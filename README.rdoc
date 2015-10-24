@@ -2,5 +2,5 @@
 
 Check this space for new features.
 
-Ruby  2.1.2
-Rails 4.2.4
+* Ruby  2.1.2
+* Rails 4.2.4
