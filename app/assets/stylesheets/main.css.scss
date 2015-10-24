@@ -1,0 +1,94 @@
+body {
+  font: 16px/180% Arial, Helvetica, sans-serif;
+  color: #444;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+p {
+  margin: 1em 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ED2D2D;
+}
+
+.hidden {
+  display: none;
+}
+
+.cloud { 
+  background-image: url('http://www.christiandewolf.com/wp-content/uploads/2015/07/clahhd.jpg'); 
+  background-repeat: no-repeat; 
+  background-position: center center !important;
+  background-attachment: fixed !important;
+  background-size: cover;
+}
+
+#wrapper {
+  background: #fff;
+  width: 620px;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  box-shadow: 0 0 10px #777;
+}
+
+#header h1 {
+  font-size: 3em;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  letter-spacing: -1px;
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
+.product-image {
+  float: left;
+  margin: 5px 20px 20px 0;
+}
+
+#menu-container {
+  border: 1px dashed #919191;
+  border-left: none;
+  border-right: none;
+  padding: 8.33333px 0;
+  margin: 25px 0;
+  font-size: 175%;
+  font-family: Artifika, Georgia, Serif;
+  text-decoration: none !important;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  display: inline-block;
+  margin-right: 65.33333px;
+}
+
+.menu-text {
+  color: #1D2378;
+}
+
+.soft {
+  font-style: italic;
+  margin-top: 0;
+  color: #919191;
+}
+
+.dotbox {
+  border-bottom: 1px dashed #919191;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+}

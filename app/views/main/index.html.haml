@@ -1,0 +1,17 @@
+#wrapper
+  #header
+    %h1 Christian DeWolf
+    %p.soft Programming / Creative
+    #menu-container
+      %ul.menu
+        %li.menu-item
+          %a.menu-text{href: "#", onclick: "showProducts(); return false;"} Products
+        %li.menu-item
+          %a.menu-text{href: "#", onclick: "showServices(); return false;"} Services
+
+  #content
+    .dotbox
+      #products
+        = render 'products'
+      #services.hidden
+        = render 'services'
