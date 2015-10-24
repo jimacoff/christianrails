@@ -1,17 +1,26 @@
-development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+production:
+  host: <%= ENV["CHRISTIANRAILS_DBSERVER_PROD"] %>
+  adapter: postgresql
+  database: christianrails_prod
   pool: 5
   timeout: 5000
+  username: <%= ENV["CHRISTIANRAILS_DBUSER_PROD"] %>
+  password: <%= ENV["CHRISTIANRAILS_DBPASS_PROD"] %>
+
+development:
+  host: <%= ENV["CHRISTIANRAILS_DBSERVER_DEV"] %>
+  adapter: postgresql
+  database: christianrails_dev
+  pool: 5
+  timeout: 5000
+  username: <%= ENV["CHRISTIANRAILS_DBUSER_DEV"] %>
+  password: <%= ENV["CHRISTIANRAILS_DBPASS_DEV"] %>
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  host: <%= ENV["CHRISTIANRAILS_DBSERVER_DEV"] %>
+  adapter: postgresql
+  database: christianrails_test
   pool: 5
   timeout: 5000
-
-production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+  username: <%= ENV["CHRISTIANRAILS_DBUSER_DEV"] %>
+  password: <%= ENV["CHRISTIANRAILS_DBPASS_DEV"] %>

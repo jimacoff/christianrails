@@ -1,11 +1,11 @@
 # Define roles, user and IP address of deployment server
 # role :name, %{[user]@[IP adde.]}
-role :app, %w{<%= ENV["CHRISTIANRAILS_USER"] %>@<%= ENV["CHRISTIANRAILS_SERVER"] %>}
-role :web, %w{<%= ENV["CHRISTIANRAILS_USER"] %>@<%= ENV["CHRISTIANRAILS_SERVER"] %>}
-role :db,  %w{<%= ENV["CHRISTIANRAILS_USER"] %>@<%= ENV["CHRISTIANRAILS_SERVER"] %>}
+role :app, %w{<%= ENV["CHRISTIANRAILS_USER_PROD"] %>@<%= ENV["CHRISTIANRAILS_HOST_PROD"] %>}
+role :web, %w{<%= ENV["CHRISTIANRAILS_USER_PROD"] %>@<%= ENV["CHRISTIANRAILS_HOST_PROD"] %>}
+role :db,  %w{<%= ENV["CHRISTIANRAILS_USER_PROD"] %>@<%= ENV["CHRISTIANRAILS_HOST_PROD"] %>}
 
 # Define server(s)
-server '<%= ENV["CHRISTIANRAILS_SERVER"] %>', user: '<%= ENV["CHRISTIANRAILS_USER"] %>', roles: %w{web}
+server '<%= ENV["CHRISTIANRAILS_HOST_PROD"] %>', user: '<%= ENV["CHRISTIANRAILS_USER_PROD"] %>', roles: %w{web}
 
 # SSH Options
 # See the example commented out section in the file
@@ -13,6 +13,6 @@ server '<%= ENV["CHRISTIANRAILS_SERVER"] %>', user: '<%= ENV["CHRISTIANRAILS_USE
 set :ssh_options, {
     forward_agent: false,
     auth_methods: %w(password),
-    user: '<%= ENV["CHRISTIANRAILS_USER"] %>',
-    password: '<%= ENV["CHRISTIANRAILS_PW"] %>'
+    user: '<%= ENV["CHRISTIANRAILS_USER_PROD"] %>',
+    password: '<%= ENV["CHRISTIANRAILS_PASS_PROD"] %>'
 }
