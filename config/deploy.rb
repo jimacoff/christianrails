@@ -7,7 +7,7 @@ set :scm, :git
 set :repo_url, 'https://github.com/christiancodes/christianrails.git'
 
 # Define where to put your application code
-set :deploy_to, "<%= ENV["CHRISTIANRAILS_PATH"] %>"
+set :deploy_to, '/var/www/christianrails'
 
 set :pty, true
 
