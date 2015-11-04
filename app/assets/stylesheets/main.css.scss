@@ -25,8 +25,8 @@ a:hover {
   display: none;
 }
 
-.cloud { 
-  background-image: url('http://www.christiandewolf.com/wp-content/uploads/2015/07/clahhd.jpg'); 
+.background { 
+  background-image: asset-data-url("fall-lake.png"); 
   background-repeat: no-repeat; 
   background-position: center center !important;
   background-attachment: fixed !important;
