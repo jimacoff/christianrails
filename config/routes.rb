@@ -1,6 +1,6 @@
 Christianrails::Application.routes.draw do
   root 'main#index'
 
-  get 'download', to: 'main#download_pdf'
-  
+  get '/downloads', to: 'downloads#test'
+
 end
