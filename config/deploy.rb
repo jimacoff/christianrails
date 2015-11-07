@@ -1,4 +1,5 @@
 require 'capistrano-rbenv'
+require 'capistrano-bundler'
 
 set :application, 'christianrails'
 
@@ -14,12 +15,15 @@ set :default_environment, {
   'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 }
 
-# Set the post-deployment instructions here.
-# Once the deployment is complete, Capistrano
-# will begin performing them as described.
-# To learn more about creating tasks,
-# check out:
-# http://capistranorb.com/
+set :use_sudo, false
+
+
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.1.2'
+
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails unicorn}
+set :rbenv_roles, :all # default value
 
 namespace :deploy do
 
@@ -27,17 +31,25 @@ namespace :deploy do
   #   system "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   # end
 
+  # desc 'Bundle'
+  # task :bundle do
+  #   on roles :all do
+  #     execute 'cd /var/www/christianrails/current && gem install bundler'
+  #     execute 'bundle install'
+  #   end
+  # end
+
   desc 'Precompile assets'
   task :precompile do
     on roles :all do
-      execute 'cd /var/www/christianrails/current && RAILS_ENV=production bundle exec rake assets:precompile'
+      execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake assets:precompile'
     end
   end
 
   desc 'Migrate the DB'
   task :migrate do
     on roles :all do
-      execute 'cd /var/www/christianrails/current && RAILS_ENV=production bundle exec rake db:migrate'
+      execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake db:migrate'
     end
   end
 
@@ -45,12 +57,12 @@ namespace :deploy do
   task :restart do
     on roles :all do
       execute 'kill -9 `cat ./tmp/pids/unicorn.pid`'
-      execute 'bundle exec unicorn_rails -c ./unicorn.rb -E production -D'
+      execute 'unicorn_rails -c ./unicorn.rb -E production -D'
     end 
   end
 
-  # after :publishing, :symlink_shared
   after :publishing, :precompile
+  #after :bundle, :precompile
   after :precompile, :migrate
   after :migrate, :restart
 

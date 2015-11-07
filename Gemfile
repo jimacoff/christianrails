@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'capistrano'
+gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rbenv'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'haml'
@@ -20,7 +22,7 @@ group :doc do
 end
 
 group :development do
-  gem 'capistrano'
+
 end
 
 # Use ActiveModel has_secure_password
