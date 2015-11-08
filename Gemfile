@@ -4,10 +4,13 @@ gem 'capistrano'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rbenv'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'devise'
+gem 'factory_girl_rails', '~> 4.0'
 gem 'haml'
 gem 'highline'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
+gem 'mocha'
 gem 'paypal-express'
 gem 'pg'
 gem 'rails', '4.2.4'
@@ -22,7 +25,11 @@ group :doc do
 end
 
 group :development do
+  gem 'rspec-rails'
+end
 
+group :test do
+  gem 'rspec-rails'
 end
 
 # Use ActiveModel has_secure_password

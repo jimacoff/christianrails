@@ -16,3 +16,4 @@
 /tmp
 .rbenv-gemsets
 .rbenv-vars
+.ruby-version
