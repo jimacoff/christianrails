@@ -1,0 +1,23 @@
+%h1 Listing price_combos
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Price
+      %th
+      %th
+      %th
+
+  %tbody
+    - @price_combos.each do |price_combo|
+      %tr
+        %td= price_combo.name
+        %td= price_combo.price
+        %td= link_to 'Show', price_combo
+        %td= link_to 'Edit', edit_price_combo_path(price_combo)
+        %td= link_to 'Destroy', price_combo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Price combo', new_price_combo_path

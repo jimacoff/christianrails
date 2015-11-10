@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Release:
+  = @download.release
+%p
+  %b User:
+  = @download.user
+%p
+  %b Cost:
+  = @download.cost
+
+= link_to 'Edit', edit_download_path(@download)
+\|
+= link_to 'Back', downloads_path
