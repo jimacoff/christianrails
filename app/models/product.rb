@@ -5,4 +5,5 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
   validates_presence_of :title, :author, :price
+  validates_numericality_of :price
 end

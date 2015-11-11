@@ -1,20 +1,15 @@
 class ReleasesController < ApplicationController
   before_action :set_release, only: [:update, :destroy]
 
-  # stats page for all releases
-  def index
-    @releases = Release.all
-  end
-
   def create
     @release = Release.new(release_params)
 
     respond_to do |format|
       if @release.save
-        format.html { redirect_to @release, notice: 'Release was successfully created.' }
+        format.html { redirect_to product_url(@release.product), notice: 'Release was successfully created.' }
         format.json { render action: 'show', status: :created, location: @release }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to product_path(@release.product) }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end
@@ -23,10 +18,10 @@ class ReleasesController < ApplicationController
   def update
     respond_to do |format|
       if @release.update(release_params)
-        format.html { redirect_to @release, notice: 'Release was successfully updated.' }
+        format.html { redirect_to product_url(@release.product), notice: 'Release was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to product_path(@release.product) }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end

@@ -17,7 +17,7 @@ class PriceCombosController < ApplicationController
 
     respond_to do |format|
       if @price_combo.save
-        format.html { redirect_to @price_combo, notice: 'Price combo was successfully created.' }
+        format.html { redirect_to price_combos_url, notice: 'Price combo was successfully created.' }
         format.json { render action: 'show', status: :created, location: @price_combo }
       else
         format.html { render action: 'new' }
@@ -29,7 +29,7 @@ class PriceCombosController < ApplicationController
   def update
     respond_to do |format|
       if @price_combo.update(price_combo_params)
-        format.html { redirect_to @price_combo, notice: 'Price combo was successfully updated.' }
+        format.html { redirect_to price_combos_url, notice: 'Price combo was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

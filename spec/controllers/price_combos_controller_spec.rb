@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe PriceCombosController, type: :controller do
 
+  render_views
+  
   let(:valid_attributes) {
     {
       name: "Crazydeal",
@@ -54,9 +56,9 @@ RSpec.describe PriceCombosController, type: :controller do
         expect(assigns(:price_combo)).to be_persisted
       end
 
-      it "redirects to the created price_combo" do
+      it "redirects to the index" do
         post :create, {:price_combo => valid_attributes}, valid_session
-        expect(response).to redirect_to(PriceCombo.last)
+        expect(response).to redirect_to(price_combos_url)
       end
     end
 
@@ -88,7 +90,7 @@ RSpec.describe PriceCombosController, type: :controller do
         price_combo.reload
         
         expect( price_combo.name ).to eq("Superdeal")
-        expect( price_combo.price ).to eq("2.99")
+        expect( price_combo.price ).to eq(2.99)
       end
 
       it "assigns the requested price_combo as @price_combo" do
@@ -97,10 +99,10 @@ RSpec.describe PriceCombosController, type: :controller do
         expect(assigns(:price_combo)).to eq(price_combo)
       end
 
-      it "redirects to the price_combo" do
+      it "redirects to the price_combos index" do
         price_combo = PriceCombo.create! valid_attributes
         put :update, {:id => price_combo.to_param, :price_combo => valid_attributes}, valid_session
-        expect(response).to redirect_to(price_combo)
+        expect(response).to redirect_to(price_combos_url)
       end
     end
 

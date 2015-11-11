@@ -7,20 +7,16 @@ class DownloadsController < ApplicationController
     #  render file: "#{Rails.root}/public/404.html", status: 404, layout: false
     #end
   end
-
-  def index
-    @downloads = Download.all
-  end
-
+  
   def create
     @download = Download.new(download_params)
 
     respond_to do |format|
       if @download.save
-        format.html { redirect_to @download, notice: 'Download was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @download }
+        format.html { redirect_to root_path, notice: 'Download was successfully created.' }
+        format.json { render @download, status: :created, location: @download }
       else
-        format.html { render action: 'new' }
+        format.html { render nil }
         format.json { render json: @download.errors, status: :unprocessable_entity }
       end
     end

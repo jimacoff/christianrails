@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DownloadsController, type: :controller do
 
+  render_views
+  
   let(:user)    { FactoryGirl.create(:user) }
   let(:release) { FactoryGirl.create(:release) }
 
@@ -21,14 +23,6 @@ RSpec.describe DownloadsController, type: :controller do
 
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all downloads as @downloads" do
-      download = Download.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:downloads)).to eq([download])
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Download" do
@@ -43,9 +37,9 @@ RSpec.describe DownloadsController, type: :controller do
         expect(assigns(:download)).to be_persisted
       end
 
-      it "redirects to the created download" do
+      it "redirects to the home page" do
         post :create, {:download => valid_attributes}, valid_session
-        expect(response).to redirect_to(Download.last)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -53,11 +47,6 @@ RSpec.describe DownloadsController, type: :controller do
       it "assigns a newly created but unsaved download as @download" do
         post :create, {:download => invalid_attributes}, valid_session
         expect(assigns(:download)).to be_a_new(Download)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:download => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
       end
     end
   end

@@ -14,7 +14,11 @@ RSpec.describe PriceCombo, type: :model do
     expect( p.errors.messages[:price] ).to include("can't be blank")
 
     p.name = "Megadeal"
-    p.price = 2.99
+    p.price = "Rascal"
+    expect( p ).to_not be_valid
+    expect( p.errors.messages[:price] ).to include("is not a number")
+
+    p.price = 2.23
     expect( p ).to be_valid
   end
 

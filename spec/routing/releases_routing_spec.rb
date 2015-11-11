@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe ReleasesController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(:get => "/releases").to route_to("releases#index")
-    end
-
     it "routes to #create" do
       expect(:post => "/releases").to route_to("releases#create")
     end

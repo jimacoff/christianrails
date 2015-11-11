@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ReleasesController, type: :controller do
 
+  render_views
+  
   let(:product)   { FactoryGirl.create(:product) }
 
   let(:valid_attributes) {
@@ -22,14 +24,6 @@ RSpec.describe ReleasesController, type: :controller do
   }
 
   let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "assigns all releases as @releases" do
-      release = Release.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:releases)).to eq([release])
-    end
-  end
 
   describe "POST #create" do
     context "with valid params" do
@@ -59,7 +53,7 @@ RSpec.describe ReleasesController, type: :controller do
 
       it "re-renders the 'new' template" do
         post :create, {:release => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(product_path(@release.product))
       end
     end
   end

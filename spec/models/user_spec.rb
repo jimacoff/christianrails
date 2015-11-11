@@ -2,12 +2,16 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
 
-  let(:product)   { FactoryGirl.create(:product) }
+  let(:product)   { FactoryGirl.create(:product, title: "Hella product") }
 
-  let(:purchase1) { FactoryGirl.create(:purchase) }
+  let(:purchase1) { FactoryGirl.create(:purchase, product: product) }
   let(:purchase2) { FactoryGirl.create(:purchase) }
   let(:purchase3) { FactoryGirl.create(:purchase) }
   
+  let(:download1) { FactoryGirl.create(:download) }
+  let(:download2) { FactoryGirl.create(:download) }
+  let(:download3) { FactoryGirl.create(:download) }
+
   it "should validate" do
     u = User.new()
     expect( u ).to_not be_valid
@@ -43,13 +47,25 @@ RSpec.describe User, type: :model do
 
   it "should have products through purchases" do
     u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
-  
+    
+    expect( u.products.count ).to eq(0)
 
+    u.purchases << purchase1
+
+    expect( u.products.count ).to eq(1)
+    expect( u.products[0].title ).to include("Hella")
   end
 
   it "should have many downloads" do
+    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+    
+    expect( u.downloads.count ).to eq(0)
 
+    u.downloads << download1
+    u.downloads << download2
+    u.downloads << download3
 
+    expect( u.downloads.count ).to eq(3)
   end
 
 end

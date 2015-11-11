@@ -1,0 +1,15 @@
+%h1 Listing Purchases
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @purchases.each do |purchase|
+      %tr
+        %td= "Something"
+%br
+= link_to 'Back', admin_path
