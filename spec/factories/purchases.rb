@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :download do
-    release
+  factory :purchase do
+    product
     user
   end
 end

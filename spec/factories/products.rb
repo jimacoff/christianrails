@@ -8,5 +8,4 @@ FactoryGirl.define do
     long_desc "This book is REALLY good."
     price "7.77"
   end
-
 end

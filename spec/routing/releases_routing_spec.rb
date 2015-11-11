@@ -7,18 +7,6 @@ RSpec.describe ReleasesController, type: :routing do
       expect(:get => "/releases").to route_to("releases#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/releases/new").to route_to("releases#new")
-    end
-
-    it "routes to #show" do
-      expect(:get => "/releases/1").to route_to("releases#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/releases/1/edit").to route_to("releases#edit", :id => "1")
-    end
-
     it "routes to #create" do
       expect(:post => "/releases").to route_to("releases#create")
     end

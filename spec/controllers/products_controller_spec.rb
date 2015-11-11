@@ -3,11 +3,19 @@ require 'rails_helper'
 RSpec.describe ProductsController, type: :controller do
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      title: "Good title", 
+      author: "Me!", 
+      short_desc: "A short desc", 
+      long_desc: "Longer description", 
+      price: 8.88
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      bad_attr: "Bahhh"
+    }
   }
 
   let(:valid_session) { {} }
@@ -17,14 +25,6 @@ RSpec.describe ProductsController, type: :controller do
       product = Product.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:products)).to eq([product])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested product as @product" do
-      product = Product.create! valid_attributes
-      get :show, {:id => product.to_param}, valid_session
-      expect(assigns(:product)).to eq(product)
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe ProductsController, type: :controller do
 
       it "redirects to the created product" do
         post :create, {:product => valid_attributes}, valid_session
-        expect(response).to redirect_to(Product.last)
+        expect(response).to redirect_to(products_url)
       end
     end
 
@@ -79,14 +79,25 @@ RSpec.describe ProductsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          title: "New title", 
+          author: "New author", 
+          short_desc: "Better short desc", 
+          long_desc: "Better longer description", 
+          price: 16.66
+        }
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
         put :update, {:id => product.to_param, :product => new_attributes}, valid_session
         product.reload
-        skip("Add assertions for updated state")
+        
+        expect( product.title ).to eq("New title")
+        expect( product.author ).to eq("New author")
+        expect( product.short_desc ).to eq("Better short desc")
+        expect( product.long_desc ).to eq("Better longer description")
+        expect( product.price ).to eq(16.66)
       end
 
       it "assigns the requested product as @product" do
@@ -98,7 +109,7 @@ RSpec.describe ProductsController, type: :controller do
       it "redirects to the product" do
         product = Product.create! valid_attributes
         put :update, {:id => product.to_param, :product => valid_attributes}, valid_session
-        expect(response).to redirect_to(product)
+        expect(response).to redirect_to(products_url)
       end
     end
 

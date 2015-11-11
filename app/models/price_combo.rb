@@ -1,5 +1,5 @@
 class PriceCombo < ActiveRecord::Base
-  has_many :combo_items, inverse_of: :price_combo
+  has_and_belongs_to_many :products, inverse_of: :price_combos
 
   validates_presence_of :name, :price
 

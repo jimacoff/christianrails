@@ -5,5 +5,4 @@ FactoryGirl.define do
     end
     price "5.00"
   end
-
 end

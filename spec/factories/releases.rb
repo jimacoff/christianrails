@@ -6,5 +6,4 @@ FactoryGirl.define do
     size "1.4"
     version "First edition"
   end
-
 end

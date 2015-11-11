@@ -2,12 +2,23 @@ require 'rails_helper'
 
 RSpec.describe ReleasesController, type: :controller do
 
+  let(:product)   { FactoryGirl.create(:product) }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      product_id: product.id,
+      format: "ePub",
+      release_date: 3.days.ago,
+      size: 2.4,
+      version: "Second edition"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      something_bad: "This",
+      bad_attr: 993
+    }
   }
 
   let(:valid_session) { {} }
@@ -17,29 +28,6 @@ RSpec.describe ReleasesController, type: :controller do
       release = Release.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:releases)).to eq([release])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested release as @release" do
-      release = Release.create! valid_attributes
-      get :show, {:id => release.to_param}, valid_session
-      expect(assigns(:release)).to eq(release)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new release as @release" do
-      get :new, {}, valid_session
-      expect(assigns(:release)).to be_a_new(Release)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested release as @release" do
-      release = Release.create! valid_attributes
-      get :edit, {:id => release.to_param}, valid_session
-      expect(assigns(:release)).to eq(release)
     end
   end
 
@@ -78,15 +66,28 @@ RSpec.describe ReleasesController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
+      
+      let(:new_product) { FactoryGirl.create(:product) }
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          product_id: new_product.id,
+          format: "PDF",
+          release_date: 5.days.ago,
+          size: 1.2,
+          version: "Third edition"
+        }
       }
 
       it "updates the requested release" do
         release = Release.create! valid_attributes
         put :update, {:id => release.to_param, :release => new_attributes}, valid_session
         release.reload
-        skip("Add assertions for updated state")
+        
+        expect( release.product.id ).to eq(new_product.id)
+        expect( release.format ).to eq("PDF")
+        expect( release.release_date ).to eq(5.days.ago)
+        expect( release.size ).to eq(1.2)
+        expect( release.version ).to eq("Third edition")
       end
 
       it "assigns the requested release as @release" do

@@ -20,7 +20,6 @@
         %td= product.short_desc
         %td= product.long_desc
         %td= product.price
-        %td= link_to 'Show', product
         %td= link_to 'Edit', edit_product_path(product)
         %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

@@ -28,7 +28,7 @@ RSpec.describe Release, type: :model do
   it "should have a valid format" do
     r = Release.create(product: product, format: "JSP", release_date: 1.week.ago)
     expect( r ).to_not be_valid
-    expect( r.errors.messages[:format] ).to include("must be right format")
+    expect( r.errors.messages[:format] ).to include("JSP is not a valid format")
 
   end
 

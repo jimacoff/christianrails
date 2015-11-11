@@ -3,11 +3,16 @@ require 'rails_helper'
 RSpec.describe PriceCombosController, type: :controller do
 
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Crazydeal",
+      price: 0.99
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      not_a_name: "This!"
+    }
   }
 
   let(:valid_session) { {} }
@@ -17,14 +22,6 @@ RSpec.describe PriceCombosController, type: :controller do
       price_combo = PriceCombo.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:price_combos)).to eq([price_combo])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested price_combo as @price_combo" do
-      price_combo = PriceCombo.create! valid_attributes
-      get :show, {:id => price_combo.to_param}, valid_session
-      expect(assigns(:price_combo)).to eq(price_combo)
     end
   end
 
@@ -79,14 +76,19 @@ RSpec.describe PriceCombosController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Superdeal",
+          price: 2.99
+        }
       }
 
       it "updates the requested price_combo" do
         price_combo = PriceCombo.create! valid_attributes
         put :update, {:id => price_combo.to_param, :price_combo => new_attributes}, valid_session
         price_combo.reload
-        skip("Add assertions for updated state")
+        
+        expect( price_combo.name ).to eq("Superdeal")
+        expect( price_combo.price ).to eq("2.99")
       end
 
       it "assigns the requested price_combo as @price_combo" do

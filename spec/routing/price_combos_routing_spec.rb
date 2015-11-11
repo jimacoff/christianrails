@@ -11,10 +11,6 @@ RSpec.describe PriceCombosController, type: :routing do
       expect(:get => "/price_combos/new").to route_to("price_combos#new")
     end
 
-    it "routes to #show" do
-      expect(:get => "/price_combos/1").to route_to("price_combos#show", :id => "1")
-    end
-
     it "routes to #edit" do
       expect(:get => "/price_combos/1/edit").to route_to("price_combos#edit", :id => "1")
     end

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :downloads, inverse_of: :user
+  has_many :purchases, inverse_of: :user
+  has_many :products, through: :purchases
 
   validates_presence_of :username, :full_name, :country, :email, :encrypted_password
 
