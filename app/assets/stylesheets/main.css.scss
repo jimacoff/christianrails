@@ -15,9 +15,11 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   text-decoration: none;
+  color: #5b5e81;
 }
 
 a:hover {
+  transition: color 0.3s;
   color: #ED2D2D;
 }
 
@@ -92,3 +94,15 @@ a:hover {
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  background-color: #fff;
+}
+
+tr:nth-child(odd)     { background-color: #dedce9; }
+tr:nth-child(even)    { background-color: #e5e4e9; }

@@ -1,4 +1,4 @@
-%h1 Listing Price Combos
+%h1 Price Combos
 
 %table
   %thead
@@ -12,11 +12,10 @@
     - @price_combos.each do |price_combo|
       %tr
         %td= price_combo.name
-        %td= price_combo.price
+        %td= number_to_currency( price_combo.price, precision: 2) || 0
         %td= link_to 'Edit', edit_price_combo_path(price_combo)
         %td= link_to 'Destroy', price_combo, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+= link_to '+ Add Combo', new_price_combo_path
 %br
-= link_to 'New Price combo', new_price_combo_path
 %br
 = link_to 'Back', admin_path

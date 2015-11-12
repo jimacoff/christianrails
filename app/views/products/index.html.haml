@@ -1,14 +1,10 @@
-%h1 Listing Products
+%h1 Products
 
-%table
+%table.wolftable
   %thead
     %tr
       %th Title
-      %th Author
-      %th Short desc
-      %th Long desc
       %th Price
-      %th
       %th
       %th
 
@@ -16,14 +12,11 @@
     - @products.each do |product|
       %tr
         %td= product.title
-        %td= product.author
-        %td= product.short_desc
-        %td= product.long_desc
-        %td= product.price
+        %td= number_to_currency( product.price, precision: 2) || 0
         %td= link_to 'Edit', edit_product_path(product)
         %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
+= link_to '+ Add Product', new_product_path
 %br
-= link_to 'New Product', new_product_path
 %br
 = link_to 'Back', admin_path

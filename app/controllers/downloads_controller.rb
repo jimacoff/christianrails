@@ -13,10 +13,10 @@ class DownloadsController < ApplicationController
 
     respond_to do |format|
       if @download.save
-        format.html { redirect_to root_path, notice: 'Download was successfully created.' }
+        format.html { redirect_to store_path, notice: 'Download initiated.' }
         format.json { render @download, status: :created, location: @download }
       else
-        format.html { render nil }
+        format.html { redirect_to store_path, notice: 'Download not started.  Please try again.' }
         format.json { render json: @download.errors, status: :unprocessable_entity }
       end
     end

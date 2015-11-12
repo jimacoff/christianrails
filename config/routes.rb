@@ -9,6 +9,7 @@ Christianrails::Application.routes.draw do
   
   root 'main#index'
   get '/admin', to: 'main#admin'
+  get '/store', to: 'main#store'
 
   #get '/downloads', to: 'downloads#test'
 

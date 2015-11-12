@@ -39,7 +39,7 @@ RSpec.describe DownloadsController, type: :controller do
 
       it "redirects to the home page" do
         post :create, {:download => valid_attributes}, valid_session
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(store_path)
       end
     end
 

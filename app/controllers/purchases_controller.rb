@@ -11,10 +11,10 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to store_path, notice: 'Item purchased.' }
         format.json { render @purchase, status: :created }
       else
-        format.html { redirect_to root_path }
+        format.html { redirect_to store_path }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
@@ -26,6 +26,6 @@ class PurchasesController < ApplicationController
     end
 
     def purchase_params
-      params.require(:purchase).permit()
+      params.require(:purchase).permit(:user_id, :product_id)
     end
 end

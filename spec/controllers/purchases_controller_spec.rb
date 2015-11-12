@@ -44,9 +44,9 @@ RSpec.describe PurchasesController, type: :controller do
         expect(assigns(:purchase)).to be_persisted
       end
 
-      it "redirects to the created purchase" do
+      it "redirects to home" do
         post :create, {:purchase => valid_attributes}, valid_session
-        expect(response).to redirect_to(Purchase.last)
+        expect(response).to redirect_to(store_path)
       end
     end
 
@@ -56,9 +56,9 @@ RSpec.describe PurchasesController, type: :controller do
         expect(assigns(:purchase)).to be_a_new(Purchase)
       end
 
-      it "re-renders the 'new' template" do
+      it "goes home" do
         post :create, {:purchase => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        expect(response).to redirect_to store_path
       end
     end
   end

@@ -9,7 +9,7 @@ class ReleasesController < ApplicationController
         format.html { redirect_to product_url(@release.product), notice: 'Release was successfully created.' }
         format.json { render action: 'show', status: :created, location: @release }
       else
-        format.html { redirect_to product_path(@release.product) }
+        format.html { redirect_to product_url(@release.product) }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end
@@ -21,7 +21,7 @@ class ReleasesController < ApplicationController
         format.html { redirect_to product_url(@release.product), notice: 'Release was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { redirect_to product_path(@release.product) }
+        format.html { render 'product/edit', location: @release.product }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end
@@ -41,6 +41,6 @@ class ReleasesController < ApplicationController
     end
 
     def release_params
-      params.require(:release).permit(:product_id, :type, :release_date, :size, :version)
+      params.require(:release).permit(:product_id, :format, :release_date, :size, :version)
     end
 end

@@ -59,7 +59,7 @@ RSpec.describe ProductsController, type: :controller do
         expect(assigns(:product)).to be_persisted
       end
 
-      it "redirects to the created product" do
+      it "redirects to the main products index" do
         post :create, {:product => valid_attributes}, valid_session
         expect(response).to redirect_to(products_url)
       end
