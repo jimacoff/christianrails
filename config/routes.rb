@@ -1,5 +1,6 @@
 Christianrails::Application.routes.draw do
-  devise_for :users
+  
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :downloads,     only:   [:create]
   resources :purchases,     only:   [:index, :create]
