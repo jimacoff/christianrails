@@ -1,0 +1,5 @@
+%h3= product.title
+%p= product.short_desc
+- if !current_user || !current_user.has_product?(product.id)
+  = number_to_currency( product.price, precision: 2 )
+  %button Add to cart

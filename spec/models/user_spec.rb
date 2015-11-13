@@ -68,4 +68,22 @@ RSpec.describe User, type: :model do
     expect( u.downloads.count ).to eq(3)
   end
 
+  describe "has_product?" do
+
+  let(:product1)   { FactoryGirl.create(:product, title: "Sick product") }
+  let(:product2)   { FactoryGirl.create(:product, title: "Rad product") }
+
+  let(:purchase) { FactoryGirl.create(:purchase, product: product1) }
+
+    it 'should return true when user has purchased product, false otherwise' do
+      u = User.create(username: "Jonn", full_name: "Jonn", country: "CA", email: "jonn@test.com", password: "jonnsword")
+    
+      u.purchases << purchase
+
+      expect( u.has_product?(product1.id) ).to be_truthy
+      expect( u.has_product?(product2.id) ).to be_falsy
+    end
+
+  end
+
 end

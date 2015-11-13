@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username, :full_name, :country, :email, :encrypted_password
 
+  def has_product?(product_id)
+    self.products.collect(&:id).include?(product_id)
+  end
+
 end

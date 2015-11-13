@@ -1,10 +1,11 @@
-%h1 Store
-- if current_user
-  %h3 Welcome, #{current_user.full_name}! 
-  = link_to 'Sign out', destroy_user_session_path, method: :delete
-- else
-  = link_to 'Log in', user_session_path
-  |
-  = link_to 'Sign up', new_user_registration_path
+= render 'layouts/userbar'
 %br
+- if @owned_products.size > 0
+  %h1 Library
+  - @owned_products.each do |owned|
+    = render 'store_product', {product: owned}
 
+- if @available_products.size > 0
+  %h1 Available products
+  - @available_products.each do |avail|
+    = render 'store_product', {product: avail}
