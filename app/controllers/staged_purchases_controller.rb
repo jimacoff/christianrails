@@ -1,5 +1,3 @@
-require 'pp'
-
 class StagedPurchasesController < ApplicationController
   before_action :set_staged_purchase, only: [:destroy]
 
@@ -14,7 +12,7 @@ class StagedPurchasesController < ApplicationController
       
       respond_to do |format|
         if @staged_purchase.save
-          format.json { render json: {}, status: :created }
+          format.json { render json: @staged_purchase, status: :created }
         else
           format.json { render json: {}, status: :unprocessable_entity }
         end
@@ -26,7 +24,9 @@ class StagedPurchasesController < ApplicationController
     if current_user
       if @staged_purchase.user.id == current_user.id
         @staged_purchase.destroy
-        format.json { head :no_content }
+        respond_to do |format|
+          format.json { render json: @staged_purchase }
+        end
       end
     end
   end
