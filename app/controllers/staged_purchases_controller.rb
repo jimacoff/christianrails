@@ -1,30 +1,33 @@
+require 'pp'
+
 class StagedPurchasesController < ApplicationController
   before_action :set_staged_purchase, only: [:destroy]
 
-  # dashboard for admins
+  # dashboard for admin
   def index
     @staged_purchases = StagedPurchase.all
   end
 
   def create
-    @staged_purchase = StagedPurchase.new(staged_purchase_params)
-
-    respond_to do |format|
-      if @staged_purchase.save
-        format.html { redirect_to @staged_purchase, notice: 'Staged purchase was successfully created.' }
-        format.json { status: :created }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @staged_purchase.errors, status: :unprocessable_entity }
+    if current_user
+      @staged_purchase = StagedPurchase.new( user: current_user, product_id: staged_purchase_params['product_id'] )
+      
+      respond_to do |format|
+        if @staged_purchase.save
+          format.json { render json: {}, status: :created }
+        else
+          format.json { render json: {}, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def destroy
-    @staged_purchase.destroy
-    respond_to do |format|
-      format.html { redirect_to staged_purchases_url }
-      format.json { head :no_content }
+    if current_user
+      if @staged_purchase.user.id == current_user.id
+        @staged_purchase.destroy
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -34,6 +37,6 @@ class StagedPurchasesController < ApplicationController
     end
 
     def staged_purchase_params
-      params[:staged_purchase]
+      params.require(:staged_purchase).permit(:product_id)
     end
 end

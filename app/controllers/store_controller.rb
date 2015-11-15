@@ -1,5 +1,9 @@
 class StoreController < ApplicationController
 
+  include StoreHelper
+
+  before_filter :get_cart
+
   def index
     @price_combos = PriceCombo.all
     @all_products = Product.all
