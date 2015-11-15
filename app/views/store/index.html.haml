@@ -9,3 +9,7 @@
   %h1 Available products
   - @available_products.each do |avail|
     = render 'store_product', {product: avail}
+
+%br
+%br
+= link_to 'Home', root_path

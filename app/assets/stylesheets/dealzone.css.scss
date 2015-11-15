@@ -6,3 +6,23 @@
   padding: 25px;
   position: absolute;
 }
+
+.store-button {
+  background-color: #BCDDE8;
+  border: black 1px solid;
+  border-radius: 5px;
+  padding: 6px;
+}
+
+.store-button:active {
+  background-color: #8CCFE6;
+  outline: none;
+}
+
+.store-button:focus {
+  outline: none;
+}
+
+.store-button:active {
+
+}

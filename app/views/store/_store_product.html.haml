@@ -1,5 +1,5 @@
-%h3= product.title
+%h3{id:"#{product.id}_title"}= product.title
 %p= product.short_desc
 - if !current_user || !current_user.has_product?(product.id)
-  = number_to_currency( product.price, precision: 2 )
-  %button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to cart
+  .none{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
+  %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket

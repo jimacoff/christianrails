@@ -6,6 +6,12 @@ class PurchasesController < ApplicationController
     @purchases = Purchase.all
   end
 
+  def complete
+    # TODO takes staged purchases and makes purchases for them
+
+  end
+
+  # not sure I need this
   def create
     @purchase = Purchase.new(purchase_params)
 
