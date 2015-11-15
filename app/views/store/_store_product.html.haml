@@ -1,5 +1,14 @@
 %h3{id:"#{product.id}_title"}= product.title
 %p= product.short_desc
-- if !current_user || !current_user.has_product?(product.id)
-  .none{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
+- if !current_user
+  - # TODO user not logged in.  Display price, formats + sign up button
+
+
+- elsif !current_user.has_product?(product.id)
+  - # logged-in user has not purchased the product.  Display price, formats + cart button 
   %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
+  .store-price{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
+
+- else
+  - # TODO logged-in user has purchased product.  Display download buttons for formats + bonus material
+

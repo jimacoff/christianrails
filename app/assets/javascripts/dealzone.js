@@ -3,24 +3,23 @@ var cart = {}
 function showDealzone() { $('#dealzone').fadeIn();  }
 function hideDealzone() { $('#dealzone').fadeOut(); }
 function possiblyHideDealzone() { if(Object.keys(cart).length === 0) { hideDealzone(); } }
-function showAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", false); }
-function hideAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true); }
+function showAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", false); $('#add_to_cart_' + product_id).text("Add to basket") }
+function hideAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true); $('#add_to_cart_' + product_id).text("Added to basket")}
+function showPriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeIn();  }
+function hidePriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeOut(); }
 
 function writeProductInfoToDealzone(product_id) {
-  $("<p id=\"dealzone_title_" + product_id + "\">" + $('#'+ product_id + "_title").html() + "</p>").insertBefore($('#check_out'));
-  $("<p id=\"dealzone_price_" + product_id + "\">" + $('#'+ product_id + "_price").html() + "</p>").insertBefore($('#check_out'));
-  $("<button id=\"dealzone_remove_" + product_id + "\" class=\"store-button\" onclick=\"removeFromCart(" + product_id + ")\">Remove</button>").insertBefore($('#check_out'));
+  $("<div id=\"dealzone_item_" + product_id + "\"><p id=\"dealzone_title_" + product_id + "\">" + $('#'+ product_id + "_title").html() + "</p><p id=\"dealzone_price_" + product_id + "\">" + $('#'+ product_id + "_price").html() + "</p><button id=\"dealzone_remove_" + product_id + "\" class=\"store-button\" onclick=\"removeFromCart(" + product_id + ")\">Remove</button></div>").insertBefore($('#check_out'));
 }
 
 function eraseProductInfoFromDealzone(product_id) {
-  $("#dealzone_title_"  + product_id).remove();
-  $("#dealzone_price_"  + product_id).remove();
-  $("#dealzone_remove_" + product_id).remove();
+  $("#dealzone_item_"  + product_id).remove();
 }
 
 function addToCart(product_id) {
   showDealzone();
   hideAddToCartButton(product_id);
+  hidePriceOfProduct(product_id);
   writeProductInfoToDealzone(product_id);
   createStagedPurchase(product_id);
   updatePrices();
@@ -28,6 +27,7 @@ function addToCart(product_id) {
 
 function removeFromCart(product_id) {
   showAddToCartButton(product_id);
+  showPriceOfProduct(product_id);
   eraseProductInfoFromDealzone(product_id);
   removeStagedPurchase(product_id);
   updatePrices();
@@ -42,11 +42,7 @@ function updatePrices() {
     total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
   });
 
-  $('#total_price').text("$" + total.toFixed(2));
-
-  //update prices on the main panel
-
-  //TODO hide selected prices
+  $('#total_price').text("Total: $" + total.toFixed(2));
 
 
   //TODO update price_combo prices
