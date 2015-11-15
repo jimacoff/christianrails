@@ -2,4 +2,4 @@
 %p= product.short_desc
 - if !current_user || !current_user.has_product?(product.id)
   = number_to_currency( product.price, precision: 2 )
-  %button Add to cart
+  %button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to cart

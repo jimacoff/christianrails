@@ -1,5 +1,6 @@
 Christianrails::Application.routes.draw do
   
+  resources :staged_purchases
   devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :downloads,     only:   [:create]
@@ -10,7 +11,7 @@ Christianrails::Application.routes.draw do
   
   root 'main#index'
   get '/admin', to: 'main#admin'
-  get '/store', to: 'main#store'
+  get '/store', to: 'store#index'
 
   #get '/downloads', to: 'downloads#test'
 

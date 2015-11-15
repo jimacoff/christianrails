@@ -12,10 +12,12 @@
     <meta property="og:description" content="Web programming, design &amp; custom data solutions for your business.">
 
     <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet' type='text/css'>
-    
   </head>
 
   <body class="background">
+
+    <%= render "layouts/dealzone" %>
+
     <div id="wrapper">
       <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
@@ -25,5 +27,7 @@
       <% end %>
       <%= yield %>
     </div>
+
   </body>
+
 </html>

@@ -23,17 +23,17 @@ a:hover {
   color: #ED2D2D;
 }
 
-.hidden {
-  display: none;
+table {
+  width: 100%;
 }
 
-.background { 
-  background-image: asset-data-url("fall-lake.png"); 
-  background-repeat: no-repeat; 
-  background-position: center center !important;
-  background-attachment: fixed !important;
-  background-size: cover;
+th {
+  text-align: left;
+  background-color: #fff;
 }
+
+tr:nth-child(odd)     { background-color: #dedce9; }
+tr:nth-child(even)    { background-color: #e5e4e9; }
 
 #wrapper {
   background: #fff;
@@ -53,11 +53,6 @@ a:hover {
   font-family: Artifika, Helvetica, Arial, sans-serif !important;
 }
 
-.product-image {
-  float: left;
-  margin: 5px 20px 20px 0;
-}
-
 #menu-container {
   border: 1px dashed #919191;
   border-left: none;
@@ -67,6 +62,23 @@ a:hover {
   font-size: 175%;
   font-family: Artifika, Georgia, Serif;
   text-decoration: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.background { 
+  background-image: asset-data-url("fall-lake.png"); 
+  background-repeat: no-repeat; 
+  background-position: center center !important;
+  background-attachment: fixed !important;
+  background-size: cover;
+}
+
+.product-image {
+  float: left;
+  margin: 5px 20px 20px 0;
 }
 
 .menu {
@@ -94,15 +106,3 @@ a:hover {
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
-
-table {
-  width: 100%;
-}
-
-th {
-  text-align: left;
-  background-color: #fff;
-}
-
-tr:nth-child(odd)     { background-color: #dedce9; }
-tr:nth-child(even)    { background-color: #e5e4e9; }
