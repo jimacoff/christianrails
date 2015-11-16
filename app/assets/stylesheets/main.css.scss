@@ -32,8 +32,12 @@ th {
   background-color: #fff;
 }
 
-tr:nth-child(odd)     { background-color: #dedce9; }
-tr:nth-child(even)    { background-color: #e5e4e9; }
+.product-table {
+
+  tr:nth-child(odd)     { background-color: #dedce9; }
+  tr:nth-child(even)    { background-color: #e5e4e9; }
+
+}
 
 #wrapper {
   background: #fff;

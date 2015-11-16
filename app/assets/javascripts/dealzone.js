@@ -9,11 +9,13 @@ function showPriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeIn
 function hidePriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeOut(); }
 
 function writeProductInfoToDealzone(product_id) {
-  $("<div id=\"dealzone_item_" + product_id + "\"><p id=\"dealzone_title_" + product_id + "\">" + $('#'+ product_id + "_title").html() + "</p><p id=\"dealzone_price_" + product_id + "\">" + $('#'+ product_id + "_price").html() + "</p><button id=\"dealzone_remove_" + product_id + "\" class=\"store-button\" onclick=\"removeFromCart(" + product_id + ")\">Remove</button></div>").insertBefore($('#check_out'));
+  $("#dealzone_item_"  + product_id).fadeIn();
+  $("#dealzone_item_"  + product_id).addClass('totalable');
 }
 
 function eraseProductInfoFromDealzone(product_id) {
-  $("#dealzone_item_"  + product_id).remove();
+  $("#dealzone_item_"  + product_id).fadeOut();
+  $("#dealzone_item_"  + product_id).removeClass('totalable');
 }
 
 function addToCart(product_id) {
@@ -39,11 +41,12 @@ function updatePrices() {
       total = 0;
 
   dealzoneSum.each(function( i ) {
-    total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
+    if($($(this).parents()[4]).hasClass("totalable")){
+      total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
+    }
   });
 
   $('#total_price').text("Total: $" + total.toFixed(2));
-
 
   //TODO update price_combo prices
 

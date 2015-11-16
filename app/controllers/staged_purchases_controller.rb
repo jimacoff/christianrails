@@ -8,10 +8,12 @@ class StagedPurchasesController < ApplicationController
 
   def create
     if current_user
-      @staged_purchase = StagedPurchase.new( user: current_user, product_id: staged_purchase_params['product_id'] )
+
+      @staged_purchase = StagedPurchase.where( user: current_user, product_id: staged_purchase_params['product_id']).first
+      @staged_purchase ||= StagedPurchase.new( user: current_user, product_id: staged_purchase_params['product_id'] )
       
       respond_to do |format|
-        if @staged_purchase.save
+        if @staged_purchase.save 
           format.json { render json: @staged_purchase, status: :created }
         else
           format.json { render json: {}, status: :unprocessable_entity }
