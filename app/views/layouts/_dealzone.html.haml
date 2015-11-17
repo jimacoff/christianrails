@@ -2,12 +2,11 @@
   - klass = @cart.size == 0 ? "hidden" : ""
 
   #dealzone{class: "#{klass}"}
-    %p Your basket:
+    %p.embolden Your basket:
     - if @all_products.size > 0
       - @all_products.each do |prod|
         = render 'store/dealzone_product', {prod: prod}
 
     #check_out
-      %hr
-      %p#total_price Total: $0.00
+      #total_price Total: $0.00
       %button{id: "check_out_button"} Check out now

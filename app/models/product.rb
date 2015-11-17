@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  has_many :releases, inverse_of: :product
+  has_many :releases, inverse_of: :product, dependent: :destroy
   accepts_nested_attributes_for :releases
   
   has_many :purchases, inverse_of: :product
@@ -7,5 +7,5 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
   validates_presence_of :title, :author, :price
-  validates_numericality_of :price
+  validates_numericality_of :price, :rank
 end

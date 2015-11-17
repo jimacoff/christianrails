@@ -3,34 +3,26 @@ var cart = {}
 function showDealzone() { $('#dealzone').fadeIn();  }
 function hideDealzone() { $('#dealzone').fadeOut(); }
 function possiblyHideDealzone() { if(Object.keys(cart).length === 0) { hideDealzone(); } }
-function showAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", false); $('#add_to_cart_' + product_id).text("Add to basket") }
-function hideAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true); $('#add_to_cart_' + product_id).text("Added to basket")}
+function enableAddToCartButton(product_id)  { $('#add_to_cart_' + product_id).prop("disabled", false); $('#add_to_cart_' + product_id).text("Add to basket"); }
+function disableAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true);  $('#add_to_cart_' + product_id).text("Added to basket"); }
 function showPriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeIn();  }
 function hidePriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeOut(); }
-
-function writeProductInfoToDealzone(product_id) {
-  $("#dealzone_item_"  + product_id).fadeIn();
-  $("#dealzone_item_"  + product_id).addClass('totalable');
-}
-
-function eraseProductInfoFromDealzone(product_id) {
-  $("#dealzone_item_"  + product_id).fadeOut();
-  $("#dealzone_item_"  + product_id).removeClass('totalable');
-}
+function showProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeIn().addClass('totalable'); }
+function hideProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeOut().removeClass('totalable'); }
 
 function addToCart(product_id) {
   showDealzone();
-  hideAddToCartButton(product_id);
+  disableAddToCartButton(product_id);
   hidePriceOfProduct(product_id);
-  writeProductInfoToDealzone(product_id);
+  showProductInDealzone(product_id);
   createStagedPurchase(product_id);
   updatePrices();
 }
 
 function removeFromCart(product_id) {
-  showAddToCartButton(product_id);
+  enableAddToCartButton(product_id);
   showPriceOfProduct(product_id);
-  eraseProductInfoFromDealzone(product_id);
+  hideProductInDealzone(product_id);
   removeStagedPurchase(product_id);
   updatePrices();
 }

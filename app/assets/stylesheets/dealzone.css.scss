@@ -13,6 +13,7 @@
   border-radius: 5px;
   padding: 6px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .store-button:active {
@@ -49,4 +50,25 @@
 
 .full-width {
   width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+.vert-center {
+  vertical-align: center;
+}
+
+.thumbnail {
+  margin-right: 10px;
+}
+
+.embolden {
+  font-weight: bold;
+}
+
+.diminutive {
+  font-size: 70%;
+  padding: 3px;
 }

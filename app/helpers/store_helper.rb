@@ -1,7 +1,7 @@
 module StoreHelper
 
   def get_products
-    @all_products = Product.all
+    @all_products = Product.order(:rank)
   end
 
   def get_cart

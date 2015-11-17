@@ -1,11 +1,15 @@
 - klass = !@cart.has_key?(prod.id) ? "hidden" : ""
 
 %div{ id: "dealzone_item_#{prod.id}", class: "#{klass}"}
-  %p{ id: "dealzone_title_#{prod.id}" }= prod.title
   %table.full-width
     %tr
-      %td.half-width
-        %p{ id: "dealzone_price_#{prod.id}" }= number_to_currency( prod.price, precision: 2 )
-      %td.half-width
-        %button.store-button{ id: "dealzone_remove_#{prod.id}", onclick:"removeFromCart(#{prod.id})"} Remove
-  %br
+      %td.center
+        = image_tag( "#{prod.small_image}" )
+      %td.center
+        %p{ id: "dealzone_title_#{prod.id}" }= prod.title
+    %tr
+      %td.half-width.center
+        %div{ id: "dealzone_price_#{prod.id}" }= number_to_currency( prod.price, precision: 2 )
+      %td.half-width.center
+        %button.store-button.diminutive{ id: "dealzone_remove_#{prod.id}", onclick:"removeFromCart(#{prod.id})"} Remove
+  %hr
