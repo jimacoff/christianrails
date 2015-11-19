@@ -3,11 +3,23 @@ require 'rails_helper'
 RSpec.describe PriceCombosController, type: :controller do
 
   render_views
+
+  before (:each) do
+    @user = User.create!({
+      username: 'testuser', 
+      full_name: 'Test User',
+      email: 'user@test.com',
+      password: '12345678',
+      password_confirmation: '12345678',
+      country: 'CA'
+    })
+    sign_in @user
+  end
   
   let(:valid_attributes) {
     {
       name: "Crazydeal",
-      price: 0.99
+      discount: 0.99
     }
   }
 
@@ -80,7 +92,7 @@ RSpec.describe PriceCombosController, type: :controller do
       let(:new_attributes) {
         {
           name: "Superdeal",
-          price: 2.99
+          discount: 2.99
         }
       }
 
@@ -90,7 +102,7 @@ RSpec.describe PriceCombosController, type: :controller do
         price_combo.reload
         
         expect( price_combo.name ).to eq("Superdeal")
-        expect( price_combo.price ).to eq(2.99)
+        expect( price_combo.discount ).to eq(2.99)
       end
 
       it "assigns the requested price_combo as @price_combo" do
@@ -111,12 +123,6 @@ RSpec.describe PriceCombosController, type: :controller do
         price_combo = PriceCombo.create! valid_attributes
         put :update, {:id => price_combo.to_param, :price_combo => invalid_attributes}, valid_session
         expect(assigns(:price_combo)).to eq(price_combo)
-      end
-
-      it "re-renders the 'edit' template" do
-        price_combo = PriceCombo.create! valid_attributes
-        put :update, {:id => price_combo.to_param, :price_combo => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end

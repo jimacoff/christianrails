@@ -16,7 +16,6 @@ function addToCart(product_id) {
   hidePriceOfProduct(product_id);
   showProductInDealzone(product_id);
   createStagedPurchase(product_id);
-  updatePrices();
 }
 
 function removeFromCart(product_id) {
@@ -24,11 +23,11 @@ function removeFromCart(product_id) {
   showPriceOfProduct(product_id);
   hideProductInDealzone(product_id);
   removeStagedPurchase(product_id);
-  updatePrices();
 }
 
 function updatePrices() {
-  //update the dealzone price
+
+  // maybe do all this down in the callback
   var dealzoneSum = $("[id^='dealzone_price_']"),
       total = 0;
 
@@ -41,7 +40,21 @@ function updatePrices() {
   $('#total_price').text("Total: $" + total.toFixed(2));
 
   //TODO update price_combo prices
+  request = void 0;
+  request = $.ajax({
+      type: 'GET',
+      url: '/store/updated_prices.json',
+      dataType: 'json'
+    });
 
+  request.done(function(data, textStatus, jqXHR) {
+    // TODO
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    // TODO
+    console.log(textStatus);
+  });
 
 }
 
@@ -56,6 +69,7 @@ function createStagedPurchase(product_id) {
 
   request.done(function(data, textStatus, jqXHR) {
     cart[data['product_id']] = data['id'];
+    updatePrices();
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
@@ -74,6 +88,7 @@ function removeStagedPurchase(product_id) {
   request.done(function(data, textStatus, jqXHR) {
     delete cart[data['product_id']];
     possiblyHideDealzone();
+    updatePrices();
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {

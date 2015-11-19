@@ -8,4 +8,8 @@ module StoreHelper
     @cart = current_user ? {}.tap{ |hash| StagedPurchase.where(user_id: current_user.id).each{ |sp| hash[sp.product_id] = sp.id } } : {}
   end
 
+  def get_dealz
+    @dealz = PriceCombo.all
+  end
+
 end

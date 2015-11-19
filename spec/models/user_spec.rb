@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
 
-  let(:product)   { FactoryGirl.create(:product, title: "Hella product") }
+  let(:product)   { FactoryGirl.create(:product, title: "Hella product", rank: 1) }
 
   let(:purchase1) { FactoryGirl.create(:purchase, product: product) }
   let(:purchase2) { FactoryGirl.create(:purchase) }

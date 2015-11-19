@@ -4,6 +4,18 @@ RSpec.describe ReleasesController, type: :controller do
 
   render_views
 
+  before (:each) do
+    @user = User.create!({
+      username: 'testuser', 
+      full_name: 'Test User',
+      email: 'user@test.com',
+      password: '12345678',
+      password_confirmation: '12345678',
+      country: 'CA'
+    })
+    sign_in @user
+  end
+
   let(:product)   { FactoryGirl.create(:product) }
 
   let(:valid_attributes) {
@@ -105,11 +117,6 @@ RSpec.describe ReleasesController, type: :controller do
         expect(assigns(:release)).to eq(release)
       end
 
-      it "re-renders the 'edit' template" do
-        release = Release.create! valid_attributes
-        put :update, {:id => release.to_param, :release => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
     end
   end
 

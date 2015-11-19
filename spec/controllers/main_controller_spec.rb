@@ -15,14 +15,18 @@ RSpec.describe MainController, type: :controller do
     describe 'for logged-out user' do
 
       it 'should display all available products' do
+        get :store, {}, valid_session
+        
         skip("Do it")
       end
 
     end
 
-    describe 'for logged-on user' do
+    describe 'for logged-in user' do
 
       it 'should display owned products and other products' do
+        get :store, {}, valid_session
+
         skip("Do it")
       end
 

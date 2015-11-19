@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StagedPurchase, type: :model do
 
-  let(:product) { FactoryGirl.create(:product) }
+  let(:product) { FactoryGirl.create(:product, rank: 1) }
   let(:user)    { FactoryGirl.create(:user) }
   
   it "should validate" do

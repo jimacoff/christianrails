@@ -52,6 +52,6 @@ class PriceCombosController < ApplicationController
     end
 
     def price_combo_params
-      params.require(:price_combo).permit(:name, :price)
+      params.require(:price_combo).permit(:name, :discount)
     end
 end

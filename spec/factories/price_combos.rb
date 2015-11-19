@@ -3,6 +3,6 @@ FactoryGirl.define do
     sequence :name do |n|
       "Combo_#{n}"
     end
-    price "5.00"
+    discount "-1.00"
   end
 end

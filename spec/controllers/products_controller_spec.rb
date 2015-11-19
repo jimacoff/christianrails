@@ -4,13 +4,26 @@ RSpec.describe ProductsController, type: :controller do
 
   render_views
 
+  before (:each) do
+    @user = User.create!({
+      username: 'testuser', 
+      full_name: 'Test User',
+      email: 'user@test.com',
+      password: '12345678',
+      password_confirmation: '12345678',
+      country: 'CA'
+    })
+    sign_in @user
+  end
+
   let(:valid_attributes) {
     {
       title: "Good title", 
       author: "Me!", 
       short_desc: "A short desc", 
       long_desc: "Longer description", 
-      price: 8.88
+      price: 8.88,
+      rank: 1
     }
   }
 
@@ -86,7 +99,8 @@ RSpec.describe ProductsController, type: :controller do
           author: "New author", 
           short_desc: "Better short desc", 
           long_desc: "Better longer description", 
-          price: 16.66
+          price: 16.66,
+          rank: 2
         }
       }
 
@@ -100,6 +114,7 @@ RSpec.describe ProductsController, type: :controller do
         expect( product.short_desc ).to eq("Better short desc")
         expect( product.long_desc ).to eq("Better longer description")
         expect( product.price ).to eq(16.66)
+        expect( product.rank ).to eq(2)
       end
 
       it "assigns the requested product as @product" do
@@ -120,12 +135,6 @@ RSpec.describe ProductsController, type: :controller do
         product = Product.create! valid_attributes
         put :update, {:id => product.to_param, :product => invalid_attributes}, valid_session
         expect(assigns(:product)).to eq(product)
-      end
-
-      it "re-renders the 'edit' template" do
-        product = Product.create! valid_attributes
-        put :update, {:id => product.to_param, :product => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end

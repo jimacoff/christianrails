@@ -2,12 +2,34 @@ require 'rails_helper'
 
 RSpec.describe StagedPurchasesController, type: :controller do
 
+  render_views
+
+  before (:each) do
+    @user = User.create!({
+      username: 'testuser', 
+      full_name: 'Test User',
+      email: 'user@test.com',
+      password: '12345678',
+      password_confirmation: '12345678',
+      country: 'CA'
+    })
+    sign_in @user
+  end
+
+  let(:product)   { FactoryGirl.create(:product) }
+  let(:user)      { FactoryGirl.create(:user) }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      product_id: product.id,
+      user_id: user.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      bad_id: 7777,
+    }
   }
 
   let(:valid_session) { {} }
@@ -34,10 +56,6 @@ RSpec.describe StagedPurchasesController, type: :controller do
         expect(assigns(:staged_purchase)).to be_persisted
       end
 
-      it "redirects to the created staged_purchase" do
-        post :create, {:staged_purchase => valid_attributes}, valid_session
-        expect(response).to redirect_to(StagedPurchase.last)
-      end
     end
 
     context "with invalid params" do
@@ -46,10 +64,6 @@ RSpec.describe StagedPurchasesController, type: :controller do
         expect(assigns(:staged_purchase)).to be_a_new(StagedPurchase)
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:staged_purchase => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
     end
   end
 
@@ -61,11 +75,6 @@ RSpec.describe StagedPurchasesController, type: :controller do
       }.to change(StagedPurchase, :count).by(-1)
     end
 
-    it "redirects to the staged_purchases list" do
-      staged_purchase = StagedPurchase.create! valid_attributes
-      delete :destroy, {:id => staged_purchase.to_param}, valid_session
-      expect(response).to redirect_to(staged_purchases_url)
-    end
   end
 
 end

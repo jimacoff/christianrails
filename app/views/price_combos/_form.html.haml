@@ -10,7 +10,7 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :price
-    = f.text_field :price, value: ( number_with_precision( f.object.price, precision: 2) || 0 )
+    = f.label :discount
+    = f.text_field :discount, value: ( number_with_precision( f.object.discount, precision: 2) || 0 )
   .actions
     = f.submit 'Save'
