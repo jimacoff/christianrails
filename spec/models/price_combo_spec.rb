@@ -34,8 +34,8 @@ RSpec.describe PriceCombo, type: :model do
 
     let(:user) { FactoryGirl.create(:user) }
 
-    let(:product_1)   { FactoryGirl.create(:product, title: "Book One", discount: 5.00) }
-    let(:product_2)   { FactoryGirl.create(:product, title: "Book Two", discount: 3.00) }
+    let(:product_1)   { FactoryGirl.create(:product, title: "Book One", price: 5.00) }
+    let(:product_2)   { FactoryGirl.create(:product, title: "Book Two", price: 3.00) }
 
     it 'should identify a satisfied combo' do
       combo = PriceCombo.create(name: "Reasonably-priced bundle", discount: -2.50)
@@ -60,15 +60,15 @@ RSpec.describe PriceCombo, type: :model do
 
   end
 
-  describe 'total_discount_for' do
+  describe 'total_cart_discount_for' do
 
     let(:user) { FactoryGirl.create(:user) }
 
-    let(:product_1)   { FactoryGirl.create(:product, title: "The main event", discount: 5.00) }
-    let(:product_2)   { FactoryGirl.create(:product, title: "Bonus material", discount: 3.00) }
-    let(:product_3)   { FactoryGirl.create(:product, title: "Some other product", discount: 4.00) }
-    let(:product_4)   { FactoryGirl.create(:product, title: "Surprise product", discount: 2.00) }
-    let(:product_5)   { FactoryGirl.create(:product, title: "A sequel no one wants", discount: 6.00) }
+    let(:product_1)   { FactoryGirl.create(:product, title: "The main event", price: 5.00) }
+    let(:product_2)   { FactoryGirl.create(:product, title: "Bonus material", price: 3.00) }
+    let(:product_3)   { FactoryGirl.create(:product, title: "Some other product", price: 4.00) }
+    let(:product_4)   { FactoryGirl.create(:product, title: "Surprise product", price: 2.00) }
+    let(:product_5)   { FactoryGirl.create(:product, title: "A sequel no one wants", price: 6.00) }
 
     let(:staged_purchase)  { FactoryGirl.create(:staged_purchase) }
 
@@ -80,7 +80,7 @@ RSpec.describe PriceCombo, type: :model do
       StagedPurchase.create(user: user, product: product_1)
       StagedPurchase.create(user: user, product: product_2)
 
-      expect( PriceCombo.total_discount_for(user.id) ).to eq(-2.50)
+      expect( PriceCombo.total_cart_discount_for(user.id) ).to eq(-2.50)
 
     end
 
@@ -103,7 +103,7 @@ RSpec.describe PriceCombo, type: :model do
       StagedPurchase.create(user: user, product: product_4)
       StagedPurchase.create(user: user, product: product_5)
 
-      expect( PriceCombo.total_discount_for(user.id) ).to eq(-7.75)
+      expect( PriceCombo.total_cart_discount_for(user.id) ).to eq(-7.75)
     end
 
     it 'should not return any discounts if no price combos satisfied' do
@@ -122,7 +122,7 @@ RSpec.describe PriceCombo, type: :model do
       StagedPurchase.create(user: user, product: product_3)
       StagedPurchase.create(user: user, product: product_4)
 
-      expect( PriceCombo.total_discount_for(user.id) ).to eq(0)
+      expect( PriceCombo.total_cart_discount_for(user.id) ).to eq(0)
     end
 
   end

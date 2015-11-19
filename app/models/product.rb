@@ -14,18 +14,20 @@ class Product < ActiveRecord::Base
     cart_products = StagedPurchase.where(user_id: user_id).collect(&:product_id)
 
     PriceCombo.all.each do |combo|
-      give_discount = true
+      potential_discount = true
       combo_product_ids = combo.products.collect(&:id)
       # check each combo to see if it includes current product
       if combo_product_ids.include?(self.id)
         # if so, remove it from the array and check if the others are in cart
         combo_product_ids -= [self.id]
-        combo_product_ids.each do |prod_id|
-          if !cart_products.include?(prod_id)
-            give_discount = false
+
+        combo_product_ids.each do |other_prod_in_combo|
+          if !cart_products.include?(other_prod_in_combo)
+            # short circuit the discount if cart does not include one of the other necessary products
+            potential_discount = false
           end
         end
-        total_discount += combo.discount if give_discount
+        total_discount += combo.discount if potential_discount
       end
     end
     total_discount
