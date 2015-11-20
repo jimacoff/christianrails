@@ -63,8 +63,10 @@ function drawNewPrices(price_data) {
   if(price_data.total_discount > 0) {
     total -= price_data.total_discount;
     $('#total_price').addClass('discount');
+    $('#discount_label').html('Save:');
   } else {
     $('#total_price').removeClass('discount');
+    $('#discount_label').html('');
   }
   
   $('#total_price').text("$" + total.toFixed(2));
