@@ -5,8 +5,8 @@ function hideDealzone() { $('#dealzone').fadeOut(); }
 function possiblyHideDealzone() { if(Object.keys(cart).length === 0) { hideDealzone(); } }
 function enableAddToCartButton(product_id)  { $('#add_to_cart_' + product_id).prop("disabled", false); $('#add_to_cart_' + product_id).text("Add to basket"); }
 function disableAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true);  $('#add_to_cart_' + product_id).text("Added to basket"); }
-function showPriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeIn();  }
-function hidePriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeOut(); }
+function showPriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeIn();  $("#" + product_id + "_new_price").fadeIn(); }
+function hidePriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeOut(); $("#" + product_id + "_new_price").fadeOut(); }
 function showProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeIn().addClass('totalable'); }
 function hideProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeOut().removeClass('totalable'); }
 
@@ -45,7 +45,7 @@ function updatePrices() {
 function drawNewPrices(price_data) {
   // the discount
   if(price_data.total_discount !== 0) {
-    $('#discount_price').html("Save: $" + price_data.total_discount.toFixed(2));
+    $('#discount_price').html("$" + price_data.total_discount.toFixed(2));
   } else {
     $('#discount_price').html('');
   }
@@ -60,14 +60,25 @@ function drawNewPrices(price_data) {
     }
   });
 
-  total -= price_data.total_discount;
-  $('#total_price').text("Total: $" + total.toFixed(2));
+  if(price_data.total_discount > 0) {
+    total -= price_data.total_discount;
+    $('#total_price').addClass('discount');
+  } else {
+    $('#total_price').removeClass('discount');
+  }
+  
+  $('#total_price').text("$" + total.toFixed(2));
 
   // update the satisfiable discounts
   $.each(price_data, function(k, v) {
-    if(k !== 'discount_price' && v[1] > 0){
-      $('#' + k + '_price').addClass('strikethrough');
-      // calc new price
+    if(k !== 'discount_price'){
+      if( v[1] > 0 ) {
+        $('#' + k + '_price').addClass('strikethrough');
+        $('#' + k + '_new_price').html( '$' + (v[0]-v[1]).toFixed(2) );
+      } else {
+        $('#' + k + '_price').removeClass('strikethrough');
+        $('#' + k + '_new_price').html('');
+      }
     }
   });
 

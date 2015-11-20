@@ -22,7 +22,12 @@
               - release_text = release_array.join(" / ")
               .store-format #{release_text}
             %td.small-width
-              .store-price{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
+              %table
+                %tr
+                  %td
+                    .new-price{id:"#{product.id}_new_price"}
+                  %td
+                    .store-price{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
 
       - else
         - # TODO logged-in user has purchased product.  Display download buttons for formats + bonus material

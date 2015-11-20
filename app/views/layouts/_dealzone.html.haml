@@ -8,6 +8,17 @@
         = render 'store/dealzone_product', {prod: prod}
 
     #check_out
-      #discount_price.discount
-      #total_price.embolden Total: $0.00
+      %table
+        %tr
+          %td
+            %div Save: 
+          %td
+            #discount_price.new-price
+      %table
+        %tr
+          %td
+            .embolden Total:
+          %td
+            #total_price.embolden $0.00
+          
       %button{id: "check_out_button"} Check out now
