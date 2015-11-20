@@ -26,20 +26,6 @@ function removeFromCart(product_id) {
 }
 
 function updatePrices() {
-
-  // maybe do all this down in the callback
-  var dealzoneSum = $("[id^='dealzone_price_']"),
-      total = 0;
-
-  dealzoneSum.each(function( i ) {
-    if($($(this).parents()[4]).hasClass("totalable")){
-      total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
-    }
-  });
-
-  $('#total_price').text("Total: $" + total.toFixed(2));
-
-  //TODO update price_combo prices
   request = void 0;
   request = $.ajax({
       type: 'GET',
@@ -48,12 +34,41 @@ function updatePrices() {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    // TODO
+    drawNewPrices(data);
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
-    // TODO
     console.log(textStatus);
+  });
+}
+
+function drawNewPrices(price_data) {
+  // the discount
+  if(price_data.total_discount !== 0) {
+    $('#discount_price').html("Save: $" + price_data.total_discount.toFixed(2));
+  } else {
+    $('#discount_price').html('');
+  }
+
+  // the checkout total
+  var dealzoneItems = $("[id^='dealzone_price_']"),
+      total = 0;
+
+  dealzoneItems.each(function( i ) {
+    if($($(this).parents()[4]).hasClass("totalable")){
+      total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
+    }
+  });
+
+  total -= price_data.total_discount;
+  $('#total_price').text("Total: $" + total.toFixed(2));
+
+  // update the satisfiable discounts
+  $.each(price_data, function(k, v) {
+    if(k !== 'discount_price' && v[1] > 0){
+      $('#' + k + '_price').addClass('strikethrough');
+      // calc new price
+    }
   });
 
 }

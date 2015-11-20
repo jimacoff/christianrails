@@ -46,12 +46,12 @@ RSpec.describe StagedPurchasesController, type: :controller do
     context "with valid params" do
       it "creates a new StagedPurchase" do
         expect {
-          post :create, {:staged_purchase => valid_attributes}, valid_session
+          post :create, {:staged_purchase => valid_attributes, format: :json}, valid_session
         }.to change(StagedPurchase, :count).by(1)
       end
 
       it "assigns a newly created staged_purchase as @staged_purchase" do
-        post :create, {:staged_purchase => valid_attributes}, valid_session
+        post :create, {:staged_purchase => valid_attributes, format: :json}, valid_session
         expect(assigns(:staged_purchase)).to be_a(StagedPurchase)
         expect(assigns(:staged_purchase)).to be_persisted
       end
@@ -60,7 +60,7 @@ RSpec.describe StagedPurchasesController, type: :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved staged_purchase as @staged_purchase" do
-        post :create, {:staged_purchase => invalid_attributes}, valid_session
+        post :create, {:staged_purchase => invalid_attributes, format: :json}, valid_session
         expect(assigns(:staged_purchase)).to be_a_new(StagedPurchase)
       end
 
@@ -71,7 +71,7 @@ RSpec.describe StagedPurchasesController, type: :controller do
     it "destroys the requested staged_purchase" do
       staged_purchase = StagedPurchase.create! valid_attributes
       expect {
-        delete :destroy, {:id => staged_purchase.to_param}, valid_session
+        delete :destroy, {id: staged_purchase.to_param, format: :json}, valid_session
       }.to change(StagedPurchase, :count).by(-1)
     end
 

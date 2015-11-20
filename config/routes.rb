@@ -15,6 +15,12 @@ Christianrails::Application.routes.draw do
       get 'check_out'
     end
   end
+
+  resources :main, only: [] do
+    collection do
+      get 'store'
+    end
+  end
   
   root 'main#index'
   get '/admin', to: 'main#admin'
