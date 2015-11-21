@@ -3,16 +3,24 @@
     %td.small-width.center
       = image_tag( "#{product.image}" )
     %td
-      %h3{id:"#{product.id}_title"}= product.title
-      %p= product.short_desc
+      %h2{id:"#{product.id}_title"}= product.title
       - if !current_user
         - # TODO user not logged in.  Display price, formats + sign up button
 
 
       - elsif !current_user.has_product?(product.id)
         - # logged-in user has not purchased the product.  Display price, formats + cart button 
+        %p= product.long_desc
         %table.full-width
           %tr
+            %td.small-width
+              - release_array = []
+              - product.releases.each do |release|
+                - release_array << release.format
+              - release_text = release_array.join(" / ")
+              .store-format.embolden #{release_text}
+            %td.small-width
+              %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
             %td.small-width
               %table
                 %tr
@@ -20,15 +28,7 @@
                     .new-price{id:"#{product.id}_new_price"}
                   %td
                     .store-price{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
-            %td.small-width
-              %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
-            %td.small-width
-              - release_array = []
-              - product.releases.each do |release|
-                - release_array << release.format
-              - release_text = release_array.join(" / ")
-              .store-format #{release_text}
 
       - else
         - # TODO logged-in user has purchased product.  Display download buttons for formats + bonus material
-
+//%hr.small-width

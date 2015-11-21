@@ -74,7 +74,6 @@ RSpec.describe StagedPurchasesController, type: :controller do
         delete :destroy, {id: staged_purchase.to_param, format: :json}, valid_session
       }.to change(StagedPurchase, :count).by(-1)
     end
-
   end
 
 end

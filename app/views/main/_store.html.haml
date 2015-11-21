@@ -1,0 +1,12 @@
+- if @owned_products.size > 0
+  %h2 Library
+  - @owned_products.each do |owned|
+    = render 'store/store_product', {product: owned}
+
+- if @available_products.size > 0 && @owned_products.size > 0
+  %h2 Available products
+- @available_products.each do |avail|
+  = render 'store/store_product', {product: avail}
+
+%br
+%p.diminutive.center All prices expressed in CAD. Prices do not include tax.

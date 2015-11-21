@@ -1,18 +1,11 @@
-#header
-  %h1 Christian DeWolf
-  %p.soft Programming / Creative
-  #menu-container
-    %ul.menu
-      %li.menu-item
-        %a.menu-text{href: "#", onclick: "showProducts(); return false;"} Products
-      %li.menu-item
-        %a.menu-text{href: "#", onclick: "showServices(); return false;"} Services
-      %li.menu-item
-        %a.menu-text{href: "#"}= link_to 'Store', store_path
+= render 'layouts/userbar'
+= render 'layouts/headerbar'
 
 #content
   .dotbox
-    #products
+    #store
+      = render 'store'
+    #products.hidden
       = render 'products'
     #services.hidden
       = render 'services'

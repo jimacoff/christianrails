@@ -2,42 +2,12 @@ require 'rails_helper'
 
 RSpec.describe StoreController, type: :controller do
 
+  render_views
+
   let(:user)    { FactoryGirl.create(:user) }
   before (:each) do
 
     sign_in user
-  end
-
-  describe 'index' do 
-
-    let(:user)       { FactoryGirl.create(:user) }
-
-    let(:product1)   { FactoryGirl.create(:product, title: "Cool product") }
-    let(:product2)   { FactoryGirl.create(:product, title: "Awesome product") }
-    let(:product3)   { FactoryGirl.create(:product, title: "Tubular product") }
-
-    let(:purchase1)  { FactoryGirl.create(:purchase, product: product2, user: user) }
-
-    describe 'for logged-out user' do
-
-      it 'should display all available products' do
-        get :index
-        
-        skip("Do it")
-      end
-
-    end
-
-    describe 'for logged-in user' do
-
-      it 'should display owned products and other products' do
-        get :index
-
-        skip("Do it")
-      end
-
-    end
-
   end
 
   describe 'updated prices' do

@@ -1,3 +1,7 @@
+p {
+  line-height: 120%;
+}
+
 #dealzone {
   background: #fff;
   width: 150px;
@@ -27,15 +31,16 @@
   outline: none;
 }
 
-.store-button:active {
-
-}
-
 .store-price {
 }
 
 .left {
   float: left;
+}
+
+.right {
+  float: right;
+  text-align: right;
 }
 
 .small-width {
