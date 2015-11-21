@@ -4,12 +4,7 @@
       = image_tag( "#{product.image}" )
     %td
       %h2{id:"#{product.id}_title"}= product.title
-      - if !current_user
-        - # TODO user not logged in.  Display price, formats + sign up button
-
-
-      - elsif !current_user.has_product?(product.id)
-        - # logged-in user has not purchased the product.  Display price, formats + cart button 
+      - if !current_user || !current_user.has_product?(product.id)
         %p= product.long_desc
         %table.full-width
           %tr
@@ -20,7 +15,10 @@
               - release_text = release_array.join(" / ")
               .store-format.embolden #{release_text}
             %td.small-width
-              %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
+              - if !current_user
+                %button.store-button{id:"sign_in_#{product.id})"}=link_to 'Start a library', new_user_registration_path()
+              - else
+                %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
             %td.small-width
               %table
                 %tr
