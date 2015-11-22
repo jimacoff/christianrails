@@ -83,7 +83,6 @@ function drawNewPrices(price_data) {
       }
     }
   });
-
 }
 
 function createStagedPurchase(product_id) {

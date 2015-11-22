@@ -6,7 +6,6 @@ RSpec.describe StoreController, type: :controller do
 
   let(:user)    { FactoryGirl.create(:user) }
   before (:each) do
-
     sign_in user
   end
 
@@ -112,6 +111,20 @@ RSpec.describe StoreController, type: :controller do
       expect( resp[product_3.id.to_s] ).to eq([4.0, 0])
 
       expect( resp["total_discount"] ).to eq(0)
+
+    end
+
+  end
+
+  describe 'check out' do
+
+    it 'should convert all StagedPurchases for user to Purchases' do
+
+
+    end 
+
+    it 'should do nothing if there are no staged purchases for user' do
+
 
     end
 

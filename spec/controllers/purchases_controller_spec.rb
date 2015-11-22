@@ -42,37 +42,4 @@ RSpec.describe PurchasesController, type: :controller do
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Purchase" do
-        expect {
-          post :create, {:purchase => valid_attributes}, valid_session
-        }.to change(Purchase, :count).by(1)
-      end
-
-      it "assigns a newly created purchase as @purchase" do
-        post :create, {:purchase => valid_attributes}, valid_session
-        expect(assigns(:purchase)).to be_a(Purchase)
-        expect(assigns(:purchase)).to be_persisted
-      end
-
-      it "redirects to home" do
-        post :create, {:purchase => valid_attributes}, valid_session
-        expect(response).to redirect_to(store_path)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved purchase as @purchase" do
-        post :create, {:purchase => invalid_attributes}, valid_session
-        expect(assigns(:purchase)).to be_a_new(Purchase)
-      end
-
-      it "goes home" do
-        post :create, {:purchase => invalid_attributes}, valid_session
-        expect(response).to redirect_to store_path
-      end
-    end
-  end
-
 end

@@ -7,6 +7,14 @@ class DownloadsController < ApplicationController
     #  render file: "#{Rails.root}/public/404.html", status: 404, layout: false
     #end
   end
+
+  def ebook(product_id)
+    if current_user && current_user.has_product?(product_id)
+      send_file "#{Rails.root}/../../downloads/test.pdf"
+    else
+      Rails.logger.error("Unauthorized download attempted on: {#product_id}")
+    end
+  end
   
   def create
     @download = Download.new(download_params)
@@ -24,6 +32,6 @@ class DownloadsController < ApplicationController
 
   private
     def download_params
-      params.require(:download).permit(:release_id, :user_id, :cost)
+      params.require(:download).permit(:release_id, :user_id)
     end
 end

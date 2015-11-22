@@ -6,26 +6,6 @@ class PurchasesController < ApplicationController
     @purchases = Purchase.all
   end
 
-  def complete
-    # TODO takes staged purchases and makes purchases for them
-
-  end
-
-  # not sure I need this
-  def create
-    @purchase = Purchase.new(purchase_params)
-
-    respond_to do |format|
-      if @purchase.save
-        format.html { redirect_to store_path, notice: 'Item purchased.' }
-        format.json { render @purchase, status: :created }
-      else
-        format.html { redirect_to store_path }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   private
     def set_purchase
       @purchase = Purchase.find(params[:id])

@@ -41,6 +41,6 @@ class ReleasesController < ApplicationController
     end
 
     def release_params
-      params.require(:release).permit(:product_id, :format, :release_date, :size, :version)
+      params.require(:release).permit(:product_id, :format, :release_date, :size, :version, :file_name)
     end
 end

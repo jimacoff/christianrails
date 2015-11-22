@@ -13,4 +13,4 @@
     = f.label :discount
     = f.text_field :discount, value: ( number_with_precision( f.object.discount, precision: 2) || 0 )
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'store-button'

@@ -24,7 +24,8 @@ RSpec.describe ReleasesController, type: :controller do
       format: "ePub",
       release_date: 3.days.ago,
       size: 2.4,
-      version: "Second edition"
+      version: "Second edition",
+      file_name: "product.epub"
     }
   }
 
@@ -81,7 +82,8 @@ RSpec.describe ReleasesController, type: :controller do
           format: "PDF",
           release_date: '2015-11-06 16:42:29.000000000 -0500',
           size: 1.2,
-          version: "Third edition"
+          version: "Third edition",
+          file_name: "newproduct.pdf"
         }
       }
 
@@ -95,6 +97,7 @@ RSpec.describe ReleasesController, type: :controller do
         expect( release.release_date ).to eq('2015-11-06 16:42:29.000000000 -0500')
         expect( release.size ).to eq(1.2)
         expect( release.version ).to eq("Third edition")
+        expect( release.file_name ).to eq("newproduct.pdf")
       end
 
       it "assigns the requested release as @release" do
