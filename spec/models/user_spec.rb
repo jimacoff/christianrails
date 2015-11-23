@@ -12,6 +12,10 @@ RSpec.describe User, type: :model do
   let(:download2) { FactoryGirl.create(:download) }
   let(:download3) { FactoryGirl.create(:download) }
 
+  let(:staged1)   { FactoryGirl.create(:staged_purchase) }
+  let(:staged2)   { FactoryGirl.create(:staged_purchase) }
+  let(:staged3)   { FactoryGirl.create(:staged_purchase) }
+
   it "should validate" do
     u = User.new()
     expect( u ).to_not be_valid
@@ -66,6 +70,18 @@ RSpec.describe User, type: :model do
     u.downloads << download3
 
     expect( u.downloads.count ).to eq(3)
+  end
+
+  it "should have many staged purchases" do
+    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+    
+    expect( u.staged_purchases.count ).to eq(0)
+
+    u.staged_purchases << staged1
+    u.staged_purchases << staged2
+    u.staged_purchases << staged3
+
+    expect( u.staged_purchases.count ).to eq(3)
   end
 
   describe "has_product?" do

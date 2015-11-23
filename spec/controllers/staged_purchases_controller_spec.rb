@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe StagedPurchasesController, type: :controller do
 
-  render_views
-
   before (:each) do
     @user = User.create!({
       username: 'testuser', 
@@ -68,6 +66,7 @@ RSpec.describe StagedPurchasesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    # what the hell is wrong with this test
     it "destroys the requested staged_purchase" do
       staged_purchase = StagedPurchase.create! valid_attributes
       expect {

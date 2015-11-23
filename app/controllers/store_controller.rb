@@ -30,10 +30,21 @@ class StoreController < ApplicationController
     end
   end
 
-  def check_out
-    # TODO checkout function    
+  def check_out 
+    if current_user
+      staged = current_user.staged_purchases
 
-
+      staged.each do |stag|
+        new_purch = Purchase.create(user: current_user, product: stag.product)
+        stag.destroy
+      end
+      note = 'Thanks for your support! Download your new books below.'
+    else
+      note = 'Please log in. If you are having difficulties, please contact the author.'
+    end
+    respond_to do |format|
+      format.html { redirect_to store_path, notice: note }
+    end
   end
 
   def download(release_id)
@@ -41,7 +52,7 @@ class StoreController < ApplicationController
       begin
         release = Release.find(release_id)
       rescue
-        Rails.logger.warn("Ebook download attempted on invalid release id: #{release_id} by user id: #{current_user.id}.")
+        Rails.logger.warn("Download attempted on invalid release id: #{release_id} by user id: #{current_user.id}.")
         return
       end
       product = release.product
@@ -50,7 +61,7 @@ class StoreController < ApplicationController
         Download.create(user: current_user, release: release)
         return
       else
-        Rails.logger.warn("Ebook download attempted on unauthorized product id: #{product.id} by user id: #{current_user.id}.")
+        Rails.logger.warn("Download attempted on unauthorized product id: #{product.id} by user id: #{current_user.id}.")
         return
       end
     end

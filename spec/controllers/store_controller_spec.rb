@@ -9,6 +9,36 @@ RSpec.describe StoreController, type: :controller do
     sign_in user
   end
 
+  describe 'index' do
+
+    let!(:combo1)    { FactoryGirl.create(:price_combo) }
+    let!(:combo2)    { FactoryGirl.create(:price_combo) }
+    let!(:combo3)    { FactoryGirl.create(:price_combo) }
+
+    let!(:product1)  { FactoryGirl.create(:product) }
+    let!(:product2)  { FactoryGirl.create(:product) }
+    let!(:product3)  { FactoryGirl.create(:product) }
+    let!(:product4)  { FactoryGirl.create(:product) }
+    let!(:product5)  { FactoryGirl.create(:product) }
+
+    let!(:purchase1)  { FactoryGirl.create(:purchase, user: user, product: product2) }
+    let!(:purchase2)  { FactoryGirl.create(:purchase, user: user, product: product4) }
+    let!(:purchase3)  { FactoryGirl.create(:purchase, user: user, product: product5) }
+
+    it 'should retrieve all price combos' do
+      get 'index'
+      expect( assigns(:price_combos).count ).to eq(3)
+    end
+
+    it 'should retrieve all products the user owns and the others available' do
+      get 'index'
+      expect( assigns(:all_products).count ).to eq(5)
+      expect( assigns(:owned_products).count ).to eq(3)
+      expect( assigns(:available_products).count).to eq(2)
+    end
+
+  end
+
   describe 'updated prices' do
     
     let!(:product_1)   { FactoryGirl.create(:product, title: "The main event", price: 5.05) }
@@ -44,7 +74,6 @@ RSpec.describe StoreController, type: :controller do
       expect( resp[product_1.id.to_s] ).to eq([5.05,-0.5])
       expect( resp[product_3.id.to_s] ).to eq([4.0, -1.0])
       expect( resp["total_discount"] ).to eq(0)  # no combos actually satisfied yet
-
     end
 
     it 'should return a combined discount for product with 2 satisfiable price combos' do
@@ -65,7 +94,6 @@ RSpec.describe StoreController, type: :controller do
 
       expect( resp[product_2.id.to_s] ).to eq([3.0,-1.5])
       expect( resp["total_discount"] ).to eq(0)   # none satisfied yet
-
     end
 
     it 'should return a total discount for satisfied combo and discount for potential combo as well' do
@@ -111,20 +139,67 @@ RSpec.describe StoreController, type: :controller do
       expect( resp[product_3.id.to_s] ).to eq([4.0, 0])
 
       expect( resp["total_discount"] ).to eq(0)
-
     end
 
   end
 
   describe 'check out' do
 
-    it 'should convert all StagedPurchases for user to Purchases' do
+    let(:product1)  { FactoryGirl.create(:product) }
+    let(:product2)  { FactoryGirl.create(:product) }
+    let(:product3)  { FactoryGirl.create(:product) }
 
+    let!(:staged_purchase1)  { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
+    let!(:staged_purchase2)  { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
+    let!(:staged_purchase3)  { FactoryGirl.create(:staged_purchase, user: user, product: product3) }
+
+    it 'should convert all StagedPurchases for user to Purchases, then redirect back to store' do
+      expect( user.staged_purchases.count ).to eq(3)
+      expect( user.purchases.count ).to eq(0)
+
+      get 'check_out'
+
+      expect( user.staged_purchases.count ).to eq(0)
+      expect( user.purchases.count ).to eq(3)
+
+      expect( response ).to redirect_to(store_url)
+      expect( response.notice ).to include('Thanks')
 
     end 
 
-    it 'should do nothing if there are no staged purchases for user' do
+    it 'should do nothing if no user logged in' do
+      sign_out user
 
+      get 'check_out'
+
+      expect( user.staged_purchases.count ).to eq(3)
+      expect( user.purchases.count ).to eq(0)
+      expect( response ).to redirect_to(store_url)
+      expect( response.notice ).to include('difficulties')
+
+    end
+
+  end
+
+  describe 'download' do
+
+    it 'should download for an authorized logged-in user' do
+
+      skip("TODO WRITE A TEST")
+    end
+
+    it 'should NOT download if no user logged in' do
+      skip("TODO WRITE A TEST")
+
+    end
+
+    it 'should NOT download if user does not own the product' do
+      skip("TODO WRITE A TEST")
+
+    end
+
+    it 'should NOT download anything if release_id is invalid' do
+      skip("TODO WRITE A TEST")
 
     end
 
