@@ -19,12 +19,12 @@
 
           %td.small-width
             - if !current_user
-              %button.store-button{id:"sign_in_#{product.id})"}=link_to 'Start a library', new_user_registration_path()
+              %div{id:"sign_in_#{product.id})"}=link_to 'Start a library', new_user_registration_path(), class: 'store-button'
             - elsif !current_user.has_product?(product.id)
               %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
             - else
               - product.releases.each do |rel|
-                %button.store-button= link_to rel.format, download_store_index_path(release_id: rel.id)
+                = link_to rel.format, download_store_index_path(release_id: rel.id), class: 'store-button'
 
           - if !current_user || !current_user.has_product?(product.id)
             %td.small-width
