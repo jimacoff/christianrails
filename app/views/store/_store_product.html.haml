@@ -4,21 +4,29 @@
       = image_tag( "#{product.image}" )
     %td
       %h2{id:"#{product.id}_title"}= product.title
-      - if !current_user || !current_user.has_product?(product.id)
-        %p= product.long_desc
-        %table.full-width
-          %tr
-            %td.small-width
+      %p= product.long_desc
+      %table.full-width
+        %tr
+          %td.small-width
+            - if !current_user || !current_user.has_product?(product.id)
               - release_array = []
               - product.releases.each do |release|
                 - release_array << release.format
               - release_text = release_array.join(" / ")
               .store-format.embolden #{release_text}
-            %td.small-width
-              - if !current_user
-                %button.store-button{id:"sign_in_#{product.id})"}=link_to 'Start a library', new_user_registration_path()
-              - else
-                %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
+            - else 
+              .store-format.embolden Download: 
+
+          %td.small-width
+            - if !current_user
+              %button.store-button{id:"sign_in_#{product.id})"}=link_to 'Start a library', new_user_registration_path()
+            - elsif !current_user.has_product?(product.id)
+              %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
+            - else
+              - product.releases.each do |rel|
+                %button.store-button= link_to rel.format, download_store_index_path(release_id: rel.id)
+
+          - if !current_user || !current_user.has_product?(product.id)
             %td.small-width
               %table
                 %tr
@@ -26,6 +34,5 @@
                     .new-price{id:"#{product.id}_new_price"}
                   %td
                     .store-price{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
-
-      - else
-        - # TODO logged-in user has purchased product.  Display download buttons for formats + bonus material
+          - else
+            %td.small-width

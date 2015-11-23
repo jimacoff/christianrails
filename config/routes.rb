@@ -8,7 +8,7 @@ Christianrails::Application.routes.draw do
   resources :price_combos,         except: [:show]
   resources :products,             except: [:show]
   
-  resources :store,  only: [:index] do
+  resources :store, only: [:index] do
     collection do
       get 'admin'
       get 'updated_prices'
@@ -18,7 +18,6 @@ Christianrails::Application.routes.draw do
   end
   
   get '/admin', to: 'store#admin'
-  get '/store', to: 'store#index'
   
   root 'store#index'
 

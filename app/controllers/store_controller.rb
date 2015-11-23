@@ -26,7 +26,6 @@ class StoreController < ApplicationController
       respond_to do |format|
         format.json { render json: price_json }
       end
-
     end
   end
 
@@ -43,11 +42,12 @@ class StoreController < ApplicationController
       note = 'Please log in. If you are having difficulties, please contact the author.'
     end
     respond_to do |format|
-      format.html { redirect_to store_path, notice: note }
+      format.html { redirect_to root_path, notice: note }
     end
   end
 
-  def download(release_id)
+  def download
+    release_id = store_params[:release_id]
     if current_user
       begin
         release = Release.find(release_id)
@@ -56,8 +56,9 @@ class StoreController < ApplicationController
         return
       end
       product = release.product
-      if current_user.has_product?(product_id)
-        send_file "#{Rails.root}/../../downloads/#{release.file_name}"
+      if current_user.has_product?(product.id)
+        file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+        send_file "#{Rails.root}/../../downloads/#{file_name}"
         Download.create(user: current_user, release: release)
         return
       else
@@ -66,6 +67,12 @@ class StoreController < ApplicationController
       end
     end
     Rails.logger.warn("Unauthorized download attempted on release: #{release_id} by a guest user.")
+  end
+
+  private
+
+  def store_params
+    params.permit(:release_id)
   end
 
 end

@@ -162,9 +162,8 @@ RSpec.describe StoreController, type: :controller do
       expect( user.staged_purchases.count ).to eq(0)
       expect( user.purchases.count ).to eq(3)
 
-      expect( response ).to redirect_to(store_url)
-      expect( response.notice ).to include('Thanks')
-
+      expect( response ).to redirect_to(root_path)
+      expect( flash[:notice] ).to include('Thanks')
     end 
 
     it 'should do nothing if no user logged in' do
@@ -174,33 +173,53 @@ RSpec.describe StoreController, type: :controller do
 
       expect( user.staged_purchases.count ).to eq(3)
       expect( user.purchases.count ).to eq(0)
-      expect( response ).to redirect_to(store_url)
-      expect( response.notice ).to include('difficulties')
+      expect( response ).to redirect_to(root_path)
 
+      expect( flash[:notice] ).to include('difficulties')
     end
 
   end
 
   describe 'download' do
 
-    it 'should download for an authorized logged-in user' do
+    let!(:product1)  { FactoryGirl.create(:product) }
+    let!(:product2)  { FactoryGirl.create(:product) }
 
-      skip("TODO WRITE A TEST")
+    let!(:release1)  { FactoryGirl.create(:release, product: product1) }
+    let!(:release2)  { FactoryGirl.create(:release, product: product2) }
+
+    let!(:purchase1)  { FactoryGirl.create(:purchase, user: user, product: product1) }
+
+    let(:invalid_release_id) {-33} 
+
+    before :each do
+      controller.stubs(:render)
+    end
+
+    it 'should download for an authorized logged-in user' do
+      controller.stubs(:send_file).returns("Download successful").once
+
+      get 'download', release_id: release1.id
     end
 
     it 'should NOT download if no user logged in' do
-      skip("TODO WRITE A TEST")
+      sign_out user
 
+      controller.stubs(:send_file).returns("Download successful").never
+
+      get 'download', release_id: release1.id
     end
 
     it 'should NOT download if user does not own the product' do
-      skip("TODO WRITE A TEST")
+      controller.stubs(:send_file).returns("Download successful").never
 
+      get 'download', release_id: release2.id
     end
 
     it 'should NOT download anything if release_id is invalid' do
-      skip("TODO WRITE A TEST")
-
+      controller.stubs(:send_file).returns("Download successful").never
+      
+      get 'download', release_id: invalid_release_id
     end
 
   end
