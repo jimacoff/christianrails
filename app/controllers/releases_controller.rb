@@ -1,5 +1,6 @@
 class ReleasesController < ApplicationController
   before_action :set_release, only: [:update, :destroy]
+  before_action :verify_is_admin
 
   def create
     @release = Release.new(release_params)

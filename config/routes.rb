@@ -13,7 +13,7 @@ Christianrails::Application.routes.draw do
       get 'admin'
       get 'updated_prices'
       get 'check_out'
-      get 'download'
+      post 'download'
     end
   end
   

@@ -1,8 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:update, :destroy]
+  before_action :verify_is_admin
 
-  # stats page for all purchases
   def index
+    # stats page for all purchases
     @purchases = Purchase.all
   end
 

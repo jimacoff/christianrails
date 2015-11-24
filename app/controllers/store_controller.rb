@@ -1,5 +1,7 @@
 class StoreController < ApplicationController
 
+  before_action :verify_is_admin, only: [:admin]
+
   def index
     @price_combos = PriceCombo.all
     @owned_products = []
@@ -41,6 +43,7 @@ class StoreController < ApplicationController
     else
       note = 'Please log in. If you are having difficulties, please contact the author.'
     end
+    
     respond_to do |format|
       format.html { redirect_to root_path, notice: note }
     end

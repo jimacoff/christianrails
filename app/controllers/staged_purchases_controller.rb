@@ -1,8 +1,9 @@
 class StagedPurchasesController < ApplicationController
   before_action :set_staged_purchase, only: [:destroy]
+  before_action :verify_is_admin, only: [:index]
 
-  # dashboard for admin
   def index
+    # dashboard for admin
     @staged_purchases = StagedPurchase.all
   end
 
