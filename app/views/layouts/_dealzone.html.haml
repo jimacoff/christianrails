@@ -1,7 +1,7 @@
 - unless !@cart || !@all_products 
-  - is_hidden = @cart.size == 0 ? "hidden" : ""
+  - is_hidden = @cart.size == 0 ? "display: none;" : "display: inline-block;"
 
-  #dealzone{class: "#{is_hidden}"}
+  #dealzone{style: "#{is_hidden}"}
     %p.embolden Your basket:
     - if @all_products.size > 0
       - @all_products.each do |prod|

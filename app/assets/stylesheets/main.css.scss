@@ -47,11 +47,12 @@ th {
 #wrapper {
   background: #fff;
   width: 620px;
-  margin-top: 75px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   padding: 50px;
   box-shadow: 0 0 10px #777;
+  z-index: 0;
 }
 
 #header h1 {
@@ -74,7 +75,7 @@ th {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .background { 

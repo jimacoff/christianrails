@@ -1,6 +1,6 @@
-- klass = !@cart.has_key?(prod.id) ? "hidden" : ""
+- is_hidden = !@cart.has_key?(prod.id) ? "display: none;" : "display: block;"
 
-%div{ id: "dealzone_item_#{prod.id}", class: "#{klass}"}
+%div{ id: "dealzone_item_#{prod.id}", style: "#{is_hidden}"}
   .center= image_tag( "#{prod.small_image}" )
   #div.embolden.center{ id: "dealzone_title_#{prod.id}" }= prod.title
   %table.full-width

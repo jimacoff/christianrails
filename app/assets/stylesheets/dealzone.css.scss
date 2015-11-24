@@ -5,10 +5,20 @@ p {
 #dealzone {
   background: #fff;
   width: 150px;
-  margin-left: 1200px;
+  margin-left: 340px;
+  margin-top: 180px;
   box-shadow: 0 0 10px #777;
   padding: 25px;
-  position: absolute;
+  z-index: 999;
+  display: inline-block;
+}
+
+#zone-keeper {
+  width: 0px; 
+  height: 0px;
+  margin: auto;
+  overflow: visible;
+  z-index: 999;
 }
 
 .store-button {
@@ -22,7 +32,6 @@ p {
   cursor: pointer;
   font-size: 11px;
   text-align: center;
-  display: inline-block;
 }
 
 .store-button:active {

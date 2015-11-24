@@ -16,7 +16,9 @@
 
   <body class="background">
 
-    <%= render "layouts/dealzone" %>
+    <div id="zone-keeper">
+      <%= render "layouts/dealzone" %>
+    </div>
 
     <div id="wrapper">
       <% if notice %>
@@ -26,9 +28,7 @@
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
       <%= yield %>
-
       <%= render "layouts/script" %>
-
     </div>
 
   </body>
