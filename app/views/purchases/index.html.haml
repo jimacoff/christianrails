@@ -3,13 +3,15 @@
 %table
   %thead
     %tr
-      %th
-      %th
-      %th
+      %th Product
+      %th Purchased by
+      %th Date
 
   %tbody
     - @purchases.each do |purchase|
       %tr
-        %td= "Something"
+        %td= Product.find(purchase.product_id).title
+        %td= User.find(purchase.user_id).username
+        %td= purchase.created_at
 %br
 = link_to 'Admin menu', admin_path
