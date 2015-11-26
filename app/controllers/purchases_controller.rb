@@ -3,7 +3,7 @@ class PurchasesController < ApplicationController
   before_action :verify_is_admin
 
   def index
-    # stats page for all purchases
+    # TODO include user and product
     @purchases = Purchase.all
   end
 
