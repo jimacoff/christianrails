@@ -72,6 +72,7 @@ th {
   font-size: 175%;
   font-family: Artifika, Georgia, Serif;
   text-decoration: none !important;
+  width: 100%;
 }
 
 .hidden {
@@ -115,4 +116,25 @@ th {
   border-bottom: 1px dashed #919191;
   margin-bottom: 25px;
   padding-bottom: 25px;
+}
+
+/* Desktop layout */
+@media screen and (min-width: 1040px) {
+  #wrapper {
+    width: 620px;
+  }
+  #mynameis {
+    width: 100%;
+  }
+
+}
+
+/* Mobile layout */
+@media screen and (max-width: 1040px) {
+  #wrapper {
+    width: 525px;
+  }
+  #mynameis {
+    width: 500px;
+  }
 }
