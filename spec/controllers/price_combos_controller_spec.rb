@@ -14,6 +14,8 @@ RSpec.describe PriceCombosController, type: :controller do
       country: 'CA'
     })
     sign_in @user
+
+    controller.class.skip_before_filter :verify_is_admin
   end
   
   let(:valid_attributes) {

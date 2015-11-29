@@ -122,3 +122,19 @@ function removeStagedPurchase(product_id) {
     console.log(textStatus);
   });
 }
+
+function doCheckout() {
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      url: '/store/check_out'
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log("Checked out.");
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log(textStatus);
+  });
+}

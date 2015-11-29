@@ -10,15 +10,17 @@ Christianrails::Application.routes.draw do
   
   resources :store, only: [:index] do
     collection do
-      get 'admin'
-      get 'updated_prices'
-      get 'check_out'
+      get  'admin'
+      get  'updated_prices'
+      post 'check_out'
+      get  'complete_order'
       post 'download'
     end
   end
   
   get '/admin', to: 'store#admin'
-  
+  get '/complete_order', to: 'store#complete_order'
+
   root 'store#index'
 
 end

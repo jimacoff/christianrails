@@ -7,6 +7,8 @@ RSpec.describe StoreController, type: :controller do
   let(:user)    { FactoryGirl.create(:user) }
   before (:each) do
     sign_in user
+
+    controller.class.skip_before_filter :verify_is_admin
   end
 
   describe 'index' do
@@ -139,43 +141,6 @@ RSpec.describe StoreController, type: :controller do
       expect( resp[product_3.id.to_s] ).to eq([4.0, 0])
 
       expect( resp["total_discount"] ).to eq(0)
-    end
-
-  end
-
-  describe 'check out' do
-
-    let(:product1)  { FactoryGirl.create(:product) }
-    let(:product2)  { FactoryGirl.create(:product) }
-    let(:product3)  { FactoryGirl.create(:product) }
-
-    let!(:staged_purchase1)  { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
-    let!(:staged_purchase2)  { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
-    let!(:staged_purchase3)  { FactoryGirl.create(:staged_purchase, user: user, product: product3) }
-
-    it 'should convert all StagedPurchases for user to Purchases, then redirect back to store' do
-      expect( user.staged_purchases.count ).to eq(3)
-      expect( user.purchases.count ).to eq(0)
-
-      get 'check_out'
-
-      expect( user.staged_purchases.count ).to eq(0)
-      expect( user.purchases.count ).to eq(3)
-
-      expect( response ).to redirect_to(root_path)
-      expect( flash[:notice] ).to include('Thanks')
-    end 
-
-    it 'should do nothing if no user logged in' do
-      sign_out user
-
-      get 'check_out'
-
-      expect( user.staged_purchases.count ).to eq(3)
-      expect( user.purchases.count ).to eq(0)
-      expect( response ).to redirect_to(root_path)
-
-      expect( flash[:notice] ).to include('difficulties')
     end
 
   end
