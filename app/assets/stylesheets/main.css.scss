@@ -45,14 +45,17 @@ th {
 }
 
 #wrapper {
-  background: #fff;
-  width: 620px;
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px;
+  background:     #fff;
+  width:          640px;
+  margin-top:     50px;
+  margin-left:    auto;
+  margin-right:   auto;
+  padding-top:    50px;
+  padding-bottom: 50px;
+  padding-left:   40px;
+  padding-right:  40px;
   box-shadow: 0 0 10px #777;
-  z-index: 0;
+  z-index:        0;
 }
 
 #header h1 {
@@ -99,7 +102,11 @@ th {
 
 .menu-item {
   display: inline-block;
-  margin-right: 65.33333px;
+  margin-right: 58px;
+}
+
+.menu-item:last-of-type {
+  margin-right: 0;
 }
 
 .menu-text {

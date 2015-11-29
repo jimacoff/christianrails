@@ -1,29 +1,15 @@
-function showServices() {
-  $('#products').addClass('hidden');
-  $('#services').removeClass('hidden');
-  $('#store').addClass('hidden');
+function showScreen(screenToShow) {
+  var screens = ['products', 'services', 'store', 'library'];
 
-  $('#store-link').removeClass('link-selected')
-  $('#explore-link').removeClass('link-selected')
-  $('#services-link').addClass('link-selected')
-}
+  screenToShow = screenToShow.toLowerCase();
 
-function showProducts() {
-  $('#services').addClass('hidden');
-  $('#products').removeClass('hidden');
-  $('#store').addClass('hidden');
+  screens.splice(screens.indexOf(screenToShow), 1);
 
-  $('#store-link').removeClass('link-selected')
-  $('#explore-link').addClass('link-selected')
-  $('#services-link').removeClass('link-selected')
-}
+  $('#' + screenToShow).removeClass('hidden');
+  $('#' + screenToShow + '-link').addClass('link-selected');
 
-function showStore() {
-  $('#services').addClass('hidden');
-  $('#products').addClass('hidden');
-  $('#store').removeClass('hidden');
-
-  $('#store-link').addClass('link-selected')
-  $('#explore-link').removeClass('link-selected')
-  $('#services-link').removeClass('link-selected')
+  for(var i in screens) {
+    $('#' + screens[i]).addClass('hidden');
+    $('#' + screens[i] + '-link').removeClass('link-selected');
+  }
 }

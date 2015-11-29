@@ -1,0 +1,6 @@
+- if @owned_products.size > 0
+  - @owned_products.each do |owned|
+    = render 'store_product', {product: owned}
+- else
+  %h2 
+    You don't own any books!
