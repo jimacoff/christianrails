@@ -30,6 +30,14 @@ RSpec.describe PriceCombo, type: :model do
     expect( p.products.count ).to eq(2)
   end
 
+  it "should have many orders" do
+    p = PriceCombo.create(name: "Jar-related bundle", discount: -3.99)
+    o1 = Order.create(price_combo: p, payment_id: "rakka", payer_id: "snaka", total: 4.65)
+    o2 = Order.create(price_combo: p, payment_id: "arara", payer_id: "maarara", total: 1.75)
+
+    expect( p.orders.count ).to eq(2)
+  end
+
   describe 'satisfied_for?' do
 
     let(:user) { FactoryGirl.create(:user) }

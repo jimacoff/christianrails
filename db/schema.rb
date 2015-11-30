@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124001239) do
+ActiveRecord::Schema.define(version: 20151130020337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20151124001239) do
 
   add_index "downloads", ["release_id"], name: "index_downloads_on_release_id", using: :btree
   add_index "downloads", ["user_id"], name: "index_downloads_on_user_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "payer_id"
+    t.string   "payment_id"
+    t.integer  "price_combo_id"
+    t.decimal  "total"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "price_combos", force: :cascade do |t|
     t.string   "name"
@@ -56,6 +65,7 @@ ActiveRecord::Schema.define(version: 20151124001239) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "order_id"
   end
 
   create_table "releases", force: :cascade do |t|

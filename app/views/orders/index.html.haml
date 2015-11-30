@@ -1,0 +1,13 @@
+%h1 Orders
+
+%table
+  %thead
+    %tr
+      %th Product
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td Something about orders
+%br
+= link_to 'Admin menu', admin_path

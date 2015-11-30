@@ -23,9 +23,13 @@ RSpec.describe StoreController, type: :controller do
     let!(:product4)  { FactoryGirl.create(:product) }
     let!(:product5)  { FactoryGirl.create(:product) }
 
-    let!(:purchase1)  { FactoryGirl.create(:purchase, user: user, product: product2) }
-    let!(:purchase2)  { FactoryGirl.create(:purchase, user: user, product: product4) }
-    let!(:purchase3)  { FactoryGirl.create(:purchase, user: user, product: product5) }
+    let(:order1)      { FactoryGirl.create(:order, price_combo: combo1) }
+    let(:order2)      { FactoryGirl.create(:order, price_combo: combo2) }
+    let(:order3)      { FactoryGirl.create(:order, price_combo: combo3) }
+
+    let!(:purchase1)  { FactoryGirl.create(:purchase, user: user, product: product2, order: order1) }
+    let!(:purchase2)  { FactoryGirl.create(:purchase, user: user, product: product4, order: order2) }
+    let!(:purchase3)  { FactoryGirl.create(:purchase, user: user, product: product5, order: order3) }
 
     it 'should retrieve all price combos' do
       get 'index'

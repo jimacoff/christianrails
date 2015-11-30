@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PurchasesController, type: :controller do
+RSpec.describe OrdersController, type: :controller do
 
   render_views
 
@@ -18,15 +18,14 @@ RSpec.describe PurchasesController, type: :controller do
     controller.class.skip_before_filter :verify_is_admin
   end
 
-  let(:product)   { FactoryGirl.create(:product) }
-  let(:user)      { FactoryGirl.create(:user) }
-  let(:order)     { FactoryGirl.create(:order) }
+  let(:price_combo)   { FactoryGirl.create(:price_combo) }
 
   let(:valid_attributes) {
     {
-      product_id: product.id,
-      user_id: user.id,
-      order_id: order.id
+      price_combo_id: price_combo.id,
+      payer_id: "john payer",
+      payment_id: "a-payment-id",
+      total: 4.33
     }
   }
 
@@ -39,10 +38,10 @@ RSpec.describe PurchasesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all purchases as @purchases" do
-      purchase = Purchase.create! valid_attributes
+    it "assigns all orders as @orders" do
+      order = Order.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:purchases)).to eq([purchase])
+      expect(assigns(:orders)).to eq([order])
     end
   end
 

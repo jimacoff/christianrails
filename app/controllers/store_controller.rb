@@ -69,10 +69,11 @@ class StoreController < ApplicationController
       if current_user
         # gets params back --> :paymentId, :token, :PayerID
         payment = PayPal::SDK::REST::Payment.find(store_params[:paymentId])
-        
         payment.execute( payer_id: store_params[:PayerID] )
 
         staged = current_user.staged_purchases
+
+        # TODO create the order to attach to the purchases + also combo
 
         staged.each do |staged_purchase|
           Purchase.create(user: current_user, product: staged_purchase.product, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId])

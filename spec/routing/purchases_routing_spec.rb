@@ -7,9 +7,5 @@ RSpec.describe PurchasesController, type: :routing do
       expect(:get => "/purchases").to route_to("purchases#index")
     end
 
-    it "routes to #create" do
-      expect(:post => "/purchases").to route_to("purchases#create")
-    end
-
   end
 end
