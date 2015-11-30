@@ -29,7 +29,7 @@ class StoreController < ApplicationController
   def check_out
     if current_user && current_user.staged_purchases.size > 0
       staged = current_user.staged_purchases
-      titles = staged.collect{ |s| s.product.title }.join(' + ')
+      titles = staged.collect{ |s| s.product.title }
 
       total_cost = 0
       staged.map { |e| total_cost += e.product.price }
@@ -49,7 +49,7 @@ class StoreController < ApplicationController
             total: total_cost.to_s,
             currency: 'CAD' 
           },
-          description: titles + ' eBooks'
+          description: titles.join(' + ') + ' eBooks'
         }] 
       })
 
@@ -66,17 +66,16 @@ class StoreController < ApplicationController
 
   def complete_order 
     begin
-      # gets params back --> :paymentId, :token, :PayerID
-      # TODO sanitize and secure
-      payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
-      payerId = params[:PayerID]
-      payment.execute( payer_id: payerId )
+      if current_user
+        # gets params back --> :paymentId, :token, :PayerID
+        payment = PayPal::SDK::REST::Payment.find(store_params[:paymentId])
+        
+        payment.execute( payer_id: store_params[:PayerID] )
 
-      if current_user # TODO authenticate they are the ones checking out
         staged = current_user.staged_purchases
 
         staged.each do |staged_purchase|
-          Purchase.create(user: current_user, product: staged_purchase.product)
+          Purchase.create(user: current_user, product: staged_purchase.product, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId])
           staged_purchase.destroy
         end
         note = 'Thanks for your support! Download your new books below.'
@@ -130,7 +129,7 @@ class StoreController < ApplicationController
   end
 
   def store_params
-    params.permit(:release_id)
+    params.permit(:release_id, :paymentId, :token, :PayerID)
   end
 
 end
