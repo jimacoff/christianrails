@@ -12,6 +12,14 @@ class PriceCombo < ActiveRecord::Base
     false
   end
 
+  def self.combos_satisfied_for(user_id)
+    sat = []
+    PriceCombo.all.each do |pc|
+      sat << pc.id if pc.satisfied_for?(user_id)
+    end
+    sat
+  end
+
   def self.total_cart_discount_for(user_id)
     total = 0
     PriceCombo.all.each do |pc|

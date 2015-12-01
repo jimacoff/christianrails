@@ -73,10 +73,13 @@ class StoreController < ApplicationController
 
         staged = current_user.staged_purchases
 
-        # TODO create the order to attach to the purchases + also combo
+        gross_price = StagedPurchase.gross_cart_value_for(current_user.id)
+        discount = PriceCombo.total_cart_discount_for(current_user.id)
+
+        order = Order.create(payer_id: store_params[:PayerID], payment_id: store_params[:paymentId], total: gross_price - discount)
 
         staged.each do |staged_purchase|
-          Purchase.create(user: current_user, product: staged_purchase.product, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId])
+          Purchase.create(user: current_user, product: staged_purchase.product, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId], order: order)
           staged_purchase.destroy
         end
         note = 'Thanks for your support! Download your new books below.'

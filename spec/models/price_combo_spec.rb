@@ -68,6 +68,26 @@ RSpec.describe PriceCombo, type: :model do
 
   end
 
+  describe 'combos_satisfied_for' do
+
+    let(:user) { FactoryGirl.create(:user) }
+
+    let(:product_1)   { FactoryGirl.create(:product, title: "Book One", price: 5.00) }
+    let(:product_2)   { FactoryGirl.create(:product, title: "Book Two", price: 3.00) }
+
+    it 'should return an array of the price combos satisfied' do
+      combo = PriceCombo.create(name: "Some bundle", discount: -6.50)
+      combo.products << product_1
+      combo.products << product_2
+
+      st1 = StagedPurchase.create(user: user, product: product_1)
+      st2 = StagedPurchase.create(user: user, product: product_2)
+
+      expect( PriceCombo.combos_satisfied_for(user.id) ).to include(combo.id)
+    end
+
+  end
+
   describe 'total_cart_discount_for' do
 
     let(:user) { FactoryGirl.create(:user) }

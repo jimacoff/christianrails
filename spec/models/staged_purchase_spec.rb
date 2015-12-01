@@ -33,4 +33,22 @@ RSpec.describe StagedPurchase, type: :model do
 
   end
 
+  describe "gross_cart_value" do
+
+    let(:product1)  { FactoryGirl.create(:product, price: 2.00) }
+    let(:product2)  { FactoryGirl.create(:product, price: 2.40) }
+    let(:product3)  { FactoryGirl.create(:product, price: 5.00) }
+
+    let!(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
+    let!(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
+    let!(:staged_purchase3) { FactoryGirl.create(:staged_purchase, user: user, product: product3) }
+
+    it "should get the gross cart value" do
+      
+      expect( StagedPurchase.gross_cart_value_for(user.id) ).to eq(9.40)
+
+    end
+
+  end
+
 end
