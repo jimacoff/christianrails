@@ -72,7 +72,6 @@ class StoreController < ApplicationController
         payment.execute( payer_id: store_params[:PayerID] )
 
         staged = current_user.staged_purchases
-
         gross_price = StagedPurchase.gross_cart_value_for(current_user.id)
         discount = PriceCombo.total_cart_discount_for(current_user.id)
 
@@ -82,6 +81,7 @@ class StoreController < ApplicationController
           Purchase.create(user: current_user, product: staged_purchase.product, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId], order: order)
           staged_purchase.destroy
         end
+        
         note = 'Thanks for your support! Download your new books below.'
       else
         note = 'Please log in. If you are having difficulties, please contact the author.'

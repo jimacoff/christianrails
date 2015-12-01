@@ -125,23 +125,23 @@ th {
   padding-bottom: 25px;
 }
 
-/* Desktop layout */
-@media screen and (min-width: 1040px) {
-  #wrapper {
-    width: 620px;
-  }
-  #mynameis {
-    width: 100%;
-  }
+// /* Desktop layout */
+// @media screen and (min-width: 1040px) {
+//   #wrapper {
+//     width: 620px;
+//   }
+//   #mynameis {
+//     width: 100%;
+//   }
 
-}
+// }
 
-/* Mobile layout */
-@media screen and (max-width: 1040px) {
-  #wrapper {
-    width: 525px;
-  }
-  #mynameis {
-    width: 500px;
-  }
-}
+// /* Mobile layout */
+// @media screen and (max-width: 1040px) {
+//   #wrapper {
+//     width: 525px;
+//   }
+//   #mynameis {
+//     width: 500px;
+//   }
+// }
