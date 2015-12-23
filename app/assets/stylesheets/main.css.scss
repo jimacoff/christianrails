@@ -83,11 +83,12 @@ th {
 }
 
 .background { 
-  background-image: asset-data-url("fall-lake.png"); 
-  background-repeat: no-repeat; 
-  background-position: center center !important;
-  background-attachment: fixed !important;
-  background-size: cover;
+  // background-image: asset-data-url("fall-lake.png"); 
+  // background-repeat: no-repeat; 
+  // background-position: center center !important;
+  // background-attachment: fixed !important;
+  // background-size: cover;
+  background: -webkit-linear-gradient(-45deg, #b3dced 0%,#29b8e5 50%,#bce0ee 100%);
 }
 
 .product-image {
