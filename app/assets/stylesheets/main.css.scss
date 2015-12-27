@@ -83,12 +83,17 @@ th {
 }
 
 .background { 
+  // IMAGE NO WORK :(
   // background-image: asset-data-url("fall-lake.png"); 
   // background-repeat: no-repeat; 
   // background-position: center center !important;
   // background-attachment: fixed !important;
   // background-size: cover;
-  background: -webkit-linear-gradient(-45deg, #b3dced 0%,#29b8e5 50%,#bce0ee 100%);
+
+  background: rgb(182,181,227); /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(182,181,227,1) 0%, rgba(102,100,192,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(182,181,227,1) 0%,rgba(102,100,192,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(182,181,227,1) 0%,rgba(102,100,192,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .product-image {
@@ -124,6 +129,27 @@ th {
   border-bottom: 1px dashed #919191;
   margin-bottom: 25px;
   padding-bottom: 25px;
+}
+
+.alert {
+  margin: auto;
+  margin-bottom: 22px;
+  max-width: 500px;
+  padding: 8px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.alert-notice {
+  border: 1px solid #6C9C46;
+  background-color: #A6DEA4;
+  color: #486532;
+}
+
+.alert-danger {
+  border: 1px solid #A83E3E;
+  background-color: #DEA4A4;
+  color: #A83E3E;
 }
 
 // /* Desktop layout */

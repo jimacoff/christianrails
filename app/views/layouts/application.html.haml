@@ -19,11 +19,11 @@
       = render "layouts/dealzone"
 
     #wrapper
-      = if notice
-        %p.alert.alert-success
+      - if notice
+        %p.alert.alert-notice
           = notice
-      = if alert
+      - if alert
         %p.alert.alert-danger
         = alert
       = yield
-      = render "layouts/script"
+      - render "layouts/script"

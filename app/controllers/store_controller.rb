@@ -56,7 +56,7 @@ class StoreController < ApplicationController
       if @payment.create
         # redirect off to PayPal to get approval
         redirect_url = @payment.links.find {|link| link.rel == 'approval_url'}
-        redirect_to redirect_url.href
+        render js: "window.location = '#{redirect_url.href}'"
       else
         redirect_to root_url, notice: @payment.error
       end
@@ -78,7 +78,7 @@ class StoreController < ApplicationController
         order = Order.create(payer_id: store_params[:PayerID], payment_id: store_params[:paymentId], total: gross_price - discount)
 
         staged.each do |staged_purchase|
-          Purchase.create(user: current_user, product: staged_purchase.product, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId], order: order)
+          Purchase.create(user: current_user, product: staged_purchase.product, order: order)
           staged_purchase.destroy
         end
         
@@ -88,7 +88,8 @@ class StoreController < ApplicationController
       end
 
     rescue => e
-      note = "Error finding/executing payment. Please contact the author."
+      pp e
+      note = "Error executing payment. Please contact the author."
     end
     
     respond_to do |format|

@@ -25,6 +25,6 @@ module Christianrails
       g.helper            false
       g.jbuilder          false
     end
-
+    
   end
 end

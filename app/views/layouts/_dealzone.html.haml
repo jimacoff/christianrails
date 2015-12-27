@@ -21,4 +21,7 @@
           %td.half-width
             #total_price.embolden $0.00
           
-      %button{id: "check_out_button", onclick: "doCheckout();"} Check out now
+      %input.center{id: "check_out_button", onclick: "doCheckout();", type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png", alt: "Check out with PayPal" }
+      .hidden.center{id: "processing"} 
+        %p Processing...
+        = image_tag("spin.gif")

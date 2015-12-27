@@ -129,12 +129,16 @@ function doCheckout() {
       type: 'POST',
       url: '/store/check_out'
     });
+  $('#check_out_button').addClass('hidden');
+  $('#processing').removeClass('hidden');
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log("Checked out.");
+    console.log("Checking out.");
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
-    console.log(textStatus);
+    $('#check_out_button').addClass('hidden');
+    $('#processing').removeClass('hidden');
+    console.log("Error occured: " + textStatus);
   });
 }
