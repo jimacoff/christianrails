@@ -110,7 +110,7 @@ class StoreController < ApplicationController
       end
       product = release.product
       if current_user.has_product?(product.id)
-        file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+        file_name = "#{product.title} {release.version} - #{product.author}.#{release.format.downcase}"
         send_file "#{Rails.root}/../../downloads/#{file_name}"
         Download.create(user: current_user, release: release)
         return

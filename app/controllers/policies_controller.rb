@@ -1,8 +1,5 @@
 class PoliciesController < ApplicationController
 
-  def index
-  end
-
   def terms_of_use
   end
 

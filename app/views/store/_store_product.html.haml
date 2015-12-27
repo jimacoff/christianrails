@@ -24,7 +24,7 @@
               %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
             - else
               - product.releases.each do |rel|
-                = button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
+                .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
 
           - if !current_user || !current_user.has_product?(product.id)
             %td.small-width

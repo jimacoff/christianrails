@@ -17,7 +17,6 @@ set :default_environment, {
 
 set :use_sudo, false
 
-
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.2.1'
 
@@ -34,22 +33,21 @@ namespace :deploy do
   # desc 'Bundle'
   # task :bundle do
   #   on roles :all do
-  #     execute 'cd /var/www/christianrails/current && gem install bundler'
-  #     execute 'bundle install'
+  #     execute 'cd /var/www/christianrails/current && bundle install'
   #   end
   # end
 
   desc 'Precompile assets'
   task :precompile do
     on roles :all do
-      execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake assets:precompile'
+      execute 'cd /var/www/christianrails/current && RAILS_ENV=production bundle exec rake assets:precompile'
     end
   end
 
   desc 'Migrate the DB'
   task :migrate do
     on roles :all do
-      execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake db:migrate'
+      execute 'cd /var/www/christianrails/current && RAILS_ENV=production bundle exec rake db:migrate'
     end
   end
 

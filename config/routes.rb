@@ -9,7 +9,7 @@ Christianrails::Application.routes.draw do
   resources :price_combos,         except: [:show]
   resources :products,             except: [:show]
 
-  resources :policies, only: [:index] do
+  resources :policies, only: [] do
     collection do
       get 'terms_of_use'
       get 'privacy'

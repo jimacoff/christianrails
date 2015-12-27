@@ -1,15 +1,10 @@
 - if @available_products.size > 0
   - @available_products.each do |avail|
-    = render 'store_product', {product: avail}
+    = render 'store_product', { product: avail }
   %br
   %p.diminutive.center All prices expressed in CAD. Prices do not include tax.
-
-  //TODO remove when stable
-  %p.center The store is currently under development and will not function as desired.  Do not attempt to give it money right now.
 
 - else
   %h2 Nothing left to buy!
   %p Thanks for your support. Come back soon for new releases.
   // TODO Suggest something else to do with the money 
-
-
