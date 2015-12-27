@@ -8,6 +8,15 @@ Christianrails::Application.routes.draw do
   resources :releases,             except: [:index, :show, :new, :edit, ]
   resources :price_combos,         except: [:show]
   resources :products,             except: [:show]
+
+  resources :policies, only: [:index] do
+    collection do
+      get 'terms_of_use'
+      get 'privacy'
+      get 'customer_service'
+      get 'refund'
+    end
+  end
   
   resources :store, only: [:index] do
     collection do
