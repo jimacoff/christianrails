@@ -4,8 +4,9 @@ This site can be found at www.christiandewolf.com.
 
 Release notes:
 
--- 1.0.1 - File download system functional
--- 1.0.0 - Initial relase
++ 1.0.2 - PayPal hookup functional
++ 1.0.1 - File download system functional
++ 1.0.0 - Initial relase
 
 * Ruby  2.1.2
 * Rails 4.2.4

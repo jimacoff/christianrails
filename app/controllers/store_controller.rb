@@ -46,8 +46,12 @@ class StoreController < ApplicationController
         },
         transactions: [{
           amount: {
-            total: total_cost.to_s,
-            currency: 'CAD' 
+            total: (total_cost * 1.15).round(2).to_s,
+            currency: 'CAD',
+            details: {
+              subtotal: total_cost.to_s,
+              tax: (total_cost * 0.15).round(2).to_s
+            }
           },
           description: titles.join(' + ') + ' eBooks'
         }] 
@@ -85,16 +89,18 @@ class StoreController < ApplicationController
         
         note = 'Thanks for your support! Download your new books below.'
       else
-        note = 'Please log in. If you are having difficulties, please contact the author.'
+        alert = 'Please log in. If you are having difficulties, please contact the author.'
       end
 
     rescue => e
       pp e
-      note = "Error executing payment. Please contact the author."
+      alert = "Error executing payment. Please contact the author."
     end
     
     respond_to do |format|
-      format.html { redirect_to root_path, notice: note }
+      flash[:notice] = note if note
+      flash[:error]  = alert if alert
+      format.html { redirect_to root_path }
     end
 
   end
@@ -110,7 +116,7 @@ class StoreController < ApplicationController
       end
       product = release.product
       if current_user.has_product?(product.id)
-        file_name = "#{product.title} {release.version} - #{product.author}.#{release.format.downcase}"
+        file_name = "#{product.title} #{release.version} - #{product.author}.#{release.format.downcase}"
         send_file "#{Rails.root}/../../downloads/#{file_name}"
         Download.create(user: current_user, release: release)
         return
