@@ -71,8 +71,8 @@ namespace :deploy do
   # after :publishing, :recover
   # after :recover, :restart
   after :publishing, :precompile
-  after :precompile, :migrate
-  after :migrate, :get_vars
-  after :get_vars, :restart_uni
+  after :precompile, :get_vars
+  after :get_vars, :migrate
+  after :migrate, :restart_uni
 
 end
