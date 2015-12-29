@@ -32,47 +32,47 @@ namespace :deploy do
   #   system "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   # end
 
-  desc 'Recover'
-  task :recover do
+  # desc 'Recover'
+  # task :recover do
+  #   on roles :all do
+  #     execute 'cd && sh recover.sh'
+  #   end
+  # end
+
+  desc 'Precompile assets'
+  task :precompile do
     on roles :all do
-      execute 'cd && sh recover.sh'
+      execute 'cd /var/www/christianrails/current && #{fetch(:rbenv_prefix)} RAILS_ENV=production rake assets:precompile'
     end
   end
 
-  # desc 'Precompile assets'
-  # task :precompile do
-  #   on roles :all do
-  #     execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake assets:precompile'
-  #   end
-  # end
+  desc 'Migrate the DB'
+  task :migrate do
+    on roles :all do
+      execute 'cd /var/www/christianrails/current && #{fetch(:rbenv_prefix)} RAILS_ENV=production rake db:migrate'
+    end
+  end
 
-  # desc 'Migrate the DB'
-  # task :migrate do
-  #   on roles :all do
-  #     execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake db:migrate'
-  #   end
-  # end
+  desc 'Get the vars'
+  task :get_vars do
+    on roles :all do
+      execute 'cp /var/www/christianrails/releases/.rbenv-vars /var/www/christianrails/current'
+    end
+  end
 
-  # desc 'Get the vars'
-  # task :get_vars do
-  #   on roles :all do
-  #     execute 'cp /var/www/christianrails/releases/.rbenv-vars /var/www/christianrails/current'
-  #   end
-  # end
+  desc 'Restart unicorn'
+  task :restart_uni do
+    on roles :all do
+      execute 'kill -9 `cat ./tmp/pids/unicorn.pid`'
+      execute 'unicorn_rails -c ./unicorn.rb -E production -D'
+    end 
+  end
 
-  # desc 'Restart unicorn'
-  # task :restart do
-  #   on roles :all do
-  #     execute 'kill -9 `cat ./tmp/pids/unicorn.pid`'
-  #     execute 'unicorn_rails -c ./unicorn.rb -E production -D'
-  #   end 
-  # end
-
-  after :publishing, :recover
-  after :recover, :restart
-  #after :bundle, :precompile
-  # after :precompile, :migrate
-  # after :migrate, :get_vars
-  # after :get_vars, :restart
+  # after :publishing, :recover
+  # after :recover, :restart
+  after :publishing, :precompile
+  after :precompile, :migrate
+  after :migrate, :get_vars
+  after :get_vars, :restart_uni
 
 end
