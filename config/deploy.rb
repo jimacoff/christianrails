@@ -65,7 +65,7 @@ namespace :deploy do
     on roles :all do
       execute 'kill -9 `cat /var/www/christianrails/shared/pids/unicorn.pid`'
       execute 'rm /var/www/christianrails/shared/pids/unicorn.pid'
-      execute "cd /var/www/christianrails/current && #{fetch(:rbenv_prefix)} unicorn -c config/unicorn.rb -E production -D"
+      execute "cd /var/www/christianrails/current && #{fetch(:rbenv_prefix)} bundle exec unicorn -c config/unicorn.rb -E production -D"
     end 
   end
 
