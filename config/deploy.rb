@@ -46,17 +46,17 @@ namespace :deploy do
     end
   end
 
-  desc 'Migrate the DB'
-  task :migrate do
-    on roles :all do
-      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rake db:migrate"
-    end
-  end
-
   desc 'Get the vars'
   task :get_vars do
     on roles :all do
       execute "cp /var/www/christianrails/releases/.rbenv-vars /var/www/christianrails/current"
+    end
+  end
+
+  desc 'Migrate the DB'
+  task :migrate do
+    on roles :all do
+      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rake db:migrate"
     end
   end
 
