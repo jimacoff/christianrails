@@ -64,7 +64,7 @@ namespace :deploy do
   task :restart_uni do
     on roles :all do
       execute 'kill -9 `cat /var/www/christianrails/shared/pids/unicorn.pid`'
-      execute 'cd /var/www/christianrails/current && unicorn_rails -c ./unicorn.rb -E production -D'
+      execute 'cd /var/www/christianrails/current && #{fetch(:rbenv_prefix)} unicorn config/unicorn.rb -E production -D'
     end 
   end
 
