@@ -63,8 +63,8 @@ namespace :deploy do
   desc 'Restart unicorn'
   task :restart_uni do
     on roles :all do
-      execute 'kill -9 `cat ./tmp/pids/unicorn.pid`'
-      execute 'unicorn_rails -c ./unicorn.rb -E production -D'
+      execute 'kill -9 `cat /var/www/christianrails/shared/pids/unicorn.pid`'
+      execute 'cd /var/www/christianrails/current && unicorn_rails -c ./unicorn.rb -E production -D'
     end 
   end
 
