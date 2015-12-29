@@ -24,6 +24,8 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails unicorn}
 set :rbenv_roles, :all # default value
 
+set :keep_releases, 5
+
 namespace :deploy do
 
   # task :symlink_shared do
@@ -33,14 +35,14 @@ namespace :deploy do
   desc 'Precompile assets'
   task :precompile do
     on roles :all do
-      execute 'cd /var/www/christianrails/current && RAILS_ENV=production bundle exec rake assets:precompile'
+      execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake assets:precompile'
     end
   end
 
   desc 'Migrate the DB'
   task :migrate do
     on roles :all do
-      execute 'cd /var/www/christianrails/current && RAILS_ENV=production bundle exec rake db:migrate'
+      execute 'cd /var/www/christianrails/current && RAILS_ENV=production rake db:migrate'
     end
   end
 
