@@ -30,13 +30,6 @@ namespace :deploy do
   #   system "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   # end
 
-  # desc 'Bundle'
-  # task :bundle do
-  #   on roles :all do
-  #     execute 'cd /var/www/christianrails/current && bundle install'
-  #   end
-  # end
-
   desc 'Precompile assets'
   task :precompile do
     on roles :all do
@@ -51,6 +44,13 @@ namespace :deploy do
     end
   end
 
+  desc 'Get the vars'
+  task :get_vars do
+    on roles :all do
+      execute 'cp /var/www/christianrails/releases/.rbenv-vars /var/www/christianrails/current'
+    end
+  end
+
   desc 'Restart unicorn'
   task :restart do
     on roles :all do
@@ -62,6 +62,7 @@ namespace :deploy do
   after :publishing, :precompile
   #after :bundle, :precompile
   after :precompile, :migrate
-  after :migrate, :restart
+  after :migrate, :get_vars
+  after :get_vars, :restart
 
 end
