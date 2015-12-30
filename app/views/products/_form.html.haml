@@ -30,9 +30,6 @@
   .field
     = f.label :small_image
     = f.text_field :small_image
-  .field
-    = f.fields_for :release do |ff|
-      = ff.label :format
-      = ff.text_field :format
+    
   .actions
     = f.submit 'Save', class: 'store-button'

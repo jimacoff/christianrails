@@ -27,5 +27,4 @@ development:
 production:
   <<: *default
 
-  #email_address: <%= ENV["PAYPAL_EMAIL"] %>
   mode: live
