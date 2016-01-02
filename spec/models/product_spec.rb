@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  
+
   let(:release1) { FactoryGirl.create(:release, format: "ePub") }
   let(:release2) { FactoryGirl.create(:release, format: "PDF") }
 
   let(:user) { FactoryGirl.create(:user) }
   let(:purchase) { FactoryGirl.create(:purchase, user: user) }
-  
+
   it "should validate" do
     p = Product.new()
     expect( p ).to_not be_valid
@@ -50,20 +50,65 @@ RSpec.describe Product, type: :model do
   describe 'discount_for' do
 
     it 'should return a discount for a product when user has satisfied price combo' do
-
+      # TODO
 
     end
 
     it 'should NOT return a discount for a product when user has NOT satisfied price combo' do
-
+      # TODO
 
     end
 
     it 'should NOT return a discount when product is not part of any price combo' do
-
+      # TODO
 
     end
 
   end
-  
+
+  describe 'physical and digital helpers' do
+
+    let(:prod1) { FactoryGirl.create(:product) }
+    let!(:rel1) { FactoryGirl.create(:release, product: prod1, format: "Book", physical_code: "abcde") }
+    let!(:rel2) { FactoryGirl.create(:release, product: prod1, format: "PDF") }
+    let!(:rel3) { FactoryGirl.create(:release, product: prod1, format: "ePub") }
+    let!(:rel4) { FactoryGirl.create(:release, product: prod1, format: "Kobo") }
+
+    let(:prod2) { FactoryGirl.create(:product) }
+    let!(:rel5) { FactoryGirl.create(:release, product: prod2, format: "Book", physical_code: "ABCDE") }
+
+    let(:prod3) { FactoryGirl.create(:product) }
+    let!(:rel6) { FactoryGirl.create(:release, product: prod3, format: "PDF") }
+
+    it "should identify all a product's digital releases" do
+      expect( prod1.digital_releases.count ).to eq(3)
+      expect( prod1.digital_releases ).to include( rel2, rel3, rel4 )
+
+      expect( prod2.digital_releases.count ).to eq(0)
+      expect( prod2.digital_releases ).to eq( [] )
+
+      expect( prod3.digital_releases.count ).to eq(1)
+      expect( prod3.digital_releases ).to eq( [ rel6 ] )
+    end
+
+    it "should identify if a product has digital releases" do
+      expect( prod1.has_digital_release? ).to be_truthy
+      expect( prod2.has_digital_release? ).to be_falsy
+      expect( prod3.has_digital_release? ).to be_truthy
+    end
+
+    it "should identify if a product has physical releases" do
+      expect( prod1.has_physical_release? ).to be_truthy
+      expect( prod2.has_physical_release? ).to be_truthy
+      expect( prod3.has_physical_release? ).to be_falsy
+    end
+
+    it "should return a product's physical_code if it has one" do
+      expect( prod1.physical_code ).to eq("abcde")
+      expect( prod2.physical_code ).to eq("ABCDE")
+      expect( prod3.physical_code ).to be_nil
+    end
+
+  end
+
 end

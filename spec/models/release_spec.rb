@@ -29,7 +29,15 @@ RSpec.describe Release, type: :model do
     r = Release.create(product: product, format: "JSP", release_date: 1.week.ago)
     expect( r ).to_not be_valid
     expect( r.errors.messages[:format] ).to include("JSP is not a valid format")
+  end
 
+  it "should have a physical code if it is a book" do
+    r = Release.create(product: product, format: "Book", release_date: 1.week.ago)
+    expect( r ).to_not be_valid
+    expect( r.errors.messages[:physical_code] ).to include("can't be blank")
+
+    r.physical_code = "PHYSICAL"
+    expect( r ).to be_valid
   end
 
   it "should belong to products" do

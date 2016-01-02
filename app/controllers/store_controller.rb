@@ -38,11 +38,11 @@ class StoreController < ApplicationController
       @payment = PayPal::SDK::REST::Payment.new({
         intent: 'sale',
         payer: {
-          payment_method: 'paypal' 
+          payment_method: 'paypal'
         },
         redirect_urls: {
           return_url: complete_order_url,
-          cancel_url: root_url 
+          cancel_url: root_url
         },
         transactions: [{
           amount: {
@@ -54,7 +54,7 @@ class StoreController < ApplicationController
             }
           },
           description: titles.join(' + ') + ' eBooks'
-        }] 
+        }]
       })
 
       if @payment.create
@@ -69,7 +69,7 @@ class StoreController < ApplicationController
     end
   end
 
-  def complete_order 
+  def complete_order
     begin
       if current_user
         # gets params back --> :paymentId, :token, :PayerID
@@ -86,7 +86,7 @@ class StoreController < ApplicationController
           Purchase.create(user: current_user, product: staged_purchase.product, order: order)
           staged_purchase.destroy
         end
-        
+
         note = 'Thanks for your support! Download your new books below.'
       else
         alert = 'Please log in. If you are having difficulties, please contact the author.'
@@ -96,7 +96,7 @@ class StoreController < ApplicationController
       pp e
       alert = "Error executing payment. Please contact the author."
     end
-    
+
     respond_to do |format|
       flash[:notice] = note if note
       flash[:error]  = alert if alert
@@ -126,6 +126,13 @@ class StoreController < ApplicationController
       end
     end
     Rails.logger.warn("Unauthorized download attempted on release: #{release_id} by a guest user.")
+  end
+
+  def order_success
+    respond_to do |format|
+      flash[:notice] = "Order complete! Your book will arrive in 2-3 weeks."
+      format.html { redirect_to root_path }
+    end
   end
 
   private

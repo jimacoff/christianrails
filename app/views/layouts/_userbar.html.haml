@@ -1,7 +1,12 @@
 - if current_user
   .right
     Welcome, #{current_user.full_name}!
-    %p.diminutive= link_to 'Sign out', destroy_user_session_path, method: :delete
+
+    %p.diminutive
+      - if current_user.admin?
+        = link_to "Admin", admin_path
+        |
+      = link_to 'Sign out', destroy_user_session_path, method: :delete
 - else
   .right
     = link_to 'Sign in', user_session_path

@@ -3,19 +3,25 @@
     %td.small-width.center
       = image_tag( "#{product.image}" )
     %td
+      - if product.has_physical_release?
+        %form.right{action: "https://www.paypal.com/cgi-bin/webscr", method: "post", target: "_top"}
+          %input{type: "hidden", name: "cmd", value: "_s-xclick"}
+          %input{type: "hidden", name: "hosted_button_id", value: product.physical_code}
+          %input.store-button.physical-button{type: "submit", border: "0", value: "Order a physical copy", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
+
       %h2{id:"#{product.id}_title"}= product.title
       %p= product.long_desc
-      %table.full-width
+      %table.full-width{id: "digital_download_#{product.id}"}
         %tr
           %td.small-width
             - if !current_user || !current_user.has_product?(product.id)
               - release_array = []
-              - product.releases.each do |release|
+              - product.digital_releases.each do |release|
                 - release_array << release.format
               - release_text = release_array.join(" / ")
               .store-format.embolden #{release_text}
-            - else 
-              .store-format.embolden Download: 
+            - else
+              .store-format.embolden Download:
 
           %td.small-width
             - if !current_user
@@ -23,7 +29,7 @@
             - elsif !current_user.has_product?(product.id)
               %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
             - else
-              - product.releases.each do |rel|
+              - product.digital_releases.each do |rel|
                 .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
 
           - if !current_user || !current_user.has_product?(product.id)

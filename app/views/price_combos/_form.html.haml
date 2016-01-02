@@ -5,12 +5,13 @@
       %ul
         - @price_combo.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :discount
-    = f.text_field :discount, value: ( number_with_precision( f.object.discount, precision: 2) || 0 )
-  .actions
-    = f.submit 'Save', class: 'store-button'
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name
+    %tr.field
+      %td= f.label :discount
+      %td= f.text_field :discount, value: ( number_with_precision( f.object.discount, precision: 2) || 0 )
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

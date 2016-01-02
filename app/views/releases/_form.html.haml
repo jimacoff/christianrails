@@ -1,0 +1,28 @@
+= form_for [@product, @release] do |f|
+  - if @release.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@release.errors.count, "error")} prohibited this release from being saved:"
+      %ul
+        - @release.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :format
+      %td= f.select :format, options_for_select(Release::FORMATS)
+    %tr.field
+      %td= f.label :release_date
+      %td= f.date_field :release_date
+    %tr.field
+      %td= f.label :size
+      %td= f.text_field :size
+    %tr.field
+      %td= f.label :version
+      %td= f.text_field :version
+    %tr.field
+      %td= f.label :physical_code
+      %td= f.text_field :physical_code
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

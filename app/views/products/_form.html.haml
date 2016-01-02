@@ -5,31 +5,33 @@
       %ul
         - @product.errors.full_messages.each do |msg|
           %li= msg
+  %table.modest-width
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :author
-    = f.text_field :author
-  .field
-    = f.label :short_desc
-    = f.text_field :short_desc
-  .field
-    = f.label :long_desc
-    = f.text_area :long_desc
-  .field
-    = f.label :price
-    = f.text_field :price, value: ( number_with_precision( f.object.price, precision: 2) || 0)
-  .field
-    = f.label :rank
-    = f.number_field :rank
-  .field
-    = f.label :image
-    = f.text_field :image
-  .field
-    = f.label :small_image
-    = f.text_field :small_image
-    
-  .actions
-    = f.submit 'Save', class: 'store-button'
+    %tr.field
+      %td= f.label :title
+      %td= f.text_field :title
+    %tr.field
+      %td= f.label :author
+      %td= f.text_field :author
+    %tr.field
+      %td= f.label :short_desc
+      %td= f.text_field :short_desc, size: 50
+    %tr.field
+      %td= f.label :long_desc
+      %td= f.text_area :long_desc, cols: 40, rows: 8
+    %tr.field
+      %td= f.label :price
+      %td= f.text_field :price, value: ( number_with_precision( f.object.price, precision: 2) || 0)
+    %tr.field
+      %td= f.label :rank
+      %td= f.number_field :rank
+    %tr.field
+      %td= f.label :image
+      %td= f.text_field :image
+    %tr.field
+      %td= f.label :small_image
+      %td= f.text_field :small_image
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

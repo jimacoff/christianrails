@@ -4,6 +4,7 @@ Christianrails is a web application that can be used to sell eBooks and other di
 
 Release notes:
 
++ 1.0.4 - Order form for physical books + release admin views
 + 1.0.3 - Visual modifications
 + 1.0.2 - PayPal hookup functional
 + 1.0.1 - File download system functional

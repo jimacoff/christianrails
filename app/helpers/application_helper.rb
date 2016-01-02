@@ -7,7 +7,7 @@ module ApplicationHelper
   def app_version
     yaml_file_path = "#{::Rails.root}/config/version.yml"
     parts = YAML.load(File.read(yaml_file_path)).symbolize_keys
-    "#{parts[:major]}.#{parts[:minor]}.#{parts[:patch]}"
+    "#{ parts[:major] }.#{ parts[:minor] }.#{ parts[:patch] }"
   end
 
 end

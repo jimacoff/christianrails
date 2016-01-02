@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
   has_many :releases, inverse_of: :product, dependent: :destroy
   accepts_nested_attributes_for :releases
-  
+
   has_many :purchases, inverse_of: :product
   has_many :users, through: :purchases
   has_and_belongs_to_many :price_combos, inverse_of: :products
@@ -31,6 +31,28 @@ class Product < ActiveRecord::Base
       end
     end
     total_discount
+  end
+
+  def digital_releases
+    self.releases.where.not(format: "Book")
+  end
+
+  def has_physical_release?
+    self.releases.each do |r|
+      return true if r.format == "Book"
+    end
+    false
+  end
+
+  def has_digital_release?
+    digital_releases.count > 0
+  end
+
+  def physical_code
+    self.releases.each do |r|
+      return r.physical_code if !r.physical_code.nil?
+    end
+    nil
   end
 
 end

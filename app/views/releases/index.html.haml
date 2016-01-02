@@ -1,0 +1,26 @@
+%h1 Releases for #{@product.title}
+
+%table.product-table
+  %thead
+    %tr
+      %th Format
+      %th Release date
+      %th Size
+      %th Version
+      %th Physical code
+      %th
+
+  %tbody
+    - @releases.each do |release|
+      %tr
+        %td= link_to release.format, edit_product_release_path(@product, release)
+        %td= release.release_date.strftime("%B %e, %Y")
+        %td= release.size
+        %td= release.version
+        %td= release.physical_code
+        %td= link_to 'Destroy', product_release_path(@product, release), method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to '+ Add Release', new_product_release_path(@product)
+%br
+%br
+= link_to 'Back to Products', products_path
