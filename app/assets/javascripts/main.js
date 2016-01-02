@@ -1,5 +1,5 @@
 function showScreen(screenToShow) {
-  var screens = ['products', 'services', 'store', 'library'];
+  var screens = ['products', 'about', 'store', 'library'];
 
   screenToShow = screenToShow.toLowerCase();
 
