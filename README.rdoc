@@ -1,12 +1,15 @@
 == About this project
 
-This site can be found at www.christiandewolf.com.
+Christianrails is a web application that can be used to sell eBooks and other digital goods through PayPal.  It also serves as the homepage of author/programmer Christian DeWolf.  A version of this site can be found at https://www.christiandewolf.com.
 
 Release notes:
 
++ 1.0.3 - Visual modifications
 + 1.0.2 - PayPal hookup functional
 + 1.0.1 - File download system functional
 + 1.0.0 - Initial relase
 
 * Ruby  2.1.2
 * Rails 4.2.4
+
+Licensed under the Apache License, Version 2.0.  Images may not be used in any derivative work or for profit.
