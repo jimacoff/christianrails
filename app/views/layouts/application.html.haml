@@ -15,6 +15,9 @@
 
   %body.background
 
+    %canvas{id: "ocean", width: "1240", height: "999"}
+    %canvas{id: "rainfield", width: "1240", height: "999"}
+
     #zone-keeper
       = render "layouts/dealzone"
 
@@ -28,6 +31,7 @@
       = yield
       = render "layouts/footer"
 
-      = render "layouts/script"
+      = render "scripts/init_cart"
+      = render "scripts/ocean"
 
     %h5.right= "v #{app_version}"
