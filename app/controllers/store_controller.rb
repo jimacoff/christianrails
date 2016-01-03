@@ -7,7 +7,7 @@ class StoreController < ApplicationController
     @owned_products = []
 
     if current_user
-      @owned_products = current_user.products
+      @owned_products = current_user.products.order(:rank)
     end
 
     @available_products = @all_products - @owned_products

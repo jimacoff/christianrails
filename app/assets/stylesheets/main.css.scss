@@ -70,6 +70,10 @@ th {
   text-align: center;
 }
 
+.pp-button {
+  margin-top: 4px;
+}
+
 .store-button:active {
   background-color: #8CCFE6;
   outline: none;
@@ -142,6 +146,11 @@ th {
 .physical-button {
   margin-top: 22px;
   background-color: #E8CB7B;
+}
+
+.digital-button {
+  margin-top: 22px;
+  background-color: #C4BADE;
 }
 
 .discount {

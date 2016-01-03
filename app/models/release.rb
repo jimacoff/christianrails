@@ -7,7 +7,6 @@ class Release < ActiveRecord::Base
 
   validates_presence_of :product, :format, :release_date
   validates :format, inclusion: { in: FORMATS, message: "%{value} is not a valid format" }
-
   validate :valid_physical_code
 
   private
