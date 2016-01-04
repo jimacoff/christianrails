@@ -10,14 +10,13 @@
   var ocean = oceanCanv.getContext("2d");
   var rain = rainField.getContext("2d");
 
-  var frequency = 1, // one per second
-      color = "#ffffff",
-      minRadius = 50,
-      maxRadius = 140,
+  var frequency = 2, // per second
+      minRadius = 80,
+      maxRadius = 200,
       dropletSize = 6;
 
   var droplets = [];
-  var waves = [];
+  var ripples = [];
 
   var angle = 3;
   var oceanDepth = 666;
@@ -27,7 +26,7 @@
 
   var white = '255, 255, 255';
 
-  function wave(originX, originY) {
+  function ripple(originX, originY) {
     this.originX = originX;
     this.originY = originY;
     this.radius  = 0;
@@ -46,33 +45,40 @@
   ///////////////////
 
   Ocean.run = function() {
-    makeItRain();
+    possiblyCreateNewDroplet();
     Ocean.update();
     Ocean.draw();
   };
 
   Ocean.update = function() {
+    updateDroplets();
+    updateRipples();
+  }
+
+  function updateDroplets() {
     for (i = 0; i < droplets.length; i++) {
       droplets[i].y += droplets[i].speed;
       accelerateDroplet(droplets[i]);
 
       if( droplets[i].y >= droplets[i].destinationY ) {
-        //CREATE NEW WAVE
-        createWaveAt(droplets[i].x, droplets[i].y);
+        //CREATE NEW RIPPLE
+        createRippleAt(droplets[i].x, droplets[i].y);
 
         delete droplets[i];
         droplets.splice(i, 1);
         i -= 1;  //soo bad
       }
     }
+  }
 
-    for (i = 0; i < waves.length; i++) {
-      waves[i].radius  += 1;
-      waves[i].opacity -= 1 / waves[i].maxRadius;
+  function updateRipples() {
+    for (i = 0; i < ripples.length; i++) {
+      ripples[i].radius  += 1;
+      ripples[i].opacity -= 1 / ripples[i].maxRadius;
 
-      if( waves[i].radius >= waves[i].maxRadius ) {
-        delete waves[i];
-        waves.splice(i, 1);
+      if( ripples[i].radius >= ripples[i].maxRadius ) {
+        delete ripples[i];
+        ripples.splice(i, 1);
         i -= 1;  //soo bad
       }
     }
@@ -82,56 +88,25 @@
     ocean.clearRect(0, 0, oceanCanv.width, oceanCanv.height);
     rain.clearRect(0, 0, rainField.width, rainField.height);
 
-    for (var i = 0; i < droplets.length; i++) {
-      drawDroplet( droplets[i] );
-    }
-
-    for (var j = 0; j < waves.length; j++) {
-      drawWave( waves[j] );
-    }
+    for (var i = 0; i < droplets.length; i++) { drawDroplet( droplets[i] ); }
+    for (var j = 0; j < ripples.length; j++) { drawRipple( ripples[j] ); }
   }
 
-  function makeItRain() {
-    if((Math.floor((Math.random() * Ocean.fps) + 1)) <= frequency ) {
-      createRandomDroplet();
-    }
-  }
-
-  function accelerateDroplet(drop) {
-    drop.speed = drop.speed * dropFactor;
-  }
-
-  function createWaveAt(x, y) {
-    var adjustedY = (y - oceanDepth) * angle;
-    var newWave = new wave(x, adjustedY);
-    waves.push( newWave );
-  }
-
-  function createRandomDroplet() {
-    var dropX = Math.floor((Math.random() * (rainField.width - maxRadius)) + 1);
-
-    var bandSize = waterBand - ((maxRadius/angle) * 2);
-    var destinationY = Math.floor((Math.random() * bandSize) + 1 + oceanDepth + (maxRadius/angle));
-
-    var newDroplet = new droplet(dropX, destinationY, white);
-    droplets.push( newDroplet );
-  }
-
-  function drawWave(wave) {
-    var x = wave.originX;
-    var y = wave.originY;
-    var r = wave.radius;
+  function drawRipple(ripple) {
+    var x = ripple.originX;
+    var y = ripple.originY;
+    var r = ripple.radius;
 
     ocean.beginPath();
-    ocean.arc(x, y, wave.radius, 0, 2*Math.PI);
+    ocean.arc(x, y, ripple.radius, 0, 2*Math.PI);
 
     var rad = ocean.createRadialGradient(x, y, 0, x, y, r);
-    rad.addColorStop(0,    'rgba(' + white + ',' + wave.opacity + ')');
-    rad.addColorStop(0.05, 'rgba(' + white + ',' + wave.opacity + ')');
-    rad.addColorStop(0.1,  'rgba(' + white + ',' + wave.opacity/2 + ')');
-    rad.addColorStop(0.25, 'rgba(' + white + ',' + wave.opacity + ')');
-    rad.addColorStop(0.5,  'rgba(' + white + ',' + wave.opacity/2 + ')');
-    rad.addColorStop(0.75, 'rgba(' + white + ',' + wave.opacity + ')');
+    rad.addColorStop(0,    'rgba(' + white + ',' + ripple.opacity + ')');
+    rad.addColorStop(0.05, 'rgba(' + white + ',' + ripple.opacity + ')');
+    rad.addColorStop(0.1,  'rgba(' + white + ',' + ripple.opacity/2 + ')');
+    rad.addColorStop(0.25, 'rgba(' + white + ',' + ripple.opacity + ')');
+    rad.addColorStop(0.5,  'rgba(' + white + ',' + ripple.opacity/2 + ')');
+    rad.addColorStop(0.75, 'rgba(' + white + ',' + ripple.opacity + ')');
     rad.addColorStop(1,    'rgba(' + white + ',' + '0)');
     ocean.fillStyle = rad;
 
@@ -154,11 +129,42 @@
     rain.fill();
   }
 
+  function possiblyCreateNewDroplet() {
+    if( (Math.floor((Math.random() * Ocean.fps) + 1)) <= frequency ) {
+      createRandomDroplet();
+    }
+  }
+
+  function createRandomDroplet() {
+    var dropX = Math.floor((Math.random() * (rainField.width - maxRadius)) + 1);
+
+    var bandSize = waterBand - ((maxRadius/angle) * 2);
+    var destinationY = Math.floor((Math.random() * bandSize) + 1 + oceanDepth + (maxRadius/angle));
+
+    var newDroplet = new droplet(dropX, destinationY, white);
+    droplets.push( newDroplet );
+  }
+
+  function accelerateDroplet(drop) {
+    drop.speed = drop.speed * dropFactor;
+  }
+
+  function createRippleAt(x, y) {
+    var adjustedY = (y - oceanDepth) * angle;
+    var newRipple = new ripple(x, adjustedY);
+    ripples.push( newRipple );
+  }
+
   //////////////////
 
   (function() {
     var onEachFrame;
-    if (window.webkitRequestAnimationFrame) {
+    if (window.requestAnimationFrame) {
+      onEachFrame = function(cb) {
+        var _cb = function() { cb(); requestAnimationFrame(_cb); }
+        _cb();
+      };
+    } else if (window.webkitRequestAnimationFrame) {
       onEachFrame = function(cb) {
         var _cb = function() { cb(); webkitRequestAnimationFrame(_cb); }
         _cb();
@@ -176,4 +182,4 @@
     window.onEachFrame = onEachFrame;
   })();
 
-  window.onEachFrame(Ocean.run);
+  //window.onEachFrame(Ocean.run);
