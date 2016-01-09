@@ -6,6 +6,10 @@ class PurchasesController < ApplicationController
     @purchases = Purchase.all
   end
 
+  def user_report
+    @users = User.all.order('created_at DESC')
+  end
+
   private
 
     def purchase_params

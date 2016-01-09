@@ -35,6 +35,8 @@ Christianrails::Application.routes.draw do
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'
 
+  get '/user_report', to: 'purchases#user_report'
+
   root 'store#index'
 
 end
