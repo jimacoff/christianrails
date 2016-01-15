@@ -2,8 +2,7 @@ class PurchasesController < ApplicationController
   before_action :verify_is_admin
 
   def index
-    # TODO include user and product
-    @purchases = Purchase.all
+    @purchases = Purchase.all.includes(:user, :product)
   end
 
   def user_report

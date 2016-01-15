@@ -10,8 +10,8 @@
   %tbody
     - @purchases.each do |purchase|
       %tr
-        %td= Product.find(purchase.product_id).title
-        %td= User.find(purchase.user_id).username
+        %td= purchase.product.title
+        %td= purchase.user.username
         %td= purchase.created_at
 %br
 = link_to 'Admin menu', admin_path
