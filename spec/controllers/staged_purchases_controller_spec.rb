@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe StagedPurchasesController, type: :controller do
 
+  render_views
+
   before (:each) do
     @user = User.create!({
-      username: 'testuser', 
+      username: 'testuser',
       full_name: 'Test User',
       email: 'user@test.com',
       password: '12345678',
@@ -22,13 +24,13 @@ RSpec.describe StagedPurchasesController, type: :controller do
   let(:valid_attributes) {
     {
       product_id: product.id,
-      user_id: user.id
+      user_id: @user.id
     }
   }
 
   let(:invalid_attributes) {
     {
-      bad_id: 7777,
+      bad_id: 7777
     }
   }
 
@@ -63,16 +65,14 @@ RSpec.describe StagedPurchasesController, type: :controller do
         post :create, {:staged_purchase => invalid_attributes, format: :json}, valid_session
         expect(assigns(:staged_purchase)).to be_a_new(StagedPurchase)
       end
-
     end
   end
 
   describe "DELETE #destroy" do
-    # what the hell is wrong with this test
     it "destroys the requested staged_purchase" do
       staged_purchase = StagedPurchase.create! valid_attributes
       expect {
-        delete :destroy, {id: staged_purchase.to_param, format: :json}, valid_session
+        delete :destroy, {id: staged_purchase.id, format: :json}, valid_session
       }.to change(StagedPurchase, :count).by(-1)
     end
   end

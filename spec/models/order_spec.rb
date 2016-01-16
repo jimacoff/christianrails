@@ -29,14 +29,12 @@ RSpec.describe Order, type: :model do
     o.purchases << purchase2
 
     expect( o.purchases.count ).to eq(2)
-
   end
 
   it "should belong to price_combo" do
     o = Order.create(price_combo: price_combo, payment_id: "wraa", payer_id: "raaaa!", total: 4.55)
 
     expect( o.price_combo.id ).to eq(price_combo.id)
-
   end
-  
+
 end

@@ -5,7 +5,7 @@ RSpec.describe Purchase, type: :model do
   let(:product) { FactoryGirl.create(:product) }
   let(:user)    { FactoryGirl.create(:user) }
   let(:order)   { FactoryGirl.create(:order) }
-  
+
   it "should validate" do
     p = Purchase.new()
     expect( p ).to_not be_valid
@@ -26,21 +26,18 @@ RSpec.describe Purchase, type: :model do
     p = Purchase.create(user: user, product: product, order: order)
 
     expect( p.user.id ).to eq(user.id)
-
   end
 
   it "should belong to products" do
     p = Purchase.create(user: user, product: product, order: order)
 
     expect( p.product.id ).to eq(product.id)
-
   end
 
   it "should belong to orders" do
     p = Purchase.create(user: user, product: product, order: order)
 
     expect( p.product.id ).to eq(product.id)
-
   end
-  
+
 end

@@ -49,19 +49,25 @@ RSpec.describe Product, type: :model do
 
   describe 'discount_for' do
 
-    it 'should return a discount for a product when user has satisfied price combo' do
-      # TODO
+    let(:combo)    { FactoryGirl.create(:price_combo, discount: 5.00) }
+    let(:product1) { FactoryGirl.create(:product) }
+    let(:product2) { FactoryGirl.create(:product) }
 
+    it 'should return a discount for products when user has satisfied price combo' do
+      combo.products << product1 << product2
+      StagedPurchase.create(user: user, product: product1)
+      StagedPurchase.create(user: user, product: product2)
+
+      expect( product1.discount_for(user)).to eq(combo.discount)
+      expect( product2.discount_for(user)).to eq(combo.discount)
     end
 
-    it 'should NOT return a discount for a product when user has NOT satisfied price combo' do
-      # TODO
+    it 'should NOT return a discount for products when user has NOT satisfied price combo' do
+      combo.products << product1 << product2
+      StagedPurchase.create(user: user, product: product1)
 
-    end
-
-    it 'should NOT return a discount when product is not part of any price combo' do
-      # TODO
-
+      expect( product1.discount_for(user)).to eq(0)
+      expect( product1.discount_for(user)).to eq(0)
     end
 
   end
@@ -80,7 +86,7 @@ RSpec.describe Product, type: :model do
     let(:prod3) { FactoryGirl.create(:product) }
     let!(:rel6) { FactoryGirl.create(:release, product: prod3, format: "PDF") }
 
-    it "should identify all a product's digital releases" do
+    it "should identify all of a product's digital releases" do
       expect( prod1.digital_releases.count ).to eq(3)
       expect( prod1.digital_releases ).to include( rel2, rel3, rel4 )
 

@@ -12,9 +12,9 @@ class StagedPurchasesController < ApplicationController
 
       @staged_purchase = StagedPurchase.where( user: current_user, product_id: staged_purchase_params['product_id']).first
       @staged_purchase ||= StagedPurchase.new( user: current_user, product_id: staged_purchase_params['product_id'] )
-      
+
       respond_to do |format|
-        if @staged_purchase.save 
+        if @staged_purchase.save
           format.json { render json: @staged_purchase, status: :created }
         else
           format.json { render json: {}, status: :unprocessable_entity }
@@ -27,9 +27,10 @@ class StagedPurchasesController < ApplicationController
     if current_user
       if @staged_purchase.user.id == current_user.id
         @staged_purchase.destroy
-        respond_to do |format|
-          format.json { render json: @staged_purchase }
-        end
+      end
+
+      respond_to do |format|
+        format.json { render json: @staged_purchase }
       end
     end
   end

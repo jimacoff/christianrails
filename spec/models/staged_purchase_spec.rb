@@ -4,7 +4,7 @@ RSpec.describe StagedPurchase, type: :model do
 
   let(:product) { FactoryGirl.create(:product, rank: 1) }
   let(:user)    { FactoryGirl.create(:user) }
-  
+
   it "should validate" do
     sp = StagedPurchase.new()
     expect( sp ).to_not be_valid
@@ -23,14 +23,12 @@ RSpec.describe StagedPurchase, type: :model do
     sp = StagedPurchase.create(user: user, product: product)
 
     expect( sp.user.id ).to eq(user.id)
-
   end
 
   it "should belong to products" do
     sp = StagedPurchase.create(user: user, product: product)
 
     expect( sp.product.id ).to eq(product.id)
-
   end
 
   describe "gross_cart_value" do
@@ -44,9 +42,7 @@ RSpec.describe StagedPurchase, type: :model do
     let!(:staged_purchase3) { FactoryGirl.create(:staged_purchase, user: user, product: product3) }
 
     it "should get the gross cart value" do
-      
       expect( StagedPurchase.gross_cart_value_for(user.id) ).to eq(9.40)
-
     end
 
   end
