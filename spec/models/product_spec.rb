@@ -46,7 +46,6 @@ RSpec.describe Product, type: :model do
     expect( p.releases.count ).to eq(2)
   end
 
-
   describe 'discount_for' do
 
     let(:combo)    { FactoryGirl.create(:price_combo, discount: 5.00) }

@@ -6,7 +6,7 @@ RSpec.describe OrdersController, type: :controller do
 
   before (:each) do
     @user = User.create!({
-      username: 'testuser', 
+      username: 'testuser',
       full_name: 'Test User',
       email: 'user@test.com',
       password: '12345678',
@@ -43,6 +43,47 @@ RSpec.describe OrdersController, type: :controller do
       get :index, {}, valid_session
       expect(assigns(:orders)).to eq([order])
     end
+  end
+
+  describe "show" do
+
+    let(:order)    { FactoryGirl.create(:order) }
+    let(:purchase) { FactoryGirl.create(:purchase, user: @user) }
+
+    it "retrieves an order for a user" do
+      order.purchases << purchase
+
+      get :show, {id: order.id}, valid_session
+
+      expect(response).to be_success
+      expect(assigns(:order)).to eq(order)
+    end
+  end
+
+  describe "receipts" do
+
+    let(:order)    { FactoryGirl.create(:order) }
+    let(:purchase) { FactoryGirl.create(:purchase, user: @user) }
+
+    it "retrieves receipts for a logged-in user with purchases" do
+      order.purchases << purchase
+
+      get :receipts
+
+      expect(response).to be_success
+      expect(assigns(:orders)).to eq([order])
+    end
+
+    it "retrieves no receipts for non-logged-in user" do
+      sign_out @user
+      order.purchases << purchase
+
+      get :receipts
+
+      expect(response).to be_success
+      expect(assigns(:orders)).to be_nil
+    end
+
   end
 
 end

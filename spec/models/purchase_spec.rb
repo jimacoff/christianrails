@@ -9,15 +9,17 @@ RSpec.describe Purchase, type: :model do
   it "should validate" do
     p = Purchase.new()
     expect( p ).to_not be_valid
-    expect( p.errors.messages.keys ).to include(:product, :user, :order)
+    expect( p.errors.messages.keys ).to include(:product, :user, :order, :price)
 
     expect( p.errors.messages[:product] ).to include("can't be blank")
     expect( p.errors.messages[:user] ).to include("can't be blank")
     expect( p.errors.messages[:order] ).to include("can't be blank")
+    expect( p.errors.messages[:price] ).to include("can't be blank")
 
     p.product = product
     p.user = user
     p.order = order
+    p.price = 3.55
 
     expect( p ).to be_valid
   end

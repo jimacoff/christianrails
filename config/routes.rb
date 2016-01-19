@@ -4,11 +4,16 @@ Christianrails::Application.routes.draw do
 
   resources :staged_purchases,     only:   [:index, :create, :destroy]
   resources :purchases,            only:   [:index]
-  resources :orders,               only:   [:index]
   resources :price_combos,         except: [:show]
 
   resources :products, except: [:show] do
     resources :releases, except: [:show]
+  end
+
+  resources :orders, only: [:index, :show] do
+    collection do
+      get 'receipts'
+    end
   end
 
   resources :policies, only: [] do

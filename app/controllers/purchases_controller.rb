@@ -9,9 +9,4 @@ class PurchasesController < ApplicationController
     @users = User.all.order('created_at DESC')
   end
 
-  private
-
-    def purchase_params
-      params.require(:purchase).permit(:user_id, :product_id)
-    end
 end

@@ -6,6 +6,9 @@
       - if current_user.admin?
         = link_to "Admin", admin_path
         |
+      - if current_user.purchases.size > 0
+        = link_to "Receipts", receipts_orders_path
+        |
       = link_to 'Sign out', destroy_user_session_path, method: :delete
 - else
   .right

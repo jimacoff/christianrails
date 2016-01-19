@@ -3,6 +3,6 @@ class Purchase < ActiveRecord::Base
   belongs_to :user, inverse_of: :purchases
   belongs_to :order, inverse_of: :purchases
 
-  validates_presence_of :product, :user, :order
+  validates_presence_of :product, :user, :order, :price
 
 end

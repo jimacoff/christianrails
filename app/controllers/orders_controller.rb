@@ -1,13 +1,25 @@
 class OrdersController < ApplicationController
-  before_action :verify_is_admin
+  before_action :verify_is_admin, except: [:show, :receipts]
+  before_action :set_order, only: [:show]
 
   def index
     @orders = Order.all
   end
 
-  private
+  def show
+    unless current_user && current_user == @order.user
+      @order = nil
+    end
+  end
 
-    def order_params
-      params.require(:order).permit(:payer_id, :payment_id, :price_combo_id)
+  def receipts
+    if current_user
+      @orders = current_user.orders
+    end
+  end
+
+  private
+    def set_order
+      @order = Order.find(params[:id])
     end
 end

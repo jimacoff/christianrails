@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :downloads, inverse_of: :user
   has_many :purchases, inverse_of: :user
+  has_many :orders, through: :purchases, inverse_of: :user
   has_many :products, through: :purchases
   has_many :staged_purchases, inverse_of: :user
 

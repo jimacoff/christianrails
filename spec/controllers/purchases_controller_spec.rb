@@ -6,7 +6,7 @@ RSpec.describe PurchasesController, type: :controller do
 
   before (:each) do
     @user = User.create!({
-      username: 'testuser', 
+      username: 'testuser',
       full_name: 'Test User',
       email: 'user@test.com',
       password: '12345678',
@@ -26,13 +26,14 @@ RSpec.describe PurchasesController, type: :controller do
     {
       product_id: product.id,
       user_id: user.id,
-      order_id: order.id
+      order_id: order.id,
+      price: 4.33
     }
   }
 
   let(:invalid_attributes) {
     {
-      bad_id: 7777,
+      bad_id: 7777
     }
   }
 

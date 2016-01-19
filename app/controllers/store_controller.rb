@@ -79,11 +79,13 @@ class StoreController < ApplicationController
         staged = current_user.staged_purchases
         gross_price = StagedPurchase.gross_cart_value_for(current_user.id)
         discount = PriceCombo.total_cart_discount_for(current_user.id)
+        tax = (gross_price - discount) * 0.15
 
-        order = Order.create(payer_id: store_params[:PayerID], payment_id: store_params[:paymentId], total: gross_price - discount)
+        order = Order.create(payer_id: store_params[:PayerID], payment_id: store_params[:paymentId],
+                             discount: discount, tax: tax, total: gross_price - discount + tax)
 
         staged.each do |staged_purchase|
-          Purchase.create(user: current_user, product: staged_purchase.product, order: order)
+          Purchase.create(user: current_user, product: staged_purchase.product, order: order, price: staged_purchase.product.price)
           staged_purchase.destroy
         end
 
@@ -93,7 +95,6 @@ class StoreController < ApplicationController
       end
 
     rescue => e
-      pp e
       alert = "Error executing payment. Please contact the author."
     end
 
