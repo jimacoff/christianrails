@@ -11,7 +11,7 @@
     - @purchases.each do |purchase|
       %tr
         %td= purchase.product.title
-        %td= purchase.user.username
+        %td= purchase.order.user.username
         %td= purchase.created_at
 %br
 = link_to 'Admin menu', admin_path

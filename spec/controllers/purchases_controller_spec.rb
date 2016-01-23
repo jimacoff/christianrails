@@ -25,7 +25,6 @@ RSpec.describe PurchasesController, type: :controller do
   let(:valid_attributes) {
     {
       product_id: product.id,
-      user_id: user.id,
       order_id: order.id,
       price: 4.33
     }

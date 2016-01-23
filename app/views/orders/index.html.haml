@@ -1,13 +1,33 @@
 %h1 Orders
 
-%table
+%table.product-table
   %thead
     %tr
-      %th Product
+      %th Date
+      %th User
+      %th Revenue
+      %th Discount
+      %th Tax
+      %th Total
 
   %tbody
     - @orders.each do |order|
       %tr
-        %td Something about orders
+        %td= order.created_at.strftime("%b %e '%y")
+        %td= order.user.username
+        %td= number_to_currency( order.purchases.map(&:price).reduce(0, :+), precision: 2 )
+        %td= number_to_currency( order.discount, precision: 2 )
+        %td= number_to_currency( order.tax, precision: 2 )
+        %td= number_to_currency( order.total, precision: 2 )
+
+  %thead
+    %tr
+      %th
+      %th
+      %td.embolden= number_to_currency( @orders.collect{|o| o.purchases.map(&:price).reduce(0, :+) }.reduce(0, :+), precision: 2 )
+      %td.embolden= number_to_currency( @orders.collect{|o| o.discount}.reduce(0, :+), precision: 2 )
+      %td.embolden= number_to_currency( @orders.collect{|o| o.tax}.reduce(0, :+), precision: 2 )
+      %td.embolden= number_to_currency( @orders.collect{|o| o.total}.reduce(0, :+), precision: 2 )
+
 %br
 = link_to 'Admin menu', admin_path

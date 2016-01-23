@@ -25,17 +25,9 @@ RSpec.describe Product, type: :model do
 
     expect( p ).to_not be_valid
     expect( p.errors.messages[:price] ).to include("is not a number")
+
     p.price = 2.33
     expect( p ).to be_valid
-  end
-
-  it "should belong to users, through purchases" do
-    p = Product.create(title: "Gray", author: "Christian DeWolf", price: 3.99, rank: 1)
-    expect( p.users.count ).to eq(0)
-    p.purchases << purchase
-
-    expect( p.purchases.count ).to eq(1)
-    expect( p.users.count ).to eq(1)
   end
 
   it "should have many releases" do

@@ -4,8 +4,4 @@ class Order < ActiveRecord::Base
   belongs_to :user, inverse_of: :orders
 
   validates_presence_of :payer_id, :payment_id, :total
-
-  def user
-    self.purchases.first.user
-  end
 end

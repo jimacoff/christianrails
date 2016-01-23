@@ -15,8 +15,8 @@
         %td= user.username
         %td= user.full_name
         %td= user.email
-        %td= user.created_at.strftime("%B %e, %Y")
-        %td= user.last_sign_in_at.strftime("%B %e, %Y")
+        %td= user.created_at.strftime("%b %e '%y")
+        %td= user.last_sign_in_at.strftime("%b %e '%y")
 
 %strong Total users: #{@users.count}
 %br

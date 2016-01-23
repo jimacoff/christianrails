@@ -23,13 +23,13 @@ RSpec.describe StoreController, type: :controller do
     let!(:product4)  { FactoryGirl.create(:product) }
     let!(:product5)  { FactoryGirl.create(:product) }
 
-    let(:order1)      { FactoryGirl.create(:order, price_combo: combo1) }
-    let(:order2)      { FactoryGirl.create(:order, price_combo: combo2) }
-    let(:order3)      { FactoryGirl.create(:order, price_combo: combo3) }
+    let(:order1)     { FactoryGirl.create(:order, price_combo: combo1, user: user) }
+    let(:order2)     { FactoryGirl.create(:order, price_combo: combo2, user: user) }
+    let(:order3)     { FactoryGirl.create(:order, price_combo: combo3, user: user) }
 
-    let!(:purchase1)  { FactoryGirl.create(:purchase, user: user, product: product2, order: order1) }
-    let!(:purchase2)  { FactoryGirl.create(:purchase, user: user, product: product4, order: order2) }
-    let!(:purchase3)  { FactoryGirl.create(:purchase, user: user, product: product5, order: order3) }
+    let!(:purchase1) { FactoryGirl.create(:purchase, product: product2, order: order1) }
+    let!(:purchase2) { FactoryGirl.create(:purchase, product: product4, order: order2) }
+    let!(:purchase3) { FactoryGirl.create(:purchase, product: product5, order: order3) }
 
     it 'should retrieve all price combos' do
       get 'index'
@@ -46,7 +46,7 @@ RSpec.describe StoreController, type: :controller do
   end
 
   describe 'updated prices' do
-    
+
     let!(:product_1)   { FactoryGirl.create(:product, title: "The main event", price: 5.05) }
     let!(:product_2)   { FactoryGirl.create(:product, title: "Bonus material", price: 3.00) }
     let!(:product_3)   { FactoryGirl.create(:product, title: "Some other product", price: 4.00) }
@@ -157,9 +157,11 @@ RSpec.describe StoreController, type: :controller do
     let!(:release1)  { FactoryGirl.create(:release, product: product1) }
     let!(:release2)  { FactoryGirl.create(:release, product: product2) }
 
-    let!(:purchase1)  { FactoryGirl.create(:purchase, user: user, product: product1) }
+    let(:order) { FactoryGirl.create(:order, user: user) }
 
-    let(:invalid_release_id) {-33} 
+    let!(:purchase1)  { FactoryGirl.create(:purchase, product: product1, order: order) }
+
+    let(:invalid_release_id) {-33}
 
     before :each do
       controller.stubs(:render)
@@ -187,10 +189,10 @@ RSpec.describe StoreController, type: :controller do
 
     it 'should NOT download anything if release_id is invalid' do
       controller.stubs(:send_file).returns("Download successful").never
-      
+
       get 'download', release_id: invalid_release_id
     end
 
   end
-  
+
 end

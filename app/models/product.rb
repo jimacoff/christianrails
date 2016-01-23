@@ -7,7 +7,6 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :releases
 
   has_many :purchases, inverse_of: :product
-  has_many :users, through: :purchases
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
   validates_presence_of :title, :author, :price

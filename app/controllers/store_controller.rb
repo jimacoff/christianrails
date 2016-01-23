@@ -7,7 +7,7 @@ class StoreController < ApplicationController
     @owned_products = []
 
     if current_user
-      @owned_products = current_user.products.order(:rank)
+      @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
     end
 
     @available_products = @all_products - @owned_products
@@ -32,7 +32,7 @@ class StoreController < ApplicationController
       titles = staged.collect{ |s| s.product.title }
 
       total_cost = 0
-      staged.map { |e| total_cost += e.product.price }
+      staged.map { |st| total_cost += st.product.price }
       total_cost -= PriceCombo.total_cart_discount_for(current_user.id)
 
       @payment = PayPal::SDK::REST::Payment.new({
@@ -81,11 +81,11 @@ class StoreController < ApplicationController
         discount = PriceCombo.total_cart_discount_for(current_user.id)
         tax = (gross_price - discount) * 0.15
 
-        order = Order.create(payer_id: store_params[:PayerID], payment_id: store_params[:paymentId],
+        order = Order.create(user: current_user, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId],
                              discount: discount, tax: tax, total: gross_price - discount + tax)
 
         staged.each do |staged_purchase|
-          Purchase.create(user: current_user, product: staged_purchase.product, order: order, price: staged_purchase.product.price)
+          Purchase.create(product: staged_purchase.product, order: order, price: staged_purchase.product.price)
           staged_purchase.destroy
         end
 
@@ -96,6 +96,7 @@ class StoreController < ApplicationController
 
     rescue => e
       alert = "Error executing payment. Please contact the author."
+      Rails.logger.error(e.to_s)
     end
 
     respond_to do |format|

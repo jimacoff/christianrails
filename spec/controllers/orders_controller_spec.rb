@@ -22,10 +22,13 @@ RSpec.describe OrdersController, type: :controller do
 
   let(:valid_attributes) {
     {
+      user_id: @user.id,
       price_combo_id: price_combo.id,
       payer_id: "john payer",
       payment_id: "a-payment-id",
-      total: 4.33
+      total: 4.33,
+      tax: 1.22,
+      discount: 0
     }
   }
 
@@ -38,21 +41,22 @@ RSpec.describe OrdersController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
+
+    let(:order)    { FactoryGirl.create(:order, user: @user) }
+    let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
+
     it "assigns all orders as @orders" do
-      order = Order.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:orders)).to eq([order])
     end
   end
 
-  describe "show" do
+  describe "GET #show" do
 
-    let(:order)    { FactoryGirl.create(:order) }
-    let(:purchase) { FactoryGirl.create(:purchase, user: @user) }
+    let(:order)    { FactoryGirl.create(:order, user: @user) }
+    let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
 
     it "retrieves an order for a user" do
-      order.purchases << purchase
-
       get :show, {id: order.id}, valid_session
 
       expect(response).to be_success
@@ -62,12 +66,10 @@ RSpec.describe OrdersController, type: :controller do
 
   describe "receipts" do
 
-    let(:order)    { FactoryGirl.create(:order) }
-    let(:purchase) { FactoryGirl.create(:purchase, user: @user) }
+    let(:order)    { FactoryGirl.create(:order, user: @user) }
+    let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
 
     it "retrieves receipts for a logged-in user with purchases" do
-      order.purchases << purchase
-
       get :receipts
 
       expect(response).to be_success
@@ -76,7 +78,6 @@ RSpec.describe OrdersController, type: :controller do
 
     it "retrieves no receipts for non-logged-in user" do
       sign_out @user
-      order.purchases << purchase
 
       get :receipts
 

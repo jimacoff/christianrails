@@ -5,12 +5,21 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :downloads, inverse_of: :user
-  has_many :purchases, inverse_of: :user
-  has_many :orders, through: :purchases, inverse_of: :user
-  has_many :products, through: :purchases
+  has_many :purchases, through: :orders, inverse_of: :user
+  has_many :orders, inverse_of: :user
   has_many :staged_purchases, inverse_of: :user
 
   validates_presence_of :username, :full_name, :country, :email, :encrypted_password
+
+  def products
+    products = []
+    self.orders.each do |order|
+      order.purchases.each do |purchase|
+        products << purchase.product
+      end
+    end
+    products
+  end
 
   def has_product?(product_id)
     self.products.collect(&:id).include?(product_id)

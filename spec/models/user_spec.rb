@@ -2,26 +2,29 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
 
-  let(:product)   { FactoryGirl.create(:product, title: "Hella product", rank: 1) }
+  let(:product) { FactoryGirl.create(:product, title: "Hella product", rank: 1) }
 
-  let(:purchase1) { FactoryGirl.create(:purchase, product: product) }
-  let(:purchase2) { FactoryGirl.create(:purchase) }
-  let(:purchase3) { FactoryGirl.create(:purchase) }
-  
+  let(:order) { FactoryGirl.create(:order) }
+
+  let!(:purchase1) { FactoryGirl.create(:purchase, order: order, product: product) }
+  let!(:purchase2) { FactoryGirl.create(:purchase, order: order) }
+  let!(:purchase3) { FactoryGirl.create(:purchase, order: order) }
+
   let(:download1) { FactoryGirl.create(:download) }
   let(:download2) { FactoryGirl.create(:download) }
   let(:download3) { FactoryGirl.create(:download) }
 
-  let(:staged1)   { FactoryGirl.create(:staged_purchase) }
-  let(:staged2)   { FactoryGirl.create(:staged_purchase) }
-  let(:staged3)   { FactoryGirl.create(:staged_purchase) }
+  let(:staged1) { FactoryGirl.create(:staged_purchase) }
+  let(:staged2) { FactoryGirl.create(:staged_purchase) }
+  let(:staged3) { FactoryGirl.create(:staged_purchase) }
+
 
   it "should validate" do
     u = User.new()
     expect( u ).to_not be_valid
     expect( u.errors.messages.keys ).to include(:username, :full_name, :country)
     expect( u.errors.messages.keys ).to include(:email, :encrypted_password)
-    
+
     expect( u.errors.messages[:username] ).to include("can't be blank")
     expect( u.errors.messages[:full_name] ).to include("can't be blank")
     expect( u.errors.messages[:country] ).to include("can't be blank")
@@ -37,32 +40,29 @@ RSpec.describe User, type: :model do
     expect( u ).to be_valid
   end
 
-  it "should have many purchases" do
+  it "should have many orders" do
     u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
-  
-    expect( u.purchases.count ).to eq(0)
 
-    u.purchases << purchase1
-    u.purchases << purchase2
-    u.purchases << purchase3
+    expect( u.orders.count ).to eq(0)
+
+    order.user = u
+    order.save
+
+    expect( u.orders.count ).to eq(1)
+  end
+
+  it "should have many purchases through orders" do
+    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+
+    order.user = u
+    order.save
 
     expect( u.purchases.count ).to eq(3)
   end
 
-  it "should have products through purchases" do
-    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
-    
-    expect( u.products.count ).to eq(0)
-
-    u.purchases << purchase1
-
-    expect( u.products.count ).to eq(1)
-    expect( u.products[0].title ).to include("Hella")
-  end
-
   it "should have many downloads" do
     u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
-    
+
     expect( u.downloads.count ).to eq(0)
 
     u.downloads << download1
@@ -74,7 +74,7 @@ RSpec.describe User, type: :model do
 
   it "should have many staged purchases" do
     u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
-    
+
     expect( u.staged_purchases.count ).to eq(0)
 
     u.staged_purchases << staged1
@@ -84,20 +84,36 @@ RSpec.describe User, type: :model do
     expect( u.staged_purchases.count ).to eq(3)
   end
 
-  describe "has_product?" do
+  describe "product helpers" do
 
-  let(:product1)   { FactoryGirl.create(:product, title: "Sick product") }
-  let(:product2)   { FactoryGirl.create(:product, title: "Rad product") }
+    let(:user_who_buys) { FactoryGirl.create(:user) }
 
-  let(:purchase) { FactoryGirl.create(:purchase, product: product1) }
+    let(:product1) { FactoryGirl.create(:product, title: "Sick product") }
+    let(:product2) { FactoryGirl.create(:product, title: "Rad product") }
+    let(:product3) { FactoryGirl.create(:product, title: "Lame product") }
 
-    it 'should return true when user has purchased product, false otherwise' do
-      u = User.create(username: "Jonn", full_name: "Jonn", country: "CA", email: "jonn@test.com", password: "jonnsword")
-    
-      u.purchases << purchase
+    let(:order1)   { FactoryGirl.create(:order, user: user_who_buys) }
 
-      expect( u.has_product?(product1.id) ).to be_truthy
-      expect( u.has_product?(product2.id) ).to be_falsy
+    let!(:purchase1) { FactoryGirl.create(:purchase, order: order1, product: product1) }
+    let!(:purchase2) { FactoryGirl.create(:purchase, order: order1, product: product2) }
+
+    describe "products" do
+
+      it "gets all the products the user has purchased" do
+        expect( user_who_buys.products.count ).to eq(2)
+        expect( user_who_buys.products ).to include(product1, product2)
+      end
+
+    end
+
+    describe "has_product?" do
+
+      it 'should return true when user has purchased product, false otherwise' do
+        expect( user_who_buys.has_product?(product1.id) ).to be_truthy
+        expect( user_who_buys.has_product?(product2.id) ).to be_truthy
+        expect( user_who_buys.has_product?(product3.id) ).to be_falsy
+      end
+
     end
 
   end

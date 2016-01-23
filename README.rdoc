@@ -1,6 +1,6 @@
 == About this project
 
-Christianrails is a web application that can be used to sell eBooks and other digital goods through PayPal.  It also serves as the homepage of author/programmer Christian DeWolf.  A version of this site can be found at https://www.christiandewolf.com.
+Christianrails is a web application that can be used to sell eBooks and other digital goods through PayPal.  It also serves as the homepage of author/programmer Christian DeWolf.  A version can be found at https://www.christiandewolf.com.
 
 Release notes:
 
