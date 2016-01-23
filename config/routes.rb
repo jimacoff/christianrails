@@ -7,6 +7,9 @@ Christianrails::Application.routes.draw do
   resources :price_combos,         except: [:show]
 
   resources :products, except: [:show] do
+    collection do
+      get 'downloads'
+    end
     resources :releases, except: [:show]
   end
 

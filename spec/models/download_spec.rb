@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Download, type: :model do
 
-  let(:release) { FactoryGirl.create(:release) }
+  let(:product) { FactoryGirl.create(:product) }
+  let(:release) { FactoryGirl.create(:release, product: product) }
   let(:user)    { FactoryGirl.create(:user) }
 
   it "should validate" do
@@ -34,5 +35,12 @@ RSpec.describe Download, type: :model do
     r = d.release
     expect( r.downloads.count).to eq(1)
   end
-  
+
+  it "should relate to product, through releases" do
+    d = Download.create(user: user, release: release)
+
+    expect( d.release ).to eq(release)
+    expect( d.release.product ).to eq(product)
+  end
+
 end

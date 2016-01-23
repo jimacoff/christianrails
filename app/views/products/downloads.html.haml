@@ -1,0 +1,20 @@
+%h1 Downloads
+
+%table.product-table
+  %thead
+    %tr
+      %th Product
+      %th Total Downloads
+      %th By Format
+
+
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td= product.title
+        %td= product.downloads.size
+        - product.digital_releases.each do |release|
+          %td= "#{release.format}: #{release.downloads.size}"
+%br
+%br
+= link_to 'Admin menu', admin_path

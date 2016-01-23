@@ -8,6 +8,10 @@ RSpec.describe Product, type: :model do
   let(:user) { FactoryGirl.create(:user) }
   let(:purchase) { FactoryGirl.create(:purchase, user: user) }
 
+  let!(:download1) { FactoryGirl.create(:download, release: release1) }
+  let!(:download2) { FactoryGirl.create(:download, release: release1) }
+  let!(:download3) { FactoryGirl.create(:download, release: release2) }
+
   it "should validate" do
     p = Product.new()
     expect( p ).to_not be_valid
@@ -36,6 +40,16 @@ RSpec.describe Product, type: :model do
     p.releases << release2
 
     expect( p.releases.count ).to eq(2)
+  end
+
+  it "should have many downloads, through releases" do
+    p = Product.create(title: "Dream Lawyer", author: "Christian DeWolf", price: 2.99, rank: 4)
+
+    p.releases << release1 << release2
+
+    expect( p.downloads.count ).to eq(3)
+    expect( p.downloads ).to include(download1, download2, download3)
+
   end
 
   describe 'discount_for' do

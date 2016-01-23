@@ -47,6 +47,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def downloads
+    @products = Product.all
+  end
+
   private
     def set_product
       @product = Product.find(params[:id])

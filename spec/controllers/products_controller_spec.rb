@@ -6,7 +6,7 @@ RSpec.describe ProductsController, type: :controller do
 
   before (:each) do
     @user = User.create!({
-      username: 'testuser', 
+      username: 'testuser',
       full_name: 'Test User',
       email: 'user@test.com',
       password: '12345678',
@@ -20,10 +20,10 @@ RSpec.describe ProductsController, type: :controller do
 
   let(:valid_attributes) {
     {
-      title: "Good title", 
-      author: "Me!", 
-      short_desc: "A short desc", 
-      long_desc: "Longer description", 
+      title: "Good title",
+      author: "Me!",
+      short_desc: "A short desc",
+      long_desc: "Longer description",
       price: 8.88,
       rank: 1
     }
@@ -97,10 +97,10 @@ RSpec.describe ProductsController, type: :controller do
     context "with valid params" do
       let(:new_attributes) {
         {
-          title: "New title", 
-          author: "New author", 
-          short_desc: "Better short desc", 
-          long_desc: "Better longer description", 
+          title: "New title",
+          author: "New author",
+          short_desc: "Better short desc",
+          long_desc: "Better longer description",
           price: 16.66,
           rank: 2
         }
@@ -110,7 +110,7 @@ RSpec.describe ProductsController, type: :controller do
         product = Product.create! valid_attributes
         put :update, {:id => product.to_param, :product => new_attributes}, valid_session
         product.reload
-        
+
         expect( product.title ).to eq("New title")
         expect( product.author ).to eq("New author")
         expect( product.short_desc ).to eq("Better short desc")
@@ -154,6 +154,35 @@ RSpec.describe ProductsController, type: :controller do
       delete :destroy, {:id => product.to_param}, valid_session
       expect(response).to redirect_to(products_url)
     end
+  end
+
+  describe "GET downloads" do
+
+    let(:product1) { FactoryGirl.create(:product) }
+    let(:product2) { FactoryGirl.create(:product) }
+
+    let(:release1) { FactoryGirl.create(:release, product: product1, format: "PDF") }
+    let(:release2) { FactoryGirl.create(:release, product: product1, format: "ePub") }
+    let(:release3) { FactoryGirl.create(:release, product: product2, format: "PDF") }
+
+    let!(:download1) { FactoryGirl.create(:download, release: release1) }
+    let!(:download2) { FactoryGirl.create(:download, release: release2) }
+    let!(:download3) { FactoryGirl.create(:download, release: release2) }
+    let!(:download4) { FactoryGirl.create(:download, release: release3) }
+
+    it "should show all the products and their respective downloads" do
+      get :index, {}, valid_session
+      expect(assigns(:products)).to include(product1, product2)
+
+      downloads = []
+
+      assigns(:products).each do |product|
+        product.downloads.map{ |d| downloads << d }
+      end
+
+      expect( downloads.size ).to eq(4)
+    end
+
   end
 
 end
