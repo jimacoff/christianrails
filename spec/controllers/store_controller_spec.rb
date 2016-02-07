@@ -149,6 +149,11 @@ RSpec.describe StoreController, type: :controller do
 
   end
 
+  describe 'complete_order' do
+    # TODO v.important
+    # need to stub paypal stuff
+  end
+
   describe 'download' do
 
     let!(:product1)  { FactoryGirl.create(:product) }

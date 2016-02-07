@@ -39,12 +39,17 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  get '/admin', to: 'store#admin'
+  get '/admin',          to: 'store#admin'
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'
 
-  get '/user_report', to: 'purchases#user_report'
+  get '/user_report',    to: 'purchases#user_report'
 
   root 'store#index'
+
+  %w( 404 422 500 ).each do |code|
+    get code, to: "errors#show", code: code
+  end
+
 
 end

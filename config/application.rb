@@ -25,6 +25,8 @@ module Christianrails
       g.helper            false
       g.jbuilder          false
     end
-    
+
+    config.exceptions_app = self.routes
+
   end
 end
