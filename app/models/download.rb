@@ -5,4 +5,6 @@ class Download < ActiveRecord::Base
 
   validates_presence_of :release, :user
 
+  LIMIT = 5
+
 end

@@ -198,6 +198,14 @@ RSpec.describe StoreController, type: :controller do
       get 'download', release_id: invalid_release_id
     end
 
+    it 'should NOT download if user has downloaded release too many times' do
+      controller.stubs(:send_file).returns("Download successful").times( Download::LIMIT )
+
+      ( Download::LIMIT + 1 ).times do
+        get 'download', release_id: release1.id
+      end
+    end
+
   end
 
 end

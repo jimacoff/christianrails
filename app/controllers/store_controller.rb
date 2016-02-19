@@ -112,22 +112,27 @@ class StoreController < ApplicationController
     if current_user
       begin
         release = Release.find(release_id)
+        product = release.product
       rescue
         Rails.logger.warn("Download attempted on invalid release id: #{release_id} by user id: #{current_user.id}.")
         return
       end
-      product = release.product
+
       if current_user.has_product?(product.id)
-        file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
-        send_file "#{Rails.root}/../../downloads/#{file_name}"
-        Download.create(user: current_user, release: release)
-        return
+        if current_user.downloads.where(release_id: release.id).size >= Download::LIMIT
+          Rails.logger.warn("Too many downloads attempted on release id: #{release_id} by user id: #{current_user.id}.")
+        else
+          file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+          send_file "#{Rails.root}/../../downloads/#{file_name}"
+          Download.create(user: current_user, release: release)
+        end
       else
         Rails.logger.warn("Download attempted on unauthorized product id: #{product.id} by user id: #{current_user.id}.")
-        return
       end
+
+    else
+      Rails.logger.warn("Unauthorized download attempted on release: #{release_id} by a guest user.")
     end
-    Rails.logger.warn("Unauthorized download attempted on release: #{release_id} by a guest user.")
   end
 
   def order_success
