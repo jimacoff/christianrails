@@ -133,6 +133,7 @@ class StoreController < ApplicationController
     else
       Rails.logger.warn("Unauthorized download attempted on release: #{release_id} by a guest user.")
     end
+    return # do not render
   end
 
   def order_success
