@@ -177,6 +177,7 @@ RSpec.describe StoreController, type: :controller do
 
       get 'download', release_id: release1.id
       expect( response.status ).to eq(200)
+      expect( assigns[:error] ).to be_nil
     end
 
     it 'should NOT download if no user logged in' do
@@ -185,21 +186,24 @@ RSpec.describe StoreController, type: :controller do
       controller.stubs(:send_file).returns("Download successful").never
 
       get 'download', release_id: release1.id
-      expect( response.status ).to eq(200)
+      expect( response.status ).to eq(302)
+      expect( assigns[:error] ).to_not be_nil
     end
 
     it 'should NOT download if user does not own the product' do
       controller.stubs(:send_file).returns("Download successful").never
 
       get 'download', release_id: release2.id
-      expect( response.status ).to eq(200)
+      expect( response.status ).to eq(302)
+      expect( assigns[:error] ).to_not be_nil
     end
 
     it 'should NOT download anything if release_id is invalid' do
       controller.stubs(:send_file).returns("Download successful").never
 
       get 'download', release_id: invalid_release_id
-      expect( response.status ).to eq(200)
+      expect( response.status ).to eq(302)
+      expect( assigns[:error] ).to_not be_nil
     end
 
     it 'should NOT download if user has downloaded release too many times' do
@@ -207,8 +211,8 @@ RSpec.describe StoreController, type: :controller do
 
       ( Download::LIMIT + 1 ).times do
         get 'download', release_id: release1.id
-        expect( response.status ).to eq(200)
       end
+      expect( assigns[:error] ).to_not be_nil
     end
 
   end

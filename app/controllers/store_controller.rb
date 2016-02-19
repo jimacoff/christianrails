@@ -114,26 +114,35 @@ class StoreController < ApplicationController
         release = Release.find(release_id)
         product = release.product
       rescue
-        Rails.logger.warn("Download attempted on invalid release id: #{release_id} by user id: #{current_user.id}.")
-        return
+        @error = "Download attempted on invalid release id: #{release_id} by user id: #{current_user.id}."
       end
 
-      if current_user.has_product?(product.id)
-        if current_user.downloads.where(release_id: release.id).size >= Download::LIMIT
-          Rails.logger.warn("Too many downloads attempted on release id: #{release_id} by user id: #{current_user.id}.")
+      if !@error
+        if current_user.has_product?(product.id)
+          if current_user.downloads.where(release_id: release.id).size >= Download::LIMIT
+            @error = "Download limit of #{Download::LIMIT} reached on release id: #{release_id} by user id: #{current_user.id}."
+          else
+            file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+            send_file "#{Rails.root}/../../downloads/#{file_name}"
+            Download.create(user: current_user, release: release)
+            return
+          end
         else
-          file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
-          send_file "#{Rails.root}/../../downloads/#{file_name}"
-          Download.create(user: current_user, release: release)
+          @error = "Download attempted on unauthorized product id: #{product.id} by user id: #{current_user.id}."
         end
-      else
-        Rails.logger.warn("Download attempted on unauthorized product id: #{product.id} by user id: #{current_user.id}.")
       end
 
     else
-      Rails.logger.warn("Unauthorized download attempted on release: #{release_id} by a guest user.")
+      @error = "Unauthorized download attempted on release: #{release_id} by a guest user."
     end
-    return # do not render
+
+    Rails.logger.warn(@error)
+
+    respond_to do |format|
+      flash[:notice] = @error
+      format.html { redirect_to root_path }
+    end
+
   end
 
   def order_success
