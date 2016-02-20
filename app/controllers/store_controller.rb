@@ -101,7 +101,7 @@ class StoreController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = note if note
-      flash[:alert]  = alert if alert
+      flash[:alert] = alert if alert
       format.html { redirect_to root_path }
     end
 

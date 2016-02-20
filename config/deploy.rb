@@ -26,6 +26,8 @@ set :rbenv_roles, :all # default value
 
 set :keep_releases, 5
 
+set :linked_dirs, %w{ log }
+
 namespace :deploy do
 
   # task :symlink_shared do
@@ -66,7 +68,7 @@ namespace :deploy do
       execute 'kill -9 `cat /var/www/christianrails/shared/pids/unicorn.pid`'
       execute 'rm /var/www/christianrails/shared/pids/unicorn.pid'
       execute "cd /var/www/christianrails/current && #{fetch(:rbenv_prefix)} bundle exec unicorn -c config/unicorn.rb -E production -D"
-    end 
+    end
   end
 
   # after :publishing, :recover
