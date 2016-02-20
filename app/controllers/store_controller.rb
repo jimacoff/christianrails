@@ -62,7 +62,7 @@ class StoreController < ApplicationController
         redirect_url = @payment.links.find {|link| link.rel == 'approval_url'}
         render js: "window.location = '#{redirect_url.href}'"
       else
-        flash[:error] = @payment.error
+        flash[:alert] = @payment.error
         render js: "window.location = '#{root_url}'"
       end
 
@@ -101,7 +101,7 @@ class StoreController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = note if note
-      flash[:error]  = alert if alert
+      flash[:alert]  = alert if alert
       format.html { redirect_to root_path }
     end
 
