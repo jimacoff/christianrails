@@ -150,8 +150,53 @@ RSpec.describe StoreController, type: :controller do
   end
 
   describe 'complete_order' do
-    # TODO v.important
-    # need to stub paypal stuff
+
+    before :each do
+      PayPal::SDK::REST::Payment.stubs(:find).returns( PayPal::SDK::REST::Payment.new )
+      PayPal::SDK::REST::Payment.any_instance.stubs(:execute).returns(true)
+    end
+
+    let(:product1) { FactoryGirl.create(:product, price: 3.00) }
+    let(:product2) { FactoryGirl.create(:product, price: 7.00) }
+
+    let!(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
+    let!(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
+
+    it "should create purchases for each staged purchase" do
+
+      get 'complete_order', paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id'
+
+      expect( StagedPurchase.count ).to eq(0)
+      expect( Purchase.count ).to eq(2)
+
+    end
+
+    it "should create an order with the correct total, tax and no discount" do
+      expect {
+        get :complete_order, { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
+      }.to change{ Order.count }.by (1)
+
+      order = Order.first
+
+      expect( order.discount ).to eq(0)
+      expect( order.tax ).to eq( ( product1.price + product2.price ) * Purchase::TAX_RATE )
+      expect( order.total ).to eq( product1.price + product2.price + order.tax )
+    end
+
+    it "should create an order with the correct discount when applicable" do
+      combo1 = PriceCombo.create(name: "Great deal", discount: 2.50)
+      combo1.products << product1
+      combo1.products << product2
+
+      get 'complete_order', paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id'
+
+      order = Order.first
+
+      expect( order.discount ).to eq( 2.50 )
+      expect( order.tax ).to eq( ((product1.price + product2.price) - order.discount) * Purchase::TAX_RATE )
+      expect( order.total ).to eq( product1.price + product2.price + order.tax - order.discount )
+    end
+
   end
 
   describe 'download' do

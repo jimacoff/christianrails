@@ -11,7 +11,7 @@
       %td= f.text_field :name
     %tr.field
       %td= f.label :discount
-      %td= f.text_field :discount, value: ( number_with_precision( f.object.discount, precision: 2) || 0 )
+      %td= f.number_field :discount, value: ( number_with_precision( f.object.discount, precision: 2) || 0 ), min: 0.01, step: 0.01
     %tr.actions
       %td
       %td= f.submit 'Save', class: 'store-button'

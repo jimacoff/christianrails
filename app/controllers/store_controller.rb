@@ -46,11 +46,11 @@ class StoreController < ApplicationController
         },
         transactions: [{
           amount: {
-            total: (total_cost * 1.15).round(2).to_s,
+            total: (total_cost * (1 + Purchase::TAX_RATE) ).round(2).to_s,
             currency: 'CAD',
             details: {
               subtotal: total_cost.to_s,
-              tax: (total_cost * 0.15).round(2).to_s
+              tax: (total_cost * Purchase::TAX_RATE ).round(2).to_s
             }
           },
           description: titles.join(' + ') + ' eBooks'
@@ -79,7 +79,7 @@ class StoreController < ApplicationController
         staged = current_user.staged_purchases
         gross_price = StagedPurchase.gross_cart_value_for(current_user.id)
         discount = PriceCombo.total_cart_discount_for(current_user.id)
-        tax = (gross_price - discount) * 0.15
+        tax = (gross_price - discount) * Purchase::TAX_RATE
 
         order = Order.create(user: current_user, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId],
                              discount: discount, tax: tax, total: gross_price - discount + tax)
