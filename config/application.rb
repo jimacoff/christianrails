@@ -28,5 +28,7 @@ module Christianrails
 
     config.exceptions_app = self.routes
 
+    config.action_view.logger = nil
+
   end
 end
