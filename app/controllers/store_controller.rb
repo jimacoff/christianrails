@@ -139,7 +139,7 @@ class StoreController < ApplicationController
     Rails.logger.warn(@error)
 
     respond_to do |format|
-      flash[:notice] = @error
+      flash[:alert] = @error
       format.html { redirect_to root_path }
     end
 
