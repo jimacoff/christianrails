@@ -1,6 +1,7 @@
 Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
+  mount Monologue::Engine, at: '/blog'
 
   resources :staged_purchases,     only:   [:index, :create, :destroy]
   resources :purchases,            only:   [:index]
@@ -50,6 +51,5 @@ Christianrails::Application.routes.draw do
   %w( 404 422 500 ).each do |code|
     get code, to: "errors#show", code: code
   end
-
 
 end
