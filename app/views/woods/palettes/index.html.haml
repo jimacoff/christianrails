@@ -1,0 +1,19 @@
+%h1 Listing woods_palettes
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @woods_palettes.each do |woods_palette|
+      %tr
+        %td= link_to 'Show', woods_palette
+        %td= link_to 'Edit', edit_woods_palette_path(woods_palette)
+        %td= link_to 'Destroy', woods_palette, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Palette', new_woods_palette_path

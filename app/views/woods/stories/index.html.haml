@@ -1,0 +1,19 @@
+%h1 Listing woods_stories
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @woods_stories.each do |woods_story|
+      %tr
+        %td= link_to 'Show', woods_story
+        %td= link_to 'Edit', edit_woods_story_path(woods_story)
+        %td= link_to 'Destroy', woods_story, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Story', new_woods_story_path
