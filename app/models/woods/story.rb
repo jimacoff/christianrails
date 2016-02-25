@@ -5,6 +5,7 @@ class Woods::Story < ActiveRecord::Base
 
   belongs_to :player
 
+  validates_presence_of :name, :player, :entry_tree
 
   def nodes
     nodes = []

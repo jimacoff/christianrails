@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225144601) do
+ActiveRecord::Schema.define(version: 20160225192459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,41 @@ ActiveRecord::Schema.define(version: 20160225144601) do
 
   add_index "downloads", ["release_id"], name: "index_downloads_on_release_id", using: :btree
   add_index "downloads", ["user_id"], name: "index_downloads_on_user_id", using: :btree
+
+  create_table "monologue_posts", force: :cascade do |t|
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+    t.string   "url"
+    t.datetime "published_at"
+  end
+
+  add_index "monologue_posts", ["url"], name: "index_monologue_posts_on_url", unique: true, using: :btree
+
+  create_table "monologue_taggings", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
+  add_index "monologue_taggings", ["post_id"], name: "index_monologue_taggings_on_post_id", using: :btree
+  add_index "monologue_taggings", ["tag_id"], name: "index_monologue_taggings_on_tag_id", using: :btree
+
+  create_table "monologue_tags", force: :cascade do |t|
+    t.string "name"
+  end
+
+  add_index "monologue_tags", ["name"], name: "index_monologue_tags_on_name", using: :btree
+
+  create_table "monologue_users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string   "payer_id"
@@ -118,145 +153,114 @@ ActiveRecord::Schema.define(version: 20160225144601) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "woods_boxes", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "itemset_id"
-    t.boolean  "enabled"
-    t.integer  "node_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "itemset_id"
+    t.boolean "enabled",    default: true
+    t.integer "node_id"
   end
 
   create_table "woods_finds", force: :cascade do |t|
-    t.integer  "player_id"
-    t.integer  "item_id"
-    t.integer  "story_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "player_id", null: false
+    t.integer "item_id",   null: false
+    t.integer "story_id"
   end
 
   create_table "woods_footprints", force: :cascade do |t|
-    t.integer  "scorecard_id"
-    t.integer  "storytree_id"
-    t.string   "footprint_data", limit: 2048
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "scorecard_id"
+    t.integer "storytree_id"
+    t.string  "footprint_data", limit: 4096
   end
 
   create_table "woods_items", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "value"
-    t.string   "legend",     limit: 1500
-    t.string   "image"
-    t.integer  "itemset_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name",       limit: 100,              null: false
+    t.integer "value",                   default: 1
+    t.string  "legend",     limit: 3000
+    t.string  "image",      limit: 60
+    t.integer "itemset_id"
   end
 
   create_table "woods_itemsets", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "player_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name",      limit: 60
+    t.integer "player_id"
   end
 
   create_table "woods_moverules", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name", limit: 60, null: false
   end
 
   create_table "woods_nodes", force: :cascade do |t|
-    t.integer  "moverule_id"
-    t.string   "name"
-    t.string   "left_text",    limit: 30
-    t.string   "right_text",   limit: 30
-    t.integer  "storytree_id"
-    t.integer  "tree_index"
-    t.string   "main_text",    limit: 1500
-    t.integer  "last_author"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "moverule_id"
+    t.string  "name",         limit: 60
+    t.string  "left_text",    limit: 60
+    t.string  "right_text",   limit: 60
+    t.integer "storytree_id"
+    t.integer "tree_index"
+    t.string  "node_text",    limit: 3000
+    t.integer "last_author"
   end
 
   create_table "woods_paintballs", force: :cascade do |t|
-    t.integer  "node_id"
-    t.integer  "palette_id"
-    t.boolean  "enabled"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "node_id"
+    t.integer "palette_id"
+    t.boolean "enabled",    default: true
   end
 
   create_table "woods_palettes", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "player_id"
-    t.string   "fore_colour"
-    t.string   "back_colour"
-    t.string   "alt_colour"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name",        limit: 100
+    t.integer "player_id"
+    t.string  "fore_colour",             default: "#000000"
+    t.string  "back_colour",             default: "#ffffff"
+    t.string  "alt_colour",              default: "#ffffff"
   end
 
   create_table "woods_players", force: :cascade do |t|
-    t.integer  "silver_coins"
-    t.string   "image"
-    t.integer  "gold_coins"
-    t.integer  "karma"
-    t.integer  "most_recent_story"
-    t.string   "description"
-    t.integer  "total_equity"
-    t.integer  "story_limit"
-    t.integer  "item_limit"
-    t.integer  "palette_limit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer "silver_coins",                  default: 0
+    t.string  "image",             limit: 60
+    t.integer "gold_coins",                    default: 0
+    t.integer "karma",                         default: 0
+    t.integer "most_recent_story"
+    t.string  "description",       limit: 510
+    t.integer "total_equity",                  default: 0
+    t.integer "story_limit"
+    t.integer "item_limit"
+    t.integer "palette_limit"
+    t.integer "user_id"
   end
 
   create_table "woods_possibleitems", force: :cascade do |t|
-    t.boolean  "enabled"
-    t.boolean  "perpetual"
-    t.integer  "itemset_id"
-    t.integer  "node_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean "enabled",    default: true
+    t.boolean "perpetual",  default: false
+    t.integer "itemset_id"
+    t.integer "node_id"
   end
 
   create_table "woods_scorecards", force: :cascade do |t|
-    t.integer  "player_id"
-    t.integer  "story_id"
-    t.integer  "number_of_plays"
-    t.integer  "total_score"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "player_id"
+    t.integer "story_id"
+    t.integer "number_of_plays", default: 0
+    t.integer "total_score",     default: 0
   end
 
   create_table "woods_stories", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "player_id"
-    t.string   "description"
-    t.string   "cover_image"
-    t.integer  "entry_tree"
-    t.integer  "total_plays"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "published",   default: false
+    t.string  "name",        limit: 50,                   null: false
+    t.integer "player_id"
+    t.string  "description", limit: 1000
+    t.string  "cover_image", limit: 60
+    t.integer "entry_tree"
+    t.integer "total_plays"
+    t.boolean "published",                default: false
   end
 
   create_table "woods_storytrees", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "max_tree_level"
-    t.integer  "story_id"
-    t.boolean  "deletable"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name",      limit: 60,                 null: false
+    t.integer "max_level",            default: 1,     null: false
+    t.integer "story_id",                             null: false
+    t.boolean "deletable",            default: false
   end
 
   create_table "woods_treelinks", force: :cascade do |t|
-    t.integer  "node_id"
-    t.boolean  "enabled"
-    t.integer  "linked_tree"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "node_id"
+    t.boolean "enabled",     default: true
+    t.integer "linked_tree"
   end
 
   add_foreign_key "downloads", "releases"

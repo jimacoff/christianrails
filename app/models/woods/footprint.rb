@@ -3,4 +3,6 @@ class Woods::Footprint < ActiveRecord::Base
   belongs_to :storytree
 
   belongs_to :player, inverse_of: :footprints
+
+  validates_presence_of :scorecard, :storytree
 end

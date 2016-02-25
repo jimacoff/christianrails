@@ -7,5 +7,5 @@ class Woods::Node < ActiveRecord::Base
   has_one :possibleitem,  dependent: :destroy
   has_one :treelink,      dependent: :destroy
 
-
+  validates_presence_of :name, :storytree, :tree_index
 end

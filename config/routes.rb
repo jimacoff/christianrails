@@ -39,11 +39,12 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  # namespace :woods do
-  #   resources :players
+  namespace :woods do
+    resources :binarywoods, only: :index
+    resources :stories
+    resources :players
   #   resources :treelinks
   #   resources :storytrees
-  #   resources :stories
   #   resources :scorecards
   #   resources :possibleitems
   #   resources :palettes
@@ -55,7 +56,9 @@ Christianrails::Application.routes.draw do
   #   resources :footprints
   #   resources :finds
   #   resources :boxes
-  # end
+  end
+
+  get '/binarywoods',    to: 'woods/binarywoods#index'
 
   get '/admin',          to: 'store#admin'
   get '/complete_order', to: 'store#complete_order'

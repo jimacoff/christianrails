@@ -10,4 +10,10 @@ class Woods::Player < ActiveRecord::Base
   has_many :palettes,     dependent: :destroy
 
   belongs_to :user
+
+  validates_presence_of :user
+
+  def username
+    self.user.username
+  end
 end

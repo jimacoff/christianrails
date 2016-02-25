@@ -1,8 +1,10 @@
-%h1 Listing woods_players
+%h1 Listing All Players
 
 %table
   %thead
     %tr
+      %th Username
+      %th Stories
       %th
       %th
       %th
@@ -10,6 +12,8 @@
   %tbody
     - @woods_players.each do |woods_player|
       %tr
+        %td= woods_player.username
+        %td= woods_player.stories.collect(&:name)
         %td= link_to 'Show', woods_player
         %td= link_to 'Edit', edit_woods_player_path(woods_player)
         %td= link_to 'Destroy', woods_player, :method => :delete, :data => { :confirm => 'Are you sure?' }
@@ -17,3 +21,7 @@
 %br
 
 = link_to 'New Player', new_woods_player_path
+
+%br
+%br
+= link_to 'Admin menu', admin_path
