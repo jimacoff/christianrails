@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :orders, inverse_of: :user
   has_many :staged_purchases, inverse_of: :user
 
+  has_one :player, dependent: :destroy
+
   validates_presence_of :username, :full_name, :country, :email, :encrypted_password
 
   def products

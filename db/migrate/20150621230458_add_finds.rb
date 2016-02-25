@@ -4,7 +4,7 @@ class AddFinds < ActiveRecord::Migration
     t.integer :player_id
     t.integer :item_id
     t.integer :story_id
-    t.datetime :find_time
+    t.datetime :find_time  # getting DROPPED
 
     t.timestamps
   end

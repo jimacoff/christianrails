@@ -7,4 +7,6 @@ class Woods::Player < ActiveRecord::Base
   has_many :items,        through: :itemsets
 
   has_many :palettes,     dependent: :destroy
+
+  belongs_to :user
 end
