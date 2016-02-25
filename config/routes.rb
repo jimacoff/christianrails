@@ -39,6 +39,24 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  namespace :woods do
+    resources :players
+    resources :treelinks
+    resources :storytrees
+    resources :stories
+    resources :scorecards
+    resources :possibleitems
+    resources :palettes
+    resources :paintballs
+    resources :nodes
+    resources :moverules
+    resources :itemsets
+    resources :items
+    resources :footprints
+    resources :finds
+    resources :boxes
+  end
+
   get '/admin',          to: 'store#admin'
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'

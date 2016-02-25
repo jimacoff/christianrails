@@ -1,0 +1,10 @@
+= form_for @woods_paintball do |f|
+  - if @woods_paintball.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@woods_paintball.errors.count, "error")} prohibited this woods_paintball from being saved:"
+      %ul
+        - @woods_paintball.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

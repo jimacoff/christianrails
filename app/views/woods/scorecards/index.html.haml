@@ -1,0 +1,19 @@
+%h1 Listing woods_scorecards
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @woods_scorecards.each do |woods_scorecard|
+      %tr
+        %td= link_to 'Show', woods_scorecard
+        %td= link_to 'Edit', edit_woods_scorecard_path(woods_scorecard)
+        %td= link_to 'Destroy', woods_scorecard, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Scorecard', new_woods_scorecard_path

@@ -1,0 +1,19 @@
+%h1 Listing woods_itemsets
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @woods_itemsets.each do |woods_itemset|
+      %tr
+        %td= link_to 'Show', woods_itemset
+        %td= link_to 'Edit', edit_woods_itemset_path(woods_itemset)
+        %td= link_to 'Destroy', woods_itemset, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Itemset', new_woods_itemset_path

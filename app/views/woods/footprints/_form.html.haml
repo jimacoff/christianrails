@@ -1,0 +1,10 @@
+= form_for @woods_footprint do |f|
+  - if @woods_footprint.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@woods_footprint.errors.count, "error")} prohibited this woods_footprint from being saved:"
+      %ul
+        - @woods_footprint.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

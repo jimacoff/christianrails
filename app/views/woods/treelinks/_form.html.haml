@@ -1,0 +1,10 @@
+= form_for @woods_treelink do |f|
+  - if @woods_treelink.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@woods_treelink.errors.count, "error")} prohibited this woods_treelink from being saved:"
+      %ul
+        - @woods_treelink.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

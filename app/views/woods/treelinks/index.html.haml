@@ -1,0 +1,19 @@
+%h1 Listing woods_treelinks
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @woods_treelinks.each do |woods_treelink|
+      %tr
+        %td= link_to 'Show', woods_treelink
+        %td= link_to 'Edit', edit_woods_treelink_path(woods_treelink)
+        %td= link_to 'Destroy', woods_treelink, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Treelink', new_woods_treelink_path

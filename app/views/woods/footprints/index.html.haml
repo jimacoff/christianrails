@@ -1,0 +1,19 @@
+%h1 Listing woods_footprints
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @woods_footprints.each do |woods_footprint|
+      %tr
+        %td= link_to 'Show', woods_footprint
+        %td= link_to 'Edit', edit_woods_footprint_path(woods_footprint)
+        %td= link_to 'Destroy', woods_footprint, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Footprint', new_woods_footprint_path
