@@ -6,20 +6,39 @@ RSpec.describe Woods::Itemset, type: :model do
 
     let(:player) { FactoryGirl.create(:player) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:itemset) { FactoryGirl.create(:itemset, player: player) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    let!(:item1) { FactoryGirl.create(:item, itemset: itemset) }
+    let!(:item2) { FactoryGirl.create(:item, itemset: itemset) }
+    let!(:item3) { FactoryGirl.create(:item, itemset: itemset) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
+    let!(:box1) { FactoryGirl.create(:box, itemset: itemset) }
+    let!(:box2) { FactoryGirl.create(:box, itemset: itemset) }
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
+    let!(:possibleitem1)  { FactoryGirl.create(:possibleitem, itemset: itemset) }
+    let!(:possibleitem2)  { FactoryGirl.create(:possibleitem, itemset: itemset) }
+
+    it "should belong to a player" do
+      expect( itemset.player ).to eq(player)
+    end
+
+    it "should have many items" do
+      expect( itemset.items.count ).to eq(3)
+    end
+
+    it "should have many possible_items" do
+      expect( itemset.possibleitems.count ).to eq(2)
+    end
+
+    it "should have many boxes" do
+      expect( itemset.boxes.count ).to eq(2)
+    end
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

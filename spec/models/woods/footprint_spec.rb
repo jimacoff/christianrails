@@ -4,23 +4,24 @@ RSpec.describe Woods::Footprint, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:storytree) { FactoryGirl.create(:storytree) }
+    let(:scorecard) { FactoryGirl.create(:scorecard) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:footprint) { FactoryGirl.create(:footprint, storytree: storytree, scorecard: scorecard) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    it "should belong to a scorecard" do
+      expect( footprint.scorecard ).to eq(scorecard)
+    end
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
-
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
-
+    it "should belong to a storytree" do
+      expect( footprint.storytree ).to eq(storytree)
+    end
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

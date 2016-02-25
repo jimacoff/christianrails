@@ -4,23 +4,25 @@ RSpec.describe Woods::Treelink, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:storytree) { FactoryGirl.create(:storytree) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:node) { FactoryGirl.create(:node) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    let!(:treelink)  { FactoryGirl.create(:treelink, node: node, linked_tree: storytree) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
+    it "should belong to node" do
+      expect( treelink.node ).to eq(node)
+    end
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
-
+    it "should belong to storytree, as linked_tree" do
+      expect( treelink.linked_tree ).to eq(storytree)
+    end
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20160225144601) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "woods_boxes", force: :cascade do |t|
+    t.string   "name"
     t.integer  "itemset_id"
     t.boolean  "enabled"
     t.integer  "node_id"

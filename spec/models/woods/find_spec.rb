@@ -5,22 +5,30 @@ RSpec.describe Woods::Find, type: :model do
   describe "relations" do
 
     let(:player) { FactoryGirl.create(:player) }
-
     let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:item) { FactoryGirl.create(:item) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    let(:find) { FactoryGirl.create(:find, player: player, item: item, story: story) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
+    it "should belong to a player" do
+      expect( find.player ).to eq(player)
+    end
+
+    it "should belong to an item" do
+      expect( find.item ).to eq(item)
+    end
+
+    it "should belong to a story" do
+      expect( find.story ).to eq(story)
+    end
 
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

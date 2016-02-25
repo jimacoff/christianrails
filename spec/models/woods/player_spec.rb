@@ -4,23 +4,65 @@ RSpec.describe Woods::Player, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:user) { FactoryGirl.create(:user) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:player) { FactoryGirl.create(:player, user: user) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    let!(:story1) { FactoryGirl.create(:story, player: player) }
+    let!(:story2) { FactoryGirl.create(:story, player: player) }
+    let!(:story3) { FactoryGirl.create(:story, player: player) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
+    let!(:find1) { FactoryGirl.create(:find, player: player) }
+    let!(:find2) { FactoryGirl.create(:find, player: player) }
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
+    let!(:scorecard) { FactoryGirl.create(:scorecard, player: player) }
+    let!(:footprint) { FactoryGirl.create(:footprint, scorecard: scorecard) }
 
+    let!(:itemset) { FactoryGirl.create(:itemset, player: player) }
+
+    let!(:item1) { FactoryGirl.create(:item, itemset: itemset) }
+    let!(:item2) { FactoryGirl.create(:item, itemset: itemset) }
+
+    let!(:palette1)  { FactoryGirl.create(:palette, player: player) }
+    let!(:palette2)  { FactoryGirl.create(:palette, player: player) }
+
+    it "should have many finds" do
+      expect( player.finds.count ).to eq(2)
+    end
+
+    it "should have many scorecards" do
+      expect( player.scorecards.count ).to eq(1)
+    end
+
+    it "should have many footprints" do
+      expect( player.footprints.count ).to eq(1)
+    end
+
+    it "should have many itemsets" do
+      expect( player.itemsets.count ).to eq(1)
+    end
+
+    it "should have many items" do
+      expect( player.items.count ).to eq(2)
+    end
+
+    it "should have many palettes" do
+      expect( player.palettes.count ).to eq(2)
+    end
+
+    it "should belong to a user" do
+      expect( player.user ).to eq(user)
+    end
+
+    it "should have many stories" do
+      expect( player.stories.count ).to eq(3)
+    end
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

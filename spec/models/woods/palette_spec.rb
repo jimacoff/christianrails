@@ -6,21 +6,24 @@ RSpec.describe Woods::Palette, type: :model do
 
     let(:player) { FactoryGirl.create(:player) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:palette) { FactoryGirl.create(:palette, player: player) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    let!(:paintball1) { FactoryGirl.create(:paintball, palette: palette) }
+    let!(:paintball2) { FactoryGirl.create(:paintball, palette: palette) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
+    it "should belong to a player" do
+      expect( palette.player ).to eq(player)
+    end
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
-
+    it "should have many paintballs" do
+      expect( palette.paintballs.count ).to eq(2)
+    end
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

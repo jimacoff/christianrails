@@ -29,5 +29,9 @@ RSpec.describe Woods::Story, type: :model do
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

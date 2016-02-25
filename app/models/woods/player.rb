@@ -5,6 +5,7 @@ class Woods::Player < ActiveRecord::Base
 
   has_many :itemsets,     dependent: :destroy
   has_many :items,        through: :itemsets
+  has_many :stories,     dependent: :destroy
 
   has_many :palettes,     dependent: :destroy
 

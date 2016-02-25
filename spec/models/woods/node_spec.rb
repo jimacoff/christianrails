@@ -44,5 +44,9 @@ RSpec.describe Woods::Node, type: :model do
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end

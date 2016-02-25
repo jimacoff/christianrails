@@ -4,21 +4,24 @@ RSpec.describe Woods::Box, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:itemset) { FactoryGirl.create(:itemset) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:node1) { FactoryGirl.create(:node) }
+    let(:node2) { FactoryGirl.create(:node) }
 
-    let(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let(:node2) { FactoryGirl.create(:node, storytree: storytree) }
+    let!(:box) { FactoryGirl.create(:box, node: node1, itemset: itemset) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
+    it "should belong to a node" do
+      expect( box.node ).to eq(node1)
+    end
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
+    it "should belong to an itemset" do
+      expect( box.itemset ).to eq(itemset)
+    end
 
+  end
+
+  describe "validations" do
 
   end
 

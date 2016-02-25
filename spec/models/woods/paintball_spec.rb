@@ -1,22 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe Woods::Storytree, type: :model do
+RSpec.describe Woods::Paintball, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:node) { FactoryGirl.create(:node) }
+    let(:palette) { FactoryGirl.create(:palette) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let!(:storytree1) { FactoryGirl.create(:storytree, story: story) }
-    let!(:storytree2) { FactoryGirl.create(:storytree, story: story) }
+    let!(:paintball) { FactoryGirl.create(:paintball, node: node, palette: palette) }
 
-    let!(:node1) { FactoryGirl.create(:node, storytree: storytree1) }
-    let!(:node2) { FactoryGirl.create(:node, storytree: storytree1) }
-    let!(:node3) { FactoryGirl.create(:node, storytree: storytree2) }
-    let!(:node4) { FactoryGirl.create(:node, storytree: storytree2) }
+    it "should belong to a node" do
+      expect( paintball.node ).to eq(node)
+    end
 
+    it "should belong to a palette" do
+      expect( paintball.palette ).to eq(palette)
+    end
 
   end
 
+  describe "validations" do
+
+
+  end
 
 end
