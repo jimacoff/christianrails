@@ -19,9 +19,9 @@
     %canvas{id: "rainfield", width: "1300", height: "999"}
 
     #zone-keeper
-      = render "layouts/dealzone"
+      = render "store/dealzone"
 
-    = render "layouts/store_header"
+    = render "store/header"
 
     #wrapper.panel
       - if notice
@@ -33,7 +33,7 @@
 
       = yield
 
-      = render "layouts/store_footer"
+      = render "store/footer"
 
       = render "scripts/init_cart"
       = render "scripts/ocean"

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  
+
   include ApplicationHelper
   include StoreHelper
+  include WoodsHelper
 
   before_filter :get_products, :get_cart
 

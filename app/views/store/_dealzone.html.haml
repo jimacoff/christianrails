@@ -1,4 +1,4 @@
-- unless !@cart || !@all_products 
+- unless !@cart || !@all_products
   - is_hidden = @cart.size == 0 ? "display: none;" : "display: inline-block;"
 
   #dealzone{style: "#{is_hidden}"}
@@ -11,7 +11,7 @@
       %table
         %tr
           %td.half-width
-            #discount_label Save: 
+            #discount_label Save:
           %td.half-width
             #discount_price.new-price
       %table
@@ -20,8 +20,8 @@
             .embolden Total:
           %td.half-width
             #total_price.embolden $0.00
-          
+
       %input.center{id: "check_out_button", onclick: "doCheckout();", type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png", alt: "Check out with PayPal" }
-      .hidden.center{id: "processing"} 
+      .hidden.center{id: "processing"}
         %p Processing...
         = image_tag("spin.gif")

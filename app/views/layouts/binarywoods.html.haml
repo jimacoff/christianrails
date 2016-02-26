@@ -15,7 +15,7 @@
 
   %body.background
 
-    = render "layouts/binary_header"
+    = render "woods/header"
 
     #wrapper.panel
       - if notice
@@ -27,7 +27,7 @@
 
       = yield
 
-      = render "layouts/woods_footer"
+      = render "woods/footer"
 
       = render "scripts/init_cart"
 
