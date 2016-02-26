@@ -1,9 +1,9 @@
-= form_for @woods_palette do |f|
-  - if @woods_palette.errors.any?
+= form_for @palette do |f|
+  - if @palette.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@woods_palette.errors.count, "error")} prohibited this woods_palette from being saved:"
+      %h2= "#{pluralize(@palette.errors.count, "error")} prohibited this woods_palette from being saved:"
       %ul
-        - @woods_palette.errors.full_messages.each do |msg|
+        - @palette.errors.full_messages.each do |msg|
           %li= msg
 
   .actions

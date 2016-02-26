@@ -37,33 +37,33 @@ RSpec.describe Woods::NodesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_nodes as @woods_nodes" do
+    it "assigns all woods_nodes as @nodes" do
       node = Woods::Node.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_nodes)).to eq([node])
+      expect(assigns(:nodes)).to eq([node])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_node as @woods_node" do
+    it "assigns the requested woods_node as @node" do
       node = Woods::Node.create! valid_attributes
       get :show, {:id => node.to_param}, valid_session
-      expect(assigns(:woods_node)).to eq(node)
+      expect(assigns(:node)).to eq(node)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_node as @woods_node" do
+    it "assigns a new woods_node as @node" do
       get :new, {}, valid_session
-      expect(assigns(:woods_node)).to be_a_new(Woods::Node)
+      expect(assigns(:node)).to be_a_new(Woods::Node)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_node as @woods_node" do
+    it "assigns the requested woods_node as @node" do
       node = Woods::Node.create! valid_attributes
       get :edit, {:id => node.to_param}, valid_session
-      expect(assigns(:woods_node)).to eq(node)
+      expect(assigns(:node)).to eq(node)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::NodesController, type: :controller do
         }.to change(Woods::Node, :count).by(1)
       end
 
-      it "assigns a newly created woods_node as @woods_node" do
+      it "assigns a newly created woods_node as @node" do
         post :create, {:woods_node => valid_attributes}, valid_session
-        expect(assigns(:woods_node)).to be_a(Woods::Node)
-        expect(assigns(:woods_node)).to be_persisted
+        expect(assigns(:node)).to be_a(Woods::Node)
+        expect(assigns(:node)).to be_persisted
       end
 
       it "redirects to the created woods_node" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::NodesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_node as @woods_node" do
+      it "assigns a newly created but unsaved woods_node as @node" do
         post :create, {:woods_node => invalid_attributes}, valid_session
-        expect(assigns(:woods_node)).to be_a_new(Woods::Node)
+        expect(assigns(:node)).to be_a_new(Woods::Node)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::NodesController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_node as @woods_node" do
+      it "assigns the requested woods_node as @node" do
         node = Woods::Node.create! valid_attributes
         put :update, {:id => node.to_param, :woods_node => valid_attributes}, valid_session
-        expect(assigns(:woods_node)).to eq(node)
+        expect(assigns(:node)).to eq(node)
       end
 
       it "redirects to the woods_node" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::NodesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_node as @woods_node" do
+      it "assigns the woods_node as @node" do
         node = Woods::Node.create! valid_attributes
         put :update, {:id => node.to_param, :woods_node => invalid_attributes}, valid_session
-        expect(assigns(:woods_node)).to eq(node)
+        expect(assigns(:node)).to eq(node)
       end
 
       it "re-renders the 'edit' template" do

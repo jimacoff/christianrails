@@ -6,7 +6,7 @@ class Woods::ScorecardsController < ApplicationController
   # GET /woods/scorecards
   # GET /woods/scorecards.json
   def index
-    @woods_scorecards = Woods::Scorecard.all
+    @scorecards = Woods::Scorecard.all
   end
 
   # GET /woods/scorecards/1
@@ -16,7 +16,7 @@ class Woods::ScorecardsController < ApplicationController
 
   # GET /woods/scorecards/new
   def new
-    @woods_scorecard = Woods::Scorecard.new
+    @scorecard = Woods::Scorecard.new
   end
 
   # GET /woods/scorecards/1/edit
@@ -26,15 +26,15 @@ class Woods::ScorecardsController < ApplicationController
   # POST /woods/scorecards
   # POST /woods/scorecards.json
   def create
-    @woods_scorecard = Woods::Scorecard.new(woods_scorecard_params)
+    @scorecard = Woods::Scorecard.new(woods_scorecard_params)
 
     respond_to do |format|
-      if @woods_scorecard.save
-        format.html { redirect_to @woods_scorecard, notice: 'Scorecard was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @woods_scorecard }
+      if @scorecard.save
+        format.html { redirect_to @scorecard, notice: 'Scorecard was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @scorecard }
       else
         format.html { render action: 'new' }
-        format.json { render json: @woods_scorecard.errors, status: :unprocessable_entity }
+        format.json { render json: @scorecard.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +43,12 @@ class Woods::ScorecardsController < ApplicationController
   # PATCH/PUT /woods/scorecards/1.json
   def update
     respond_to do |format|
-      if @woods_scorecard.update(woods_scorecard_params)
-        format.html { redirect_to @woods_scorecard, notice: 'Scorecard was successfully updated.' }
+      if @scorecard.update(woods_scorecard_params)
+        format.html { redirect_to @scorecard, notice: 'Scorecard was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @woods_scorecard.errors, status: :unprocessable_entity }
+        format.json { render json: @scorecard.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +56,7 @@ class Woods::ScorecardsController < ApplicationController
   # DELETE /woods/scorecards/1
   # DELETE /woods/scorecards/1.json
   def destroy
-    @woods_scorecard.destroy
+    @scorecard.destroy
     respond_to do |format|
       format.html { redirect_to woods_scorecards_url }
       format.json { head :no_content }
@@ -66,7 +66,7 @@ class Woods::ScorecardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_woods_scorecard
-      @woods_scorecard = Woods::Scorecard.find(params[:id])
+      @scorecard = Woods::Scorecard.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

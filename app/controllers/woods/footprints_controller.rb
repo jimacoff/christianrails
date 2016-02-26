@@ -6,7 +6,7 @@ class Woods::FootprintsController < ApplicationController
   # GET /woods/footprints
   # GET /woods/footprints.json
   def index
-    @woods_footprints = Woods::Footprint.all
+    @footprints = Woods::Footprint.all
   end
 
   # GET /woods/footprints/1
@@ -16,7 +16,7 @@ class Woods::FootprintsController < ApplicationController
 
   # GET /woods/footprints/new
   def new
-    @woods_footprint = Woods::Footprint.new
+    @footprint = Woods::Footprint.new
   end
 
   # GET /woods/footprints/1/edit
@@ -26,15 +26,15 @@ class Woods::FootprintsController < ApplicationController
   # POST /woods/footprints
   # POST /woods/footprints.json
   def create
-    @woods_footprint = Woods::Footprint.new(woods_footprint_params)
+    @footprint = Woods::Footprint.new(woods_footprint_params)
 
     respond_to do |format|
-      if @woods_footprint.save
-        format.html { redirect_to @woods_footprint, notice: 'Footprint was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @woods_footprint }
+      if @footprint.save
+        format.html { redirect_to @footprint, notice: 'Footprint was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @footprint }
       else
         format.html { render action: 'new' }
-        format.json { render json: @woods_footprint.errors, status: :unprocessable_entity }
+        format.json { render json: @footprint.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +43,12 @@ class Woods::FootprintsController < ApplicationController
   # PATCH/PUT /woods/footprints/1.json
   def update
     respond_to do |format|
-      if @woods_footprint.update(woods_footprint_params)
-        format.html { redirect_to @woods_footprint, notice: 'Footprint was successfully updated.' }
+      if @footprint.update(woods_footprint_params)
+        format.html { redirect_to @footprint, notice: 'Footprint was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @woods_footprint.errors, status: :unprocessable_entity }
+        format.json { render json: @footprint.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +56,7 @@ class Woods::FootprintsController < ApplicationController
   # DELETE /woods/footprints/1
   # DELETE /woods/footprints/1.json
   def destroy
-    @woods_footprint.destroy
+    @footprint.destroy
     respond_to do |format|
       format.html { redirect_to woods_footprints_url }
       format.json { head :no_content }
@@ -66,7 +66,7 @@ class Woods::FootprintsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_woods_footprint
-      @woods_footprint = Woods::Footprint.find(params[:id])
+      @footprint = Woods::Footprint.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

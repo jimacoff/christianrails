@@ -8,7 +8,7 @@
       %th
 
   %tbody
-    - @woods_treelinks.each do |woods_treelink|
+    - @treelinks.each do |woods_treelink|
       %tr
         %td= link_to 'Show', woods_treelink
         %td= link_to 'Edit', edit_woods_treelink_path(woods_treelink)

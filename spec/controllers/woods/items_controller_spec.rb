@@ -37,33 +37,33 @@ RSpec.describe Woods::ItemsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_items as @woods_items" do
+    it "assigns all woods_items as @items" do
       item = Woods::Item.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_items)).to eq([item])
+      expect(assigns(:items)).to eq([item])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_item as @woods_item" do
+    it "assigns the requested woods_item as @item" do
       item = Woods::Item.create! valid_attributes
       get :show, {:id => item.to_param}, valid_session
-      expect(assigns(:woods_item)).to eq(item)
+      expect(assigns(:item)).to eq(item)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_item as @woods_item" do
+    it "assigns a new woods_item as @item" do
       get :new, {}, valid_session
-      expect(assigns(:woods_item)).to be_a_new(Woods::Item)
+      expect(assigns(:item)).to be_a_new(Woods::Item)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_item as @woods_item" do
+    it "assigns the requested woods_item as @item" do
       item = Woods::Item.create! valid_attributes
       get :edit, {:id => item.to_param}, valid_session
-      expect(assigns(:woods_item)).to eq(item)
+      expect(assigns(:item)).to eq(item)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::ItemsController, type: :controller do
         }.to change(Woods::Item, :count).by(1)
       end
 
-      it "assigns a newly created woods_item as @woods_item" do
+      it "assigns a newly created woods_item as @item" do
         post :create, {:woods_item => valid_attributes}, valid_session
-        expect(assigns(:woods_item)).to be_a(Woods::Item)
-        expect(assigns(:woods_item)).to be_persisted
+        expect(assigns(:item)).to be_a(Woods::Item)
+        expect(assigns(:item)).to be_persisted
       end
 
       it "redirects to the created woods_item" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::ItemsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_item as @woods_item" do
+      it "assigns a newly created but unsaved woods_item as @item" do
         post :create, {:woods_item => invalid_attributes}, valid_session
-        expect(assigns(:woods_item)).to be_a_new(Woods::Item)
+        expect(assigns(:item)).to be_a_new(Woods::Item)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::ItemsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_item as @woods_item" do
+      it "assigns the requested woods_item as @item" do
         item = Woods::Item.create! valid_attributes
         put :update, {:id => item.to_param, :woods_item => valid_attributes}, valid_session
-        expect(assigns(:woods_item)).to eq(item)
+        expect(assigns(:item)).to eq(item)
       end
 
       it "redirects to the woods_item" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::ItemsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_item as @woods_item" do
+      it "assigns the woods_item as @item" do
         item = Woods::Item.create! valid_attributes
         put :update, {:id => item.to_param, :woods_item => invalid_attributes}, valid_session
-        expect(assigns(:woods_item)).to eq(item)
+        expect(assigns(:item)).to eq(item)
       end
 
       it "re-renders the 'edit' template" do

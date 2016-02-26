@@ -1,9 +1,9 @@
-= form_for @woods_item do |f|
-  - if @woods_item.errors.any?
+= form_for @item do |f|
+  - if @item.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@woods_item.errors.count, "error")} prohibited this woods_item from being saved:"
+      %h2= "#{pluralize(@item.errors.count, "error")} prohibited this woods_item from being saved:"
       %ul
-        - @woods_item.errors.full_messages.each do |msg|
+        - @item.errors.full_messages.each do |msg|
           %li= msg
 
   .actions

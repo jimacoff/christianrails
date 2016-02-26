@@ -8,7 +8,7 @@
       %th
 
   %tbody
-    - @woods_itemsets.each do |woods_itemset|
+    - @itemsets.each do |woods_itemset|
       %tr
         %td= link_to 'Show', woods_itemset
         %td= link_to 'Edit', edit_woods_itemset_path(woods_itemset)

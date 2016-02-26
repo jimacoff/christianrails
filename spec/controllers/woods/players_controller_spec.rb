@@ -37,33 +37,33 @@ RSpec.describe Woods::PlayersController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_players as @woods_players" do
+    it "assigns all woods_players as @players" do
       player = Woods::Player.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_players)).to eq([player])
+      expect(assigns(:players)).to eq([player])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_player as @woods_player" do
+    it "assigns the requested woods_player as @player" do
       player = Woods::Player.create! valid_attributes
       get :show, {:id => player.to_param}, valid_session
-      expect(assigns(:woods_player)).to eq(player)
+      expect(assigns(:player)).to eq(player)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_player as @woods_player" do
+    it "assigns a new woods_player as @player" do
       get :new, {}, valid_session
-      expect(assigns(:woods_player)).to be_a_new(Woods::Player)
+      expect(assigns(:player)).to be_a_new(Woods::Player)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_player as @woods_player" do
+    it "assigns the requested woods_player as @player" do
       player = Woods::Player.create! valid_attributes
       get :edit, {:id => player.to_param}, valid_session
-      expect(assigns(:woods_player)).to eq(player)
+      expect(assigns(:player)).to eq(player)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::PlayersController, type: :controller do
         }.to change(Woods::Player, :count).by(1)
       end
 
-      it "assigns a newly created woods_player as @woods_player" do
+      it "assigns a newly created woods_player as @player" do
         post :create, {:woods_player => valid_attributes}, valid_session
-        expect(assigns(:woods_player)).to be_a(Woods::Player)
-        expect(assigns(:woods_player)).to be_persisted
+        expect(assigns(:player)).to be_a(Woods::Player)
+        expect(assigns(:player)).to be_persisted
       end
 
       it "redirects to the created woods_player" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::PlayersController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_player as @woods_player" do
+      it "assigns a newly created but unsaved woods_player as @player" do
         post :create, {:woods_player => invalid_attributes}, valid_session
-        expect(assigns(:woods_player)).to be_a_new(Woods::Player)
+        expect(assigns(:player)).to be_a_new(Woods::Player)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::PlayersController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_player as @woods_player" do
+      it "assigns the requested woods_player as @player" do
         player = Woods::Player.create! valid_attributes
         put :update, {:id => player.to_param, :woods_player => valid_attributes}, valid_session
-        expect(assigns(:woods_player)).to eq(player)
+        expect(assigns(:player)).to eq(player)
       end
 
       it "redirects to the woods_player" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::PlayersController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_player as @woods_player" do
+      it "assigns the woods_player as @player" do
         player = Woods::Player.create! valid_attributes
         put :update, {:id => player.to_param, :woods_player => invalid_attributes}, valid_session
-        expect(assigns(:woods_player)).to eq(player)
+        expect(assigns(:player)).to eq(player)
       end
 
       it "re-renders the 'edit' template" do

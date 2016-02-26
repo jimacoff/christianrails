@@ -8,7 +8,7 @@
       %th
 
   %tbody
-    - @woods_scorecards.each do |woods_scorecard|
+    - @scorecards.each do |woods_scorecard|
       %tr
         %td= link_to 'Show', woods_scorecard
         %td= link_to 'Edit', edit_woods_scorecard_path(woods_scorecard)

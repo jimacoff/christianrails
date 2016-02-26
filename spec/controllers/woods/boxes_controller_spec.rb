@@ -37,33 +37,33 @@ RSpec.describe Woods::BoxesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_boxes as @woods_boxes" do
+    it "assigns all woods_boxes as @boxes" do
       box = Woods::Box.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_boxes)).to eq([box])
+      expect(assigns(:boxes)).to eq([box])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_box as @woods_box" do
+    it "assigns the requested woods_box as @box" do
       box = Woods::Box.create! valid_attributes
       get :show, {:id => box.to_param}, valid_session
-      expect(assigns(:woods_box)).to eq(box)
+      expect(assigns(:box)).to eq(box)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_box as @woods_box" do
+    it "assigns a new woods_box as @box" do
       get :new, {}, valid_session
-      expect(assigns(:woods_box)).to be_a_new(Woods::Box)
+      expect(assigns(:box)).to be_a_new(Woods::Box)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_box as @woods_box" do
+    it "assigns the requested woods_box as @box" do
       box = Woods::Box.create! valid_attributes
       get :edit, {:id => box.to_param}, valid_session
-      expect(assigns(:woods_box)).to eq(box)
+      expect(assigns(:box)).to eq(box)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::BoxesController, type: :controller do
         }.to change(Woods::Box, :count).by(1)
       end
 
-      it "assigns a newly created woods_box as @woods_box" do
+      it "assigns a newly created woods_box as @box" do
         post :create, {:woods_box => valid_attributes}, valid_session
-        expect(assigns(:woods_box)).to be_a(Woods::Box)
-        expect(assigns(:woods_box)).to be_persisted
+        expect(assigns(:box)).to be_a(Woods::Box)
+        expect(assigns(:box)).to be_persisted
       end
 
       it "redirects to the created woods_box" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::BoxesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_box as @woods_box" do
+      it "assigns a newly created but unsaved woods_box as @box" do
         post :create, {:woods_box => invalid_attributes}, valid_session
-        expect(assigns(:woods_box)).to be_a_new(Woods::Box)
+        expect(assigns(:box)).to be_a_new(Woods::Box)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::BoxesController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_box as @woods_box" do
+      it "assigns the requested woods_box as @box" do
         box = Woods::Box.create! valid_attributes
         put :update, {:id => box.to_param, :woods_box => valid_attributes}, valid_session
-        expect(assigns(:woods_box)).to eq(box)
+        expect(assigns(:box)).to eq(box)
       end
 
       it "redirects to the woods_box" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::BoxesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_box as @woods_box" do
+      it "assigns the woods_box as @box" do
         box = Woods::Box.create! valid_attributes
         put :update, {:id => box.to_param, :woods_box => invalid_attributes}, valid_session
-        expect(assigns(:woods_box)).to eq(box)
+        expect(assigns(:box)).to eq(box)
       end
 
       it "re-renders the 'edit' template" do

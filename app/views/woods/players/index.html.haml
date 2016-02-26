@@ -10,7 +10,7 @@
       %th
 
   %tbody
-    - @woods_players.each do |woods_player|
+    - @players.each do |woods_player|
       %tr
         %td= woods_player.username
         %td= woods_player.stories.collect(&:name)

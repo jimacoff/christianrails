@@ -1,11 +1,11 @@
 %p#notice= notice
 
 
-%h1= @woods_story.name
+%h1= @story.name
 
-= link_to "Play", play_woods_story_path(@woods_story)
+= link_to "Play", play_woods_story_path(@story)
 
-- if owns_story?(@woods_story)
-  = link_to 'Edit', edit_woods_story_path(@woods_story)
+- if owns_story?(@story)
+  = link_to 'Edit', edit_woods_story_path(@story)
   \|
 = link_to 'Back', woods_stories_path

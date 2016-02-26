@@ -37,33 +37,33 @@ RSpec.describe Woods::StoriesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_stories as @woods_stories" do
+    it "assigns all woods_stories as @stories" do
       story = Woods::Story.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_stories)).to eq([story])
+      expect(assigns(:stories)).to eq([story])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_story as @woods_story" do
+    it "assigns the requested woods_story as @story" do
       story = Woods::Story.create! valid_attributes
       get :show, {:id => story.to_param}, valid_session
-      expect(assigns(:woods_story)).to eq(story)
+      expect(assigns(:story)).to eq(story)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_story as @woods_story" do
+    it "assigns a new woods_story as @story" do
       get :new, {}, valid_session
-      expect(assigns(:woods_story)).to be_a_new(Woods::Story)
+      expect(assigns(:story)).to be_a_new(Woods::Story)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_story as @woods_story" do
+    it "assigns the requested woods_story as @story" do
       story = Woods::Story.create! valid_attributes
       get :edit, {:id => story.to_param}, valid_session
-      expect(assigns(:woods_story)).to eq(story)
+      expect(assigns(:story)).to eq(story)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::StoriesController, type: :controller do
         }.to change(Woods::Story, :count).by(1)
       end
 
-      it "assigns a newly created woods_story as @woods_story" do
+      it "assigns a newly created woods_story as @story" do
         post :create, {:woods_story => valid_attributes}, valid_session
-        expect(assigns(:woods_story)).to be_a(Woods::Story)
-        expect(assigns(:woods_story)).to be_persisted
+        expect(assigns(:story)).to be_a(Woods::Story)
+        expect(assigns(:story)).to be_persisted
       end
 
       it "redirects to the created woods_story" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::StoriesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_story as @woods_story" do
+      it "assigns a newly created but unsaved woods_story as @story" do
         post :create, {:woods_story => invalid_attributes}, valid_session
-        expect(assigns(:woods_story)).to be_a_new(Woods::Story)
+        expect(assigns(:story)).to be_a_new(Woods::Story)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::StoriesController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_story as @woods_story" do
+      it "assigns the requested woods_story as @story" do
         story = Woods::Story.create! valid_attributes
         put :update, {:id => story.to_param, :woods_story => valid_attributes}, valid_session
-        expect(assigns(:woods_story)).to eq(story)
+        expect(assigns(:story)).to eq(story)
       end
 
       it "redirects to the woods_story" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::StoriesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_story as @woods_story" do
+      it "assigns the woods_story as @story" do
         story = Woods::Story.create! valid_attributes
         put :update, {:id => story.to_param, :woods_story => invalid_attributes}, valid_session
-        expect(assigns(:woods_story)).to eq(story)
+        expect(assigns(:story)).to eq(story)
       end
 
       it "re-renders the 'edit' template" do

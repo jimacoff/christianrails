@@ -37,33 +37,33 @@ RSpec.describe Woods::PalettesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_palettes as @woods_palettes" do
+    it "assigns all woods_palettes as @palettes" do
       palette = Woods::Palette.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_palettes)).to eq([palette])
+      expect(assigns(:palettes)).to eq([palette])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_palette as @woods_palette" do
+    it "assigns the requested woods_palette as @palette" do
       palette = Woods::Palette.create! valid_attributes
       get :show, {:id => palette.to_param}, valid_session
-      expect(assigns(:woods_palette)).to eq(palette)
+      expect(assigns(:palette)).to eq(palette)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_palette as @woods_palette" do
+    it "assigns a new woods_palette as @palette" do
       get :new, {}, valid_session
-      expect(assigns(:woods_palette)).to be_a_new(Woods::Palette)
+      expect(assigns(:palette)).to be_a_new(Woods::Palette)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_palette as @woods_palette" do
+    it "assigns the requested woods_palette as @palette" do
       palette = Woods::Palette.create! valid_attributes
       get :edit, {:id => palette.to_param}, valid_session
-      expect(assigns(:woods_palette)).to eq(palette)
+      expect(assigns(:palette)).to eq(palette)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::PalettesController, type: :controller do
         }.to change(Woods::Palette, :count).by(1)
       end
 
-      it "assigns a newly created woods_palette as @woods_palette" do
+      it "assigns a newly created woods_palette as @palette" do
         post :create, {:woods_palette => valid_attributes}, valid_session
-        expect(assigns(:woods_palette)).to be_a(Woods::Palette)
-        expect(assigns(:woods_palette)).to be_persisted
+        expect(assigns(:palette)).to be_a(Woods::Palette)
+        expect(assigns(:palette)).to be_persisted
       end
 
       it "redirects to the created woods_palette" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::PalettesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_palette as @woods_palette" do
+      it "assigns a newly created but unsaved woods_palette as @palette" do
         post :create, {:woods_palette => invalid_attributes}, valid_session
-        expect(assigns(:woods_palette)).to be_a_new(Woods::Palette)
+        expect(assigns(:palette)).to be_a_new(Woods::Palette)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::PalettesController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_palette as @woods_palette" do
+      it "assigns the requested woods_palette as @palette" do
         palette = Woods::Palette.create! valid_attributes
         put :update, {:id => palette.to_param, :woods_palette => valid_attributes}, valid_session
-        expect(assigns(:woods_palette)).to eq(palette)
+        expect(assigns(:palette)).to eq(palette)
       end
 
       it "redirects to the woods_palette" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::PalettesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_palette as @woods_palette" do
+      it "assigns the woods_palette as @palette" do
         palette = Woods::Palette.create! valid_attributes
         put :update, {:id => palette.to_param, :woods_palette => invalid_attributes}, valid_session
-        expect(assigns(:woods_palette)).to eq(palette)
+        expect(assigns(:palette)).to eq(palette)
       end
 
       it "re-renders the 'edit' template" do

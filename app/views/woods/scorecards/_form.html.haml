@@ -1,9 +1,9 @@
-= form_for @woods_scorecard do |f|
-  - if @woods_scorecard.errors.any?
+= form_for @scorecard do |f|
+  - if @scorecard.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@woods_scorecard.errors.count, "error")} prohibited this woods_scorecard from being saved:"
+      %h2= "#{pluralize(@scorecard.errors.count, "error")} prohibited this woods_scorecard from being saved:"
       %ul
-        - @woods_scorecard.errors.full_messages.each do |msg|
+        - @scorecard.errors.full_messages.each do |msg|
           %li= msg
 
   .actions

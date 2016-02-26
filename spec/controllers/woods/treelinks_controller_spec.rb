@@ -37,33 +37,33 @@ RSpec.describe Woods::TreelinksController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_treelinks as @woods_treelinks" do
+    it "assigns all woods_treelinks as @treelinks" do
       treelink = Woods::Treelink.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_treelinks)).to eq([treelink])
+      expect(assigns(:treelinks)).to eq([treelink])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_treelink as @woods_treelink" do
+    it "assigns the requested woods_treelink as @treelink" do
       treelink = Woods::Treelink.create! valid_attributes
       get :show, {:id => treelink.to_param}, valid_session
-      expect(assigns(:woods_treelink)).to eq(treelink)
+      expect(assigns(:treelink)).to eq(treelink)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_treelink as @woods_treelink" do
+    it "assigns a new woods_treelink as @treelink" do
       get :new, {}, valid_session
-      expect(assigns(:woods_treelink)).to be_a_new(Woods::Treelink)
+      expect(assigns(:treelink)).to be_a_new(Woods::Treelink)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_treelink as @woods_treelink" do
+    it "assigns the requested woods_treelink as @treelink" do
       treelink = Woods::Treelink.create! valid_attributes
       get :edit, {:id => treelink.to_param}, valid_session
-      expect(assigns(:woods_treelink)).to eq(treelink)
+      expect(assigns(:treelink)).to eq(treelink)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::TreelinksController, type: :controller do
         }.to change(Woods::Treelink, :count).by(1)
       end
 
-      it "assigns a newly created woods_treelink as @woods_treelink" do
+      it "assigns a newly created woods_treelink as @treelink" do
         post :create, {:woods_treelink => valid_attributes}, valid_session
-        expect(assigns(:woods_treelink)).to be_a(Woods::Treelink)
-        expect(assigns(:woods_treelink)).to be_persisted
+        expect(assigns(:treelink)).to be_a(Woods::Treelink)
+        expect(assigns(:treelink)).to be_persisted
       end
 
       it "redirects to the created woods_treelink" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::TreelinksController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_treelink as @woods_treelink" do
+      it "assigns a newly created but unsaved woods_treelink as @treelink" do
         post :create, {:woods_treelink => invalid_attributes}, valid_session
-        expect(assigns(:woods_treelink)).to be_a_new(Woods::Treelink)
+        expect(assigns(:treelink)).to be_a_new(Woods::Treelink)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::TreelinksController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_treelink as @woods_treelink" do
+      it "assigns the requested woods_treelink as @treelink" do
         treelink = Woods::Treelink.create! valid_attributes
         put :update, {:id => treelink.to_param, :woods_treelink => valid_attributes}, valid_session
-        expect(assigns(:woods_treelink)).to eq(treelink)
+        expect(assigns(:treelink)).to eq(treelink)
       end
 
       it "redirects to the woods_treelink" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::TreelinksController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_treelink as @woods_treelink" do
+      it "assigns the woods_treelink as @treelink" do
         treelink = Woods::Treelink.create! valid_attributes
         put :update, {:id => treelink.to_param, :woods_treelink => invalid_attributes}, valid_session
-        expect(assigns(:woods_treelink)).to eq(treelink)
+        expect(assigns(:treelink)).to eq(treelink)
       end
 
       it "re-renders the 'edit' template" do

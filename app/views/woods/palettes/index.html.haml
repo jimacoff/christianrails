@@ -8,7 +8,7 @@
       %th
 
   %tbody
-    - @woods_palettes.each do |woods_palette|
+    - @palettes.each do |woods_palette|
       %tr
         %td= link_to 'Show', woods_palette
         %td= link_to 'Edit', edit_woods_palette_path(woods_palette)

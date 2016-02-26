@@ -8,7 +8,7 @@
       %th
 
   %tbody
-    - @woods_boxes.each do |woods_box|
+    - @boxes.each do |woods_box|
       %tr
         %td= link_to 'Show', woods_box
         %td= link_to 'Edit', edit_woods_box_path(woods_box)

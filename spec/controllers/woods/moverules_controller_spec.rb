@@ -37,33 +37,33 @@ RSpec.describe Woods::MoverulesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_moverules as @woods_moverules" do
+    it "assigns all woods_moverules as @moverules" do
       moverule = Woods::Moverule.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_moverules)).to eq([moverule])
+      expect(assigns(:moverules)).to eq([moverule])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_moverule as @woods_moverule" do
+    it "assigns the requested woods_moverule as @moverule" do
       moverule = Woods::Moverule.create! valid_attributes
       get :show, {:id => moverule.to_param}, valid_session
-      expect(assigns(:woods_moverule)).to eq(moverule)
+      expect(assigns(:moverule)).to eq(moverule)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_moverule as @woods_moverule" do
+    it "assigns a new woods_moverule as @moverule" do
       get :new, {}, valid_session
-      expect(assigns(:woods_moverule)).to be_a_new(Woods::Moverule)
+      expect(assigns(:moverule)).to be_a_new(Woods::Moverule)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_moverule as @woods_moverule" do
+    it "assigns the requested woods_moverule as @moverule" do
       moverule = Woods::Moverule.create! valid_attributes
       get :edit, {:id => moverule.to_param}, valid_session
-      expect(assigns(:woods_moverule)).to eq(moverule)
+      expect(assigns(:moverule)).to eq(moverule)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::MoverulesController, type: :controller do
         }.to change(Woods::Moverule, :count).by(1)
       end
 
-      it "assigns a newly created woods_moverule as @woods_moverule" do
+      it "assigns a newly created woods_moverule as @moverule" do
         post :create, {:woods_moverule => valid_attributes}, valid_session
-        expect(assigns(:woods_moverule)).to be_a(Woods::Moverule)
-        expect(assigns(:woods_moverule)).to be_persisted
+        expect(assigns(:moverule)).to be_a(Woods::Moverule)
+        expect(assigns(:moverule)).to be_persisted
       end
 
       it "redirects to the created woods_moverule" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::MoverulesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_moverule as @woods_moverule" do
+      it "assigns a newly created but unsaved woods_moverule as @moverule" do
         post :create, {:woods_moverule => invalid_attributes}, valid_session
-        expect(assigns(:woods_moverule)).to be_a_new(Woods::Moverule)
+        expect(assigns(:moverule)).to be_a_new(Woods::Moverule)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::MoverulesController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_moverule as @woods_moverule" do
+      it "assigns the requested woods_moverule as @moverule" do
         moverule = Woods::Moverule.create! valid_attributes
         put :update, {:id => moverule.to_param, :woods_moverule => valid_attributes}, valid_session
-        expect(assigns(:woods_moverule)).to eq(moverule)
+        expect(assigns(:moverule)).to eq(moverule)
       end
 
       it "redirects to the woods_moverule" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::MoverulesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_moverule as @woods_moverule" do
+      it "assigns the woods_moverule as @moverule" do
         moverule = Woods::Moverule.create! valid_attributes
         put :update, {:id => moverule.to_param, :woods_moverule => invalid_attributes}, valid_session
-        expect(assigns(:woods_moverule)).to eq(moverule)
+        expect(assigns(:moverule)).to eq(moverule)
       end
 
       it "re-renders the 'edit' template" do

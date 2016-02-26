@@ -37,33 +37,33 @@ RSpec.describe Woods::PossibleitemsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_possibleitems as @woods_possibleitems" do
+    it "assigns all woods_possibleitems as @possibleitems" do
       possibleitem = Woods::Possibleitem.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_possibleitems)).to eq([possibleitem])
+      expect(assigns(:possibleitems)).to eq([possibleitem])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_possibleitem as @woods_possibleitem" do
+    it "assigns the requested woods_possibleitem as @possibleitem" do
       possibleitem = Woods::Possibleitem.create! valid_attributes
       get :show, {:id => possibleitem.to_param}, valid_session
-      expect(assigns(:woods_possibleitem)).to eq(possibleitem)
+      expect(assigns(:possibleitem)).to eq(possibleitem)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_possibleitem as @woods_possibleitem" do
+    it "assigns a new woods_possibleitem as @possibleitem" do
       get :new, {}, valid_session
-      expect(assigns(:woods_possibleitem)).to be_a_new(Woods::Possibleitem)
+      expect(assigns(:possibleitem)).to be_a_new(Woods::Possibleitem)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_possibleitem as @woods_possibleitem" do
+    it "assigns the requested woods_possibleitem as @possibleitem" do
       possibleitem = Woods::Possibleitem.create! valid_attributes
       get :edit, {:id => possibleitem.to_param}, valid_session
-      expect(assigns(:woods_possibleitem)).to eq(possibleitem)
+      expect(assigns(:possibleitem)).to eq(possibleitem)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::PossibleitemsController, type: :controller do
         }.to change(Woods::Possibleitem, :count).by(1)
       end
 
-      it "assigns a newly created woods_possibleitem as @woods_possibleitem" do
+      it "assigns a newly created woods_possibleitem as @possibleitem" do
         post :create, {:woods_possibleitem => valid_attributes}, valid_session
-        expect(assigns(:woods_possibleitem)).to be_a(Woods::Possibleitem)
-        expect(assigns(:woods_possibleitem)).to be_persisted
+        expect(assigns(:possibleitem)).to be_a(Woods::Possibleitem)
+        expect(assigns(:possibleitem)).to be_persisted
       end
 
       it "redirects to the created woods_possibleitem" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::PossibleitemsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_possibleitem as @woods_possibleitem" do
+      it "assigns a newly created but unsaved woods_possibleitem as @possibleitem" do
         post :create, {:woods_possibleitem => invalid_attributes}, valid_session
-        expect(assigns(:woods_possibleitem)).to be_a_new(Woods::Possibleitem)
+        expect(assigns(:possibleitem)).to be_a_new(Woods::Possibleitem)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::PossibleitemsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_possibleitem as @woods_possibleitem" do
+      it "assigns the requested woods_possibleitem as @possibleitem" do
         possibleitem = Woods::Possibleitem.create! valid_attributes
         put :update, {:id => possibleitem.to_param, :woods_possibleitem => valid_attributes}, valid_session
-        expect(assigns(:woods_possibleitem)).to eq(possibleitem)
+        expect(assigns(:possibleitem)).to eq(possibleitem)
       end
 
       it "redirects to the woods_possibleitem" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::PossibleitemsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_possibleitem as @woods_possibleitem" do
+      it "assigns the woods_possibleitem as @possibleitem" do
         possibleitem = Woods::Possibleitem.create! valid_attributes
         put :update, {:id => possibleitem.to_param, :woods_possibleitem => invalid_attributes}, valid_session
-        expect(assigns(:woods_possibleitem)).to eq(possibleitem)
+        expect(assigns(:possibleitem)).to eq(possibleitem)
       end
 
       it "re-renders the 'edit' template" do

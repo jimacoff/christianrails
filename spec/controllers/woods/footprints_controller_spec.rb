@@ -37,33 +37,33 @@ RSpec.describe Woods::FootprintsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_footprints as @woods_footprints" do
+    it "assigns all woods_footprints as @footprints" do
       footprint = Woods::Footprint.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_footprints)).to eq([footprint])
+      expect(assigns(:footprints)).to eq([footprint])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_footprint as @woods_footprint" do
+    it "assigns the requested woods_footprint as @footprint" do
       footprint = Woods::Footprint.create! valid_attributes
       get :show, {:id => footprint.to_param}, valid_session
-      expect(assigns(:woods_footprint)).to eq(footprint)
+      expect(assigns(:footprint)).to eq(footprint)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_footprint as @woods_footprint" do
+    it "assigns a new woods_footprint as @footprint" do
       get :new, {}, valid_session
-      expect(assigns(:woods_footprint)).to be_a_new(Woods::Footprint)
+      expect(assigns(:footprint)).to be_a_new(Woods::Footprint)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_footprint as @woods_footprint" do
+    it "assigns the requested woods_footprint as @footprint" do
       footprint = Woods::Footprint.create! valid_attributes
       get :edit, {:id => footprint.to_param}, valid_session
-      expect(assigns(:woods_footprint)).to eq(footprint)
+      expect(assigns(:footprint)).to eq(footprint)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::FootprintsController, type: :controller do
         }.to change(Woods::Footprint, :count).by(1)
       end
 
-      it "assigns a newly created woods_footprint as @woods_footprint" do
+      it "assigns a newly created woods_footprint as @footprint" do
         post :create, {:woods_footprint => valid_attributes}, valid_session
-        expect(assigns(:woods_footprint)).to be_a(Woods::Footprint)
-        expect(assigns(:woods_footprint)).to be_persisted
+        expect(assigns(:footprint)).to be_a(Woods::Footprint)
+        expect(assigns(:footprint)).to be_persisted
       end
 
       it "redirects to the created woods_footprint" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::FootprintsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_footprint as @woods_footprint" do
+      it "assigns a newly created but unsaved woods_footprint as @footprint" do
         post :create, {:woods_footprint => invalid_attributes}, valid_session
-        expect(assigns(:woods_footprint)).to be_a_new(Woods::Footprint)
+        expect(assigns(:footprint)).to be_a_new(Woods::Footprint)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::FootprintsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_footprint as @woods_footprint" do
+      it "assigns the requested woods_footprint as @footprint" do
         footprint = Woods::Footprint.create! valid_attributes
         put :update, {:id => footprint.to_param, :woods_footprint => valid_attributes}, valid_session
-        expect(assigns(:woods_footprint)).to eq(footprint)
+        expect(assigns(:footprint)).to eq(footprint)
       end
 
       it "redirects to the woods_footprint" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::FootprintsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_footprint as @woods_footprint" do
+      it "assigns the woods_footprint as @footprint" do
         footprint = Woods::Footprint.create! valid_attributes
         put :update, {:id => footprint.to_param, :woods_footprint => invalid_attributes}, valid_session
-        expect(assigns(:woods_footprint)).to eq(footprint)
+        expect(assigns(:footprint)).to eq(footprint)
       end
 
       it "re-renders the 'edit' template" do

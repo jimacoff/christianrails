@@ -6,7 +6,7 @@ class Woods::ItemsetsController < ApplicationController
   # GET /woods/itemsets
   # GET /woods/itemsets.json
   def index
-    @woods_itemsets = Woods::Itemset.all
+    @itemsets = Woods::Itemset.all
   end
 
   # GET /woods/itemsets/1
@@ -16,7 +16,7 @@ class Woods::ItemsetsController < ApplicationController
 
   # GET /woods/itemsets/new
   def new
-    @woods_itemset = Woods::Itemset.new
+    @itemset = Woods::Itemset.new
   end
 
   # GET /woods/itemsets/1/edit
@@ -26,15 +26,15 @@ class Woods::ItemsetsController < ApplicationController
   # POST /woods/itemsets
   # POST /woods/itemsets.json
   def create
-    @woods_itemset = Woods::Itemset.new(woods_itemset_params)
+    @itemset = Woods::Itemset.new(woods_itemset_params)
 
     respond_to do |format|
-      if @woods_itemset.save
-        format.html { redirect_to @woods_itemset, notice: 'Itemset was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @woods_itemset }
+      if @itemset.save
+        format.html { redirect_to @itemset, notice: 'Itemset was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @itemset }
       else
         format.html { render action: 'new' }
-        format.json { render json: @woods_itemset.errors, status: :unprocessable_entity }
+        format.json { render json: @itemset.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +43,12 @@ class Woods::ItemsetsController < ApplicationController
   # PATCH/PUT /woods/itemsets/1.json
   def update
     respond_to do |format|
-      if @woods_itemset.update(woods_itemset_params)
-        format.html { redirect_to @woods_itemset, notice: 'Itemset was successfully updated.' }
+      if @itemset.update(woods_itemset_params)
+        format.html { redirect_to @itemset, notice: 'Itemset was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @woods_itemset.errors, status: :unprocessable_entity }
+        format.json { render json: @itemset.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +56,7 @@ class Woods::ItemsetsController < ApplicationController
   # DELETE /woods/itemsets/1
   # DELETE /woods/itemsets/1.json
   def destroy
-    @woods_itemset.destroy
+    @itemset.destroy
     respond_to do |format|
       format.html { redirect_to woods_itemsets_url }
       format.json { head :no_content }
@@ -66,7 +66,7 @@ class Woods::ItemsetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_woods_itemset
-      @woods_itemset = Woods::Itemset.find(params[:id])
+      @itemset = Woods::Itemset.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

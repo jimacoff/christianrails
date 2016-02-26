@@ -37,33 +37,33 @@ RSpec.describe Woods::PaintballsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_paintballs as @woods_paintballs" do
+    it "assigns all woods_paintballs as @paintballs" do
       paintball = Woods::Paintball.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_paintballs)).to eq([paintball])
+      expect(assigns(:paintballs)).to eq([paintball])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_paintball as @woods_paintball" do
+    it "assigns the requested woods_paintball as @paintball" do
       paintball = Woods::Paintball.create! valid_attributes
       get :show, {:id => paintball.to_param}, valid_session
-      expect(assigns(:woods_paintball)).to eq(paintball)
+      expect(assigns(:paintball)).to eq(paintball)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_paintball as @woods_paintball" do
+    it "assigns a new woods_paintball as @paintball" do
       get :new, {}, valid_session
-      expect(assigns(:woods_paintball)).to be_a_new(Woods::Paintball)
+      expect(assigns(:paintball)).to be_a_new(Woods::Paintball)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_paintball as @woods_paintball" do
+    it "assigns the requested woods_paintball as @paintball" do
       paintball = Woods::Paintball.create! valid_attributes
       get :edit, {:id => paintball.to_param}, valid_session
-      expect(assigns(:woods_paintball)).to eq(paintball)
+      expect(assigns(:paintball)).to eq(paintball)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::PaintballsController, type: :controller do
         }.to change(Woods::Paintball, :count).by(1)
       end
 
-      it "assigns a newly created woods_paintball as @woods_paintball" do
+      it "assigns a newly created woods_paintball as @paintball" do
         post :create, {:woods_paintball => valid_attributes}, valid_session
-        expect(assigns(:woods_paintball)).to be_a(Woods::Paintball)
-        expect(assigns(:woods_paintball)).to be_persisted
+        expect(assigns(:paintball)).to be_a(Woods::Paintball)
+        expect(assigns(:paintball)).to be_persisted
       end
 
       it "redirects to the created woods_paintball" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::PaintballsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_paintball as @woods_paintball" do
+      it "assigns a newly created but unsaved woods_paintball as @paintball" do
         post :create, {:woods_paintball => invalid_attributes}, valid_session
-        expect(assigns(:woods_paintball)).to be_a_new(Woods::Paintball)
+        expect(assigns(:paintball)).to be_a_new(Woods::Paintball)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::PaintballsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_paintball as @woods_paintball" do
+      it "assigns the requested woods_paintball as @paintball" do
         paintball = Woods::Paintball.create! valid_attributes
         put :update, {:id => paintball.to_param, :woods_paintball => valid_attributes}, valid_session
-        expect(assigns(:woods_paintball)).to eq(paintball)
+        expect(assigns(:paintball)).to eq(paintball)
       end
 
       it "redirects to the woods_paintball" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::PaintballsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_paintball as @woods_paintball" do
+      it "assigns the woods_paintball as @paintball" do
         paintball = Woods::Paintball.create! valid_attributes
         put :update, {:id => paintball.to_param, :woods_paintball => invalid_attributes}, valid_session
-        expect(assigns(:woods_paintball)).to eq(paintball)
+        expect(assigns(:paintball)).to eq(paintball)
       end
 
       it "re-renders the 'edit' template" do

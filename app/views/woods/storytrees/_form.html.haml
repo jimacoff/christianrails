@@ -1,9 +1,9 @@
-= form_for @woods_storytree do |f|
-  - if @woods_storytree.errors.any?
+= form_for @storytree do |f|
+  - if @storytree.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@woods_storytree.errors.count, "error")} prohibited this woods_storytree from being saved:"
+      %h2= "#{pluralize(@storytree.errors.count, "error")} prohibited this woods_storytree from being saved:"
       %ul
-        - @woods_storytree.errors.full_messages.each do |msg|
+        - @storytree.errors.full_messages.each do |msg|
           %li= msg
 
   .actions

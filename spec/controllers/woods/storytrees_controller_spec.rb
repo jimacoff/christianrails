@@ -37,33 +37,33 @@ RSpec.describe Woods::StorytreesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_storytrees as @woods_storytrees" do
+    it "assigns all woods_storytrees as @storytrees" do
       storytree = Woods::Storytree.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_storytrees)).to eq([storytree])
+      expect(assigns(:storytrees)).to eq([storytree])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_storytree as @woods_storytree" do
+    it "assigns the requested woods_storytree as @storytree" do
       storytree = Woods::Storytree.create! valid_attributes
       get :show, {:id => storytree.to_param}, valid_session
-      expect(assigns(:woods_storytree)).to eq(storytree)
+      expect(assigns(:storytree)).to eq(storytree)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_storytree as @woods_storytree" do
+    it "assigns a new woods_storytree as @storytree" do
       get :new, {}, valid_session
-      expect(assigns(:woods_storytree)).to be_a_new(Woods::Storytree)
+      expect(assigns(:storytree)).to be_a_new(Woods::Storytree)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_storytree as @woods_storytree" do
+    it "assigns the requested woods_storytree as @storytree" do
       storytree = Woods::Storytree.create! valid_attributes
       get :edit, {:id => storytree.to_param}, valid_session
-      expect(assigns(:woods_storytree)).to eq(storytree)
+      expect(assigns(:storytree)).to eq(storytree)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::StorytreesController, type: :controller do
         }.to change(Woods::Storytree, :count).by(1)
       end
 
-      it "assigns a newly created woods_storytree as @woods_storytree" do
+      it "assigns a newly created woods_storytree as @storytree" do
         post :create, {:woods_storytree => valid_attributes}, valid_session
-        expect(assigns(:woods_storytree)).to be_a(Woods::Storytree)
-        expect(assigns(:woods_storytree)).to be_persisted
+        expect(assigns(:storytree)).to be_a(Woods::Storytree)
+        expect(assigns(:storytree)).to be_persisted
       end
 
       it "redirects to the created woods_storytree" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::StorytreesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_storytree as @woods_storytree" do
+      it "assigns a newly created but unsaved woods_storytree as @storytree" do
         post :create, {:woods_storytree => invalid_attributes}, valid_session
-        expect(assigns(:woods_storytree)).to be_a_new(Woods::Storytree)
+        expect(assigns(:storytree)).to be_a_new(Woods::Storytree)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::StorytreesController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_storytree as @woods_storytree" do
+      it "assigns the requested woods_storytree as @storytree" do
         storytree = Woods::Storytree.create! valid_attributes
         put :update, {:id => storytree.to_param, :woods_storytree => valid_attributes}, valid_session
-        expect(assigns(:woods_storytree)).to eq(storytree)
+        expect(assigns(:storytree)).to eq(storytree)
       end
 
       it "redirects to the woods_storytree" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::StorytreesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_storytree as @woods_storytree" do
+      it "assigns the woods_storytree as @storytree" do
         storytree = Woods::Storytree.create! valid_attributes
         put :update, {:id => storytree.to_param, :woods_storytree => invalid_attributes}, valid_session
-        expect(assigns(:woods_storytree)).to eq(storytree)
+        expect(assigns(:storytree)).to eq(storytree)
       end
 
       it "re-renders the 'edit' template" do

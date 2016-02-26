@@ -37,33 +37,33 @@ RSpec.describe Woods::ScorecardsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_scorecards as @woods_scorecards" do
+    it "assigns all woods_scorecards as @scorecards" do
       scorecard = Woods::Scorecard.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_scorecards)).to eq([scorecard])
+      expect(assigns(:scorecards)).to eq([scorecard])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_scorecard as @woods_scorecard" do
+    it "assigns the requested woods_scorecard as @scorecard" do
       scorecard = Woods::Scorecard.create! valid_attributes
       get :show, {:id => scorecard.to_param}, valid_session
-      expect(assigns(:woods_scorecard)).to eq(scorecard)
+      expect(assigns(:scorecard)).to eq(scorecard)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_scorecard as @woods_scorecard" do
+    it "assigns a new woods_scorecard as @scorecard" do
       get :new, {}, valid_session
-      expect(assigns(:woods_scorecard)).to be_a_new(Woods::Scorecard)
+      expect(assigns(:scorecard)).to be_a_new(Woods::Scorecard)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_scorecard as @woods_scorecard" do
+    it "assigns the requested woods_scorecard as @scorecard" do
       scorecard = Woods::Scorecard.create! valid_attributes
       get :edit, {:id => scorecard.to_param}, valid_session
-      expect(assigns(:woods_scorecard)).to eq(scorecard)
+      expect(assigns(:scorecard)).to eq(scorecard)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::ScorecardsController, type: :controller do
         }.to change(Woods::Scorecard, :count).by(1)
       end
 
-      it "assigns a newly created woods_scorecard as @woods_scorecard" do
+      it "assigns a newly created woods_scorecard as @scorecard" do
         post :create, {:woods_scorecard => valid_attributes}, valid_session
-        expect(assigns(:woods_scorecard)).to be_a(Woods::Scorecard)
-        expect(assigns(:woods_scorecard)).to be_persisted
+        expect(assigns(:scorecard)).to be_a(Woods::Scorecard)
+        expect(assigns(:scorecard)).to be_persisted
       end
 
       it "redirects to the created woods_scorecard" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::ScorecardsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_scorecard as @woods_scorecard" do
+      it "assigns a newly created but unsaved woods_scorecard as @scorecard" do
         post :create, {:woods_scorecard => invalid_attributes}, valid_session
-        expect(assigns(:woods_scorecard)).to be_a_new(Woods::Scorecard)
+        expect(assigns(:scorecard)).to be_a_new(Woods::Scorecard)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::ScorecardsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_scorecard as @woods_scorecard" do
+      it "assigns the requested woods_scorecard as @scorecard" do
         scorecard = Woods::Scorecard.create! valid_attributes
         put :update, {:id => scorecard.to_param, :woods_scorecard => valid_attributes}, valid_session
-        expect(assigns(:woods_scorecard)).to eq(scorecard)
+        expect(assigns(:scorecard)).to eq(scorecard)
       end
 
       it "redirects to the woods_scorecard" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::ScorecardsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_scorecard as @woods_scorecard" do
+      it "assigns the woods_scorecard as @scorecard" do
         scorecard = Woods::Scorecard.create! valid_attributes
         put :update, {:id => scorecard.to_param, :woods_scorecard => invalid_attributes}, valid_session
-        expect(assigns(:woods_scorecard)).to eq(scorecard)
+        expect(assigns(:scorecard)).to eq(scorecard)
       end
 
       it "re-renders the 'edit' template" do

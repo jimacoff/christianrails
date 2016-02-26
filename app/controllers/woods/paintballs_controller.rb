@@ -6,7 +6,7 @@ class Woods::PaintballsController < ApplicationController
   # GET /woods/paintballs
   # GET /woods/paintballs.json
   def index
-    @woods_paintballs = Woods::Paintball.all
+    @paintballs = Woods::Paintball.all
   end
 
   # GET /woods/paintballs/1
@@ -16,7 +16,7 @@ class Woods::PaintballsController < ApplicationController
 
   # GET /woods/paintballs/new
   def new
-    @woods_paintball = Woods::Paintball.new
+    @paintball = Woods::Paintball.new
   end
 
   # GET /woods/paintballs/1/edit
@@ -26,15 +26,15 @@ class Woods::PaintballsController < ApplicationController
   # POST /woods/paintballs
   # POST /woods/paintballs.json
   def create
-    @woods_paintball = Woods::Paintball.new(woods_paintball_params)
+    @paintball = Woods::Paintball.new(woods_paintball_params)
 
     respond_to do |format|
-      if @woods_paintball.save
-        format.html { redirect_to @woods_paintball, notice: 'Paintball was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @woods_paintball }
+      if @paintball.save
+        format.html { redirect_to @paintball, notice: 'Paintball was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @paintball }
       else
         format.html { render action: 'new' }
-        format.json { render json: @woods_paintball.errors, status: :unprocessable_entity }
+        format.json { render json: @paintball.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +43,12 @@ class Woods::PaintballsController < ApplicationController
   # PATCH/PUT /woods/paintballs/1.json
   def update
     respond_to do |format|
-      if @woods_paintball.update(woods_paintball_params)
-        format.html { redirect_to @woods_paintball, notice: 'Paintball was successfully updated.' }
+      if @paintball.update(woods_paintball_params)
+        format.html { redirect_to @paintball, notice: 'Paintball was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @woods_paintball.errors, status: :unprocessable_entity }
+        format.json { render json: @paintball.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +56,7 @@ class Woods::PaintballsController < ApplicationController
   # DELETE /woods/paintballs/1
   # DELETE /woods/paintballs/1.json
   def destroy
-    @woods_paintball.destroy
+    @paintball.destroy
     respond_to do |format|
       format.html { redirect_to woods_paintballs_url }
       format.json { head :no_content }
@@ -66,7 +66,7 @@ class Woods::PaintballsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_woods_paintball
-      @woods_paintball = Woods::Paintball.find(params[:id])
+      @paintball = Woods::Paintball.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

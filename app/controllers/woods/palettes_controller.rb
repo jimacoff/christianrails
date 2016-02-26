@@ -6,7 +6,7 @@ class Woods::PalettesController < ApplicationController
   # GET /woods/palettes
   # GET /woods/palettes.json
   def index
-    @woods_palettes = Woods::Palette.all
+    @palettes = Woods::Palette.all
   end
 
   # GET /woods/palettes/1
@@ -16,7 +16,7 @@ class Woods::PalettesController < ApplicationController
 
   # GET /woods/palettes/new
   def new
-    @woods_palette = Woods::Palette.new
+    @palette = Woods::Palette.new
   end
 
   # GET /woods/palettes/1/edit
@@ -26,15 +26,15 @@ class Woods::PalettesController < ApplicationController
   # POST /woods/palettes
   # POST /woods/palettes.json
   def create
-    @woods_palette = Woods::Palette.new(woods_palette_params)
+    @palette = Woods::Palette.new(woods_palette_params)
 
     respond_to do |format|
-      if @woods_palette.save
-        format.html { redirect_to @woods_palette, notice: 'Palette was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @woods_palette }
+      if @palette.save
+        format.html { redirect_to @palette, notice: 'Palette was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @palette }
       else
         format.html { render action: 'new' }
-        format.json { render json: @woods_palette.errors, status: :unprocessable_entity }
+        format.json { render json: @palette.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +43,12 @@ class Woods::PalettesController < ApplicationController
   # PATCH/PUT /woods/palettes/1.json
   def update
     respond_to do |format|
-      if @woods_palette.update(woods_palette_params)
-        format.html { redirect_to @woods_palette, notice: 'Palette was successfully updated.' }
+      if @palette.update(woods_palette_params)
+        format.html { redirect_to @palette, notice: 'Palette was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @woods_palette.errors, status: :unprocessable_entity }
+        format.json { render json: @palette.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +56,7 @@ class Woods::PalettesController < ApplicationController
   # DELETE /woods/palettes/1
   # DELETE /woods/palettes/1.json
   def destroy
-    @woods_palette.destroy
+    @palette.destroy
     respond_to do |format|
       format.html { redirect_to woods_palettes_url }
       format.json { head :no_content }
@@ -66,7 +66,7 @@ class Woods::PalettesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_woods_palette
-      @woods_palette = Woods::Palette.find(params[:id])
+      @palette = Woods::Palette.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

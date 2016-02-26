@@ -8,7 +8,7 @@
       %th
 
   %tbody
-    - @woods_paintballs.each do |woods_paintball|
+    - @paintballs.each do |woods_paintball|
       %tr
         %td= link_to 'Show', woods_paintball
         %td= link_to 'Edit', edit_woods_paintball_path(woods_paintball)

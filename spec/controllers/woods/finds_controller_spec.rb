@@ -37,33 +37,33 @@ RSpec.describe Woods::FindsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all woods_finds as @woods_finds" do
+    it "assigns all woods_finds as @finds" do
       find = Woods::Find.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:woods_finds)).to eq([find])
+      expect(assigns(:finds)).to eq([find])
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested woods_find as @woods_find" do
+    it "assigns the requested woods_find as @find" do
       find = Woods::Find.create! valid_attributes
       get :show, {:id => find.to_param}, valid_session
-      expect(assigns(:woods_find)).to eq(find)
+      expect(assigns(:find)).to eq(find)
     end
   end
 
   describe "GET #new" do
-    it "assigns a new woods_find as @woods_find" do
+    it "assigns a new woods_find as @find" do
       get :new, {}, valid_session
-      expect(assigns(:woods_find)).to be_a_new(Woods::Find)
+      expect(assigns(:find)).to be_a_new(Woods::Find)
     end
   end
 
   describe "GET #edit" do
-    it "assigns the requested woods_find as @woods_find" do
+    it "assigns the requested woods_find as @find" do
       find = Woods::Find.create! valid_attributes
       get :edit, {:id => find.to_param}, valid_session
-      expect(assigns(:woods_find)).to eq(find)
+      expect(assigns(:find)).to eq(find)
     end
   end
 
@@ -75,10 +75,10 @@ RSpec.describe Woods::FindsController, type: :controller do
         }.to change(Woods::Find, :count).by(1)
       end
 
-      it "assigns a newly created woods_find as @woods_find" do
+      it "assigns a newly created woods_find as @find" do
         post :create, {:woods_find => valid_attributes}, valid_session
-        expect(assigns(:woods_find)).to be_a(Woods::Find)
-        expect(assigns(:woods_find)).to be_persisted
+        expect(assigns(:find)).to be_a(Woods::Find)
+        expect(assigns(:find)).to be_persisted
       end
 
       it "redirects to the created woods_find" do
@@ -88,9 +88,9 @@ RSpec.describe Woods::FindsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved woods_find as @woods_find" do
+      it "assigns a newly created but unsaved woods_find as @find" do
         post :create, {:woods_find => invalid_attributes}, valid_session
-        expect(assigns(:woods_find)).to be_a_new(Woods::Find)
+        expect(assigns(:find)).to be_a_new(Woods::Find)
       end
 
       it "re-renders the 'new' template" do
@@ -113,10 +113,10 @@ RSpec.describe Woods::FindsController, type: :controller do
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested woods_find as @woods_find" do
+      it "assigns the requested woods_find as @find" do
         find = Woods::Find.create! valid_attributes
         put :update, {:id => find.to_param, :woods_find => valid_attributes}, valid_session
-        expect(assigns(:woods_find)).to eq(find)
+        expect(assigns(:find)).to eq(find)
       end
 
       it "redirects to the woods_find" do
@@ -127,10 +127,10 @@ RSpec.describe Woods::FindsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns the woods_find as @woods_find" do
+      it "assigns the woods_find as @find" do
         find = Woods::Find.create! valid_attributes
         put :update, {:id => find.to_param, :woods_find => invalid_attributes}, valid_session
-        expect(assigns(:woods_find)).to eq(find)
+        expect(assigns(:find)).to eq(find)
       end
 
       it "re-renders the 'edit' template" do

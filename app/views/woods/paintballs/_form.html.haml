@@ -1,9 +1,9 @@
-= form_for @woods_paintball do |f|
-  - if @woods_paintball.errors.any?
+= form_for @paintball do |f|
+  - if @paintball.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@woods_paintball.errors.count, "error")} prohibited this woods_paintball from being saved:"
+      %h2= "#{pluralize(@paintball.errors.count, "error")} prohibited this woods_paintball from being saved:"
       %ul
-        - @woods_paintball.errors.full_messages.each do |msg|
+        - @paintball.errors.full_messages.each do |msg|
           %li= msg
 
   .actions

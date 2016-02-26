@@ -1,9 +1,9 @@
-= form_for @woods_moverule do |f|
-  - if @woods_moverule.errors.any?
+= form_for @moverule do |f|
+  - if @moverule.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@woods_moverule.errors.count, "error")} prohibited this woods_moverule from being saved:"
+      %h2= "#{pluralize(@moverule.errors.count, "error")} prohibited this woods_moverule from being saved:"
       %ul
-        - @woods_moverule.errors.full_messages.each do |msg|
+        - @moverule.errors.full_messages.each do |msg|
           %li= msg
 
   .actions
