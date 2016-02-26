@@ -1,6 +1,6 @@
 %h1 Price Combos
 
-%table.product-table 
+%table.product-table
   %thead
     %tr
       %th Name
@@ -14,6 +14,5 @@
         %td= number_to_currency( price_combo.discount, precision: 2) || 0
         %td= link_to 'Destroy', price_combo, :method => :delete, :data => { :confirm => 'Are you sure?' }
 = link_to '+ Add Combo', new_price_combo_path
-%br
-%br
-= link_to 'Admin menu', admin_path
+
+= render "admin_link"

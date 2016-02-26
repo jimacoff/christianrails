@@ -1,4 +1,6 @@
 class Woods::PalettesController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_palette, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/palettes

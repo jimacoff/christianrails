@@ -1,4 +1,6 @@
 class Woods::TreelinksController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_treelink, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/treelinks

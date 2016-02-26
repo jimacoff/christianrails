@@ -21,7 +21,9 @@
     #zone-keeper
       = render "layouts/dealzone"
 
-    #wrapper
+    = render "layouts/store_header"
+
+    #wrapper.panel
       - if notice
         %p.alert.alert-notice
           = notice
@@ -31,7 +33,7 @@
 
       = yield
 
-      = render "layouts/footer"
+      = render "layouts/store_footer"
 
       = render "scripts/init_cart"
       = render "scripts/ocean"

@@ -30,7 +30,6 @@ Christianrails::Application.routes.draw do
 
   resources :store, only: [:index] do
     collection do
-      get  'admin'
       get  'updated_prices'
       post 'check_out'
       get  'complete_order'
@@ -39,9 +38,15 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  resources :admin, only: [:index]
+
   namespace :woods do
     resources :binarywoods, only: :index
-    resources :stories
+    resources :stories do
+      member do
+        get 'play'
+      end
+    end
     resources :players
   #   resources :treelinks
   #   resources :storytrees
@@ -60,7 +65,6 @@ Christianrails::Application.routes.draw do
 
   get '/binarywoods',    to: 'woods/binarywoods#index'
 
-  get '/admin',          to: 'store#admin'
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'
 

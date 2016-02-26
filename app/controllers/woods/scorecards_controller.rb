@@ -1,4 +1,6 @@
 class Woods::ScorecardsController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_scorecard, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/scorecards

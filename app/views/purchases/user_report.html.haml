@@ -19,6 +19,5 @@
         %td= user.last_sign_in_at.strftime("%b %e '%y")
 
 %strong Total users: #{@users.count}
-%br
-%br
-= link_to 'Admin menu', admin_path
+
+= render "admin_link"

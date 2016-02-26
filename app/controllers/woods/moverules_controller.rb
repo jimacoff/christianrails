@@ -1,4 +1,6 @@
 class Woods::MoverulesController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_moverule, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/moverules

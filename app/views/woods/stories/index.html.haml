@@ -9,27 +9,20 @@
       %th Published
       %th Trees
       %th Nodes
-      %th
-      %th
 
   %tbody
     - @woods_stories.each do |woods_story|
       %tr
-        %td= woods_story.name
+        %td= link_to woods_story.name, woods_story
         %td= woods_story.player.username
         %td= woods_story.total_plays
         %td= woods_story.published
         %td= woods_story.storytrees.count
         %td
           = woods_story.nodes.count
-        %td= link_to 'Show', woods_story
-        %td= link_to 'Edit', edit_woods_story_path(woods_story)
-        %td= link_to 'Destroy', woods_story, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
 = link_to 'New Story', new_woods_story_path
 
-%br
-%br
-= link_to 'Admin menu', admin_path
+= render "admin_link"

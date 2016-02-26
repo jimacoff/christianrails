@@ -15,6 +15,5 @@
         %td= product.downloads.size
         - product.digital_releases.each do |release|
           %td= "#{release.format}: #{release.downloads.size}"
-%br
-%br
-= link_to 'Admin menu', admin_path
+
+= render "admin_link"

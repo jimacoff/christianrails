@@ -29,5 +29,4 @@
       %td.embolden= number_to_currency( @orders.collect{|o| o.tax}.reduce(0, :+), precision: 2 )
       %td.embolden= number_to_currency( @orders.collect{|o| o.total}.reduce(0, :+), precision: 2 )
 
-%br
-= link_to 'Admin menu', admin_path
+= render "admin_link"

@@ -1,4 +1,13 @@
-%h1 Binary Woods
+%h3 Stories
+%table.small-width
+  %tr
+    %th Title
+    %th Size
+
+  - @stories.each do |story|
+    %tr
+      %td= link_to story.name, woods_story_path(story)
+      %td= story.nodes.count
 
 %br
 %br

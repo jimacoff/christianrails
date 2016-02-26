@@ -1,4 +1,6 @@
 class Woods::FindsController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_find, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/finds

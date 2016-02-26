@@ -1,7 +1,5 @@
 class StoreController < ApplicationController
 
-  before_action :verify_is_admin, only: [:admin]
-
   def index
     @price_combos = PriceCombo.all
     @owned_products = []
@@ -11,9 +9,6 @@ class StoreController < ApplicationController
     end
 
     @available_products = @all_products - @owned_products
-  end
-
-  def admin
   end
 
   def updated_prices

@@ -1,17 +1,21 @@
-- if current_user
-  .right
-    Welcome, #{current_user.full_name}!
+#user-wrapper.glass
+  - if current_user
+    .center
+      Welcome, #{current_user.full_name}!
 
-    %p.diminutive
-      - if current_user.admin?
-        = link_to "Admin", admin_path
-        |
-      - if current_user.purchases.size > 0
-        = link_to "Receipts", receipts_orders_path
-        |
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
-- else
-  .right
-    = link_to 'Sign in', user_session_path
-    |
-    = link_to 'Sign up', new_user_registration_path
+      %p.diminutive
+        - if current_user.admin?
+          = link_to "Admin", admin_index_path
+          |
+        - if current_user.purchases.size > 0
+          = link_to "Receipts", receipts_orders_path
+          |
+        = link_to 'Sign out', destroy_user_session_path, method: :delete
+  - else
+    .center
+      = link_to 'Sign in', user_session_path
+      |
+      = link_to 'Sign up', new_user_registration_path
+
+      %p.diminutive
+        Start your library today!

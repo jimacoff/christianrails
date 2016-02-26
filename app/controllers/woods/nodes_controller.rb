@@ -1,4 +1,6 @@
 class Woods::NodesController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_node, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/nodes

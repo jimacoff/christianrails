@@ -1,4 +1,6 @@
 class Woods::ItemsetsController < ApplicationController
+  layout "binarywoods"
+
   before_action :set_woods_itemset, only: [:show, :edit, :update, :destroy]
 
   # GET /woods/itemsets

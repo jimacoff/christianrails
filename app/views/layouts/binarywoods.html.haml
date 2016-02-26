@@ -1,0 +1,34 @@
+!!! 5
+%html
+  %head
+    %title Binary Woods -- Writing... digitally
+    = stylesheet_link_tag    "woods/binarywoods", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "http://www.christiandewolf.com/assets/ghostcrime-icon.jpg" }
+    %meta{ property: "og:title", content: "Binary Woods -- Writing... digitally" }
+    %meta{ property: "og:url",   content: "https://www.binarywoods.com" }
+    %meta{ property: "og:description", content: "Get lost in the woods." }
+
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+  %body.background
+
+    = render "layouts/binary_header"
+
+    #wrapper.panel
+      - if notice
+        %p.alert.alert-notice
+          = notice
+      - if alert
+        %p.alert.alert-danger
+          = alert
+
+      = yield
+
+      = render "layouts/woods_footer"
+
+      = render "scripts/init_cart"
+
+    %h5.right= "v #{app_version}"
