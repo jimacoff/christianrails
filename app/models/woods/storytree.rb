@@ -11,4 +11,9 @@ class Woods::Storytree < ActiveRecord::Base
   has_many :footprints
 
   validates_presence_of :name, :max_level, :story
+
+  def get_first_node
+    Woods::Node.where(storytree_id: self.id, tree_index: 1).first
+  end
+
 end

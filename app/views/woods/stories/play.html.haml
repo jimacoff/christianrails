@@ -1,1 +1,17 @@
-%h1 Play story
+%h1.center= @story.name
+
+#nodepanel.half-width.zero-margin
+
+  #story-pane.glass
+    = @node.node_text
+  #choice-pane.center
+    %button#left-button.binary-button.hidden{onclick: "move('" + @story.id.to_s + ", L');"}
+      = @node.left_text
+    %button#right-button.binary-button.hidden{onclick: "move('" + @story.id.to_s + ", R');"}
+      = @node.right_text
+    %button#big-button.binary-button{onclick: "move('" + @story.id.to_s + ", C');"}
+      Continue
+
+:javascript
+
+  var current_node = #{@node.to_json};

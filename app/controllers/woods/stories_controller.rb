@@ -1,11 +1,43 @@
 class Woods::StoriesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_story, only: [:show, :edit, :update, :destroy, :play, :move_to]
+  before_action :verify_is_published
   before_action :verify_is_admin
 
   def index
     @stories = Woods::Story.all
+  end
+
+  def play
+    begin
+      @storytree = Woods::Storytree.find(@story.entry_tree)
+    rescue
+      raise ""
+    end
+
+    @node = @storytree.get_first_node
+
+  end
+
+  # JSON endpoint
+  def move_to
+    # calculate next node and return it with accoutrements
+
+    # track lefts and rights
+
+
+    # track user footprints
+
+
+    respond_to do |format|
+      if @node
+        format.json { render @node, status: :ok }
+      else
+        format.json { render @node, status: :error }
+      end
+    end
+
   end
 
   def show

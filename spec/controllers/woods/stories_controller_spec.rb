@@ -156,4 +156,17 @@ RSpec.describe Woods::StoriesController, type: :controller do
     end
   end
 
+  describe "GET play" do
+
+    skip("TODO write the test")
+
+  end
+
+
+  describe "GET move_to" do
+
+    skip("TODO write the test")
+
+  end
+
 end

@@ -42,12 +42,14 @@ Christianrails::Application.routes.draw do
 
   namespace :woods do
     resources :binarywoods, only: :index
+    resources :players
+
     resources :stories do
       member do
         get 'play'
+        get 'move_to'
       end
     end
-    resources :players
   #   resources :treelinks
   #   resources :storytrees
   #   resources :scorecards

@@ -31,3 +31,15 @@
   z-index:        0;
   background:     #fff;
 }
+
+#story-pane {
+  padding: 10px;
+}
+
+#choice-pane {
+  padding: 10px;
+}
+
+.binary-button {
+
+}
