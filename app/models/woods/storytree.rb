@@ -13,7 +13,7 @@ class Woods::Storytree < ActiveRecord::Base
   validates_presence_of :name, :max_level, :story
 
   def get_first_node
-    Woods::Node.where(storytree_id: self.id, tree_index: 1).first
+    Woods::Node.includes(:paintball, :treelink, :possibleitem, :box).where(storytree_id: self.id, tree_index: 1).first
   end
 
 end

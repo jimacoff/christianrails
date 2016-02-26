@@ -13,28 +13,36 @@ class Woods::StoriesController < ApplicationController
     begin
       @storytree = Woods::Storytree.find(@story.entry_tree)
     rescue
-      raise ""
+      raise "Invalid entry tree?!?"
     end
 
     @node = @storytree.get_first_node
-
+    @node = @node.add_accoutrements
   end
 
   # JSON endpoint
   def move_to
-    # calculate next node and return it with accoutrements
+    begin
+      @node = Woods::Node.find( params[:target_node] )
+      # TODO check if node in published story
 
-    # track lefts and rights
+    rescue
+      Rails.logger.warn("Unexpected node requested.")
+    end
+
+    @node = @node.add_accoutrements
+
+    # TODO track lefts and rights
 
 
-    # track user footprints
+    # TODO update user footprints
 
 
     respond_to do |format|
       if @node
-        format.json { render @node, status: :ok }
+        format.json { render json: @node, status: :ok }
       else
-        format.json { render @node, status: :error }
+        format.json { render json: @node, status: :unprocessable_entity }
       end
     end
 

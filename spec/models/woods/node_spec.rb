@@ -49,4 +49,20 @@ RSpec.describe Woods::Node, type: :model do
 
   end
 
+  describe "level" do
+
+    let(:level_1_node) { FactoryGirl.create(:node, tree_index: 1) }
+    let(:level_2_node) { FactoryGirl.create(:node, tree_index: 3) }
+    let(:level_3_node) { FactoryGirl.create(:node, tree_index: 4) }
+    let(:level_8_node) { FactoryGirl.create(:node, tree_index: 245) }
+
+    it "should calculate the node's level on the storytree" do
+      expect( level_1_node.level ).to eq( 1 )
+      expect( level_2_node.level ).to eq( 2 )
+      expect( level_3_node.level ).to eq( 3 )
+      expect( level_8_node.level ).to eq( 8 )
+    end
+
+  end
+
 end
