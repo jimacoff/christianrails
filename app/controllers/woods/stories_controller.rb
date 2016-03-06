@@ -25,23 +25,39 @@ class Woods::StoriesController < ApplicationController
     begin
       @node = Woods::Node.find( params[:target_node] )
       # TODO check if node in published story
+      @node = @node.add_accoutrements
 
-    rescue
-      Rails.logger.warn("Unexpected node requested.")
+      # TODO track lefts and rights
+
+
+      # update user scorecard & footprints
+      @storytree = Woods::Storytree.find( @node['storytree_id'] )
+      @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
+
+      if @scorecard.size == 0
+        @scorecard = Woods::Scorecard.create!(player_id: current_player.id, story_id: @story.id)
+      else
+        @scorecard = @scorecard.first
+      end
+
+      footprint = @scorecard.footprints.where(storytree_id: @storytree.id)
+      unless footprint.size > 0
+        footprint = Woods::Footprint.create!(scorecard_id: @scorecard.id, storytree_id: @storytree.id)
+        footprint.construct_for_tree!
+      else
+        footprint = footprint.first
+      end
+      footprint.step!( @node['tree_index'] )
+
+    rescue => e
+      Rails.logger.warn("Something's wrong: " + e.to_s)
     end
-
-    @node = @node.add_accoutrements
-
-    # TODO track lefts and rights
-
-
-    # TODO update user footprints
-
 
     respond_to do |format|
       if @node
         format.json { render json: @node, status: :ok }
       else
+        # TODO better error here
         format.json { render json: @node, status: :unprocessable_entity }
       end
     end

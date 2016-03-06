@@ -23,7 +23,6 @@ function move(story_id, button) {
   //$('#processing').removeClass('hidden');
 
   request.done(function(data, textStatus, jqXHR) {
-
     current_node = data;
     drawNewNode();
 
@@ -38,13 +37,14 @@ function move(story_id, button) {
 
 function drawNewNode() {
 
+  // new text into panels
   $('#story-pane').html( current_node['node_text'] );
-
   $('#left-button').html( current_node['left_text'] );
   $('#right-button').html( current_node['right_text'] );
 
-  $('#choice-pane').removeClass('hidden');
+  // TODO paint the panels if necessary
 
+  // show/hide buttons
   if( current_node['left_text'] !== '' ) {
     $('#left-button').removeClass('hidden');
     $('#right-button').removeClass('hidden');
@@ -54,5 +54,6 @@ function drawNewNode() {
     $('#right-button').addClass('hidden');
     $('#big-button').removeClass('hidden');
   }
+  $('#choice-pane').removeClass('hidden');
 
 }

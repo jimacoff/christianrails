@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225192459) do
+ActiveRecord::Schema.define(version: 20160306164426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,9 +220,9 @@ ActiveRecord::Schema.define(version: 20160225192459) do
     t.integer "most_recent_story"
     t.string  "description",       limit: 510
     t.integer "total_equity",                  default: 0
-    t.integer "story_limit"
-    t.integer "item_limit"
-    t.integer "palette_limit"
+    t.integer "story_limit",                   default: 10
+    t.integer "item_limit",                    default: 100
+    t.integer "palette_limit",                 default: 100
     t.integer "user_id"
   end
 
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 20160225192459) do
   create_table "woods_scorecards", force: :cascade do |t|
     t.integer "player_id"
     t.integer "story_id"
-    t.integer "number_of_plays", default: 0
+    t.integer "number_of_plays", default: 1
     t.integer "total_score",     default: 0
   end
 

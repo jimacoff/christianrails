@@ -15,30 +15,29 @@ class Woods::Node < ActiveRecord::Base
 
     if self.paintball && self.paintball.enabled
       palette = self.paintball.palette
-      p = { palette: { fore: palette.fore_colour, back: palette.back_colour, alt: palette.alt_colour} }
-      nodehash.merge!( p )
+      nodehash.merge!( { palette: { fore: palette.fore_colour, back: palette.back_colour, alt: palette.alt_colour} } )
     end
 
     if self.level == self.storytree.max_level
 
       if self.treelink && self.treelink.enabled
-        t = { linked_node: treelink.linked_tree.get_first_node.id }
+        l = { linked_node: treelink.linked_tree.get_first_node.id }
       else
-        t = { linked_node: self.storytree.get_first_node.id }
+        l = { linked_node: self.storytree.get_first_node.id }
       end
-      nodehash.merge!( t )
+      nodehash.merge!( l )
 
     elsif self.level == self.storytree.max_level - 1
        # check moverule and provide a linked_node
-       t = { linked_node: self.calculate_ending.id }
-       nodehash.merge!( t )
+       nodehash.merge!( { linked_node: self.calculate_ending.id } )
 
     else
       left_node  = self.left
       right_node = self.right
-      t = { left_link: left_node.id, right_link: right_node.id }
-      nodehash.merge!( t )
+      nodehash.merge!( { left_link: left_node.id, right_link: right_node.id } )
     end
+
+    nodehash.merge!( { tree_size: ( 2 ** self.level ) - 1 } )
 
     pp nodehash
     nodehash
