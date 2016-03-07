@@ -36,8 +36,8 @@ RSpec.describe Woods::Itemset, type: :model do
 
   end
 
-  describe "validations" do
-
+  describe "calculate_item_id_found" do
+    # TODO
 
   end
 

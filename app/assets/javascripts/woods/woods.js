@@ -24,8 +24,10 @@ function move(story_id, button) {
 
   request.done(function(data, textStatus, jqXHR) {
     current_node = data;
+    if(current_node['item_found']) {
+      item_gallery.push(current_node['item_found']);
+    }
     drawNewNode();
-
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {

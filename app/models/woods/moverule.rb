@@ -27,4 +27,12 @@ class Woods::Moverule < ActiveRecord::Base
     self.name == "Perpetual box on left"
   end
 
+  # helpers
+  def item?
+    perpetual_item? || variable_item?
+  end
+
+  def box?
+    single_box? || perpetual_box?
+  end
 end

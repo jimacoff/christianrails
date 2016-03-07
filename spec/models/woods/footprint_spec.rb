@@ -71,6 +71,21 @@ RSpec.describe Woods::Footprint, type: :model do
 
     end
 
+    describe "print_at_index" do
+
+      it "should retrieve the footprint at the given index" do
+        footprint2.construct_for_tree!
+        footprint2.step!(1)
+        footprint2.step!(3)
+
+        expect( footprint2.print_at_index(1) ).to eq( 'x' )
+        expect( footprint2.print_at_index(2) ).to eq( 'o' )
+        expect( footprint2.print_at_index(3) ).to eq( 'x' )
+        expect( footprint2.print_at_index(4) ).to eq( 'o' )
+      end
+
+    end
+
   end
 
 end

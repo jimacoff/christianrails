@@ -17,7 +17,7 @@ class Woods::StoriesController < ApplicationController
     end
 
     @node = @storytree.get_first_node
-    @node = @node.add_accoutrements
+    @node = @node.add_accoutrements_and_make_json!
   end
 
   # JSON endpoint
@@ -25,7 +25,7 @@ class Woods::StoriesController < ApplicationController
     begin
       @node = Woods::Node.find( params[:target_node] )
       # TODO check if node in published story
-      @node = @node.add_accoutrements
+
 
       # TODO track lefts and rights
 
@@ -40,14 +40,18 @@ class Woods::StoriesController < ApplicationController
         @scorecard = @scorecard.first
       end
 
-      footprint = @scorecard.footprints.where(storytree_id: @storytree.id)
-      unless footprint.size > 0
-        footprint = Woods::Footprint.create!(scorecard_id: @scorecard.id, storytree_id: @storytree.id)
-        footprint.construct_for_tree!
+      @footprint = @scorecard.footprints.where(storytree_id: @storytree.id)
+      unless @footprint.size > 0
+        @footprint = Woods::Footprint.create!(scorecard_id: @scorecard.id, storytree_id: @storytree.id)
+        @footprint.construct_for_tree!
       else
-        footprint = footprint.first
+        @footprint = @footprint.first
       end
-      footprint.step!( @node['tree_index'] )
+
+      items_player_has = current_player.finds.collect(&:item_id)
+      @node = @node.add_accoutrements_and_make_json!(items_player_has, @footprint)
+
+      @footprint.step!( @node['tree_index'] )
 
     rescue => e
       Rails.logger.warn("Something's wrong: " + e.to_s)
