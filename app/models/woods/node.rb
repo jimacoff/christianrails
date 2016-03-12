@@ -1,6 +1,5 @@
 class Woods::Node < ActiveRecord::Base
 
-
   belongs_to :storytree
   belongs_to :moverule
 
@@ -11,7 +10,7 @@ class Woods::Node < ActiveRecord::Base
 
   validates_presence_of :name, :storytree, :tree_index
 
-  def add_accoutrements_and_make_json!(items_player_has = [], footprint = nil)
+  def add_accoutrements_and_make_json!(player_id = nil, footprint = nil, item_found = nil)
 
     nodehash = self.as_json
 
@@ -20,9 +19,7 @@ class Woods::Node < ActiveRecord::Base
       nodehash.merge!( { palette: { fore: palette.fore_colour, back: palette.back_colour, alt: palette.alt_colour} } )
     end
 
-    if self.possibleitem && self.possibleitem.enabled && footprint.item_at_index?(nodehash['tree_index'])
-      itemset_found = Woods::Itemset.find( self.possibleitem.itemset_id )
-      found = itemset_found.calculate_item_id_found(items_player_has)
+    if item_found
       nodehash.merge!( { item_found: { name: found.name, value: found.value, legend: found.legend, image: found.image } } )
     end
 
@@ -36,7 +33,7 @@ class Woods::Node < ActiveRecord::Base
       nodehash.merge!( l )
 
     elsif self.level == self.storytree.max_level - 1
-       nodehash.merge!( { linked_node: self.calculate_ending(footprint).id } )
+       nodehash.merge!( { linked_node: self.calculate_ending(footprint, player_id).id } )
     else
       left_node  = self.left
       right_node = self.right
@@ -58,19 +55,26 @@ class Woods::Node < ActiveRecord::Base
     l_count
   end
 
-  def calculate_ending(footprint)
+  def calculate_ending(footprint, player_id)
     case
-    when self.moverule.toggler?
-      Random.rand(2) < 1 ? self.left : self.right
-    when self.moverule.left_right_switch?
-      footprint.been_to_index?(self.left_index) ? self.right : self.left
+    when moverule.toggler?
+      Random.rand(2) < 1 ? left : right
 
-    when self.moverule.perpetual_item?
-      footprint.been_to_index?(left_index) ? self.right : self.left
-    when self.moverule.variable_item?
-      footprint.item_at_index?(left_index) ? self.left : self.right
-    when self.moverule.box?
-      calc_box_node
+    when moverule.left_right_switch?
+      footprint.been_to_index?(left_index) ? right : left
+
+    when moverule.perpetual_item?
+      footprint.been_to_index?(left_index) ? right : left
+
+    when moverule.variable_item?
+      footprint.item_at_index?(left_index) ? left : right
+
+    when moverule.single_box?
+      footprint.been_to_index?(left_index) ? right : can_open_box?(player_id)
+
+    when moverule.perpetual_box?
+      can_open_box?(player_id) ? left : right
+
     else
       raise "ERROR: Unknown moverule!"
     end
@@ -100,11 +104,11 @@ class Woods::Node < ActiveRecord::Base
     (self.tree_index * 2) + 1
   end
 
-  def calc_box_node
-    if self.moverule.single_box?
-      # TODO determine if box opened
-    elsif self.moverule.perpetual_box?
-      # TODO determine if you have item in set required
+  def can_open_box?(player_id)
+    if box = left.box
+      itemset_required = box.itemset
+      player = Woods::Player.find(player_id)
+      player.has_item_in_itemset?(itemset_required.id)
     end
   end
 

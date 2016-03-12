@@ -60,9 +60,12 @@ RSpec.describe Woods::Player, type: :model do
 
   end
 
-  describe "validations" do
+  describe "has_item?" do
+    # TODO
+  end
 
-
+  describe "has_item_in_itemset?" do
+    # TODO
   end
 
 end

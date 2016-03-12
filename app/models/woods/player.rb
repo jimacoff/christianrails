@@ -16,4 +16,13 @@ class Woods::Player < ActiveRecord::Base
   def username
     self.user.username
   end
+
+  def has_item?(item_id_to_check)
+    finds.collect{ |f| f.item_id }.include?(item_id_to_check)
+  end
+
+  def has_item_in_itemset?(itemset_id_to_check)
+    finds.collect{ |f| f.item.itemset_id }.uniq.include?(itemset_id_to_check)
+  end
+
 end

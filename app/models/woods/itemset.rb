@@ -8,7 +8,7 @@ class Woods::Itemset < ActiveRecord::Base
 
   validates_presence_of :name, :player
 
-  def calculate_item_id_found(items_player_has)
+  def calculate_item_found(items_player_has)
     items_in_set = self.items.collect(&:id)
 
     possible_finds = items_in_set - items_player_has

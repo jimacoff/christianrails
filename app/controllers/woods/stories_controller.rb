@@ -48,8 +48,16 @@ class Woods::StoriesController < ApplicationController
         @footprint = @footprint.first
       end
 
-      items_player_has = current_player.finds.collect(&:item_id)
-      @node = @node.add_accoutrements_and_make_json!(items_player_has, @footprint)
+      # any finds?
+      if @node.possibleitem && @node.possibleitem.enabled && @footprint.item_at_index?(nodehash['tree_index'])
+        items_player_has = current_player.finds.collect(&:item_id)
+        itemset_found = Woods::Itemset.includes(:items).find( @node.possibleitem.itemset_id )
+        found = itemset_found.calculate_item_found(items_player_has)
+        Woods::Find.create( player_id: current_player.id, item_id: found.id, story_id: @story.id )
+        nodehash.merge!( { item_found: { name: found.name, value: found.value, legend: found.legend, image: found.image } } )
+      end
+
+      @node = @node.add_accoutrements_and_make_json!(current_player.id, @footprint, items_player_has)
 
       @footprint.step!( @node['tree_index'] )
 
