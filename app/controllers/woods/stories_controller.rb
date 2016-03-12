@@ -22,7 +22,7 @@ class Woods::StoriesController < ApplicationController
 
   # JSON endpoint
   def move_to
-    begin
+    #begin
       @node = Woods::Node.find( params[:target_node] )
       # TODO check if node in published story
 
@@ -49,21 +49,20 @@ class Woods::StoriesController < ApplicationController
       end
 
       # any finds?
-      if @node.possibleitem && @node.possibleitem.enabled && @footprint.item_at_index?(nodehash['tree_index'])
+      if @node.possibleitem && @node.possibleitem.enabled && @footprint.item_at_index?(@node.tree_index)
         items_player_has = current_player.finds.collect(&:item_id)
         itemset_found = Woods::Itemset.includes(:items).find( @node.possibleitem.itemset_id )
         found = itemset_found.calculate_item_found(items_player_has)
-        Woods::Find.create( player_id: current_player.id, item_id: found.id, story_id: @story.id )
-        nodehash.merge!( { item_found: { name: found.name, value: found.value, legend: found.legend, image: found.image } } )
+        Woods::Find.create( player_id: current_player.id, item_id: found.id, story_id: @story.id ) if found
       end
 
-      @node = @node.add_accoutrements_and_make_json!(current_player.id, @footprint, items_player_has)
+      @node = @node.add_accoutrements_and_make_json!(current_player.id, @footprint, found)
 
       @footprint.step!( @node['tree_index'] )
 
-    rescue => e
-      Rails.logger.warn("Something's wrong: " + e.to_s)
-    end
+    #rescue => e
+    #  Rails.logger.warn("Something's wrong: " + e.to_s)
+    #end
 
     respond_to do |format|
       if @node

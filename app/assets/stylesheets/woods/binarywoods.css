@@ -32,11 +32,7 @@
   background:     #fff;
 }
 
-#story-pane {
-  padding: 10px;
-}
-
-#choice-pane {
+.pane {
   padding: 10px;
 }
 

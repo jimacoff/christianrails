@@ -20,7 +20,7 @@ class Woods::Node < ActiveRecord::Base
     end
 
     if item_found
-      nodehash.merge!( { item_found: { name: found.name, value: found.value, legend: found.legend, image: found.image } } )
+      nodehash.merge!( { item_found: { name: item_found.name, value: item_found.value, legend: item_found.legend, image: item_found.image } } )
     end
 
     if self.level == self.storytree.max_level

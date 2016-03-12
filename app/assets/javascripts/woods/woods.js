@@ -13,6 +13,11 @@ function move(story_id, button) {
     }
   }
 
+  if(pop_item) {
+    showItemViewer();
+    pop_item = false;
+  }
+
   request = void 0;
   request = $.ajax({
       type: 'GET',
@@ -26,6 +31,8 @@ function move(story_id, button) {
     current_node = data;
     if(current_node['item_found']) {
       item_gallery.push(current_node['item_found']);
+      item_index = item_gallery.length - 1;
+      pop_item = true;
     }
     drawNewNode();
   });
@@ -58,4 +65,39 @@ function drawNewNode() {
   }
   $('#choice-pane').removeClass('hidden');
 
+}
+
+function showItemViewer() {
+  showItem();
+
+  $('#findpanel').removeClass('hidden');
+  $('#nodepanel').addClass('hidden');
+}
+
+function hideItemViewer() {
+  $('#findpanel').addClass('hidden');
+  $('#nodepanel').removeClass('hidden');
+}
+
+function nextItem() {
+  item_index += 1;
+  if( item_index === item_gallery.length ) {
+    item_index = 0;
+  }
+  showItem();
+}
+
+function prevItem() {
+  item_index -= 1;
+  if( item_index === -1 ) {
+    item_index = item_gallery.length - 1;
+  }
+  showItem();
+}
+
+function showItem() {
+  //current_node['item_found']['name']
+  //current_node['item_found']['value']
+  $('#item-image').html( item_gallery[item_index]['image'] );
+  $('#item-desc').html(  item_gallery[item_index]['legend'] );
 }

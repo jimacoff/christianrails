@@ -1,10 +1,9 @@
 %h1.center= @story.name
 
 #nodepanel.half-width.zero-margin
-
-  #story-pane.glass
+  #story-pane.pane.glass
     = @node['node_text']
-  #choice-pane.center
+  #choice-pane.pane.center
     %button#left-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'L');"}
       = @node['left_text']
     %button#right-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'R');"}
@@ -12,8 +11,20 @@
     %button#big-button.binary-button{onclick: "move(" + @story.id.to_s + ", 'C');"}
       Continue
 
+#findpanel.half-width.zero-margin.hidden
+  #item-image.pane.glass
+
+  #item-desc.pane.glass
+
+  #item-controls.pane.glass
+    %button#prev-item-button.binary-button{onclick: "prevItem();"} Previous
+    %button#next-item-button.binary-button{onclick: "nextItem();"} Next
+    %button#big-button.binary-button{onclick: "hideItemViewer();"} Continue
+
 :javascript
 
   // load the intro node into the JS + set up item gallery
   var current_node = #{@node.to_json};
   var item_gallery = [];
+  var item_index = -1;
+  var pop_item = false;

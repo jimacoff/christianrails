@@ -24,7 +24,7 @@ class Woods::Footprint < ActiveRecord::Base
 
     solidified_item_tree_indexes = decide_on_var_items(var_items)
     solidified_item_tree_indexes.each do |sol|
-      self.footprint_data[sol] = 'i'
+      self.footprint_data[sol - 1] = 'i'
     end
   end
 
