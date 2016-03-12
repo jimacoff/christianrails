@@ -77,6 +77,7 @@ function showItemViewer() {
 function hideItemViewer() {
   $('#findpanel').addClass('hidden');
   $('#nodepanel').removeClass('hidden');
+  showStoryTitle();
 }
 
 function nextItem() {
@@ -98,6 +99,10 @@ function prevItem() {
 function showItem() {
   //current_node['item_found']['name']
   //current_node['item_found']['value']
-  $('#item-image').html( item_gallery[item_index]['image'] );
+  $('#imagepanel').html( "<img src='/assets/" + storyname + "/d_" + item_gallery[item_index]['value'] + ".jpg' class='rounded'>" );
   $('#item-desc').html(  item_gallery[item_index]['legend'] );
+}
+
+function showStoryTitle() {
+  $('#imagepanel').html( "<img src='/assets/" + storyname + "/title.png' class='rounded'>" );
 }

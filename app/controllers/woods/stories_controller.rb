@@ -18,6 +18,13 @@ class Woods::StoriesController < ApplicationController
 
     @node = @storytree.get_first_node
     @node = @node.add_accoutrements_and_make_json!
+
+    @items = []
+    items_player_has = Woods::Item.find( current_player.finds.collect(&:item_id) )
+    items_player_has.each do |i|
+      @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
+    end
+    @items = @items.to_json
   end
 
   # JSON endpoint

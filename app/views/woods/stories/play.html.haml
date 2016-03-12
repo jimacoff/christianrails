@@ -1,4 +1,5 @@
-%h1.center= @story.name
+#imagepanel.zero-margin.center
+  = image_tag("#{@story.name.downcase.gsub(' ','')}/title.png", class: "rounded")
 
 #nodepanel.half-width.zero-margin
   #story-pane.pane.glass
@@ -12,7 +13,6 @@
       Continue
 
 #findpanel.half-width.zero-margin.hidden
-  #item-image.pane.glass
 
   #item-desc.pane.glass
 
@@ -25,6 +25,7 @@
 
   // load the intro node into the JS + set up item gallery
   var current_node = #{@node.to_json};
-  var item_gallery = [];
+  var item_gallery = #{@items};
   var item_index = -1;
   var pop_item = false;
+  var storyname = '#{@story.name.downcase.gsub(' ','')}';

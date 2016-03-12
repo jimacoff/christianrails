@@ -70,7 +70,7 @@ class Woods::Node < ActiveRecord::Base
       footprint.item_at_index?(left_index) ? left : right
 
     when moverule.single_box?
-      footprint.been_to_index?(left_index) ? right : can_open_box?(player_id)
+      footprint.been_to_index?(left_index) ? right : can_open_box?(player_id) ? left : right
 
     when moverule.perpetual_box?
       can_open_box?(player_id) ? left : right
