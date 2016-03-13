@@ -1,6 +1,5 @@
 class Woods::Story < ActiveRecord::Base
   has_many :storytrees, dependent: :destroy
-
   has_many :finds
 
   belongs_to :player
@@ -13,6 +12,10 @@ class Woods::Story < ActiveRecord::Base
       nodes += tree.nodes
     end
     nodes
+  end
+
+  def pic_name
+    name.downcase.gsub(' ','')
   end
 
 end

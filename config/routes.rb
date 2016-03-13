@@ -6,6 +6,8 @@ Christianrails::Application.routes.draw do
   resources :purchases,            only:   [:index]
   resources :price_combos,         except: [:show]
 
+  resources :users, only: [:show, :edit]
+
   resources :products, except: [:show] do
     collection do
       get 'downloads'

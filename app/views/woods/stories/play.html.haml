@@ -1,5 +1,11 @@
+#statspanel.zero-margin.center
+  %span= "Score: #{current_player.total_score}"
+  - if current_player.finds.size > 0
+    %span
+      %button#gallery-button.minory-button{onclick: "showItemViewer();"} View gallery
+
 #imagepanel.zero-margin.center
-  = image_tag("#{@story.name.downcase.gsub(' ','')}/title.png", class: "rounded")
+  = image_tag("#{@story.pic_name}/title.png", class: "rounded")
 
 #nodepanel.half-width.zero-margin
   #story-pane.pane.glass
@@ -24,6 +30,6 @@
   // load the intro node into the JS + set up item gallery
   var current_node = #{@node.to_json};
   var item_gallery = #{@items};
-  var item_index = -1;
+  var item_index = 0;
   var pop_item = false;
-  var storyname = '#{@story.name.downcase.gsub(' ','')}';
+  var storyname = '#{@story.pic_name}';

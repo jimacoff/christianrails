@@ -68,12 +68,13 @@ function drawNewNode() {
 
 function showItemViewer() {
   showItem();
-
+  $('#gallery-button').prop('disabled', true);
   $('#findpanel').removeClass('hidden');
   $('#nodepanel').addClass('hidden');
 }
 
 function hideItemViewer() {
+  $('#gallery-button').prop('disabled', false);
   $('#findpanel').addClass('hidden');
   $('#nodepanel').removeClass('hidden');
   showStoryTitle();

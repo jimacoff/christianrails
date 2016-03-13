@@ -1,7 +1,7 @@
 %table
   %tr
     %td.small-width.center
-      = image_tag( "#{product.image}" )
+      = image_tag( "#{product.image}", class: "store-image" )
     %td
       - if product.has_physical_release?
         %button.store-button.physical-button.right{id:"toggle_physical_#{product.id}", onclick:"togglePhysical( #{product.id} )"} Order a physical copy

@@ -1,0 +1,7 @@
+%h1= @user.full_name
+%h3= @user.username
+
+%h4= "Item finds:  #{@user.player.finds.size}"
+%h4= "Total score: #{@user.player.total_score}"
+
+= link_to "Home", root_path

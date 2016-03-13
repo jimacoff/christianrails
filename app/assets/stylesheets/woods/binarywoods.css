@@ -2,6 +2,10 @@
  *= require ../main.css.scss
  */
 
+body {
+  color: #252525;
+}
+
 .background {
   background: rgb(0,0,0); /* Old browsers */
   background: -moz-linear-gradient(right, rgba(0,0,0,1) 0%, rgba(184,220,227,1) 100%); /* FF3.6-15 */
@@ -47,6 +51,23 @@
   min-height: 80px;
   font-size: 125%;
   min-width: 40%;
+  cursor: pointer;
+}
+
+.minory-button {
+  border-radius: 10px;
+  border: 0px solid;
+  min-height: 20px;
+  min-width: 80px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-left: 100px;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.minory-button:disabled {
+  color: #bfbfbf;
 }
 
 .lineheight-spacer {

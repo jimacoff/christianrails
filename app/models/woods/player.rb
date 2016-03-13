@@ -25,4 +25,12 @@ class Woods::Player < ActiveRecord::Base
     finds.collect{ |f| f.item.itemset_id }.uniq.include?(itemset_id_to_check)
   end
 
+  def total_score
+    score = 0
+    finds.each do |f|
+      score += f.item.value
+    end
+    score
+  end
+
 end
