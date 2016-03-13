@@ -3,10 +3,13 @@ class Woods::StoriesController < ApplicationController
 
   before_action :set_woods_story, only: [:show, :edit, :update, :destroy, :play, :move_to]
   before_action :verify_is_published
-  before_action :verify_is_admin
+  before_action :verify_is_admin, except: [:play, :move_to, :show]
 
   def index
     @stories = Woods::Story.all
+  end
+
+  def show
   end
 
   def play
@@ -80,9 +83,6 @@ class Woods::StoriesController < ApplicationController
       end
     end
 
-  end
-
-  def show
   end
 
   def new

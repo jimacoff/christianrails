@@ -5,10 +5,18 @@ body {
   word-wrap: break-word;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
 table {
   width: 100%;
 }
 
+.face {
+  margin-top: -30px;
+  margin-right: 10px;
+}
 
 #header {
   padding-top: 10px;
@@ -47,7 +55,6 @@ table {
 }
 
 #logo-wrapper {
-
 }
 
 #user-wrapper {

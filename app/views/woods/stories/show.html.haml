@@ -1,11 +1,13 @@
-%p#notice= notice
+#imagepanel.zero-margin.center
+  = image_tag("#{@story.name.downcase.gsub(' ','')}/title.png", class: "rounded")
 
+// STATS ETC
 
-%h1= @story.name
-
-= link_to "Play", play_woods_story_path(@story)
-
-- if owns_story?(@story)
-  = link_to 'Edit', edit_woods_story_path(@story)
-  \|
-= link_to 'Back', woods_stories_path
+.center
+  - if current_user
+    = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "binary-button", method: :get
+  - else
+    %h3= "Play #{@story.name} now!"
+    = link_to 'Sign in', user_session_path
+    or
+    = link_to 'Create an account for free!', new_user_registration_path

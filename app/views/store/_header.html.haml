@@ -3,6 +3,10 @@
     %tr
       %td
         #logo-wrapper
+          .left.face
+            %a{onclick: "window.onEachFrame(Ocean.run); $('#rain-trigger').addClass('hidden'); $('#no-rain').removeClass('hidden');", href: "#", id: "rain-trigger"}
+              #rain-trigger= image_tag("cyan-circle.png", alt: "Christian DeWolf", width: "150", height: "150")
+            #no-rain.hidden= image_tag("purple-circle.png", alt: "Christian DeWolf", width: "150", height: "150")
           %h1#mynameis Christian DeWolf
           %p#imake.subtitle Books + Software
       %td
