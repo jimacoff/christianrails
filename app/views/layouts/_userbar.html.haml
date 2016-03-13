@@ -3,7 +3,7 @@
     .center
       Welcome, #{current_user.full_name}!
 
-      %p.diminutive
+      %p.diminutive.lineheight-spacer
         - if current_user.admin?
           = link_to "Admin", admin_index_path
           |
@@ -17,5 +17,5 @@
       |
       = link_to 'Sign up', new_user_registration_path
 
-      %p.diminutive
+      %p.diminutive.lineheight-spacer
         Start your library today!

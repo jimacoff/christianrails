@@ -46,14 +46,14 @@ function move(story_id, button) {
 
 function drawNewNode() {
 
-  // new text into panels
   $('#story-pane').html( current_node['node_text'] );
   $('#left-button').html( current_node['left_text'] );
   $('#right-button').html( current_node['right_text'] );
 
-  // TODO paint the panels if necessary
+  if( current_node['palette'] !== undefined ) {
+    paintPanel();
+  }
 
-  // show/hide buttons
   if( current_node['left_text'] !== '' ) {
     $('#left-button').removeClass('hidden');
     $('#right-button').removeClass('hidden');
@@ -64,7 +64,6 @@ function drawNewNode() {
     $('#big-button').removeClass('hidden');
   }
   $('#choice-pane').removeClass('hidden');
-
 }
 
 function showItemViewer() {
@@ -97,12 +96,36 @@ function prevItem() {
 }
 
 function showItem() {
-  //current_node['item_found']['name']
-  //current_node['item_found']['value']
+  var itemDesc = "<strong>" + item_gallery[item_index]['name'] + "</strong>";
+
+  if( item_gallery[item_index]['value'] > 0 ) {
+    itemDesc += "\xa0\xa0\xa0\xa0Value: " + item_gallery[item_index]['value'].toString();
+  }
   $('#imagepanel').html( "<img src='/assets/" + storyname + "/d_" + item_gallery[item_index]['value'] + ".jpg' class='rounded'>" );
-  $('#item-desc').html(  item_gallery[item_index]['legend'] );
+  $('#item-desc').html( itemDesc + "<br/>" + item_gallery[item_index]['legend'] );
 }
 
 function showStoryTitle() {
   $('#imagepanel').html( "<img src='/assets/" + storyname + "/title.png' class='rounded'>" );
+}
+
+function paintPanel() {
+  var fore = current_node['palette']['fore'],
+      back = current_node['palette']['back'],
+      alt  = current_node['palette']['alt'];
+
+  $('#left-button').css('border-color', back);
+  $('#right-button').css('border-color', back);
+
+  $('.binary-button').css('background-color', fore);
+  $('.binary-button').css('color', alt);
+  $('#item-continue-button').css('background-color', alt);
+  $('#item-continue-button').css('color', fore);
+
+  $('#story-pane').css('color', fore);
+  $('#story-pane').css("background-image", "-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, " + back + "), color-stop(100%, " + alt + "))");
+  $('#story-pane').css("background-image", "-webkit-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+  $('#story-pane').css("background-image", "-moz-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+  $('#story-pane').css("background-image", "-o-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+  $('#story-pane').css("background-image", "linear-gradient(top, " + back + " 0%," + alt + " 100%)");
 }

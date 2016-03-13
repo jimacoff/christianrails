@@ -13,16 +13,14 @@
       Continue
 
 #findpanel.half-width.zero-margin.hidden
-
   #item-desc.pane.glass
-
-  #item-controls.pane.glass
+  #item-controls.pane.center
     %button#prev-item-button.binary-button{onclick: "prevItem();"} Previous
     %button#next-item-button.binary-button{onclick: "nextItem();"} Next
-    %button#big-button.binary-button{onclick: "hideItemViewer();"} Continue
+  #item-continue.pane.center{style: "padding-top: 0;"}
+    %button#item-continue-button.binary-button{onclick: "hideItemViewer();"} Continue
 
 :javascript
-
   // load the intro node into the JS + set up item gallery
   var current_node = #{@node.to_json};
   var item_gallery = #{@items};

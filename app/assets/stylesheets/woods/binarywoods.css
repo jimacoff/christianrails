@@ -3,10 +3,10 @@
  */
 
 .background {
-  background: rgb(118,61,209); /* Old browsers */
-  background: -moz-linear-gradient(right, rgba(118,61,209,1) 0%, rgba(147,161,201,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(right, rgba(118,61,209,1) 0%,rgba(147,161,201,1) 100%); /* Chrome10-118,Safari5.1-6 */
-  background: linear-gradient(to left, rgba(118,61,209,1) 0%,rgba(147,161,201,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: rgb(0,0,0); /* Old browsers */
+  background: -moz-linear-gradient(right, rgba(0,0,0,1) 0%, rgba(184,220,227,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(right, rgba(0,0,0,1) 0%,rgba(184,220,227,1) 100%); /* Chrome10-118,Safari5.1-6 */
+  background: linear-gradient(to left, rgba(0,0,0,1) 0%,rgba(184,220,227,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 #binaryheader {
@@ -38,11 +38,18 @@
 
 .pane {
   padding: 10px;
+  opacity: 1;
 }
 
 .binary-button {
   border-radius: 10px;
+  border: 0px solid;
   min-height: 80px;
   font-size: 125%;
   min-width: 40%;
+}
+
+.lineheight-spacer {
+  margin: 1em 0;
+  line-height: 120%;
 }
