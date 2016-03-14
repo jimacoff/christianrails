@@ -2,8 +2,7 @@ class Woods::StoriesController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_story, only: [:show, :edit, :update, :destroy, :play, :move_to]
-  before_action :verify_is_published
-  before_action :verify_is_admin, except: [:play, :move_to, :show]
+  before_action :verify_is_published, except: [:index]
 
   def index
     @stories = Woods::Story.all
@@ -28,6 +27,9 @@ class Woods::StoriesController < ApplicationController
       @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
     end
     @items = @items.to_json
+
+    @story.total_plays += 1
+    @story.save
   end
 
   # JSON endpoint
@@ -83,47 +85,6 @@ class Woods::StoriesController < ApplicationController
       end
     end
 
-  end
-
-  def new
-    @story = Woods::Story.new
-  end
-
-  def edit
-  end
-
-  def create
-    @story = Woods::Story.new(woods_story_params)
-
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @story }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @story.update(woods_story_params)
-        format.html { redirect_to @story, notice: 'Story was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @story.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_stories_url }
-      format.json { head :no_content }
-    end
   end
 
   private

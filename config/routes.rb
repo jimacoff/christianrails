@@ -52,6 +52,10 @@ Christianrails::Application.routes.draw do
         get 'move_to'
       end
     end
+
+    resources :items, only: [] do
+      post 'download'
+    end
   #   resources :treelinks
   #   resources :storytrees
   #   resources :scorecards
@@ -61,7 +65,6 @@ Christianrails::Application.routes.draw do
   #   resources :nodes
   #   resources :moverules
   #   resources :itemsets
-  #   resources :items
   #   resources :footprints
   #   resources :finds
   #   resources :boxes

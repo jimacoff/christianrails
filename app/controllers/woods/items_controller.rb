@@ -3,6 +3,44 @@ class Woods::ItemsController < ApplicationController
 
   before_action :set_woods_item, only: [:show, :edit, :update, :destroy]
 
+  def download
+    raise "BLAH"
+    item_id = woods_item_params[:item_id]
+    if current_user
+      begin
+        item = Woods::Item.find(item_id)
+      rescue
+        @error = "Download attempted on invalid item id: #{item_id} by user id: #{current_user.id}."
+      end
+
+      if !@error
+        if current_user.player.has_item?(item.id)
+          if current_user.downloads.where(release_id: release.id).size >= Woods::Download::LIMIT
+            @error = "Download limit of #{Woods::Download::LIMIT} reached on release id: #{release_id} by user id: #{current_user.id}."
+          else
+            file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+            send_file "#{Rails.root}/../../downloads/#{file_name}"
+            Woods::Download.create(user: current_user, item: item)
+            return
+          end
+        else
+          @error = "Download attempted on unauthorized item id: #{item.id} by user id: #{current_user.id}."
+        end
+      end
+
+    else
+      @error = "Unauthorized download attempted on item: #{item_id} by a guest user."
+    end
+
+    Rails.logger.warn(@error)
+
+    respond_to do |format|
+      flash[:alert] = @error
+      format.html { redirect_to root_path }
+    end
+
+  end
+
   # GET /woods/items
   # GET /woods/items.json
   def index

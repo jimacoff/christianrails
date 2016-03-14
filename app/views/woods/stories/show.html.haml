@@ -1,11 +1,12 @@
 #statspanel.zero-margin.center
-  - if current_user.player
+  - if current_user && current_user.player
     %span= "Score: #{current_player.total_score}"
 
 #imagepanel.zero-margin.center
   = image_tag("#{@story.pic_name}/title.png", class: "rounded")
 
-// STATS ETC
+#storyinfopanel.zero-margin.center
+  %p= "Total plays: #{@story.total_plays}"
 
 .center
   - if current_user
