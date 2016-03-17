@@ -13,7 +13,7 @@ module WoodsHelper
       current_user.player
     else
       # TODO needs something for guest users, not all using the same player
-      Woods::Player.create(user_id: current_user.id)
+      # Woods::Player.create(user_id: current_user.id)
     end
   end
 

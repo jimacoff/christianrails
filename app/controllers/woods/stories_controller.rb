@@ -39,9 +39,6 @@ class Woods::StoriesController < ApplicationController
       # TODO check if node in published story
 
 
-      # TODO track lefts and rights
-
-
       # update user scorecard & footprints
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
       @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
@@ -50,6 +47,15 @@ class Woods::StoriesController < ApplicationController
         @scorecard = Woods::Scorecard.create!(player_id: current_player.id, story_id: @story.id)
       else
         @scorecard = @scorecard.first
+      end
+
+      dir = params[:dir]
+      if dir == "L"
+        @scorecard.lefts += 1
+        @scorecard.save
+      elsif dir == "R"
+        @scorecard.rights += 1
+        @scorecard.save
       end
 
       @footprint = @scorecard.footprints.where(storytree_id: @storytree.id)

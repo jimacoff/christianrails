@@ -22,7 +22,7 @@ function move(story_id, button) {
   request = $.ajax({
       type: 'GET',
       format: 'json',
-      url: '/woods/stories/' + story_id + '/move_to.json?target_node=' + target_node
+      url: '/woods/stories/' + story_id + '/move_to.json?target_node=' + target_node + "&dir=" + button
     });
   $('#choice-pane').addClass('hidden');
   //$('#processing').removeClass('hidden');

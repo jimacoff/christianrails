@@ -4,7 +4,6 @@ class Woods::ItemsController < ApplicationController
   before_action :set_woods_item, only: [:show, :edit, :update, :destroy]
 
   def download
-    raise "BLAH"
     item_id = woods_item_params[:item_id]
     if current_user
       begin
@@ -15,12 +14,12 @@ class Woods::ItemsController < ApplicationController
 
       if !@error
         if current_user.player.has_item?(item.id)
-          if current_user.downloads.where(release_id: release.id).size >= Woods::Download::LIMIT
-            @error = "Download limit of #{Woods::Download::LIMIT} reached on release id: #{release_id} by user id: #{current_user.id}."
+          if current_player.item_downloads.where(item_id: item.id).size >= Woods::ItemDownload::LIMIT
+            @error = "Download limit of #{Woods::ItemDownload::LIMIT} reached on item id: #{item_id} by user id: #{current_user.id}."
           else
-            file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+            file_name = "#{item.value} - #{item.name}.jpg"
             send_file "#{Rails.root}/../../downloads/#{file_name}"
-            Woods::Download.create(user: current_user, item: item)
+            Woods::ItemDownload.create(player: current_player, item: item)
             return
           end
         else
@@ -109,6 +108,6 @@ class Woods::ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def woods_item_params
-      params[:woods_item]
+      params.permit(:authenticity_token, :item_id)
     end
 end

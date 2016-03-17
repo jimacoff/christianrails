@@ -6,7 +6,9 @@ class StoreController < ApplicationController
 
     if current_user
       @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
+      @finds = current_user.player.finds if current_user.player && current_user.player.finds.size > 0
     end
+    @finds ||= nil
 
     @available_products = @all_products - @owned_products
   end

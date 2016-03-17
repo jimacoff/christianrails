@@ -1,13 +1,11 @@
 #menu-container
   %ul.menu
-    - if @owned_products.size > 0
+    - if @owned_products.size > 0 || @finds
       %li.menu-item
         %a#library-link.menu-text.link-selected{href: "#", onclick: "showScreen( $(this).html() ); return false;"} Library
       %li.menu-item
         %a#store-link.menu-text{href: "#", onclick: "showScreen( $(this).html() ); return false;"} Store
     - else
-      %li.menu-item.hidden
-        %a#library-link.menu-text{href: "#", onclick: "showScreen( $(this).html() ); return false;"} Library
       %li.menu-item
         %a#store-link.menu-text.link-selected{href: "#", onclick: "showScreen( $(this).html() ); return false;"} Store
     %li.menu-item

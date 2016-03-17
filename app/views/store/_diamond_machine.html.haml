@@ -5,10 +5,10 @@
       = image_tag( "diamondfind-icon.png", class: "store-image" )
     %td
       %h2 Diamond Find
-      %p You've been busy finding diamonds, and now you can download your finds in HD! All wallpapers are 1600x900 and free to download.
+      %p You've been busy finding diamonds, and now you can download your finds in HD! All wallpapers are 1600x900.
 
       %table.full-width
-        - current_user.player.finds.each do |f|
+        - @finds.each do |f|
           %tr
             %td
               = button_to "JPEG", { controller: 'woods/items', action: 'download', item_id: f.item.id }, class: 'store-button'

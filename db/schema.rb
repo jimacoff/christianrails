@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306164426) do
+ActiveRecord::Schema.define(version: 20160317014215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,16 @@ ActiveRecord::Schema.define(version: 20160306164426) do
     t.string  "footprint_data", limit: 4096
   end
 
+  create_table "woods_item_downloads", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "woods_item_downloads", ["item_id"], name: "index_woods_item_downloads_on_item_id", using: :btree
+  add_index "woods_item_downloads", ["player_id"], name: "index_woods_item_downloads_on_player_id", using: :btree
+
   create_table "woods_items", force: :cascade do |t|
     t.string  "name",       limit: 100,              null: false
     t.integer "value",                   default: 1
@@ -238,13 +248,14 @@ ActiveRecord::Schema.define(version: 20160306164426) do
     t.integer "story_id"
     t.integer "number_of_plays", default: 1
     t.integer "total_score",     default: 0
+    t.integer "lefts",           default: 0
+    t.integer "rights",          default: 0
   end
 
   create_table "woods_stories", force: :cascade do |t|
     t.string  "name",        limit: 50,                   null: false
     t.integer "player_id"
     t.string  "description", limit: 1000
-    t.string  "cover_image", limit: 60
     t.integer "entry_tree"
     t.integer "total_plays"
     t.boolean "published",                default: false
@@ -266,4 +277,6 @@ ActiveRecord::Schema.define(version: 20160306164426) do
   add_foreign_key "downloads", "releases"
   add_foreign_key "downloads", "users"
   add_foreign_key "releases", "products"
+  add_foreign_key "woods_item_downloads", "woods_items", column: "item_id"
+  add_foreign_key "woods_item_downloads", "woods_players", column: "player_id"
 end

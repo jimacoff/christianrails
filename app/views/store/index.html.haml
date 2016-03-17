@@ -3,16 +3,12 @@
 
 #content
   .dotbox
-    - if @owned_products.size > 0
-      #library
-        = render 'library'
-      #store.hidden
-        = render 'store'
-    - else
-      #library.hidden
-        = render 'library'
-      #store
-        = render 'store'
+    - show_library = @owned_products.size > 0 || ( current_user && current_user.player && current_user.player.finds.size > 0 )
+    #library{class: "#{show_library ? '' : 'hidden'}"}
+      = render 'library'
+    #store{class: "#{show_library ? 'hidden' : ''}"}
+      = render 'store'
+
     #products.hidden
       = render 'products'
     #about.hidden
