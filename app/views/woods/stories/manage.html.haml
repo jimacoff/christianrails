@@ -1,0 +1,14 @@
+%h1= @story.name
+
+%table{style: "width: 50%;"}
+  %tr
+    %th Tree name
+    %th Size
+  - @storytrees.each do |st|
+    %tr
+      %td= st.name
+      %td= st.max_level
+
+%br
+= link_to 'Back to story', @story
+

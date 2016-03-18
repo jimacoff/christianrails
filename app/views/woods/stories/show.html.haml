@@ -11,6 +11,9 @@
 .center
   - if current_user
     = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "binary-button", method: :get
+    - if current_user.player && current_player.owns_story?(@story)
+      %br
+      = button_to "Manage this story", manage_woods_story_path(@story), class: "binary-button", method: :get
   - else
     %h3= "Play #{@story.name} now!"
     = link_to 'Sign in', user_session_path

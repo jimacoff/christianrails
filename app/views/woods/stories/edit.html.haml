@@ -1,7 +1,6 @@
-%h1 Editing woods_story
+%h1= "Editing #{@story.name}"
 
 = render 'form'
 
-= link_to 'Show', @story
-\|
-= link_to 'Back', woods_stories_path
+= link_to 'Back to manage', manage_woods_story_path( @story )
+

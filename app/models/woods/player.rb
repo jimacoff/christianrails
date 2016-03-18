@@ -35,4 +35,8 @@ class Woods::Player < ActiveRecord::Base
     score
   end
 
+  def owns_story?(story)
+    story.player_id == id
+  end
+
 end

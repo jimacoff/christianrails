@@ -46,10 +46,11 @@ Christianrails::Application.routes.draw do
     resources :binarywoods, only: :index
     resources :players
 
-    resources :stories do
+    resources :stories, except: [:delete] do
       member do
         get 'play'
         get 'move_to'
+        get 'manage'
       end
     end
 

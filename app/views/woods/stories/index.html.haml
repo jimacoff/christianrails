@@ -1,6 +1,6 @@
-%h1 Listing All Stories
+%h1 All Stories
 
-%table
+%table{style: "width: 50%"}
   %thead
     %tr
       %th Title
@@ -18,11 +18,4 @@
         %td= woods_story.total_plays
         %td= woods_story.published
         %td= woods_story.storytrees.count
-        %td
-          = woods_story.nodes.count
-
-%br
-
-= link_to 'New Story', new_woods_story_path
-
-= render "admin_link"
+        %td= woods_story.nodes.count
