@@ -36,37 +36,6 @@ RSpec.describe Woods::ItemsController, type: :controller do
   # Woods::ItemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all woods_items as @items" do
-      item = Woods::Item.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:items)).to eq([item])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested woods_item as @item" do
-      item = Woods::Item.create! valid_attributes
-      get :show, {:id => item.to_param}, valid_session
-      expect(assigns(:item)).to eq(item)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new woods_item as @item" do
-      get :new, {}, valid_session
-      expect(assigns(:item)).to be_a_new(Woods::Item)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested woods_item as @item" do
-      item = Woods::Item.create! valid_attributes
-      get :edit, {:id => item.to_param}, valid_session
-      expect(assigns(:item)).to eq(item)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Woods::Item" do

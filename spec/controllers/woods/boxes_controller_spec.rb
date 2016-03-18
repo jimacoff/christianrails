@@ -36,37 +36,6 @@ RSpec.describe Woods::BoxesController, type: :controller do
   # Woods::BoxesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all woods_boxes as @boxes" do
-      box = Woods::Box.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:boxes)).to eq([box])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested woods_box as @box" do
-      box = Woods::Box.create! valid_attributes
-      get :show, {:id => box.to_param}, valid_session
-      expect(assigns(:box)).to eq(box)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new woods_box as @box" do
-      get :new, {}, valid_session
-      expect(assigns(:box)).to be_a_new(Woods::Box)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested woods_box as @box" do
-      box = Woods::Box.create! valid_attributes
-      get :edit, {:id => box.to_param}, valid_session
-      expect(assigns(:box)).to eq(box)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Woods::Box" do
@@ -138,21 +107,6 @@ RSpec.describe Woods::BoxesController, type: :controller do
         put :update, {:id => box.to_param, :woods_box => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested woods_box" do
-      box = Woods::Box.create! valid_attributes
-      expect {
-        delete :destroy, {:id => box.to_param}, valid_session
-      }.to change(Woods::Box, :count).by(-1)
-    end
-
-    it "redirects to the woods_boxes list" do
-      box = Woods::Box.create! valid_attributes
-      delete :destroy, {:id => box.to_param}, valid_session
-      expect(response).to redirect_to(woods_boxes_url)
     end
   end
 

@@ -41,26 +41,6 @@ class Woods::ItemsController < ApplicationController
 
   end
 
-  # GET /woods/items
-  # GET /woods/items.json
-  def index
-    @items = Woods::Item.all
-  end
-
-  # GET /woods/items/1
-  # GET /woods/items/1.json
-  def show
-  end
-
-  # GET /woods/items/new
-  def new
-    @item = Woods::Item.new
-  end
-
-  # GET /woods/items/1/edit
-  def edit
-  end
-
   # POST /woods/items
   # POST /woods/items.json
   def create

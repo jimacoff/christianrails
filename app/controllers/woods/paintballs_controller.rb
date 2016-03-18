@@ -4,26 +4,6 @@ class Woods::PaintballsController < ApplicationController
   before_action :set_woods_paintball, only: [:show, :edit, :update, :destroy]
   before_action :verify_is_admin
 
-  # GET /woods/paintballs
-  # GET /woods/paintballs.json
-  def index
-    @paintballs = Woods::Paintball.all
-  end
-
-  # GET /woods/paintballs/1
-  # GET /woods/paintballs/1.json
-  def show
-  end
-
-  # GET /woods/paintballs/new
-  def new
-    @paintball = Woods::Paintball.new
-  end
-
-  # GET /woods/paintballs/1/edit
-  def edit
-  end
-
   # POST /woods/paintballs
   # POST /woods/paintballs.json
   def create
@@ -51,16 +31,6 @@ class Woods::PaintballsController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @paintball.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /woods/paintballs/1
-  # DELETE /woods/paintballs/1.json
-  def destroy
-    @paintball.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_paintballs_url }
-      format.json { head :no_content }
     end
   end
 

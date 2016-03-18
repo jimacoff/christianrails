@@ -1,28 +1,8 @@
 class Woods::BoxesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_box, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_box, only: [:update]
   before_action :verify_is_admin
-
-  # GET /woods/boxes
-  # GET /woods/boxes.json
-  def index
-    @boxes = Woods::Box.all
-  end
-
-  # GET /woods/boxes/1
-  # GET /woods/boxes/1.json
-  def show
-  end
-
-  # GET /woods/boxes/new
-  def new
-    @box = Woods::Box.new
-  end
-
-  # GET /woods/boxes/1/edit
-  def edit
-  end
 
   # POST /woods/boxes
   # POST /woods/boxes.json
@@ -51,16 +31,6 @@ class Woods::BoxesController < ApplicationController
         format.html { render action: 'edit' }
         format.json { render json: @box.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /woods/boxes/1
-  # DELETE /woods/boxes/1.json
-  def destroy
-    @box.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_boxes_url }
-      format.json { head :no_content }
     end
   end
 

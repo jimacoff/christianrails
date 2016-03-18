@@ -10,7 +10,7 @@
         - if current_user.purchases.size > 0
           = link_to "Receipts", receipts_orders_path
           |
-        - if current_user.player.scorecards.size > 0
+        - if current_user.player && current_user.player.scorecards.size > 0
           = link_to 'Stats', user_path(current_user)
           |
         = link_to 'Sign out', destroy_user_session_path, method: :delete
