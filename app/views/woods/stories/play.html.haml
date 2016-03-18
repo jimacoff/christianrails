@@ -3,6 +3,8 @@
   - if current_player.finds.size > 0
     %span
       %button#gallery-button.minory-button{onclick: "showItemViewer();"} View gallery
+  %span
+    %button#go-to-store-button.minory-button.hidden{onclick: "goToStore();"} Download my diamonds!
 
 #imagepanel.zero-margin.center
   = image_tag("#{@story.pic_name}/title.png", class: "rounded")

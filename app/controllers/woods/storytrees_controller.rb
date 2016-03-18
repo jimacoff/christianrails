@@ -2,6 +2,7 @@ class Woods::StorytreesController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_storytree, only: [:show, :edit, :update, :destroy]
+  before_action :verify_is_admin
 
   # GET /woods/storytrees
   # GET /woods/storytrees.json

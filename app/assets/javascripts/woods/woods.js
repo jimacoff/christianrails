@@ -68,13 +68,15 @@ function drawNewNode() {
 
 function showItemViewer() {
   showItem();
-  $('#gallery-button').prop('disabled', true);
+  $('#go-to-store-button').removeClass('hidden');
+  $('#gallery-button').addClass('hidden');
   $('#findpanel').removeClass('hidden');
   $('#nodepanel').addClass('hidden');
 }
 
 function hideItemViewer() {
-  $('#gallery-button').prop('disabled', false);
+  $('#go-to-store-button').addClass('hidden');
+  $('#gallery-button').removeClass('hidden');
   $('#findpanel').addClass('hidden');
   $('#nodepanel').removeClass('hidden');
   showStoryTitle();
@@ -129,4 +131,10 @@ function paintPanel() {
   $('#story-pane').css("background-image", "-moz-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
   $('#story-pane').css("background-image", "-o-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
   $('#story-pane').css("background-image", "linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+}
+
+function goToStore() {
+  if(confirm("Do you wish to leave your current game & visit the download area?  All progress will be saved.")) {
+    window.location = "/";
+  }
 }

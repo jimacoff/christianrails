@@ -2,6 +2,7 @@ class Woods::FindsController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_find, only: [:show, :edit, :update, :destroy]
+  before_action :verify_is_admin
 
   # GET /woods/finds
   # GET /woods/finds.json

@@ -83,5 +83,4 @@ Christianrails::Application.routes.draw do
     get code, to: "errors#show", code: code
   end
 
-
 end

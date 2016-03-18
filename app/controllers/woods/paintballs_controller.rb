@@ -2,6 +2,7 @@ class Woods::PaintballsController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_paintball, only: [:show, :edit, :update, :destroy]
+  before_action :verify_is_admin
 
   # GET /woods/paintballs
   # GET /woods/paintballs.json

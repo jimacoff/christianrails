@@ -3,7 +3,7 @@
 
 #content
   .dotbox
-    - show_library = @owned_products.size > 0 || ( current_user && current_user.player && current_user.player.finds.size > 0 )
+    - show_library = @owned_products.size > 0 || ( current_user && current_user.player && @finds && @finds.size > 0 )
     #library{class: "#{show_library ? '' : 'hidden'}"}
       = render 'library'
     #store{class: "#{show_library ? 'hidden' : ''}"}

@@ -6,7 +6,7 @@ class StoreController < ApplicationController
 
     if current_user
       @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
-      @finds = current_user.player.finds if current_user.player && current_user.player.finds.size > 0
+      @finds = current_user.player.finds.joins(:item).where('woods_items.value > ?', 0) if current_user.player
     end
     @finds ||= nil
 
