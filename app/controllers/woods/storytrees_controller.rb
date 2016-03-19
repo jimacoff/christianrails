@@ -2,26 +2,10 @@ class Woods::StorytreesController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_storytree, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_story
   before_action :verify_is_admin
 
-  # GET /woods/storytrees
-  # GET /woods/storytrees.json
-  def index
-    @storytrees = Woods::Storytree.all
-  end
-
-  # GET /woods/storytrees/1
-  # GET /woods/storytrees/1.json
   def show
-  end
-
-  # GET /woods/storytrees/new
-  def new
-    @storytree = Woods::Storytree.new
-  end
-
-  # GET /woods/storytrees/1/edit
-  def edit
   end
 
   # POST /woods/storytrees
@@ -40,22 +24,6 @@ class Woods::StorytreesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /woods/storytrees/1
-  # PATCH/PUT /woods/storytrees/1.json
-  def update
-    respond_to do |format|
-      if @storytree.update(woods_storytree_params)
-        format.html { redirect_to @storytree, notice: 'Storytree was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @storytree.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /woods/storytrees/1
-  # DELETE /woods/storytrees/1.json
   def destroy
     @storytree.destroy
     respond_to do |format|

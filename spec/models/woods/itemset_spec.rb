@@ -4,9 +4,9 @@ RSpec.describe Woods::Itemset, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:story) { FactoryGirl.create(:story) }
 
-    let(:itemset) { FactoryGirl.create(:itemset, player: player) }
+    let(:itemset) { FactoryGirl.create(:itemset, story: story) }
 
     let!(:item1) { FactoryGirl.create(:item, itemset: itemset) }
     let!(:item2) { FactoryGirl.create(:item, itemset: itemset) }
@@ -18,8 +18,8 @@ RSpec.describe Woods::Itemset, type: :model do
     let!(:possibleitem1)  { FactoryGirl.create(:possibleitem, itemset: itemset) }
     let!(:possibleitem2)  { FactoryGirl.create(:possibleitem, itemset: itemset) }
 
-    it "should belong to a player" do
-      expect( itemset.player ).to eq(player)
+    it "should belong to a story" do
+      expect( itemset.story ).to eq(story)
     end
 
     it "should have many items" do

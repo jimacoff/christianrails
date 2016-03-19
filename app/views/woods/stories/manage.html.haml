@@ -1,14 +1,13 @@
 %h1= @story.name
 
-%table{style: "width: 50%;"}
+%table.woods-table
   %tr
     %th Tree name
     %th Size
   - @storytrees.each do |st|
     %tr
-      %td= st.name
+      %td= link_to st.name, woods_storytree_path(st)
       %td= st.max_level
 
 %br
 = link_to 'Back to story', @story
-

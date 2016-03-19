@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :itemset, :class => 'Woods::Itemset' do
-    player
+    story
 
     sequence :name do |n|
       "itemset_#{n}"

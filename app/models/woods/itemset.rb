@@ -4,9 +4,9 @@ class Woods::Itemset < ActiveRecord::Base
   has_many :possibleitems, dependent: :destroy
   has_many :boxes
 
-  belongs_to :player  #TODO come back to this
+  belongs_to :story
 
-  validates_presence_of :name, :player
+  validates_presence_of :name, :story
 
   def calculate_item_found(items_player_has)
     items_in_set = self.items.collect(&:id)

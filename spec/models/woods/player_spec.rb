@@ -18,14 +18,6 @@ RSpec.describe Woods::Player, type: :model do
     let!(:scorecard) { FactoryGirl.create(:scorecard, player: player) }
     let!(:footprint) { FactoryGirl.create(:footprint, scorecard: scorecard) }
 
-    let!(:itemset) { FactoryGirl.create(:itemset, player: player) }
-
-    let!(:item1) { FactoryGirl.create(:item, itemset: itemset) }
-    let!(:item2) { FactoryGirl.create(:item, itemset: itemset) }
-
-    let!(:palette1)  { FactoryGirl.create(:palette, player: player) }
-    let!(:palette2)  { FactoryGirl.create(:palette, player: player) }
-
     it "should have many finds" do
       expect( player.finds.count ).to eq(2)
     end
@@ -36,18 +28,6 @@ RSpec.describe Woods::Player, type: :model do
 
     it "should have many footprints" do
       expect( player.footprints.count ).to eq(1)
-    end
-
-    it "should have many itemsets" do
-      expect( player.itemsets.count ).to eq(1)
-    end
-
-    it "should have many items" do
-      expect( player.items.count ).to eq(2)
-    end
-
-    it "should have many palettes" do
-      expect( player.palettes.count ).to eq(2)
     end
 
     it "should belong to a user" do

@@ -15,15 +15,6 @@ class Woods::PalettesController < ApplicationController
   def show
   end
 
-  # GET /woods/palettes/new
-  def new
-    @palette = Woods::Palette.new
-  end
-
-  # GET /woods/palettes/1/edit
-  def edit
-  end
-
   # POST /woods/palettes
   # POST /woods/palettes.json
   def create

@@ -43,7 +43,6 @@ Christianrails::Application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :woods do
-    resources :binarywoods, only: :index
     resources :players
 
     resources :stories, except: [:delete] do
@@ -52,26 +51,23 @@ Christianrails::Application.routes.draw do
         get 'move_to'
         get 'manage'
       end
+      resources :storytrees, only: [:show]
     end
 
-    resources :items, only: [] do
-      post 'download'
+    resources :itemsets do
+      resources :items, only: [] do
+        post 'download'
+      end
     end
-  #   resources :treelinks
-  #   resources :storytrees
-  #   resources :scorecards
-  #   resources :possibleitems
+
   #   resources :palettes
+  #   resources :treelinks
+  #   resources :possibleitems
   #   resources :paintballs
-  #   resources :nodes
-  #   resources :moverules
-  #   resources :itemsets
-  #   resources :footprints
-  #   resources :finds
   #   resources :boxes
   end
 
-  get '/binarywoods',    to: 'woods/binarywoods#index'
+  get '/woods',          to: 'woods/stories#index'
 
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'

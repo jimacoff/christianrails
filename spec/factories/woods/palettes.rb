@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :palette, :class => 'Woods::Palette' do
-    player
+    story
 
     sequence :name do |n|
       "palette_#{n}"

@@ -74,3 +74,12 @@ body {
   margin: 1em 0;
   line-height: 120%;
 }
+
+.woods-table {
+  width: 30%;
+  tr:nth-child(odd)  { background-color: #c1dee3; }
+  tr:nth-child(even) { background-color: #c1d3e3; }
+  th { background-color: #ffffff; }
+  th { border-radius: 3px; }
+  td { border-radius: 3px; }
+}
