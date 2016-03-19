@@ -51,21 +51,24 @@ Christianrails::Application.routes.draw do
         get 'move_to'
         get 'manage'
       end
-      resources :storytrees, only: [:show]
-    end
 
-    resources :itemsets do
-      resources :items, only: [] do
-        post 'download'
+      resources :storytrees, only: [:show]
+
+      resources :palettes
+      resources :itemsets do
+        resources :items, only: [] do
+          post 'download'
+        end
       end
     end
 
-  #   resources :palettes
   #   resources :treelinks
   #   resources :possibleitems
   #   resources :paintballs
   #   resources :boxes
   end
+
+  post '/woods/items/download', to: 'woods/items#download'
 
   get '/woods',          to: 'woods/stories#index'
 

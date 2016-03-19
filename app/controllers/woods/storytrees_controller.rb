@@ -38,6 +38,10 @@ class Woods::StorytreesController < ApplicationController
       @storytree = Woods::Storytree.find(params[:id])
     end
 
+    def set_woods_story
+      @story = Woods::Story.find(params[:story_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def woods_storytree_params
       params[:woods_storytree]

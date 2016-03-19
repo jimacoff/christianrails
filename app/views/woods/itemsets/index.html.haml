@@ -1,19 +1,14 @@
-%h1 Listing woods_itemsets
+%h1 Listing Itemsets
 
 %table
   %thead
     %tr
       %th
       %th
-      %th
 
   %tbody
-    - @itemsets.each do |woods_itemset|
+    - @itemsets.each do |i|
       %tr
-        %td= link_to 'Show', woods_itemset
-        %td= link_to 'Edit', edit_woods_itemset_path(woods_itemset)
-        %td= link_to 'Destroy', woods_itemset, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= i.name
 
-%br
-
-= link_to 'New Itemset', new_woods_itemset_path
+= link_to "Back to story manager", manage_woods_story_path(@story)

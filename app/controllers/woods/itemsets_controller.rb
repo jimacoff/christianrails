@@ -2,26 +2,13 @@ class Woods::ItemsetsController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_itemset, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_story
   before_action :verify_is_admin
 
   # GET /woods/itemsets
   # GET /woods/itemsets.json
   def index
     @itemsets = Woods::Itemset.all
-  end
-
-  # GET /woods/itemsets/1
-  # GET /woods/itemsets/1.json
-  def show
-  end
-
-  # GET /woods/itemsets/new
-  def new
-    @itemset = Woods::Itemset.new
-  end
-
-  # GET /woods/itemsets/1/edit
-  def edit
   end
 
   # POST /woods/itemsets
@@ -68,6 +55,10 @@ class Woods::ItemsetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_woods_itemset
       @itemset = Woods::Itemset.find(params[:id])
+    end
+
+    def set_woods_story
+      @story = Woods::Story.find(params[:story_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

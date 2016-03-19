@@ -1,13 +1,25 @@
-%h1= @story.name
 
-%table.woods-table
+%table{style: "width: 70%;"}
   %tr
-    %th Tree name
-    %th Size
-  - @storytrees.each do |st|
-    %tr
-      %td= link_to st.name, woods_storytree_path(st)
-      %td= st.max_level
+    %td
+      %h1= @story.name
+      %table.woods-table
+        %tr
+          %th Tree name
+          %th Size
+        - @storytrees.each do |st|
+          %tr
+            %td= link_to st.name, woods_story_storytree_path(@story, st)
+            %td= st.max_level
 
+      %br
+      = link_to "Items", woods_story_itemsets_path(@story)
+      |
+      = link_to "Palettes", woods_story_palettes_path(@story)
+    %td
+      #story-stats-div
+        %h2 Stats
+
+%br
 %br
 = link_to 'Back to story', @story
