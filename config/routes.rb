@@ -56,7 +56,7 @@ Christianrails::Application.routes.draw do
 
       resources :palettes
       resources :itemsets do
-        resources :items, only: [] do
+        resources :items, only: [:create, :update, :destroy] do
           post 'download'
         end
       end

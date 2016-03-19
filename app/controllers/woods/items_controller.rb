@@ -41,8 +41,6 @@ class Woods::ItemsController < ApplicationController
 
   end
 
-  # POST /woods/items
-  # POST /woods/items.json
   def create
     @item = Woods::Item.new(woods_item_params)
 
@@ -57,8 +55,6 @@ class Woods::ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /woods/items/1
-  # PATCH/PUT /woods/items/1.json
   def update
     respond_to do |format|
       if @item.update(woods_item_params)
@@ -71,8 +67,6 @@ class Woods::ItemsController < ApplicationController
     end
   end
 
-  # DELETE /woods/items/1
-  # DELETE /woods/items/1.json
   def destroy
     @item.destroy
     respond_to do |format|

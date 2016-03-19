@@ -1,14 +1,18 @@
 class Woods::ItemsetsController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_itemset, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_itemset, only: [:show, :update, :destroy]
   before_action :set_woods_story
   before_action :verify_is_admin
 
   # GET /woods/itemsets
   # GET /woods/itemsets.json
   def index
-    @itemsets = Woods::Itemset.all
+    @itemsets = Woods::Itemset.includes(:items).where(story_id: @story.id)
+  end
+
+  def show
+    @items = Woods::Item.where(itemset_id: @itemset.id)
   end
 
   # POST /woods/itemsets

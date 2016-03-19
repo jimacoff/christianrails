@@ -1,6 +1,40 @@
-%p#notice= notice
+%h1= @itemset.name
 
+%table.modest-width
+  %tr
+    %td
+      = select_tag 'items', options_from_collection_for_select(@items, "id", "name"), multiple: true, class: 'item-selectbox', onchange: "selectItem( parseInt( $(this).val() ) );"
+    %td
+      #itemform.hidden
+        = form_tag(woods_story_itemset_item_path(@story, @itemset, @items.first || Woods::Item.new), method: :put) do
+          %span Name:
+          = text_field_tag :name, nil, size: 40
+          %br
+          %span Description:
+          %br
+          = text_area_tag :description, nil, { rows: 10, cols: 40 }
+          %br
+          %span Value:
+          = number_field_tag :value, step: 1, min: -50, max: 150
 
-= link_to 'Edit', edit_woods_itemset_path(@itemset)
-\|
-= link_to 'Back', woods_itemsets_path
+          = hidden_field_tag :item_id
+          %br
+          = submit_tag :Update
+
+%br
+
+= link_to 'Back to itemsets', woods_story_itemsets_path(@story)
+
+:javascript
+
+  var items = #{@items.to_json};
+
+  function selectItem(selected_id) {
+    $('#itemform').removeClass('hidden');
+
+    var the_item = $.grep(items, function(e){ return e.id === selected_id; })[0];
+    $('#item_id').val(the_item.id);
+    $('#name').val(the_item.name);
+    $('#description').val(the_item.legend);
+    $('#value').val( the_item.value );
+  }

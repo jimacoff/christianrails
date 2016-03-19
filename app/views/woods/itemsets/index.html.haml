@@ -1,6 +1,6 @@
 %h1 Listing Itemsets
 
-%table
+%table.small-width
   %thead
     %tr
       %th
@@ -10,5 +10,6 @@
     - @itemsets.each do |i|
       %tr
         %td= i.name
+        %td= link_to "View", woods_story_itemset_path(@story, i)
 
 = link_to "Back to story manager", manage_woods_story_path(@story)
