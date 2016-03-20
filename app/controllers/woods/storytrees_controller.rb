@@ -1,15 +1,13 @@
 class Woods::StorytreesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_storytree, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_storytree, only: [:show, :destroy]
   before_action :set_woods_story
   before_action :verify_is_admin
 
   def show
   end
 
-  # POST /woods/storytrees
-  # POST /woods/storytrees.json
   def create
     @storytree = Woods::Storytree.new(woods_storytree_params)
 
@@ -33,7 +31,6 @@ class Woods::StorytreesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_woods_storytree
       @storytree = Woods::Storytree.find(params[:id])
     end
@@ -42,7 +39,6 @@ class Woods::StorytreesController < ApplicationController
       @story = Woods::Story.find(params[:story_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def woods_storytree_params
       params[:woods_storytree]
     end

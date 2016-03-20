@@ -44,29 +44,6 @@ RSpec.describe Woods::PalettesController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested woods_palette as @palette" do
-      palette = Woods::Palette.create! valid_attributes
-      get :show, {:id => palette.to_param}, valid_session
-      expect(assigns(:palette)).to eq(palette)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new woods_palette as @palette" do
-      get :new, {}, valid_session
-      expect(assigns(:palette)).to be_a_new(Woods::Palette)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested woods_palette as @palette" do
-      palette = Woods::Palette.create! valid_attributes
-      get :edit, {:id => palette.to_param}, valid_session
-      expect(assigns(:palette)).to eq(palette)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Woods::Palette" do

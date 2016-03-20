@@ -1,7 +1,7 @@
 class Woods::StoriesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_story, only: [:show, :edit, :update, :destroy, :play, :move_to, :manage]
+  before_action :set_woods_story, only: [:show, :update, :destroy, :play, :move_to, :manage]
   before_action :verify_is_published, except: [:index, :show]
   before_action :verify_is_admin, only: [:edit, :manage]
 
@@ -10,9 +10,6 @@ class Woods::StoriesController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
   end
 
   def manage

@@ -36,70 +36,6 @@ RSpec.describe Woods::NodesController, type: :controller do
   # Woods::NodesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all woods_nodes as @nodes" do
-      node = Woods::Node.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:nodes)).to eq([node])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested woods_node as @node" do
-      node = Woods::Node.create! valid_attributes
-      get :show, {:id => node.to_param}, valid_session
-      expect(assigns(:node)).to eq(node)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new woods_node as @node" do
-      get :new, {}, valid_session
-      expect(assigns(:node)).to be_a_new(Woods::Node)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested woods_node as @node" do
-      node = Woods::Node.create! valid_attributes
-      get :edit, {:id => node.to_param}, valid_session
-      expect(assigns(:node)).to eq(node)
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Woods::Node" do
-        expect {
-          post :create, {:woods_node => valid_attributes}, valid_session
-        }.to change(Woods::Node, :count).by(1)
-      end
-
-      it "assigns a newly created woods_node as @node" do
-        post :create, {:woods_node => valid_attributes}, valid_session
-        expect(assigns(:node)).to be_a(Woods::Node)
-        expect(assigns(:node)).to be_persisted
-      end
-
-      it "redirects to the created woods_node" do
-        post :create, {:woods_node => valid_attributes}, valid_session
-        expect(response).to redirect_to(Woods::Node.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved woods_node as @node" do
-        post :create, {:woods_node => invalid_attributes}, valid_session
-        expect(assigns(:node)).to be_a_new(Woods::Node)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:woods_node => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
@@ -138,21 +74,6 @@ RSpec.describe Woods::NodesController, type: :controller do
         put :update, {:id => node.to_param, :woods_node => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested woods_node" do
-      node = Woods::Node.create! valid_attributes
-      expect {
-        delete :destroy, {:id => node.to_param}, valid_session
-      }.to change(Woods::Node, :count).by(-1)
-    end
-
-    it "redirects to the woods_nodes list" do
-      node = Woods::Node.create! valid_attributes
-      delete :destroy, {:id => node.to_param}, valid_session
-      expect(response).to redirect_to(woods_nodes_url)
     end
   end
 

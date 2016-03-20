@@ -76,14 +76,12 @@ class Woods::ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_woods_params
       @item = Woods::Item.find(params[:id])
       @story = Woods::Story.find(params[:story_id])
       @itemset = Woods::Itemset.find(params[:itemset_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def woods_item_params
       params.permit(:authenticity_token, :item_id, :name, :legend, :value)
     end

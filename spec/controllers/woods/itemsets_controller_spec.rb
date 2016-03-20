@@ -52,21 +52,6 @@ RSpec.describe Woods::ItemsetsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new woods_itemset as @itemset" do
-      get :new, {}, valid_session
-      expect(assigns(:itemset)).to be_a_new(Woods::Itemset)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested woods_itemset as @itemset" do
-      itemset = Woods::Itemset.create! valid_attributes
-      get :edit, {:id => itemset.to_param}, valid_session
-      expect(assigns(:itemset)).to eq(itemset)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Woods::Itemset" do
@@ -96,47 +81,6 @@ RSpec.describe Woods::ItemsetsController, type: :controller do
       it "re-renders the 'new' template" do
         post :create, {:woods_itemset => invalid_attributes}, valid_session
         expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested woods_itemset" do
-        itemset = Woods::Itemset.create! valid_attributes
-        put :update, {:id => itemset.to_param, :woods_itemset => new_attributes}, valid_session
-        itemset.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested woods_itemset as @itemset" do
-        itemset = Woods::Itemset.create! valid_attributes
-        put :update, {:id => itemset.to_param, :woods_itemset => valid_attributes}, valid_session
-        expect(assigns(:itemset)).to eq(itemset)
-      end
-
-      it "redirects to the woods_itemset" do
-        itemset = Woods::Itemset.create! valid_attributes
-        put :update, {:id => itemset.to_param, :woods_itemset => valid_attributes}, valid_session
-        expect(response).to redirect_to(itemset)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the woods_itemset as @itemset" do
-        itemset = Woods::Itemset.create! valid_attributes
-        put :update, {:id => itemset.to_param, :woods_itemset => invalid_attributes}, valid_session
-        expect(assigns(:itemset)).to eq(itemset)
-      end
-
-      it "re-renders the 'edit' template" do
-        itemset = Woods::Itemset.create! valid_attributes
-        put :update, {:id => itemset.to_param, :woods_itemset => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
