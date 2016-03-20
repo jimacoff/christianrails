@@ -21,7 +21,6 @@
           %span Alt-background colour:
           = text_field_tag :alt_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
 
-          = hidden_field_tag :palette_id
           %br
           = submit_tag :Update
 
@@ -41,13 +40,13 @@
 :javascript
 
   var palettes = #{@palettes.to_json};
+  var story_id = #{@story.id};
 
   function selectPalette(selected_id) {
     $('#paletteform').removeClass('hidden');
     $('#colourtest').removeClass('hidden');
 
     var the_palette = $.grep(palettes, function(e){ return e.id === selected_id; })[0];
-    $('#palette_id').val(the_palette.id);
     $('#name').val(the_palette.name);
 
     $('#fore_colour').val(the_palette.fore_colour);
@@ -59,6 +58,8 @@
     });
     $('#palettes').focus();
     paintTestPanel();
+
+    $('form').attr("action", "/woods/stories/" + story_id + "/palettes/" + the_palette.id);
   }
 
   function paintTestPanel() {

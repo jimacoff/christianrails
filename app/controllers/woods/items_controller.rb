@@ -1,7 +1,7 @@
 class Woods::ItemsController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_params, only: [:show, :edit, :update, :destroy]
   before_action :verify_is_admin, except: [:download]
 
   def download
@@ -57,11 +57,11 @@ class Woods::ItemsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @item.update(woods_item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+      if @item.update(woods_item_params.except(:authenticity_token))
+        format.html { redirect_to woods_story_itemset_path(@story, @itemset), notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to woods_story_itemsets_path(@story, @itemset) }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
@@ -77,12 +77,14 @@ class Woods::ItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_woods_item
+    def set_woods_params
       @item = Woods::Item.find(params[:id])
+      @story = Woods::Story.find(params[:story_id])
+      @itemset = Woods::Itemset.find(params[:itemset_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def woods_item_params
-      params.permit(:authenticity_token, :item_id)
+      params.permit(:authenticity_token, :item_id, :name, :legend, :value)
     end
 end

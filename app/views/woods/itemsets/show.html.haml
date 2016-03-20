@@ -12,12 +12,11 @@
           %br
           %span Description:
           %br
-          = text_area_tag :description, nil, { rows: 10, cols: 40 }
+          = text_area_tag :legend, nil, { rows: 10, cols: 40 }
           %br
           %span Value:
           = number_field_tag :value, step: 1, min: -50, max: 150
 
-          = hidden_field_tag :item_id
           %br
           = submit_tag :Update
 
@@ -28,13 +27,16 @@
 :javascript
 
   var items = #{@items.to_json};
+  var story_id = #{@story.id};
+  var itemset_id = #{@itemset.id};
 
   function selectItem(selected_id) {
     $('#itemform').removeClass('hidden');
 
     var the_item = $.grep(items, function(e){ return e.id === selected_id; })[0];
-    $('#item_id').val(the_item.id);
     $('#name').val(the_item.name);
-    $('#description').val(the_item.legend);
+    $('#legend').val(the_item.legend);
     $('#value').val( the_item.value );
+
+    $('form').attr("action", "/woods/stories/" + story_id + "/itemsets/" + itemset_id + "/items/" + the_item.id);
   }

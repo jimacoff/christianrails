@@ -5,8 +5,6 @@ class Woods::ItemsetsController < ApplicationController
   before_action :set_woods_story
   before_action :verify_is_admin
 
-  # GET /woods/itemsets
-  # GET /woods/itemsets.json
   def index
     @itemsets = Woods::Itemset.includes(:items).where(story_id: @story.id)
   end
@@ -15,8 +13,6 @@ class Woods::ItemsetsController < ApplicationController
     @items = Woods::Item.where(itemset_id: @itemset.id)
   end
 
-  # POST /woods/itemsets
-  # POST /woods/itemsets.json
   def create
     @itemset = Woods::Itemset.new(woods_itemset_params)
 
@@ -31,22 +27,6 @@ class Woods::ItemsetsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /woods/itemsets/1
-  # PATCH/PUT /woods/itemsets/1.json
-  def update
-    respond_to do |format|
-      if @itemset.update(woods_itemset_params)
-        format.html { redirect_to @itemset, notice: 'Itemset was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @itemset.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /woods/itemsets/1
-  # DELETE /woods/itemsets/1.json
   def destroy
     @itemset.destroy
     respond_to do |format|
@@ -56,7 +36,6 @@ class Woods::ItemsetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_woods_itemset
       @itemset = Woods::Itemset.find(params[:id])
     end
@@ -65,7 +44,6 @@ class Woods::ItemsetsController < ApplicationController
       @story = Woods::Story.find(params[:story_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def woods_itemset_params
       params[:woods_itemset]
     end
