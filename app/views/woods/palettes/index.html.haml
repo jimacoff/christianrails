@@ -1,15 +1,82 @@
-%h1 Listing Palettes
+%h1 Palettes
 
-%table
-  %thead
-    %tr
-      %th
+%table.modest-width
+  %tr
+    %td
+      = select_tag 'palettes', options_from_collection_for_select(@palettes, "id", "name"), multiple: true, class: 'item-selectbox', onchange: "selectPalette( parseInt( $(this).val() ) );"
+    %td
+      #paletteform.hidden
+        = form_tag(woods_story_palette_path(@story, @palettes.first), method: :put) do
+          %span Name:
+          = text_field_tag :name, nil, size: 40
+          %br
+          %span Foreground colour:
+          = text_field_tag :fore_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
 
-  %tbody
-    - @palettes.each do |pal|
-      %tr
-        %td= pal.name
+          %br
+          %span Background colour:
+          = text_field_tag :back_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
+
+          %br
+          %span Alt-background colour:
+          = text_field_tag :alt_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
+
+          = hidden_field_tag :palette_id
+          %br
+          = submit_tag :Update
 
 %br
 
-= link_to "Back to story manager", manage_woods_story_path(@story)
+#colourtest.hidden
+  #colouredpanel
+    %p
+      You agree to stick up posters, as long as there's a diamond in it for you. You and the Mayor shake hands and then he reveals an unrealistically large stack of posters -- at least three thousand -- that you must put on walls with tape he has also provided. You take the posters and leave the office, but after sticking up five posters you're already tiring of the task. Do you finish the job like you agreed, or dispose of the posters in a sewer grate and return in a few hours to collect your diamond?
+  %button#one-button.binary-button{style: "width: 200px;"} One button
+  %button#another-button.binary-button{style: "width: 200px;"} Another button
+
+%br
+
+= link_to 'Back to story manager', manage_woods_story_path(@story)
+
+:javascript
+
+  var palettes = #{@palettes.to_json};
+
+  function selectPalette(selected_id) {
+    $('#paletteform').removeClass('hidden');
+    $('#colourtest').removeClass('hidden');
+
+    var the_palette = $.grep(palettes, function(e){ return e.id === selected_id; })[0];
+    $('#palette_id').val(the_palette.id);
+    $('#name').val(the_palette.name);
+
+    $('#fore_colour').val(the_palette.fore_colour);
+    $('#back_colour').val(the_palette.back_colour);
+    $('#alt_colour').val(the_palette.alt_colour);
+
+    $('.colourbox').each(function() {
+      $(this).focus();
+    });
+    $('#palettes').focus();
+    paintTestPanel();
+  }
+
+  function paintTestPanel() {
+    var fore = '#' + $('#fore_colour').val(),
+        back = '#' + $('#back_colour').val(),
+        alt  = '#' + $('#alt_colour').val();
+
+    $('.binary-button').css('border-color', back);
+
+    $('#one-button').css('background-color', fore);
+    $('#one-button').css('color', alt);
+    $('#another-button').css('background-color', alt);
+    $('#another-button').css('color', fore);
+
+    $('#colouredpanel').css('color', fore);
+    $('#colouredpanel').css("background-image", "-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, " + back + "), color-stop(100%, " + alt + "))");
+    $('#colouredpanel').css("background-image", "-webkit-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+    $('#colouredpanel').css("background-image", "-moz-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+    $('#colouredpanel').css("background-image", "-o-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+    $('#colouredpanel').css("background-image", "linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+  }

@@ -113,9 +113,9 @@ function showStoryTitle() {
 }
 
 function paintPanel() {
-  var fore = current_node['palette']['fore'],
-      back = current_node['palette']['back'],
-      alt  = current_node['palette']['alt'];
+  var fore = '#' + current_node['palette']['fore'],
+      back = '#' + current_node['palette']['back'],
+      alt  = '#' + current_node['palette']['alt'];
 
   $('#left-button').css('border-color', back);
   $('#right-button').css('border-color', back);
