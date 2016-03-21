@@ -6,6 +6,11 @@ body {
   color: #252525;
 }
 
+a {
+  color: #340D5C;
+  text-decoration: none !important;
+}
+
 .background {
   background: rgb(0,0,0); /* Old browsers */
   background: -moz-linear-gradient(right, rgba(0,0,0,1) 0%, rgba(184,220,227,1) 100%); /* FF3.6-15 */
@@ -77,11 +82,14 @@ body {
 
 .woods-table {
   width: 30%;
-  tr:nth-child(odd)  { background-color: #c1dee3; }
-  tr:nth-child(even) { background-color: #c1d3e3; }
-  th { background-color: #ffffff; }
-  th { border-radius: 3px; }
-  td { border-radius: 3px; }
+  padding: 0;
+  tr:nth-child(odd)  { background-color: #E6E6E6; }
+  tr:nth-child(even) { background-color: #D6D6D6; }
+  th { background-color: #ffffff;
+       padding: 0; }
+  td { padding: 0;
+       border: 0; }
+  border-radius: 3px;
 }
 
 .item-selectbox {

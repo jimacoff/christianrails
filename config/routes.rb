@@ -52,7 +52,9 @@ Christianrails::Application.routes.draw do
         get 'manage'
       end
 
-      resources :storytrees, only: [:show]
+      resources :storytrees, only: [:show] do
+        resources :nodes, only: [:update]
+      end
 
       resources :palettes
       resources :itemsets do
