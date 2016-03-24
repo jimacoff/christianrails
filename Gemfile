@@ -22,6 +22,7 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'rake', '~> 10.4.2'
+gem "non-stupid-digest-assets"
 
 group :doc do
   gem 'sdoc', require: false
