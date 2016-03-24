@@ -142,7 +142,5 @@ function paintPanel() {
 }
 
 function goToStore() {
-  if(confirm("Do you wish to leave your current game & visit the download area?  All progress will be saved.")) {
-    window.location = "/";
-  }
+  window.location = "/";
 }

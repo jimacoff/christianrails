@@ -1,6 +1,6 @@
 #menu-container
   %ul.menu
-    - if @owned_products.size > 0 || @finds
+    - if @owned_products.size > 0 || (@finds && @finds.size > 0)
       %li.menu-item
         %a#library-link.menu-text.link-selected{href: "#", onclick: "showScreen( $(this).html() ); return false;"} Library
       %li.menu-item
