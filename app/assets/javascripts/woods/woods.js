@@ -33,6 +33,8 @@ function move(story_id, button) {
       item_gallery.push(current_node['item_found']);
       item_index = item_gallery.length - 1;
       pop_item = true;
+      $('#score-span').html("Score: " + (parseInt($('#score-span').html().substr(7)) + current_node['item_found'].value).toString() );
+      //$('#gallery-button').removeClass('hidden');
     }
     drawNewNode();
   });
@@ -72,6 +74,12 @@ function showItemViewer() {
   $('#gallery-button').addClass('hidden');
   $('#findpanel').removeClass('hidden');
   $('#nodepanel').addClass('hidden');
+
+  if(item_gallery.length > 1) {
+    $('#item-controls').removeClass('hidden');
+  } else {
+    $('#item-controls').addClass('hidden');
+  }
 }
 
 function hideItemViewer() {

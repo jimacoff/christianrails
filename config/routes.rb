@@ -71,8 +71,8 @@ Christianrails::Application.routes.draw do
   end
 
   post '/woods/items/download', to: 'woods/items#download'
-
-  get '/woods',          to: 'woods/stories#index'
+  get '/woods',                 to: 'woods/stories#index'
+  get '/diamondfind', to: 'woods/stories#show', defaults: { id: 1 }
 
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'

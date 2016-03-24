@@ -1,8 +1,6 @@
 - if @owned_products.size > 0
   - @owned_products.each do |owned|
     = render 'store_product', {product: owned}
+
 - if current_user && current_user.player && @finds && @finds.size > 0
   = render 'diamond_machine'
-- else
-  %h2
-    You don't own any books!

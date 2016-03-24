@@ -1,8 +1,7 @@
 #statspanel.zero-margin.center
-  %span= "Score: #{current_player.total_score}"
-  - if current_player.finds.size > 0
-    %span
-      %button#gallery-button.minory-button{onclick: "showItemViewer();"} View gallery
+  %span#score-span= "Score: #{current_player.total_score}"
+  %span
+    %button#gallery-button.minory-button{class: "#{current_player.finds.size > 0 ? '' : 'hidden'}", onclick: "showItemViewer();"} View gallery
   %span
     %button#go-to-store-button.minory-button.hidden{onclick: "goToStore();"} Download my diamonds!
 
@@ -22,11 +21,11 @@
 
 #findpanel.half-width.zero-margin.hidden
   #item-desc.pane.glass
-  #item-controls.pane.center
+  #item-controls.pane.center{style: "padding-bottom: 0;"}
     %button#prev-item-button.binary-button{onclick: "prevItem();"} Previous
     %button#next-item-button.binary-button{onclick: "nextItem();"} Next
-  #item-continue.pane.center{style: "padding-top: 0;"}
-    %button#item-continue-button.binary-button{onclick: "hideItemViewer();"} Continue
+  #item-continue.pane.center
+    %button#item-continue-button.binary-button{onclick: "hideItemViewer();"} Keep playing!
 
 :javascript
   // load the intro node into the JS + set up item gallery
