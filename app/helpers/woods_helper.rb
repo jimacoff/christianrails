@@ -9,13 +9,7 @@ module WoodsHelper
   end
 
   def current_player
-    if current_user
-      if current_user.player
-        current_user.player
-      else
-        currnt_user.player = Woods::Player.create(user_id: current_user.id)
-      end
-    end
+    current_user.player if current_user && current_user.player
   end
 
 end

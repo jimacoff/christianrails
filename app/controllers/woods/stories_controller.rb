@@ -26,6 +26,12 @@ class Woods::StoriesController < ApplicationController
     @node = @storytree.get_first_node
     @node = @node.add_accoutrements_and_make_json!
 
+    if !current_user
+      redirect_to woods_story_path( @story ) and return
+    elsif current_user && !current_user.player
+      current_user.player = Woods::Player.create(user_id: current_user.id)
+    end
+
     @items = []
     items_player_has = Woods::Item.find( current_player.finds.collect(&:item_id) )
     items_player_has.each do |i|

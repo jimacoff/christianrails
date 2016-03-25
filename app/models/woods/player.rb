@@ -2,8 +2,9 @@ class Woods::Player < ActiveRecord::Base
   has_many :finds,        dependent: :destroy
   has_many :scorecards,   dependent: :destroy
   has_many :footprints,   through: :scorecards
-  has_many :stories,     dependent: :destroy
   has_many :item_downloads,  dependent: :destroy
+
+  has_many :stories
 
   belongs_to :user
 
