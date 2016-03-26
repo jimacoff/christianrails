@@ -1,6 +1,17 @@
-%p#notice= notice
+%h1= "Player: #{ @player.username }"
 
+%h3= "Item finds:  #{@player.finds.size}"
+- if @player.finds.size > 0
+  %ul
+    - @player.finds.each do |f|
+      %li #{f.item.name} -- #{f.item.value}
+  = link_to "Download your diamonds!", root_path
 
-= link_to 'Edit', edit_woods_player_path(@player)
+%h3= "Total score: #{@player.total_score}"
+
+%h4= "Lefts:  #{@player.left_count}"
+%h4= "Rights: #{@player.right_count}"
+
+= link_to "Home", root_path
 \|
-= link_to 'Back', woods_players_path
+= link_to "Back to Diamond Find", diamondfind_path

@@ -7,14 +7,6 @@ class UsersController < ApplicationController
 
   end
 
-  def edit
-    if @user == current_user
-
-    else
-      redirect_to root_path
-    end
-  end
-
   private
 
   def set_user

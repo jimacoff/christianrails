@@ -22,4 +22,12 @@ class Woods::Story < ActiveRecord::Base
     name.downcase.gsub(' ','')
   end
 
+  def left_count
+    Woods::Scorecard.where(story_id: id).map{ |sc| sc.lefts }.reduce(:+)
+  end
+
+  def right_count
+    Woods::Scorecard.where(story_id: id).map{ |sc| sc.rights }.reduce(:+)
+  end
+
 end

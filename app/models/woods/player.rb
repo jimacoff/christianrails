@@ -34,4 +34,12 @@ class Woods::Player < ActiveRecord::Base
     story.player_id == id
   end
 
+  def left_count
+    Woods::Scorecard.where(player_id: id).map{ |sc| sc.lefts }.reduce(:+)
+  end
+
+  def right_count
+    Woods::Scorecard.where(player_id: id).map{ |sc| sc.rights }.reduce(:+)
+  end
+
 end

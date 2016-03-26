@@ -1,7 +1,7 @@
 class Woods::StoriesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_story, only: [:show, :update, :destroy, :play, :move_to, :manage]
+  before_action :set_woods_story, only: [:show, :play, :move_to, :manage]
   before_action :verify_is_published, except: [:index, :show]
   before_action :verify_is_admin, only: [:edit, :manage]
 
@@ -14,6 +14,8 @@ class Woods::StoriesController < ApplicationController
 
   def manage
     @storytrees = @story.storytrees
+    @lefts = @story.left_count
+    @rights = @story.right_count
   end
 
   def play
@@ -45,15 +47,14 @@ class Woods::StoriesController < ApplicationController
 
   # JSON endpoint
   def move_to
-    #begin
+    begin
       @node = Woods::Node.find( params[:target_node] )
-      # TODO check if node in published story
-
-
-      # update user scorecard & footprints
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
-      @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
 
+      #security check
+      redirect_to woods_story_path( @story ) and return if !@storytree.story.published
+
+      @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
       if @scorecard.size == 0
         @scorecard = Woods::Scorecard.create!(player_id: current_player.id, story_id: @story.id)
       else
@@ -89,9 +90,9 @@ class Woods::StoriesController < ApplicationController
 
       @footprint.step!( @node['tree_index'] )
 
-    #rescue => e
-    #  Rails.logger.warn("Something's wrong: " + e.to_s)
-    #end
+    rescue => e
+      Rails.logger.warn("Something's wrong: " + e.to_s)
+    end
 
     respond_to do |format|
       if @node
