@@ -9,12 +9,10 @@
   %table.zero-margin.center{style: "width: 50%;"}
     %tr
       %td= @story.total_plays
-      %td= @story.left_count
-      %td= @story.right_count
+      %td= "#{@story.left_count} / #{@story.right_count}"
     %tr
       %th Total plays
-      %th Lefts
-      %th Rights
+      %th Lefts / Rights
 
 .center
   - if current_user
