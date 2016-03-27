@@ -1,3 +1,5 @@
+require 'constraints/domain_constraint'
+
 Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
@@ -42,6 +44,13 @@ Christianrails::Application.routes.draw do
 
   resources :admin, only: [:index]
 
+  resources :graveyard, only: [] do
+    collection do
+      get 'fractalfic'
+    end
+  end
+  get '/fractalfic', to: 'graveyard#fractalfic'
+
   namespace :woods do
     resources :players
 
@@ -64,10 +73,6 @@ Christianrails::Application.routes.draw do
       end
     end
 
-  #   resources :treelinks
-  #   resources :possibleitems
-  #   resources :paintballs
-  #   resources :boxes
   end
 
   post '/woods/items/download', to: 'woods/items#download'
@@ -79,6 +84,7 @@ Christianrails::Application.routes.draw do
 
   get '/user_report',    to: 'purchases#user_report'
 
+  get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   root 'store#index'
 
   %w( 404 422 500 ).each do |code|

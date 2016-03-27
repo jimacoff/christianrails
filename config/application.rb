@@ -22,8 +22,8 @@ module Christianrails
 
     config.generators do |g|
       g.template_engine :haml
-      g.helper            false
-      g.jbuilder          false
+      g.helper          false
+      g.jbuilder        false
     end
 
     config.exceptions_app = self.routes
