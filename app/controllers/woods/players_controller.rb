@@ -2,7 +2,7 @@ class Woods::PlayersController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_player, only: [:show]
-  before_action :verify_is_admin
+  before_action :verify_is_admin, except: [:show]
 
   def index
     @players = Woods::Player.all

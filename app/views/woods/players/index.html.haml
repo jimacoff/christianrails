@@ -1,22 +1,19 @@
+
 %h1 Listing All Players
 
-%table
+%table.small-width
   %thead
     %tr
       %th Username
-      %th Stories
-      %th
-      %th
+      %th Item downloads
       %th
 
   %tbody
     - @players.each do |woods_player|
       %tr
         %td= woods_player.username
-        %td= woods_player.stories.collect(&:name)
-        %td= link_to 'Show', woods_player
-        %td= link_to 'Edit', edit_woods_player_path(woods_player)
-        %td= link_to 'Destroy', woods_player, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= woods_player.item_download_count
+        %td= link_to 'Stats', woods_player
 
 %br
 

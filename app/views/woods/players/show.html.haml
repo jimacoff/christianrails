@@ -12,6 +12,9 @@
 %h4= "Lefts:  #{@player.left_count}"
 %h4= "Rights: #{@player.right_count}"
 
+- if current_user.admin?
+  = link_to "Players index", woods_players_path
+  |
 = link_to "Home", root_path
 \|
 = link_to "Back to Diamond Find", diamondfind_path

@@ -42,4 +42,8 @@ class Woods::Player < ActiveRecord::Base
     Woods::Scorecard.where(player_id: id).map{ |sc| sc.rights }.reduce(:+)
   end
 
+  def item_download_count
+    Woods::ItemDownload.where(player_id: id).size
+  end
+
 end
