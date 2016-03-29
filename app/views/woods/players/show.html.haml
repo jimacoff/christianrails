@@ -1,13 +1,13 @@
 %h1= "Player: #{ @player.username }"
 
+%h3= "Total score: #{@player.total_score}"
+
 %h3= "Item finds:  #{@player.finds.size}"
 - if @player.finds.size > 0
   %ul
     - @player.finds.each do |f|
       %li #{f.item.name} -- #{f.item.value}
-  = link_to "Download your diamonds!", root_path
-
-%h3= "Total score: #{@player.total_score}"
+  = link_to "Download your diamonds!", root_path, class: "niceblue"
 
 %h4= "Lefts:  #{@player.left_count}"
 %h4= "Rights: #{@player.right_count}"
@@ -15,6 +15,6 @@
 - if current_user.admin?
   = link_to "Players index", woods_players_path
   |
-= link_to "Home", root_path
+= link_to "Home", root_path, class: "niceblue"
 \|
-= link_to "Back to Diamond Find", diamondfind_path
+= link_to "Back to Diamond Find", diamondfind_path, class: "niceblue"
