@@ -10,6 +10,7 @@ class Woods::StoriesController < ApplicationController
   end
 
   def show
+    @highscores = Woods::Player.all.collect{|p| [p.username, p.total_score]}.sort{ |x,y| y[1] <=> x[1]}[0..4]
   end
 
   def manage

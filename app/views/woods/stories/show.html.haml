@@ -5,23 +5,37 @@
 #imagepanel.zero-margin.center
   = image_tag("#{@story.pic_name}/title.png", class: "rounded")
 
-#storyinfopanel.zero-margin.center
-  %table.zero-margin.center{style: "width: 50%;"}
-    %tr
-      %td= @story.total_plays
-      %td= "#{@story.left_count} / #{@story.right_count}"
-    %tr
-      %th Total plays
-      %th Lefts / Rights
-
 .center
-  - if current_user
-    = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "binary-button", method: :get
-    - if current_user.player && current_player.owns_story?(@story)
-      %br
-      = button_to "Manage this story", manage_woods_story_path(@story), class: "binary-button", method: :get
-  - else
-    %h3= "Play #{@story.name} now!"
-    = link_to 'Sign in', user_session_path
-    or
-    = link_to 'Create an account for free!', new_user_registration_path
+  %table.zero-margin.center{style: "width: 60%"}
+    %tr
+      %td{style: "vertical-align: top;"}
+        - if current_user
+          = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "bright-button", method: :get
+
+        - else
+          %h3= "Play #{@story.name} now!"
+          = link_to 'Sign in', user_session_path, class: 'megapink'
+          or
+          = link_to 'Create an account for free!', new_user_registration_path, class: 'megapink'
+
+        #storyinfopanel.zero-margin.center
+          %h3.center Story Stats
+          %table.zero-margin.center
+            %tr
+              %td= @story.total_plays
+              %td= "#{@story.left_count} / #{@story.right_count}"
+            %tr
+              %th Total plays
+              %th Lefts / Rights
+
+      %td
+        #highscore-table.zero-margin.center
+          %h3.center High Scores
+          %table.zero-margin.center
+            - @highscores.each do |h|
+              %tr
+                %td= h[0]
+                %td= h[1]
+  - if current_user && current_user.player && current_player.owns_story?(@story)
+    %br
+    = button_to "Manage this story", manage_woods_story_path(@story), class: "minory-button", method: :get

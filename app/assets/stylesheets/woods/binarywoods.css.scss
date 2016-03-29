@@ -77,6 +77,16 @@ a {
   background-color: #000000;
 }
 
+.bright-button {
+  border-radius: 40px;
+  min-height: 80px;
+  font-size: 125%;
+  cursor: pointer;
+  background-color: #F0F8FF;
+  border: 1px solid #000000;
+  margin-top: 10px;
+}
+
 .minory-button:disabled {
   color: #bfbfbf;
 }
@@ -119,4 +129,36 @@ a {
   margin: 5px;
   width: 500px;
   padding: 10px;
+}
+
+#highscore-table {
+  td {
+    width: 50%;
+  }
+  border: 1px solid #000000;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #E2CFFA;
+  width: 300px;
+  padding-bottom: 20px;
+}
+
+#storyinfopanel {
+  margin-top: 20px;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #CFDAFA;
+  width: 300px;
+  padding-bottom: 6px;
+}
+
+.megapink {
+  color: #E2CFFA;
+  text-decoration: underline !important;
+}
+
+.megablue {
+  color: #CDD7F3;
+  text-decoration: underline !important;
 }
