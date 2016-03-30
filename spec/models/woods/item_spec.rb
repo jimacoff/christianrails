@@ -19,10 +19,4 @@ RSpec.describe Woods::Item, type: :model do
 
   end
 
-
-  describe "validations" do
-
-
-  end
-
 end

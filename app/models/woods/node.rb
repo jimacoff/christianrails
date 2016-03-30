@@ -11,7 +11,6 @@ class Woods::Node < ActiveRecord::Base
   validates_presence_of :name, :storytree, :tree_index
 
   def add_accoutrements_and_make_json!(player_id = nil, footprint = nil, item_found = nil)
-
     nodehash = self.as_json
 
     if self.paintball && self.paintball.enabled
@@ -24,7 +23,6 @@ class Woods::Node < ActiveRecord::Base
     end
 
     if self.level == self.storytree.max_level
-
       if self.treelink && self.treelink.enabled
         l = { linked_node: treelink.linked_tree.get_first_node.id }
       else
@@ -41,8 +39,6 @@ class Woods::Node < ActiveRecord::Base
     end
 
     nodehash.merge!( { tree_size: ( 2 ** self.level ) - 1 } )
-
-    pp nodehash
     nodehash
   end
 

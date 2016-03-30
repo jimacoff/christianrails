@@ -19,9 +19,4 @@ RSpec.describe Woods::Scorecard, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
 end

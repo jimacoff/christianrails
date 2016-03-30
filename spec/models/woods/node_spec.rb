@@ -44,11 +44,6 @@ RSpec.describe Woods::Node, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
   describe "level" do
 
     let(:level_1_node) { FactoryGirl.create(:node, tree_index: 1) }

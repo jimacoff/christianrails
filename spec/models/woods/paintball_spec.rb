@@ -19,9 +19,4 @@ RSpec.describe Woods::Paintball, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
 end

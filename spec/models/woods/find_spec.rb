@@ -23,12 +23,6 @@ RSpec.describe Woods::Find, type: :model do
       expect( find.story ).to eq(story)
     end
 
-
-  end
-
-  describe "validations" do
-
-
   end
 
 end

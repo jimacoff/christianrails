@@ -20,9 +20,4 @@ RSpec.describe Woods::Treelink, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
 end

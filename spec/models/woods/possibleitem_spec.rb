@@ -20,9 +20,4 @@ RSpec.describe Woods::Possibleitem, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
 end

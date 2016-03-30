@@ -21,9 +21,4 @@ RSpec.describe Woods::Palette, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
 end

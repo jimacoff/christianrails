@@ -21,9 +21,4 @@ RSpec.describe Woods::Box, type: :model do
 
   end
 
-  describe "validations" do
-
-  end
-
-
 end

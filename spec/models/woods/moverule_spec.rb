@@ -15,9 +15,4 @@ RSpec.describe Woods::Moverule, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
 end

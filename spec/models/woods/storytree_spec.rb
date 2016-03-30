@@ -47,11 +47,6 @@ RSpec.describe Woods::Storytree, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
   describe "helpers" do
 
     describe "get_first_node" do

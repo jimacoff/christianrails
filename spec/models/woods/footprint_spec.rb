@@ -19,11 +19,6 @@ RSpec.describe Woods::Footprint, type: :model do
 
   end
 
-  describe "validations" do
-
-
-  end
-
   describe "helper methods" do
 
     let(:player) { FactoryGirl.create(:player) }
@@ -51,6 +46,10 @@ RSpec.describe Woods::Footprint, type: :model do
 
     end
 
+    describe "scatter_objects_in_tree" do
+      skip("TODO")
+    end
+
     describe "step!" do
 
       it 'should step on the index requested' do
@@ -65,7 +64,7 @@ RSpec.describe Woods::Footprint, type: :model do
       end
 
       it 'should not step past the size of a tree' do
-        # TODO
+        skip("TODO")
 
       end
 
@@ -84,6 +83,10 @@ RSpec.describe Woods::Footprint, type: :model do
         expect( footprint2.print_at_index(4) ).to eq( 'o' )
       end
 
+    end
+
+    describe "decide_on_var_items" do
+      skip("TODO")
     end
 
   end
