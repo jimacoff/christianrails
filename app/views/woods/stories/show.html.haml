@@ -10,7 +10,7 @@
     %tr
       %td{style: "vertical-align: top;"}
         - if current_user
-          = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "bright-button", method: :get
+          = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
 
         - else
           %h3= "Play #{@story.name} now!"

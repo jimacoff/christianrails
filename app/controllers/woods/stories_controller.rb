@@ -30,7 +30,7 @@ class Woods::StoriesController < ApplicationController
     @node = @node.add_accoutrements_and_make_json!
 
     if !current_user
-      redirect_to woods_story_path( @story ) and return
+      redirect_to diamondfind_path and return
     elsif current_user && !current_user.player
       current_user.player = Woods::Player.create(user_id: current_user.id)
     end
