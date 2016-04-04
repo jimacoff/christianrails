@@ -1,0 +1,15 @@
+- content_for :title do
+  = @post.title
+
+- content_for :meta_description do
+  = truncate(strip_tags(@post.content), length: 155)
+
+%article
+  = render partial: 'monologue/posts/post_header', locals: {post: @post }
+  .content{data: { monologue: "content"} }
+    = raw @post.content
+
+  .tags{data: { monologue: "tags"} }
+    = render @post.tags
+
+  = render "monologue/posts/social_sharing"
