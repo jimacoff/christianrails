@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
 gem 'mocha'
 gem 'monologue', git: 'https://github.com/jipiboily/monologue.git'
+gem "monologue-markdown", git: "https://github.com/christiancodes/monologue-markdown.git"
 gem 'paypal-sdk-rest'
 gem 'pg'
 gem 'rails', '4.2.4'

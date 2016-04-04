@@ -3,9 +3,9 @@
 # end
 
 Monologue.config do |config|
-  config.site_name = "My blog"
-  config.site_subtitle = "my own place online"
-  config.site_url = "http://example.com"
+  config.site_name = "Christian DeWolf"
+  config.site_subtitle = "Books + Software"
+  config.site_url = "https://www.christiandewolf.com"
 
   config.meta_description = "This is my blog about..."
   config.meta_keyword = "music, fun"
@@ -21,7 +21,7 @@ Monologue.config do |config|
   config.facebook_like_locale = "en_US" # "fr_CA"
   config.google_plusone_locale = "en"
 
-  #config.layout = "layouts/application"
+  config.layout = "layouts/application"
 
   # ANALYTICS
   # config.gauge_analytics_site_id = "YOUR COGE FROM GAUG.ES"
@@ -30,10 +30,10 @@ Monologue.config do |config|
   config.sidebar = ["latest_posts", "latest_tweets", "categories", "tag_cloud"]
 
   #SOCIAL
-  config.twitter_username = "myhandle"
+  config.twitter_username = "dewolfchristian"
   config.facebook_url = "https://www.facebook.com/myhandle"
   config.facebook_logo = 'logo.png'
-  config.github_username = "myhandle"
+  config.github_username = "christiancodes"
   config.show_rss_icon = true
 
 end

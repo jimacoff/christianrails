@@ -5,21 +5,21 @@
 
       %p.diminutive.lineheight-spacer
         - if current_user.admin?
-          = link_to "Admin", admin_index_path
+          = link_to "Admin", main_app.admin_index_path
           |
         - if current_user.purchases.size > 0
-          = link_to "Receipts", receipts_orders_path
+          = link_to "Receipts", main_app.receipts_orders_path
           |
         - if current_player && current_player.scorecards.size > 0
-          = link_to 'Stats', woods_player_path(current_player)
+          = link_to 'Stats', main_app.woods_player_path(current_player)
           |
-        = link_to 'Sign out', destroy_user_session_path, method: :delete
+        = link_to 'Sign out', main_app.destroy_user_session_path, method: :delete
 
   - else
     .center
-      = link_to 'Sign in', user_session_path
+      = link_to 'Sign in', main_app.user_session_path
       |
-      = link_to 'Sign up', new_user_registration_path
+      = link_to 'Sign up',  main_app.new_user_registration_path
 
       %p.diminutive.lineheight-spacer
         Start your library today!
