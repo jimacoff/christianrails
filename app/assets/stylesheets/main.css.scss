@@ -5,6 +5,11 @@ body {
   word-wrap: break-word;
 }
 
+#bulk {
+  text-align: center;
+  margin: 0 auto;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: Artifika, Helvetica, Arial, sans-serif !important;
 }
@@ -26,18 +31,26 @@ table {
   margin: 0 auto;
 }
 
+#logo-wrapper {
+  display: inline-block;
+}
+
 #header h1 {
-  font-size: 3em;
-  margin: 0 0 10px 0;
   font-weight: bold;
   letter-spacing: -1px;
-  line-height: 55px;
   font-family: Artifika, Helvetica, Arial, sans-serif !important;
 }
 
 .subtitle {
   font-style: italic;
   margin-top: 0;
+}
+
+#user-wrapper {
+  height: 60px;
+  min-width: 200px;
+  display: inline-block;
+  float: right;
 }
 
 .panel {
@@ -52,13 +65,6 @@ table {
   z-index:        0;
   border-radius: 10px;
   border: 0px solid;
-}
-
-#logo-wrapper {
-}
-
-#user-wrapper {
-  height: 60px;
 }
 
 .left {
@@ -115,3 +121,48 @@ table {
   text-decoration: underline !important;
   font-weight: bold;
 }
+
+
+@media screen and (min-width: 320px) {
+
+  #header h1 {
+    font-size: 1.5em;
+    margin: 0 0 10px 0;
+    line-height: 55px;
+  }
+
+  .elastiface {
+    width: 80%;
+    height: 80%;
+  }
+
+}
+@media screen and (min-width: 680px) {
+
+  #header h1 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+    line-height: 55px;
+  }
+
+  .elastiface {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+@media screen and (min-width: 1024px) {
+
+  #header h1 {
+    font-size: 3em;
+    margin: 0 0 10px 0;
+    line-height: 55px;
+  }
+
+  .elastiface {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+

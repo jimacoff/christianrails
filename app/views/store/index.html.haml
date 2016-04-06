@@ -1,15 +1,14 @@
 / TODO eventually move this out to layout once Admin starts using its own
 = render 'store/navbar'
 
-#content
-  .dotbox
-    - show_library = @owned_products.size > 0 || ( current_user && current_user.player && @finds && @finds.size > 0 )
-    #library{class: "#{show_library ? '' : 'hidden'}"}
-      = render 'library'
-    #store{class: "#{show_library ? 'hidden' : ''}"}
-      = render 'store'
+.dotbox
+  - show_library = @owned_products.size > 0 || ( current_user && current_user.player && @finds && @finds.size > 0 )
+  #library{class: "#{show_library ? '' : 'hidden'}"}
+    = render 'library'
+  #store{class: "#{show_library ? 'hidden' : ''}"}
+    = render 'store'
 
-    #products.hidden
-      = render 'products'
-    #about.hidden
-      = render 'about'
+  #products.hidden
+    = render 'products'
+  #about.hidden
+    = render 'about'
