@@ -1,14 +1,9 @@
-/ TODO eventually move this out to layout once Admin starts using its own
-= render 'store/navbar'
-
-.dotbox
-  - show_library = @owned_products.size > 0 || ( current_user && current_user.player && @finds && @finds.size > 0 )
-  #library{class: "#{show_library ? '' : 'hidden'}"}
+#super-wrapper
+  #store-wrapper.panel
     = render 'library'
-  #store{class: "#{show_library ? 'hidden' : ''}"}
-    = render 'store'
+  #store-col2
+    #blog-wrapper.panel
+      = render 'blog_sample'
+    #about-wrapper.panel
+      = render 'about'
 
-  #products.hidden
-    = render 'products'
-  #about.hidden
-    = render 'about'

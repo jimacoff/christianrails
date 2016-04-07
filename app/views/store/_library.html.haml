@@ -1,6 +1,15 @@
-- if @owned_products.size > 0
-  - @owned_products.each do |owned|
-    = render 'store_product', {product: owned}
+%h1 Read
 
-- if current_user && current_user.player && @finds && @finds.size > 0
-  = render 'diamond_machine'
+- prods = [ @owned_products + @available_products ].flatten
+
+- if prods.size > 0
+  - prods.each_with_index do |prod, i|
+    - if i > 0
+      %hr
+    = render 'store_product', { product: prod }
+
+%hr
+= render 'diamond_machine'
+
+%br
+%p.diminutive.center All prices expressed in CAD. Prices do not include tax. All downloads are DRM-free.

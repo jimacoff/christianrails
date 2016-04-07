@@ -11,31 +11,32 @@
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com" }
     %meta{ property: "og:description", content: "Download or order the new book, \"GHOSTCRIME\", the latest in sci-fi/comedy/horror." }
 
+    %meta{ name: "viewport", content: "width=device-width", initial: { scale: 1 } }
+
     %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
 
   %body.background
 
-    %canvas{id: "ocean", width: "1300", height: "999"}
-    %canvas{id: "rainfield", width: "1300", height: "999"}
+    / %canvas{id: "ocean", width: "1300", height: "999"}
+    / %canvas{id: "rainfield", width: "1300", height: "999"}
 
     #zone-keeper
       = render "store/dealzone"
 
     = render "store/header"
 
-    #wrapper.panel
-      - if notice
-        %p.alert.alert-notice
-          = notice
-      - if alert
-        %p.alert.alert-danger
-          = alert
+    - if notice
+      %p.alert.alert-notice
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
 
-      = yield
+    = yield
 
-      = render "store/footer"
+    = render "store/footer"
 
-      = render "scripts/init_cart"
-      = render "scripts/ocean"
+    = render "scripts/init_cart"
+    =# render "scripts/ocean"
 
     %h5.right= "v #{app_version}"
