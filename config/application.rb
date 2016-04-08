@@ -30,5 +30,7 @@ module Christianrails
 
     config.action_view.logger = nil
 
+    config.assets.paths << Rails.root.join("app", "assets", "stylesheets", "woods")
+
   end
 end

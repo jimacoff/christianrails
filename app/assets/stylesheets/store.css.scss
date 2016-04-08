@@ -125,6 +125,13 @@ th {
   border-radius:  40px;
 }
 
+.admin-panel {
+  margin: 9px auto 30px auto;
+  width: 640px;
+  padding: 1px 40px 40px 40px;
+  border-radius:  40px;
+}
+
 #menu-container {
   border: 1px dashed #919191;
   border-left: none;
@@ -254,6 +261,7 @@ th {
 }
 
 @media screen and (max-width: 800px) {
+  // STEP 1 -- SMALLEST
 
   #super-wrapper {
     margin: 0 auto;
@@ -276,6 +284,7 @@ th {
 }
 
 @media screen and (min-width: 801px) {
+  // STEP 2 -- MEDIUM
   #super-wrapper {
     margin: 0 auto;
     padding: 25px;
@@ -299,15 +308,13 @@ th {
   }
 }
 
-@media screen and (min-width: 1420px) {
+@media screen and (min-width: 1240px)  {
+  // STEP 3 -- THE MAX
   #super-wrapper {
-    padding: 25px;
     text-align: center;
   }
 
   #store-wrapper, #about-wrapper, #blog-wrapper   {
-    width: 640px;
-    margin: 0 auto 25px 25px;
     display: inline-block;
     vertical-align: top;
     text-align: left;
@@ -315,15 +322,17 @@ th {
 
   #store-col2 {
     display: inline-block;
-    width: 640px;
+    width: 450px;
   }
 
   #store-wrapper {
     width: 640px;
+    margin: 0 auto 25px 0;
   }
 
   #about-wrapper, #blog-wrapper {
-    width: 550px;
+    margin: 0 auto 25px 25px;
+    width: 450px;
     clear: right;
   }
 

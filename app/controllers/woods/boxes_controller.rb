@@ -2,7 +2,6 @@ class Woods::BoxesController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_box, only: [:update]
-  before_action :verify_is_admin
 
   def create
     @box = Woods::Box.new(woods_box_params)

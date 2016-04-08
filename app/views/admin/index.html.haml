@@ -1,21 +1,22 @@
-%h1 Admin
+.admin-panel.panel
+  %h1 Admin
 
-.embolden Store Maintenance
-%ul
-  %li= link_to 'Products', products_path
-  %li= link_to 'Price Combos', price_combos_path
+  .embolden Store Maintenance
+  %ul
+    %li= link_to 'Products', products_path
+    %li= link_to 'Price Combos', price_combos_path
 
-.embolden Reports
-%ul
-  %li= link_to 'Orders', orders_path
-  %li= link_to 'Purchases', purchases_path
-  %li= link_to 'Downloads', downloads_products_path
-  %li= link_to 'Users', user_report_path
+  .embolden Reports
+  %ul
+    %li= link_to 'Orders', orders_path
+    %li= link_to 'Purchases', purchases_path
+    %li= link_to 'Downloads', downloads_products_path
+    %li= link_to 'Users', user_report_path
 
-.embolden BinaryWoods
-%ul
-  %li= link_to 'Stories', woods_stories_path
-  %li= link_to 'Players', woods_players_path
-  %li= link_to 'Manage Diamond Find', manage_woods_story_path(1)
+  .embolden BinaryWoods
+  %ul
+    %li= link_to 'Stories', woods_stories_path
+    %li= link_to 'Players', woods_players_path
+    %li= link_to 'Manage Diamond Find', manage_woods_story_path(1)
 
-= link_to 'Home', root_path
+  = link_to 'Home', root_path

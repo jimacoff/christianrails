@@ -2,7 +2,6 @@ class Woods::NodesController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_node, only: [:update]
-  before_action :verify_is_admin
 
   def update
     respond_to do |format|

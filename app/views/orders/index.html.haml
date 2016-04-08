@@ -1,32 +1,33 @@
-%h1 Orders
+.admin-panel.panel
+  %h1 Orders
 
-%table.product-table
-  %thead
-    %tr
-      %th Date
-      %th User
-      %th Revenue
-      %th Discount
-      %th Tax
-      %th Total
-
-  %tbody
-    - @orders.each do |order|
+  %table.product-table
+    %thead
       %tr
-        %td= order.created_at.strftime("%b %e '%y")
-        %td= order.user.username
-        %td= number_to_currency( order.purchases.map(&:price).reduce(0, :+), precision: 2 )
-        %td= number_to_currency( order.discount, precision: 2 )
-        %td= number_to_currency( order.tax, precision: 2 )
-        %td= number_to_currency( order.total, precision: 2 )
+        %th Date
+        %th User
+        %th Revenue
+        %th Discount
+        %th Tax
+        %th Total
 
-  %thead
-    %tr
-      %th
-      %th
-      %td.embolden= number_to_currency( @orders.collect{|o| o.purchases.map(&:price).reduce(0, :+) }.reduce(0, :+), precision: 2 )
-      %td.embolden= number_to_currency( @orders.collect{|o| o.discount}.reduce(0, :+), precision: 2 )
-      %td.embolden= number_to_currency( @orders.collect{|o| o.tax}.reduce(0, :+), precision: 2 )
-      %td.embolden= number_to_currency( @orders.collect{|o| o.total}.reduce(0, :+), precision: 2 )
+    %tbody
+      - @orders.each do |order|
+        %tr
+          %td= order.created_at.strftime("%b %e '%y")
+          %td= order.user.username
+          %td= number_to_currency( order.purchases.map(&:price).reduce(0, :+), precision: 2 )
+          %td= number_to_currency( order.discount, precision: 2 )
+          %td= number_to_currency( order.tax, precision: 2 )
+          %td= number_to_currency( order.total, precision: 2 )
 
-= render "admin/admin_link"
+    %thead
+      %tr
+        %th
+        %th
+        %td.embolden= number_to_currency( @orders.collect{|o| o.purchases.map(&:price).reduce(0, :+) }.reduce(0, :+), precision: 2 )
+        %td.embolden= number_to_currency( @orders.collect{|o| o.discount}.reduce(0, :+), precision: 2 )
+        %td.embolden= number_to_currency( @orders.collect{|o| o.tax}.reduce(0, :+), precision: 2 )
+        %td.embolden= number_to_currency( @orders.collect{|o| o.total}.reduce(0, :+), precision: 2 )
+
+  = render "admin/admin_link"

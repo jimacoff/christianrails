@@ -1,5 +1,7 @@
 class StoreController < ApplicationController
 
+  skip_before_action :verify_is_admin
+
   def index
     @price_combos = PriceCombo.all
     @owned_products = []

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :verify_is_admin, except: [:show, :receipts]
+  skip_before_action :verify_is_admin, only: [:show, :receipts]
   before_action :set_order, only: [:show]
 
   def index

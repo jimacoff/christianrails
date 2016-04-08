@@ -1,6 +1,5 @@
 class PriceCombosController < ApplicationController
   before_action :set_price_combo, only: [:edit, :update, :destroy]
-  before_action :verify_is_admin
 
   def index
     @price_combos = PriceCombo.all

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   include WoodsHelper
 
   before_filter :get_products, :get_cart
+  before_action :verify_is_admin
+
   after_filter :store_location
 
   # Prevent CSRF attacks by raising an exception.

@@ -3,7 +3,6 @@ class Woods::ItemsetsController < ApplicationController
 
   before_action :set_woods_itemset, only: [:show, :destroy]
   before_action :set_woods_story
-  before_action :verify_is_admin
 
   def index
     @itemsets = Woods::Itemset.includes(:items).where(story_id: @story.id)

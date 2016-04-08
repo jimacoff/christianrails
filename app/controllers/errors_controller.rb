@@ -1,5 +1,7 @@
 class ErrorsController < ApplicationController
 
+  skip_before_action :verify_is_admin
+
   def show
     render status_code.to_s, status: status_code
   end

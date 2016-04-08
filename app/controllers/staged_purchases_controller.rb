@@ -1,6 +1,6 @@
 class StagedPurchasesController < ApplicationController
   before_action :set_staged_purchase, only: [:destroy]
-  before_action :verify_is_admin, only: [:index]
+  skip_before_action :verify_is_admin, only: [:create, :destroy]
 
   def index
     # dashboard for admin

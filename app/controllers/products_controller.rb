@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
-  before_action :verify_is_admin
 
   def index
     @products = Product.all

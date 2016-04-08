@@ -2,7 +2,7 @@ class Woods::ItemsController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_params, only: [:show, :edit, :update, :destroy]
-  before_action :verify_is_admin, except: [:download]
+  skip_before_action :verify_is_admin, only: [:download]
 
   def download
     item_id = woods_item_params[:item_id]

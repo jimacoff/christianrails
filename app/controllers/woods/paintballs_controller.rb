@@ -2,7 +2,6 @@ class Woods::PaintballsController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_paintball, only: [:update]
-  before_action :verify_is_admin
 
   def create
     @paintball = Woods::Paintball.new(woods_paintball_params)
