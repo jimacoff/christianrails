@@ -27,7 +27,7 @@ th {
   position: absolute;
   z-index: 100;
   top: -100px;
-  right: 0;
+  right: 40px;
 }
 
 .dealzone-image {
@@ -36,7 +36,15 @@ th {
 
 .dealzone-prod-details {
   border-radius: 0 0 30px 30px;
-  background-color: grey;
+  background-color: #B5DBE8;
+  margin-top: -9px;
+}
+
+#dealzone-pricedetails {
+  background-color: #EBEBEB;
+  padding: 5px;
+  border-radius: 0 0 10px 10px;
+  margin-top: -9px;
 }
 
 #store-wrapper {
