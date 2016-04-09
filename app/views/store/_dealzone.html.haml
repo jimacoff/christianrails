@@ -1,27 +1,28 @@
 - unless !@cart || !@all_products
-  - is_hidden = @cart.size == 0 ? "display: none;" : "display: inline-block;"
+  - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
 
-  #dealzone{style: "#{is_hidden}"}
-    %p.embolden Your basket:
-    - if @all_products.size > 0
-      - @all_products.each do |prod|
-        = render 'store/dealzone_product', {prod: prod}
+  #dealzone.panel{style: "#{display_setting}"}
+    #deal-col1
+      - if @all_products.size > 0
+        - @all_products.each do |prod|
+          = render 'store/dealzone_product', {prod: prod}
 
-    #check_out
-      %table
-        %tr
-          %td.half-width
-            #discount_label Save:
-          %td.half-width
-            #discount_price.new-price
-      %table
-        %tr
-          %td.half-width
-            .embolden Total:
-          %td.half-width
-            #total_price.embolden $0.00
+    #deal-col2
+      #check_out
+        %table
+          %tr
+            %td.half-width
+              #discount_label Save:
+            %td.half-width
+              #discount_price.new-price
+        %table
+          %tr
+            %td.half-width
+              .embolden Total:
+            %td.half-width
+              #total_price.embolden $0.00
 
-      %input.center{id: "check_out_button", onclick: "doCheckout();", type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png", alt: "Check out with PayPal" }
-      .hidden.center{id: "processing"}
-        %p Processing...
-        = image_tag("spin.gif")
+        %input.center{id: "check_out_button", onclick: "doCheckout();", type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png", alt: "Check out with PayPal" }
+        .hidden.center{id: "processing"}
+          %p Processing...
+          = image_tag("spin.gif")

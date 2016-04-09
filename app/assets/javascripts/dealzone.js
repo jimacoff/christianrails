@@ -55,7 +55,7 @@ function drawNewPrices(price_data) {
       total = 0;
 
   dealzoneItems.each(function( i ) {
-    if($($(this).parents()[4]).hasClass("totalable")){
+    if($($(this).parents()[1]).hasClass("totalable")){
       total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
     }
   });
@@ -68,7 +68,7 @@ function drawNewPrices(price_data) {
     $('#total_price').removeClass('discount');
     $('#discount_label').html('');
   }
-  
+
   $('#total_price').text("$" + total.toFixed(2));
 
   // update the satisfiable discounts
@@ -91,7 +91,7 @@ function createStagedPurchase(product_id) {
       type: 'POST',
       url: '/staged_purchases.json',
       dataType: 'json',
-      data: { 'staged_purchase': { 'product_id' : product_id } } 
+      data: { 'staged_purchase': { 'product_id' : product_id } }
     });
 
   request.done(function(data, textStatus, jqXHR) {

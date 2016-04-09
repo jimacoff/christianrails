@@ -5,11 +5,6 @@ body {
   word-wrap: break-word;
 }
 
-#bulk {
-  text-align: center;
-  margin: 0 auto;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: Artifika, Helvetica, Arial, sans-serif !important;
 }
@@ -18,10 +13,7 @@ table {
   width: 100%;
 }
 
-.face {
-  margin-top: -30px;
-  margin-right: 10px;
-}
+// HEADER STUFF
 
 #header {
   padding-top: 10px;
@@ -29,21 +21,26 @@ table {
   padding-right: 10px;
   width: 80%;
   margin: 0 auto;
+
+  h1 {
+    font-weight: bold;
+    letter-spacing: -1px;
+    font-family: Artifika, Helvetica, Arial, sans-serif !important;
+  }
 }
 
 #logo-wrapper {
   display: inline-block;
 }
 
-#header h1 {
-  font-weight: bold;
-  letter-spacing: -1px;
-  font-family: Artifika, Helvetica, Arial, sans-serif !important;
-}
-
 .subtitle {
   font-style: italic;
   margin-top: 0;
+}
+
+.face {
+  margin-top: -30px;
+  margin-right: 10px;
 }
 
 #user-wrapper {
@@ -54,10 +51,19 @@ table {
   position: static;
 }
 
+// PANELS ETC
+
 .panel {
   box-shadow: 0 0 10px #777;
   z-index:        0;
   background:     #fff;
+  margin-top: 9px;
+  padding: 1px 40px 40px 40px;
+  border-radius:  40px;
+}
+
+.smart-panel {
+  margin: 0 auto 25px;
 }
 
 .glass {
@@ -67,6 +73,8 @@ table {
   border-radius: 10px;
   border: 0px solid;
 }
+
+// TOOLBOX
 
 .left {
   float: left;
@@ -167,6 +175,10 @@ table {
     position: static;
   }
 
+  .smart-panel {
+    width: 550px;
+  }
+
 }
 @media screen and (min-width: 1024px) {
 
@@ -189,5 +201,8 @@ table {
     position: static;
   }
 
-}
+  .smart-panel {
+    width: 640px;
+  }
 
+}

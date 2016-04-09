@@ -20,9 +20,6 @@
     / %canvas{id: "ocean", width: "1300", height: "999"}
     / %canvas{id: "rainfield", width: "1300", height: "999"}
 
-    #zone-keeper
-      = render "store/dealzone"
-
     = render "store/header"
 
     - if notice
@@ -32,7 +29,11 @@
       %p.alert.alert-danger
         = alert
 
-    = yield
+    - if controller_name == 'store' && action_name == 'index'
+      = yield
+    - else
+      .smart-panel.panel
+        = yield
 
     = render "store/footer"
 

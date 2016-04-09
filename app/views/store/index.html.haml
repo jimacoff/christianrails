@@ -1,8 +1,6 @@
 #super-wrapper
-  #store-wrapper.panel
-    = render 'library'
+  #store-wrapper.panel= render 'library'
   #store-col2
-    #blog-wrapper.panel
-      = render 'blog_sample'
-    #about-wrapper.panel
-      = render 'about'
+    = render "store/dealzone"
+    #blog-wrapper.panel= render 'blog_sample'
+    #about-wrapper.panel= render 'about'

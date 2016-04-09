@@ -24,23 +24,12 @@ th {
 }
 
 #dealzone {
-  background: #fff;
-  width: 150px;
-  margin-left: 375px;
-  margin-top: 174px;
-  box-shadow: 0 0 10px #777;
-  padding: 25px;
-  z-index: 999;
   display: inline-block;
-  border-radius: 50px;
 }
 
-#zone-keeper {
-  width: 0px;
-  height: 0px;
-  margin: auto;
-  overflow: visible;
-  z-index: 999;
+#deal-col1, #deal-col2 {
+  width: 49%;
+  display: inline-block;
 }
 
 .store-button {
@@ -117,12 +106,6 @@ th {
 .product-table {
   tr:nth-child(odd)     { background-color: #dedce9; }
   tr:nth-child(even)    { background-color: #e5e4e9; }
-}
-
-#store-wrapper, #about-wrapper, #blog-wrapper {
-  margin-top: 9px;
-  padding: 1px 40px 40px 40px;
-  border-radius:  40px;
 }
 
 .admin-panel {
@@ -267,7 +250,7 @@ th {
     margin: 0 auto;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper  {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #dealzone  {
     width: 500px;
     margin: 0 auto 25px auto;
   }
@@ -290,7 +273,7 @@ th {
     padding: 25px;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper   {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #dealzone   {
     margin: 0 auto 25px auto;
   }
 
@@ -306,6 +289,11 @@ th {
   #about-wrapper {
     width: 640px;
   }
+
+  #dealzone {
+    width: 640px;
+  }
+
 }
 
 @media screen and (min-width: 1240px)  {
@@ -314,7 +302,7 @@ th {
     text-align: center;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper   {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #dealzone   {
     display: inline-block;
     vertical-align: top;
     text-align: left;
@@ -330,11 +318,14 @@ th {
     margin: 0 auto 25px 0;
   }
 
-  #about-wrapper, #blog-wrapper {
+  #about-wrapper, #blog-wrapper, #dealzone  {
     margin: 0 auto 25px 25px;
     width: 450px;
     clear: right;
   }
 
-}
+  #dealzone {
+    width: 450px;
+  }
 
+}
