@@ -1,7 +1,3 @@
-# Monologue::User.class_eval do
-#   self.table_name = 'users'
-# end
-
 Monologue.config do |config|
   config.site_name = "Christian DeWolf"
   config.site_subtitle = "Books + Software"
@@ -35,5 +31,4 @@ Monologue.config do |config|
   config.facebook_logo = 'logo.png'
   config.github_username = "christiancodes"
   config.show_rss_icon = true
-
 end

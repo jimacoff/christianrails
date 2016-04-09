@@ -1,9 +1,7 @@
 #header
   #logo-wrapper
     .left.face
-      %a{onclick: "window.onEachFrame(Ocean.run); $('#rain-trigger').addClass('hidden'); $('#no-rain').removeClass('hidden');", href: "#", id: "rain-trigger"}
-        #rain-trigger= image_tag("cyan-circle.png", alt: "Christian DeWolf", class: 'elastiface')
-      #no-rain.hidden= image_tag("purple-circle.png", alt: "Christian DeWolf", class: 'elastiface')
+      %a{ href: main_app.root_path }= image_tag("cyan-circle.png", alt: "Christian DeWolf", class: 'elastiface')
     %h1#mynameis Christian DeWolf
     %p#imake.subtitle Books + Software
 
