@@ -1,7 +1,7 @@
 var cart = {}
 
-function showDealzone() { $('#dealzone').fadeIn();  }
-function hideDealzone() { $('#dealzone').fadeOut(); }
+function showDealzone() { $('#dealzone').fadeIn();  $('#checkout').fadeIn(); }
+function hideDealzone() { $('#dealzone').fadeOut(); $('#checkout').fadeOut(); }
 function possiblyHideDealzone() { if(Object.keys(cart).length === 0) { hideDealzone(); } }
 function enableAddToCartButton(product_id)  { $('#add_to_cart_' + product_id).prop("disabled", false); $('#add_to_cart_' + product_id).text("Add to basket"); }
 function disableAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true);  $('#add_to_cart_' + product_id).text("Added to basket"); }
