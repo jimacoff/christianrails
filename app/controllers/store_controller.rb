@@ -45,11 +45,11 @@ class StoreController < ApplicationController
         },
         transactions: [{
           amount: {
-            total: (total_cost * (1 + Purchase::TAX_RATE) ).round(2).to_s,
+            total: '%.2f' % (total_cost * (1 + Purchase::TAX_RATE) ).round(2).to_s,
             currency: 'CAD',
             details: {
               subtotal: total_cost.to_s,
-              tax: (total_cost * Purchase::TAX_RATE ).round(2).to_s
+              tax: '%.2f' % (total_cost * Purchase::TAX_RATE ).round(2).to_s
             }
           },
           description: titles.join(' + ') + ' eBooks'

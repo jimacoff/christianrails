@@ -1,13 +1,13 @@
 var cart = {}
 
-function showDealzone() { $('#dealzone').fadeIn();  $('#checkout').fadeIn(); }
+function showDealzone() { $('#dealzone').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); }
 function hideDealzone() { $('#dealzone').fadeOut(); $('#checkout').fadeOut(); }
 function possiblyHideDealzone() { if(Object.keys(cart).length === 0) { hideDealzone(); } }
 function enableAddToCartButton(product_id)  { $('#add_to_cart_' + product_id).prop("disabled", false); $('#add_to_cart_' + product_id).text("Add to basket"); }
 function disableAddToCartButton(product_id) { $('#add_to_cart_' + product_id).prop("disabled", true);  $('#add_to_cart_' + product_id).text("Added to basket"); }
 function showPriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeIn();  $("#" + product_id + "_new_price").fadeIn(); }
 function hidePriceOfProduct(product_id)  { $("#" + product_id + "_price").fadeOut(); $("#" + product_id + "_new_price").fadeOut(); }
-function showProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeIn().addClass('totalable'); }
+function showProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeIn().css("display","inline-block").addClass('totalable'); }
 function hideProductInDealzone(product_id) { $("#dealzone_item_"  + product_id).fadeOut().removeClass('totalable'); }
 
 function addToCart(product_id) {
@@ -130,6 +130,7 @@ function doCheckout() {
       url: '/store/check_out'
     });
   $('#check_out_button').addClass('hidden');
+  $('#dealzone-pricedetails').addClass('pricedetails-processing');
   $('#processing').removeClass('hidden');
 
   request.done(function(data, textStatus, jqXHR) {
@@ -138,6 +139,7 @@ function doCheckout() {
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     $('#check_out_button').addClass('hidden');
+    $('#dealzone-pricedetails').removeClass('pricedetails-processing');
     $('#processing').removeClass('hidden');
     console.log("Error occured: " + textStatus);
   });
