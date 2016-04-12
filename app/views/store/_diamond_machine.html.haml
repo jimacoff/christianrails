@@ -9,7 +9,10 @@
 
       - has_diamonds = current_user && current_user.player && @finds && @finds.size > 0
       - if has_diamonds
-        %p You've been busy finding diamonds, and now you can download your finds in HD! All wallpapers are 1600x900.
+        %p
+          You've been busy
+          %a{title: "Diamond Find", href: diamondfind_path, class: "niceblue"} finding diamonds,
+          and now you can download your finds in HD! All wallpapers are 1600x900.
 
         %table.full-width
           - @finds.each do |f|

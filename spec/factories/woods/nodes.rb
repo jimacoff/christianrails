@@ -8,7 +8,7 @@ FactoryGirl.define do
     end
     left_text "Left"
     right_text "Right"
-    node_text "Content"
+    main_text "Content"
 
     tree_index 1
 

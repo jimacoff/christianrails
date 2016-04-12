@@ -1,9 +1,20 @@
-%h1 Blog
-
 - if @post
+  %h1 Blog
+
   %p= raw( @post.content )
 
 - else
-  %p No blog yet!
 
-  %p But there soon will be.  Keep an eye on this space.
+  %h1 News
+
+  %h4 Christian "@" Geequinox 2016!
+
+  %p I'm mostly a recluse, but occasionally I try to get out and interact with my readership. And while meeting all three of them is pretty overwhelming, it's also very rewarding.
+
+  %p
+    So come down to
+    = link_to "Spring Geequinox 2016", "http://geequinox.ca/", target: 'blank'
+    at the Halifax Forum on April 23rd and 24th and say 'Hi', and if you buy a copy of Ghostcrime, I completely understand.
+
+  %p
+    Each copy comes with a free gift!  The remaining first editions won't last long.
