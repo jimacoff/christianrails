@@ -13,7 +13,6 @@ gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
 gem 'mocha'
 gem 'monologue', git: 'https://github.com/jipiboily/monologue.git'
-gem "monologue-markdown", git: "https://github.com/christiancodes/monologue-markdown.git"
 gem 'paypal-sdk-rest'
 gem 'pg'
 gem 'rails', '4.2.4'
@@ -25,9 +24,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'rake', '~> 10.4.2'
 gem "non-stupid-digest-assets"
-
-gem 'therubyracer'
-gem 'execjs'
 
 group :doc do
   gem 'sdoc', require: false
