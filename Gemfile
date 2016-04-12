@@ -26,6 +26,9 @@ gem 'unicorn'
 gem 'rake', '~> 10.4.2'
 gem "non-stupid-digest-assets"
 
+gem 'therubyracer'
+gem 'execjs'
+
 group :doc do
   gem 'sdoc', require: false
 end
