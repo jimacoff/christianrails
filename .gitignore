@@ -18,3 +18,4 @@
 .rbenv-vars
 .ruby-version
 .gems
+.DS_Store

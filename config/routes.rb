@@ -3,7 +3,6 @@ require 'constraints/domain_constraint'
 Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
-  mount Monologue::Engine, at: '/blog'
 
   resources :staged_purchases,     only:   [:index, :create, :destroy]
   resources :purchases,            only:   [:index]

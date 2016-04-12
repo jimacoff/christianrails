@@ -13,8 +13,6 @@ class StoreController < ApplicationController
     @finds ||= nil
 
     @available_products = @all_products - @owned_products
-
-    @post = Monologue::Post.last
   end
 
   def updated_prices
