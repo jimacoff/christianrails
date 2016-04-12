@@ -8,7 +8,7 @@
 #imagepanel.zero-margin.center
   = image_tag("#{@story.pic_name}/title.png", class: "rounded")
 
-#nodepanel.half-width.zero-margin
+#nodepanel.zero-margin
   #story-pane.pane.glass
     = @node['node_text']
   #choice-pane.pane.center
@@ -19,7 +19,7 @@
     %button#big-button.binary-button{onclick: "move(" + @story.id.to_s + ", 'C');"}
       Continue
 
-#findpanel.half-width.zero-margin.hidden
+#findpanel.zero-margin.hidden
   #item-desc.pane.glass
   #item-controls.pane.center{style: "padding-bottom: 0;"}
     %button#prev-item-button.binary-button{onclick: "prevItem();"} Previous

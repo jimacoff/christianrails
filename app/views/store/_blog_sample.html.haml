@@ -1,1 +1,9 @@
 %h1 Blog
+
+- if @post
+  %p= raw( @post.content )
+
+- else
+  %p No blog yet!
+
+  %p But there soon will be.  Keep an eye on this space.
