@@ -1,0 +1,5 @@
+%p.embolden.right= "#{date_of( @post_name )}"
+
+= render "blog/posts/blog_#{ @post_name }"
+
+= link_to "Back to Archives", archives_blog_index_path, class: "embolden"

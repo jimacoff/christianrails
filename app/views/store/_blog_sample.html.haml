@@ -1,13 +1,7 @@
-%h1 News
+%h1#blog-header Blog
 
-%h4 Christian "@" Geequinox 2016!
+= render '/blog/embed_post', locals: { post_name: '20160501_spring_cleaning' }
+%hr
+= render '/blog/embed_post', locals: { post_name: '20160411_christian_at_geequinox' }
 
-%p I'm mostly a recluse, but occasionally I try to get out and interact with my readership. And while meeting all three of them is pretty overwhelming, it's also very rewarding.
-
-%p
-  So come down to
-  = link_to "Spring Geequinox 2016", "http://geequinox.ca/", target: 'blank'
-  at the Halifax Forum on April 23rd and 24th and say 'Hi', and if you buy a copy of Ghostcrime, I completely understand.
-
-%p
-  Each copy comes with a free gift!  The remaining first editions won't last long.
+.center= link_to "Archives", archives_blog_index_path

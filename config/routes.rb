@@ -10,6 +10,13 @@ Christianrails::Application.routes.draw do
 
   resources :users, only: [:show]
 
+  resources :blog, only: [:index] do
+    collection do
+      get 'show_post'
+      get 'archives'
+    end
+  end
+
   resources :products, except: [:show] do
     collection do
       get 'downloads'
@@ -89,6 +96,8 @@ Christianrails::Application.routes.draw do
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   root 'store#index'
 
+
+  get 'page_not_found', to: "errors#show", code: '404'
   %w( 404 422 500 ).each do |code|
     get code, to: "errors#show", code: code
   end

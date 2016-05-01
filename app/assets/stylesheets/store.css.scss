@@ -288,6 +288,11 @@ th {
   #store-wrapper, #about-wrapper, #blog-wrapper {
     width: 500px;
     margin: 0 auto 25px auto;
+    text-align: left;
+  }
+
+  #about-header, #blog-header {
+    text-align: center;
   }
 
   #store-col2 {
@@ -315,6 +320,11 @@ th {
 
   #store-wrapper, #about-wrapper, #blog-wrapper  {
     margin: 0 auto 25px auto;
+    text-align: left;
+  }
+
+  #about-header, #blog-header {
+    text-align: center;
   }
 
   #store-col2 {
@@ -341,6 +351,10 @@ th {
   #store-wrapper, #about-wrapper, #blog-wrapper  {
     display: inline-block;
     vertical-align: top;
+    text-align: left;
+  }
+
+  #about-header, #blog-header {
     text-align: left;
   }
 
