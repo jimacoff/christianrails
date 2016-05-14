@@ -1,0 +1,109 @@
+#fadeWrapper {
+  background-color: white;
+}
+
+.header {
+  background-color: white;
+}
+
+#content {
+  background-color: white;
+}
+
+body {
+  background-color: white;
+}
+
+h1 {
+color: black;
+}
+
+h2 {
+color: black;
+}
+
+h3 {
+color: black;
+}
+
+h4 {
+color: black;
+}
+
+h5 {
+color: black;
+}
+
+h6 {
+color: black;
+}
+
+p {
+color: black;
+}
+
+a {
+color: black;
+}
+
+li {
+color: black;
+text-align: left;
+}
+
+ul {
+color: black;
+text-align: left;
+}
+
+nav, nav-mobile {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: black !important;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #2E2E2E;
+  margin-bottom: 20px;
+  box-shadow: -5px 5px 5px 0px #000000;
+}
+
+nav {
+  max-width: 300px;
+}
+
+nav-mobile {
+  max-width: 625px;
+}
+
+nav a, nav-mobile a {
+  color: white;
+}
+
+.product-description {
+  color: gray;
+}
+
+#accent-bar {
+  min-height: 200px;
+  min-height: 400px;
+  background-color: black;
+  max-width: 100%;
+  min-width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: -800;
+}
+
+.top-button {
+  color: black;
+}
+
+hr {
+  border-color: #ffffff;
+  background-color: black;
+}
+
+#mobile-divider {
+  display:none;
+}

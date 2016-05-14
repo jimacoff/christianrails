@@ -4,6 +4,8 @@ Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
 
+  resources :butler, only: [:index]
+
   resources :staged_purchases,     only:   [:index, :create, :destroy]
   resources :purchases,            only:   [:index]
   resources :price_combos,         except: [:show]
