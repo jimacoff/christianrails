@@ -1,0 +1,113 @@
+!!! 5
+%html
+  %head
+    %title Wolf Butler Art & Software
+
+    %link#mainstyle{ href: "assets/butler/butler.css", rel: "stylesheet", type: "text/css" }
+    %link#flavourstyle{ href: "assets/butler/classic.css", rel: "stylesheet", type: "text/css" }
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "butler/butler", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "http://www.christiandewolf.com/assets/diamondfind/title.png" }
+    %meta{ property: "og:title", content: "Wolf Butler Art & Software" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/butler" }
+    %meta{ property: "og:description", content: "Digital comedy publishing from programmer/writer Christian DeWolf." }
+
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+  %body.noselect
+
+    #fadeWrapper.site-width
+      - if notice
+        %p.alert.alert-notice
+          = notice
+      - if alert
+        %p.alert.alert-danger
+          = alert
+
+      #top-bar.header.site-width
+        #title-image.site-width
+          %a.link{href: "blog"}
+            = image_tag('butler/title-comedyserver.jpg', id: 'title-img', class: 'page-link', alt: 'Comedy... server')
+            = image_tag('butler/logo-reserve.jpg', id: 'reserve-title-img', class: 'page-link hidden', alt: 'Comedy... server')
+            = image_tag('butler/inklogo.png', id: 'ink-title-img', class: 'page-link hidden', alt: 'Comedy... server')
+
+          #top-links
+            %a#products-link.top-button{href: "javascript:moveToProducts();"}
+              %h5.top-button.pointer Products
+            %a.link.top-button{href: "about"}
+              %h5.top-button.pointer About
+            %a.whitener.no-dec.ultra-diminutive.Courier{:href => "https://twitter.com/dewolfchristian", :target => "_blank"}
+              %img{:src => "assets/butler/twitter.png", :title => "Follow me on Twitter"}/
+              Follow on Twitter
+
+      .wrapper.site-width
+        %nav
+
+        #content
+          = yield
+
+        %br/
+        %br/
+        #mobile-divider
+          %hr/
+          %br/
+          %br/
+          %br/
+        %nav-mobile
+
+        #footer-bar.footer.site-width
+          %p{style: "align='center'"}
+            %a#topper{href: "javascript:moveToTop();"} Top
+            -
+            %a.link{href: "blog"} Blog
+          %br/
+          %p.Courier{style: "align='center'"} Wolf Butler Art & Software &copy; 2011-2016
+
+      #accent-bar
+
+:javascript
+
+  $(document).ready(function() {
+    // Create cross browser requestAnimationFrame method:
+    window.requestAnimationFrame = window.requestAnimationFrame
+     || window.mozRequestAnimationFrame
+     || window.webkitRequestAnimationFrame
+     || window.msRequestAnimationFrame
+     || function(f){setTimeout(f, 1000/60)};
+
+    window.addEventListener('scroll', function(){
+      if (typeof grayscroller === 'function') {
+        requestAnimationFrame(grayscroller);
+      }
+    }, false)
+
+    // make products into buttons
+    entities.forEach(function(product) {
+      //only do for entities with productName
+      if(product.productName) {
+        makeNavButton(product);
+        makeNavMobileButton(product);
+      }
+    });
+
+    loadProductFromHash();
+    loadStyleSheet();
+
+    // Navigation button clicks
+    $('nav a').click(function(){
+      switchPage(this);
+      return false;
+    });
+    $('nav-mobile a').click(function(){
+      switchPage(this);
+      return false;
+    });
+    $('.link').click(function(){
+      switchPage(this);
+      return false;
+    });
+
+  });

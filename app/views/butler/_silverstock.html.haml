@@ -1,0 +1,14 @@
+#silverstock.hidden
+  = image_tag('butler/silverstock-0.jpg', title: "Silver Stock", width: '666px', height: '460px' )
+  %br/
+  %p.grayer
+    In 2013, the comics and metal from Silver Stock were distributed to members of the now-defunct
+    = succeed "." do
+      %a#reserve-link.diminutive{:href => "reserve"} Precious Metals Reserve
+  %p.grayer Silver Stock will return soon.
+
+:javascript
+  $('#reserve-link').click(function(){
+    switchPage(this);
+    return false;
+  });
