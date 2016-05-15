@@ -29,13 +29,19 @@
 
       #top-bar.header.site-width
         #title-image.site-width
-          %a.link{href: "blog.php"}
-            %img#title-img.page-link{alt: "Comedy... server", src: "img-butler/title-comedyserver.jpg"}/
+          %a.link{href: "blog"}
+            = image_tag('butler/title-comedyserver.jpg', id: 'title-img', class: 'page-link', alt: 'Comedy... server')
+            = image_tag('butler/logo-reserve.jpg', id: 'reserve-title-img', class: 'page-link hidden', alt: 'Comedy... server')
+            = image_tag('butler/inklogo.png', id: 'ink-title-img', class: 'page-link hidden', alt: 'Comedy... server')
+
           #top-links
             %a#products-link.top-button{href: "javascript:moveToProducts();"}
               %h5.top-button.pointer Products
-            %a.link.top-button{href: "about.php"}
+            %a.link.top-button{href: "about"}
               %h5.top-button.pointer About
+            %a.whitener.no-dec.ultra-diminutive.Courier{:href => "https://twitter.com/dewolfchristian", :target => "_blank"}
+              %img{:src => "assets/butler/twitter.png", :title => "Follow me on Twitter"}/
+              Follow on Twitter
 
       .wrapper.site-width
         %nav
@@ -56,13 +62,11 @@
           %p{style: "align='center'"}
             %a#topper{href: "javascript:moveToTop();"} Top
             -
-            %a.link{href: "blog.php"} Blog
+            %a.link{href: "blog"} Blog
           %br/
           %p.Courier{style: "align='center'"} Wolf Butler Art & Software &copy; 2011-2016
 
       #accent-bar
-
-    %h5.right= "v #{app_version}"
 
 :javascript
 
@@ -88,4 +92,22 @@
         makeNavMobileButton(product);
       }
     });
+
+    loadProductFromHash();
+    loadStyleSheet();
+
+    // Navigation button clicks
+    $('nav a').click(function(){
+      switchPage(this);
+      return false;
+    });
+    $('nav-mobile a').click(function(){
+      switchPage(this);
+      return false;
+    });
+    $('.link').click(function(){
+      switchPage(this);
+      return false;
+    });
+
   });

@@ -53,7 +53,7 @@ var entities = [
   },
   {
     productName:"Snapback",
-    description:"Read a sample",
+    description:"Novella series",
     icon:"snapback-icon.jpg",
     code:"snapback",
     theme:"classic",
@@ -97,74 +97,46 @@ var entities = [
   }
 ];
 
-  function makeNavButton(product) {
-    $("nav").append("<table class=\"product-icon swell\"><tbody><tr><th><a href=\"" +
-        product.code + ".php\"><img src=\"buttons/" +
-        product.icon + "\" width=\"" +
-        product.iconW + "px\" height=\"" +
-        product.iconH + "\"></a></th></tr> <tr><th><a class=\"product-link Courier\" href=\"" +
-        product.code + ".php\">" +
-        product.productName + "</a></th></tr> <tr><th class=\"product-description Courier diminutive\">" +
-        product.description + "</th></tr></tbody></table>");
-  };
+function makeNavButton(product) {
+  $("nav").append("<table class=\"product-icon swell\"><tbody><tr><th><a href=\"" +
+      product.code + "\"><img src=\"assets/butler/buttons/" +
+      product.icon + "\" width=\"" +
+      product.iconW + "px\" height=\"" +
+      product.iconH + "\"></a></th></tr> <tr><th><a class=\"product-link Courier\" href=\"" +
+      product.code + "\">" +
+      product.productName + "</a></th></tr> <tr><th class=\"product-description Courier diminutive\">" +
+      product.description + "</th></tr></tbody></table>");
+};
 
-  function makeNavMobileButton(product) {
-    $("nav-mobile").append("<table class=\"product-icon swell flow\"><tbody><tr><th><a href=\"" +
-        product.code + ".php\"><img src=\"buttons/" +
-        product.icon + "\" width=\"" +
-        product.iconW + "px\" height=\"" +
-        product.iconH + "\"></a></th></tr> <tr><th><a class=\"product-link Courier\" href=\"" +
-        product.code + ".php\">" +
-        product.productName + "</a></th></tr> <tr><th class=\"product-description Courier diminutive\">" +
-        product.description + "</th></tr></tbody></table>");
-  };
+function makeNavMobileButton(product) {
+  $("nav-mobile").append("<table class=\"product-icon swell flow\"><tbody><tr><th><a href=\"" +
+      product.code + "\"><img src=\"assets/butler/buttons/" +
+      product.icon + "\" width=\"" +
+      product.iconW + "px\" height=\"" +
+      product.iconH + "\"></a></th></tr> <tr><th><a class=\"product-link Courier\" href=\"" +
+      product.code + "\">" +
+      product.productName + "</a></th></tr> <tr><th class=\"product-description Courier diminutive\">" +
+      product.description + "</th></tr></tbody></table>");
+};
 
-  function loadProductFromHash() {
-    // Check for hash value in URL
-    var hash = getHashOfWindow();
-    if(hash !== '') {
-      product = findProductByCode(hash);
-    } else {
-      product = findProductByCode('blog');
-    }
-    showProduct(product);
-  };
-
-  loadProductFromHash();
-  loadStyleSheet();
-
-  // Navigation button clicks
-  $('nav a').click(function(){
-    switchPage(this);
-    return false;
-  });
-  $('nav-mobile a').click(function(){
-    switchPage(this);
-    return false;
-  });
-  $('.link').click(function(){
-    switchPage(this);
-    return false;
-  });
-
+function loadProductFromHash() {
+  var hash = getHashOfWindow();
+  product = (hash !== '') ? findProductByCode(hash) : findProductByCode('blog');
+  showProduct(product);
+};
 
 function switchPage(context) {
-  var codeOfClicked = $(context).attr('href').substr(0,$(context).attr('href').length-4);
+  var codeOfClicked = $(context).attr('href');
   var product = findProductByCode(codeOfClicked);
 
   //don't switch if already on this product
   hash = getHashOfWindow();
   if(hash !== codeOfClicked) {
     // Fill #content with target page contents
-    navigateTo(product);
-    switchStyle(product);
+    window.location.hash = product.code;
+    hideThenShowNewProduct(product);
   }
   scrollToContent(product);
-};
-
-function navigateTo(productClicked) {
-  window.location.hash = productClicked.code;
-  hideThenShowNewProduct(productClicked);
 };
 
 function loadStyleSheet() {
@@ -175,7 +147,7 @@ function loadStyleSheet() {
 };
 
 function hideThenShowNewProduct(product) {
-  $('#content').hide({duration: 0, done: showProduct(product) } );
+  $('#content').fadeOut('fast', function() { showProduct(product) } );
   switchStyle(product);
 };
 
@@ -183,7 +155,7 @@ function switchStyle(product){
   var currentStyle = $('#flavourstyle').attr('href');
   if( currentStyle.indexOf(product.theme) == -1) {
     $("#fadeWrapper").hide( 0, function() {
-      $('#flavourstyle').attr('href', "css/" + product.theme + ".css");
+      $('#flavourstyle').attr('href', "assets/butler/" + product.theme + ".css");
       swapHeaderIcon(product);
       $("#fadeWrapper").fadeIn('fast');
     } );
@@ -191,15 +163,18 @@ function switchStyle(product){
 };
 
 function swapHeaderIcon(product) {
-  var prefix = "img-butler/";
   if(product.theme === 'reserve') {
-    $("#title-img").attr("src", prefix + "logo-reserve.jpg");
+    $("#title-img").addClass('hidden');
+    $("#ink-title-img").addClass('hidden');
+    $("#reserve-title-img").removeClass('hidden');
   } else if(product.theme === 'blackink') {
-    $("#title-img").attr("src", prefix + "inklogo.png");
-  } else if(product.theme === 'ghostcrime') {
-    $("#title-img").attr("src", prefix + "title-comedyserver.jpg");
+    $("#title-img").addClass('hidden');
+    $("#ink-title-img").removeClass('hidden');
+    $("#reserve-title-img").addClass('hidden');
   } else {
-    $("#title-img").attr("src", prefix + "title-comedyserver.jpg");
+    $("#title-img").removeClass('hidden');
+    $("#ink-title-img").addClass('hidden');
+    $("#reserve-title-img").addClass('hidden');
   }
 };
 
@@ -235,16 +210,31 @@ function getHashOfWindow() {
 }
 
 function showProduct(product) {
-  $('#content').load(product.code + ".php", function() {
-    showNewContent(product);
-  });
+  hideAllPartials();
+  $('#' + product.code).removeClass('hidden');
+
+  showNewContent(product);
 };
+
+function hideAllPartials() {
+  $('#about').addClass('hidden');
+  $('#blackink').addClass('hidden');
+  $('#blog').addClass('hidden');
+  $('#diamondfind').addClass('hidden');
+  $('#ghostcrime').addClass('hidden');
+  $('#gray').addClass('hidden');
+  $('#reserve').addClass('hidden');
+  $('#silverstock').addClass('hidden');
+  $('#snapback').addClass('hidden');
+  $('#thisbadger').addClass('hidden');
+}
+
 
 function showNewContent(product) {
   $('#content').fadeIn('slow', function() {
     timedPadNav(5);
   });
-  initializeBook(product);
+  //initializeBook(product);
 };
 
 function timedPadNav(times) {
@@ -278,107 +268,4 @@ function findProductByCode(productCode) {
     }
   }
   return -1;
-};
-
-// Comic viewer controls
-
-function initializeBook(product) {
-  // set book to first page
-  if( product.pages ) {
-    setPage(product, product.currentPage);
-    updateControls(product);
-    precacheBookImages(product);
-  }
-};
-
-$(document).on("click", '#left-control', function(event) {
-  product = findProductByCode(getHashOfWindow());
-  prevPage(product);
-});
-$(document).on("click", '#right-control', function(event) {
-  product = findProductByCode(getHashOfWindow());
-  nextPage(product);
-});
-
-function setPage(product, page) {
-  var code = product.code;
-
-  //TODO possibly quick fade out/in
-  $("#comic").attr("src", "img-" + code + "/" + code + "-" + page + ".jpg");
-  $("#comic").attr("height", product.pageH + "px");
-  $("#comic").attr("width", product.pageW + "px");
-};
-
-function nextPage(product) {
-  if( !product.pages ) {
-    return false;
-  } else {
-    if (product.currentPage == product.pages - 1) {
-      // return to start of book
-      product.currentPage == 0;
-    } else {
-      // actally increment page
-      product.currentPage++;
-    }
-    setPage(product, product.currentPage);
-    updateControls(product);
-  }
-  return true;
-};
-
-function prevPage(product) {
-  if( !product.pages ) {
-    return false;
-  } else {
-    if (product.currentPage == 0) {
-      // return to start of book
-      product.currentPage == 0;
-    } else {
-      // actally decrement page
-      product.currentPage--;
-    }
-    setPage(product, product.currentPage);
-    updateControls(product);
-  }
-  return true;
-};
-
-function updateControls(product) {
-  // update the controls
-  if( product.currentPage == 0) {
-    hidePrevButton(product);
-    showNextButton(product);
-  } else if ( product.currentPage == product.pages - 1) {
-    hideNextButton(product);
-    showPrevButton(product);
-  } else {
-    showNextButton(product);
-    showPrevButton(product);
-  }
-};
-
-function showPrevButton(product) {
-  $("#left-control").attr("src", "img-" + product.code + "/" + product.code + "-" + "prev.png");
-};
-function hidePrevButton(product) {
-  $("#left-control").attr("src", "img-" + product.code + "/" + product.code + "-" + "aligner.png");
-};
-function showNextButton(product) {
-  $("#right-control").attr("src", "img-" + product.code + "/" + product.code + "-" + "next.png");
-};
-function hideNextButton(product) {
-  $("#right-control").attr("src", "img-" + product.code + "/" + product.code + "-" + "aligner.png");
-};
-
-function precacheBookImages(product) {
-  var preloads = [];
-  var tempImg = [];
-  for(var i = 0; i < product.pages; i++) {
-    // add each imagename to array
-    preloads.push("img-" + product.code + "/" + product.code + "-" + i + ".jpg");
-  }
-  for(var x = 0; x < preloads.length; x++) {
-    tempImg[x] = new Image();
-    tempImg[x].src = preloads[x];
-  }
 };
