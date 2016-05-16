@@ -91,6 +91,11 @@ var entities = [
     code:"about"
   },
   {
+    pageName:"Archives",
+    theme:"classic",
+    code:"archives"
+  },
+  {
     pageName:"Thanks for ordering!",
     theme:"reserve",
     code:"ghost-thanks"
@@ -218,6 +223,7 @@ function showProduct(product) {
 
 function hideAllPartials() {
   $('#about').addClass('hidden');
+  $('#archives').addClass('hidden');
   $('#blackink').addClass('hidden');
   $('#blog').addClass('hidden');
   $('#diamondfind').addClass('hidden');

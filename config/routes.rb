@@ -4,7 +4,9 @@ Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :butler, only: [:index]
+  get '/butler',           to: 'butler#index'
+  get '/butler/show_post', to: 'butler#show_post'
+  get '/butler/archives',  to: 'butler#archives'
 
   resources :staged_purchases,     only:   [:index, :create, :destroy]
   resources :purchases,            only:   [:index]

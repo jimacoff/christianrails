@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   include StoreHelper
   include WoodsHelper
 
-  before_filter :get_products, :get_cart
   before_action :verify_is_admin unless :devise_controller?
+
+  before_filter :get_products, :get_cart
 
   after_filter :store_location
 
