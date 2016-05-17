@@ -1,6 +1,4 @@
 #blog
-  %p.embolden.right= "#{date_of( @post_name )}"
+  = render 'embed_post', locals: { post_name: @post_name }
 
-  = render "butler/posts/blog_#{ @post_name }"
-
-  = link_to "Archives", butler_path + '#archives', class: "embolden"
+  %a.page-link.link{href: "archives"} Archives
