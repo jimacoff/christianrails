@@ -3,8 +3,8 @@
   %head
     %title Wolf Butler Art & Software
 
-    %link#mainstyle{ href: "../assets/butler/butler.css", rel: "stylesheet", type: "text/css" }
-    %link#flavourstyle{ href: "../assets/butler/classic.css", rel: "stylesheet", type: "text/css" }
+    = stylesheet_link_tag    "butler/butler", media: "all", "data-turbolinks-track" => true
+    #flavourstyle= stylesheet_link_tag    "butler/classic", media: "all", "data-turbolinks-track" => true
 
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = javascript_include_tag "butler/butler", "data-turbolinks-track" => true
@@ -29,7 +29,7 @@
 
       #top-bar.header.site-width
         #title-image.site-width
-          %a.link{href: "blog"}
+          %a.link{href: ".#blog"}
             = image_tag('butler/title-comedyserver.jpg', id: 'title-img', class: 'page-link', alt: 'Comedy... server')
             = image_tag('butler/logo-reserve.jpg', id: 'reserve-title-img', class: 'page-link hidden', alt: 'Comedy... server')
             = image_tag('butler/inklogo.png', id: 'ink-title-img', class: 'page-link hidden', alt: 'Comedy... server')
@@ -40,10 +40,13 @@
             %a.link.top-button{href: "about"}
               %h5.top-button.pointer About
             %a.whitener.no-dec.top-button{:href => "https://twitter.com/dewolfchristian", :target => "_blank"}
-              %img{:src => "assets/butler/twitter.png", :title => "Follow me on Twitter"}
+              = image_tag("butler/twitter.png", title: "Follow me on Twitter")
 
       .wrapper.site-width
         %nav
+          - @entities.each do |product|
+            - if product[:productName]
+              = render "/butler/navbutton", locals: { product: product}
 
         #content
           = yield
@@ -56,6 +59,9 @@
           %br/
           %br/
         %nav-mobile
+          - @entities.each do |product|
+            - if product[:productName]
+              = render "/butler/navbutton", locals: { product: product}
 
         #footer-bar.footer.site-width
           %p{style: "align='center'"}
@@ -68,6 +74,8 @@
       #accent-bar
 
 :javascript
+
+  var entities = #{ @entities.to_json };
 
   $(document).ready(function() {
     // Create cross browser requestAnimationFrame method:
@@ -82,15 +90,6 @@
         requestAnimationFrame(grayscroller);
       }
     }, false)
-
-    // make products into buttons
-    entities.forEach(function(product) {
-      //only do for entities with productName
-      if(product.productName) {
-        makeNavButton(product);
-        makeNavMobileButton(product);
-      }
-    });
 
     loadProductFromHash();
     loadStyleSheet();
