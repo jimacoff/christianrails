@@ -1,5 +1,6 @@
-%p.embolden.right= "#{date_of( @post_name )}"
+#blog
+  %p.embolden.right= "#{date_of( @post_name )}"
 
-= render "butler/posts/blog_#{ @post_name }"
+  = render "butler/posts/blog_#{ @post_name }"
 
-= link_to "Back to Blog", butler_path, class: "embolden"
+  = link_to "Archives", butler_path + '#archives', class: "embolden"

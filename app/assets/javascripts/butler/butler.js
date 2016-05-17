@@ -12,7 +12,7 @@ function switchPage(context) {
   hash = getHashOfWindow();
   if(hash !== codeOfClicked) {
     // Fill #content with target page contents
-    window.location.hash = product.code;
+    window.location = '/butler#' + product.code;
     hideThenShowNewProduct(product);
   }
   scrollToContent(product);
