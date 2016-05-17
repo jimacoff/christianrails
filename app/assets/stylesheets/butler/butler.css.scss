@@ -10,8 +10,16 @@ body {
   background-color: black;
 }
 
+.right {
+  float: right;
+}
+
 .hidden {
   display: none;
+}
+
+.no-bullets {
+  list-style: none;
 }
 
 #fadeWrapper {
@@ -33,6 +41,10 @@ p {
 
 p, h1, h2, h3, h4, h5, h6, tr, .cursory {
   cursor: default;
+}
+
+hr {
+  margin: 35px 0;
 }
 
 .pointer {
@@ -112,6 +124,11 @@ nav-mobile {
   p {
     text-align: left !important;
   }
+}
+
+.blog-title {
+  color: #8E3EA9;
+  text-decoration: underline;
 }
 
 /* Desktop layout */
@@ -258,6 +275,10 @@ img.center {
 
 .df-cell {
   padding: 32px;
+}
+
+.leftmargin {
+  margin-left: 20px;
 }
 
 .left {
