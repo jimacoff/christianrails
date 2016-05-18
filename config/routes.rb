@@ -3,15 +3,6 @@ require 'constraints/domain_constraint'
 Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
-
-  get '/butler',           to: 'butler#index'
-  get '/butler/show_post', to: 'butler#show_post'
-  get '/butler/archives',  to: 'butler#archives'
-
-  resources :staged_purchases,     only:   [:index, :create, :destroy]
-  resources :purchases,            only:   [:index]
-  resources :price_combos,         except: [:show]
-
   resources :users, only: [:show]
 
   resources :blog, only: [:index] do
@@ -20,6 +11,10 @@ Christianrails::Application.routes.draw do
       get 'archives'
     end
   end
+
+  resources :staged_purchases,     only:   [:index, :create, :destroy]
+  resources :purchases,            only:   [:index]
+  resources :price_combos,         except: [:show]
 
   resources :products, except: [:show] do
     collection do
@@ -34,15 +29,6 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  resources :policies, only: [] do
-    collection do
-      get 'terms_of_use'
-      get 'privacy'
-      get 'customer_service'
-      get 'refund'
-    end
-  end
-
   resources :store, only: [:index] do
     collection do
       get  'updated_prices'
@@ -50,6 +36,15 @@ Christianrails::Application.routes.draw do
       get  'complete_order'
       post 'download'
       get  'order_success'
+    end
+  end
+
+  resources :policies, only: [] do
+    collection do
+      get 'terms_of_use'
+      get 'privacy'
+      get 'customer_service'
+      get 'refund'
     end
   end
 
@@ -61,6 +56,9 @@ Christianrails::Application.routes.draw do
     end
   end
   get '/fractalfic', to: 'graveyard#fractalfic'
+
+  get '/butler',           to: 'butler#index'
+  get '/butler/show_post', to: 'butler#show_post'
 
   namespace :woods do
     resources :players
@@ -83,11 +81,10 @@ Christianrails::Application.routes.draw do
         end
       end
     end
-
   end
 
   post '/woods/items/download', to: 'woods/items#download'
-  get '/woods',                 to: 'woods/stories#index'
+  get  '/woods',                to: 'woods/stories#index'
 
   get '/diamondfind',      to: 'woods/stories#show', defaults: { id: 1 }
   get '/diamondfind/play', to: 'woods/stories#play', defaults: { id: 1 }
@@ -98,8 +95,8 @@ Christianrails::Application.routes.draw do
   get '/user_report',    to: 'purchases#user_report'
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
+  get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')
   root 'store#index'
-
 
   get 'page_not_found', to: "errors#show", code: '404'
   %w( 404 422 500 ).each do |code|

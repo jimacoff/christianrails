@@ -4,8 +4,8 @@ Christianrails is a web application that can be used to sell eBooks and other di
 
 Release notes:
 
-- 1.1.1
-  - Major site redesign
+- 1.1.2 - Wolf Butler Art & Software site integrated
+- 1.1.1 - Major site redesign incl. blog
 - 1.1.0
   - BinaryWoods story player implemented for Diamond Find
   - Minor site redesign
