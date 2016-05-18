@@ -3,8 +3,10 @@
   %head
     %title Wolf Butler Art & Software
 
-    = stylesheet_link_tag    "butler/butler", media: "all", "data-turbolinks-track" => true
-    = stylesheet_link_tag    "butler/classic", media: "all", "data-turbolinks-track" => true, id: 'flavourstyle'
+    = stylesheet_link_tag "butler/butler",   media: "all", "data-turbolinks-track" => true, id: 'butler-style'
+    = stylesheet_link_tag "butler/classic",  media: "all", "data-turbolinks-track" => true, id: 'classic-style'
+    = stylesheet_link_tag "butler/reserve",  media: "all", "data-turbolinks-track" => true, id: 'reserve-style', disabled: true
+    = stylesheet_link_tag "butler/blackink", media: "all", "data-turbolinks-track" => true, id: 'blackink-style', disabled: true
 
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = javascript_include_tag "butler/butler", "data-turbolinks-track" => true
@@ -35,6 +37,8 @@
             = image_tag('butler/inklogo.png', id: 'ink-title-img', class: 'page-link hidden', alt: 'Comedy... server')
 
           #top-links
+            %a.top-button{href: root_path}
+              %h5.top-button.pointer Store
             %a#products-link.top-button{href: "javascript:moveToProducts();"}
               %h5.top-button.pointer Products
             %a.link.top-button{href: "about"}

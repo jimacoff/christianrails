@@ -31,10 +31,21 @@ function hideThenShowNewProduct(product) {
 };
 
 function switchStyle(product){
-  var currentStyle = $('#flavourstyle').attr('href');
+  var stylz = ['classic', 'reserve', 'blackink'];
+
+  for (var i = 0; i < stylz.length; i++) {
+    if( !$('#' + stylz[i] + '-style').prop("disabled")) {
+      var currentStyle = stylz[i];
+    }
+  }
+
   if( currentStyle.indexOf(product.theme) == -1) {
     $("#fadeWrapper").hide( 0, function() {
-      $('#flavourstyle').attr('href', "assets/butler/" + product.theme + ".css");
+      for (var i = 0; i < stylz.length; i++) {
+        $('#' + stylz[i] + '-style').prop("disabled", true);
+      }
+      $('#' + product.theme + '-style').prop("disabled", false);
+
       swapHeaderIcon(product);
       $("#fadeWrapper").fadeIn('fast');
     } );

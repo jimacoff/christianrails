@@ -9,7 +9,9 @@
         = image_tag("butler/coffeecup.jpg")
 
         %p.left Threatened by a well-armed strike team from competitor Real Estate Unlimited, as well as the possibility that the third floor might contain ghosts, Gray and his coworkers need to use all of their swivel chair expertise to protect their lives, their jobs, and their reputation with the fancy lobster place across the street, which does not look favourably on cancelled reservations.
-        %img{:height => "306px", :src => "assets/butler/lobster.jpg", :width => "300px"}/
+
+        = image_tag("butler/lobster.jpg", width: "300px", height: "306px", alt: "Gray")
+
         %br/
         %br/
         %h1
@@ -23,9 +25,9 @@
           %h5.df-table.Courier.grayer.diminutive Temporarily out of print!
 
 :javascript
-  function grayscroller(){
+  function grayscroller() {
     var vPosition = window.pageYOffset,
-      contentHeight = 1200;
+        contentHeight = 1200;
     if(vPosition < contentHeight) {
       $('#gray-cover').css("margin-top", vPosition - 500 + 'px');
     }
