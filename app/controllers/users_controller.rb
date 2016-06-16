@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   skip_before_action :verify_is_admin
 
   def show
-
   end
 
   private
