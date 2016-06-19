@@ -1,8 +1,6 @@
-= render 'embed_post', locals: { post_name: '20160522_ghostcrime_2ed_printed' }
-%hr
-= render 'embed_post', locals: { post_name: '20160501_spring_cleaning' }
-%hr
-= render 'embed_post', locals: { post_name: '20160411_christian_at_geequinox' }
+- @blog_posts.each do |post|
+  = render 'embed_post', locals: { post_name: post }
+  %hr
 
 %br
 %br

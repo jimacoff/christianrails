@@ -1,6 +1,9 @@
 class StoreController < ApplicationController
 
+  include BlogHelper
+
   skip_before_action :verify_is_admin
+  before_action :get_sample_blog_posts, only: [:index]
 
   def index
     @price_combos = PriceCombo.all
@@ -165,6 +168,10 @@ class StoreController < ApplicationController
 
   def store_params
     params.permit(:release_id, :paymentId, :token, :PayerID)
+  end
+
+  def get_sample_blog_posts
+    @blog_posts = sample_blog_posts
   end
 
 end
