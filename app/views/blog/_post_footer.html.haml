@@ -1,0 +1,12 @@
+#category-holder
+  %span.diminutive.embolden Posted in:
+
+  %span.category-link= locals[:post][:category]
+
+%br
+
+#tags-holder
+  %span.diminutive.embolden Tags:
+
+  - locals[:post][:tags].each do |tag|
+    %span.tag-link= tag

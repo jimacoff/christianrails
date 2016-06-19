@@ -136,9 +136,30 @@ table {
 .blog-link {
   font-weight: bold;
   text-decoration: underline;
-  color: #5400D1;
+  color: #428e84; // ghost green
 }
 
+#category-holder, #tags-holder {
+  display: inline-block;
+}
+
+.category-link {
+  font-size: 80%;
+}
+
+.tag-link, .category-link {
+  font-size: 85%;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.tag-link {
+  color: #428e84; // ghost green
+}
+
+.category-link {
+  color: #5400D1;  // bright purple
+}
 //
 
 @media screen and (min-width: 320px) {

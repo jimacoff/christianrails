@@ -1,7 +1,7 @@
 %h1#blog-header Blog
 
 - @blog_posts.each do |post|
-  = render '/blog/embed_post', locals: { post_name: post }
+  = render '/blog/embed_post', locals: { post: post }
   %hr
 
 .center= link_to "Archives", archives_blog_index_path

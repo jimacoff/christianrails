@@ -1,12 +1,27 @@
 module BlogHelper
 
   def all_blog_posts
-    # TODO pull these from the folder
     [
-      "20160618_new_book_in_the_works",
-      "20160522_ghostcrime_2ed_printed",
-      "20160501_spring_cleaning",
-      "20160411_christian_at_geequinox"
+      {
+        title: "20160618_new_book_in_the_works",
+        category: "Writing & Publishing",
+        tags: ["Hal-Con", "Snapback", "Go"]
+      },
+      {
+        title: "20160522_ghostcrime_2ed_printed",
+        category: "Writing & Publishing",
+        tags: ["Ghostcrime", "Hal-Con"]
+      },
+      {
+        title: "20160501_spring_cleaning",
+        category: "Rare Public Appearances",
+        tags: ["Ghostcrime"]
+      },
+      {
+        title: "20160411_christian_at_geequinox",
+        category: "Rare Public Appearances",
+        tags: ["Ghostcrime", "Geequinox"]
+      }
     ]
   end
 

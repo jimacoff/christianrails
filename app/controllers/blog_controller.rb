@@ -12,10 +12,12 @@ class BlogController < ApplicationController
   end
 
   def show_post
-    @post_name = params[:post]
-    if !lookup_context.find_all("/blog/posts/_blog_#{ @post_name }").any?
-      redirect_to page_not_found_path
+    post_name = params[:post]
+    if !lookup_context.find_all("/blog/posts/_blog_#{ post_name }").any?
+      redirect_to page_not_found_path and return
     end
+    titles = all_blog_posts.collect{ |x| x[:title] }
+    @post = all_blog_posts[ titles.index( post_name ) ]
   end
 
   private
