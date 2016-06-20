@@ -3,7 +3,6 @@
 - unless !@cart || !@all_products
   - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
 
-
   #checkout{style: "#{display_setting}"}
     %div{style: "text-align: right;"}
       %input{id: "check_out_button", onclick: "doCheckout();", type: "image", src: paypal_image, alt: "Check out with PayPal" }

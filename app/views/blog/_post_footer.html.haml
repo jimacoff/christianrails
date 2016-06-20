@@ -1,7 +1,7 @@
 #category-holder
   %span.diminutive.embolden Posted in:
 
-  %span.category-link= locals[:post][:category]
+  %span= link_to locals[:post][:category], category_blog_index_path + "?name=" + locals[:post][:category], class: "category-link"
 
 %br
 
@@ -9,4 +9,4 @@
   %span.diminutive.embolden Tags:
 
   - locals[:post][:tags].each do |tag|
-    %span.tag-link= tag
+    %span= link_to tag, tag_blog_index_path + "?name=" + tag, class: "tag-link"

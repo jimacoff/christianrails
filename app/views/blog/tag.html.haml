@@ -1,0 +1,13 @@
+- if @tag_posts.size > 0
+  %h1= "Tagged with: #{ @tag }"
+  %hr
+
+  - @tag_posts.each do |post|
+    = render 'embed_post', locals: { post: post }
+    %br
+    %hr
+
+- else
+  %h1 No such tag!
+
+= link_to "Home", root_path

@@ -20,6 +20,22 @@ class BlogController < ApplicationController
     @post = all_blog_posts[ titles.index( post_name ) ]
   end
 
+  def category
+    @category = params[:name]
+    @category_posts = []
+    all_blog_posts.each do |post|
+      @category_posts << post if post[:category] == @category
+    end
+  end
+
+  def tag
+    @tag = params[:name]
+    @tag_posts = []
+    all_blog_posts.each do |post|
+      @tag_posts << post if post[:tags].include? @tag
+    end
+  end
+
   private
 
   def get_all_blog_posts

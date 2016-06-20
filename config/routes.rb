@@ -9,6 +9,8 @@ Christianrails::Application.routes.draw do
     collection do
       get 'show_post'
       get 'archives'
+      get 'category'
+      get 'tag'
     end
   end
 

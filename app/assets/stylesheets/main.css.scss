@@ -144,21 +144,21 @@ table {
 }
 
 .category-link {
-  font-size: 80%;
+  font-size: 85% !important;
 }
 
 .tag-link, .category-link {
-  font-size: 85%;
+  font-size: 70%;
   font-weight: bold;
   text-decoration: underline;
 }
 
-.tag-link {
-  color: #428e84; // ghost green
+a.tag-link {
+  color: #6A0AFA !important;
 }
 
-.category-link {
-  color: #5400D1;  // bright purple
+a.category-link {
+  color: #220AFA !important;
 }
 //
 
