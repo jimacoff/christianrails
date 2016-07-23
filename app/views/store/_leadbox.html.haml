@@ -34,8 +34,10 @@
       request.done(function(data, textStatus, jqXHR) {
         $('#newsletter-signup-wrapper').fadeOut('fast', function() {
           $('#newsletter-success').fadeIn();
+          window.setTimeout(function(){
+            $('#newsletter-wrapper').fadeOut('slow');
+          }, 3000);
         })
-
       });
 
       request.error(function(jqXHR, textStatus, errorThrown) {
@@ -47,6 +49,5 @@
       window.setTimeout(function(){
         $('#enter-valid-email').fadeOut('slow');
       }, 2500);
-
     }
   }
