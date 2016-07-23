@@ -91,6 +91,14 @@ Christianrails::Application.routes.draw do
   get '/diamondfind',      to: 'woods/stories#show', defaults: { id: 1 }
   get '/diamondfind/play', to: 'woods/stories#play', defaults: { id: 1 }
 
+  namespace :crm do
+    resources :contacts, only: [:create] do
+      collection do
+        post 'newsletter_signup'
+      end
+    end
+  end
+
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'
 

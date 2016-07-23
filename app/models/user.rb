@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :staged_purchases, inverse_of: :user
 
   has_one :player, class_name: "Woods::Player", dependent: :destroy
+  has_one :assistant, class_name: "Crm::Assistant", dependent: :destroy
 
   validates_presence_of :username, :full_name, :country, :email, :encrypted_password
 

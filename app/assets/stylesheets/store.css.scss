@@ -76,7 +76,7 @@ th {
 
 .store-button {
   background-color: #BCDDE8;
-  border: black 1px solid;
+  border: #000000 1px solid;
   border-radius: 5px;
   padding: 6px;
   margin-right: 20px;
@@ -278,6 +278,35 @@ th {
   }
 }
 
+#leadbox {
+  text-align: center;
+}
+
+#newsletter-signup-wrapper {
+  margin-top: -10px;
+}
+
+.newsletter-input {
+  font-size: 1.25em;
+  min-width: 250px;
+  min-height: 33px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.newsletter-signup-button {
+  background-color: #C4BADE;
+  margin: -5px 0 0 5px;
+  font-size: 13px;
+}
+
+.enter-valid-email {
+  color: #E8CB7B;
+  margin-bottom: -20px;
+}
+
+////////// BEGIN RESPONSIVE ////////////////
+
 @media screen and (max-width: 800px) {
   // STEP 1 -- SMALL
 
@@ -285,7 +314,7 @@ th {
     margin: 0 auto;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
     width: 500px;
     margin: 0 auto 25px auto;
     text-align: left;
@@ -318,7 +347,7 @@ th {
     padding: 25px;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper  {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper  {
     margin: 0 auto 25px auto;
     text-align: left;
   }
@@ -332,11 +361,7 @@ th {
     text-align: center;
   }
 
-  #store-wrapper, #blog-wrapper {
-    width: 640px;
-  }
-
-  #about-wrapper {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
     width: 640px;
   }
 
@@ -348,7 +373,7 @@ th {
     text-align: center;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper  {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper  {
     display: inline-block;
     vertical-align: top;
     text-align: left;
@@ -368,7 +393,7 @@ th {
     margin: 0 auto 25px 0;
   }
 
-  #about-wrapper, #blog-wrapper {
+  #about-wrapper, #blog-wrapper, #newsletter-wrapper {
     margin: 0 auto 25px 25px;
     width: 450px;
     clear: right;

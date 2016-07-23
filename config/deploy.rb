@@ -34,13 +34,6 @@ namespace :deploy do
   #   system "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   # end
 
-  # desc 'Recover'
-  # task :recover do
-  #   on roles :all do
-  #     execute 'cd && sh recover.sh'
-  #   end
-  # end
-
   desc 'Precompile assets'
   task :precompile do
     on roles :all do

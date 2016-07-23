@@ -1,0 +1,52 @@
+#leadbox
+
+  #newsletter-signup-wrapper
+    %h4 Want to be the first to know about new releases?
+
+    %input#newsletter-email{type: 'email', placeholder: 'Enter your email', class: 'newsletter-input'}
+    %input#newsletter-button{type: 'submit', onclick: 'newsletterSignup();', class: "store-button newsletter-signup-button", value: "Sign me up!"}
+
+  #newsletter-success{style: "display: none;"}
+    %h2 Welcome to the inner circle!
+    %p{style: "margin-bottom: -20px"} Try not to abuse your new power.
+
+  #enter-valid-email{style: "display: none;"}
+    %p.enter-valid-email Please enter a valid email address.
+
+:javascript
+
+  function newsletterSignup() {
+
+    var address = $('#newsletter-email').val();
+
+    if(address.indexOf('@') !== -1) {
+
+      $('#newsletter-button').prop('disabled', true);
+
+      request = void 0;
+      request = $.ajax({
+          type: 'POST',
+          url: '/crm/contacts/newsletter_signup.json',
+          dataType: 'json',
+          data: { 'crm_contact': { 'email' : address } }
+        });
+
+      request.done(function(data, textStatus, jqXHR) {
+        $('#newsletter-signup-wrapper').fadeOut('fast', function() {
+          $('#newsletter-success').fadeIn();
+        })
+
+      });
+
+      request.error(function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus);
+        $('#newsletter-button').prop('disabled', false);
+      });
+    } else {
+      $('#enter-valid-email').fadeIn();
+      window.setTimeout(function(){
+        $('#enter-valid-email').fadeOut('slow');
+      }, 2500);
+
+    }
+  }
