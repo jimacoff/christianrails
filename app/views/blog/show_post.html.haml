@@ -1,7 +1,8 @@
-%p.embolden.right= "#{date_of( @post[:title] )}"
+.blog
+  %p.embolden.right= "#{date_of( @post[:title] )}"
 
-= render "blog/posts/blog_#{ @post[:title] }"
-= render "blog/post_footer", locals: { post: @post }
+  = render "blog/posts/blog_#{ @post[:title] }"
+  = render "blog/post_footer", locals: { post: @post }
 
 %br
 %br

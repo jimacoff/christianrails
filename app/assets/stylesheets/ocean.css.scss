@@ -1,13 +1,13 @@
-#ocean {
+#ocean, #rainfield {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+#ocean {
   z-index: -555;
 }
 
 #rainfield {
-  position: absolute;
-  left: 0;
-  top: 0;
   z-index: -444;
 }

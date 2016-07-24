@@ -1,3 +1,5 @@
+@import 'colormind';
+
 body {
   font: 16px/180% Arial, Helvetica, sans-serif;
   color: #444;
@@ -54,9 +56,9 @@ table {
 // PANELS ETC
 
 .panel {
-  box-shadow: 0 0 10px #777;
-  z-index:        0;
-  background:     #fff;
+  box-shadow: 0 0 10px $shadow-gray;
+  z-index: 0;
+  background: $white;
   margin-top: 9px;
   padding: 1px 40px 40px 40px;
   border-radius:  40px;
@@ -68,8 +70,8 @@ table {
 
 .glass {
   opacity: 0.75;
-  background:     #fff;
-  z-index:        0;
+  background: $white;
+  z-index: 0;
   border-radius: 10px;
   border: 0px solid;
 }
@@ -105,6 +107,16 @@ table {
   text-align: center;
 }
 
+.blog {
+  p {
+    //text-align: justify;
+  }
+}
+
+.justify {
+  text-align: justify !important;
+}
+
 .zero-margin {
   margin: 0 auto;
 }
@@ -126,7 +138,7 @@ table {
 }
 
 .niceblue {
-  color: #5258AB;
+  color: $violet-blue;
   text-decoration: underline !important;
   font-weight: bold;
 }
@@ -136,7 +148,7 @@ table {
 .blog-link {
   font-weight: bold;
   text-decoration: underline;
-  color: #428e84; // ghost green
+  color: $ghost-green;
 }
 
 #category-holder, #tags-holder {
@@ -154,11 +166,11 @@ table {
 }
 
 a.tag-link {
-  color: #6A0AFA !important;
+  color: $bright-purple !important;
 }
 
 a.category-link {
-  color: #220AFA !important;
+  color: $link-blue !important;
 }
 //
 

@@ -2,12 +2,14 @@
  *= require ../main.css.scss
  */
 
+@import '../colormind';
+
 body {
-  color: #252525;
+  color: $dark-gray;
 }
 
 a {
-  color: #340D5C;
+  color: $dark-purple;
   text-decoration: none !important;
 }
 
@@ -26,7 +28,7 @@ a {
 
 #binaryheader {
   width: 100%;
-  background: #fff;
+  background: $white;
 }
 
 #woods-wrapper {
@@ -46,9 +48,9 @@ a {
 }
 
 .panel {
-  box-shadow: 0 0 10px #777;
-  z-index:        0;
-  background:     #fff;
+  box-shadow: 0 0 10px $shadow-gray;
+  z-index: 0;
+  background: $white;
 }
 
 #nodepanel, #findpanel {
@@ -77,8 +79,8 @@ a {
   cursor: pointer;
   margin-bottom: 5px;
   margin-left: 100px;
-  color: #ffffff;
-  background-color: #000000;
+  color: $white;
+  background-color: $black;
 }
 
 .bright-button {
@@ -86,13 +88,13 @@ a {
   min-height: 80px;
   font-size: 125%;
   cursor: pointer;
-  background-color: #F0F8FF;
-  border: 1px solid #000000;
+  background-color: $cloud-blue;
+  border: 1px solid $black;
   margin-top: 10px;
 }
 
 .minory-button:disabled {
-  color: #bfbfbf;
+  color: $light-gray;
 }
 
 .lineheight-spacer {
@@ -103,9 +105,9 @@ a {
 .woods-table {
   width: 30%;
   padding: 0;
-  tr:nth-child(odd)  { background-color: #E6E6E6; }
-  tr:nth-child(even) { background-color: #D6D6D6; }
-  th { background-color: #ffffff;
+  tr:nth-child(odd)  { background-color: $smoke-gray; }
+  tr:nth-child(even) { background-color: $alt-smoke-gray; }
+  th { background-color: $white;
        padding: 0; }
   td { padding: 0;
        border: 0; }
@@ -139,30 +141,30 @@ a {
   td {
     width: 50%;
   }
-  border: 1px solid #000000;
+  border: 1px solid $black;
   border-radius: 20px;
   text-align: center;
-  background-color: #E2CFFA;
+  background-color: $mega-pink;
   width: 300px;
   padding-bottom: 20px;
 }
 
 #storyinfopanel {
   margin-top: 20px;
-  border: 1px solid #000000;
+  border: 1px solid $black;
   border-radius: 20px;
   text-align: center;
-  background-color: #CFDAFA;
+  background-color: $mega-blue;
   width: 300px;
   padding-bottom: 6px;
 }
 
 .megapink {
-  color: #E2CFFA;
+  color: $mega-pink;
   text-decoration: underline !important;
 }
 
 .megablue {
-  color: #CDD7F3;
+  color: $mega-blue;
   text-decoration: underline !important;
 }

@@ -1,6 +1,7 @@
-- @blog_posts.each do |post|
-  = render 'embed_post', locals: { post: post }
-  %hr
+.blog
+  - @blog_posts.each do |post|
+    = render 'embed_post', locals: { post: post }
+    %hr
 
 %br
 %br

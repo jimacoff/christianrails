@@ -1,3 +1,5 @@
+@import 'colormind';
+
 p {
   margin: 1em 0;
   line-height: 120%;
@@ -20,7 +22,7 @@ a:hover {
 
 th {
   text-align: left;
-  background-color: #fff;
+  background-color: $white;
 }
 
 #dealzone {
@@ -75,8 +77,8 @@ th {
 }
 
 .store-button {
-  background-color: #BCDDE8;
-  border: #000000 1px solid;
+  background-color: $soft-cyan;
+  border: $black 1px solid;
   border-radius: 5px;
   padding: 6px;
   margin-right: 20px;
@@ -243,7 +245,7 @@ th {
 
 #footer-bar {
   border-radius: 30px;
-  background-color: #BCDDE8;
+  background-color: $soft-cyan;
   width: 640px;
   margin: 0 auto;
 

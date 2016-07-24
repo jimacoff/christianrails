@@ -1,13 +1,14 @@
-- if @category_posts.size > 0
-  %h1= "Posts in: #{ @category }"
-  %hr
-
-  - @category_posts.each do |post|
-    = render 'embed_post', locals: { post: post }
-    %br
+.blog
+  - if @category_posts.size > 0
+    %h1= "Posts in: #{ @category }"
     %hr
 
-- else
-  %h1 No such category!
+    - @category_posts.each do |post|
+      = render 'embed_post', locals: { post: post }
+      %br
+      %hr
+
+  - else
+    %h1 No such category!
 
 = link_to "Home", root_path
