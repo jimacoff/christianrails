@@ -59,8 +59,10 @@ Christianrails::Application.routes.draw do
   end
   get '/fractalfic', to: 'graveyard#fractalfic'
 
-  get '/butler',           to: 'butler#index'
-  get '/butler/show_post', to: 'butler#show_post'
+  get '/butler',               to: 'butler#index'
+  get '/butler/show_post',     to: 'butler#show_post'
+  get '/butler/category',      to: 'butler#category'
+  get '/butler/tag',           to: 'butler#tag'
 
   namespace :woods do
     resources :players

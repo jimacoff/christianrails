@@ -1,12 +1,6 @@
 #blog
-  = render 'embed_post', locals: { post_name: '20160212_2015_in_review' }
-  %hr
-  = render 'embed_post', locals: { post_name: '20151126_actually_did_publish_that_book' }
-  %hr
-  = render 'embed_post', locals: { post_name: '20150822_new_book_forthcoming' }
-  %hr
-  = render 'embed_post', locals: { post_name: '20150515_victoria_day_hacks' }
-  %hr
-  = render 'embed_post', locals: { post_name: '20150311_go_is_great' }
+  - @sample_posts.each do |post|
+    = render 'butler/blog/embed_post', locals: { post: post }
+    %hr
 
   %a.page-link.link{href: "archives"} Archives

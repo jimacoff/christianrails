@@ -1,0 +1,82 @@
+@import '../colormind';
+
+#fadeWrapper {
+  background-color: black;
+}
+
+h1 {
+  color: $white;
+}
+
+h2 {
+  color: $pumpkin-orange;
+}
+
+h3 {
+  color: $platinum-blue;
+}
+
+h4 {
+  color: $white;
+}
+
+h5 {
+  color: $platinum-blue;
+}
+
+h6 {
+  color: $white;
+}
+
+p {
+  font-size: 20px;
+  color: $white;
+}
+
+a {
+  color: $platinum-blue;
+}
+
+li {
+  color: $platinum-blue;
+  text-align: left;
+}
+
+ul {
+  color: $platinum-blue;
+  text-align: left;
+}
+
+/* Input box controls */
+label {
+  color: $white;
+  text-align: center;
+}
+select {
+  color: $white;
+  border: $white;
+}
+textarea {
+  color: $white;
+
+}
+input {
+  color: $light-platinum;
+}
+
+.option {
+  color: $white;
+  text-align: center;
+}
+
+.product-description {
+  color: $white;
+}
+
+.top-button {
+  color: $platinum-blue;
+}
+
+hr {
+  border-color: $white;
+}

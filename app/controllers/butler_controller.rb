@@ -1,10 +1,14 @@
 class ::ButlerController < ApplicationController
 
+  include ButlerHelper
+
   layout "butler"
 
   before_action :set_entities
+  before_action :get_all_blog_posts
 
   def index
+    get_sample_posts
   end
 
   def show_post
@@ -14,7 +18,49 @@ class ::ButlerController < ApplicationController
     end
   end
 
-private
+  def archives
+  end
+
+  def show_post
+    post_name = params[:post]
+    if !lookup_context.find_all("/butler/blog/posts/_blog_#{ post_name }").any?
+      redirect_to page_not_found_path and return
+    end
+    titles = @blog_posts.collect{ |x| x[:title] }
+    @post = @blog_posts[ titles.index( post_name ) ]
+
+    render 'butler/blog/show_post'
+  end
+
+  def category
+    @category = params[:name]
+    @category_posts = []
+    @blog_posts.each do |post|
+      @category_posts << post if post[:category] == @category
+    end
+
+    render 'butler/blog/category'
+  end
+
+  def tag
+    @tag = params[:name]
+    @tag_posts = []
+    @blog_posts.each do |post|
+      @tag_posts << post if post[:tags].include? @tag
+    end
+
+    render 'butler/blog/tag'
+  end
+
+  private
+
+  def get_sample_posts
+    @sample_posts = sample_butler_posts
+  end
+
+  def get_all_blog_posts
+    @blog_posts = all_butler_posts
+  end
 
   def set_entities
     @entities = [

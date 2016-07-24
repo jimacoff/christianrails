@@ -1,0 +1,14 @@
+- if @category_posts.size > 0
+  %h3{style: "text-align: left;"}
+    Category:
+    .oranger{style: "display: inline-block;"}= @category
+
+  - @category_posts.each do |post|
+    = render 'butler/blog/embed_post', locals: { post: post }
+    %br
+    %hr
+
+- else
+  %h1 No such category!
+
+= link_to "Home", butler_path

@@ -1,3 +1,5 @@
+@import '../colormind';
+
 * {
   margin: 0;
   -webkit-box-sizing: border-box;
@@ -7,7 +9,7 @@
 }
 
 body {
-  background-color: black;
+  background-color: $black;
 }
 
 .right {
@@ -79,23 +81,23 @@ p {
 }
 
 tr, th {
-  color: white;
+  color: $white;
   text-align: center;
   width: 33%;
 }
 
 a {
-  color: #8E3EA9;
+  color: $servile-purple;
   text-align: left;
 }
 
 li {
-  color: white;
+  color: $white;
   text-align: left;
 }
 
 ul {
-  color: white;
+  color: $white;
 }
 
 table.center {
@@ -127,7 +129,7 @@ nav-mobile {
 }
 
 .blog-title {
-  color: #8E3EA9;
+  color: $servile-purple;
   text-decoration: underline;
 }
 
@@ -220,27 +222,27 @@ img.center {
 
 /* Colourizers */
 .whitener {
-  color: white;
+  color: $white;
 }
 
 .blackener {
-  color: black;
+  color: $black;
 }
 
 .grayer {
-  color: gray;
+  color: $gray;
 }
 
 .purpler {
-  color: #8E3EA9;
+  color: $servile-purple;
 }
 
 .oranger {
-  color: #FB9400 !important;
+  color: $pumpkin-orange !important;
 }
 
 .platinum {
-  color: #88A8B0;
+  color: $platinum-blue;
 }
 
 /*B&W*/
@@ -359,4 +361,32 @@ img.center {
 
 .ultra-diminutive {
   font-size: 10px;
+}
+
+.radical-diminutive {
+  font-size: 65%;
+}
+
+#category-holder, #tags-holder {
+  display: inline-block;
+  text-align: left !important;
+  font-size: 1.2em;
+  margin-top: 15px;
+}
+
+#tags-holder {
+  margin-left: 20px;
+}
+
+.tag-link, .category-link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.category-link {
+  font-size: 90% !important;
+}
+
+.tag-link {
+  font-size: 80% !important;
 }

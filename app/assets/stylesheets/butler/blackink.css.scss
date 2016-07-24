@@ -1,59 +1,27 @@
+@import '../colormind';
+
 #fadeWrapper {
-  background-color: white;
+  background-color: $white;
 }
 
 .header {
-  background-color: white;
+  background-color: $white;
 }
 
 #content {
-  background-color: white;
+  background-color: $white;
 }
 
 body {
-  background-color: white;
+  background-color: $white;
 }
 
-h1 {
-color: black;
+h1, h2, h3, h4, h5, h6, p, a, ul, li {
+  color: $black;
 }
 
-h2 {
-color: black;
-}
-
-h3 {
-color: black;
-}
-
-h4 {
-color: black;
-}
-
-h5 {
-color: black;
-}
-
-h6 {
-color: black;
-}
-
-p {
-color: black;
-}
-
-a {
-color: black;
-}
-
-li {
-color: black;
-text-align: left;
-}
-
-ul {
-color: black;
-text-align: left;
+li, ul {
+  text-align: left;
 }
 
 nav, nav-mobile {
@@ -77,17 +45,17 @@ nav-mobile {
 }
 
 nav a, nav-mobile a {
-  color: white;
+  color: $white;
 }
 
 .product-description {
-  color: gray;
+  color: $gray;
 }
 
 #accent-bar {
   min-height: 200px;
   min-height: 400px;
-  background-color: black;
+  background-color: $black;
   max-width: 100%;
   min-width: 100%;
   position: fixed;
@@ -96,14 +64,14 @@ nav a, nav-mobile a {
 }
 
 .top-button {
-  color: black;
+  color: $black;
 }
 
 hr {
-  border-color: #ffffff;
-  background-color: black;
+  border-color: $white;
+  background-color: $black;
 }
 
 #mobile-divider {
-  display:none;
+  display: none;
 }

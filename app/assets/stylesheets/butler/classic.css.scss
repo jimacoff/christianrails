@@ -1,43 +1,46 @@
+@import '../colormind';
+
 #fadeWrapper {
-  background-color: black;
+  background-color: $black;
 }
 
-h1 {
-  color: white;
-}
-
-h2 {
-  color: white;
-}
-
-h3 {
-  color: white;
-}
-
-h4 {
-  color: white;
+h1, h2, h3, h4, p {
+  color: $white;
 }
 
 h5 {
-  color: #8E3EA9;
+  color: $servile-purple;
 }
 
 h6 {
-  color: #88A8B0;
-}
-
-p {
-  color: white;
+  color: $platinum-blue;
 }
 
 nav {
-  background-color: black;
+  background-color: $black;
 }
 
 .top-button {
-  color: #FB9400;
+  color: $pumpkin-orange;
 }
 
 hr {
-  border-color: gray;
+  border-color: $gray;
+}
+
+a.tag-link {
+  color: $platinum-blue !important;
+  margin-right: 2px;
+}
+
+a.category-link {
+  color: $pumpkin-orange !important;
+}
+
+#posted-in {
+  color: $gray;
+}
+
+#tags-tag {
+  color: $gray;
 }
