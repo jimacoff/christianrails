@@ -8,6 +8,8 @@
     = stylesheet_link_tag "butler/reserve",  media: "all", "data-turbolinks-track" => true, id: 'reserve-style', disabled: true
     = stylesheet_link_tag "butler/blackink", media: "all", "data-turbolinks-track" => true, id: 'blackink-style', disabled: true
 
+    %link{rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css"}
+
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = javascript_include_tag "butler/butler", "data-turbolinks-track" => true
     = csrf_meta_tags
