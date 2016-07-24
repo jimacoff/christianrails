@@ -29,6 +29,10 @@ body {
   min-width: 100%;
 }
 
+.justify {
+  text-align: justify !important;
+}
+
 html, body {
   height: 100%;
 }
@@ -128,7 +132,7 @@ nav-mobile {
 
 #blog {
   p {
-    text-align: left !important;
+    text-align: justify !important;
   }
 }
 
