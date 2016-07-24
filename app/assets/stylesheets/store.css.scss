@@ -7,17 +7,17 @@ p {
 
 a {
   text-decoration: none;
-  color: #5b5e81;
+  color: $slate-purple;
 }
 
 a:hover {
   transition: color 0.3s;
-  color: #99ABC4;
+  color: $l-slate-purple;
   //color: #ED2D2D;  the red
 }
 
 .link-selected {
-  color: #99ABC4 !important;
+  color: $l-slate-purple !important;
 }
 
 th {
@@ -39,12 +39,12 @@ th {
 
 .dealzone-prod-details {
   border-radius: 0 0 30px 30px;
-  background-color: #B5DBE8;
+  background-color: $sky-cyan;
   margin-top: -9px;
 }
 
 #dealzone-pricedetails {
-  background-color: #EBEBEB;
+  background-color: $smoke-gray;
   padding: 5px;
   border-radius: 0 0 10px 10px;
   margin-top: -9px;
@@ -98,7 +98,7 @@ th {
 }
 
 .store-button:active {
-  background-color: #8CCFE6;
+  background-color: $ice-blue;
   outline: none;
 }
 
@@ -125,43 +125,31 @@ th {
   padding-top: 1px;
   padding-bottom: 1px;
 
-  background-color: #E6E9EB;
+  background-color: $blue-smoke;
   margin-right: auto;
 }
 
 .physical-button {
   margin-top: 22px;
-  background-color: #E8CB7B;
+  background-color: $honey-yellow;
 }
 
 .digital-button {
   margin-top: 22px;
-  background-color: #C4BADE;
+  background-color: $mega-pink;
 }
 
 .discount {
-  color: #CFBF65;
+  color: $honey-yellow;
 }
 
 .new-price {
-  color: #6ECF65;
+  color: $grass-green;
 }
 
 .product-table {
-  tr:nth-child(odd)     { background-color: #dedce9; }
-  tr:nth-child(even)    { background-color: #e5e4e9; }
-}
-
-#menu-container {
-  border: 1px dashed #919191;
-  border-left: none;
-  border-right: none;
-  padding: 8.33333px 0;
-  margin: 25px 0;
-  font-size: 175%;
-  font-family: Artifika, Georgia, Serif;
-  text-decoration: none !important;
-  width: 100%;
+  tr:nth-child(odd)     { background-color: $purple-smoke; }
+  tr:nth-child(even)    { background-color: $l-purple-smoke; }
 }
 
 .background {
@@ -195,24 +183,20 @@ th {
   margin-right: 0;
 }
 
-.menu-text {
-  color: #1D2378;
-}
-
 .purpler {
-  color: #653AC2;
+  color: $medium-purple;
 }
 
 .gold {
-  color: #E8CB7B;
+  color: $honey-yellow;
 }
 
 .greener {
-  color: #428E84;
+  color: $ghost-green;
 }
 
 .dotbox {
-  border-bottom: 1px dashed #919191;
+  border-bottom: 1px dashed $gray;
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
@@ -228,19 +212,15 @@ th {
 }
 
 .alert-notice {
-  border: 1px solid #6C9C46;
-  background-color: #A6DEA4;
-  color: #486532;
+  border: 1px solid $health-green;
+  background-color: $light-jade;
+  color: $algae-green;
 }
 
 .alert-danger {
-  border: 1px solid #A83E3E;
-  background-color: #DEA4A4;
-  color: #A83E3E;
-}
-
-#notice {
-  color: green;
+  border: 1px solid $rust-red;
+  background-color: $wet-clay;
+  color: $rust-red;
 }
 
 #footer-bar {
@@ -248,22 +228,15 @@ th {
   background-color: $soft-cyan;
   width: 640px;
   margin: 0 auto;
-
-}
-
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
 }
 
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid $rust-red;
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: $off-white;
   h2 {
     text-align: left;
     font-weight: bold;
@@ -271,8 +244,8 @@ th {
     font-size: 12px;
     margin: -7px;
     margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
+    background-color: $rust-red;
+    color: $white;
   }
   ul li {
     font-size: 12px;
@@ -297,13 +270,13 @@ th {
 }
 
 .newsletter-signup-button {
-  background-color: #C4BADE;
+  background-color: $mega-pink;
   margin: -5px 0 0 5px;
   font-size: 13px;
 }
 
 .enter-valid-email {
-  color: #E8CB7B;
+  color: $honey-yellow;
   margin-bottom: -20px;
 }
 
