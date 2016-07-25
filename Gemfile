@@ -24,6 +24,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'rake', '~> 10.4.2'
 gem "non-stupid-digest-assets"
+gem "mandrill-api"
 
 group :doc do
   gem 'sdoc', require: false
