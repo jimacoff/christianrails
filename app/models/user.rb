@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_one :player, class_name: "Woods::Player", dependent: :destroy
   has_one :assistant, class_name: "Crm::Assistant", dependent: :destroy
 
-  validates_presence_of :username, :full_name, :country, :email, :encrypted_password
+  validates_presence_of :username, :first_name, :last_name, :email, :encrypted_password
 
   def products
     products = []
@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
 
   def has_product?(product_id)
     self.products.collect(&:id).include?(product_id)
+  end
+
+  def full_name
+    first_name + " " + last_name
   end
 
 end

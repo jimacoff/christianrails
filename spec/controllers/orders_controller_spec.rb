@@ -7,7 +7,8 @@ RSpec.describe OrdersController, type: :controller do
   before (:each) do
     @user = User.create!({
       username: 'testuser',
-      full_name: 'Test User',
+      first_name: 'Test',
+      last_name: 'User',
       email: 'user@test.com',
       password: '12345678',
       password_confirmation: '12345678',

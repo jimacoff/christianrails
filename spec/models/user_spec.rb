@@ -22,17 +22,18 @@ RSpec.describe User, type: :model do
   it "should validate" do
     u = User.new()
     expect( u ).to_not be_valid
-    expect( u.errors.messages.keys ).to include(:username, :full_name, :country)
+    expect( u.errors.messages.keys ).to include(:username, :first_name, :last_name)
     expect( u.errors.messages.keys ).to include(:email, :encrypted_password)
 
     expect( u.errors.messages[:username] ).to include("can't be blank")
-    expect( u.errors.messages[:full_name] ).to include("can't be blank")
-    expect( u.errors.messages[:country] ).to include("can't be blank")
+    expect( u.errors.messages[:first_name] ).to include("can't be blank")
+    expect( u.errors.messages[:last_name] ).to include("can't be blank")
     expect( u.errors.messages[:email] ).to include("can't be blank")
     expect( u.errors.messages[:encrypted_password] ).to include("can't be blank")
 
     u.username = "keazy"
-    u.full_name = "Kevin"
+    u.first_name = "Kevin"
+    u.last_name = "K"
     u.country = "US"
     u.email = "cinnabon@themall.com"
     u.password = "kevs_pass"
@@ -41,7 +42,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should have many orders" do
-    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+    u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     expect( u.orders.count ).to eq(0)
 
@@ -52,7 +53,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should have many purchases through orders" do
-    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+    u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     order.user = u
     order.save
@@ -61,7 +62,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should have many downloads" do
-    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+    u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     expect( u.downloads.count ).to eq(0)
 
@@ -73,7 +74,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should have many staged purchases" do
-    u = User.create(username: "Tim", full_name: "Tim", country: "CA", email: "tim@test.com", password: "timsword")
+    u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     expect( u.staged_purchases.count ).to eq(0)
 

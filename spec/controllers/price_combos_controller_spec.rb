@@ -6,8 +6,9 @@ RSpec.describe PriceCombosController, type: :controller do
 
   before (:each) do
     @user = User.create!({
-      username: 'testuser', 
-      full_name: 'Test User',
+      username: 'testuser',
+      first_name: 'Test',
+      last_name: 'User',
       email: 'user@test.com',
       password: '12345678',
       password_confirmation: '12345678',
@@ -17,7 +18,7 @@ RSpec.describe PriceCombosController, type: :controller do
 
     controller.class.skip_before_filter :verify_is_admin
   end
-  
+
   let(:valid_attributes) {
     {
       name: "Crazydeal",
@@ -102,7 +103,7 @@ RSpec.describe PriceCombosController, type: :controller do
         price_combo = PriceCombo.create! valid_attributes
         put :update, {:id => price_combo.to_param, :price_combo => new_attributes}, valid_session
         price_combo.reload
-        
+
         expect( price_combo.name ).to eq("Superdeal")
         expect( price_combo.discount ).to eq(2.99)
       end

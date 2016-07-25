@@ -3,7 +3,8 @@ FactoryGirl.define do
     sequence :username do |n|
       "user_#{n}"
     end
-    full_name "Ellison Rath"
+    first_name "Ellison"
+    last_name "Rath"
     country "CA"
     sequence :email do |n|
       "person#{n}@test.com"

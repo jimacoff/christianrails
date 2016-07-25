@@ -1,7 +1,7 @@
 #user-wrapper.glass
   - if current_user
     .center
-      Welcome, #{current_user.full_name}!
+      Welcome, #{current_user.first_name}!
 
       %p.diminutive.lineheight-spacer
         - if current_user.admin?
