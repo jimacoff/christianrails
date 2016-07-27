@@ -149,7 +149,7 @@ class StoreController < ApplicationController
 
   def order_success
     respond_to do |format|
-      flash[:notice] = "Order complete! Your book(s) will arrive in 2-3 weeks."
+      flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
       format.html { redirect_to root_path }
     end
   end
