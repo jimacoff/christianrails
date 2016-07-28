@@ -8,6 +8,7 @@ class AdminController < ApplicationController
     begin
       @contact = Crm::Contact.find(3) # me!
       NewsletterMailer.welcome(@contact).deliver_later
+      NewsletterMailer.welcome(@contact).deliver
     rescue
       @failure = true
     end
