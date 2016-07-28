@@ -50,7 +50,11 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  resources :admin, only: [:index]
+  resources :admin, only: [:index] do
+    collection do
+      get 'emailtest'
+    end
+  end
 
   resources :graveyard, only: [] do
     collection do
