@@ -66,13 +66,13 @@ Christianrails::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.smtp_settings = {
-    address: ENV.fetch("SMTP_ADDRESS"),
+    address: ENV["SMTP_ADDRESS"],
     authentication: :plain,
-    domain: ENV.fetch("SMTP_DOMAIN"),
+    domain: ENV["SMTP_DOMAIN"],
     enable_starttls_auto: true,
-    password: ENV.fetch("SMTP_PASSWORD"),
+    password: ENV["SMTP_PASSWORD"],
     port: "587",
-    user_name: ENV.fetch("SMTP_USERNAME")
+    user_name: ENV["SMTP_USERNAME"]
   }
   config.action_mailer.default_url_options = { host: ENV["SMTP_DOMAIN"] }
 
