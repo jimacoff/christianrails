@@ -1,6 +1,7 @@
 module ButlerHelper
 
   def all_butler_posts
+    # Add new posts at the top.
     [
       {
         title: "20160212_2015_in_review",

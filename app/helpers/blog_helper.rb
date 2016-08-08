@@ -1,7 +1,13 @@
 module BlogHelper
 
   def all_blog_posts
+    # Add new posts at the top.
     [
+      {
+        title: "20160808_between_contracts",
+        category: "Freelance Life",
+        tags: ["freelance", "self-employment", "travelling", "British Columbia"]
+      },
       {
         title: "20160618_new_book_in_the_works",
         category: "Writing and Publishing",
@@ -26,7 +32,7 @@ module BlogHelper
   end
 
   def sample_blog_posts
-    all_blog_posts[0..3]
+    all_blog_posts[0..4]
   end
 
 end
