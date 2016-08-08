@@ -38,6 +38,7 @@ Christianrails::Application.routes.draw do
       get  'complete_order'
       post 'download'
       get  'order_success'
+      get  'unsubscribe'
     end
   end
 
@@ -107,6 +108,7 @@ Christianrails::Application.routes.draw do
 
   get '/complete_order', to: 'store#complete_order'
   get '/order_success',  to: 'store#order_success'
+  get '/unsubscribe',    to: 'store#unsubscribe'
 
   get '/user_report',    to: 'purchases#user_report'
 

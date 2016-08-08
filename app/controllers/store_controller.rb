@@ -154,6 +154,9 @@ class StoreController < ApplicationController
     end
   end
 
+  def unsubscribe
+  end
+
   private
 
   def get_updated_prices
