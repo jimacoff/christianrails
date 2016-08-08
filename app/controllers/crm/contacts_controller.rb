@@ -19,12 +19,12 @@ class Crm::ContactsController < ApplicationController
 
   def newsletter_signup
     @contact = Crm::Contact.new(crm_contact_params)
-    @contact.assistant = Crm::Assistant.find(1)
+    @contact.assistant = Crm::Assistant.find(1)  # mine
     @contact.source = "Newsletter signup"
 
     respond_to do |format|
       if @contact.save
-        # TODO mail off notifications
+        NewsletterMailer.welcome(@contact).deliver_now
         format.json { render json: @contact, status: :created }
       else
         format.json { render json: @contact.errors, status: :unprocessable_entity }
