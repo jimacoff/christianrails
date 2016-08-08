@@ -6,7 +6,7 @@ module BlogHelper
       {
         title: "20160808_between_contracts",
         category: "Freelance Life",
-        tags: ["freelance", "self-employment", "travelling", "British Columbia"]
+        tags: ["freelance", "self-employment", "travelling", "British Columbia", "Snapback", "books"]
       },
       {
         title: "20160618_new_book_in_the_works",
