@@ -33,6 +33,7 @@ class Crm::ContactsController < ApplicationController
   end
 
   private
+
     def set_crm_contact
       @contact = Crm::Contact.find(params[:id])
     end

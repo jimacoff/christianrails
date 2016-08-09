@@ -2,33 +2,34 @@
 %html
   %head
     %title DeWolf Personal Assistant
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "crm/crm", media: "all", "data-turbolinks-track" => true
 
     = javascript_include_tag "application", "data-turbolinks-track" => true
-    = javascript_include_tag "woods/woods", "data-turbolinks-track" => true
+
     = csrf_meta_tags
 
     %meta{ property: "og:image", content: "http://www.christiandewolf.com/diamondfind.png" }
     %meta{ property: "og:title", content: "DeWolf Personal Assistant" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com/crm" }
-    %meta{ property: "og:description", content: "Store your contacts." }
+    %meta{ property: "og:description", content: "Sort your goddamn life out." }
 
     %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
 
   %body.background
 
-    = render "woods/header"
+    = render "crm/header"
 
-    #woods-wrapper
-      - if notice
-        %p.alert.alert-notice
-          = notice
-      - if alert
-        %p.alert.alert-danger
-          = alert
+    - if notice
+      %p.alert.alert-notice
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
 
+    .crm-panel
       = yield
 
-      = render "woods/footer"
+    = render "crm/footer"
 
     %h5.right= "v #{app_version}"

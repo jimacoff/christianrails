@@ -1,0 +1,21 @@
+- if @assistant
+  %h2 Welcome back.
+  %h5= "I am Assistant #{ @assistant.name }. Please allow me to help you."
+
+  %p TODO The main index view will follow.
+
+- elsif !current_user
+  %h1 You aren't signed in!
+  %br
+    %p
+      = link_to 'Sign in', main_app.user_session_path
+      or
+      = link_to 'Sign up',  main_app.new_user_registration_path
+      to access this area.
+
+- else
+  %h1 You don't have an Assistant yet!
+
+  // add a form
+  %p.center
+    = link_to "Create one", crm_assistants_path, method: "post"

@@ -15,8 +15,10 @@ Christianrails::Application.routes.draw do
   end
 
   resources :staged_purchases,     only:   [:index, :create, :destroy]
-  resources :purchases,            only:   [:index]
   resources :price_combos,         except: [:show]
+
+  resources :purchases,            only:   [:index]
+  get '/user_report',              to: 'purchases#user_report'
 
   resources :products, except: [:show] do
     collection do
@@ -38,9 +40,11 @@ Christianrails::Application.routes.draw do
       get  'complete_order'
       post 'download'
       get  'order_success'
-      get  'unsubscribe'
     end
   end
+  get '/complete_order', to: 'store#complete_order'
+  get '/order_success',  to: 'store#order_success'
+
 
   resources :policies, only: [] do
     collection do
@@ -56,18 +60,6 @@ Christianrails::Application.routes.draw do
       get 'emailtest'
     end
   end
-
-  resources :graveyard, only: [] do
-    collection do
-      get 'fractalfic'
-    end
-  end
-  get '/fractalfic', to: 'graveyard#fractalfic'
-
-  get '/butler',               to: 'butler#index'
-  get '/butler/show_post',     to: 'butler#show_post'
-  get '/butler/category',      to: 'butler#category'
-  get '/butler/tag',           to: 'butler#tag'
 
   namespace :woods do
     resources :players
@@ -99,18 +91,26 @@ Christianrails::Application.routes.draw do
   get '/diamondfind/play', to: 'woods/stories#play', defaults: { id: 1 }
 
   namespace :crm do
+    resources :assistants, only: [:index]
     resources :contacts, only: [:create] do
       collection do
         post 'newsletter_signup'
       end
     end
   end
+  get '/crm', to: 'crm/assistants#index'
 
-  get '/complete_order', to: 'store#complete_order'
-  get '/order_success',  to: 'store#order_success'
-  get '/unsubscribe',    to: 'store#unsubscribe'
+  resources :graveyard, only: [] do
+    collection do
+      get 'fractalfic'
+    end
+  end
+  get '/fractalfic', to: 'graveyard#fractalfic'
 
-  get '/user_report',    to: 'purchases#user_report'
+  get '/butler',               to: 'butler#index'
+  get '/butler/show_post',     to: 'butler#show_post'
+  get '/butler/category',      to: 'butler#category'
+  get '/butler/tag',           to: 'butler#tag'
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')
