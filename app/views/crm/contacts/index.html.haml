@@ -1,17 +1,24 @@
 %h1 Contacts
 
-%table.crm-table
-  %thead
-    %tr
-      %th Name
-      %th Email
-      %th Phone
+= link_to "Add New Contact", new_crm_contact_path
 
-  %tbody
-    - @contacts.each do |contact|
+%br
+%br
+
+- @contacts.each do |contact|
+  %table.crm-table
+    %thead
       %tr
-        %td= contact.full_name
+        %th= contact.full_name
+        %th= contact.position_at_business
+        %th
+          = link_to "Edit", edit_crm_contact_path( contact )
+          |
+          = link_to "Destroy", crm_contact_path( contact ), method: :delete, data: { confirm: "Are you sure you wish to DESTROY this contact?" }
+      %tr
         %td= contact.email
         %td= contact.phone
+        %td= contact.address
+  %br
 
 = link_to '<< Home', crm_path

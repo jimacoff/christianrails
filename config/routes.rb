@@ -92,7 +92,7 @@ Christianrails::Application.routes.draw do
 
   namespace :crm do
     resources :assistants, only: [:index]
-    resources :contacts, only: [:index, :create] do
+    resources :contacts, except: [:show] do
       collection do
         post 'newsletter_signup'
       end

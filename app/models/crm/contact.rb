@@ -6,4 +6,14 @@ class Crm::Contact < ActiveRecord::Base
     name ||= firstname unless !firstname
     name ||= ""
   end
+
+  def position_at_business
+    if positiontitle && positiontitle != "" && business && business != ""
+      positiontitle + ", " + business
+    elsif positiontitle && positiontitle != ""
+      positiontitle
+    else
+      business
+    end
+  end
 end
