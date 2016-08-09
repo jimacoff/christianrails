@@ -24,7 +24,7 @@ class Crm::ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        NewsletterMailer.welcome(@contact).deliver_now
+        send_notifications
         format.json { render json: @contact, status: :created }
       else
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -39,5 +39,10 @@ class Crm::ContactsController < ApplicationController
 
     def crm_contact_params
       params.require(:crm_contact).permit(:email)
+    end
+
+    def send_notifications
+      NewsletterMailer.welcome(@contact).deliver_now
+      AdminMailer.newsletter_signup(@contact).deliver_now
     end
 end

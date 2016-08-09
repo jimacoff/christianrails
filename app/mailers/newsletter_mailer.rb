@@ -1,6 +1,5 @@
 class NewsletterMailer < BaseMandrillMailer
-  def welcome(contact_id)
-    contact = Crm::Contact.find(contact_id)
+  def welcome(contact)
     subject = "Welcome."
     merge_vars = {
       "EMAIL" => contact.email
