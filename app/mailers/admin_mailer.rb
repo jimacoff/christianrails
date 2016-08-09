@@ -8,7 +8,7 @@ class AdminMailer < ActionMailer::Base
     @contact = contact
     subject = "New newsletter signup"
 
-    mail(to: @contact.email, subject: subject, content_type: "text/html")
+    mail(to: "christian@wolfbutler.com", subject: subject, content_type: "text/html")
   end
 
 end
