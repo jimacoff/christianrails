@@ -1,8 +1,30 @@
 - if @assistant
-  %h2 Welcome back.
-  %h5= "I am Assistant #{ @assistant.name }. Please allow me to help you."
+  %h4= "I am your Assistant, #{ @assistant.name }. Please allow me to help you."
 
-  %p TODO The main index view will follow.
+  %p
+    %span Ideas
+    |
+    %span Reminders
+    |
+    %span= link_to "Contacts", crm_contacts_path
+    |
+    %span Obligations
+    |
+    %span Meetings
+
+  %table.crm-table
+    %thead
+      %tr
+        %th Obligation
+        %th For
+        %th Due by
+
+    %tbody
+      - @obligations.each do |ob|
+        %tr
+          %td= ob.name
+          %td= ob.contact.name
+          %td= ob.due_at
 
 - elsif !current_user
   %h1 You aren't signed in!

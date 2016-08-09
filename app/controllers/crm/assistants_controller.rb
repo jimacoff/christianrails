@@ -3,6 +3,7 @@ class Crm::AssistantsController < ApplicationController
 
   def index
     @assistant = current_user ? current_user.assistant : nil
+    @obligations = [] if @assistant
   end
 
   def create
@@ -38,4 +39,5 @@ class Crm::AssistantsController < ApplicationController
       NewsletterMailer.welcome(@assistant).deliver_now
       AdminMailer.newsletter_signup(@assistant).deliver_now
     end
+
 end

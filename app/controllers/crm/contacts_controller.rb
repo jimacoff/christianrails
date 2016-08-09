@@ -2,6 +2,15 @@ class Crm::ContactsController < ApplicationController
   layout "crm"
 
   skip_before_action :verify_is_admin, only: [:newsletter_signup]
+  before_action :verify_has_assistant, except: [:newsletter_signup]
+
+  def index
+    @contacts = current_assistant.contacts
+  end
+
+  def new
+    # TODO
+  end
 
   def create
     @contact = Crm::Contact.new(crm_contact_params)
@@ -9,10 +18,8 @@ class Crm::ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @contact }
       else
         format.html { render action: 'new' }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
   end

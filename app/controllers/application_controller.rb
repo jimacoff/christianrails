@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include StoreHelper
   include WoodsHelper
+  include CrmHelper
 
   before_action :verify_is_admin unless :devise_controller?
 

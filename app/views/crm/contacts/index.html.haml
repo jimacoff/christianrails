@@ -1,0 +1,17 @@
+%h1 Contacts
+
+%table.crm-table
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Phone
+
+  %tbody
+    - @contacts.each do |contact|
+      %tr
+        %td= contact.full_name
+        %td= contact.email
+        %td= contact.phone
+
+= link_to '<< Home', crm_path

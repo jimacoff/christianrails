@@ -8,3 +8,17 @@
   width: 90%;
   text-align: center;
 }
+
+.crm-table {
+  background-color: $slate-gray;
+  tr:nth-child(odd)     { background-color: $purple-smoke; }
+  tr:nth-child(even)    { background-color: $l-purple-smoke; }
+}
+
+@media screen and (min-width: 800px) {
+
+  .crm-panel {
+    width: 700px;
+  }
+
+}
