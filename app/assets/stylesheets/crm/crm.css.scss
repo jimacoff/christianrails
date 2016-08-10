@@ -13,11 +13,14 @@
   background-color: $slate-gray;
   tr:nth-child(odd)     { background-color: $purple-smoke; }
   tr:nth-child(even)    { background-color: $l-purple-smoke; }
-  td {
-    width: 33%;
-  }
   th {
     text-align: center;
+  }
+}
+
+.thirds-table {
+  td {
+    width: 33%;
   }
 }
 

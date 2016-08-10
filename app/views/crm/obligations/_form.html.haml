@@ -1,0 +1,22 @@
+= form_for @obligation do |f|
+  - if @obligation.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@obligation.errors.count, "error")} prohibited this obligation from being saved:"
+      %ul
+        - @obligation.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name
+    %tr.field
+      %td= f.label :due_at
+      %td= f.date_field :due_at
+    %tr.field
+      %td= f.label "Contact"
+      %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @obligation.contact_id), class: ""
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

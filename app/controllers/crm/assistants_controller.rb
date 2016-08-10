@@ -3,7 +3,10 @@ class Crm::AssistantsController < ApplicationController
 
   def index
     @assistant = current_user ? current_user.assistant : nil
-    @obligations = [] if @assistant
+    if @assistant
+      @obligations = Crm::Obligation.where( assistant_id: current_assistant.id ).order("due_at asc")
+      @obligations ||= []
+    end
   end
 
   def create

@@ -2,29 +2,31 @@
   %h4= "I am your Assistant, #{ @assistant.name }. Please allow me to help you."
 
   %p
-    %span Ideas
+    %span= link_to "Contacts", crm_contacts_path
+    |
+    %span= link_to "Obligations", crm_obligations_path
+    |
+    %span Meetings
     |
     %span Reminders
     |
-    %span= link_to "Contacts", crm_contacts_path
-    |
-    %span Obligations
-    |
-    %span Meetings
+    %span Ideas
 
-  %table.crm-table
+  %br
+
+  %table.crm-table.thirds-table
     %thead
       %tr
-        %th Obligation
-        %th For
-        %th Due by
+        %th Event
+        %th With
+        %th Date
 
     %tbody
-      - @obligations.each do |ob|
+      - @obligations.each do |obligation|
         %tr
-          %td= ob.name
-          %td= ob.contact.name
-          %td= ob.due_at
+          %td= obligation.name
+          %td= obligation.contact.full_name
+          %td= obligation.personal_time
 
 - elsif !current_user
   %h1 You aren't signed in!
