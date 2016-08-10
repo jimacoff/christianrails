@@ -2,20 +2,19 @@ class Crm::MeetingsController < ApplicationController
   layout "crm"
 
   before_action :set_crm_meeting_secure, only: [:edit, :update, :destroy]
-  before_action :verify_has_assistant, except: [:newsletter_signup]
+  before_action :verify_has_assistant
+  before_action :get_contacts, only: [:index, :new, :edit]
 
   def index
-    @meetings = Crm::Meeting.order("date_time asc")
+    @meetings = Crm::Meeting.where( assistant_id: current_assistant.id ).order("date_time asc")
     @meetings ||= []
   end
 
   def new
     @meeting = Crm::Meeting.new
-    get_contacts
   end
 
   def edit
-    get_contacts
   end
 
   def create

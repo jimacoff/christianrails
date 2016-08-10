@@ -92,7 +92,15 @@ Christianrails::Application.routes.draw do
 
   namespace :crm do
     resources :meetings, except: [:show]
-    resources :obligations, except: [:show]
+    resources :obligations, except: [:show] do
+      collection do
+        get 'closed'
+      end
+      member do
+        post 'complete'
+        post 'bypass'
+      end
+    end
     resources :assistants, only: [:index, :create]
     resources :contacts, except: [:show] do
       collection do

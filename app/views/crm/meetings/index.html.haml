@@ -1,31 +1,39 @@
 %h1 My meetings
 
-%span
-  = link_to 'Add new meeting', new_crm_meeting_path
-  |
-  View closed meetings
+- if @contacts.size > 0
+  %span
+    = link_to 'Add new meeting', new_crm_meeting_path
+    |
+    View closed meetings
+- else
+  %span
+    First
+    = link_to "add some contacts", crm_contacts_path
+    with whom you will meet!
 
 %br
-%br
 
-%table.crm-table
-  %thead
-    %tr
-      %th Meeting
-      %th With
-      %th When
-      %th= Time.now.strftime("%a, %b %e, %Y")
+- if @meetings.size > 0
+  %br
 
-  %tbody
-    - @meetings.each do |meeting|
+  %table.crm-table
+    %thead
       %tr
-        %td= meeting.name
-        %td= meeting.contact.full_name
-        %td= meeting.personal_time
-        %td
-          = link_to 'Edit', edit_crm_meeting_path(meeting)
-          |
-          = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }
+        %th Meeting
+        %th With
+        %th When
+        %th= Time.now.strftime("%a, %b %e, %Y")
+
+    %tbody
+      - @meetings.each do |meeting|
+        %tr
+          %td= meeting.name
+          %td= meeting.contact.full_name
+          %td= meeting.personal_time
+          %td
+            = link_to 'Edit', edit_crm_meeting_path(meeting)
+            |
+            = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 = link_to "<< Back to home", crm_path

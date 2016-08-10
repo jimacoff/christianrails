@@ -4,7 +4,7 @@ class Crm::AssistantsController < ApplicationController
   def index
     @assistant = current_assistant || Crm::Assistant.new
 
-    @obligations = Crm::Obligation.where( assistant_id: current_assistant.id ).order("due_at asc")
+    @obligations = Crm::Obligation.where( assistant_id: current_assistant.id ).order("due_at asc") if current_assistant
     @obligations ||= []
   end
 
@@ -19,7 +19,7 @@ class Crm::AssistantsController < ApplicationController
 
     respond_to do |format|
       if @assistant
-        format.html { render action: 'index', notice: 'Your Assistant has been created.' }
+        format.html { redirect_to crm_path, notice: 'Your Assistant has been created.' }
       else
         flash[:alert] = "We could not create your Assistant. You may already have one."
         format.html { render action: 'index' }

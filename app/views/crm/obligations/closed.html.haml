@@ -1,0 +1,24 @@
+%h1 Closed obligations
+
+- if @obligations.size > 0
+  %br
+  %br
+  %table.crm-table
+    %thead
+      %tr
+        %th Obligation
+        %th To
+        %th Status
+        %th Closed at
+
+    %tbody
+      - @obligations.each do |obligation|
+        %tr
+          %td= obligation.name
+          %td= obligation.contact.full_name
+          %td= Crm::Obligation::STATUSES[ obligation.status_id ]
+          %td= obligation.completed_at.strftime("%a, %b %e")
+
+%br
+%br
+= link_to "<< Back to obligations", crm_obligations_path

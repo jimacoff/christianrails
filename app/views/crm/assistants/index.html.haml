@@ -1,5 +1,4 @@
 - if @assistant.name
-  %h4= "I am your Assistant, #{ @assistant.name }. Please allow me to help you."
 
   %p
     %span= link_to "Contacts", crm_contacts_path
@@ -12,21 +11,22 @@
     |
     %span Ideas
 
-  %br
+  - if @obligations.size > 0
+    %br
 
-  %table.crm-table.thirds-table
-    %thead
-      %tr
-        %th Event
-        %th With
-        %th Date
-
-    %tbody
-      - @obligations.each do |obligation|
+    %table.crm-table.thirds-table
+      %thead
         %tr
-          %td= obligation.name
-          %td= obligation.contact.full_name
-          %td= obligation.personal_time
+          %th Event
+          %th With
+          %th Date
+
+      %tbody
+        - @obligations.each do |obligation|
+          %tr
+            %td= obligation.name
+            %td= obligation.contact.full_name
+            %td= obligation.personal_time
 
 - elsif !current_user
   %h1 You aren't signed in!
@@ -47,11 +47,14 @@
         %ul
           - @assistant.errors.full_messages.each do |msg|
             %li= msg
+    .field
+      = f.label :name
+      %br
+      = f.text_field :name, required: true
 
-    = f.label :name
-    = f.text_field :name
-
-    = f.label "Personality"
-    = f.select :personality_id, options_for_select( Crm::Assistant::PERSONALITIES, @assistant.personality_id), class: ""
+    .field
+      = f.label "Personality:"
+      %br
+      = f.select :personality_id, options_for_select( Crm::Assistant::PERSONALITIES, @assistant.personality_id), class: ""
 
     = f.submit 'Save', class: 'store-button'

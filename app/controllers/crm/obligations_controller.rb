@@ -1,21 +1,22 @@
 class Crm::ObligationsController < ApplicationController
   layout "crm"
 
-  before_action :set_crm_obligation_secure, only: [:edit, :update, :destroy]
-  before_action :verify_has_assistant, except: [:newsletter_signup]
+  before_action :set_crm_obligation_secure, only: [:edit, :update, :destroy, :complete, :bypass]
+  before_action :verify_has_assistant
+  before_action :get_contacts, only: [:index, :new, :edit]
 
   def index
-    @obligations = Crm::Obligation.order("due_at asc")
+    @obligations = Crm::Obligation.where(assistant_id: current_assistant.id)
+                                  .where(status_id: Crm::Obligation::STATUS_OPEN)
+                                  .order("due_at asc")
     @obligations ||= []
   end
 
   def new
     @obligation = Crm::Obligation.new
-    get_contacts
   end
 
   def edit
-    get_contacts
   end
 
   def create
@@ -53,6 +54,41 @@ class Crm::ObligationsController < ApplicationController
     @obligation.destroy
     respond_to do |format|
       format.html { render action: 'index' }
+    end
+  end
+
+  def closed
+    @obligations = Crm::Obligation.where( assistant_id: current_assistant.id )
+                                  .where(status_id: [Crm::Obligation::STATUS_COMPLETE, Crm::Obligation::STATUS_BYPASSED] )
+                                  .order("completed_at desc")
+    @obligations ||= []
+  end
+
+  def complete
+    @obligation.status_id = Crm::Obligation::STATUS_COMPLETE
+    @obligation.completed_at = Time.now
+
+    respond_to do |format|
+      if @obligation.save
+        format.html { redirect_to crm_obligations_path, notice: 'Obligation completed.' }
+      else
+        flash[:alert] = "Could not complete this obligation. Check with the programmer."
+        format.html { redirect_to crm_obligations_path }
+      end
+    end
+  end
+
+  def bypass
+    @obligation.status_id = Crm::Obligation::STATUS_BYPASSED
+    @obligation.completed_at = Time.now
+
+    respond_to do |format|
+      if @obligation.save
+        format.html { redirect_to crm_obligations_path, notice: 'Obligation bypassed.' }
+      else
+        flash[:alert] = "Could not bypass this obligation. Check with the programmer."
+        format.html { redirect_to crm_obligations_path }
+      end
     end
   end
 

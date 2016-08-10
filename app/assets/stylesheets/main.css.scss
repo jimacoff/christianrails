@@ -178,11 +178,8 @@ a.category-link {
 .field {
   text-align: center;
   margin-bottom: 20px;
-  label {
 
-  }
-
-  input {
+  input, select {
     font-size: 1.1em;
     width: 225px;
     min-height: 25px;

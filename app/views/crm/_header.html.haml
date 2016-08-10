@@ -5,7 +5,10 @@
         #logo-wrapper
           .left.face
             %h1 CRM
-          %h1#mynameis Personal Assistant
+          - if current_assistant
+            %h1#mynameis= current_assistant.name
+          - else
+            %h1#mynameis Digital Assistant
           %p#imake.subtitle.soft Sort your goddamn life out
 
       %td

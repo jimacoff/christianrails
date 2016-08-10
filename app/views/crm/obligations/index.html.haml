@@ -1,31 +1,42 @@
 %h1 My obligations
 
-%span
-  = link_to 'Add New Obligation', new_crm_obligation_path
-  |
-  View Closed Obligations
+- if @contacts.size > 0
+  %span
+    = link_to 'Add New Obligation', new_crm_obligation_path
+    - if current_assistant.has_closed_obligations?
+      |
+      = link_to 'View Closed Obligations', closed_crm_obligations_path
+- else
+  %span
+    First
+    = link_to "add some contacts", crm_contacts_path
+    to whom you are obligated!
 
-%br
-%br
-
-%table.crm-table
-  %thead
-    %tr
-      %th Obligation
-      %th To
-      %th Due
-      %th= Time.now.strftime("%a, %b %e, %Y")
-
-  %tbody
-    - @obligations.each do |obligation|
+- if @obligations.size > 0
+  %br
+  %br
+  %table.crm-table
+    %thead
       %tr
-        %td= obligation.name
-        %td= obligation.contact.full_name
-        %td= obligation.personal_time
-        %td
-          = link_to 'Edit', edit_crm_obligation_path(obligation)
-          |
-          = link_to 'Destroy', obligation, method: :delete, data: { confirm: 'Are you sure?' }
+        %th Obligation
+        %th To
+        %th Due
+        %th= Time.now.strftime("%a, %b %e, %Y")
 
+    %tbody
+      - @obligations.each do |obligation|
+        %tr
+          %td= obligation.name
+          %td= obligation.contact.full_name
+          %td= obligation.personal_time
+          %td
+            = link_to 'Complete', complete_crm_obligation_path( obligation ), method: :post
+            |
+            = link_to 'Bypass', bypass_crm_obligation_path( obligation ), method: :post
+            |
+            = link_to 'Edit', edit_crm_obligation_path(obligation)
+            |
+            = link_to 'Destroy', obligation, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this obligation?' }
+%br
 %br
 = link_to "<< Back to home", crm_path

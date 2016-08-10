@@ -9,16 +9,16 @@
   %table.modest-width
     %tr.field
       %td= f.label :firstname
-      %td= f.text_field :firstname
+      %td= f.text_field :firstname, required: true
     %tr.field
       %td= f.label :lastname
-      %td= f.text_field :lastname
+      %td= f.text_field :lastname, required: true
     %tr.field
       %td= f.label :email
       %td= f.email_field :email
     %tr.field
       %td= f.label :phone
-      %td= f.text_field :phone
+      %td= f.number_field :phone
     %tr.field
       %td= f.label :address
       %td= f.text_field :address
