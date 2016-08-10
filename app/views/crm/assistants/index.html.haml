@@ -1,4 +1,4 @@
-- if @assistant
+- if @assistant.name
   %h4= "I am your Assistant, #{ @assistant.name }. Please allow me to help you."
 
   %p
@@ -6,7 +6,7 @@
     |
     %span= link_to "Obligations", crm_obligations_path
     |
-    %span Meetings
+    %span= link_to "Meetings", crm_meetings_path
     |
     %span Reminders
     |
@@ -38,8 +38,20 @@
       to access this area.
 
 - else
-  %h1 You don't have an Assistant yet!
+  %h3 You don't have an Assistant yet!  Create one now.
 
-  // add a form
-  %p.center
-    = link_to "Create one", crm_assistants_path, method: "post"
+  = form_for @assistant do |f|
+    - if @assistant.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@assistant.errors.count, "error")} prohibited your Assistant from being saved:"
+        %ul
+          - @assistant.errors.full_messages.each do |msg|
+            %li= msg
+
+    = f.label :name
+    = f.text_field :name
+
+    = f.label "Personality"
+    = f.select :personality_id, options_for_select( Crm::Assistant::PERSONALITIES, @assistant.personality_id), class: ""
+
+    = f.submit 'Save', class: 'store-button'

@@ -2,15 +2,14 @@ class Crm::AssistantsController < ApplicationController
   layout "crm"
 
   def index
-    @assistant = current_user ? current_user.assistant : nil
-    if @assistant
-      @obligations = Crm::Obligation.where( assistant_id: current_assistant.id ).order("due_at asc")
-      @obligations ||= []
-    end
+    @assistant = current_assistant || Crm::Assistant.new
+
+    @obligations = Crm::Obligation.where( assistant_id: current_assistant.id ).order("due_at asc")
+    @obligations ||= []
   end
 
   def create
-    if current_user && !current_user.assistant
+    if current_user && !current_user.assistant && current_user.has_crm_access?
       @assistant = Crm::Assistant.create( crm_assistant_params )
       current_user.assistant = @assistant
       current_user.save

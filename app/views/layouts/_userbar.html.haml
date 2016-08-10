@@ -4,6 +4,9 @@
       Welcome, #{current_user.first_name}!
 
       %p.diminutive.lineheight-spacer
+        - if current_user.has_crm_access?
+          = link_to "CRM", main_app.crm_path
+          |
         - if current_user.admin?
           = link_to "Admin", main_app.admin_index_path
           |

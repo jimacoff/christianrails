@@ -1,0 +1,31 @@
+%h1 My meetings
+
+%span
+  = link_to 'Add new meeting', new_crm_meeting_path
+  |
+  View closed meetings
+
+%br
+%br
+
+%table.crm-table
+  %thead
+    %tr
+      %th Meeting
+      %th With
+      %th When
+      %th= Time.now.strftime("%a, %b %e, %Y")
+
+  %tbody
+    - @meetings.each do |meeting|
+      %tr
+        %td= meeting.name
+        %td= meeting.contact.full_name
+        %td= meeting.personal_time
+        %td
+          = link_to 'Edit', edit_crm_meeting_path(meeting)
+          |
+          = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+= link_to "<< Back to home", crm_path

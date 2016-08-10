@@ -32,4 +32,8 @@ class User < ActiveRecord::Base
     first_name + " " + last_name
   end
 
+  def has_crm_access?
+    crm_access
+  end
+
 end
