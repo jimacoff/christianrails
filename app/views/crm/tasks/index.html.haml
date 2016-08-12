@@ -1,0 +1,34 @@
+%h1 My tasks
+
+%span
+  = link_to 'Add New Task', new_crm_task_path
+  - if current_assistant.has_closed_tasks?
+    |
+    = link_to 'View Closed Tasks', closed_crm_tasks_path
+
+- if @tasks.size > 0
+  %br
+  %br
+  %table.crm-table
+    %thead
+      %tr
+        %th Task
+        %th Due
+        %th= Time.now.strftime("%a, %b %e, %Y")
+
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td= task.name
+          %td= task.personal_time
+          %td
+            = link_to 'Complete', complete_crm_task_path( task ), method: :post
+            |
+            = link_to 'Bypass', bypass_crm_task_path( task ), method: :post
+            |
+            = link_to 'Edit', edit_crm_task_path(task)
+            |
+            = link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this task?' }
+%br
+%br
+= link_to "<< Back to home", crm_path

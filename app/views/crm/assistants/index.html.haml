@@ -7,9 +7,13 @@
     |
     %span= link_to "Meetings", crm_meetings_path
     |
-    %span Reminders
+    %span= link_to "Tasks", crm_tasks_path
     |
     %span Ideas
+    |
+    %span Books
+    |
+    %span Reminders
 
   - if @obligations.size > 0
     %br

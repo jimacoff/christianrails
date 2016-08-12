@@ -91,7 +91,12 @@ Christianrails::Application.routes.draw do
   get '/diamondfind/play', to: 'woods/stories#play', defaults: { id: 1 }
 
   namespace :crm do
-    resources :meetings, except: [:show]
+    resources :assistants, only: [:index, :create]
+    resources :contacts, except: [:show] do
+      collection do
+        post 'newsletter_signup'
+      end
+    end
     resources :obligations, except: [:show] do
       collection do
         get 'closed'
@@ -101,12 +106,16 @@ Christianrails::Application.routes.draw do
         post 'bypass'
       end
     end
-    resources :assistants, only: [:index, :create]
-    resources :contacts, except: [:show] do
+    resources :tasks, except: [:show] do
       collection do
-        post 'newsletter_signup'
+        get 'closed'
+      end
+      member do
+        post 'complete'
+        post 'bypass'
       end
     end
+    resources :meetings, except: [:show]
   end
   get '/crm', to: 'crm/assistants#index'
 

@@ -1,0 +1,52 @@
+= form_for @task do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+      %ul
+        - @task.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name
+    %tr.field
+      %td= f.label "Due on"
+      %td= f.date_field :due_at
+    %tr.field
+      %td= f.label "Type"
+      %td= f.select :type_id, options_for_select( Crm::Task::TYPES, @task.type_id ), class: ""
+    %tr#recurral-period.field{style: "display: none;"}
+      %td= f.label "Recurral period"
+      %td= f.number_field :recurral_period, value: @task.recurral_period || 30, min: 1, max: 99
+    %tr#recurral-weekday.field{style: "display: none;"}
+      %td= f.label "Recurs on weekday"
+      %td= f.select :recurral_weekday, options_for_select( Time::DAYS_INTO_WEEK, @task.recurral_weekday ), class: ""
+    %tr#recurral-monthday.field{style: "display: none;"}
+      %td= f.label "Recurs on day of month"
+      %td= f.number_field :recurral_monthday, min: 1, max: 31, value: @task.recurral_monthday || Date.today.day
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'
+
+:javascript
+  function checkRecurralOption() {
+    console.log('here');
+    hideAllRecurralFields();
+    if( parseInt( $('#crm_task_type_id').val() ) === 1) {
+      $('#recurral-period').fadeIn();
+    } else if( parseInt( $('#crm_task_type_id').val() ) === 2) {
+      $('#recurral-weekday').fadeIn();
+    } else if( parseInt( $('#crm_task_type_id').val() ) === 3) {
+      $('#recurral-monthday').fadeIn();
+    }
+  }
+
+  function hideAllRecurralFields() {
+    $("[id^='recurral']").hide();
+  }
+
+  checkRecurralOption();
+  $('#crm_task_type_id').on('change', checkRecurralOption);
+

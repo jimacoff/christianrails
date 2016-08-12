@@ -1,0 +1,20 @@
+%h1 Closed tasks
+
+- if @tasks.size > 0
+  %table.crm-table
+    %thead
+      %tr
+        %th Task
+        %th Status
+        %th Closed at
+
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td= task.name
+          %td= Crm::Task::STATUSES[ task.status_id ]
+          %td= task.closed_at.strftime("%a, %b %e")
+
+%br
+%br
+= link_to "<< Back to tasks", crm_tasks_path

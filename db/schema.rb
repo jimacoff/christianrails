@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810140048) do
+ActiveRecord::Schema.define(version: 20160811215827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,20 @@ ActiveRecord::Schema.define(version: 20160810140048) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.datetime "completed_at"
+  end
+
+  create_table "crm_tasks", force: :cascade do |t|
+    t.integer  "assistant_id"
+    t.string   "name"
+    t.integer  "type_id"
+    t.datetime "due_at"
+    t.integer  "recurral_period"
+    t.integer  "recurral_weekday"
+    t.integer  "recurral_monthday"
+    t.integer  "status_id",         default: 0
+    t.datetime "closed_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "downloads", force: :cascade do |t|
