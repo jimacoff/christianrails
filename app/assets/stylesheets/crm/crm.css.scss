@@ -24,6 +24,11 @@
   }
 }
 
+#footer-bar {
+  background-color: $ghost-green;
+  color: $white;
+}
+
 @media screen and (min-width: 800px) {
 
   .crm-panel {

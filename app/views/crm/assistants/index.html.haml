@@ -34,12 +34,11 @@
 
 - elsif !current_user
   %h1 You aren't signed in!
-  %br
-    %p
-      = link_to 'Sign in', main_app.user_session_path
-      or
-      = link_to 'Sign up',  main_app.new_user_registration_path
-      to access this area.
+  %p
+    = link_to 'Sign in', main_app.user_session_path
+    or
+    = link_to 'Sign up',  main_app.new_user_registration_path
+    to access this area.
 
 - else
   %h3 You don't have an Assistant yet!  Create one now.

@@ -13,6 +13,7 @@ class Crm::AssistantsController < ApplicationController
       @assistant = Crm::Assistant.create( crm_assistant_params )
       current_user.assistant = @assistant
       current_user.save
+      add_ghostcrime_to_crm
     else
       @assistant = nil
     end
@@ -40,6 +41,12 @@ class Crm::AssistantsController < ApplicationController
     def send_notifications
       NewsletterMailer.welcome(@assistant).deliver_now
       AdminMailer.newsletter_signup(@assistant).deliver_now
+    end
+
+    def add_ghostcrime_to_crm
+      @book = Crm::Book.create(title: "Ghostcrime", author: "Christian DeWolf")
+      @book.assistant = @assistant
+      @book.save
     end
 
 end
