@@ -15,7 +15,7 @@
           %td= obligation.name
           %td= obligation.contact.full_name
           %td= Crm::Obligation::STATUSES[ obligation.status_id ]
-          %td= obligation.completed_at.strftime("%a, %b %e")
+          %td= obligation.closed_at.strftime("%a, %b %e")
 
 %br
 %br

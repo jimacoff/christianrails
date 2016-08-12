@@ -115,7 +115,15 @@ Christianrails::Application.routes.draw do
         post 'bypass'
       end
     end
-    resources :meetings, except: [:show]
+    resources :meetings, except: [:show] do
+      collection do
+        get 'past'
+      end
+      member do
+        post 'complete'
+        post 'bypass'
+      end
+    end
   end
   get '/crm', to: 'crm/assistants#index'
 

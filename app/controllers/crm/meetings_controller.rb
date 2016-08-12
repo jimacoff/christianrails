@@ -1,12 +1,14 @@
 class Crm::MeetingsController < ApplicationController
   layout "crm"
 
-  before_action :set_crm_meeting_secure, only: [:edit, :update, :destroy]
+  before_action :set_crm_meeting_secure, only: [:edit, :update, :destroy, :complete, :bypass]
   before_action :verify_has_assistant
   before_action :get_contacts, only: [:index, :new, :edit]
 
   def index
-    @meetings = Crm::Meeting.where( assistant_id: current_assistant.id ).order("date_time asc")
+    @meetings = Crm::Meeting.where(assistant_id: current_assistant.id)
+                            .where(status_id: Crm::Obligation::STATUS_OPEN)
+                            .order("date_time asc")
     @meetings ||= []
   end
 
@@ -55,6 +57,42 @@ class Crm::MeetingsController < ApplicationController
     end
   end
 
+  def past
+    @meetings = Crm::Meeting.where( assistant_id: current_assistant.id )
+                            .where( status_id: [Crm::Meeting::STATUS_COMPLETE, Crm::Meeting::STATUS_BYPASSED] )
+                            .order("closed_at desc")
+    @meetings ||= []
+  end
+
+  def complete
+    @meeting.status_id = Crm::Meeting::STATUS_COMPLETE
+    @meeting.closed_at = Time.now
+
+    respond_to do |format|
+
+      if @meeting.save
+        format.html { redirect_to crm_meetings_path, notice: 'Meeting completed.' }
+      else
+        flash[:alert] = "Could not complete this meeting. Check with the programmer."
+        format.html { redirect_to crm_meetings_path }
+      end
+    end
+  end
+
+  def bypass
+    @meeting.status_id = Crm::Meeting::STATUS_BYPASSED
+    @meeting.closed_at = Time.now
+
+    respond_to do |format|
+      if @meeting.save
+        format.html { redirect_to crm_meetings_path, notice: 'Meeting bypassed.' }
+      else
+        flash[:alert] = "Could not bypass this meeting. Check with the programmer."
+        format.html { redirect_to crm_meetings_path }
+      end
+    end
+  end
+
   private
     def set_crm_meeting_secure
       @meeting = Crm::Meeting.find(params[:id])
@@ -62,7 +100,7 @@ class Crm::MeetingsController < ApplicationController
     end
 
     def crm_meeting_params
-      params.require(:crm_meeting).permit(:contact_id, :name, :status_id, :date_time)
+      params.require(:crm_meeting).permit(:contact_id, :name, :date_time)
     end
 
     def get_contacts

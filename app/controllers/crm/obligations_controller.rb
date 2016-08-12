@@ -60,13 +60,13 @@ class Crm::ObligationsController < ApplicationController
   def closed
     @obligations = Crm::Obligation.where( assistant_id: current_assistant.id )
                                   .where(status_id: [Crm::Obligation::STATUS_COMPLETE, Crm::Obligation::STATUS_BYPASSED] )
-                                  .order("completed_at desc")
+                                  .order("closed_at desc")
     @obligations ||= []
   end
 
   def complete
     @obligation.status_id = Crm::Obligation::STATUS_COMPLETE
-    @obligation.completed_at = Time.now
+    @obligation.closed_at = Time.now
 
     respond_to do |format|
       if @obligation.save
@@ -80,7 +80,7 @@ class Crm::ObligationsController < ApplicationController
 
   def bypass
     @obligation.status_id = Crm::Obligation::STATUS_BYPASSED
-    @obligation.completed_at = Time.now
+    @obligation.closed_at = Time.now
 
     respond_to do |format|
       if @obligation.save

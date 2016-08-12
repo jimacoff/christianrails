@@ -4,9 +4,10 @@ class Crm::Meeting < ActiveRecord::Base
 
   validates_presence_of :date_time, :name
 
-  STATUS_FORTHCOMING = 1
-  STATUS_COMPLETE = 2
-  STATUS_BYPASSED = 3
+  STATUS_FORTHCOMING = 0
+  STATUS_COMPLETE = 1
+  STATUS_BYPASSED = 2
+  STATUSES = ["Forthcoming", "Complete", "Bypassed"]
 
   # TODO modify to show time
   def personal_time

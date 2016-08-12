@@ -18,6 +18,11 @@ class Crm::Assistant < ActiveRecord::Base
                             x.status_id == Crm::Obligation::STATUS_BYPASSED }.size > 0
   end
 
+  def has_closed_meetings?
+    meetings.select{ |x| x.status_id == Crm::Meeting::STATUS_COMPLETE ||
+                         x.status_id == Crm::Meeting::STATUS_BYPASSED }.size > 0
+  end
+
   def has_closed_tasks?
     tasks.select{ |x| x.status_id == Crm::Task::STATUS_COMPLETE ||
                       x.status_id == Crm::Task::STATUS_BYPASSED }.size > 0

@@ -3,8 +3,9 @@
 - if @contacts.size > 0
   %span
     = link_to 'Add new meeting', new_crm_meeting_path
-    |
-    View closed meetings
+    - if current_assistant.has_closed_meetings?
+      |
+      = link_to 'View Past Meetings', past_crm_meetings_path
 - else
   %span
     First
@@ -31,6 +32,10 @@
           %td= meeting.contact.full_name
           %td= meeting.personal_time
           %td
+            = link_to 'Complete', complete_crm_meeting_path( meeting ), method: :post
+            |
+            = link_to 'Bypass', bypass_crm_meeting_path( meeting ), method: :post
+            |
             = link_to 'Edit', edit_crm_meeting_path(meeting)
             |
             = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,22 @@
+%h1 Closed meetings
+
+- if @meetings.size > 0
+  %table.crm-table
+    %thead
+      %tr
+        %th Meeting
+        %th With
+        %th Status
+        %th Closed at
+
+    %tbody
+      - @meetings.each do |meeting|
+        %tr
+          %td= meeting.name
+          %td= meeting.contact.full_name
+          %td= Crm::Meeting::STATUSES[ meeting.status_id ]
+          %td= meeting.closed_at.strftime("%a, %b %e")
+
+%br
+%br
+= link_to "<< Back to meetings", crm_meetings_path
