@@ -10,8 +10,6 @@ class Crm::Task < ActiveRecord::Base
 
   TYPE_ONETIME = 0
   TYPE_RECURRING_PERIOD = 1
-  TYPE_RECURRING_WEEKDAY = 2
-  TYPE_RECURRING_MONTHDAY = 3
-  TYPES = [["One-time", 0], ["Recurs periodically", 1], ["Recurs on weekday", 2], ["Recurs on calendar day", 3]]
+  TYPES = [["One-time", 0], ["Recurs periodically", 1]]
 
 end

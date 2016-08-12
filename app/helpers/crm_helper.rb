@@ -14,12 +14,12 @@ module CrmHelper
 
   def relative_time(datetime)
       # TODO modify to show time when flag given
-    if datetime.day < Time.now.day  # in the past!
-      return "Yesterday" if datetime.day == Time.now.day - 1
-      return (Time.now.day - datetime.day).to_s + " days ago"
+    if datetime < Time.now.to_datetime  # in the past!
+      return "Yesterday" if datetime.strftime("%a, %b %e") == (DateTime.now - 1.day).strftime("%a, %b %e")
+      return ((DateTime.now.to_i - datetime.to_i) / 86400).to_s + " days ago"
     end
-    return "Today"    if datetime.day == Time.now.day
-    return "Tomorrow" if datetime.day == Time.now.day + 1
+    return "Today"    if datetime.strftime("%a, %b %e") == (DateTime.now).strftime("%a, %b %e")
+    return "Tomorrow" if datetime.strftime("%a, %b %e") == (DateTime.now + 1.day).strftime("%a, %b %e")
     datetime.strftime("%a, %b %e")
   end
 

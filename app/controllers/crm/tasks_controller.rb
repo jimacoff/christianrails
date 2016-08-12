@@ -44,7 +44,7 @@ class Crm::TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { render action: 'index' }
+      format.html { redirect_to crm_tasks_path }
     end
   end
 
@@ -61,10 +61,10 @@ class Crm::TasksController < ApplicationController
 
     respond_to do |format|
 
-      # TODO recurral notification
+      recurral_notification = spawn_next_if_recurring
 
       if @task.save
-        format.html { redirect_to crm_tasks_path, notice: 'Task completed.' }
+        format.html { redirect_to crm_tasks_path, notice: 'Task completed.' + recurral_notification }
       else
         flash[:alert] = "Could not complete this task. Please file a bug report."
         format.html { redirect_to crm_tasks_path }
@@ -93,6 +93,26 @@ class Crm::TasksController < ApplicationController
     end
 
     def crm_task_params
-      params.require(:crm_task).permit(:name, :status_id, :due_at, :type_id, :recurral_period, :recurral_weekday, :recurral_monthday)
+      params.require(:crm_task).permit(:name, :status_id, :due_at, :type_id, :recurral_period, :recurral_weekday)
     end
+
+    # this could use some tests
+    def spawn_next_if_recurring
+      new_date = nil
+      if @task.type_id == Crm::Task::TYPE_RECURRING_PERIOD
+        new_date = @task.due_at + @task.recurral_period.days
+        new_task = Crm::Task.create(name: @task.name, type_id: @task.type_id,
+                                    recurral_period: @task.recurral_period,
+                                    due_at: new_date )
+        resp = "Next iteration scheduled for #{relative_time(new_date)}"
+      end
+
+      if new_date
+        current_assistant.tasks << new_task
+        " Next iteration scheduled for #{relative_time(new_date)}."
+      else
+        ""
+      end
+    end
+
 end
