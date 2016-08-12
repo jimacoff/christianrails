@@ -5,8 +5,10 @@
 
       %p.diminutive.lineheight-spacer
         - if current_user.has_crm_access?
-          // TODO link home if you're in the crm
-          = link_to "CRM", main_app.crm_path
+          - if controller_path.starts_with?("crm")
+            = link_to "Main site", main_app.root_path
+          - else
+            = link_to "CRM", main_app.crm_path
           |
         - if current_user.admin?
           = link_to "Admin", main_app.admin_index_path

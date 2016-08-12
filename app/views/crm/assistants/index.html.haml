@@ -13,24 +13,31 @@
     |
     %span= link_to "Books", crm_books_path
     |
-    %span Reminders
+    %span= link_to "Reminders", reminders_crm_assistants_path
 
-  - if @obligations.size > 0
-    %br
+  - if @upcoming_events.size > 0
+    %h3 Upcoming meetings + deadlines
 
     %table.crm-table.thirds-table
       %thead
         %tr
-          %th Event
+          %th Task/event
           %th With
           %th Date
+          %th
 
       %tbody
-        - @obligations.each do |obligation|
+        - @upcoming_events.each do |event|
           %tr
-            %td= obligation.name
-            %td= obligation.contact.full_name
-            %td= obligation.personal_time
+            %td= event[:name]
+            %td= event[:with]
+            %td= relative_time ( event[:date] )
+            %td
+              - event[:paths].each do |path|
+                - path.keys.each do |k|
+                  %span
+                    = link_to k.to_s.titlecase, path[k], method: :post
+
 
 - elsif !current_user
   %h1 You aren't signed in!

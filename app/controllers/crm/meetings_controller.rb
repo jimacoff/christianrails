@@ -7,7 +7,7 @@ class Crm::MeetingsController < ApplicationController
 
   def index
     @meetings = Crm::Meeting.where(assistant_id: current_assistant.id)
-                            .where(status_id: Crm::Obligation::STATUS_OPEN)
+                            .where(status_id: Crm::Meeting::STATUS_FORTHCOMING)
                             .order("date_time asc")
     @meetings ||= []
   end

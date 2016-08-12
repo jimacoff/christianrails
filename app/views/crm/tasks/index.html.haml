@@ -14,13 +14,13 @@
       %tr
         %th Task
         %th Due
-        %th= Time.now.strftime("%a, %b %e, %Y")
+        %th
 
     %tbody
       - @tasks.each do |task|
         %tr
           %td= task.name
-          %td= task.personal_time
+          %td= relative_time( task.due_at )
           %td
             = link_to 'Complete', complete_crm_task_path( task ), method: :post
             |

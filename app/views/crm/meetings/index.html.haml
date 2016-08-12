@@ -23,14 +23,14 @@
         %th Meeting
         %th With
         %th When
-        %th= Time.now.strftime("%a, %b %e, %Y")
+        %th
 
     %tbody
       - @meetings.each do |meeting|
         %tr
           %td= meeting.name
           %td= meeting.contact.full_name
-          %td= meeting.personal_time
+          %td= relative_time ( meeting.date_time )
           %td
             = link_to 'Complete', complete_crm_meeting_path( meeting ), method: :post
             |

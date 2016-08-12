@@ -9,9 +9,4 @@ class Crm::Obligation < ActiveRecord::Base
   STATUS_BYPASSED = 2
   STATUSES = ["Open", "Complete", "Bypassed"]
 
-  def personal_time
-    return "Today"    if due_at.day == Time.now.day
-    return "Tomorrow" if due_at.day == Time.now.day + 1
-    due_at.strftime("%a, %b %e")
-  end
 end

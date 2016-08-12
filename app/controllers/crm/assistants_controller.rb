@@ -4,8 +4,49 @@ class Crm::AssistantsController < ApplicationController
   def index
     @assistant = current_assistant || Crm::Assistant.new
 
-    @obligations = Crm::Obligation.where( assistant_id: current_assistant.id ).order("due_at asc") if current_assistant
-    @obligations ||= []
+    @upcoming_events = []
+
+    if current_assistant
+      @obligations = Crm::Obligation.where( assistant_id: current_assistant.id )
+                                    .where(status_id: Crm::Obligation::STATUS_OPEN)
+                                    .order("due_at asc")
+      @meetings = Crm::Meeting.where( assistant_id: current_assistant.id )
+                              .where(status_id: Crm::Meeting::STATUS_FORTHCOMING)
+                              .order("date_time asc")
+      @tasks = Crm::Task.where( assistant_id: current_assistant.id )
+                        .where(status_id: Crm::Task::STATUS_OPEN)
+                        .order("due_at asc")
+
+      # do this more functionally
+      @obligations.each do |ob|
+        @upcoming_events << { name: ob.name, with: ob.contact.full_name, date: ob.due_at,
+                              paths:[
+                                      { complete: complete_crm_obligation_path( ob ) },
+                                      { bypass: bypass_crm_obligation_path( ob ) }
+                                    ] }
+
+      end
+      @meetings.each do |meet|
+        @upcoming_events << { name: "Meeting: " + meet.name, with: meet.contact.full_name, date: meet.date_time,
+                              paths: [
+                                       { complete: complete_crm_meeting_path( meet ) },
+                                       { bypass: bypass_crm_meeting_path( meet ) }
+                                     ] }
+      end
+      @tasks.each do |task|
+        @upcoming_events << { name: task.name, with: "", date: task.due_at,
+                              paths: [
+                                       { complete: complete_crm_task_path( task ) },
+                                       { bypass: bypass_crm_task_path( task ) }
+                                     ] }
+      end
+
+      @upcoming_events.sort!{ |a, b| a[:date] <=> b[:date] }
+    end
+  end
+
+  def reminders
+    # TODO
   end
 
   def create
@@ -20,7 +61,7 @@ class Crm::AssistantsController < ApplicationController
 
     respond_to do |format|
       if @assistant
-        format.html { redirect_to crm_path, notice: 'Your Assistant has been created.' }
+        format.html { redirect_to crm_path, notice: "Your Assistant #{@assistant.name} has been created!" }
       else
         flash[:alert] = "We could not create your Assistant. You may already have one."
         format.html { render action: 'index' }

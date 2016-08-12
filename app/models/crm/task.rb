@@ -14,9 +14,4 @@ class Crm::Task < ActiveRecord::Base
   TYPE_RECURRING_MONTHDAY = 3
   TYPES = [["One-time", 0], ["Recurs periodically", 1], ["Recurs on weekday", 2], ["Recurs on calendar day", 3]]
 
-  def personal_time
-    return "Today"    if due_at.day == Time.now.day
-    return "Tomorrow" if due_at.day == Time.now.day + 1
-    due_at.strftime("%a, %b %e")
-  end
 end
