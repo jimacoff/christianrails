@@ -1,5 +1,6 @@
-class Crm::AssistantsController < ApplicationController
-  layout "crm"
+class Crm::AssistantsController < Crm::CrmController
+
+  skip_before_action :verify_has_assistant, only: [:index, :create]
 
   def index
     @assistant = current_assistant || Crm::Assistant.new
@@ -45,10 +46,6 @@ class Crm::AssistantsController < ApplicationController
     end
   end
 
-  def reminders
-    # TODO
-  end
-
   def create
     if current_user && !current_user.assistant && current_user.has_crm_access?
       @assistant = Crm::Assistant.create( crm_assistant_params )
@@ -64,9 +61,13 @@ class Crm::AssistantsController < ApplicationController
         format.html { redirect_to crm_path, notice: "Your Assistant #{@assistant.name} has been created!" }
       else
         flash[:alert] = "We could not create your Assistant. You may already have one."
-        format.html { render action: 'index' }
+        format.html { redirect_to crm_path }
       end
     end
+  end
+
+  def reminders
+    # TODO
   end
 
   private

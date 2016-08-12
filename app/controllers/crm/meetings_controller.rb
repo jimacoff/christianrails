@@ -1,8 +1,6 @@
-class Crm::MeetingsController < ApplicationController
-  layout "crm"
+class Crm::MeetingsController < Crm::CrmController
 
   before_action :set_crm_meeting_secure, only: [:edit, :update, :destroy, :complete, :bypass]
-  before_action :verify_has_assistant
   before_action :get_contacts, only: [:index, :new, :edit]
 
   def index

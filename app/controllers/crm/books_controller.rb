@@ -1,8 +1,6 @@
-class Crm::BooksController < ApplicationController
-  layout "crm"
+class Crm::BooksController < Crm::CrmController
 
   before_action :set_crm_book_secure, only: [:edit, :update, :destroy, :start_reading, :finish ]
-  before_action :verify_has_assistant
 
   def index
     @reading_books = Crm::Book.where(assistant_id: current_assistant.id)

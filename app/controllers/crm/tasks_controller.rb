@@ -1,8 +1,6 @@
-class Crm::TasksController < ApplicationController
-  layout "crm"
+class Crm::TasksController < Crm::CrmController
 
   before_action :set_crm_task_secure, only: [:edit, :update, :destroy, :complete, :bypass]
-  before_action :verify_has_assistant
 
   def index
     @tasks = Crm::Task.where(assistant_id: current_assistant.id)

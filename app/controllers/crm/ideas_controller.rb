@@ -1,8 +1,6 @@
-class Crm::IdeasController < ApplicationController
-  layout "crm"
+class Crm::IdeasController < Crm::CrmController
 
   before_action :set_crm_idea_secure, only: [:edit, :update, :destroy, :complete, :abandon ]
-  before_action :verify_has_assistant
 
   def index
     @ideas = Crm::Idea.where(assistant_id: current_assistant.id)

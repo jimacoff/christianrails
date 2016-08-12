@@ -1,8 +1,6 @@
-class Crm::ContactsController < ApplicationController
-  layout "crm"
+class Crm::ContactsController < Crm::CrmController
 
-  skip_before_action :verify_is_admin, only: [:newsletter_signup]
-  before_action :verify_has_assistant, except: [:newsletter_signup]
+  skip_before_action :verify_has_assistant, only: [:newsletter_signup]
   before_action :set_crm_contact_secure, only: [:edit, :update, :destroy]
 
   def index

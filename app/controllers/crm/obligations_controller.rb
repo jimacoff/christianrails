@@ -1,8 +1,6 @@
-class Crm::ObligationsController < ApplicationController
-  layout "crm"
+class Crm::ObligationsController < Crm::CrmController
 
   before_action :set_crm_obligation_secure, only: [:edit, :update, :destroy, :complete, :bypass]
-  before_action :verify_has_assistant
   before_action :get_contacts, only: [:index, :new, :edit]
 
   def index
