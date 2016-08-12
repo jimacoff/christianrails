@@ -1,0 +1,20 @@
+%h1 Finished books
+
+- if @books.size > 0
+  %table.crm-table
+    %thead
+      %tr
+        %th Title
+        %th Author
+        %th Finished at
+
+    %tbody
+      - @books.each do |book|
+        %tr
+          %td= book.title
+          %td= book.author
+          %td= book.finished_at.strftime("%a, %b %e")
+
+%br
+%br
+= link_to "<< Back to books", crm_books_path

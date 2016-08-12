@@ -1,0 +1,57 @@
+%h1 My books
+
+%span
+  = link_to 'Add new book', new_crm_book_path
+  - if current_assistant.has_read_books?
+    |
+    = link_to 'View finished books', have_read_crm_books_path
+
+- if @reading_books.size > 0
+  %h3 Currently reading
+  %table.crm-table
+    %thead
+      %tr
+        %th Title
+        %th Author
+        %th Desire to read
+        %th
+
+    %tbody
+      - @reading_books.each do |book|
+        %tr
+          %td= book.title
+          %td= book.author
+          %td= book.desire_to_read
+          %td
+            = link_to 'Finish', finish_crm_book_path( book ), method: :post
+            |
+            = link_to 'Edit', edit_crm_book_path(book)
+            |
+            = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this book? That\'s pretty drastic.' }
+
+- if @unread_books.size > 0
+  %br
+  %h3 Want to read
+  %table.crm-table
+    %thead
+      %tr
+        %th Title
+        %th Author
+        %th Desire to read
+        %th
+
+    %tbody
+      - @unread_books.each do |book|
+        %tr
+          %td= book.title
+          %td= book.author
+          %td= book.desire_to_read
+          %td
+            = link_to 'Start reading', start_reading_crm_book_path( book ), method: :post
+            |
+            = link_to 'Edit', edit_crm_book_path(book)
+            |
+            = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this book? That\'s pretty drastic.' }
+%br
+%br
+= link_to "<< Back to home", crm_path

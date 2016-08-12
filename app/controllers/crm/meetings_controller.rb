@@ -73,7 +73,7 @@ class Crm::MeetingsController < ApplicationController
       if @meeting.save
         format.html { redirect_to crm_meetings_path, notice: 'Meeting completed.' }
       else
-        flash[:alert] = "Could not complete this meeting. Check with the programmer."
+        flash[:alert] = "Could not complete this meeting. Please file a bug report."
         format.html { redirect_to crm_meetings_path }
       end
     end
@@ -87,7 +87,7 @@ class Crm::MeetingsController < ApplicationController
       if @meeting.save
         format.html { redirect_to crm_meetings_path, notice: 'Meeting bypassed.' }
       else
-        flash[:alert] = "Could not bypass this meeting. Check with the programmer."
+        flash[:alert] = "Could not bypass this meeting. Please file a bug report."
         format.html { redirect_to crm_meetings_path }
       end
     end

@@ -1,0 +1,25 @@
+= form_for @book do |f|
+  - if @book.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@book.errors.count, "error")} prohibited this book from being saved:"
+      %ul
+        - @book.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :title
+      %td= f.text_field :title, required: true
+    %tr.field
+      %td= f.label :author
+      %td= f.text_field :author, required: true
+    %tr.field
+      %td= f.label "Desire to read (1-100)"
+      %td= f.number_field :desire_to_read, min: 1, max: 100, value: @book.desire_to_read || 50, required: true
+    %tr.field
+      %td= f.label "Status"
+      %td= f.select :status_id, options_for_select( Crm::Book::STATUSES, @book.status_id ), class: "", value: @book.status_id
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

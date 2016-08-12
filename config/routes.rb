@@ -124,6 +124,16 @@ Christianrails::Application.routes.draw do
         post 'bypass'
       end
     end
+    resources :books, except: [:show] do
+      collection do
+        get 'have_read'
+      end
+      member do
+        post 'start_reading'
+        post 'finish'
+      end
+    end
+
   end
   get '/crm', to: 'crm/assistants#index'
 

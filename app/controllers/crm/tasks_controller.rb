@@ -66,7 +66,7 @@ class Crm::TasksController < ApplicationController
       if @task.save
         format.html { redirect_to crm_tasks_path, notice: 'Task completed.' }
       else
-        flash[:alert] = "Could not complete this task. Check with the programmer."
+        flash[:alert] = "Could not complete this task. Please file a bug report."
         format.html { redirect_to crm_tasks_path }
       end
     end
@@ -80,7 +80,7 @@ class Crm::TasksController < ApplicationController
       if @task.save
         format.html { redirect_to crm_tasks_path, notice: 'Task bypassed.' }
       else
-        flash[:alert] = "Could not bypass this task. Check with the programmer."
+        flash[:alert] = "Could not bypass this task. Please file a bug report."
         format.html { redirect_to crm_tasks_path }
       end
     end

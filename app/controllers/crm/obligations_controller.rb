@@ -72,7 +72,7 @@ class Crm::ObligationsController < ApplicationController
       if @obligation.save
         format.html { redirect_to crm_obligations_path, notice: 'Obligation completed.' }
       else
-        flash[:alert] = "Could not complete this obligation. Check with the programmer."
+        flash[:alert] = "Could not complete this obligation. Please file a bug report."
         format.html { redirect_to crm_obligations_path }
       end
     end
@@ -86,7 +86,7 @@ class Crm::ObligationsController < ApplicationController
       if @obligation.save
         format.html { redirect_to crm_obligations_path, notice: 'Obligation bypassed.' }
       else
-        flash[:alert] = "Could not bypass this obligation. Check with the programmer."
+        flash[:alert] = "Could not bypass this obligation. Please file a bug report."
         format.html { redirect_to crm_obligations_path }
       end
     end
