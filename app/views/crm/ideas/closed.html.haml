@@ -1,0 +1,20 @@
+%h1 Closed ideas
+
+- if @ideas.size > 0
+  %table.crm-table
+    %thead
+      %tr
+        %th Idea
+        %th Status
+        %th Completed on
+
+    %tbody
+      - @ideas.each do |idea|
+        %tr
+          %td= idea.name
+          %td= Crm::Idea::STATUSES[ idea.status_id ][0]
+          %td= idea.completed_on.strftime("%a, %b %e")
+
+%br
+%br
+= link_to "<< Back to ideas", crm_ideas_path

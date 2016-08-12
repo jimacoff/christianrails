@@ -1,0 +1,31 @@
+%h1 My ideas
+
+%span
+  = link_to 'Add new idea', new_crm_idea_path
+  - if current_assistant.has_closed_ideas?
+    |
+    = link_to 'View old ideas', closed_crm_ideas_path
+
+- if @ideas.size > 0
+  %table.crm-table
+    %thead
+      %tr
+        %th Idea
+        %th
+
+    %tbody
+      - @ideas.each do |idea|
+        %tr
+          %td= idea.name
+          %td
+            = link_to 'Complete', complete_crm_idea_path( idea ), method: :post
+            |
+            = link_to 'Abandon', abandon_crm_idea_path( idea ), method: :post
+            |
+            = link_to 'Edit', edit_crm_idea_path(idea)
+            |
+            = link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this idea?' }
+
+%br
+%br
+= link_to "<< Back to home", crm_path

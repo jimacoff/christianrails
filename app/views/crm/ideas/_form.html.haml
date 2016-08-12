@@ -1,0 +1,16 @@
+= form_for @idea do |f|
+  - if @idea.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@idea.errors.count, "error")} prohibited this idea from being saved:"
+      %ul
+        - @idea.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name, required: true
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

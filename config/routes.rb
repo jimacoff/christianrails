@@ -124,6 +124,15 @@ Christianrails::Application.routes.draw do
         post 'bypass'
       end
     end
+    resources :ideas, except: [:show] do
+      collection do
+        get 'closed'
+      end
+      member do
+        post 'complete'
+        post 'abandon'
+      end
+    end
     resources :books, except: [:show] do
       collection do
         get 'have_read'
