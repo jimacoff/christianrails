@@ -15,7 +15,7 @@
       %td= f.date_field :due_at
     %tr.field
       %td= f.label "Contact"
-      %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @obligation.contact_id), class: ""
+      %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @obligation.contact_id || params[:contact_id]), class: ""
 
     %tr.actions
       %td

@@ -74,9 +74,11 @@ class Crm::TasksController < Crm::CrmController
     @task.status_id = Crm::Task::STATUS_BYPASSED
     @task.closed_at = Time.now
 
+    recurral_notification = spawn_next_if_recurring
+
     respond_to do |format|
       if @task.save
-        format.html { redirect_to crm_tasks_path, notice: 'Task bypassed.' }
+        format.html { redirect_to crm_tasks_path, notice: 'Task bypassed.' + recurral_notification  }
       else
         flash[:alert] = "Could not bypass this task. Please file a bug report."
         format.html { redirect_to crm_tasks_path }
@@ -102,12 +104,11 @@ class Crm::TasksController < Crm::CrmController
         new_task = Crm::Task.create(name: @task.name, type_id: @task.type_id,
                                     recurral_period: @task.recurral_period,
                                     due_at: new_date )
-        resp = "Next iteration scheduled for #{relative_time(new_date)}"
       end
 
       if new_date
         current_assistant.tasks << new_task
-        " Next iteration scheduled for #{relative_time(new_date)}."
+        " Next instance scheduled for #{relative_time(new_date)}."
       else
         ""
       end

@@ -1,24 +1,30 @@
 %h1 My contacts
 
 = link_to "Add New Contact", new_crm_contact_path
-
-%br
 %br
 
 - @contacts.each do |contact|
+  %br
   %table.crm-table.thirds-table
     %thead
       %tr
-        %th= contact.full_name
-        %th= contact.position_at_business
+        %td{colspan: 2}= contact.full_name
+        %td= contact.position_at_business
         %th
-          = link_to "Edit", edit_crm_contact_path( contact )
+          = link_to "Meet", new_crm_meeting_path + "?contact_id=" + contact.id.to_s
           |
-          = link_to "Destroy", crm_contact_path( contact ), method: :delete, data: { confirm: "Are you sure you wish to DESTROY this contact?" }
+          = link_to "Add Obligation", new_crm_obligation_path + "?contact_id=" + contact.id.to_s
+          |
+          = link_to "Edit", edit_crm_contact_path( contact )
+          - if current_user.admin?
+            |
+            = link_to "Destroy", crm_contact_path( contact ), method: :delete, data: { confirm: "Are you sure you wish to DESTROY this contact?" }
+
       %tr
+        %th Info:
         %td= contact.email
         %td= contact.phone
         %td= contact.address
-  %br
 
-= link_to '<< Home', crm_path
+%br
+= link_to '<< Back to Home', crm_path

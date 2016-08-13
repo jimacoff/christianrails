@@ -4,7 +4,7 @@ class Crm::ContactsController < Crm::CrmController
   before_action :set_crm_contact_secure, only: [:edit, :update, :destroy]
 
   def index
-    @contacts = current_assistant.contacts
+    @contacts = current_assistant.contacts.order('firstname asc')
   end
 
   def new

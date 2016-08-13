@@ -101,6 +101,7 @@ class Crm::BooksController < Crm::CrmController
     def set_book_finished_time_if_read
       if @book.status_id == Crm::Book::STATUS_READ
         @book.finished_at = Time.now
+        @book.save
       end
     end
 end
