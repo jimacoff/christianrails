@@ -3,7 +3,7 @@
 %span
   = link_to 'Add New Task', new_crm_task_path
   - if current_assistant.has_closed_tasks?
-    |
+    ·
     = link_to 'View Closed Tasks', closed_crm_tasks_path
 
 - if @tasks.size > 0
@@ -23,11 +23,11 @@
           %td= relative_time( task.due_at )
           %td
             = link_to 'Complete', complete_crm_task_path( task ), method: :post
-            |
+            ·
             = link_to 'Bypass', bypass_crm_task_path( task ), method: :post
-            |
+            ·
             = link_to 'Edit', edit_crm_task_path(task)
-            |
+            ·
             = link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this task?' }
 %br
 %br

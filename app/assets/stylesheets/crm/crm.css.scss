@@ -58,10 +58,14 @@
 }
 
 .idea-color {
-  color: $slate-gray;
+  color: $flower-pink;
 }
 
 .book-color {
+  color: $pumpkin-orange;
+}
+
+.reminder-color {
   color: $slate-gray;
 }
 
@@ -84,6 +88,22 @@
   tr:nth-child(odd)  { background-color: $l-ghost-green;}
   tr:nth-child(even) { background-color: lighten($l-ghost-green, 30%); }
 }
+
+.contact-table {
+  tr:nth-child(odd)  { background-color: $l-ghost-green;}
+  tr:nth-child(even) { background-color: lighten($l-ghost-green, 30%); }
+}
+
+.idea-table {
+  tr:nth-child(odd)  { background-color: lighten($flower-pink, 10%); }
+  tr:nth-child(even) { background-color: lighten($flower-pink, 20%); }
+}
+
+.book-table {
+  tr:nth-child(odd)  { background-color: lighten($pumpkin-orange, 15%); }
+  tr:nth-child(even) { background-color: lighten($pumpkin-orange, 30%); }
+}
+
 
 @media screen and (min-width: 800px) {
 

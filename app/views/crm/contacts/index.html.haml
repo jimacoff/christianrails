@@ -11,13 +11,13 @@
         %td{colspan: 2}= contact.full_name
         %td= contact.position_at_business
         %th
-          = link_to "Meet", new_crm_meeting_path + "?contact_id=" + contact.id.to_s
-          |
-          = link_to "Add Obligation", new_crm_obligation_path + "?contact_id=" + contact.id.to_s
-          |
+          = link_to "Meet", new_crm_meeting_path + "?contact_id=" + contact.id.to_s, class: 'meeting-color'
+          ·
+          = link_to "Add Obligation", new_crm_obligation_path + "?contact_id=" + contact.id.to_s, class: 'obligation-color'
+          ·
           = link_to "Edit", edit_crm_contact_path( contact )
           - if current_user.admin?
-            |
+            ·
             = link_to "Destroy", crm_contact_path( contact ), method: :delete, data: { confirm: "Are you sure you wish to DESTROY this contact?" }
 
       %tr

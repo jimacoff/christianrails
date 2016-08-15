@@ -3,12 +3,12 @@
 %span
   = link_to 'Add new book', new_crm_book_path
   - if current_assistant.has_read_books?
-    |
+    ·
     = link_to 'View finished books', have_read_crm_books_path
 
 - if @reading_books.size > 0
   %h3 Currently reading
-  %table.crm-table
+  %table.crm-table.book-table
     %thead
       %tr
         %th Title
@@ -24,15 +24,15 @@
           %td= book.desire_to_read
           %td
             = link_to 'Finish', finish_crm_book_path( book ), method: :post
-            |
+            ·
             = link_to 'Edit', edit_crm_book_path(book)
-            |
+            ·
             = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this book? That\'s pretty drastic.' }
 
 - if @unread_books.size > 0
   %br
   %h3 Want to read
-  %table.crm-table
+  %table.crm-table.book-table
     %thead
       %tr
         %th Title
@@ -48,9 +48,9 @@
           %td= book.desire_to_read
           %td
             = link_to 'Start reading', start_reading_crm_book_path( book ), method: :post
-            |
+            ·
             = link_to 'Edit', edit_crm_book_path(book)
-            |
+            ·
             = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this book? That\'s pretty drastic.' }
 %br
 %br

@@ -4,7 +4,7 @@
   %span
     = link_to 'Add New Obligation', new_crm_obligation_path
     - if current_assistant.has_closed_obligations?
-      |
+      ·
       = link_to 'View Closed Obligations', closed_crm_obligations_path
 - else
   %span
@@ -31,11 +31,11 @@
           %td= relative_time ( obligation.due_at )
           %td
             = link_to 'Complete', complete_crm_obligation_path( obligation ), method: :post
-            |
+            ·
             = link_to 'Bypass', bypass_crm_obligation_path( obligation ), method: :post
-            |
+            ·
             = link_to 'Edit', edit_crm_obligation_path(obligation)
-            |
+            ·
             = link_to 'Destroy', obligation, method: :delete, data: { confirm: 'Are you sure you wish to DESTROY this obligation?' }
 %br
 %br
