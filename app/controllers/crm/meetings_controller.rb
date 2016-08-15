@@ -98,7 +98,7 @@ class Crm::MeetingsController < Crm::CrmController
     end
 
     def crm_meeting_params
-      params.require(:crm_meeting).permit(:contact_id, :name, :date_time)
+      params.require(:crm_meeting).permit(:contact_id, :name, :date_time, :location)
     end
 
     def get_contacts
@@ -107,6 +107,5 @@ class Crm::MeetingsController < Crm::CrmController
 
     def verify_contact
       redirect_to(root_path) and return unless owns_assistant?( @contact.assistant )
-      true
     end
 end

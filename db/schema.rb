@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812231832) do
+ActiveRecord::Schema.define(version: 20160813024330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,9 +64,10 @@ ActiveRecord::Schema.define(version: 20160812231832) do
     t.integer  "assistant_id"
     t.datetime "date_time"
     t.integer  "status_id",    default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.datetime "closed_at"
+    t.string   "location",     default: ""
   end
 
   create_table "crm_obligations", force: :cascade do |t|
