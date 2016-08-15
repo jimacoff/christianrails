@@ -15,3 +15,12 @@
 
 %br
 %p.diminutive.center All prices expressed in CAD. Prices do not include tax. All downloads are DRM-free.
+
+:javascript
+
+  $(document).ready(function() {
+    console.log("#{ @gc_crm }");
+    if( "#{ @gc_crm }" === "add-to-cart") {
+      addToCart("#{ @gc_product.id }");
+    }
+  });

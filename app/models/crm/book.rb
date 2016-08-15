@@ -8,4 +8,8 @@ class Crm::Book < ActiveRecord::Base
   STATUS_READ = 2
   STATUSES = [["Want to read", 0], ["Currently reading", 1], ["Read", 2]]
 
+  def is_ghostcrime?
+    title == "Ghostcrime"
+  end
+
 end

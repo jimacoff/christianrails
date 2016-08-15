@@ -16,6 +16,15 @@ class StoreController < ApplicationController
     @finds ||= nil
 
     @available_products = @all_products - @owned_products
+
+    @gc_product = Product.where(title: "Ghostcrime").first
+    @gc_crm = ""
+    if @gc_product && current_user && store_params[:gc] == "crm"
+      if @available_products.collect{ |x| x.id }.include?( @gc_product.id )
+        @gc_crm = "add-to-cart"
+      end
+    end
+
   end
 
   def updated_prices
@@ -167,7 +176,7 @@ class StoreController < ApplicationController
   end
 
   def store_params
-    params.permit(:release_id, :paymentId, :token, :PayerID)
+    params.permit(:release_id, :paymentId, :token, :PayerID, :gc)
   end
 
   def get_sample_blog_posts
