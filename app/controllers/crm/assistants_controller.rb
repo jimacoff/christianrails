@@ -20,7 +20,7 @@ class Crm::AssistantsController < Crm::CrmController
 
       # do this more functionally
       @obligations.each do |ob|
-        @upcoming_events << { name: ob.name, with: ob.contact.full_name, date: ob.due_at,
+        @upcoming_events << { name: ob.name, with: ob.contact.full_name, date: ob.due_at, type: "Obligation",
                               paths:[
                                       { complete: complete_crm_obligation_path( ob ) },
                                       { bypass: bypass_crm_obligation_path( ob ) }
@@ -28,21 +28,24 @@ class Crm::AssistantsController < Crm::CrmController
 
       end
       @meetings.each do |meet|
-        @upcoming_events << { name: "Meeting: " + meet.name, with: meet.contact.full_name, date: meet.date_time,
+        @upcoming_events << { name: "Meeting: " + meet.name, with: meet.contact.full_name, date: meet.date_time, type: "Meeting",
                               paths: [
                                        { complete: complete_crm_meeting_path( meet ) },
                                        { bypass: bypass_crm_meeting_path( meet ) }
                                      ] }
       end
       @tasks.each do |task|
-        @upcoming_events << { name: task.name, with: "", date: task.due_at,
+        @upcoming_events << { name: task.name, with: "", date: task.due_at, type: "Task",
                               paths: [
                                        { complete: complete_crm_task_path( task ) },
                                        { bypass: bypass_crm_task_path( task ) }
                                      ] }
       end
-
       @upcoming_events.sort!{ |a, b| a[:date] <=> b[:date] }
+
+      @reading_books = Crm::Book.where(assistant_id: current_assistant.id)
+                                .where(status_id: Crm::Book::STATUS_READING)
+                                .order("desire_to_read desc")
     end
   end
 

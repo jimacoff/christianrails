@@ -1,19 +1,21 @@
 - if @assistant.name
 
   %p
-    %span= link_to "Contacts", crm_contacts_path
-    |
-    %span= link_to "Obligations", crm_obligations_path
-    |
-    %span= link_to "Meetings", crm_meetings_path
-    |
-    %span= link_to "Tasks", crm_tasks_path
-    |
-    %span= link_to "Ideas", crm_ideas_path
-    |
-    %span= link_to "Books", crm_books_path
-    |
-    %span= link_to "Reminders", reminders_crm_assistants_path
+    %strong
+      %span= link_to "Contacts", crm_contacts_path, class: 'contact-color'
+      ·
+      %span= link_to "Obligations", crm_obligations_path, class: 'obligation-color'
+      ·
+      %span= link_to "Meetings", crm_meetings_path, class: 'meeting-color'
+      ·
+      %span= link_to "Tasks", crm_tasks_path, class: 'task-color'
+  %p
+    %strong
+      %span= link_to "Ideas", crm_ideas_path, class: 'idea-color'
+      ·
+      %span= link_to "Books", crm_books_path, class: 'book-color'
+      ·
+      %span= link_to "Reminders", reminders_crm_assistants_path
 
   - if @upcoming_events.size > 0
     %h3 Upcoming meetings + deadlines
@@ -28,7 +30,16 @@
 
       %tbody
         - @upcoming_events.each do |event|
-          %tr
+          - if event[:type] == "Meeting"
+            - rowclass = "meeting-row"
+          - elsif event[:type] == "Obligation"
+            - rowclass = "obligation-row"
+          - elsif event[:type] == "Task"
+            - rowclass = "task-row"
+          - else
+            - rowclass = ""
+
+          %tr{class: "#{rowclass}"}
             %td= event[:name]
             %td= event[:with]
             %td= relative_time ( event[:date] )
@@ -38,6 +49,22 @@
                   %span
                     = link_to k.to_s.titlecase, path[k], method: :post
 
+  - if @reading_books.size > 0
+    %h3 Currently reading
+    %table.crm-table
+      %thead
+        %tr
+          %th Title
+          %th Author
+          %th
+
+      %tbody
+        - @reading_books.each do |book|
+          %tr
+            %td= book.title
+            %td= book.author
+            %td
+              = link_to 'Finish', finish_crm_book_path( book ), method: :post
 
 - elsif !current_user
   %h1 You aren't signed in!

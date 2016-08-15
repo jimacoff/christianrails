@@ -10,9 +10,9 @@
 }
 
 .crm-table {
-  background-color: $slate-gray;
-  tr:nth-child(odd)     { background-color: $purple-smoke; }
-  tr:nth-child(even)    { background-color: $l-purple-smoke; }
+  background-color:  $slate-gray;
+  tr:nth-child(odd)  { background-color: $purple-smoke; }
+  tr:nth-child(even) { background-color: $l-purple-smoke; }
   th {
     text-align: center;
   }
@@ -27,6 +27,62 @@
 #footer-bar {
   background-color: $ghost-green;
   color: $white;
+}
+
+.meeting-row {
+  background-color: $ice-blue !important;
+}
+
+.obligation-row {
+  background-color: $l-back-purple !important;
+}
+
+.task-row {
+  background-color: $blue-smoke !important;
+}
+
+.meeting-color {
+  color: darken($ice-blue, 10%);
+}
+
+.obligation-color {
+  color: darken($l-back-purple, 10%);
+}
+
+.task-color {
+  color: darken($alt-smoke-gray, 20%);
+}
+
+.contact-color {
+  color: $ghost-green;
+}
+
+.idea-color {
+  color: $slate-gray;
+}
+
+.book-color {
+  color: $slate-gray;
+}
+
+.meeting-table {
+  tr:nth-child(odd)  { background-color: $ice-blue; }
+  tr:nth-child(even) { background-color: $soft-cyan; }
+}
+
+.obligation-table {
+  tr:nth-child(odd)  { background-color: $l-back-purple; }
+  tr:nth-child(even) { background-color: $purple-smoke; }
+}
+
+.task-table {
+  tr:nth-child(odd)  { background-color: $blue-smoke; }
+  tr:nth-child(even) { background-color: $alt-smoke-gray; }
+}
+
+.contact-table {
+  tr:nth-child(odd)  { background-color: $l-ghost-green;}
+  tr:nth-child(even) { background-color: lighten($l-ghost-green, 30%); }
 }
 
 @media screen and (min-width: 800px) {
