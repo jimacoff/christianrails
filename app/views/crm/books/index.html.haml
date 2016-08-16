@@ -4,7 +4,7 @@
   = link_to 'Add new book', new_crm_book_path
   - if current_assistant.has_read_books?
     ·
-    = link_to 'View finished books', have_read_crm_books_path
+    = link_to 'View finished books', have_read_crm_books_path, class: 'closed-color'
 
 - if @reading_books.size > 0
   %h3 Currently reading

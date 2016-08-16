@@ -5,7 +5,7 @@
     = link_to 'Add new meeting', new_crm_meeting_path
     - if current_assistant.has_closed_meetings?
       ·
-      = link_to 'View Past Meetings', past_crm_meetings_path
+      = link_to 'View Past Meetings', past_crm_meetings_path, class: 'closed-color'
 - else
   %span
     First
@@ -37,8 +37,9 @@
             = link_to 'Bypass', bypass_crm_meeting_path( meeting ), method: :post
             ·
             = link_to 'Edit', edit_crm_meeting_path(meeting)
-            ·
-            = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }
+            - if current_user.admin?
+              ·
+              = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 = link_to "<< Back to home", crm_path
