@@ -42,7 +42,11 @@
           %tr{class: "#{rowclass}"}
             %td= event[:name]
             %td= event[:with]
-            %td= relative_time ( event[:date] )
+            %td
+              - if event[:type] == "Meeting"
+                = relative_time( event[:date], true )
+              - else
+                = relative_time( event[:date] )
             %td
               - event[:paths].each do |path|
                 - path.keys.each do |k|

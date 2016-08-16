@@ -30,7 +30,7 @@
         %tr
           %td= meeting.name
           %td= meeting.contact.full_name
-          %td= relative_time ( meeting.date_time )
+          %td= relative_time( meeting.date_time, true )
           %td
             = link_to 'Complete', complete_crm_meeting_path( meeting ), method: :post
             ·

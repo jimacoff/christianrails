@@ -12,7 +12,7 @@
       %td= f.text_field :name, required: true
     %tr
       %td= f.label "Date"
-      %td{style: "padding-left: 30px;"}= f.datetime_select :date_time, ampm: true
+      %td.radius{style: "padding-left: 70px;"}= f.datetime_select :date_time, ampm: true, default: {minute: 0, hour: 12}
 
     %tr.field
       %td= f.label :location

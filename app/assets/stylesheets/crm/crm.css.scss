@@ -108,6 +108,11 @@
   tr:nth-child(even) { background-color: lighten($pumpkin-orange, 30%); }
 }
 
+.radius {
+  select {
+    border-radius: 2px;
+  }
+}
 
 @media screen and (min-width: 800px) {
 
