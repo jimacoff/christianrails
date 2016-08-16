@@ -10,9 +10,10 @@
     %tr.field
       %td= f.label :name
       %td= f.text_field :name, required: true
-    %tr.field
+    %tr
       %td= f.label "Date"
-      %td= f.date_field :date_time
+      %td{style: "padding-left: 30px;"}= f.datetime_select :date_time, ampm: true
+
     %tr.field
       %td= f.label :location
       %td= f.text_field :location
