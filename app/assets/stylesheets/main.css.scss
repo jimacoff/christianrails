@@ -47,10 +47,11 @@ table {
 
 #user-wrapper {
   height: 60px;
-  min-width: 200px;
+  min-width: 160px;
   display: inline-block;
   float: right;
   position: static;
+  padding: 0 5px 0 5px;
 }
 
 // PANELS ETC
@@ -208,6 +209,7 @@ a.category-link {
 
 /////  RESPONSIVE //////
 
+// small
 @media screen and (min-width: 320px) {
 
   #header h1 {
@@ -217,14 +219,29 @@ a.category-link {
   }
 
   #mynameis {
-    width: 200px;
+    width: 145px;
   }
 
   #user-wrapper {
     position: absolute;
   }
 
+  #logo-wrapper {
+    height: 95px;
+    width: 95px;
+  }
+
 }
+
+@media screen and (min-width: 450px) {
+
+  #mynameis {
+    width: 200px;
+  }
+
+}
+
+// medium
 @media screen and (min-width: 680px) {
 
   #header h1 {
@@ -245,7 +262,14 @@ a.category-link {
     width: 550px;
   }
 
+  #logo-wrapper {
+    height: 95px;
+    width: 95px;
+  }
+
 }
+
+// large
 @media screen and (min-width: 1034px) {
 
   #header h1 {
@@ -255,7 +279,16 @@ a.category-link {
   }
 
   #mynameis {
-    width: 600px;
+    width: 475px;
+    // display: inline-block;
+  }
+
+  #imake {
+    // display: inline-block;
+  }
+
+  .header-words {
+    display: inline-block;
   }
 
   #user-wrapper {
@@ -264,6 +297,11 @@ a.category-link {
 
   .smart-panel {
     width: 640px;
+  }
+
+  #logo-wrapper {
+    height: 125px;
+    width: 125px;
   }
 
 }

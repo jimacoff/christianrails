@@ -1,12 +1,10 @@
 #header
-  %table
-    %tr
-      %td
-        #logo-wrapper
-          .left.face
-            = link_to image_tag("cyan-circle.png", alt: "Christian DeWolf", width: "150", height: "150"), root_path
-          %h1#mynameis Christian DeWolf
-          %p#imake.subtitle.soft Casual Interactive Fiction
+  .left-header{style: "display: inline-block;"}
+    #logo-wrapper
+      .left.face
+        = link_to image_tag("cyan-circle.png", alt: "Christian DeWolf", width: "150", height: "150"), root_path
+    .header-words
+      %h1#mynameis Christian DeWolf
+      %p#imake.subtitle.soft Non-Linear Fiction
 
-      %td
-        = render "layouts/userbar"
+  = render "layouts/userbar"

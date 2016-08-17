@@ -24,9 +24,12 @@
   }
 }
 
-#footer-bar {
+#store-footer-bar {
   background-color: $ghost-green;
   color: $white;
+  border-radius: 30px;
+  width: 300px;
+  margin: 0 auto;
 }
 
 .meeting-row {
@@ -114,10 +117,47 @@
   }
 }
 
+#crm-logo-wrapper {
+  display: inline-block;
+  height: 75px;
+  width: 75px;
+}
+
+
+@media screen and (min-width: 320px) {
+
+  #user-wrapper {
+    position: absolute;
+  }
+
+
+  #mynameis {
+    width: 170px;
+    font-size: 0.75em;
+  }
+
+  #imake {
+    font-size: 0.75em;
+  }
+
+}
+
 @media screen and (min-width: 800px) {
+
+  #user-wrapper {
+    position: static;
+  }
 
   .crm-panel {
     width: 700px;
   }
 
+  #mynameis {
+    width: 280px;
+    font-size: 1em;
+  }
+
+  #imake {
+    font-size: 1em;
+  }
 }
