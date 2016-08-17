@@ -1,10 +1,18 @@
 == About this project
 
-Christianrails is a web application that can be used to sell eBooks and other digital goods through PayPal.  It also serves as the homepage of author/programmer Christian DeWolf.  A version can be found at https://www.christiandewolf.com.
+Christianrails is a monolithic web application that serves as the homepage of author/programmer Christian DeWolf.  A version can be found at https://www.christiandewolf.com. It features:
+
+- an eBook store powered by PayPal, with admin backend
+- a blog engine
+- Diamond Find, a Story Choice Adventure
+- the homepage for Wolf Butler Art & Software, a digital publishing company
+- ghostCRM, a stripped-down CRM for managing contacts + obligations
+- a graveyard, with pages for failed projects
 
 Release notes:
 
-- 1.1.4 - Newsletter signup + Rough CRM
+- 1.2.0 - CRM v.1 -> contacts, obligations, meetings, tasks, books + ideas
+- 1.1.4 - Newsletter signup, auto-mailers + Rough CRM
 - 1.1.3 - Blog upgraded for dynamic link generation, tags + categories
 - 1.1.2 - Wolf Butler Art & Software site integrated
 - 1.1.1 - Major site redesign incl. blog

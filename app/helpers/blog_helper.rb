@@ -4,6 +4,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20160816_tie_in_for_ghostcrime",
+        category: "Software Development",
+        tags: ["CRM", "Ghostcrime", "organization", "business", "books", "tie-ins"]
+      },
+      {
         title: "20160808_between_contracts",
         category: "Freelance Life",
         tags: ["freelance", "self-employment", "travelling", "British Columbia", "Snapback", "books"]
