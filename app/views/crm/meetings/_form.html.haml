@@ -16,7 +16,7 @@
 
     %tr.field
       %td= f.label :location
-      %td= f.text_field :location
+      %td= f.text_field :location, required: true
     %tr.field
       %td= f.label "Contact"
       %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @meeting.contact_id || params[:contact_id]), class: ""

@@ -25,7 +25,7 @@
         %tr
           %th Task/event
           %th With
-          %th Date
+          %th When
           %th
 
       %tbody
@@ -74,7 +74,7 @@
   %h1 Welcome to ghostCRM!
 
   %p
-    ghostCRM lets you keep track of your personal obligations as well as your dreams and goals.
+    Keep track of your personal obligations as well as your dreams and goals.
 
   %p
     = link_to 'Sign in', main_app.user_session_path
@@ -89,6 +89,8 @@
 
 - else
   %h3 You don't have an Assistant yet!  Create one now.
+
+  %p Your Assistant's personality will evolve with ghostCRM and currently takes a backseat to application functionality.
 
   = form_for @assistant do |f|
     - if @assistant.errors.any?

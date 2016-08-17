@@ -23,6 +23,7 @@
         %th Meeting
         %th With
         %th When
+        %th Where
         %th
 
     %tbody
@@ -31,6 +32,7 @@
           %td= meeting.name
           %td= meeting.contact.full_name
           %td= relative_time( meeting.date_time, true )
+          %td= meeting.location
           %td
             = link_to 'Complete', complete_crm_meeting_path( meeting ), method: :post
             ·
