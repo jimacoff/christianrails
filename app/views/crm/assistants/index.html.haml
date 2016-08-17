@@ -71,12 +71,21 @@
               = link_to 'Finish', finish_crm_book_path( book ), method: :post
 
 - elsif !current_user
-  %h1 You aren't signed in!
+  %h1 Welcome to ghostCRM!
+
+  %p
+    ghostCRM lets you keep track of your personal obligations as well as your dreams and goals.
+
   %p
     = link_to 'Sign in', main_app.user_session_path
     or
     = link_to 'Sign up',  main_app.new_user_registration_path
-    to access this area.
+    to begin organizing your shambles of a life.
+
+    %br
+    %br
+    %p
+      = link_to 'Back to ChristianDeWolf.com', main_app.root_path
 
 - else
   %h3 You don't have an Assistant yet!  Create one now.
