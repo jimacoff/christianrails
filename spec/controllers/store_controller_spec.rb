@@ -17,7 +17,7 @@ RSpec.describe StoreController, type: :controller do
     let!(:combo2)    { FactoryGirl.create(:price_combo) }
     let!(:combo3)    { FactoryGirl.create(:price_combo) }
 
-    let!(:product1)  { FactoryGirl.create(:product) }
+    let!(:product1)  { FactoryGirl.create(:product, title: "Ghostcrime") }
     let!(:product2)  { FactoryGirl.create(:product) }
     let!(:product3)  { FactoryGirl.create(:product) }
     let!(:product4)  { FactoryGirl.create(:product) }
