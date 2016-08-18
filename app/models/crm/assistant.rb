@@ -43,19 +43,19 @@ class Crm::Assistant < ActiveRecord::Base
   def todays_meetings
     meetings.where('date_time > ?', DateTime.now)
             .where('date_time < ?', DateTime.now + 1.day)
-            .sort( |a, b| a.date_time <=> b.date_time )
+            #.sort( |a, b| a.date_time <=> b.date_time )
   end
 
   def todays_obligations
     obligations.where('due_at > ?', DateTime.now)
                .where('due_at < ?', DateTime.now + 1.day)
-               .sort( |a, b| a.date_time <=> b.date_time )
+               #.sort( |a, b| a.date_time <=> b.date_time )
   end
 
   def todays_tasks
     tasks.where('due_at > ?', DateTime.now)
          .where('due_at < ?', DateTime.now + 1.day)
-         .sort( |a, b| a.date_time <=> b.date_time )
+         #.sort( |a, b| a.date_time <=> b.date_time )
   end
 
   def nothing_to_do_today?
