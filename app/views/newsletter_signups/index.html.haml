@@ -1,0 +1,14 @@
+%h1 Newsletter signups
+
+%table
+  %thead
+    %tr
+      %th Email
+      %th Date
+  %tbody
+    - @newsletter_signups.each do |news|
+      %tr
+        %td= news.email
+        %td= news.created_at.strftime("%B %e, %Y")
+
+= render "admin/admin_link"

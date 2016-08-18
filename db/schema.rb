@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817191507) do
+ActiveRecord::Schema.define(version: 20160818141023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,13 @@ ActiveRecord::Schema.define(version: 20160817191507) do
 
   add_index "downloads", ["release_id"], name: "index_downloads_on_release_id", using: :btree
   add_index "downloads", ["user_id"], name: "index_downloads_on_user_id", using: :btree
+
+  create_table "newsletter_signups", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "newsletters_received", default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string   "payer_id"

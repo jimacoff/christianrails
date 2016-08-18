@@ -6,8 +6,8 @@ class AdminMailer < ActionMailer::Base
     content_type: "text/html"
   )
 
-  def newsletter_signup(contact)
-    @contact = contact
+  def newsletter_signup(signup)
+    @newsletter_signup = signup
     subject = "New newsletter signup"
 
     mail(subject: subject)

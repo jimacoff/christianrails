@@ -98,11 +98,6 @@ class Crm::AssistantsController < Crm::CrmController
       params.require(:crm_assistant).permit(:name, :personality_id, :email_me_daily)
     end
 
-    def send_notifications
-      NewsletterMailer.welcome(@assistant).deliver_now
-      AdminMailer.newsletter_signup(@assistant).deliver_now
-    end
-
     def add_ghostcrime_to_crm
       @book = Crm::Book.create(title: "Ghostcrime", author: "Christian DeWolf")
       @book.assistant = @assistant

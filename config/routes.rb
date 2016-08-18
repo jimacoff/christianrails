@@ -84,6 +84,8 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  resources :newsletter_signups, only: [:index, :create]
+
   post '/woods/items/download', to: 'woods/items#download'
   get  '/woods',                to: 'woods/stories#index'
 
@@ -97,11 +99,7 @@ Christianrails::Application.routes.draw do
         post 'send_daily_emails'
       end
     end
-    resources :contacts, except: [:show] do
-      collection do
-        post 'newsletter_signup'
-      end
-    end
+    resources :contacts, except: [:show]
     resources :obligations, except: [:show] do
       collection do
         get 'closed'

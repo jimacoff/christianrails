@@ -26,9 +26,9 @@
       request = void 0;
       request = $.ajax({
           type: 'POST',
-          url: '/crm/contacts/newsletter_signup.json',
+          url: '/newsletter_signups.json',
           dataType: 'json',
-          data: { 'crm_contact': { 'email' : address } }
+          data: { 'newsletter_signup': { 'email' : address } }
         });
 
       request.done(function(data, textStatus, jqXHR) {

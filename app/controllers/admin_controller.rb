@@ -6,8 +6,8 @@ class AdminController < ApplicationController
   def emailtest
     @failure = false
     begin
-      @contact = Crm::Contact.find(3) # me!
-      NewsletterMailer.welcome(@contact).deliver_now
+      @newsletter_signup = NewsletterSignup.find(1) # me!
+      NewsletterMailer.welcome(@newsletter_signup).deliver_now
     rescue
       @failure = true
     end
