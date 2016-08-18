@@ -6,7 +6,7 @@
         - @book.errors.full_messages.each do |msg|
           %li= msg
 
-  %table.modest-width
+  %table.modest-width.zero-margin
     %tr.field
       %td= f.label :title
       %td= f.text_field :title, required: true

@@ -6,7 +6,7 @@
         - @contact.errors.full_messages.each do |msg|
           %li= msg
 
-  %table.modest-width
+  %table.modest-width.zero-margin
     %tr.field
       %td= f.label "First name"
       %td= f.text_field :firstname, required: true

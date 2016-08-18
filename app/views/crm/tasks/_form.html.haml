@@ -6,7 +6,7 @@
         - @task.errors.full_messages.each do |msg|
           %li= msg
 
-  %table.modest-width
+  %table.modest-width.zero-margin
     %tr.field
       %td= f.label :name
       %td= f.text_field :name, required: true
