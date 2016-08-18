@@ -19,7 +19,12 @@ class OrdersController < ApplicationController
   end
 
   private
+
+    def order_params
+      params.permit(:id)
+    end
+
     def set_order
-      @order = Order.find(params[:id])
+      @order = Order.find(order_params[:id])
     end
 end

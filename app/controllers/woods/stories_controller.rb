@@ -10,7 +10,7 @@ class Woods::StoriesController < ApplicationController
   end
 
   def show
-    @highscores = Woods::Player.all.collect{|p| [p.username, p.total_score]}.sort{ |x,y| y[1] <=> x[1]}[0..4]
+    @highscores = Woods::Player.all.collect{|p| [p.username, p.total_score, p.id]}.sort{ |x,y| y[1] <=> x[1]}[0..4]
   end
 
   def manage
@@ -49,7 +49,7 @@ class Woods::StoriesController < ApplicationController
   # JSON endpoint
   def move_to
     begin
-      @node = Woods::Node.find( params[:target_node] )
+      @node = Woods::Node.find( woods_story_params[:target_node] )
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
 
       #security check
@@ -62,7 +62,7 @@ class Woods::StoriesController < ApplicationController
         @scorecard = @scorecard.first
       end
 
-      dir = params[:dir]
+      dir = woods_story_params[:dir]
       if dir == "L"
         @scorecard.lefts += 1
         @scorecard.save
@@ -108,10 +108,10 @@ class Woods::StoriesController < ApplicationController
 
   private
     def set_woods_story
-      @story = Woods::Story.find(params[:id])
+      @story = Woods::Story.find( woods_story_params[:id] )
     end
 
     def woods_story_params
-      params[:woods_story]
+      params.permit(:id, :target_node, :dir)
     end
 end

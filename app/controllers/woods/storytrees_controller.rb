@@ -39,6 +39,6 @@ class Woods::StorytreesController < ApplicationController
     end
 
     def woods_storytree_params
-      params[:woods_storytree]
+      params.require(:woods_storytree).permit(:name, :max_level)
     end
 end

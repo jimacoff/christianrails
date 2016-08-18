@@ -34,7 +34,8 @@
           %table.zero-margin.center
             - @highscores.each do |h|
               %tr
-                %td= h[0]
+                %td
+                  %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
                 %td= h[1]
   - if current_user && current_user.player && current_player.owns_story?(@story)
     %br

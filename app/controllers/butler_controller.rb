@@ -12,7 +12,7 @@ class ::ButlerController < ApplicationController
   end
 
   def show_post
-    @post_name = params[:post]
+    @post_name = butler_params[:post]
     if !lookup_context.find_all("/butler/posts/_blog_#{ @post_name }").any?
       redirect_to page_not_found_path
     end
@@ -22,7 +22,7 @@ class ::ButlerController < ApplicationController
   end
 
   def show_post
-    post_name = params[:post]
+    post_name = butler_params[:post]
     if !lookup_context.find_all("/butler/blog/posts/_blog_#{ post_name }").any?
       redirect_to page_not_found_path and return
     end
@@ -33,7 +33,7 @@ class ::ButlerController < ApplicationController
   end
 
   def category
-    @category = params[:name]
+    @category = butler_params[:name]
     @category_posts = []
     @blog_posts.each do |post|
       @category_posts << post if post[:category] == @category
@@ -43,7 +43,7 @@ class ::ButlerController < ApplicationController
   end
 
   def tag
-    @tag = params[:name]
+    @tag = butler_params[:name]
     @tag_posts = []
     @blog_posts.each do |post|
       @tag_posts << post if post[:tags].include? @tag
@@ -53,6 +53,10 @@ class ::ButlerController < ApplicationController
   end
 
   private
+
+  def butler_params
+    params.permit(:post, :name)
+  end
 
   def get_sample_posts
     @sample_posts = sample_butler_posts

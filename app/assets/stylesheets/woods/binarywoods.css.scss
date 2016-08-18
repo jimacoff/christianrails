@@ -159,6 +159,40 @@ a {
   padding-bottom: 6px;
 }
 
+#woods-player-display-panel {
+  border: 1px solid $black;
+  margin: 20px auto 0 auto;
+  border-radius: 20px;
+  text-align: left;
+  background-color: $mega-blue;
+  width: 600px;
+  padding: 15px;
+}
+
+.player-stats-table {
+  text-align: center;
+}
+
+.player-finds-table {
+  text-align: left;
+  margin: 0 auto;
+  border: 1px solid $black;
+  border-radius: 10px;
+  padding: 10px;
+
+  tr:nth-child(odd)  {
+    td {
+
+    }
+  }
+  tr:nth-child(even) {
+    td {
+
+    }
+  }
+
+}
+
 .megapink {
   color: $mega-pink;
   text-decoration: underline !important;
@@ -166,5 +200,10 @@ a {
 
 .megablue {
   color: $mega-blue;
+  text-decoration: underline !important;
+}
+
+.blackscore {
+  color: $black;
   text-decoration: underline !important;
 }

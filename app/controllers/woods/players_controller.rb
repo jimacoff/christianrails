@@ -1,7 +1,6 @@
 class Woods::PlayersController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_player, only: [:show]
   skip_before_action :verify_is_admin, only: [:show]
 
   def index
@@ -9,14 +8,12 @@ class Woods::PlayersController < ApplicationController
   end
 
   def show
+    # shows the player's 'profile' + stats + finds
+    @player = Woods::Player.find( woods_player_params[:id] )
   end
 
   private
-    def set_woods_player
-      @player = Woods::Player.find(params[:id])
-    end
-
     def woods_player_params
-      params[:woods_player]
+      params.permit(:id)
     end
 end

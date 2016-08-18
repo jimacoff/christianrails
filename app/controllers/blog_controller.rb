@@ -12,7 +12,7 @@ class BlogController < ApplicationController
   end
 
   def show_post
-    post_name = params[:post]
+    post_name = blog_params[:post]
     if !lookup_context.find_all("/blog/posts/_blog_#{ post_name }").any?
       redirect_to page_not_found_path and return
     end
@@ -21,7 +21,7 @@ class BlogController < ApplicationController
   end
 
   def category
-    @category = params[:name]
+    @category = blog_params[:name]
     @category_posts = []
     @blog_posts.each do |post|
       @category_posts << post if post[:category] == @category
@@ -29,7 +29,7 @@ class BlogController < ApplicationController
   end
 
   def tag
-    @tag = params[:name]
+    @tag = blog_params[:name]
     @tag_posts = []
     @blog_posts.each do |post|
       @tag_posts << post if post[:tags].include? @tag
@@ -37,6 +37,10 @@ class BlogController < ApplicationController
   end
 
   private
+
+  def blog_params
+    params.permit(:post, :name)
+  end
 
   def get_all_blog_posts
     @blog_posts = all_blog_posts
