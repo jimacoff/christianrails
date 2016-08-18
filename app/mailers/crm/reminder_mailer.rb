@@ -19,7 +19,7 @@ class ReminderMailer < ActionMailer::Base
       subjs = [
                 "Sort your day out."
               ]
-      subjs[ Random.rand( subjs.size )
+      subjs[ Random.rand( subjs.size )]
     end
 
 end
