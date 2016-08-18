@@ -1,0 +1,40 @@
+%p=  "Hi #{ @assistant.user.first_name },"
+
+- if @assistant.nothing_to_do_today?
+  %p I've got nothing scheduled for you today!
+
+  %p If you actually don't have anything you have to do, read a book!
+  %p
+    Otherwise, log back into
+    = link_to "ghostCRM", "https://www.christiandewolf.com/crm"
+    and get your life together.
+
+  %p Remember: you're the best,
+
+- else
+  %p Here's what your day looks like:
+
+  - if @assistant.todays_meetings.size > 0
+    %strong Meetings:
+    %ul
+      - @assistant.todays_meetings.each do |meeting|
+        %li
+          = "Meeting with #{ meeting.contact.full_name } at #{ meeting.location || '' } #{ meeting.date_time.strftime("%-I:%M %p") }"
+
+  - if @assistant.todays_obligationss.size > 0
+    %strong Obligations due:
+    %ul
+      - @assistant.todays_obligations.each do |obligation|
+        %li
+          = "#{ obligation.name } for #{ obligation.contact.full_name }"
+
+  - if @assistant.todays_obligationss.size > 0
+    %strong Tasks due:
+    %ul
+      - @assistant.todays_tasks.each do |task|
+        %li
+          = "#{ task.name }"
+
+  %p Have a happy and productive day! Always remember: you're shockingly effective at what you do best.
+
+%p= "#{ @assistant.name }, your ghostCRM Assistant"

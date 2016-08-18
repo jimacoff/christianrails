@@ -8,8 +8,12 @@
 
   %table.modest-width
     %tr.field
-      %td= f.label :name
+      %td= f.label "Summary"
       %td= f.text_field :name, required: true
+
+    %tr.field
+      %td= f.label "Contact"
+      %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @meeting.contact_id || params[:contact_id]), class: ""
     %tr
       %td= f.label "Date"
       %td.radius{style: "padding-left: 70px;"}= f.datetime_select :date_time, ampm: true, default: {minute: 0, hour: 12}
@@ -17,9 +21,10 @@
     %tr.field
       %td= f.label :location
       %td= f.text_field :location, required: true
+
     %tr.field
-      %td= f.label "Contact"
-      %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @meeting.contact_id || params[:contact_id]), class: ""
+      %td= f.label :agenda
+      %td= f.text_area :agenda, rows: 8, cols: 40
 
     %tr.actions
       %td

@@ -40,4 +40,30 @@ class Crm::Assistant < ActiveRecord::Base
     books.select{ |x| x.status_id == Crm::Book::STATUS_READ }.size > 0
   end
 
+  def todays_meetings
+    meetings.where('date_time > ?', DateTime.now)
+            .where('date_time < ?', DateTime.now + 1.day)
+            .sort( |a, b| a.date_time <=> b.date_time )
+  end
+
+  def todays_obligations
+    obligations.where('due_at > ?', DateTime.now)
+               .where('due_at < ?', DateTime.now + 1.day)
+               .sort( |a, b| a.date_time <=> b.date_time )
+  end
+
+  def todays_tasks
+    tasks.where('due_at > ?', DateTime.now)
+         .where('due_at < ?', DateTime.now + 1.day)
+         .sort( |a, b| a.date_time <=> b.date_time )
+  end
+
+  def nothing_to_do_today?
+    todays_meetings.size == 0 &&
+    todays_obligations.size == 0 &&
+    todays_tasks.size == 0
+  end
+
+  # TODO add some randomizers for books, ideas etc.
+
 end
