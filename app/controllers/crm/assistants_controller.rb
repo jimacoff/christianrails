@@ -1,6 +1,6 @@
 class Crm::AssistantsController < Crm::CrmController
 
-  skip_before_action :verify_has_assistant, only: [:index, :create]
+  skip_before_action :verify_has_assistant, only: [:index, :create, :send_daily_emails]
 
   def index
     @assistant = current_assistant || Crm::Assistant.new
@@ -69,18 +69,33 @@ class Crm::AssistantsController < Crm::CrmController
     end
   end
 
+  def update
+    @assistant = current_assistant
+
+    respond_to do |format|
+      if @assistant.update_attributes( crm_assistant_params )
+        format.html { redirect_to crm_path, notice: "Your Assistant's settings have been updated!" }
+      else
+        flash[:alert] = "We could not update your Assistant. Please file a bug report."
+        format.html { redirect_to crm_path }
+      end
+    end
+  end
+
   def reminders
-    # TODO
+    @assistant = current_assistant
+  end
+
+  def send_daily_emails
+    Crm::Assistant.where(email_me_daily: true).each do |assistant|
+      send_daily_summary_if_not_yet_sent( assistant )
+    end
   end
 
   private
 
-    def set_crm_assistant
-      @assistant = Crm::Assistant.find(params[:id])
-    end
-
     def crm_assistant_params
-      params.require(:crm_assistant).permit(:name, :personality_id)
+      params.require(:crm_assistant).permit(:name, :personality_id, :email_me_daily)
     end
 
     def send_notifications
@@ -92,6 +107,20 @@ class Crm::AssistantsController < Crm::CrmController
       @book = Crm::Book.create(title: "Ghostcrime", author: "Christian DeWolf")
       @book.assistant = @assistant
       @book.save
+    end
+
+    def send_daily_summary_if_not_yet_sent(assistant)
+      mailouts_to_assistant = Crm::Mailout.where(assistant_id: assistant.id)
+                                          .where(type_id: Crm::Mailout::TYPE_DAILY_SUMMARY)
+                                          .where('created_at > ?', DateTime.now - 1.day)
+      unless mailouts_to_assistant.size > 0
+        Crm::ReminderMailer.(@assistant).deliver_now
+        create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
+      end
+    end
+
+    def create_new_mailout_record(assistant, type)
+      Crm::Mailout.create(assistant_id: assistant.id, type_id: type, status_id: Crm::Mailout::STATUS_COMPLETE)
     end
 
 end

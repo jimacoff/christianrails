@@ -1,6 +1,25 @@
 %h1 Reminders
 
-%p Coming soon: automatic emails to remind you about what you should be doing!
+= form_for @assistant do |f|
+  - if @assistant.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@assistant.errors.count, "error")} prohibited your Assistant from being saved:"
+      %ul
+        - @assistant.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width{style: "margin: 0 auto;"}
+    %tr
+      %td
+        %p{style: "text-align: left;"}
+          ghostCRM can send you an email summary of the upcoming day, along with reminders of ideas and goals.
+    %tr
+      %td.left
+        = f.label :email_me_daily, class: 'embolden'
+        = f.check_box :email_me_daily, value: @assistant.email_me_daily
+
+    %tr.center
+      %td= f.submit 'Save', class: 'store-button'
 
 %br
 = link_to "<< Back to home", crm_path

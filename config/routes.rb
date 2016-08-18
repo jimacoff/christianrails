@@ -91,9 +91,10 @@ Christianrails::Application.routes.draw do
   get '/diamondfind/play', to: 'woods/stories#play', defaults: { id: 1 }
 
   namespace :crm do
-    resources :assistants, only: [:index, :create] do
+    resources :assistants, only: [:index, :create, :update] do
       collection do
-        get 'reminders'
+        get  'reminders'
+        post 'send_daily_emails'
       end
     end
     resources :contacts, except: [:show] do

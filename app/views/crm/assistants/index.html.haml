@@ -71,42 +71,6 @@
               = link_to 'Finish', finish_crm_book_path( book ), method: :post
 
 - elsif !current_user
-  %h1 Welcome to ghostCRM!
-
-  %p
-    Keep track of your personal obligations as well as your dreams and goals.
-
-  %p
-    = link_to 'Sign in', main_app.user_session_path
-    or
-    = link_to 'Sign up',  main_app.new_user_registration_path
-    to begin organizing your shambles of a life.
-
-    %br
-    %br
-    %p
-      = link_to 'Back to ChristianDeWolf.com', main_app.root_path
-
+  = render "not_signed_in"
 - else
-  %h3 You don't have an Assistant yet!  Create one now.
-
-  %p Your Assistant's personality will evolve with ghostCRM and currently takes a backseat to application functionality.
-
-  = form_for @assistant do |f|
-    - if @assistant.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@assistant.errors.count, "error")} prohibited your Assistant from being saved:"
-        %ul
-          - @assistant.errors.full_messages.each do |msg|
-            %li= msg
-    .field
-      = f.label :name
-      %br
-      = f.text_field :name, required: true
-
-    .field
-      = f.label "Personality:"
-      %br
-      = f.select :personality_id, options_for_select( Crm::Assistant::PERSONALITIES, @assistant.personality_id), class: ""
-
-    = f.submit 'Save', class: 'store-button'
+  = render "no_assistant"

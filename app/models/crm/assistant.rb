@@ -5,6 +5,7 @@ class Crm::Assistant < ActiveRecord::Base
   has_many :tasks,       dependent: :destroy
   has_many :ideas,       dependent: :destroy
   has_many :books,       dependent: :destroy
+  has_many :mailouts,    dependent: :destroy
 
   belongs_to :user
   validates_presence_of :user
