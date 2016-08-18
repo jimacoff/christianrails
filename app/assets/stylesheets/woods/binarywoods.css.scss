@@ -174,8 +174,9 @@ a {
 }
 
 .player-finds-table {
+  background-color: lighten($mega-blue, 5%);
   text-align: left;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   border: 1px solid $black;
   border-radius: 10px;
   padding: 10px;

@@ -3,7 +3,8 @@ class Woods::StoriesController < ApplicationController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage]
   before_action :verify_is_published, except: [:index, :show]
-  skip_before_action :verify_is_admin, except: [:manage]
+
+  skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
 
   def index
     @stories = Woods::Story.all

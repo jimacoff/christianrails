@@ -64,7 +64,7 @@ Christianrails::Application.routes.draw do
   namespace :woods do
     resources :players
 
-    resources :stories, except: [:delete] do
+    resources :stories, except: [:create, :update, :destroy] do
       member do
         get 'play'
         get 'move_to'
