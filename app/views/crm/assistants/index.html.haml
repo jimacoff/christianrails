@@ -18,40 +18,12 @@
       %span= link_to "Reminders", reminders_crm_assistants_path, class: 'reminder-color'
 
   - if @upcoming_events.size > 0
-    %h3 Upcoming meetings + deadlines
+    %h3 This week
+    = render "events_table", locals: { events_group: @upcoming_events }
 
-    %table.crm-table.thirds-table
-      %thead
-        %tr
-          %th Task/event
-          %th With
-          %th When
-          %th
-
-      %tbody
-        - @upcoming_events.each do |event|
-          - if event[:type] == "Meeting"
-            - rowclass = "meeting-row"
-          - elsif event[:type] == "Obligation"
-            - rowclass = "obligation-row"
-          - elsif event[:type] == "Task"
-            - rowclass = "task-row"
-          - else
-            - rowclass = ""
-
-          %tr{class: "#{rowclass}"}
-            %td= event[:name]
-            %td= event[:with]
-            %td
-              - if event[:type] == "Meeting"
-                = relative_time( event[:date], true )
-              - else
-                = relative_time( event[:date] )
-            %td
-              - event[:paths].each do |path|
-                - path.keys.each do |k|
-                  %span
-                    = link_to k.to_s.titlecase, path[k], method: :post
+  - if @future_events.size > 0
+    %h3 Future events
+    = render "events_table", locals: { events_group: @future_events }
 
   - if @reading_books.size > 0
     %h3 Currently reading

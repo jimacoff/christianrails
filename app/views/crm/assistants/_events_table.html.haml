@@ -1,0 +1,34 @@
+- events_group = locals[:events_group]
+
+%table.crm-table.thirds-table
+  %thead
+    %tr
+      %th Task/event
+      %th With
+      %th When
+      %th
+
+  %tbody
+    - events_group.each do |event|
+      - if event[:type] == "Meeting"
+        - rowclass = "meeting-row"
+      - elsif event[:type] == "Obligation"
+        - rowclass = "obligation-row"
+      - elsif event[:type] == "Task"
+        - rowclass = "task-row"
+      - else
+        - rowclass = ""
+
+      %tr{class: "#{rowclass}"}
+        %td= event[:name]
+        %td= event[:with]
+        %td
+          - if event[:type] == "Meeting"
+            = relative_time( event[:date], true )
+          - else
+            = relative_time( event[:date] )
+        %td
+          - event[:paths].each do |path|
+            - path.keys.each do |k|
+              %span
+                = link_to k.to_s.titlecase, path[k], method: :post

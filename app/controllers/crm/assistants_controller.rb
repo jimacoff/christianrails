@@ -6,6 +6,7 @@ class Crm::AssistantsController < Crm::CrmController
     @assistant = current_assistant || Crm::Assistant.new
 
     @upcoming_events = []
+    @future_events = []
 
     if current_assistant
       @obligations = Crm::Obligation.where( assistant_id: current_assistant.id )
@@ -41,7 +42,12 @@ class Crm::AssistantsController < Crm::CrmController
                                        { bypass: bypass_crm_task_path( task ) }
                                      ] }
       end
+      @future_events = @upcoming_events.select{ |x| x[:date] > (DateTime.now + 7.days) }
+      @upcoming_events -= @future_events
+
       @upcoming_events.sort!{ |a, b| a[:date] <=> b[:date] }
+      @future_events.sort!{ |a, b| a[:date] <=> b[:date] }
+
 
       @reading_books = Crm::Book.where(assistant_id: current_assistant.id)
                                 .where(status_id: Crm::Book::STATUS_READING)
