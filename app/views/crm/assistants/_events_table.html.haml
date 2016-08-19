@@ -31,4 +31,4 @@
           - event[:paths].each do |path|
             - path.keys.each do |k|
               %span
-                = link_to k.to_s.titlecase, path[k], method: :post
+                = link_to k.to_s.titlecase, path[k] + "?dest=home", method: :post

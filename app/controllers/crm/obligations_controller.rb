@@ -3,6 +3,8 @@ class Crm::ObligationsController < Crm::CrmController
   before_action :set_crm_obligation_secure, only: [:edit, :update, :destroy, :complete, :bypass]
   before_action :get_contacts, only: [:index, :new, :edit]
 
+  before_action :set_destination, only: [:complete, :bypass]
+
   def index
     @obligations = Crm::Obligation.where(assistant_id: current_assistant.id)
                                   .where(status_id: Crm::Obligation::STATUS_OPEN)
@@ -68,10 +70,10 @@ class Crm::ObligationsController < Crm::CrmController
 
     respond_to do |format|
       if @obligation.save
-        format.html { redirect_to crm_obligations_path, notice: 'Obligation completed.' }
+        format.html { redirect_to @dest, notice: 'Obligation completed.' }
       else
         flash[:alert] = "Could not complete this obligation. Please file a bug report."
-        format.html { redirect_to crm_obligations_path }
+        format.html { redirect_to @dest }
       end
     end
   end
@@ -82,10 +84,10 @@ class Crm::ObligationsController < Crm::CrmController
 
     respond_to do |format|
       if @obligation.save
-        format.html { redirect_to crm_obligations_path, notice: 'Obligation bypassed.' }
+        format.html { redirect_to @dest, notice: 'Obligation bypassed.' }
       else
         flash[:alert] = "Could not bypass this obligation. Please file a bug report."
-        format.html { redirect_to crm_obligations_path }
+        format.html { redirect_to @dest }
       end
     end
   end
@@ -107,5 +109,9 @@ class Crm::ObligationsController < Crm::CrmController
     def verify_contact
       redirect_to(root_path) and return unless owns_assistant?( @contact.assistant )
       true
+    end
+
+    def set_destination
+      @dest = params[:dest] == "home" ? crm_path : crm_obligations_path
     end
 end

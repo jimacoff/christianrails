@@ -2,6 +2,8 @@ class Crm::TasksController < Crm::CrmController
 
   before_action :set_crm_task_secure, only: [:edit, :update, :destroy, :complete, :bypass]
 
+  before_action :set_destination, only: [:complete, :bypass]
+
   def index
     @tasks = Crm::Task.where(assistant_id: current_assistant.id)
                       .where(status_id: Crm::Task::STATUS_OPEN)
@@ -62,10 +64,10 @@ class Crm::TasksController < Crm::CrmController
       recurral_notification = spawn_next_if_recurring
 
       if @task.save
-        format.html { redirect_to crm_tasks_path, notice: 'Task completed.' + recurral_notification }
+        format.html { redirect_to @dest, notice: 'Task completed.' + recurral_notification }
       else
         flash[:alert] = "Could not complete this task. Please file a bug report."
-        format.html { redirect_to crm_tasks_path }
+        format.html { redirect_to @dest }
       end
     end
   end
@@ -78,10 +80,10 @@ class Crm::TasksController < Crm::CrmController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to crm_tasks_path, notice: 'Task bypassed.' + recurral_notification  }
+        format.html { redirect_to @dest, notice: 'Task bypassed.' + recurral_notification  }
       else
         flash[:alert] = "Could not bypass this task. Please file a bug report."
-        format.html { redirect_to crm_tasks_path }
+        format.html { redirect_to @dest }
       end
     end
   end
@@ -112,6 +114,10 @@ class Crm::TasksController < Crm::CrmController
       else
         ""
       end
+    end
+
+    def set_destination
+      @dest = params[:dest] == "home" ? crm_path : crm_tasks_path
     end
 
 end

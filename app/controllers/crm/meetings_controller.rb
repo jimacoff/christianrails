@@ -3,6 +3,8 @@ class Crm::MeetingsController < Crm::CrmController
   before_action :set_crm_meeting_secure, only: [:edit, :update, :destroy, :complete, :bypass]
   before_action :get_contacts, only: [:index, :new, :edit]
 
+  before_action :set_destination, only: [:complete, :bypass]
+
   def index
     @meetings = Crm::Meeting.where(assistant_id: current_assistant.id)
                             .where(status_id: Crm::Meeting::STATUS_FORTHCOMING)
@@ -69,10 +71,10 @@ class Crm::MeetingsController < Crm::CrmController
     respond_to do |format|
 
       if @meeting.save
-        format.html { redirect_to crm_meetings_path, notice: 'Meeting completed.' }
+        format.html { redirect_to @dest, notice: 'Meeting completed.' }
       else
         flash[:alert] = "Could not complete this meeting. Please file a bug report."
-        format.html { redirect_to crm_meetings_path }
+        format.html { redirect_to @dest }
       end
     end
   end
@@ -83,10 +85,10 @@ class Crm::MeetingsController < Crm::CrmController
 
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to crm_meetings_path, notice: 'Meeting bypassed.' }
+        format.html { redirect_to @dest, notice: 'Meeting bypassed.' }
       else
         flash[:alert] = "Could not bypass this meeting. Please file a bug report."
-        format.html { redirect_to crm_meetings_path }
+        format.html { redirect_to @dest }
       end
     end
   end
@@ -108,4 +110,9 @@ class Crm::MeetingsController < Crm::CrmController
     def verify_contact
       redirect_to(root_path) and return unless owns_assistant?( @contact.assistant )
     end
+
+    def set_destination
+      @dest = params[:dest] == "home" ? crm_path : crm_meetings_path
+    end
+
 end
