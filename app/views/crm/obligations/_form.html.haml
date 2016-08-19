@@ -8,7 +8,7 @@
 
   %table.modest-width.zero-margin
     %tr.field
-      %td= f.label :name
+      %td= f.label "Description"
       %td= f.text_field :name, required: true
     %tr.field
       %td= f.label :due_at
@@ -16,6 +16,10 @@
     %tr.field
       %td= f.label "Contact"
       %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @obligation.contact_id || params[:contact_id]), class: ""
+
+    %tr.field
+      %td= f.label "Notes (optional)"
+      %td= f.text_area :notes, rows: 8, cols: 37, class: 'no-resize'
 
     %tr.actions
       %td

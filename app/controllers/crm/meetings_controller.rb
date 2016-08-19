@@ -98,7 +98,7 @@ class Crm::MeetingsController < Crm::CrmController
     end
 
     def crm_meeting_params
-      params.require(:crm_meeting).permit(:contact_id, :name, :date_time, :location, :agenda)
+      params.require(:crm_meeting).permit(:contact_id, :name, :date_time, :location, :agenda, :notes)
     end
 
     def get_contacts

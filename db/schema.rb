@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818155523) do
+ActiveRecord::Schema.define(version: 20160819172400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160818155523) do
     t.datetime "completed_on"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.text     "notes"
   end
 
   create_table "crm_mailouts", force: :cascade do |t|
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20160818155523) do
     t.datetime "closed_at"
     t.string   "location",     default: ""
     t.text     "agenda"
+    t.text     "notes"
   end
 
   create_table "crm_obligations", force: :cascade do |t|
@@ -89,6 +91,7 @@ ActiveRecord::Schema.define(version: 20160818155523) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.datetime "closed_at"
+    t.text     "notes"
   end
 
   create_table "crm_tasks", force: :cascade do |t|
@@ -103,6 +106,7 @@ ActiveRecord::Schema.define(version: 20160818155523) do
     t.datetime "closed_at"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.text     "notes"
   end
 
   create_table "downloads", force: :cascade do |t|

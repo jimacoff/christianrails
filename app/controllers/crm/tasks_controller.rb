@@ -93,7 +93,7 @@ class Crm::TasksController < Crm::CrmController
     end
 
     def crm_task_params
-      params.require(:crm_task).permit(:name, :status_id, :due_at, :type_id, :recurral_period, :recurral_weekday)
+      params.require(:crm_task).permit(:name, :status_id, :due_at, :type_id, :recurral_period, :recurral_weekday, :notes)
     end
 
     # this could use some tests

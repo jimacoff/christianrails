@@ -20,6 +20,10 @@
       %td= f.label "Recurral period (days)"
       %td= f.number_field :recurral_period, value: @task.recurral_period || 30, min: 1, max: 99
 
+    %tr.field
+      %td= f.label :notes
+      %td= f.text_area :notes, rows: 8, cols: 37, class: 'no-resize'
+
     %tr.actions
       %td
       %td= f.submit 'Save', class: 'store-button'

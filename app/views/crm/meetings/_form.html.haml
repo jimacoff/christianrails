@@ -23,8 +23,12 @@
       %td= f.text_field :location, required: true
 
     %tr.field
-      %td= f.label :agenda
+      %td= f.label "Agenda (optional)"
       %td= f.text_area :agenda, rows: 8, cols: 37, class: "no-resize"
+
+    %tr.field
+      %td= f.label "Notes (optional)"
+      %td= f.text_area :notes, rows: 8, cols: 37, class: 'no-resize'
 
     %tr.actions
       %td

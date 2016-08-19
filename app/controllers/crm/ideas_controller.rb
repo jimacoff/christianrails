@@ -88,6 +88,6 @@ class Crm::IdeasController < Crm::CrmController
     end
 
     def crm_idea_params
-      params.require(:crm_idea).permit(:name)
+      params.require(:crm_idea).permit(:name, :notes)
     end
 end

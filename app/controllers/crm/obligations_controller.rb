@@ -97,7 +97,7 @@ class Crm::ObligationsController < Crm::CrmController
     end
 
     def crm_obligation_params
-      params.require(:crm_obligation).permit(:contact_id, :name, :status_id, :due_at)
+      params.require(:crm_obligation).permit(:contact_id, :name, :status_id, :due_at, :notes)
     end
 
     def get_contacts
