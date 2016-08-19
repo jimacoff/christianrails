@@ -13,4 +13,8 @@ class AdminController < ApplicationController
     end
   end
 
+  def crm_stats
+    @assistants = Crm::Assistant.all.sort{|a,b| b.total_activity_volume <=> a.total_activity_volume }
+  end
+
 end

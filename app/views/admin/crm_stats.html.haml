@@ -1,0 +1,23 @@
+%h1 CRM stats
+
+%p= "Number of Assistants: #{ @assistants.size }"
+
+%table
+  %tr
+    %th Username
+    %th Assistant
+    %th Contacts
+    %th Open activities
+    %th Total activities
+
+  - @assistants.each do |assistant|
+    %tr
+      %td= assistant.user.username
+      %td= assistant.name
+      %td= assistant.contacts.size
+      %td= assistant.open_activity_volume
+      %td= assistant.total_activity_volume
+
+%br
+= link_to "Back to admin area", admin_index_path
+

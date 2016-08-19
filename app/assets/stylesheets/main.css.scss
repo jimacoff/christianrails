@@ -112,6 +112,10 @@ table {
   text-align: center;
 }
 
+.no-bullets {
+  list-style: none;
+}
+
 .blog {
   p {
     //text-align: justify;
@@ -176,6 +180,19 @@ a.tag-link {
 
 a.category-link {
   color: $link-blue !important;
+}
+
+.maintenance-panel {
+  display: inline-block;
+  background-color: $mega-pink;
+  border: 1px solid $black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.next-row-over {
+  margin-left: 30px;
+  vertical-align: top;
 }
 
 /// DEVISE

@@ -43,25 +43,35 @@ class Crm::Assistant < ActiveRecord::Base
   def todays_meetings
     meetings.where('date_time > ?', DateTime.now)
             .where('date_time < ?', DateTime.now + 1.day)
-            #.sort( |a, b| a.date_time <=> b.date_time )
+            .sort{ |a, b| a.date_time <=> b.date_time }
   end
 
   def todays_obligations
     obligations.where('due_at > ?', DateTime.now)
                .where('due_at < ?', DateTime.now + 1.day)
-               #.sort( |a, b| a.date_time <=> b.date_time )
+               .sort{ |a, b| a.due_at <=> b.due_at }
   end
 
   def todays_tasks
     tasks.where('due_at > ?', DateTime.now)
          .where('due_at < ?', DateTime.now + 1.day)
-         #.sort( |a, b| a.date_time <=> b.date_time )
+         .sort{ |a, b| a.due_at <=> b.due_at }
   end
 
   def nothing_to_do_today?
     todays_meetings.size == 0 &&
     todays_obligations.size == 0 &&
     todays_tasks.size == 0
+  end
+
+  def total_activity_volume
+    obligations.size + tasks.size + meetings.size
+  end
+
+  def open_activity_volume
+    obligations.select{ |x| x.status_id == Crm::Obligation::STATUS_OPEN }.size +
+    meetings.select{ |x| x.status_id == Crm::Meeting::STATUS_FORTHCOMING }.size +
+    tasks.select{ |x| x.status_id == Crm::Task::STATUS_OPEN }.size
   end
 
   # TODO add some randomizers for books, ideas etc.
