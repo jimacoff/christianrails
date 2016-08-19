@@ -8,6 +8,8 @@
       %th Email
       %th Signed up
       %th Last sign-in
+      %th DF
+      %th CRM
 
   %tbody
     - @users.each do |user|
@@ -17,6 +19,8 @@
         %td= user.email
         %td= user.created_at.strftime("%b %e '%y")
         %td= user.last_sign_in_at.strftime("%b %e '%y")
+        %td= user.player ? "X" : ""
+        %td= user.assistant ? "X" : ""
 
 %strong Total users: #{@users.count}
 

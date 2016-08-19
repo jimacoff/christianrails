@@ -16,8 +16,8 @@
         - if current_user.purchases.size > 0
           = link_to "Receipts", main_app.receipts_orders_path
           ·
-        - if current_player && current_player.scorecards.size > 0
-          = link_to 'Stats', main_app.woods_player_path(current_player)
+        - if current_player && current_player.scorecards.size > 0 && controller_path.starts_with?("woods")
+          = link_to 'Scores', main_app.woods_player_path(current_player)
           ·
         = link_to 'Sign out', main_app.destroy_user_session_path, method: :delete
 

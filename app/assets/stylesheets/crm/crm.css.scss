@@ -83,7 +83,7 @@
 
 .obligation-table {
   tr:nth-child(odd)  { background-color: $l-back-purple; }
-  tr:nth-child(even) { background-color: $purple-smoke; }
+  tr:nth-child(even) { background-color: lighten($l-back-purple, 5%); }
 }
 
 .task-table {

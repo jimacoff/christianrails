@@ -1,6 +1,11 @@
 %h1.center Admin
 
 .small-width.maintenance-panel
+  .embolden Site Management
+  %ul
+    %li= link_to 'View Users', user_report_path
+
+
   .embolden Store Maintenance
   %ul
     %li= link_to 'Products', products_path
@@ -11,15 +16,14 @@
     %li= link_to 'Orders', orders_path
     %li= link_to 'Purchases', purchases_path
     %li= link_to 'Downloads', downloads_products_path
-    %li= link_to 'Users', user_report_path
     %li= link_to 'Newsletter signups', newsletter_signups_path
 
   .embolden Testing
   %ul
     %li= link_to 'Test welcome email', emailtest_admin_index_path
 
-.small-width.maintenance-panel.next-row-over
 
+.small-width.maintenance-panel.next-row-over
   .embolden BinaryWoods
   %ul
     %li= link_to 'Stories', woods_stories_path
