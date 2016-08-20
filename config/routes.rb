@@ -96,7 +96,7 @@ Christianrails::Application.routes.draw do
   namespace :crm do
     resources :assistants, only: [:index, :create, :update] do
       collection do
-        get  'reminders'
+        get  'settings'
         post 'send_daily_emails'
       end
     end

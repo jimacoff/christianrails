@@ -88,7 +88,7 @@ class Crm::AssistantsController < Crm::CrmController
     end
   end
 
-  def reminders
+  def settings
     @assistant = current_assistant
   end
 
