@@ -8,11 +8,11 @@
 
   %table.sizeable-width.zero-margin
     %tr.field
-      %td= f.label "Summary"
+      %td= f.label "Topic"
       %td= f.text_field :name, required: true
 
     %tr.field
-      %td= f.label "Contact"
+      %td= f.label "With"
       %td= f.select :contact_id, options_from_collection_for_select( @contacts, :id, :full_name, @meeting.contact_id || params[:contact_id]), class: ""
 
     %tr.field

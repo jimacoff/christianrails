@@ -8,14 +8,17 @@
 
   %table.modest-width.zero-margin
     %tr.field
-      %td= f.label :name
+      %td= f.label "Task"
       %td= f.text_field :name, required: true
+
     %tr.field
       %td= f.label "Due on"
       %td= f.date_field :due_at
+
     %tr.field
       %td= f.label "Type"
       %td= f.select :type_id, options_for_select( Crm::Task::TYPES, @task.type_id ), class: ""
+
     %tr#recurral-period.field{style: "display: none;"}
       %td= f.label "Recurral period (days)"
       %td= f.number_field :recurral_period, value: @task.recurral_period || 30, min: 1, max: 99
