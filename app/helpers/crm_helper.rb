@@ -12,14 +12,18 @@ module CrmHelper
     current_user.assistant if current_user && current_user.assistant
   end
 
-  def relative_time(datetime, time = false)
-    return "Today"    if datetime.strftime("%a, %b %e") == (DateTime.now).strftime("%a, %b %e")
-    return "Tomorrow" if datetime.strftime("%a, %b %e") == (DateTime.now + 1.day).strftime("%a, %b %e")
+  def relative_time(datetime, include_time = false)
+    return "Today"    + tack_on_time(include_time, datetime) if datetime.strftime("%a, %b %e") == (DateTime.now).strftime("%a, %b %e")
+    return "Tomorrow" + tack_on_time(include_time, datetime) if datetime.strftime("%a, %b %e") == (DateTime.now + 1.day).strftime("%a, %b %e")
     if datetime < Time.now.to_datetime  # in the past!
       return "Yesterday" if datetime.strftime("%a, %b %e") == (DateTime.now - 1.day).strftime("%a, %b %e")
       return ((DateTime.now.to_i - datetime.to_i) / 86400).to_s + " days ago"
     end
-    time ? datetime.strftime("%a, %b %e, %-I:%M %p") : datetime.strftime("%a, %b %e")
+    include_time ? datetime.strftime("%a, %b %e, %-I:%M %p") : datetime.strftime("%a, %b %e")
+  end
+
+  def tack_on_time(include_time, datetime)
+    include_time ? " at #{datetime.strftime("%-I:%M %p")}" : ""
   end
 
 end
