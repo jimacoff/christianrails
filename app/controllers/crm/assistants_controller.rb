@@ -116,7 +116,7 @@ class Crm::AssistantsController < Crm::CrmController
                                           .where(type_id: Crm::Mailout::TYPE_DAILY_SUMMARY)
                                           .where('created_at > ?', DateTime.now - 1.day)
       unless mailouts_to_assistant.size > 0
-        Crm::ReminderMailer.daily_summary( @assistant ).deliver_now
+        Crm::ReminderMailer.daily_summary( assistant ).deliver_now
         create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
       end
     end
