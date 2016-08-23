@@ -18,6 +18,11 @@
         = f.label :email_me_daily, class: 'embolden'
         = f.check_box :email_me_daily, value: @assistant.email_me_daily
 
+    %tr
+      %td.left
+        = f.label :time_zone, class: 'embolden'
+        =f.time_zone_select :time_zone
+
     %tr.center
       %td= f.submit 'Save', class: 'store-button'
 

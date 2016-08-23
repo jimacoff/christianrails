@@ -12,6 +12,15 @@ class Crm::Assistant < ActiveRecord::Base
 
   PERSONALITIES = [["Servile", 1]]
 
+  def time_zone=(val)
+    self.user.time_zone = val
+    self.user.save
+  end
+
+  def time_zone
+    self.user.time_zone
+  end
+
   def username
     self.user.username
   end
@@ -73,6 +82,7 @@ class Crm::Assistant < ActiveRecord::Base
     meetings.select{ |x| x.status_id == Crm::Meeting::STATUS_FORTHCOMING }.size +
     tasks.select{ |x| x.status_id == Crm::Task::STATUS_OPEN }.size
   end
+
 
   # TODO add some randomizers for books, ideas etc.
 
