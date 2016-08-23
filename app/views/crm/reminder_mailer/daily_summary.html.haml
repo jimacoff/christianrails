@@ -1,9 +1,11 @@
-%p=  "Hi #{ @assistant.user.first_name },"
+%p= "Hi #{ @assistant.user.first_name },"
 
 - if @assistant.nothing_to_do_today?
   %p I've got nothing scheduled for you today!
 
   %p If you actually don't have anything you have to do, read a book!
+  // TODO book suggestion
+
   %p
     Otherwise, log back into
     = link_to "ghostCRM", "https://www.christiandewolf.com/crm"
@@ -35,6 +37,6 @@
         %li
           = "#{ task.name }"
 
-  %p Have a happy and productive day! Always remember: you're shockingly effective at what you do best.
+  %p Have a happy and productive day! Always remember: you're shockingly effective at what you do best,
 
 %p= "#{ @assistant.name }, your ghostCRM Assistant"

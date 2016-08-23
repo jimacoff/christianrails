@@ -1,6 +1,7 @@
 class Crm::AssistantsController < Crm::CrmController
 
   skip_before_action :verify_has_assistant, only: [:index, :create, :send_daily_emails]
+  skip_before_action :verify_authenticity_token, only: [:send_daily_emails]
 
   def index
     @assistant = current_assistant || Crm::Assistant.new
