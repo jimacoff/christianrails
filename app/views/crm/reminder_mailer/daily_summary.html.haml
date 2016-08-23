@@ -23,14 +23,14 @@
         %li
           = "Meeting with #{ meeting.contact.full_name } at #{ meeting.location || '' } #{ meeting.date_time.strftime("%-I:%M %p") }"
 
-  - if @assistant.todays_obligationss.size > 0
+  - if @assistant.todays_obligations.size > 0
     %strong Obligations due:
     %ul
       - @assistant.todays_obligations.each do |obligation|
         %li
           = "#{ obligation.name } for #{ obligation.contact.full_name }"
 
-  - if @assistant.todays_obligationss.size > 0
+  - if @assistant.todays_obligations.size > 0
     %strong Tasks due:
     %ul
       - @assistant.todays_tasks.each do |task|
