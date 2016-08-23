@@ -1,4 +1,4 @@
-class ReminderMailer < ActionMailer::Base
+class Crm::ReminderMailer < ActionMailer::Base
   default(
     from: "ghostCRM AutoMailer <me@christiandewolf.com>",
     reply_to: "me@christiandewolf.com",
