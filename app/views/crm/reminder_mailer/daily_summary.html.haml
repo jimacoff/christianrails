@@ -30,7 +30,7 @@
         %li
           = "#{ obligation.name } for #{ obligation.contact.full_name }"
 
-  - if @assistant.todays_obligations.size > 0
+  - if @assistant.todays_tasks.size > 0
     %strong Tasks due:
     %ul
       - @assistant.todays_tasks.each do |task|

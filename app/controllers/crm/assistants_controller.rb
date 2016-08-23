@@ -97,6 +97,10 @@ class Crm::AssistantsController < Crm::CrmController
     Crm::Assistant.where(email_me_daily: true).each do |assistant|
       send_daily_summary_if_not_yet_sent( assistant )
     end
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
   end
 
   private
