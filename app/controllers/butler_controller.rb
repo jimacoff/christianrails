@@ -69,6 +69,15 @@ class ::ButlerController < ApplicationController
   def set_entities
     @entities = [
       {
+        productName: "Snapback",
+        description: "Board game adventure",
+        icon: "snapback-icon.jpg",
+        code: "snapback",
+        theme: "classic",
+        iconH: "150",
+        iconW: "225"
+      },
+      {
         productName: "Ghostcrime",
         description: "Spooky robot novel",
         icon: "ghostcrime-icon.png",
@@ -118,15 +127,6 @@ class ::ButlerController < ApplicationController
         theme: "blackink",
         iconH: "200",
         iconW: "130"
-      },
-      {
-        productName: "Snapback",
-        description: "Novella series",
-        icon: "snapback-icon.jpg",
-        code: "snapback",
-        theme: "classic",
-        iconH: "150",
-        iconW: "225"
       },
       {
         productName: "Silver Stock",
