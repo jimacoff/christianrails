@@ -18,7 +18,7 @@ class Crm::Assistant < ActiveRecord::Base
   end
 
   def time_zone
-    self.user.time_zone
+    self.user ? self.user.time_zone : "UTC"
   end
 
   def username

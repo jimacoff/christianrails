@@ -15,13 +15,8 @@
     = f.text_field :name, required: true
 
   .field
-    = f.label "Personality:"
+    = f.label "Personality"
     %br
     = f.select :personality_id, options_for_select( Crm::Assistant::PERSONALITIES, @assistant.personality_id)
-
-  .field
-    = f.label :time_zone
-    %br
-    =f.time_zone_select :time_zone
 
   = f.submit 'Save', class: 'store-button'

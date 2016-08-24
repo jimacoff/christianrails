@@ -42,6 +42,12 @@
             - if current_user.admin?
               ·
               = link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' }
+- else
+
+  %p
+    Before you add any meetings, make sure your time zone is correct in your
+    = succeed "." do
+      = link_to "Settings", settings_crm_assistants_path
 
 %br
 = link_to "<< Back to home", crm_path
