@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  around_action :set_time_zone, if: :current_user
+
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     return unless request.get?
@@ -32,5 +34,11 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end
+
+  private
+
+    def set_time_zone(&block)
+      Time.use_zone(current_user.time_zone, &block)
+    end
 
 end
