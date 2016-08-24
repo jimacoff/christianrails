@@ -66,7 +66,7 @@ class Crm::MeetingsController < Crm::CrmController
 
   def complete
     @meeting.status_id = Crm::Meeting::STATUS_COMPLETE
-    @meeting.closed_at = Time.now
+    @meeting.closed_at = Time.current
 
     respond_to do |format|
 
@@ -81,7 +81,7 @@ class Crm::MeetingsController < Crm::CrmController
 
   def bypass
     @meeting.status_id = Crm::Meeting::STATUS_BYPASSED
-    @meeting.closed_at = Time.now
+    @meeting.closed_at = Time.current
 
     respond_to do |format|
       if @meeting.save

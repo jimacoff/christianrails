@@ -66,7 +66,7 @@ class Crm::ObligationsController < Crm::CrmController
 
   def complete
     @obligation.status_id = Crm::Obligation::STATUS_COMPLETE
-    @obligation.closed_at = Time.now
+    @obligation.closed_at = Time.current
 
     respond_to do |format|
       if @obligation.save
@@ -80,7 +80,7 @@ class Crm::ObligationsController < Crm::CrmController
 
   def bypass
     @obligation.status_id = Crm::Obligation::STATUS_BYPASSED
-    @obligation.closed_at = Time.now
+    @obligation.closed_at = Time.current
 
     respond_to do |format|
       if @obligation.save

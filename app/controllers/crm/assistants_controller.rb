@@ -43,7 +43,7 @@ class Crm::AssistantsController < Crm::CrmController
                                        { bypass: bypass_crm_task_path( task ) }
                                      ] }
       end
-      @future_events = @upcoming_events.select{ |x| x[:date] > (DateTime.now + 7.days) }
+      @future_events = @upcoming_events.select{ |x| x[:date] > (DateTime.current + 7.days) }
       @upcoming_events -= @future_events
 
       @upcoming_events.sort!{ |a, b| a[:date] <=> b[:date] }
@@ -118,7 +118,7 @@ class Crm::AssistantsController < Crm::CrmController
     def send_daily_summary_if_not_yet_sent(assistant)
       mailouts_to_assistant = Crm::Mailout.where(assistant_id: assistant.id)
                                           .where(type_id: Crm::Mailout::TYPE_DAILY_SUMMARY)
-                                          .where('created_at > ?', DateTime.now - 1.day)
+                                          .where('created_at > ?', DateTime.current - 1.day)
       unless mailouts_to_assistant.size > 0
         Crm::ReminderMailer.daily_summary( assistant ).deliver_now
         create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )

@@ -57,7 +57,7 @@ class Crm::TasksController < Crm::CrmController
 
   def complete
     @task.status_id = Crm::Task::STATUS_COMPLETE
-    @task.closed_at = Time.now
+    @task.closed_at = Time.current
 
     respond_to do |format|
 
@@ -74,7 +74,7 @@ class Crm::TasksController < Crm::CrmController
 
   def bypass
     @task.status_id = Crm::Task::STATUS_BYPASSED
-    @task.closed_at = Time.now
+    @task.closed_at = Time.current
 
     recurral_notification = spawn_next_if_recurring
 

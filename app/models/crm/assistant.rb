@@ -50,20 +50,20 @@ class Crm::Assistant < ActiveRecord::Base
   end
 
   def todays_meetings
-    meetings.where('date_time > ?', DateTime.now)
-            .where('date_time < ?', DateTime.now + 1.day)
+    meetings.where('date_time > ?', DateTime.current)
+            .where('date_time < ?', DateTime.current + 1.day)
             .where(status_id: Crm::Meeting::STATUS_FORTHCOMING)
             .sort{ |a, b| a.date_time <=> b.date_time }
   end
 
   def todays_obligations
-    obligations.where('due_at < ?', DateTime.now + 1.day)
+    obligations.where('due_at < ?', DateTime.current + 1.day)
                .where(status_id: Crm::Obligation::STATUS_OPEN)
                .sort{ |a, b| a.due_at <=> b.due_at }
   end
 
   def todays_tasks
-    tasks.where('due_at < ?', DateTime.now + 1.day)
+    tasks.where('due_at < ?', DateTime.current + 1.day)
          .where(status_id: Crm::Task::STATUS_OPEN)
          .sort{ |a, b| a.due_at <=> b.due_at }
   end

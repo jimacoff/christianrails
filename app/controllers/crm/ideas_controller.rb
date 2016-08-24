@@ -55,7 +55,7 @@ class Crm::IdeasController < Crm::CrmController
 
   def complete
     @idea.status_id = Crm::Idea::STATUS_COMPLETE
-    @idea.completed_on = Time.now
+    @idea.completed_on = Time.current
 
     respond_to do |format|
       if @idea.save
@@ -69,7 +69,7 @@ class Crm::IdeasController < Crm::CrmController
 
   def abandon
     @idea.status_id = Crm::Idea::STATUS_ABANDONED
-    @idea.completed_on = Time.now
+    @idea.completed_on = Time.current
 
     respond_to do |format|
       if @idea.save
