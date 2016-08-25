@@ -9,6 +9,7 @@
     %th Contacts
     %th Open activities
     %th Total activities
+    %th Automail?
 
   - @assistants.each do |assistant|
     %tr
@@ -17,6 +18,7 @@
       %td= assistant.contacts.size
       %td= assistant.open_activity_volume
       %td= assistant.total_activity_volume
+      %td= assistant.email_me_daily ? "Yes" : ""
 
 %br
 = link_to "Back to admin area", admin_index_path
