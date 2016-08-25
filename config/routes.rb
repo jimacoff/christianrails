@@ -1,4 +1,5 @@
 require 'constraints/domain_constraint'
+require 'constraints/whitelist'
 
 Christianrails::Application.routes.draw do
 
@@ -97,7 +98,7 @@ Christianrails::Application.routes.draw do
     resources :assistants, only: [:index, :create, :update] do
       collection do
         get  'settings'
-        post 'send_daily_emails'
+        post 'send_daily_emails', constraints: Whitelist.new
       end
     end
     resources :contacts, except: [:show]

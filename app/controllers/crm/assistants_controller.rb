@@ -95,7 +95,9 @@ class Crm::AssistantsController < Crm::CrmController
 
   def send_daily_emails
     Crm::Assistant.where(email_me_daily: true).each do |assistant|
-      send_daily_summary_if_not_yet_sent( assistant )
+      if assistant.ripe_for_email?
+        send_daily_summary( assistant )
+      end
     end
 
     respond_to do |format|
@@ -115,14 +117,9 @@ class Crm::AssistantsController < Crm::CrmController
       @book.save
     end
 
-    def send_daily_summary_if_not_yet_sent(assistant)
-      mailouts_to_assistant = Crm::Mailout.where(assistant_id: assistant.id)
-                                          .where(type_id: Crm::Mailout::TYPE_DAILY_SUMMARY)
-                                          .where('created_at > ?', DateTime.current - 1.day)
-      unless mailouts_to_assistant.size > 0
-        Crm::ReminderMailer.daily_summary( assistant ).deliver_now
-        create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
-      end
+    def send_daily_summary(assistant)
+      Crm::ReminderMailer.daily_summary( assistant ).deliver_now
+      create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
     end
 
     def create_new_mailout_record(assistant, type)

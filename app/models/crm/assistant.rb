@@ -12,6 +12,8 @@ class Crm::Assistant < ActiveRecord::Base
 
   PERSONALITIES = [["Servile", 1]]
 
+  EMAIL_SEND_TIME = 7#AM
+
   def time_zone=(val)
     self.user.time_zone = val
     self.user.save
@@ -84,6 +86,9 @@ class Crm::Assistant < ActiveRecord::Base
     tasks.select{ |x| x.status_id == Crm::Task::STATUS_OPEN }.size
   end
 
+  def ripe_for_email?
+    Time.current.in_time_zone( self.user.time_zone ).hour == EMAIL_SEND_TIME
+  end
 
   # TODO add some randomizers for books, ideas etc.
 
