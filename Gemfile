@@ -25,6 +25,7 @@ gem 'unicorn'
 gem 'rake', '~> 10.4.2'
 gem "non-stupid-digest-assets"
 gem "mandrill-api"
+gem 'httparty'
 
 group :doc do
   gem 'sdoc', require: false

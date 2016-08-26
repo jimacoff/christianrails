@@ -20,4 +20,11 @@ class AdminMailer < ActionMailer::Base
     mail(subject: subject)
   end
 
+  def watch_property_alert(watch_property)
+    @watch_property = watch_property
+    subject = "#{ @watch_property.name } might be down!"
+
+    mail(subject: subject)
+  end
+
 end

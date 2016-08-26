@@ -1,5 +1,9 @@
 class WatchPropertiesController < ApplicationController
+
   before_action :set_watch_property, only: [:edit, :update, :destroy]
+
+  skip_before_action :verify_is_admin,           only: [:check_properties]
+  skip_before_action :verify_authenticity_token, only: [:check_properties]
 
   def index
     @watch_properties = WatchProperty.all
@@ -38,6 +42,22 @@ class WatchPropertiesController < ApplicationController
     @watch_property.destroy
     respond_to do |format|
       format.html { redirect_to watch_properties_url, notice: 'WatchProperty was successfully destroyed.' }
+    end
+  end
+
+  def check_properties
+    WatchProperty.all.each do |watch_property|
+      response = HTTParty.get( watch_property.url )
+
+      if response.body.include?( watch_property.expected_response ) && response.code == 200
+        Rails.logger.info("Property check succeeded for #{ watch_property.name }!")
+      else
+        AdminMailer.watch_property_alert( watch_property ).deliver_now
+      end
+    end
+
+    respond_to do |format|
+      format.json { head :no_content }
     end
   end
 

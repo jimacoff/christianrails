@@ -56,7 +56,11 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  resources :watch_properties, except: [:show]
+  resources :watch_properties, except: [:show] do
+    collection do
+      post 'check_properties', constraints: Whitelist.new
+    end
+  end
 
   resources :admin, only: [:index] do
     collection do
