@@ -4,7 +4,7 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
-        title: "20160820_did_not_get_the_social_media_job",
+        title: "20160826_did_not_get_the_social_media_job",
         category: "Freelancing Stories",
         tags: ["freelancing", "Twitter", "style", "failure", "watches"]
       },
