@@ -24,7 +24,7 @@ li, ul {
   text-align: left;
 }
 
-nav, nav-mobile {
+nav, #nav-mobile {
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: black !important;
@@ -40,11 +40,11 @@ nav {
   max-width: 300px;
 }
 
-nav-mobile {
+#nav-mobile {
   max-width: 625px;
 }
 
-nav a, nav-mobile a {
+nav a, #nav-mobile a {
   color: $white;
 }
 

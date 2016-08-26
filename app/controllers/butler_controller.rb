@@ -106,7 +106,7 @@ class ::ButlerController < ApplicationController
       },
       {
         productName: "Black Ink",
-        description: "21 dark comics",
+        description: "21 non-erasable comics",
         icon: "blackink-icon.jpg",
         code: "blackink",
         theme: "blackink",
@@ -121,7 +121,7 @@ class ::ButlerController < ApplicationController
       },
       {
         productName: "Gray",
-        description: "Official novel",
+        description: "An official novel",
         icon: "gray-icon.png",
         code: "gray",
         theme: "blackink",

@@ -71,7 +71,8 @@
           %br/
           %br/
           %br/
-        %nav-mobile
+
+        #nav-mobile
           - @entities.each do |product|
             - if product[:productName]
               = render "/butler/navbutton", locals: { product: product}
@@ -112,7 +113,7 @@
       switchPage(this);
       return false;
     });
-    $('nav-mobile a').click(function(){
+    $('#nav-mobile a').click(function(){
       switchPage(this);
       return false;
     });

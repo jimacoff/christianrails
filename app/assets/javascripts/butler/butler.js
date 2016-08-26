@@ -123,7 +123,7 @@ function hideAllPartials() {
 
 function showNewContent(product) {
   $('#content').fadeIn('slow', function() {
-    timedPadNav(6);
+    timedPadNav(7);
   });
   //initializeBook(product);
 };
@@ -132,7 +132,7 @@ function timedPadNav(times) {
   for (var i = times; i >= 0; i--) {
     window.setTimeout(function(){
       padNav();
-    }, 500);
+    }, 50);
   };
 };
 
