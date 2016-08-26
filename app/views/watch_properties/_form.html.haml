@@ -1,0 +1,22 @@
+= form_for @watch_property do |f|
+  - if @watch_property.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@watch_property.errors.count, "error")} prohibited this WatchProperty from being saved:"
+      %ul
+        - @watch_property.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name, required: true
+    %tr.field
+      %td= f.label "URL"
+      %td= f.text_field :url, required: true
+    %tr.field
+      %td= f.label :expected_response
+      %td= f.text_field :expected_response, required: true
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

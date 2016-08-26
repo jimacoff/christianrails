@@ -56,6 +56,8 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  resources :watch_properties, except: [:show]
+
   resources :admin, only: [:index] do
     collection do
       get 'emailtest'

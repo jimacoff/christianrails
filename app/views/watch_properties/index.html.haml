@@ -1,0 +1,22 @@
+%h1 Watch Properties
+
+%table.product-table
+  %thead
+    %tr
+      %th Name
+      %th URL
+      %th Expected
+      %th
+
+  %tbody
+    - @watch_properties.each do |watch_property|
+      %tr
+        %td= link_to watch_property.name, edit_watch_property_path( watch_property )
+        %td= watch_property.url
+        %td= watch_property.expected_response
+        %td= link_to 'Destroy', watch_property_path( watch_property ), method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to '+ New Watch Property', new_watch_property_path
+%br
+%br
+= link_to 'Back to Admin', admin_index_path
