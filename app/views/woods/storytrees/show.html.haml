@@ -15,6 +15,9 @@
   var cursor = 1;
   var nodeModified = false;
 
+  var storyId = #{ @story.id };
+  var storytreeId = #{ @storytree.id };
+
   $(document).ready(function() {
     refreshNodeEditor()
     updateControls();

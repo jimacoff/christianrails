@@ -230,7 +230,19 @@ a {
 .woods-text {
   border: 1px solid $black;
   border-radius: 4px;
+  padding: 3px;
 }
 
 .editor-button {
+}
+
+.map-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.map-cell {
+  border: 1px solid $black;
+  border-radius: 4px;
 }

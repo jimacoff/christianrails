@@ -1,6 +1,46 @@
 function moveToNewNode(destinationId) {
   cursor = destinationId;
 
+  if( nodeModified ) {
+    console.log('needs a save!');
+  } else {
+    refreshEverything();
+  }
+
+}
+
+function saveCurrentNode(currentNodeId) {
+
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      format: 'json',
+      url: '/woods/stories/' + storyId + '/storytrees/' + storytreeId + '/nodes/' + currentNodeId + '.json',
+      data: {
+        woods_node: {
+          //moverule_id: ,
+          name: $('#node-name-box').val(),
+          left_text:  $('#left-text-box').val(),
+          right_text: $('#right-text-box').val(),
+          node_text:  $('#node-content-box').val()
+        }
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log("Saved the node!");
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured: " + textStatus);
+    // TODO pop an error flash or something
+  });
+
+}
+
+function refreshEverything() {
+  nodeModified = false;
+
   refreshNodeEditor();
   updateControls();
   updateMap();
@@ -26,12 +66,8 @@ function updateControls() {
   $('#slide-right-button').prop('disabled', !canSlideRight() );
 }
 
-function saveCurrentNode(currentNodeId) {
-  // TODO ajax it
-}
-
 function updateMap() {
-
+  // TODO
 }
 
 
