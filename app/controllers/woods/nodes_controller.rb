@@ -21,6 +21,6 @@ class Woods::NodesController < ApplicationController
     end
 
     def woods_node_params
-      params[:woods_node]
+      params.require(:woods_node).permit(:moverule_id, :name, :left_text, :right_text, :node_text)
     end
 end

@@ -4,7 +4,9 @@ class Woods::StorytreesController < ApplicationController
   before_action :set_woods_storytree, only: [:show, :destroy]
   before_action :set_woods_story
 
+  # the story editor
   def show
+    @nodes = @storytree.nodes
   end
 
   def create

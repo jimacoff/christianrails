@@ -1,5 +1,21 @@
-[Insert fully-featured story editor here]
+= render "node_editor"
+= render "tree_map"
+= render "tree_controls"
 
 %br
 
 = link_to 'Back to story manager', manage_woods_story_path(@story)
+
+
+
+:javascript
+
+  var nodes = #{@nodes.to_json};
+  var cursor = 1;
+  var nodeModified = false;
+
+  $(document).ready(function() {
+    refreshNodeEditor()
+    updateControls();
+    updateMap();
+  }

@@ -152,6 +152,11 @@ table {
   font-weight: bold;
 }
 
+.no-resize {
+  resize: none;
+  border-radius: 4px;
+}
+
 // Blog stuff
 
 .blog-link {

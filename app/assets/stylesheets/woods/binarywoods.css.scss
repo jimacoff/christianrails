@@ -208,3 +208,29 @@ a {
   color: $black;
   text-decoration: underline !important;
 }
+
+
+/////  TREE EDITOR
+
+#node-editor {
+  display: inline-block;
+  width: 300px;
+}
+
+#tree-map {
+  display: inline-block;
+  width: 550px;
+}
+
+#tree-controls {
+  width: 150px;
+  text-align: center;
+}
+
+.woods-text {
+  border: 1px solid $black;
+  border-radius: 4px;
+}
+
+.editor-button {
+}
