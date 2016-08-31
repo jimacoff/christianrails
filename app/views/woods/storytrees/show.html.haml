@@ -11,6 +11,7 @@
 :javascript
 
   var nodes = #{@nodes.to_json};
+  var max_node_index = nodes.length;
   var cursor = 1;
   var nodeModified = false;
 
@@ -18,4 +19,4 @@
     refreshNodeEditor()
     updateControls();
     updateMap();
-  }
+  });

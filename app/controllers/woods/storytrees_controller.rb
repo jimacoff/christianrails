@@ -6,7 +6,7 @@ class Woods::StorytreesController < ApplicationController
 
   # the story editor
   def show
-    @nodes = @storytree.nodes
+    @nodes = @storytree.nodes.order('tree_index asc')
   end
 
   def create
