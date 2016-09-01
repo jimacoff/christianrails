@@ -8,16 +8,14 @@ class Woods::NodesController < ApplicationController
   def update
     @error = nil
 
-    unless current_player && current_player.owns_story?( @story )
-                      && @storytree.story_id == @story.id
-                      && @node.storytree_id == @storytree.id
+    unless current_player && current_player.owns_story?( @story ) && (@storytree.story_id == @story.id) && (@node.storytree_id == @storytree.id)
                       # TODO deal with moverule here
       @error = "User does not have access to story."
     end
 
     respond_to do |format|
-      if @error || @node.update(woods_node_params)
-        format.json { head :no_content }
+      if !@error && @node.update(woods_node_params)
+        format.json { render json: @node, status: :ok }
       else
         format.json { render json: @node.errors, status: :unprocessable_entity }
       end

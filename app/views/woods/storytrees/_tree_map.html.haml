@@ -1,1 +1,31 @@
 #tree-map.panel
+  .map-row
+    .map-cell{onclick: 'moveToParent();'}
+      %span#parent-cell
+
+  .map-row
+    .map-cell{onclick: 'slideLeft();'}
+      %span#left-of-current-cell
+    .spacer
+    .map-cell
+      %span#current-cell
+    .spacer
+    .map-cell{onclick: 'slideRight();'}
+      %span#right-of-current-cell
+
+  .map-row
+    .map-cell{onclick: 'moveLeft();'}
+      %span#l-cell
+    .spacer
+    .map-cell{onclick: 'moveRight();'}
+      %span#r-cell
+
+  .map-row
+    .map-cell{onclick: 'moveLeft(); moveLeft();'}
+      %span#ll-cell
+    .map-cell{onclick: 'moveLeft(); moveRight();'}
+      %span#lr-cell
+    .map-cell{onclick: 'moveRight(); moveLeft();'}
+      %span#rl-cell
+    .map-cell{onclick: 'moveRight(); moveRight();'}
+      %span#rr-cell

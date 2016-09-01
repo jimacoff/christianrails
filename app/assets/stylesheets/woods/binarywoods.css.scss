@@ -220,6 +220,7 @@ a {
 #tree-map {
   display: inline-block;
   width: 550px;
+  vertical-align: top;
 }
 
 #tree-controls {
@@ -240,9 +241,19 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .map-cell {
   border: 1px solid $black;
   border-radius: 4px;
+  width: 120px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.spacer {
+  margin: 0 30px;
 }

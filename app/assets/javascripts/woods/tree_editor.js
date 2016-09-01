@@ -1,19 +1,23 @@
 function moveToNewNode(destinationId) {
+  currentNode = nodes[cursor - 1];
   cursor = destinationId;
 
   if( nodeModified ) {
-    console.log('needs a save!');
+    saveCurrentNode( currentNode['id'] );
   } else {
     refreshEverything();
   }
+}
 
+function touchNode() {
+  nodeModified = true;
 }
 
 function saveCurrentNode(currentNodeId) {
 
   request = void 0;
   request = $.ajax({
-      type: 'POST',
+      type: 'PUT',
       format: 'json',
       url: '/woods/stories/' + storyId + '/storytrees/' + storytreeId + '/nodes/' + currentNodeId + '.json',
       data: {
@@ -29,6 +33,9 @@ function saveCurrentNode(currentNodeId) {
 
   request.done(function(data, textStatus, jqXHR) {
     console.log("Saved the node!");
+
+    updateNodeLocally(data);
+    refreshEverything();
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
@@ -36,6 +43,16 @@ function saveCurrentNode(currentNodeId) {
     // TODO pop an error flash or something
   });
 
+}
+
+function updateNodeLocally(callback_data) {
+  var nodes_array_index = callback_data['tree_index'] - 1;
+
+  nodes[ nodes_array_index ]['left_text'] = callback_data['left_text'];
+  nodes[ nodes_array_index ]['right_text'] = callback_data['right_text'];
+  nodes[ nodes_array_index ]['node_text'] = callback_data['node_text'];
+  nodes[ nodes_array_index ]['name'] = callback_data['name'];
+  nodes[ nodes_array_index ]['moverule_id'] = callback_data['moverule_id'];
 }
 
 function refreshEverything() {
@@ -67,7 +84,43 @@ function updateControls() {
 }
 
 function updateMap() {
-  // TODO
+  if(cursor > 1) {
+    $('#parent-cell').html( nodes[Math.floor(cursor / 2) - 1]['name'] );
+    $('#left-of-current-cell').html( nodes[cursor - 2]['name'] );
+
+  } else {
+    $('#parent-cell').html('---');
+    $('#left-of-current-cell').html('---');
+  }
+
+  if(cursor < nodes.length) {
+    $('#right-of-current-cell').html( nodes[cursor]['name'] );
+  } else {
+    $('#right-of-current-cell').html('---');
+  }
+
+  $('#current-cell').html(nodes[cursor - 1]['name']);
+
+  if( cursor * 2 > nodes.length) {
+    $('#l-cell').html('---');
+    $('#r-cell').html('---');
+  } else {
+    $('#l-cell').html( nodes[(cursor * 2) - 1]['name'] );
+    $('#r-cell').html( nodes[(cursor * 2)    ]['name'] );
+  }
+
+  if( cursor * 4 > nodes.length) {
+    $('#ll-cell').html('---');
+    $('#lr-cell').html('---');
+    $('#rl-cell').html('---');
+    $('#rr-cell').html('---');
+  } else {
+    $('#ll-cell').html( nodes[(cursor * 4) - 1]['name'] );
+    $('#lr-cell').html( nodes[(cursor * 4)    ]['name'] );
+    $('#rl-cell').html( nodes[(cursor * 4) + 1]['name'] );
+    $('#rr-cell').html( nodes[(cursor * 4) + 2]['name'] );
+  }
+
 }
 
 
