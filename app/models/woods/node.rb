@@ -1,7 +1,6 @@
 class Woods::Node < ActiveRecord::Base
 
   belongs_to :storytree
-  belongs_to :moverule
 
   has_one :box,           dependent: :destroy
   has_one :paintball,     dependent: :destroy
@@ -9,6 +8,21 @@ class Woods::Node < ActiveRecord::Base
   has_one :treelink,      dependent: :destroy
 
   validates_presence_of :name, :storytree, :tree_index
+
+  MOVERULE_TOGGLER = 1
+  MOVERULE_LR_SWITCH = 2
+  MOVERULE_PERPETUAL_ITEM = 3
+  MOVERULE_VARIABLE_ITEM = 4
+  MOVERULE_SINGlE_BOX = 5
+  MOVERULE_PERPETUAL_BOX = 6
+  MOVERULES = [
+    [1, "50/50 toggler"],
+    [2, "Left/right switch"],
+    [3, "Perpetual item on left"],
+    [4, "Variable item on left"],
+    [5, "Single-use box on left"],
+    [6, "Perpetual box on left"]
+  ]
 
   def add_accoutrements_and_make_json!(player_id = nil, footprint = nil, item_found = nil)
     nodehash = self.as_json
@@ -53,22 +67,22 @@ class Woods::Node < ActiveRecord::Base
 
   def calculate_ending(footprint, player_id)
     case
-    when moverule.toggler?
+    when toggler?
       Random.rand(2) < 1 ? left : right
 
-    when moverule.left_right_switch?
+    when left_right_switch?
       footprint.been_to_index?(left_index) ? right : left
 
-    when moverule.perpetual_item?
+    when perpetual_item?
       footprint.been_to_index?(left_index) ? right : left
 
-    when moverule.variable_item?
+    when variable_item?
       footprint.item_at_index?(left_index) ? left : right
 
-    when moverule.single_box?
+    when single_box?
       footprint.been_to_index?(left_index) ? right : can_open_box?(player_id) ? left : right
 
-    when moverule.perpetual_box?
+    when perpetual_box?
       can_open_box?(player_id) ? left : right
 
     else
@@ -100,12 +114,49 @@ class Woods::Node < ActiveRecord::Base
     (self.tree_index * 2) + 1
   end
 
+private
+
   def can_open_box?(player_id)
     if box = left.box
       itemset_required = box.itemset
       player = Woods::Player.find(player_id)
       player.has_item_in_itemset?(itemset_required.id)
     end
+  end
+
+  ## moverule helpers
+
+  def toggler?
+    moverule_id == MOVERULE_TOGGLER
+  end
+
+  def left_right_switch?
+    moverule_id == MOVERULE_LR_SWITCH
+  end
+
+  def perpetual_item?
+    moverule_id == MOVERULE_PERPETUAL_ITEM
+  end
+
+  def variable_item?
+    moverule_id == MOVERULE_VARIABLE_ITEM
+  end
+
+  def single_box?
+    moverule_id == MOVERULE_SINGlE_BOX
+  end
+
+  def perpetual_box?
+    moverule_id == MOVERULE_PERPETUAL_BOX
+  end
+
+  # further helpers
+  def item?
+    perpetual_item? || variable_item?
+  end
+
+  def box?
+    single_box? || perpetual_box?
   end
 
 end

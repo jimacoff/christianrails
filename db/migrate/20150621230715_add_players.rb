@@ -30,7 +30,6 @@ class AddPlayers < ActiveRecord::Migration
 
       t.timestamps
 
-      # TODO DROP A PILE OF THESE
     end
 
   end

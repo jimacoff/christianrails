@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826001610) do
+ActiveRecord::Schema.define(version: 20160901012327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,21 +229,27 @@ ActiveRecord::Schema.define(version: 20160826001610) do
   end
 
   create_table "woods_boxes", force: :cascade do |t|
-    t.integer "itemset_id"
-    t.boolean "enabled",    default: true
-    t.integer "node_id"
+    t.integer  "itemset_id"
+    t.boolean  "enabled",    default: true
+    t.integer  "node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_finds", force: :cascade do |t|
-    t.integer "player_id", null: false
-    t.integer "item_id",   null: false
-    t.integer "story_id"
+    t.integer  "player_id",  null: false
+    t.integer  "item_id",    null: false
+    t.integer  "story_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_footprints", force: :cascade do |t|
-    t.integer "scorecard_id"
-    t.integer "storytree_id"
-    t.string  "footprint_data", limit: 4096
+    t.integer  "scorecard_id"
+    t.integer  "storytree_id"
+    t.string   "footprint_data", limit: 4096
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_item_downloads", force: :cascade do |t|
@@ -257,97 +263,115 @@ ActiveRecord::Schema.define(version: 20160826001610) do
   add_index "woods_item_downloads", ["player_id"], name: "index_woods_item_downloads_on_player_id", using: :btree
 
   create_table "woods_items", force: :cascade do |t|
-    t.string  "name",       limit: 100,              null: false
-    t.integer "value",                   default: 1
-    t.string  "legend",     limit: 3000
-    t.string  "image",      limit: 60
-    t.integer "itemset_id"
+    t.string   "name",       limit: 100,              null: false
+    t.integer  "value",                   default: 1
+    t.string   "legend",     limit: 3000
+    t.string   "image",      limit: 60
+    t.integer  "itemset_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_itemsets", force: :cascade do |t|
-    t.string  "name",     limit: 60
-    t.integer "story_id"
-  end
-
-  create_table "woods_moverules", force: :cascade do |t|
-    t.string "name", limit: 60, null: false
+    t.string   "name",       limit: 60
+    t.integer  "story_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_nodes", force: :cascade do |t|
-    t.integer "moverule_id"
-    t.string  "name",         limit: 60
-    t.string  "left_text",    limit: 60
-    t.string  "right_text",   limit: 60
-    t.integer "storytree_id"
-    t.integer "tree_index"
-    t.string  "node_text",    limit: 3000
-    t.integer "last_author"
+    t.integer  "moverule_id"
+    t.string   "name",         limit: 60
+    t.string   "left_text",    limit: 60
+    t.string   "right_text",   limit: 60
+    t.integer  "storytree_id"
+    t.integer  "tree_index"
+    t.string   "node_text",    limit: 3000
+    t.integer  "last_author"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_paintballs", force: :cascade do |t|
-    t.integer "node_id"
-    t.integer "palette_id"
-    t.boolean "enabled",    default: true
+    t.integer  "node_id"
+    t.integer  "palette_id"
+    t.boolean  "enabled",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_palettes", force: :cascade do |t|
-    t.string  "name",        limit: 100
-    t.string  "fore_colour",             default: "#000000"
-    t.string  "back_colour",             default: "#ffffff"
-    t.string  "alt_colour",              default: "#ffffff"
-    t.integer "story_id"
+    t.string   "name",        limit: 100
+    t.string   "fore_colour",             default: "#000000"
+    t.string   "back_colour",             default: "#ffffff"
+    t.string   "alt_colour",              default: "#ffffff"
+    t.integer  "story_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_players", force: :cascade do |t|
-    t.integer "silver_coins",                  default: 0
-    t.string  "image",             limit: 60
-    t.integer "gold_coins",                    default: 0
-    t.integer "karma",                         default: 0
-    t.integer "most_recent_story"
-    t.string  "description",       limit: 510
-    t.integer "total_equity",                  default: 0
-    t.integer "story_limit",                   default: 10
-    t.integer "item_limit",                    default: 100
-    t.integer "palette_limit",                 default: 100
-    t.integer "user_id"
+    t.integer  "silver_coins",                  default: 0
+    t.string   "image",             limit: 60
+    t.integer  "gold_coins",                    default: 0
+    t.integer  "karma",                         default: 0
+    t.integer  "most_recent_story"
+    t.string   "description",       limit: 510
+    t.integer  "total_equity",                  default: 0
+    t.integer  "story_limit",                   default: 10
+    t.integer  "item_limit",                    default: 100
+    t.integer  "palette_limit",                 default: 100
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_possibleitems", force: :cascade do |t|
-    t.boolean "enabled",    default: true
-    t.boolean "perpetual",  default: false
-    t.integer "itemset_id"
-    t.integer "node_id"
+    t.boolean  "enabled",    default: true
+    t.boolean  "perpetual",  default: false
+    t.integer  "itemset_id"
+    t.integer  "node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_scorecards", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "story_id"
-    t.integer "number_of_plays", default: 1
-    t.integer "total_score",     default: 0
-    t.integer "lefts",           default: 0
-    t.integer "rights",          default: 0
+    t.integer  "player_id"
+    t.integer  "story_id"
+    t.integer  "number_of_plays", default: 1
+    t.integer  "total_score",     default: 0
+    t.integer  "lefts",           default: 0
+    t.integer  "rights",          default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_stories", force: :cascade do |t|
-    t.string  "name",        limit: 50,                   null: false
-    t.integer "player_id"
-    t.string  "description", limit: 1000
-    t.integer "entry_tree"
-    t.integer "total_plays"
-    t.boolean "published",                default: false
+    t.string   "name",        limit: 50,                   null: false
+    t.integer  "player_id"
+    t.string   "description", limit: 1000
+    t.integer  "entry_tree"
+    t.integer  "total_plays"
+    t.boolean  "published",                default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_storytrees", force: :cascade do |t|
-    t.string  "name",      limit: 60,                 null: false
-    t.integer "max_level",            default: 1,     null: false
-    t.integer "story_id",                             null: false
-    t.boolean "deletable",            default: false
+    t.string   "name",       limit: 60,                 null: false
+    t.integer  "max_level",             default: 1,     null: false
+    t.integer  "story_id",                              null: false
+    t.boolean  "deletable",             default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "woods_treelinks", force: :cascade do |t|
-    t.integer "node_id"
-    t.boolean "enabled",     default: true
-    t.integer "linked_tree"
+    t.integer  "node_id"
+    t.boolean  "enabled",     default: true
+    t.integer  "linked_tree"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "downloads", "releases"

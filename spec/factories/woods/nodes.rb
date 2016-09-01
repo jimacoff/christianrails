@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :node, :class => 'Woods::Node' do
-    moverule
+    moverule_id -1
     storytree
 
     sequence :name do |n|

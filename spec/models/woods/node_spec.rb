@@ -17,8 +17,6 @@ RSpec.describe Woods::Node, type: :model do
     let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
     let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
 
-    let!(:moverule)  { FactoryGirl.create(:moverule) }
-
     it "should have a box" do
       expect( node1.box ).to eq(box)
     end
@@ -33,13 +31,6 @@ RSpec.describe Woods::Node, type: :model do
 
     it "should have a paintball" do
       expect( node1.paintball ).to eq(paintball)
-    end
-
-    it "should belong to a moverule" do
-      node1.moverule = moverule
-      node1.save
-
-      expect( node1.moverule ).to eq(moverule)
     end
 
   end

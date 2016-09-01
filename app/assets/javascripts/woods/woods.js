@@ -5,7 +5,6 @@ function move(story_id, button) {
   if( current_node.linked_node ) {
     target_node = current_node['linked_node'];
   } else {
-    // choose a direction based on moverule or button
     if(button === "L") {
       target_node = current_node['left_link'];
     } else if(button === "R") {

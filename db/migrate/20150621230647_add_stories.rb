@@ -20,9 +20,6 @@ class AddStories < ActiveRecord::Migration
       t.boolean :mature
       t.string  :corp_link
 
-
-      # TODO DROP A BUNCH OF THESE
-
       t.timestamps
     end
   end
