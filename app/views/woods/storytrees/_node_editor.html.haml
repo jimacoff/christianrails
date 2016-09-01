@@ -10,4 +10,8 @@
   %input#left-text-box.woods-text.savetrigger{type: 'textbox', size: 22, onchange: "touchNode();"}
   %input#right-text-box.woods-text.savetrigger{type: 'textbox', size: 22, onchange: "touchNode();"}
 
-  // TODO add move rules around here
+  #moverule-box
+    %label Move rule:
+    %select#moverule-select
+      - Woods::Node::MOVERULES.each do |moverule|
+        %option.moverule-option{value: moverule[0]}= moverule[1]

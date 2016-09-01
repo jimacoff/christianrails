@@ -225,8 +225,9 @@ a {
 }
 
 #tree-controls {
-  width: 150px;
+  width: 160px;
   text-align: center;
+  margin-top: 10px;
 }
 
 .woods-text {
@@ -261,9 +262,27 @@ a {
 }
 
 .map-cell-text {
-  margin-top: 20px;;
+  margin-top: 20px;
 }
 
 .right-side-editor {
   display: inline-block;
+}
+
+#parent-button, #left-button, #right-button, #slide-left-button, #slide-right-button {
+  border-radius: 10px;
+  background-color: $white;
+}
+
+#parent-button {
+  font-size: 1.5em;
+  width: 125px;
+}
+
+#left-button, #right-button {
+  font-size: 1.5em;
+  height: 40px;
+}
+
+#slide-left-button, #slide-right-button {
 }

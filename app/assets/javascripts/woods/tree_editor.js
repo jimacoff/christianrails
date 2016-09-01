@@ -72,10 +72,24 @@ function refreshNodeEditor() {
   $('#node-content-box').val(currentNode['node_text']);
   $('#left-text-box').val(currentNode['left_text']);
   $('#right-text-box').val(currentNode['right_text']);
+
+  // moverule + accoutrements
+  if(currentNode['moverule_id'] !== -1) {
+    $('.moverule-option').each(function(rule) {
+      if( currentNode['moverule_id'] === rule + 1) {
+        $(this).prop('selected', 'selected');
+      } else {
+        $(this).prop('selected', '');
+      }
+    });
+    $('#moverule-box').fadeIn();
+  } else {
+    $('#moverule-box').fadeOut();
+  }
+
 }
 
 function updateControls() {
-  // TODO update button enableds
   $('#parent-button').prop('disabled', !canMoveToParent() );
   $('#left-button').prop('disabled', !canMoveLeft() );
   $('#right-button').prop('disabled', !canMoveRight() );
