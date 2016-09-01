@@ -215,6 +215,7 @@ a {
 #node-editor {
   display: inline-block;
   width: 300px;
+  vertical-align: top;
 }
 
 #tree-map {
@@ -248,6 +249,7 @@ a {
   border: 1px solid $black;
   border-radius: 4px;
   width: 120px;
+  height: 55px;
   margin: 10px;
   text-align: center;
   cursor: pointer;
@@ -256,4 +258,12 @@ a {
 
 .spacer {
   margin: 0 30px;
+}
+
+.map-cell-text {
+  margin-top: 20px;;
+}
+
+.right-side-editor {
+  display: inline-block;
 }

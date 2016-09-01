@@ -1,4 +1,6 @@
 #node-editor
+  = link_to '<< Story manager', manage_woods_story_path(@story)
+  %br
 
   %label#node-index-label
   %input#node-name-box.woods-text.savetrigger{type: 'textbox', size: 30, onchange: "touchNode();"}
