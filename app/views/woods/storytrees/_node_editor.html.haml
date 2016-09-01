@@ -12,6 +12,6 @@
 
   #moverule-box
     %label Move rule:
-    %select#moverule-select
+    %select#moverule-select{onchange: "touchNode();"}
       - Woods::Node::MOVERULES.each do |moverule|
         %option.moverule-option{value: moverule[0]}= moverule[1]

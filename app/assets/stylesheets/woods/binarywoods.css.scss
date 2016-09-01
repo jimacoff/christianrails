@@ -255,6 +255,11 @@ a {
   text-align: center;
   cursor: pointer;
   vertical-align: middle;
+  background-color: $white;
+}
+
+.highlighted-cell {
+  background-color: $cloud-blue !important;
 }
 
 .spacer {

@@ -15,6 +15,12 @@ function touchNode() {
 
 function saveCurrentNode(currentNodeId) {
 
+  if( $('#moverule-box').css('display') === "none" ) {
+    var theMoverule = -1;
+  } else {
+    var theMoverule = $('#moverule-select').val();
+  }
+
   request = void 0;
   request = $.ajax({
       type: 'PUT',
@@ -22,7 +28,7 @@ function saveCurrentNode(currentNodeId) {
       url: '/woods/stories/' + storyId + '/storytrees/' + storytreeId + '/nodes/' + currentNodeId + '.json',
       data: {
         woods_node: {
-          //moverule_id: ,
+          moverule_id: theMoverule,
           name: $('#node-name-box').val(),
           left_text:  $('#left-text-box').val(),
           right_text: $('#right-text-box').val(),

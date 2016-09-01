@@ -9,7 +9,6 @@ class Woods::NodesController < ApplicationController
     @error = nil
 
     unless current_player && current_player.owns_story?( @story ) && (@storytree.story_id == @story.id) && (@node.storytree_id == @storytree.id)
-                      # TODO deal with moverule here
       @error = "User does not have access to story."
     end
 
