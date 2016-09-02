@@ -22,6 +22,10 @@
   var boxes = #{@boxes.to_json};
   var paintballs = #{@paintballs.to_json};
 
+  var palettes = #{@palettes.to_json};
+  var itemsets = #{@itemsets.to_json};
+  var storytrees = #{@storytrees.to_json};
+
   $(document).ready(function() {
     refreshNodeEditor()
     updateControls();

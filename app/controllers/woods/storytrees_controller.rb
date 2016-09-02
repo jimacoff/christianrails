@@ -8,13 +8,33 @@ class Woods::StorytreesController < ApplicationController
   def show
     @nodes = @storytree.nodes.order('tree_index asc')
 
-    @treelinks = @paintballs = @possibleitems = @boxes = {}
+    @treelinks = {}
+    @paintballs = {}
+    @possibleitems = {}
+    @boxes = {}
+    @palettes = {}
+    @storytrees = {}
+    @itemsets = {}
+
     @nodes.each do |node|
       @treelinks[node.id]  = node.treelink if node.treelink
       @paintballs[node.id] = node.paintball if node.paintball
       @possibleitems[node.id] = node.possibleitem if node.possibleitem
       @boxes[node.id] = node.box if node.box
     end
+
+    @story.palettes.each do |palette|
+      @palettes[palette.id] = palette
+    end
+
+    @story.storytrees.each do |storytree|
+      @storytrees[storytree.id] = storytree unless storytree.id == @storytree.id
+    end
+
+    @story.itemsets.each do |itemset|
+      @itemsets[itemset.id] = itemset
+    end
+
   end
 
   def create
