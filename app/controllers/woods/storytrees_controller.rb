@@ -7,6 +7,14 @@ class Woods::StorytreesController < ApplicationController
   # the story editor
   def show
     @nodes = @storytree.nodes.order('tree_index asc')
+
+    @treelinks = @paintballs = @possibleitems = @boxes = {}
+    @nodes.each do |node|
+      @treelinks[node.id]  = node.treelink if node.treelink
+      @paintballs[node.id] = node.paintball if node.paintball
+      @possibleitems[node.id] = node.possibleitem if node.possibleitem
+      @boxes[node.id] = node.box if node.box
+    end
   end
 
   def create

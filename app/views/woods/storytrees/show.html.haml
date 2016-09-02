@@ -7,8 +7,6 @@
 
 
 
-
-
 :javascript
 
   var nodes = #{@nodes.to_json};
@@ -18,6 +16,11 @@
 
   var storyId = #{ @story.id };
   var storytreeId = #{ @storytree.id };
+
+  var treelinks = #{@treelinks.to_json};
+  var possibleitems = #{@possibleitems.to_json};
+  var boxes = #{@boxes.to_json};
+  var paintballs = #{@paintballs.to_json};
 
   $(document).ready(function() {
     refreshNodeEditor()

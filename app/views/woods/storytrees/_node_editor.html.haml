@@ -15,3 +15,15 @@
     %select#moverule-select{onchange: "touchNode();"}
       - Woods::Node::MOVERULES.each do |moverule|
         %option.moverule-option{value: moverule[0]}= moverule[1]
+
+  #treelink-box
+    %label Link to tree:
+
+  #paintball-box
+    %label Palette:
+
+  #possibleitem-box
+    %label Itemset:
+
+  #box-box
+    %label Keyset:

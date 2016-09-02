@@ -79,6 +79,14 @@ function refreshNodeEditor() {
   $('#left-text-box').val(currentNode['left_text']);
   $('#right-text-box').val(currentNode['right_text']);
 
+  if( isPenultimateLevel() || isBottomLevel() ) {
+    $('#left-text-box').prop('disabled', true);
+    $('#right-text-box').prop('disabled', true);
+  } else {
+    $('#left-text-box').prop('disabled', false);
+    $('#right-text-box').prop('disabled', false);
+  }
+
   // moverule + accoutrements
   if(currentNode['moverule_id'] !== -1) {
     $('.moverule-option').each(function(rule) {
@@ -93,6 +101,14 @@ function refreshNodeEditor() {
     $('#moverule-box').fadeOut();
   }
 
+}
+
+function isPenultimateLevel() {
+  return (cursor * 4 > nodes.length) && !isBottomLevel();
+}
+
+function isBottomLevel() {
+  return (cursor * 2 > nodes.length);
 }
 
 function updateControls() {
