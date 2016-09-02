@@ -291,3 +291,20 @@ a {
 
 #slide-left-button, #slide-right-button {
 }
+
+#treelink-box, #box-box, #possibleitem-box, #paintball-box {
+  border: 1px solid $black;
+  border-radius: 10px;
+}
+
+#treelink-box {
+  background-color: $ghost-green;
+}
+
+#box-box {
+  background-color: $slate-purple;
+}
+
+#possibleitem-box {
+  background-color: $honey-yellow;
+}

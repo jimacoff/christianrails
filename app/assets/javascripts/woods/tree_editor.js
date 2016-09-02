@@ -10,6 +10,7 @@ function moveToNewNode(destinationId) {
 }
 
 function touchNode() {
+  console.log('touched!');
   nodeModified = true;
 }
 
@@ -96,11 +97,68 @@ function refreshNodeEditor() {
         $(this).prop('selected', '');
       }
     });
-    $('#moverule-box').fadeIn();
+    $('#moverule-box').show();
   } else {
-    $('#moverule-box').fadeOut();
+    $('#moverule-box').hide();
   }
 
+  if( paintballs[cursor] ) {
+    // choose palette
+    $('#palette-checkbox').prop('checked', false)
+    $('#palette-chooser').show();
+  } else {
+    $('#palette-checkbox').prop('checked', true)
+    $('#palette-chooser').hide();
+  }
+
+  if( isBottomLevel() ) {
+    $('#treelink-box').show();
+
+    if( treelinks[cursor] ) {
+      $('#treelink-checkbox').prop('checked', true)
+      $('#storytree-chooser').show();
+    } else {
+      $('#treelink-checkbox').prop('checked', false)
+      $('#storytree-chooser').hide();
+    }
+
+    if( isNodeWithABox() ){
+      $('#box-box').show();
+      if( boxes[cursor] ) {
+        // choose itemset
+      }
+
+    } else {
+      $('#box-box').hide();
+    }
+
+    if( isNodeWithAnItem() ) {
+      $('#possibleitem-box').show();
+      if( possibleitems[cursor] ) {
+        // choose itemset
+      }
+    } else {
+
+      $('#possibleitem-box').hide();
+    }
+
+
+  } else { // not bottom level
+    $('#treelink-box').hide();
+    $('#possibleitem-box').hide();
+    $('#box-box').hide();
+  }
+
+
+}
+
+function paletteCheck() {
+  touchNode();
+  if( $('#palette-checkbox').prop('checked') ) {
+    $('#palette-chooser').hide();
+  } else {
+    $('#palette-chooser').show();
+  }
 }
 
 function isPenultimateLevel() {
@@ -190,6 +248,22 @@ function slideRight() {
   if( canSlideRight() ) {
     moveToNewNode(cursor + 1);
   }
+}
+
+function isNodeWithABox() {
+  return (parentNodeMoverule() === 5 || parentNodeMoverule() === 6) && isEvenNode();
+}
+
+function isNodeWithAnItem() {
+  return (parentNodeMoverule() === 3 || parentNodeMoverule() === 4) && isEvenNode();
+}
+
+function parentNodeMoverule() {
+  return nodes[ Math.floor(cursor / 2) - 1 ]['moverule_id'];
+}
+
+function isEvenNode() {
+  return (cursor % 2 === 0)
 }
 
 function canMoveToParent() {
