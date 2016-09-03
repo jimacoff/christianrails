@@ -225,9 +225,14 @@ a {
 }
 
 #tree-controls {
-  width: 160px;
-  text-align: center;
   margin-top: 10px;
+}
+
+#primary-controls, #alt-tree-controls {
+  text-align: center;
+  width: 160px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .woods-text {

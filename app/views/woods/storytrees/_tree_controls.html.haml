@@ -1,9 +1,14 @@
 #tree-controls
+  #primary-controls
 
-  %input#parent-button.editor-button{type: 'button', value: 'Parent', onclick: 'moveToParent();'}
+    %input#parent-button.editor-button{type: 'button', value: 'Parent', onclick: 'moveToParent();'}
 
-  %input#left-button.editor-button{type: 'button', value: 'Left', onclick: 'moveLeft();'}
-  %input#right-button.editor-button{type: 'button', value: 'Right', onclick: 'moveRight();'}
+    %input#left-button.editor-button{type: 'button', value: 'Left', onclick: 'moveLeft();'}
+    %input#right-button.editor-button{type: 'button', value: 'Right', onclick: 'moveRight();'}
 
-  %input#slide-left-button.editor-button{type: 'button', value: 'Slide Left', onclick: 'slideLeft();'}
-  %input#slide-right-button.editor-button{type: 'button', value: 'Slide Right', onclick: 'slideRight();'}
+    %input#slide-left-button.editor-button{type: 'button', value: 'Slide Left', onclick: 'slideLeft();'}
+    %input#slide-right-button.editor-button{type: 'button', value: 'Slide Right', onclick: 'slideRight();'}
+
+  #alt-tree-controls
+    %input#move-to-top-button.editor-button{type: 'button', value: 'Move to top', onclick: 'moveToTop();'}
+    %input#revert-changes-button.editor-button{type: 'button', value: 'Revert changes', onclick: 'revertChanges();'}

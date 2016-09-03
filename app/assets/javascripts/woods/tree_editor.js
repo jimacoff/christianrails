@@ -142,11 +142,12 @@ function refreshNodeEditor() {
     $('#box-box').hide();
   }
 
-
+  colourThePalettePanel();
 }
 
 function paletteCheck() {
   touchNode();
+  colourThePalettePanel();
   if( $('#palette-checkbox').prop('checked') ) {
     $('#palette-chooser').hide();
   } else {
@@ -286,4 +287,42 @@ function canSlideLeft() {
 
 function canSlideRight() {
   return cursor < max_node_index;
+}
+
+function revertChanges() {
+  refreshEverything();
+  nodeModified = false;
+}
+
+function moveToTop() {
+  moveToNewNode(1);
+}
+
+function colourThePalettePanel() {
+
+  if( $('#palette-checkbox').prop('checked') ) {
+    // inherit from parent
+    var lookingAt = Math.floor(cursor / 2);
+    while( !paintballs[lookingAt] && lookingAt !== 1 ) {
+      lookingAt = Math.floor(lookingAt / 2);
+    }
+    currentPalette = palettes[ paintballs[lookingAt]['palette_id'] ];
+  } else {
+    if(paintballs[cursor]) {
+      currentPalette = palettes[ paintballs[cursor]['palette_id'] ];
+    }
+  }
+
+  if(currentPalette) {
+    var fore = '#' + currentPalette['fore_colour'],
+        back = '#' + currentPalette['back_colour'],
+        alt  = '#' + currentPalette['alt_colour'];
+
+    $('#paintball-box').css('color', fore);
+    $('#paintball-box').css("background-image", "-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, " + back + "), color-stop(100%, " + alt + "))");
+    $('#paintball-box').css("background-image", "-webkit-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+    $('#paintball-box').css("background-image", "-moz-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+    $('#paintball-box').css("background-image", "-o-linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+    $('#paintball-box').css("background-image", "linear-gradient(top, " + back + " 0%," + alt + " 100%)");
+  }
 }
