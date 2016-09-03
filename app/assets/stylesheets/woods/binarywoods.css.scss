@@ -295,6 +295,8 @@ a {
 #treelink-box, #box-box, #possibleitem-box, #paintball-box {
   border: 1px solid $black;
   border-radius: 10px;
+  padding: 5px;
+  margin: 5px 0;
 }
 
 #treelink-box {

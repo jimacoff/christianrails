@@ -90,20 +90,14 @@ function refreshNodeEditor() {
 
   // moverule + accoutrements
   if(currentNode['moverule_id'] !== -1) {
-    $('.moverule-option').each(function(rule) {
-      if( currentNode['moverule_id'] === rule + 1) {
-        $(this).prop('selected', 'selected');
-      } else {
-        $(this).prop('selected', '');
-      }
-    });
+    $('#moverule-select').val( currentNode['moverule_id'] )
     $('#moverule-box').show();
   } else {
     $('#moverule-box').hide();
   }
 
   if( paintballs[cursor] ) {
-    // choose palette
+    $('#paintball-select').val( paintballs[cursor]['palette_id'] )
     $('#palette-checkbox').prop('checked', false)
     $('#palette-chooser').show();
   } else {
@@ -114,7 +108,8 @@ function refreshNodeEditor() {
   if( isBottomLevel() ) {
     $('#treelink-box').show();
 
-    if( treelinks[cursor] ) {
+    if( treelinks[currentNode['tree_index']] ) {
+      $('#treelink-select').val( treelinks[ currentNode['tree_index'] ]['linked_tree']['id'] )
       $('#treelink-checkbox').prop('checked', true)
       $('#storytree-chooser').show();
     } else {
@@ -123,22 +118,20 @@ function refreshNodeEditor() {
     }
 
     if( isNodeWithABox() ){
-      $('#box-box').show();
       if( boxes[cursor] ) {
-        // choose itemset
+        $('#box-select').val( boxes[cursor]['itemset_id'] )
       }
-
+      $('#box-box').show();
     } else {
       $('#box-box').hide();
     }
 
     if( isNodeWithAnItem() ) {
-      $('#possibleitem-box').show();
       if( possibleitems[cursor] ) {
-        // choose itemset
+        $('#possibleitem-select').val( possibleitems[cursor]['itemset_id'] )
       }
+      $('#possibleitem-box').show();
     } else {
-
       $('#possibleitem-box').hide();
     }
 
@@ -158,6 +151,15 @@ function paletteCheck() {
     $('#palette-chooser').hide();
   } else {
     $('#palette-chooser').show();
+  }
+}
+
+function treelinkCheck() {
+  touchNode();
+  if( $('#treelink-checkbox').prop('checked') ) {
+    $('#storytree-chooser').show();
+  } else {
+    $('#storytree-chooser').hide();
   }
 }
 

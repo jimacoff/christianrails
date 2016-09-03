@@ -17,10 +17,10 @@ class Woods::StorytreesController < ApplicationController
     @itemsets = {}
 
     @nodes.each do |node|
-      @treelinks[node.id]  = node.treelink if node.treelink
-      @paintballs[node.id] = node.paintball if node.paintball
-      @possibleitems[node.id] = node.possibleitem if node.possibleitem
-      @boxes[node.id] = node.box if node.box
+      @treelinks[node.tree_index]  = node.treelink if node.treelink
+      @paintballs[node.tree_index] = node.paintball if node.paintball
+      @possibleitems[node.tree_index] = node.possibleitem if node.possibleitem
+      @boxes[node.tree_index] = node.box if node.box
     end
 
     @story.palettes.each do |palette|

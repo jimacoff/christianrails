@@ -25,7 +25,7 @@
           %option.paintball-option{ value: k }= v[:name]
 
   #treelink-box
-    %input#treelink-checkbox{type: 'checkbox'} Link to another tree
+    %input#treelink-checkbox{type: 'checkbox', onclick: "treelinkCheck();"} Link to another tree
     #storytree-chooser
       %label Storytree:
       %select#treelink-select{onchange: "touchNode();"}
