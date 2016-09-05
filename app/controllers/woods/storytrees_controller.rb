@@ -16,6 +16,7 @@ class Woods::StorytreesController < ApplicationController
     @storytrees = {}
     @itemsets = {}
 
+    # accoutrements
     @nodes.each do |node|
       @treelinks[node.tree_index]  = node.treelink if node.treelink
       @paintballs[node.tree_index] = node.paintball if node.paintball
@@ -23,14 +24,13 @@ class Woods::StorytreesController < ApplicationController
       @boxes[node.tree_index] = node.box if node.box
     end
 
+    # resources
     @story.palettes.each do |palette|
       @palettes[palette.id] = palette
     end
-
     @story.storytrees.each do |storytree|
       @storytrees[storytree.id] = storytree unless storytree.id == @storytree.id
     end
-
     @story.itemsets.each do |itemset|
       @itemsets[itemset.id] = itemset
     end

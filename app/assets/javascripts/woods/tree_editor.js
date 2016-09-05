@@ -58,13 +58,41 @@ function saveAccoutrements( currentNode ) {
 
   //savePaintball();
 
-  //savePossibleItem();
+  if( possibleitems[currentNode['tree_index']] ) {
+    savePossibleitem(true, currentNode['id'], $('#possibleitem-select').val());
+  }
 
   if( boxes[currentNode['tree_index']] ) {
     saveBox(true, currentNode['id'], $('#box-select').val());
   }
 }
 
+function savePossibleitem(setEnabled, nodeId, itemsetId) {
+
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      format: 'json',
+      url: '/woods/possibleitems/upsert.json',
+      data: {
+        woods_possibleitem: {
+          node_id: nodeId,
+          enabled: setEnabled,
+          itemset_id: itemsetId
+        }
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log("Saved the possibleitem!");
+    updatePossibleitemLocally(data);
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured saving possibleitem: " + textStatus);
+    // TODO pop an error flash or something
+  });
+}
 function saveBox(setEnabled, nodeId, itemsetId) {
 
   request = void 0;
@@ -107,6 +135,13 @@ function updateBoxLocally(callback_data) {
 
   boxes[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
   boxes[ theTreeIndex ]['enabled']    = callback_data['enabled'];
+}
+
+function updatePossibleitemLocally(callback_data) {
+  var theTreeIndex = callback_data['tree_index'];
+
+  possibleitems[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
+  possibleitems[ theTreeIndex ]['enabled']    = callback_data['enabled'];
 }
 
 function refreshEverything() {
