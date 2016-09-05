@@ -4,6 +4,7 @@ function moveToNewNode(destinationId) {
 
   if( nodeModified ) {
     saveCurrentNode( currentNode['id'] );
+    saveAccoutrements( currentNode );
   } else {
     refreshEverything();
   }
@@ -49,7 +50,46 @@ function saveCurrentNode(currentNodeId) {
     console.log("Error occured: " + textStatus);
     // TODO pop an error flash or something
   });
+}
 
+function saveAccoutrements( currentNode ) {
+  // TODO
+  //saveTreelink();
+
+  //savePaintball();
+
+  //savePossibleItem();
+
+  if( boxes[currentNode['tree_index']] ) {
+    saveBox(true, currentNode['id'], $('#box-select').val());
+  }
+}
+
+function saveBox(setEnabled, nodeId, itemsetId) {
+
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      format: 'json',
+      url: '/woods/boxes/upsert.json',
+      data: {
+        woods_box: {
+          node_id: nodeId,
+          enabled: setEnabled,
+          itemset_id: itemsetId
+        }
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log("Saved the box!");
+    updateBoxLocally(data);
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured saving box: " + textStatus);
+    // TODO pop an error flash or something
+  });
 }
 
 function updateNodeLocally(callback_data) {
@@ -60,6 +100,13 @@ function updateNodeLocally(callback_data) {
   nodes[ nodes_array_index ]['node_text'] = callback_data['node_text'];
   nodes[ nodes_array_index ]['name'] = callback_data['name'];
   nodes[ nodes_array_index ]['moverule_id'] = callback_data['moverule_id'];
+}
+
+function updateBoxLocally(callback_data) {
+  var theTreeIndex = callback_data['tree_index'];
+
+  boxes[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
+  boxes[ theTreeIndex ]['enabled']    = callback_data['enabled'];
 }
 
 function refreshEverything() {
@@ -308,9 +355,7 @@ function colourThePalettePanel() {
     }
     currentPalette = palettes[ paintballs[lookingAt]['palette_id'] ];
   } else {
-    if(paintballs[cursor]) {
-      currentPalette = palettes[ paintballs[cursor]['palette_id'] ];
-    }
+    currentPalette = palettes[ $('#paintball-select').val() ];
   }
 
   if(currentPalette) {

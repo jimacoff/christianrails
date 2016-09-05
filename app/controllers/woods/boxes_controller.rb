@@ -1,40 +1,28 @@
 class Woods::BoxesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_box, only: [:update]
-
-  def create
-    @box = Woods::Box.new(woods_box_params)
+  def upsert
+    begin
+      @box = Woods::Box.where(node_id: woods_box_params[:node_id]).first
+      @box.update(woods_box_params)
+    rescue
+      @box = Woods::Box.new(woods_box_params)
+    end
 
     respond_to do |format|
       if @box.save
-        format.html { redirect_to @box, notice: 'Box was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @box }
+        tree_index = Woods::Node.find(@box.node_id).tree_index
+        json_box = @box.as_json
+        json_box[:tree_index] = tree_index
+        format.json { render json: json_box, status: :ok }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @box.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @box.update(woods_box_params)
-        format.html { redirect_to @box, notice: 'Box was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @box.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
-    def set_woods_box
-      @box = Woods::Box.find(params[:id])
-    end
-
     def woods_box_params
-      params[:woods_box]
+      params.require(:woods_box).permit(:itemset_id, :enabled, :node_id)
     end
 end

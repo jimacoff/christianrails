@@ -20,7 +20,7 @@
     %input#palette-checkbox{type: 'checkbox', onclick: "paletteCheck();"} Inherit palette from parent
     #palette-chooser
       %label Palette:
-      %select#paintball-select{onchange: "touchNode();"}
+      %select#paintball-select{onchange: "paletteCheck();"}
         - @palettes.each do |k, v|
           %option.paintball-option{ value: k }= v[:name]
 

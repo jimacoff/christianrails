@@ -90,6 +90,14 @@ Christianrails::Application.routes.draw do
         end
       end
     end
+
+    [:treelinks, :paintballs, :possibleitems, :boxes].each do |accoutrement|
+      resources accoutrement, only: [] do
+        collection do
+          post 'upsert'
+        end
+      end
+    end
   end
 
   resources :newsletter_signups, only: [:index, :create]
