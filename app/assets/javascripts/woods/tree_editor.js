@@ -53,10 +53,15 @@ function saveCurrentNode(currentNodeId) {
 }
 
 function saveAccoutrements( currentNode ) {
-  // TODO
-  //saveTreelink();
+  if( $('#treelink-box').css('display') !== "none" ) {
+    isEnabled = $('#treelink-checkbox').prop('checked');
+    saveTreelink(isEnabled, currentNode['id'], $('#treelink-select').val());
+  }
 
-  //savePaintball();
+  if( $('#paintball-box').css('display') !== "none" ) {
+    isEnabled = !$('#palette-checkbox').prop('checked');
+    savePaintball(isEnabled, currentNode['id'], $('#paintball-select').val());
+  }
 
   if( possibleitems[currentNode['tree_index']] ) {
     savePossibleitem(true, currentNode['id'], $('#possibleitem-select').val());
@@ -67,6 +72,59 @@ function saveAccoutrements( currentNode ) {
   }
 }
 
+function saveTreelink(setEnabled, nodeId, storytreeId) {
+
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      format: 'json',
+      url: '/woods/treelinks/upsert.json',
+      data: {
+        woods_treelink: {
+          node_id: nodeId,
+          enabled: setEnabled,
+          linked_tree_id: storytreeId
+        }
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log("Saved the treelink!");
+    updateTreelinkLocally(data);
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured saving treelink: " + textStatus);
+    // TODO pop an error flash or something
+  });
+}
+
+function savePaintball(setEnabled, nodeId, paletteId) {
+
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      format: 'json',
+      url: '/woods/paintballs/upsert.json',
+      data: {
+        woods_paintball: {
+          node_id: nodeId,
+          enabled: setEnabled,
+          palette_id: paletteId
+        }
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log("Saved the paintball!");
+    updatePaintballLocally(data);
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured saving paintball: " + textStatus);
+    // TODO pop an error flash or something
+  });
+}
 function savePossibleitem(setEnabled, nodeId, itemsetId) {
 
   request = void 0;
@@ -130,6 +188,20 @@ function updateNodeLocally(callback_data) {
   nodes[ nodes_array_index ]['moverule_id'] = callback_data['moverule_id'];
 }
 
+function updateTreelinkLocally(callback_data) {
+  var theTreeIndex = callback_data['tree_index'];
+
+  treelinks[ theTreeIndex ]['linked_tree_id'] = callback_data['linked_tree_id'];
+  treelinks[ theTreeIndex ]['enabled']      = callback_data['enabled'];
+}
+
+function updatePaintballLocally(callback_data) {
+  var theTreeIndex = callback_data['tree_index'];
+
+  paintballs[ theTreeIndex ]['palette_id'] = callback_data['palette_id'];
+  paintballs[ theTreeIndex ]['enabled']    = callback_data['enabled'];
+}
+
 function updateBoxLocally(callback_data) {
   var theTreeIndex = callback_data['tree_index'];
 
@@ -178,7 +250,7 @@ function refreshNodeEditor() {
     $('#moverule-box').hide();
   }
 
-  if( paintballs[cursor] ) {
+  if( paintballs[cursor] && paintballs[cursor]['enabled'] ) {
     $('#paintball-select').val( paintballs[cursor]['palette_id'] )
     $('#palette-checkbox').prop('checked', false)
     $('#palette-chooser').show();
@@ -190,8 +262,8 @@ function refreshNodeEditor() {
   if( isBottomLevel() ) {
     $('#treelink-box').show();
 
-    if( treelinks[currentNode['tree_index']] ) {
-      $('#treelink-select').val( treelinks[ currentNode['tree_index'] ]['linked_tree']['id'] )
+    if( treelinks[cursor] && treelinks[cursor]['enabled'] ) {
+      $('#treelink-select').val( treelinks[ cursor ]['linked_tree_id'] )
       $('#treelink-checkbox').prop('checked', true)
       $('#storytree-chooser').show();
     } else {
@@ -385,7 +457,7 @@ function colourThePalettePanel() {
   if( $('#palette-checkbox').prop('checked') ) {
     // inherit from parent
     var lookingAt = Math.floor(cursor / 2);
-    while( !paintballs[lookingAt] && lookingAt !== 1 ) {
+    while( !paintballs[lookingAt] && lookingAt > 1 ) {
       lookingAt = Math.floor(lookingAt / 2);
     }
     currentPalette = palettes[ paintballs[lookingAt]['palette_id'] ];

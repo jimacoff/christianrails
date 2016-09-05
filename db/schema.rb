@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901012327) do
+ActiveRecord::Schema.define(version: 20160905184828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -368,8 +368,8 @@ ActiveRecord::Schema.define(version: 20160901012327) do
 
   create_table "woods_treelinks", force: :cascade do |t|
     t.integer  "node_id"
-    t.boolean  "enabled",     default: true
-    t.integer  "linked_tree"
+    t.boolean  "enabled",        default: true
+    t.integer  "linked_tree_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

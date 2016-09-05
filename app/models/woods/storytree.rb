@@ -6,7 +6,7 @@ class Woods::Storytree < ActiveRecord::Base
   has_many :paintballs, through: :nodes
   has_many :possibleitems, through: :nodes
 
-  has_many :treelinks, foreign_key: "linked_tree"
+  has_many :treelinks, foreign_key: "linked_tree_id"
 
   has_many :footprints
 

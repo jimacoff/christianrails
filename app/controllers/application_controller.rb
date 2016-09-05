@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   before_action :verify_is_admin unless :devise_controller?
 
-  before_filter :get_products, :get_cart
+  before_action :get_products, :get_cart
 
-  after_filter :store_location
+  after_action :store_location
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

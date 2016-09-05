@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :treelink, :class => 'Woods::Treelink' do
+  factory :treelink, class: 'Woods::Treelink' do
     node
     association :linked_tree, factory: :storytree
 

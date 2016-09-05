@@ -1,40 +1,30 @@
 class Woods::PaintballsController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_paintball, only: [:update]
+  # TODO if ever non-admin-facing, verify user can do such a thing
 
-  def create
-    @paintball = Woods::Paintball.new(woods_paintball_params)
+  def upsert
+    begin
+      @paintball = Woods::Paintball.where(node_id: woods_paintball_params[:node_id]).first
+      @paintball.update(woods_paintball_params)
+    rescue
+      @paintball = Woods::Paintball.new(woods_paintball_params)
+    end
 
     respond_to do |format|
       if @paintball.save
-        format.html { redirect_to @paintball, notice: 'Paintball was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @paintball }
+        tree_index = Woods::Node.find(@paintball.node_id).tree_index
+        json_paintball = @paintball.as_json
+        json_paintball[:tree_index] = tree_index
+        format.json { render json: json_paintball, status: :ok }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @paintball.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @paintball.update(woods_paintball_params)
-        format.html { redirect_to @paintball, notice: 'Paintball was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @paintball.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
-    def set_woods_paintball
-      @paintball = Woods::Paintball.find(params[:id])
-    end
-
     def woods_paintball_params
-      params[:woods_paintball]
+      params.require(:woods_paintball).permit(:palette_id, :enabled, :node_id)
     end
 end
