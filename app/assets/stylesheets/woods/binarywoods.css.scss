@@ -228,7 +228,7 @@ a {
   margin-top: 10px;
 }
 
-#primary-controls, #alt-tree-controls {
+#primary-controls, #alt-tree-controls, #error-console-wrapper {
   text-align: center;
   width: 160px;
   display: inline-block;
@@ -269,6 +269,11 @@ a {
 
 .spacer {
   margin: 0 30px;
+}
+
+#left-parent-spacer, #right-parent-spacer {
+  display: none;
+  margin: 0 100px;
 }
 
 .map-cell-text {

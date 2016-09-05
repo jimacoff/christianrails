@@ -16,6 +16,8 @@
       - Woods::Node::MOVERULES.each do |moverule|
         %option.moverule-option{ value: moverule[0] }= moverule[1]
 
+  // accoutrements
+
   #paintball-box
     %input#palette-checkbox{type: 'checkbox', onclick: "paletteCheck();"} Inherit palette from parent
     #palette-chooser
@@ -28,18 +30,18 @@
     %input#treelink-checkbox{type: 'checkbox', onclick: "treelinkCheck();"} Link to another tree
     #storytree-chooser
       %label Storytree:
-      %select#treelink-select{onchange: "touchNode();"}
+      %select#treelink-select{onchange: "touchTreelink();"}
         - @storytrees.each do |k, v|
           %option.treelink-option{ value: k }= v[:name]
 
   #possibleitem-box
     %label Itemset:
-    %select#possibleitem-select{onchange: "touchNode();"}
+    %select#possibleitem-select{onchange: "touchPossibleitem();"}
       - @itemsets.each do |k, v|
         %option.possibleitem-option{ value: k }= v[:name]
 
   #box-box
     %label Keyset:
-    %select#box-select{onchange: "touchNode();"}
+    %select#box-select{onchange: "touchBox();"}
       - @itemsets.each do |k, v|
         %option.possibleitem-option{ value: k }= v[:name]

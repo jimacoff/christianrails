@@ -2,17 +2,65 @@ function moveToNewNode(destinationId) {
   currentNode = nodes[cursor - 1];
   cursor = destinationId;
 
-  if( nodeModified ) {
-    saveCurrentNode( currentNode['id'] );
-    saveAccoutrements( currentNode );
+  if( anythingStillModified() ) {
+
+    if( nodeModified ) {
+      saveCurrentNode( currentNode['id'] );
+    }
+    if( treelinkModified || paintballModified || possibleitemModified || boxModified ) {
+      saveAccoutrements( currentNode );
+    }
   } else {
-    refreshEverything();
+    refreshAllPanels();
   }
 }
 
 function touchNode() {
   console.log('touched!');
   nodeModified = true;
+}
+
+function touchTreelink() {
+  console.log('treelink touched!');
+  treelinkModified = true;
+}
+
+function touchPaintball() {
+  console.log('paintball touched!');
+  paintballModified = true;
+}
+
+function touchPossibleitem() {
+  console.log('possibleitem touched!');
+  possibleitemModified = true;
+}
+
+function touchBox() {
+  console.log('box touched!');
+  boxModified = true;
+}
+
+function anythingStillModified() {
+  return nodeModified || treelinkModified || paintballModified || possibleitemModified || boxModified;
+}
+
+function paletteCheck() {
+  touchPaintball();
+  colourThePalettePanel();
+  if( $('#palette-checkbox').prop('checked') ) {
+    $('#palette-chooser').hide();
+  } else {
+    $('#palette-chooser').show();
+  }
+}
+
+function treelinkCheck() {
+  touchTreelink();
+  if( $('#treelink-checkbox').prop('checked') ) {
+    $('#storytree-chooser').show();
+  } else {
+    $('#storytree-chooser').hide();
+  }
 }
 
 function saveCurrentNode(currentNodeId) {
@@ -40,34 +88,41 @@ function saveCurrentNode(currentNodeId) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log("Saved the node!");
-
+    printSaveSuccess('node');
     updateNodeLocally(data);
-    refreshEverything();
+    if( !anythingStillModified() ) { refreshAllPanels(); }
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log("Error occured: " + textStatus);
-    // TODO pop an error flash or something
+    printError(textStatus);
   });
 }
 
+function printSaveSuccess(obj) {
+  $('#error-console').append('Saved ' + obj + '.\n');
+}
+
+function printError(err) {
+  $('#error-console').append('ERROR SAVING NODE!\n');
+}
+
 function saveAccoutrements( currentNode ) {
-  if( $('#treelink-box').css('display') !== "none" ) {
-    isEnabled = $('#treelink-checkbox').prop('checked');
-    saveTreelink(isEnabled, currentNode['id'], $('#treelink-select').val());
+  if( treelinkModified ) {
+    treelinkEnabled = $('#treelink-checkbox').prop('checked');
+    saveTreelink(treelinkEnabled, currentNode['id'], $('#treelink-select').val());
   }
 
-  if( $('#paintball-box').css('display') !== "none" ) {
-    isEnabled = !$('#palette-checkbox').prop('checked');
-    savePaintball(isEnabled, currentNode['id'], $('#paintball-select').val());
+  if( paintballModified ) {
+    paintballEnabled = !$('#palette-checkbox').prop('checked');
+    savePaintball(paintballEnabled, currentNode['id'], $('#paintball-select').val());
   }
 
-  if( possibleitems[currentNode['tree_index']] ) {
+  if( possibleitemModified ) {
     savePossibleitem(true, currentNode['id'], $('#possibleitem-select').val());
   }
 
-  if( boxes[currentNode['tree_index']] ) {
+  if( boxModified ) {
     saveBox(true, currentNode['id'], $('#box-select').val());
   }
 }
@@ -89,13 +144,14 @@ function saveTreelink(setEnabled, nodeId, storytreeId) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log("Saved the treelink!");
+    printSaveSuccess('treelink');
     updateTreelinkLocally(data);
+    if( !anythingStillModified() ) { refreshAllPanels(); }
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log("Error occured saving treelink: " + textStatus);
-    // TODO pop an error flash or something
+    printError(textStatus);
   });
 }
 
@@ -116,13 +172,14 @@ function savePaintball(setEnabled, nodeId, paletteId) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log("Saved the paintball!");
+    printSaveSuccess('paintball');
     updatePaintballLocally(data);
+    if( !anythingStillModified() ) { refreshAllPanels(); }
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log("Error occured saving paintball: " + textStatus);
-    // TODO pop an error flash or something
+    printError(textStatus);
   });
 }
 function savePossibleitem(setEnabled, nodeId, itemsetId) {
@@ -142,13 +199,14 @@ function savePossibleitem(setEnabled, nodeId, itemsetId) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log("Saved the possibleitem!");
+    printSaveSuccess('possibleitem');
     updatePossibleitemLocally(data);
+    if( !anythingStillModified() ) { refreshAllPanels(); }
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log("Error occured saving possibleitem: " + textStatus);
-    // TODO pop an error flash or something
+    printError(textStatus);
   });
 }
 function saveBox(setEnabled, nodeId, itemsetId) {
@@ -168,15 +226,18 @@ function saveBox(setEnabled, nodeId, itemsetId) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log("Saved the box!");
+    printSaveSuccess('box');
     updateBoxLocally(data);
+    if( !anythingStillModified() ) { refreshAllPanels(); }
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log("Error occured saving box: " + textStatus);
-    // TODO pop an error flash or something
+    printError(textStatus);
   });
 }
+
+/// Local updates
 
 function updateNodeLocally(callback_data) {
   var nodes_array_index = callback_data['tree_index'] - 1;
@@ -186,13 +247,15 @@ function updateNodeLocally(callback_data) {
   nodes[ nodes_array_index ]['node_text'] = callback_data['node_text'];
   nodes[ nodes_array_index ]['name'] = callback_data['name'];
   nodes[ nodes_array_index ]['moverule_id'] = callback_data['moverule_id'];
+  nodeModified = false;
 }
 
 function updateTreelinkLocally(callback_data) {
   var theTreeIndex = callback_data['tree_index'];
 
   treelinks[ theTreeIndex ]['linked_tree_id'] = callback_data['linked_tree_id'];
-  treelinks[ theTreeIndex ]['enabled']      = callback_data['enabled'];
+  treelinks[ theTreeIndex ]['enabled']        = callback_data['enabled'];
+  treelinkModified = false;
 }
 
 function updatePaintballLocally(callback_data) {
@@ -200,6 +263,7 @@ function updatePaintballLocally(callback_data) {
 
   paintballs[ theTreeIndex ]['palette_id'] = callback_data['palette_id'];
   paintballs[ theTreeIndex ]['enabled']    = callback_data['enabled'];
+  paintballModified = false;
 }
 
 function updateBoxLocally(callback_data) {
@@ -207,6 +271,7 @@ function updateBoxLocally(callback_data) {
 
   boxes[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
   boxes[ theTreeIndex ]['enabled']    = callback_data['enabled'];
+  boxModified = false;
 }
 
 function updatePossibleitemLocally(callback_data) {
@@ -214,11 +279,12 @@ function updatePossibleitemLocally(callback_data) {
 
   possibleitems[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
   possibleitems[ theTreeIndex ]['enabled']    = callback_data['enabled'];
+  possibleitemModified = false;
 }
 
-function refreshEverything() {
-  nodeModified = false;
+////////////
 
+function refreshAllPanels() {
   refreshNodeEditor();
   updateControls();
   updateMap();
@@ -299,33 +365,6 @@ function refreshNodeEditor() {
   colourThePalettePanel();
 }
 
-function paletteCheck() {
-  touchNode();
-  colourThePalettePanel();
-  if( $('#palette-checkbox').prop('checked') ) {
-    $('#palette-chooser').hide();
-  } else {
-    $('#palette-chooser').show();
-  }
-}
-
-function treelinkCheck() {
-  touchNode();
-  if( $('#treelink-checkbox').prop('checked') ) {
-    $('#storytree-chooser').show();
-  } else {
-    $('#storytree-chooser').hide();
-  }
-}
-
-function isPenultimateLevel() {
-  return (cursor * 4 > nodes.length) && !isBottomLevel();
-}
-
-function isBottomLevel() {
-  return (cursor * 2 > nodes.length);
-}
-
 function updateControls() {
   $('#parent-button').prop('disabled', !canMoveToParent() );
   $('#left-button').prop('disabled', !canMoveLeft() );
@@ -339,9 +378,20 @@ function updateMap() {
     $('#parent-cell').html( nodes[Math.floor(cursor / 2) - 1]['name'] );
     $('#left-of-current-cell').html( nodes[cursor - 2]['name'] );
 
+    if( isEvenNode() ){
+      $('#left-parent-spacer').show();
+      $('#right-parent-spacer').hide();
+    } else {
+      $('#left-parent-spacer').hide();
+      $('#right-parent-spacer').show();
+    }
+
   } else {
     $('#parent-cell').html('---');
     $('#left-of-current-cell').html('---');
+
+    $('#left-parent-spacer').hide();
+    $('#right-parent-spacer').hide();
   }
 
   if(cursor < nodes.length) {
@@ -444,12 +494,30 @@ function canSlideRight() {
 }
 
 function revertChanges() {
-  refreshEverything();
-  nodeModified = false;
+  refreshAllPanels();
+  setWholeNodeAsUnmodified();
 }
 
 function moveToTop() {
   moveToNewNode(1);
+}
+
+function setWholeNodeAsUnmodified() {
+  nodeModified = false;
+  treelinkModified = false;
+  paintballModified = false;
+  possibleitemModified = false;
+  boxModified = false;
+}
+
+// colouring
+
+function isPenultimateLevel() {
+  return (cursor * 4 > nodes.length) && !isBottomLevel();
+}
+
+function isBottomLevel() {
+  return (cursor * 2 > nodes.length);
 }
 
 function colourThePalettePanel() {

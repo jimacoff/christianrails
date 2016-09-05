@@ -12,7 +12,12 @@
   var nodes = #{@nodes.to_json};
   var max_node_index = nodes.length;
   var cursor = 1;
+
   var nodeModified = false;
+  var paintballModified = false;
+  var treelinkModified = false;
+  var possibleitemModified = false;
+  var boxModified = false;
 
   var storyId = #{ @story.id };
   var storytreeId = #{ @storytree.id };
