@@ -15,6 +15,19 @@ function moveToNewNode(destinationId) {
   }
 }
 
+function saveNodeNow() {
+  currentNode = nodes[cursor - 1];
+
+  if( anythingStillModified() ) {
+    if( nodeModified ) {
+      saveCurrentNode( currentNode['id'] );
+    }
+    if( treelinkModified || paintballModified || possibleitemModified || boxModified ) {
+      saveAccoutrements( currentNode );
+    }
+  }
+}
+
 function touchNode() {
   console.log('touched!');
   nodeModified = true;

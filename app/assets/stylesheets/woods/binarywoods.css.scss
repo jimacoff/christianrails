@@ -166,6 +166,12 @@ a {
   padding-bottom: 20px;
 }
 
+#story-pane {
+  p {
+    white-space: pre-line;
+  }
+}
+
 #storyinfopanel {
   margin-top: 20px;
   border: 1px solid $black;

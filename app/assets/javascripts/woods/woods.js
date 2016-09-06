@@ -47,7 +47,7 @@ function move(story_id, button) {
 
 function drawNewNode() {
 
-  $('#story-pane').html( current_node['node_text'] );
+  $('#story-pane').html( '<p>' + current_node['node_text'] + '</p>' );
   $('#left-button').html( current_node['left_text'] );
   $('#right-button').html( current_node['right_text'] );
 

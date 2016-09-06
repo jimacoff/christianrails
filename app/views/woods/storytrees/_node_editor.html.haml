@@ -3,12 +3,12 @@
   %br
 
   %label#node-index-label
-  %input#node-name-box.woods-text.savetrigger{type: 'textbox', size: 30, onchange: "touchNode();"}
+  %input#node-name-box.woods-text.savetrigger{type: 'textbox', size: 30, onkeyup: "touchNode();"}
 
-  %textarea#node-content-box.no-resize.woods-text.savetrigger{rows: 20, cols: 45, onchange: "touchNode();"}
+  %textarea#node-content-box.no-resize.woods-text.savetrigger{rows: 20, cols: 45, onkeyup: "touchNode();"}
 
-  %input#left-text-box.woods-text.savetrigger{type: 'textbox', size: 22, onchange: "touchNode();"}
-  %input#right-text-box.woods-text.savetrigger{type: 'textbox', size: 22, onchange: "touchNode();"}
+  %input#left-text-box.woods-text.savetrigger{type: 'textbox', size: 22, onkeyup: "touchNode();"}
+  %input#right-text-box.woods-text.savetrigger{type: 'textbox', size: 22, onkeyup: "touchNode();"}
 
   #moverule-box
     %label Move rule:

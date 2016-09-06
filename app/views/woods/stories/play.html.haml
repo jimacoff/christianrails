@@ -11,7 +11,7 @@
 
 #nodepanel.zero-margin.noselect
   #story-pane.pane.glass
-    = @node['node_text']
+    %p= @node['node_text'].gsub("\n",'')
   #choice-pane.pane.center
     %button#left-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'L');"}
       = @node['left_text']
@@ -39,3 +39,4 @@
   var storyname = '#{@story.pic_name}';
 
   scrollToAnchor();
+
