@@ -119,7 +119,8 @@ function saveAccoutrements( currentNode ) {
   }
 
   if( possibleitemModified ) {
-    savePossibleitem(true, currentNode['id'], $('#possibleitem-select').val());
+    possibleitemPerpetual = nodes[ Math.floor(currentNode['tree_index'] / 2) ]['moverule_id'] === 3;
+    savePossibleitem(true, currentNode['id'], $('#possibleitem-select').val(), possibleitemPerpetual);
   }
 
   if( boxModified ) {
@@ -182,7 +183,7 @@ function savePaintball(setEnabled, nodeId, paletteId) {
     printError(textStatus);
   });
 }
-function savePossibleitem(setEnabled, nodeId, itemsetId) {
+function savePossibleitem(setEnabled, nodeId, itemsetId, possibleitemPerpetual) {
 
   request = void 0;
   request = $.ajax({
@@ -191,6 +192,7 @@ function savePossibleitem(setEnabled, nodeId, itemsetId) {
       url: '/woods/possibleitems/upsert.json',
       data: {
         woods_possibleitem: {
+          perpetual: possibleitemPerpetual;
           node_id: nodeId,
           enabled: setEnabled,
           itemset_id: itemsetId
@@ -466,7 +468,11 @@ function isNodeWithAnItem() {
 }
 
 function parentNodeMoverule() {
-  return nodes[ Math.floor(cursor / 2) - 1 ]['moverule_id'];
+  if( cursor > 1 ) {
+    return nodes[ Math.floor(cursor / 2) - 1 ]['moverule_id'];
+  } else {
+    return -1;
+  }
 }
 
 function isEvenNode() {
@@ -521,14 +527,19 @@ function isBottomLevel() {
 }
 
 function colourThePalettePanel() {
+  var currentPalette;
 
   if( $('#palette-checkbox').prop('checked') ) {
     // inherit from parent
-    var lookingAt = Math.floor(cursor / 2);
-    while( !paintballs[lookingAt] && lookingAt > 1 ) {
-      lookingAt = Math.floor(lookingAt / 2);
+    if(cursor > 1) {
+      var lookingAt = Math.floor(cursor / 2);
+      while( !paintballs[lookingAt] && lookingAt > 1 ) {
+        lookingAt = Math.floor(lookingAt / 2);
+      }
+      if( paintballs[lookingAt] ) {
+        currentPalette = palettes[ paintballs[lookingAt]['palette_id'] ];
+      }
     }
-    currentPalette = palettes[ paintballs[lookingAt]['palette_id'] ];
   } else {
     currentPalette = palettes[ $('#paintball-select').val() ];
   }

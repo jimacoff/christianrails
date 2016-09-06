@@ -25,6 +25,6 @@ class Woods::PossibleitemsController < ApplicationController
 
   private
     def woods_possibleitem_params
-      params.require(:woods_possibleitem).permit(:itemset_id, :enabled, :node_id)
+      params.require(:woods_possibleitem).permit(:itemset_id, :enabled, :node_id, :perpetual)
     end
 end
