@@ -103,15 +103,18 @@ a {
 }
 
 .woods-table {
+  border-spacing: 0;
+  border: 3px solid $black;
   width: 30%;
   padding: 0;
+  tr { padding: 0; }
   tr:nth-child(odd)  { background-color: $smoke-gray; }
   tr:nth-child(even) { background-color: $alt-smoke-gray; }
   th { background-color: $white;
-       padding: 0; }
-  td { padding: 0;
-       border: 0; }
-  border-radius: 3px;
+       padding: 5px; }
+  td { padding: 5px;
+       margin: 0; }
+  border-radius: 5px;
 }
 
 .item-selectbox {

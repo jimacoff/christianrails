@@ -15,7 +15,7 @@
           = text_area_tag :legend, nil, { rows: 10, cols: 40 }
           %br
           %span Value:
-          = number_field_tag :value, step: 1, min: -50, max: 150
+          = number_field_tag :value, nil, { step: 1, min: -50, max: 150 }
 
           %br
           = submit_tag :Update

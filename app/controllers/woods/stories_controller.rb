@@ -1,9 +1,9 @@
 class Woods::StoriesController < ApplicationController
   layout "binarywoods"
 
-  before_action :set_woods_story, only: [:show, :play, :move_to, :manage]
+  before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export]
 
-  before_action :verify_is_published, except: [:index, :show, :manage]
+  before_action :verify_is_published, except: [:index, :show, :manage, :export]
   skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
 
   def index
@@ -18,6 +18,16 @@ class Woods::StoriesController < ApplicationController
     @storytrees = @story.storytrees
     @lefts = @story.left_count
     @rights = @story.right_count
+  end
+
+  def export
+    @storytrees = @story.storytrees
+    @nodes = []
+    @storytrees.each do |storytree|
+      storytree.nodes.each do |node|
+        @nodes << node
+      end
+    end
   end
 
   def play

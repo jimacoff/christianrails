@@ -15,6 +15,9 @@
       = link_to "Items", woods_story_itemsets_path(@story)
       |
       = link_to "Palettes", woods_story_palettes_path(@story)
+
+      %br
+      = link_to "Export story as JSON", export_woods_story_path(@story)
     %td
       #story-stats-div
         %h2 Stats

@@ -77,6 +77,7 @@ Christianrails::Application.routes.draw do
         get 'play'
         get 'move_to'
         get 'manage'
+        get 'export'
       end
 
       resources :storytrees, only: [:show] do
@@ -164,6 +165,8 @@ Christianrails::Application.routes.draw do
 
   end
   get '/crm', to: 'crm/assistants#index'
+
+  get '/go',  to: 'go#index'
 
   resources :graveyard, only: [] do
     collection do

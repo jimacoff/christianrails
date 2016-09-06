@@ -1,0 +1,43 @@
+%h1 Story Exporter
+
+%h3 Story
+%p#story-data= @story.as_json
+
+%h3 Storytrees
+%p#storytree-data= @storytrees.as_json
+
+%h3 Itemsets
+%p#itemset-data=@story.itemsets.as_json
+
+%h3 Items
+%p#item-data
+  - @story.itemsets.each do |itemset|
+    = itemset.items.as_json
+
+%h3 Nodes
+%p#node-data
+  - @nodes.each do |node|
+    = node.as_json
+
+%h3 Possibleitems
+%p#possibleitem-data
+  - @nodes.each do |node|
+    = node.possibleitem.as_json
+
+%h3 Treelinks
+%p#treelink-data
+  - @nodes.each do |node|
+    = node.treelink.as_json
+
+%h3 Paintballs
+%p#paintball-data
+  - @nodes.each do |node|
+    = node.paintball.as_json
+
+%h3 Boxes
+%p#box-data
+  - @nodes.each do |node|
+    = node.box.as_json
+
+%h3 Palettes
+%p#palette-data= Woods::Palette.all.as_json
