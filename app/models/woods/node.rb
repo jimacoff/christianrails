@@ -7,7 +7,7 @@ class Woods::Node < ActiveRecord::Base
   has_one :possibleitem,  dependent: :destroy
   has_one :treelink,      dependent: :destroy
 
-  validates_presence_of :name, :storytree, :tree_index
+  validates_presence_of :storytree, :tree_index
 
   MOVERULE_TOGGLER = 1
   MOVERULE_LR_SWITCH = 2

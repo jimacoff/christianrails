@@ -192,7 +192,7 @@ function savePossibleitem(setEnabled, nodeId, itemsetId, possibleitemPerpetual) 
       url: '/woods/possibleitems/upsert.json',
       data: {
         woods_possibleitem: {
-          perpetual: possibleitemPerpetual;
+          perpetual: possibleitemPerpetual,
           node_id: nodeId,
           enabled: setEnabled,
           itemset_id: itemsetId
@@ -373,6 +373,8 @@ function updateControls() {
   $('#right-button').prop('disabled', !canMoveRight() );
   $('#slide-left-button').prop('disabled', !canSlideLeft() );
   $('#slide-right-button').prop('disabled', !canSlideRight() );
+
+  countFilledNodes();
 }
 
 function updateMap() {
@@ -516,7 +518,15 @@ function setWholeNodeAsUnmodified() {
   boxModified = false;
 }
 
-// colouring
+function countFilledNodes() {
+  filled = 0;
+  for (var i = 0; i < nodes.length; i++) {
+    if( nodes[i]['name'] !== '' ) {
+      filled += 1;
+    }
+  }
+  $('#filled-nodes-counter').html( filled + '/' + nodes.length + ' filled');
+}
 
 function isPenultimateLevel() {
   return (cursor * 4 > nodes.length) && !isBottomLevel();
@@ -525,6 +535,8 @@ function isPenultimateLevel() {
 function isBottomLevel() {
   return (cursor * 2 > nodes.length);
 }
+
+// colouring
 
 function colourThePalettePanel() {
   var currentPalette;

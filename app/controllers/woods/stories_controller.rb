@@ -2,8 +2,8 @@ class Woods::StoriesController < ApplicationController
   layout "binarywoods"
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage]
-  before_action :verify_is_published, except: [:index, :show]
 
+  before_action :verify_is_published, except: [:index, :show, :manage]
   skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
 
   def index

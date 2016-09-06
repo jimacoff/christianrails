@@ -25,7 +25,7 @@ class Woods::StorytreesController < ApplicationController
     end
 
     # resources
-    @story.palettes.each do |palette|
+    Woods::Palette.all.each do |palette|
       @palettes[palette.id] = palette
     end
     @story.storytrees.each do |storytree|
