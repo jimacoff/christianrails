@@ -1,3 +1,4 @@
+#woods-anchor
 #statspanel.zero-margin.center
   %span#score-span= "Score: #{current_player.total_score}"
   %span
@@ -27,6 +28,8 @@
   #item-continue.pane.center
     %button#item-continue-button.binary-button{onclick: "hideItemViewer();"} Keep playing!
 
+#woods-spacer
+
 :javascript
   // load the intro node into the JS + set up item gallery
   var current_node = #{@node.to_json};
@@ -34,3 +37,5 @@
   var item_index = 0;
   var pop_item = false;
   var storyname = '#{@story.pic_name}';
+
+  scrollToAnchor();

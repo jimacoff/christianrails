@@ -65,6 +65,7 @@ function drawNewNode() {
     $('#big-button').removeClass('hidden');
   }
   $('#choice-pane').removeClass('hidden');
+  scrollToAnchor();
 }
 
 function showItemViewer() {
@@ -79,14 +80,16 @@ function showItemViewer() {
   } else {
     $('#item-controls').addClass('hidden');
   }
+  scrollToAnchor();
 }
 
 function hideItemViewer() {
+  showStoryTitle();
+  $('#nodepanel').removeClass('hidden');
   $('#go-to-store-button').addClass('hidden');
   $('#gallery-button').removeClass('hidden');
   $('#findpanel').addClass('hidden');
-  $('#nodepanel').removeClass('hidden');
-  showStoryTitle();
+  scrollToAnchor();
 }
 
 function nextItem() {
@@ -95,6 +98,7 @@ function nextItem() {
     item_index = 0;
   }
   showItem();
+  scrollToAnchor();
 }
 
 function prevItem() {
@@ -103,6 +107,11 @@ function prevItem() {
     item_index = item_gallery.length - 1;
   }
   showItem();
+  scrollToAnchor();
+}
+
+function scrollToAnchor() {
+ $("html, body").scrollTop($('#woods-anchor').offset().top);
 }
 
 function showItem() {
