@@ -11,6 +11,7 @@ Christianrails is a monolithic web application that serves as the homepage of au
 
 Release notes:
 
+- 1.2.2 - BinaryWoods story editor implemented for admins; new Go area
 - 1.2.1 - CRM v.1.1 -> auto-mailer and upgrades
 - 1.2.0 - CRM v.1 -> contacts, obligations, meetings, tasks, books + ideas
 - 1.1.4 - Newsletter signup, auto-mailers + Rough CRM

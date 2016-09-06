@@ -1,0 +1,43 @@
+!!! 5
+%html
+  %head
+    %title Christian DeWolf -- Go / Weiqi / Baduk
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "go/go",       media: "all", "data-turbolinks-track" => true
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "http://www.christiandewolf.com/go-board.jpg" }
+    %meta{ property: "og:title", content: "GO IS THE BEST GAME IN THE WORLD" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/go" }
+    %meta{ property: "og:description", content: "did you know that" }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "GO IS THE BEST GAME IN THE WORLD" }
+    %meta{ name: "twitter:description", content: "did you know that" }
+    %meta{ name: "twitter:image", content: "http://www.christiandewolf.com/go-board.jpg" }
+
+
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+  %body.background
+
+    = render "go/header"
+
+    #woods-wrapper
+      - if notice
+        %p.alert.alert-notice
+          = notice
+      - if alert
+        %p.alert.alert-danger
+          = alert
+
+      #go-content
+        = yield
+
+      = render "go/footer"
+
+    %h5.right= "v #{app_version}"

@@ -1,0 +1,46 @@
+@import '../colormind';
+
+body {
+  color: $dark-gray;
+  background: $white !important;
+}
+
+a {
+  color: $dark-purple;
+  text-decoration: none !important;
+}
+
+h1, h2, h3, h4, h5, h6, tr, th, a, li, ul {
+  font-family: CMUSerifRoman;
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+#go-content {
+  max-width: 650px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#user-wrapper {
+  background-color: $black;
+  color: $white;
+  a {
+    color: $white;
+  }
+}
+
+#go-footer-bar {
+  border: 1px $black solid;
+  max-width: 300px;
+  border-radius: 30px;
+  margin: 30px auto 0 auto;
+}
+
+.go-image {
+  border-radius: 100px;
+}
