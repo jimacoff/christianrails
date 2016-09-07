@@ -1,0 +1,21 @@
+%h2 Add New Storytree
+
+= form_for [@storytree], url: woods_story_storytrees_url(@story) do |f|
+  - if @storytree.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@storytree.errors.count, "error")} prohibited this Storytree from being saved:"
+      %ul
+        - @storytree.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name, required: true
+    %tr.field
+      %td= f.label :max_level
+      %td= f.number_field :max_level, required: true, max: 10, min: 1
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

@@ -80,7 +80,7 @@ Christianrails::Application.routes.draw do
         get 'export'
       end
 
-      resources :storytrees, only: [:show] do
+      resources :storytrees, only: [:show, :create] do
         resources :nodes, only: [:update]
       end
 

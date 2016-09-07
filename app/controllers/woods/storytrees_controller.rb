@@ -39,23 +39,12 @@ class Woods::StorytreesController < ApplicationController
 
   def create
     @storytree = Woods::Storytree.new(woods_storytree_params)
+    @storytree.story_id = params[:story_id]
+    @storytree.save!
+    create_nodes_for_storytree
 
     respond_to do |format|
-      if @storytree.save
-        format.html { redirect_to @storytree, notice: 'Storytree was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @storytree }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @storytree.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @storytree.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_storytrees_url }
-      format.json { head :no_content }
+      format.html { redirect_to manage_woods_story_path( @story ), notice: 'Storytree was successfully created.' }
     end
   end
 
@@ -69,6 +58,26 @@ class Woods::StorytreesController < ApplicationController
     end
 
     def woods_storytree_params
-      params.require(:woods_storytree).permit(:name, :max_level)
+      params.require(:woods_storytree).permit(:name, :max_level, :story_id)
+    end
+
+    def create_nodes_for_storytree
+      n_nodes = ( 2 ** @storytree.max_level ) - 1
+      n_nodes.times do |i|
+        the_moverule = penultimate_level?( @storytree.max_level, i + 1) ? 1 : -1
+        Woods::Node.create(name: "",
+                           left_text: "",
+                           right_text: "",
+                           node_text: "",
+                           moverule_id: the_moverule,
+                           tree_index: i+1,
+                           storytree_id: @storytree.id )
+      end
+    end
+
+    def penultimate_level?(max_level, cursor)
+      top_threshold = ( 2 ** max_level ) / 2
+      bottom_threshold = top_threshold / 2
+      (cursor < top_threshold) && (cursor <= bottom_threshold)
     end
 end

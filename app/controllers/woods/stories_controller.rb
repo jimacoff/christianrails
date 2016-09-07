@@ -18,6 +18,8 @@ class Woods::StoriesController < ApplicationController
     @storytrees = @story.storytrees
     @lefts = @story.left_count
     @rights = @story.right_count
+
+    @storytree = Woods::Storytree.new
   end
 
   def export

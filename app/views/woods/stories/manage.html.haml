@@ -15,10 +15,13 @@
       = link_to "Items", woods_story_itemsets_path(@story)
       |
       = link_to "Palettes", woods_story_palettes_path(@story)
-
       %br
-      = link_to "Export story as JSON", export_woods_story_path(@story)
-    %td
+      %br
+
+
+    %td{style: "vertical-align: top;"}
+      = render "new_storytree_form"
+
       #story-stats-div
         %h2 Stats
         %table.woods-table
@@ -28,6 +31,10 @@
           %tr
             %td= @lefts
             %td= @rights
+
+      %br
+      %br
+      = link_to "Export story as JSON", export_woods_story_path(@story)
 %br
 %br
 = link_to 'Back to story', @story
