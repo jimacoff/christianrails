@@ -61,7 +61,7 @@ class Crm::AssistantsController < Crm::CrmController
       @assistant = Crm::Assistant.create( crm_assistant_params )
       current_user.assistant = @assistant
       current_user.save
-      add_ghostcrime_to_crm
+      add_initial_objects_to_crm
     else
       @assistant = nil
     end
@@ -111,12 +111,6 @@ class Crm::AssistantsController < Crm::CrmController
       params.require(:crm_assistant).permit(:name, :personality_id, :email_me_daily, :time_zone)
     end
 
-    def add_ghostcrime_to_crm
-      @book = Crm::Book.create(title: "Ghostcrime", author: "Christian DeWolf")
-      @book.assistant = @assistant
-      @book.save
-    end
-
     def send_daily_summary(assistant)
       Crm::ReminderMailer.daily_summary( assistant ).deliver_now
       create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
@@ -124,6 +118,18 @@ class Crm::AssistantsController < Crm::CrmController
 
     def create_new_mailout_record(assistant, type)
       Crm::Mailout.create(assistant_id: assistant.id, type_id: type, status_id: Crm::Mailout::STATUS_COMPLETE)
+    end
+
+    def add_initial_objects_to_crm
+      @book = Crm::Book.create(title: "Ghostcrime", author: "Christian DeWolf")
+      @book.assistant = @assistant
+      @book.save
+
+      task = Crm::Task.create(name: "Start organizing your life",
+                              due_at: DateTime.now,
+                              notes: "Yeah it's a complete mess right now" )
+      task.assistant = @assistant
+      task.save
     end
 
 end
