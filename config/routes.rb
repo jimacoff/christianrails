@@ -180,17 +180,16 @@ Christianrails::Application.routes.draw do
   get '/butler/category',      to: 'butler#category'
   get '/butler/tag',           to: 'butler#tag'
 
-  # resources :badger, only: [:index] do
-  #   collection do
-  #     get 'show_post'
-  #     get 'archives'
-  #     get 'category'
-  #     get 'tag'
-  #   end
-  # end
+  resources :badger, only: [:index] do
+    collection do
+      get 'show_post'
+      get 'archives'
+      get 'tag'
+    end
+  end
 
-  # get '/thisbadger',           to: 'badger#index'
-  # get '/badger',               to: 'badger#index'
+  get '/thisbadger',           to: 'badger#index'
+  get '/badger',               to: 'badger#index'
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')

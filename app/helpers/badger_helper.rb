@@ -5,73 +5,59 @@ module BadgerHelper
     [
       {
         title: "20160427_food_fight",
-        category: "Living with wild animals",
-        tags: ["Badger", "Budgeting", "Food", "High-end cheeses", "Worrying weight loss"]
+        tags: ["badger", "budgeting", "food", "high-end cheeses", "worrying weight loss"]
       },
       {
         title: "20160106_counter_attacks",
-        category: "Living with wild animals",
-        tags: ["Badger", "Cold", "E-commerce", "Food safety"]
+        tags: ["badger", "cold", "e-commerce", "food safety"]
       },
       {
         title: "20150428_springtime",
-        category: "Living with wild animals",
-        tags: ["Badger", "Feelings of hope and trepidation", "Spring"]
+        tags: ["badger", "feelings of hope and trepidation", "spring"]
       },
       {
         title: "20150329_badger_games",
-        category: "Living with wild animals",
-        tags: ["Badger", "De-humidifier", "Monetization", "Wholesaling", "Winter"]
+        tags: ["badger", "de-humidifier", "monetization", "wholesaling", "winter"]
       },
       {
         title: "20150226_leaks",
-        category: "Living with wild animals",
-        tags: ["Badger", "Badger-related deception", "Cold", "Halifax", "Infrastructure"]
+        tags: ["badger", "badger-related deception", "cold", "halifax", "infrastructure"]
       },
       {
         title: "20150128_snow_problem",
-        category: "Living with wild animals",
-        tags: ["Badger", "Bubble baths", "Halifax", "Misery", "Winter"]
+        tags: ["badger", "bubble baths", "halifax", "misery", "winter"]
       },
       {
         title: "20141222_housecoat",
-        category: "Living with wild animals",
-        tags: ["Badger", "Build tools", "Cold", "Housecoat", "Java", "Space heater"]
+        tags: ["badger", "build tools", "cold", "housecoat", "java", "space heater"]
       },
       {
         title: "20141126_strategies",
-        category: "Living with wild animals",
-        tags: ["Badger", "Badger-related deception", "Consequences", "Go", "Yoga"]
+        tags: ["badger", "badger-related deception", "consequences", "go", "yoga"]
       },
       {
         title: "20141119_another_november",
-        category: "Living with wild animals",
-        tags: ["Badger", "Cold", "Go", "Responsive web technologies", "Winter"]
+        tags: ["badger", "cold", "go", "responsive web technologies", "winter"]
       },
       {
         title: "20100204_blanket_statements",
-        category: "Living with wild animals",
-        tags: ["Badger", "Cold", "Consequences", "Database design"]
+        tags: ["badger", "cold", "consequences", "database design"]
       },
       {
         title: "20091127_november",
-        category: "Living with wild animals",
-        tags: ["Badger", "Cold", "Self-loathing"]
+        tags: ["badger", "cold", "self-loathing"]
       },
       {
         title: "20091123_a_knock_at_the_door",
-        category: "Living with wild animals",
-        tags: ["Badger", "Badger-related deception", "Consequences", "Surveillance"]
+        tags: ["badger", "badger-related deception", "consequences", "surveillance"]
       },
       {
         title: "20091120_badger_for_business",
-        category: "Living with wild animals",
-        tags: ["Badger", "Business", "Client-oriented", "Coffee", "Meets deadlines"]
+        tags: ["badger", "business", "client-oriented", "coffee", "meets deadlines"]
       },
       {
         title: "20091118_i_found_this_badger",
-        category: "Living with wild animals",
-        tags: ["Badger", "Pets", "Serendipity"]
+        tags: ["badger", "pets", "serendipity"]
       }
     ]
   end

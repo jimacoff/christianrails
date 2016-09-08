@@ -25,16 +25,6 @@ class BadgerController < ApplicationController
     render 'badger/show_post'
   end
 
-  def category
-    @category = badger_params[:name]
-    @category_posts = []
-    @blog_posts.each do |post|
-      @category_posts << post if post[:category] == @category
-    end
-
-    render 'badger/category'
-  end
-
   def tag
     @tag = badger_params[:name]
     @tag_posts = []

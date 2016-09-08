@@ -9,10 +9,30 @@ body {
   margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6, tr, th, a, li, ul {
+h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   font-family: CMUSerifRoman;
   font-weight: normal;
   font-style: normal;
+}
+
+.badger-post {
+  a {
+    font-weight: bold;
+    color: $pumpkin-orange;
+  }
+}
+
+.subtle {
+  color: $gray;
+}
+
+.tag-link {
+  font-size: 0.8em;
+  color: $bright-purple !important;
+}
+
+.pop {
+  color: $bright-purple;
 }
 
 #user-wrapper {
@@ -30,4 +50,106 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul {
   max-width: 300px;
   border-radius: 30px;
   margin: 30px auto 0 auto;
+}
+
+
+/////  RESPONSIVE //////
+
+// small
+@media screen and (min-width: 320px) {
+
+  #header h1 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+    line-height: 55px;
+  }
+
+  #mynameis {
+    width: 300px;
+  }
+
+  #user-wrapper {
+    display: none;
+  }
+
+  #logo-wrapper {
+    height: 95px;
+    width: 95px;
+  }
+
+  #badger-content {
+    padding: 15px;
+  }
+
+}
+
+@media screen and (min-width: 450px) {
+
+  #mynameis {
+    width: 400px;
+  }
+
+  #user-wrapper {
+    display: none;
+  }
+
+}
+
+// medium
+@media screen and (min-width: 650px) {
+
+  #header h1 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+    line-height: 55px;
+  }
+
+  #mynameis {
+    width: 400px;
+  }
+
+  #user-wrapper {
+    display: none;
+  }
+
+  #logo-wrapper {
+    height: 95px;
+    width: 95px;
+  }
+
+}
+
+@media screen and (min-width: 750px) {
+  #user-wrapper {
+    display: inline-block;
+    position: static;
+  }
+}
+
+// large
+@media screen and (min-width: 1034px) {
+
+  #header h1 {
+    font-size: 2.5em;
+    margin: 0 0 10px 0;
+    line-height: 55px;
+  }
+
+  #mynameis {
+    width: 630px;
+  }
+
+  .header-words {
+    display: inline-block;
+  }
+
+  #user-wrapper {
+    position: static;
+  }
+
+  #logo-wrapper {
+    height: 95px;
+    width: 160px;
+  }
+
 }
