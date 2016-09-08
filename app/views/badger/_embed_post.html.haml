@@ -1,0 +1,6 @@
+%br
+%br
+%br
+%p.embolden.right.grayer.datemargin= "#{date_of( locals[:post][:title] )}"
+= render "badger/posts/blog_#{ locals[:post][:title] }"
+= render "badger/post_footer", locals: { post: locals[:post] }

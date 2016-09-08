@@ -1,0 +1,33 @@
+@import '../colormind';
+
+body {
+  background-color: $white;
+}
+
+#badger-content {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6, tr, th, a, li, ul {
+  font-family: CMUSerifRoman;
+  font-weight: normal;
+  font-style: normal;
+}
+
+#user-wrapper {
+  background-color: $white;
+  color: $black;
+  a {
+    color: $black;
+  }
+  border: 1px $black solid;
+  border-radius: 20px;
+}
+
+#badger-footer-bar {
+  border: 1px $black solid;
+  max-width: 300px;
+  border-radius: 30px;
+  margin: 30px auto 0 auto;
+}

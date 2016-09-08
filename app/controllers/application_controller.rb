@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include WoodsHelper
   include CrmHelper
 
-  before_action :verify_is_admin unless :devise_controller?
+  before_action :verify_is_admin
 
   before_action :get_products, :get_cart
 

@@ -1,0 +1,42 @@
+!!! 5
+%html
+  %head
+    %title I Found This Badger
+
+    = stylesheet_link_tag "application",   media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "badger/badger",   media: "all", "data-turbolinks-track" => true
+
+    %link{rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css"}
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "http://www.christiandewolf.com/thisbadger.png" }
+    %meta{ property: "og:title", content: "I Found This Badger" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/thisbadger" }
+    %meta{ property: "og:description", content: "I found this badger and named it Jesse and these are our stories." }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "I Found This Badger" }
+    %meta{ name: "twitter:description", content: "I found this badger and named it Jesse and these are our stories." }
+    %meta{ name: "twitter:image", content: "http://www.christiandewolf.com/thisbadger.png" }
+
+    = favicon_link_tag "badger.ico"
+
+  %body.noselect
+
+    = render "badger/header"
+
+    - if notice
+      %p.alert.alert-notice
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
+
+    #badger-content
+      = yield
+
+    = render "badger/footer"

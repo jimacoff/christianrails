@@ -1,0 +1,7 @@
+#blog
+  - @sample_posts.each do |post|
+    = render 'badger/embed_post', locals: { post: post }
+    %br
+
+  .center
+    %a.page-link{href: archives_badger_index_path} Archives
