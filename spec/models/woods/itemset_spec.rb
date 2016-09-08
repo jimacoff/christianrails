@@ -36,9 +36,4 @@ RSpec.describe Woods::Itemset, type: :model do
 
   end
 
-  describe "calculate_item_found" do
-    skip( "TODO")
-
-  end
-
 end

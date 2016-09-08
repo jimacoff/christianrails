@@ -8,24 +8,8 @@ class Woods::Footprint < ActiveRecord::Base
 
   def construct_for_tree!
     self.footprint_data = 'o' * ( 2**self.storytree.max_level - 1)
-    scatter_objects_in_tree
+    scatter_objects_in_tree!
     self.save
-  end
-
-  def scatter_objects_in_tree
-    var_items = []
-    self.storytree.possibleitems.includes(:node).where(enabled: true).each do |poss_item|
-      if poss_item.perpetual
-        self.footprint_data[poss_item.node.tree_index - 1] = 'i'
-      else
-        var_items << poss_item.node.tree_index
-      end
-    end
-
-    solidified_item_tree_indexes = decide_on_var_items(var_items)
-    solidified_item_tree_indexes.each do |sol|
-      self.footprint_data[sol - 1] = 'i'
-    end
   end
 
   def step!(tree_index)
@@ -48,6 +32,24 @@ class Woods::Footprint < ActiveRecord::Base
 
   def item_at_index?(index)
     print_at_index(index) == 'i'
+  end
+
+private
+
+  def scatter_objects_in_tree!
+    var_items = []
+    self.storytree.possibleitems.includes(:node).where(enabled: true).each do |poss_item|
+      if poss_item.perpetual
+        self.footprint_data[poss_item.node.tree_index - 1] = 'i'
+      else
+        var_items << poss_item.node.tree_index
+      end
+    end
+
+    solidified_item_tree_indexes = decide_on_var_items(var_items)
+    solidified_item_tree_indexes.each do |sol|
+      self.footprint_data[sol - 1] = 'i'
+    end
   end
 
   def decide_on_var_items(var_items)

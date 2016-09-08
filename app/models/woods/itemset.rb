@@ -18,6 +18,7 @@ class Woods::Itemset < ActiveRecord::Base
         Woods::Item.find( possible_finds[ Random.rand(possible_finds.size) ] )
       rescue
         raise "Cannot find item requested!"
+        nil
       end
     end
   end

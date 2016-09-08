@@ -47,14 +47,4 @@ RSpec.describe Woods::Storytree, type: :model do
 
   end
 
-  describe "helpers" do
-
-    describe "get_first_node" do
-
-      skip("TODO write the test")
-
-    end
-
-  end
-
 end
