@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
   before_action :verify_is_admin
 
   before_action :get_products, :get_cart
-
   after_action :store_location
+
+  around_action :set_time_zone, if: :current_user
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  around_action :set_time_zone, if: :current_user
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -39,6 +39,17 @@ class ApplicationController < ActionController::Base
 
     def set_time_zone(&block)
       Time.use_zone(current_user.time_zone, &block)
+    end
+
+    def verify_is_admin
+
+      unless controller_path.start_with?('devise') || controller_path.start_with?('registrations')
+        if !current_user
+          redirect_to(root_path)
+        else
+          redirect_to(root_path) unless current_user.admin?
+        end
+      end
     end
 
 end

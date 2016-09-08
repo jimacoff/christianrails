@@ -1,4 +1,4 @@
-class ::GoController < ApplicationController
+class GoController < ApplicationController
 
   layout "go"
 

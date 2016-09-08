@@ -1,4 +1,4 @@
-class ::ButlerController < ApplicationController
+class ButlerController < ApplicationController
 
   include ButlerHelper
 
@@ -6,6 +6,8 @@ class ::ButlerController < ApplicationController
 
   before_action :set_entities
   before_action :get_all_blog_posts
+
+  skip_before_action :verify_is_admin
 
   def index
     get_sample_posts

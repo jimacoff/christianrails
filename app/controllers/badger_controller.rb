@@ -1,4 +1,4 @@
-class ::BadgerController < ApplicationController
+class BadgerController < ApplicationController
 
   include BadgerHelper
 
