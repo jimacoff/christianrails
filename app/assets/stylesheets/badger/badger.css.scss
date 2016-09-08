@@ -52,11 +52,26 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   margin: 30px auto 0 auto;
 }
 
+.bit-larger {
+  font-size: 1.25em;
+}
+
+#mobile-title {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 55px;
+  text-align: center;
+}
+
 
 /////  RESPONSIVE //////
 
 // small
 @media screen and (min-width: 320px) {
+
+  #mobile-title {
+    display: block;
+  }
 
   #header h1 {
     font-size: 2em;
@@ -65,10 +80,6 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   }
 
   #mynameis {
-    width: 300px;
-  }
-
-  #user-wrapper {
     display: none;
   }
 
@@ -86,13 +97,12 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 @media screen and (min-width: 450px) {
 
   #mynameis {
-    width: 400px;
-  }
-
-  #user-wrapper {
     display: none;
   }
 
+  #mobile-title {
+    display: block;
+  }
 }
 
 // medium
@@ -105,11 +115,11 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   }
 
   #mynameis {
-    width: 400px;
+    display: none;
   }
 
-  #user-wrapper {
-    display: none;
+  #mobile-title {
+    display: block;
   }
 
   #logo-wrapper {
@@ -120,9 +130,13 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 }
 
 @media screen and (min-width: 750px) {
-  #user-wrapper {
+  #mynameis {
     display: inline-block;
-    position: static;
+    width: 230px;
+  }
+
+  #mobile-title {
+    display: none;
   }
 }
 
@@ -136,7 +150,11 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   }
 
   #mynameis {
-    width: 630px;
+    width: 400px;
+  }
+
+  #mobile-title {
+    display: none;
   }
 
   .header-words {
