@@ -63,7 +63,7 @@ module BadgerHelper
   end
 
   def sample_badger_posts
-    all_badger_posts[0..3]
+    all_badger_posts
   end
 
 end

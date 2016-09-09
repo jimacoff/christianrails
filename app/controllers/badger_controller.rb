@@ -35,7 +35,7 @@ class BadgerController < ApplicationController
     render 'badger/tag'
   end
 
-  private
+private
 
   def badger_params
     params.permit(:post, :name)
