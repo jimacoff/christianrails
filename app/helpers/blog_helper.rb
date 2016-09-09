@@ -4,6 +4,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20160909_word_on_the_street",
+        category: "Rare Public Appearances",
+        tags: ["Word on the Street", "Halifax", "self-publishing", "Ghostcrime", "badger"]
+      },
+      {
         title: "20160816_tie_in_for_ghostcrime",
         category: "Software Development",
         tags: ["CRM", "Ghostcrime", "organization", "business", "books", "tie-ins"]
