@@ -6,8 +6,9 @@
 %ul
   - @order.purchases.each do |purchase|
     %li
-      %p= purchase.product.title
-      %p= number_to_currency( purchase.price, precision: 2 )
+      %p
+        %span= "#{purchase.product.title} : "
+        %span= number_to_currency( purchase.price, precision: 2 )
 
       - if @order.discount > 0
         %p

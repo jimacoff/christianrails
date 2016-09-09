@@ -101,6 +101,8 @@ class StoreController < ApplicationController
         end
 
         note = 'Thanks for your support! Download your new books below.'
+
+        ChristianMailer.ebook_receipt( order ).deliver_now
       else
         alert = 'Please log in. If you are having difficulties, please contact the author.'
       end
