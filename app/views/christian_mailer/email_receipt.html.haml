@@ -1,3 +1,29 @@
 %h2 Your receipt from the ChristianDeWolf.com eBook Marketplace:
 
-= render '/orders/order_info'
+%p= @order.created_at.strftime("%B %e, %Y  %I:%M %p")
+%p= @order.payment_id
+
+%ul
+  - @order.purchases.each do |purchase|
+    %li
+      %p= purchase.product.title
+      %p= number_to_currency( purchase.price, precision: 2 )
+
+      - if @order.discount > 0
+        %p
+          %span= "Discount: "
+          %span= number_to_currency( @order.discount, precision: 2 )
+
+      %p
+        %span= "Tax: "
+        %span= number_to_currency( @order.tax, precision: 2 )
+
+      %p
+        %span= "Total: "
+        %span= number_to_currency( @order.total, precision: 2)
+
+%p All prices expressed in CAD.
+
+%br
+%p Thank you for your purchase!
+%p Christian DeWolf, Wolf Butler Art & Software
