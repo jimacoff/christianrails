@@ -18,7 +18,8 @@ class AdminController < ApplicationController
     begin
       @order = current_user.orders.first # mine!
       ChristianMailer.ebook_receipt(@order).deliver_now
-    rescue
+    rescue => e
+      Rails.logger.warn(e)
       @failure = true
     end
   end
