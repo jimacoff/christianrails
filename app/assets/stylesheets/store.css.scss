@@ -280,6 +280,13 @@ th {
   margin-bottom: -20px;
 }
 
+#ghostcrm-banner {
+  margin-bottom: 15px;
+}
+
+#mynameis, #imake {
+  color: $dark-gray;
+}
 ////////// BEGIN RESPONSIVE ////////////////
 
 @media screen and (max-width: 800px) {
@@ -348,7 +355,7 @@ th {
     text-align: center;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper  {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper, #ghostcrm-banner  {
     display: inline-block;
     vertical-align: top;
     text-align: left;
