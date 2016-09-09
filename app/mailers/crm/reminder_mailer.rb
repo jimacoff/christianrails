@@ -17,7 +17,11 @@ class Crm::ReminderMailer < ActionMailer::Base
     def generate_subject_line
       # TODO more with personalities
       subjs = [
-                "Sort your day out."
+                "Sort your day out.",
+                "Get your life together.",
+                "Make today work for you.",
+                "Take control of your day.",
+                "Get it done."
               ]
       subjs[ Random.rand( subjs.size )]
     end

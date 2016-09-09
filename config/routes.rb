@@ -65,6 +65,7 @@ Christianrails::Application.routes.draw do
   resources :admin, only: [:index] do
     collection do
       get 'emailtest'
+      get 'receipttest'
       get 'crm_stats'
     end
   end

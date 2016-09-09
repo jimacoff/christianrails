@@ -6,7 +6,7 @@ module BlogHelper
       {
         title: "20160909_word_on_the_street",
         category: "Rare Public Appearances",
-        tags: ["Word on the Street", "Halifax", "self-publishing", "Ghostcrime", "badger"]
+        tags: ["Word on the Street", "Halifax", "self-publishing", "Ghostcrime", "badgers"]
       },
       {
         title: "20160816_tie_in_for_ghostcrime",

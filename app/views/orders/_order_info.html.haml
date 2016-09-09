@@ -1,0 +1,28 @@
+%p.embolden= @order.created_at.strftime("%B %e, %Y  %I:%M %p")
+%p= @order.payment_id
+
+%table.product-table.small-width
+  %tbody
+    - @order.purchases.each do |purchase|
+      %tr
+        %td= purchase.product.title
+        %td= number_to_currency( purchase.price, precision: 2 )
+
+  - if @order.discount > 0
+    %tr
+      %th= "Discount:"
+      %th.greener= number_to_currency( @order.discount, precision: 2 )
+
+  %tr
+    %th= "Tax:"
+    %th= number_to_currency( @order.tax, precision: 2 )
+
+  %tr
+    %th= "Total:"
+    %th= number_to_currency( @order.total, precision: 2)
+%p.diminutive All prices expressed in CAD.
+
+%br
+%p Thank you for your purchase!
+%h4 Christian DeWolf
+%h6 Wolf Butler Art & Software
