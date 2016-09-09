@@ -9,7 +9,7 @@ class ChristianMailer < ActionMailer::Base
     @order = order
     subject = "Your receipt from ChristianDeWolf.com"
 
-    mail(subject: subject)
+    mail(subject: subject, to: @order.user.email)
   end
 
 end
