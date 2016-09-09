@@ -1,9 +1,11 @@
 .center
   %h1 Archives
 
-- @blog_posts.each do |post|
-  = render 'link_to_post', locals: { post: post }
-  %br
+#archive-wrapper
+  - @blog_posts.each do |post|
+    = render 'link_to_post', locals: { post: post }
+    %br
 
 .center
-  = link_to "Home", thisbadger_path
+  %br
+  = link_to "Home", thisbadger_path, class: 'bit-larger'

@@ -37,8 +37,12 @@
         = alert
 
     #badger-content
+
       #mobile-title
         %h1 I Found This Badger
+
+      = render 'badger/badger_nav'
+
       = yield
 
     = render "badger/footer"

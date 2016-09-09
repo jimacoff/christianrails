@@ -68,6 +68,21 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   margin-top: -50px;
 }
 
+#badger-nav {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto 50px auto;
+}
+
+#archive-wrapper {
+  max-width: 275px;
+  margin: 0 auto;
+}
 
 /////  RESPONSIVE //////
 
