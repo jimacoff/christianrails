@@ -49,7 +49,7 @@ class Crm::BooksController < Crm::CrmController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { render action: 'index' }
+      format.html { redirect_to crm_books_path, notice: 'Book was successfully destroyed.' }
     end
   end
 
