@@ -50,7 +50,7 @@
 %p
   Before this year I'd never been with a web-hosting company that gave me root access to a server and let me install whatever I wanted. I didn't think any of them allowed that. But then during my Ruby exploration I started a server on DigitalOcean and lo, I had to install my own software stack! Exactly how I wanted! Most fun I've ever had, except for that time that I lived with a
   = succeed "." do
-    %a{:href => "http://www.thisbadger.com", :target => "_blank", :title => "I Found This Badger"} badger
+    = link_to "badger", thisbadger_path
 
 %h3 2. Standing desk
 %p
