@@ -105,4 +105,109 @@ module ButlerHelper
     all_butler_posts[0..3]
   end
 
+  def butler_entities
+    [
+      {
+        productName: "Snapback",
+        description: "Board game adventure",
+        icon: "snapback-butler-icon.jpg",
+        code: "snapback",
+        theme: "classic",
+        iconH: "200",
+        iconW: "131"
+      },
+      {
+        productName: "Ghostcrime",
+        description: "Spooky robot novel",
+        icon: "ghostcrime-icon.png",
+        code: "ghostcrime",
+        theme: "reserve",
+        iconH: "200",
+        iconW: "150"
+      },
+      {
+        productName: "Diamond Find",
+        description: "Story Choice Adventure",
+        icon: "diamondfind-icon.png",
+        code: "diamondfind",
+        theme: "classic",
+        iconH: "150",
+        iconW: "150"
+      },
+      {
+        productName: "I Found This Badger",
+        description: "A cautionary blog",
+        icon: "thisbadger-icon.png",
+        code: "thisbadger",
+        theme: "blackink",
+        iconH: "125",
+        iconW: "125"
+      },
+      {
+        productName: "Black Ink",
+        description: "21 non-erasable comics",
+        icon: "blackink-icon.jpg",
+        code: "blackink",
+        theme: "blackink",
+        iconH: "150",
+        iconW: "150",
+        pages: 23,
+        currentPage: 0,
+        pageH: 700,
+        pageW: 700,
+        controlH: 50,
+        controlW: 200
+      },
+      {
+        productName: "Gray",
+        description: "An official novel",
+        icon: "gray-icon.png",
+        code: "gray",
+        theme: "blackink",
+        iconH: "200",
+        iconW: "130"
+      },
+      {
+        productName: "Silver Stock",
+        description: "16 shiny comics",
+        icon: "silverstock-icon.jpg",
+        code: "silverstock",
+        theme: "reserve",
+        iconH: "125",
+        iconW: "200",
+        pages: 21,
+        currentPage: 0,
+        pageH: 511,
+        pageW: 715,
+        controlH: 100,
+        controlW: 100
+      },
+      {
+        pageName: "Reserve",
+        theme: "reserve",
+        code: "reserve"
+      },
+      {
+        pageName: "Blog",
+        theme: "classic",
+        code: "blog"
+      },
+      {
+        pageName: "About",
+        theme: "classic",
+        code: "about"
+      },
+      {
+        pageName: "Archives",
+        theme: "classic",
+        code: "archives"
+      },
+      {
+        pageName: "Thanks for ordering!",
+        theme: "reserve",
+        code: "ghost-thanks"
+      }
+    ]
+  end
+
 end
