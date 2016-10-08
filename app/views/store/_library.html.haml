@@ -3,6 +3,7 @@
 - prods = [ @owned_products + @available_products ].flatten
 
 - if prods.size > 0
+  - prods = prods.sort{|a,b| a.rank <=> b.rank }
   - prods.each_with_index do |prod, i|
     - if i > 0
       %hr

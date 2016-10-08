@@ -26,7 +26,8 @@ RSpec.describe ProductsController, type: :controller do
       short_desc: "A short desc",
       long_desc: "Longer description",
       price: 8.88,
-      rank: 1
+      rank: 1,
+      coming_soon: true
     }
   }
 
@@ -75,6 +76,12 @@ RSpec.describe ProductsController, type: :controller do
         expect(assigns(:product)).to be_persisted
       end
 
+      it "makes a product with specified attrs" do
+        post :create, {:product => valid_attributes}, valid_session
+        expect(assigns(:product).coming_soon).to be_truthy
+        expect(assigns(:product).title).to eq("Good title")
+      end
+
       it "redirects to the main products index" do
         post :create, {:product => valid_attributes}, valid_session
         expect(response).to redirect_to(products_url)
@@ -103,7 +110,8 @@ RSpec.describe ProductsController, type: :controller do
           short_desc: "Better short desc",
           long_desc: "Better longer description",
           price: 16.66,
-          rank: 2
+          rank: 2,
+          coming_soon: false
         }
       }
 
@@ -118,6 +126,7 @@ RSpec.describe ProductsController, type: :controller do
         expect( product.long_desc ).to eq("Better longer description")
         expect( product.price ).to eq(16.66)
         expect( product.rank ).to eq(2)
+        expect(assigns(:product).coming_soon).to be_falsy
       end
 
       it "assigns the requested product as @product" do

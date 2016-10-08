@@ -5,8 +5,8 @@
       %ul
         - @product.errors.full_messages.each do |msg|
           %li= msg
-  %table.modest-width
 
+  %table.modest-width
     %tr.field
       %td= f.label :title
       %td= f.text_field :title
@@ -31,6 +31,9 @@
     %tr.field
       %td= f.label :small_image
       %td= f.text_field :small_image
+    %tr.field
+      %td= f.label :coming_soon
+      %td= f.check_box :coming_soon, value: @product.coming_soon
 
     %tr.actions
       %td
