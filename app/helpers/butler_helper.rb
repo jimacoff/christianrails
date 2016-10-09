@@ -110,7 +110,7 @@ module ButlerHelper
       {
         productName: "Snapback",
         description: "Board game adventure",
-        icon: "snapback-butler-icon.jpg",
+        icon: "snapback-butler-icon.png",
         code: "snapback",
         theme: "classic",
         iconH: "200",
