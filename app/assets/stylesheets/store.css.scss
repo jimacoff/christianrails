@@ -69,11 +69,19 @@ th {
 #checkout {
   position: absolute;
   top: -26px;
-  left: 135px;
 }
 
 #discount_price {
   margin-right: 10px;
+}
+
+#mobile-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 55px;
+  text-align: center;
+  margin-top: 0;
+  color: $dark-gray;
 }
 
 .store-button {
@@ -280,18 +288,100 @@ th {
   margin-bottom: -20px;
 }
 
-#ghostcrm-banner {
-  margin-bottom: 15px;
-  margin-left: 25px;
-}
-
 #mynameis, #imake {
   color: $dark-gray;
 }
+
+#mobile-badger, #mobile-diamonds, .mobile-product {
+  text-align: center;
+}
 ////////// BEGIN RESPONSIVE ////////////////
 
-@media screen and (max-width: 800px) {
+@media screen and (min-width: 1px) {
+  // STEP 0 -- VERY SMALL
+
+  // #super-wrapper {
+  //   margin: 0 auto;
+  // }
+
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
+    min-width: 330px;
+    margin: 0 auto 25px auto;
+    text-align: left;
+    padding: 40px 15px 15px 15px;
+  }
+
+  // #about-header, #blog-header {
+  //   text-align: center;
+  // }
+
+  // #store-col2 {
+  //   margin: 0 auto;
+  //   text-align: center;
+  // }
+
+  #footer-bar {
+    width: 360px;
+  }
+
+  .header-words {
+    display: none;
+  }
+
+  #mobile-title {
+    display: block;
+  }
+
+  #ghostcrm-banner {
+    margin: 0 auto 15px auto;
+    text-align: center;
+  }
+
+  #ghostcrm-banner-image {
+    width: 323px;
+    height: 100px;
+  }
+
+  // .store-image {
+  //   margin-right: 10px !important;
+
+  // }
+
+  #mobile-badger, #mobile-diamonds, .mobile-product {
+    display: block;
+  }
+  #desktop-badger, #desktop-diamonds, .desktop-product {
+    display: none;
+  }
+  .store-image {
+    float: none;
+  }
+
+  #finds-table {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  #checkout {
+    left: 35px;
+  }
+
+}
+
+
+@media screen and (min-width: 601px) {
   // STEP 1 -- SMALL
+
+  #ghostcrm-banner {
+    margin-bottom: 15px;
+    margin-left: 25px;
+    text-align: center;
+  }
+
+  #ghostcrm-banner-image {
+    width: 490px;
+    height: 150px;
+  }
 
   #super-wrapper {
     margin: 0 auto;
@@ -301,6 +391,7 @@ th {
     width: 500px;
     margin: 0 auto 25px auto;
     text-align: left;
+    padding: 15px 40px 40px 40px;
   }
 
   #about-header, #blog-header {
@@ -318,7 +409,23 @@ th {
 
   .store-image {
     margin-right: 10px !important;
+    float: left;
+  }
 
+  #mobile-badger, #mobile-diamonds, .mobile-product {
+    display: none;
+  }
+  #desktop-badger, #desktop-diamonds, .desktop-product {
+    display: block;
+  }
+
+  #finds-table {
+    max-width: 500px;
+    margin: 0;
+  }
+
+  #checkout {
+    left: 135px;
   }
 
 }
@@ -346,6 +453,14 @@ th {
 
   #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
     width: 640px;
+  }
+
+  #mobile-title {
+    display: none;
+  }
+
+  .header-words {
+    display: inline-block;
   }
 
 }

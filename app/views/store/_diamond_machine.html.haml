@@ -1,29 +1,20 @@
-%table
-  %tr
-    %td.small-width.center{style: "vertical-align: text-top;"}
-      %br
-      %a{href: diamondfind_path}
-        = image_tag( "diamondfind-icon.png", class: "store-image" )
-    %td
-      %h2 Diamond Find
+#desktop-diamonds
+  %table
+    %tr
+      %td.small-width.center{style: "vertical-align: text-top;"}
+        %br
+        %a{href: diamondfind_path}
+          = image_tag( "diamondfind-icon.png", class: "store-image" )
+      %td
+        %h2 Diamond Find
 
-      - has_diamonds = current_user && current_user.player && @finds && @finds.size > 0
-      - if has_diamonds
-        %p
-          You've been busy
-          %a{title: "Diamond Find", href: diamondfind_path, class: "niceblue"} finding diamonds,
-          and now you can download your finds in HD! All wallpapers are 1600x900.
+        = render 'diamond_machine_content'
 
-        %table.full-width
-          - @finds.each do |f|
-            %tr
-              %td
-                = button_to "JPEG", { controller: 'woods/items', action: 'download', item_id: f.item.id }, class: 'store-button'
-              %td
-                .store-format.embolden= f.item.name
-      - else
-        %p
-          Explore the soulless Diamond City and trek to the staggering Diamond Mountains on a hypnotizing hunt for diamonds!
-          %a{title: "Diamond Find", href: diamondfind_path, class: "niceblue"} Diamond Find
-          is a free diamond-finding adventure with over 500 endings and 100 legendary diamonds to discover.
 %br
+#mobile-diamonds
+  %a{href: diamondfind_path}
+    = image_tag( "diamondfind-icon.png", class: "store-image" )
+
+  %h2 Diamond Find
+
+  = render 'diamond_machine_content'
