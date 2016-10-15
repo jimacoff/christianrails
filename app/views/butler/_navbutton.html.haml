@@ -6,7 +6,7 @@
           = image_tag('butler/buttons/' + locals[:product][:icon], width: locals[:product][:iconW], height: locals[:product][:iconH])
     %tr
       %th
-        %a.product-link.Courier{href: locals[:product][:code]}= locals[:product][:productName]
+        %a.product-link.courier{href: locals[:product][:code]}= locals[:product][:productName]
     %tr
       %th
-        .product-description.Courier.diminutive{href: locals[:product][:code]}= locals[:product][:description]
+        .product-description.courier.diminutive{href: locals[:product][:code]}= locals[:product][:description]
