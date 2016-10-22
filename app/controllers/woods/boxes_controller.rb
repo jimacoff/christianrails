@@ -1,5 +1,6 @@
-class Woods::BoxesController < ApplicationController
-  layout "binarywoods"
+class Woods::BoxesController < Woods::WoodsController
+
+  # TODO if ever non-admin-facing, verify user can do such a thing
 
   def upsert
     begin

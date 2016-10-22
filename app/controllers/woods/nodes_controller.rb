@@ -1,9 +1,7 @@
-class Woods::NodesController < ApplicationController
-  layout "binarywoods"
+class Woods::NodesController < Woods::WoodsController
 
   before_action :set_woods_node,                only: [:update]
   before_action :set_woods_story_and_storytree, only: [:update]
-
 
   def update
     @error = nil

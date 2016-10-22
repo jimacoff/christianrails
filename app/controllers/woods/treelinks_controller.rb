@@ -1,6 +1,4 @@
-class Woods::TreelinksController < ApplicationController
-  layout "binarywoods"
-
+class Woods::TreelinksController < Woods::WoodsController
   # TODO if ever non-admin-facing, verify user can do such a thing
 
   def upsert

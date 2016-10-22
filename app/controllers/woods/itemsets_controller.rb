@@ -1,5 +1,4 @@
-class Woods::ItemsetsController < ApplicationController
-  layout "binarywoods"
+class Woods::ItemsetsController < Woods::WoodsController
 
   before_action :set_woods_itemset, only: [:show, :destroy]
   before_action :set_woods_story

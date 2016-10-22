@@ -1,5 +1,4 @@
-class Woods::PlayersController < ApplicationController
-  layout "binarywoods"
+class Woods::PlayersController < Woods::WoodsController
 
   skip_before_action :verify_is_admin, only: [:show]
 

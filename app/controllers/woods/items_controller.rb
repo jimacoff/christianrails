@@ -1,5 +1,4 @@
-class Woods::ItemsController < ApplicationController
-  layout "binarywoods"
+class Woods::ItemsController < Woods::WoodsController
 
   before_action :set_woods_params, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_is_admin, only: [:download]

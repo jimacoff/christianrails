@@ -1,5 +1,4 @@
-class Woods::PaintballsController < ApplicationController
-  layout "binarywoods"
+class Woods::PaintballsController < Woods::WoodsController
 
   # TODO if ever non-admin-facing, verify user can do such a thing
 

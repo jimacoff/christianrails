@@ -1,5 +1,4 @@
-class Woods::StoriesController < ApplicationController
-  layout "binarywoods"
+class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export]
 
