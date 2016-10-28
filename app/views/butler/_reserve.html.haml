@@ -1,5 +1,5 @@
 #reserve.hidden
-  = image_tag( "butler/gold.jpg", alt: "Which precious metal is the best?", :height => "375", :width => "500")
+  = image_tag( "butler/gold.jpg", alt: "Which precious metal is the best?", class: 'precious-image')
   %h1.courier Precious Metals Reserve
   %br/
   %br/
@@ -8,7 +8,7 @@
   %p.grayer
     While the Reserve will re-distribute no more metal, precious or otherwise, its legacy will exist in the pieces it
     = succeed "." do
-      %a#silver-link.diminutive{:href => "silverstock"} did pass on
+      %a#silver-link.diminutive{href: "silverstock"} did pass on
     %br/
 
 :javascript

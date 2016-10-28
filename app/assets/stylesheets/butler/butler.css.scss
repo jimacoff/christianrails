@@ -79,11 +79,6 @@ p {
   margin-bottom: 16px;
 }
 
-.site-width {
-  max-width: 1050px;
-  min-width: 625px;
-}
-
 tr, th {
   color: $white;
   text-align: center;
@@ -107,23 +102,6 @@ ul {
 table.center {
   margin-left: auto;
   margin-right: auto;
-}
-
-nav, #nav-mobile {
-  z-index: 999;
-  align: top;
-}
-
-nav {
-  float: left;
-  margin-right: 25px;
-  max-width: 300px;
-}
-
-#nav-mobile {
-  margin-left: auto;
-  margin-right: auto;
-  width: 600px;
 }
 
 #blog {
@@ -159,11 +137,6 @@ img.center {
 .footer, .push {
   height: 7em;
   text-align: center;
-}
-
-.container {
-  margin-left: 10%;
-  margin-right: 10%;
 }
 
 #content {
@@ -358,26 +331,70 @@ img.center {
   font-size: 80% !important;
 }
 
-/* Desktop layout */
-@media screen and (min-width: 1040px) {
+nav, #nav-mobile {
+  z-index: 999;
+  align: top;
+}
+
+nav {
+  float: left;
+  margin-right: 25px;
+  max-width: 300px;
+}
+
+#nav-mobile {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+// specific images
+
+.silver-image {
+  width: 666px;
+  height: 460px;
+}
+
+.precious-image {
+  height: 375px;
+  width: 500px;
+}
+
+#df-cover-image {
+  height: 300px;
+  width: 500px;
+}
+
+#blackink-cover-image {
+  width: 600px;
+  height: 600px;
+}
+
+/////////////////////////////////////////////////
+/* Mobile layout */
+
+// A MEDIUM SIZE
+@media screen and (max-width: 1039px) {
+  #content {
+    width: 80%;
+  }
+  .site-width {
+    max-width: 1050px;
+    min-width: 625px;
+  }
   nav {
+    display: block;
   }
   #nav-mobile {
     display: none;
   }
-  #content {
-    width: 100%;
-  }
-  #mobile-divider {
-    display:none;
-  }
-  #products-link {
-    display: none;
-  }
+
 }
 
-/* Mobile layout */
-@media screen and (max-width: 1040px) {
+
+// THE SECOND SMALLEST
+@media screen and (max-width: 800px) {
   nav {
     display: none;
   }
@@ -393,4 +410,121 @@ img.center {
     margin-right: auto;
     max-width: 50%;
   }
+  .site-width {
+    min-width: 300px;
+  }
+
+  #title-img, #reserve-title-img {
+    height: 120px;
+    width: 246px;
+    margin-top: 10px;
+  }
+
+  #ink-title-img {
+    height: 140px;
+    width: 246px;
+  }
+
+  #top-links {
+    display: inline-block;
+    float: none;
+    margin: 70px 0 20px 40px;
+    text-align: center;
+  }
+
+  .smart-image {
+    max-width: 450px;
+    max-height: 300px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p, h4, h5, h6, tr, th, a, li, ul {
+    font-size: 16px;
+  }
+
+  .silver-image {
+    width: 444px;
+    height: 303px;
+  }
 }
+
+
+
+// THE VERY SMALLEST
+@media screen and (max-width: 530px) {
+  .header {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #top-links {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+
+  .top-button {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .silver-image {
+    width: 333px;
+    height: 230px;
+  }
+
+  .precious-image {
+    height: 225px;
+    width: 300px;
+  }
+
+  #gray-cover {
+    display: none;
+  }
+
+  #df-cover-image {
+    height: 180px;
+    width: 300px;
+  }
+
+  #blackink-cover-image {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+
+
+/* Desktop layout */
+@media screen and (min-width: 1040px) {
+  .site-width {
+    max-width: 1050px;
+    min-width: 625px;
+  }
+  nav {
+    display: block;
+  }
+  #nav-mobile {
+    display: none;
+  }
+  #content {
+    width: 100%;
+  }
+  #mobile-divider {
+    display:none;
+  }
+  #products-link {
+    display: none;
+  }
+}
+
