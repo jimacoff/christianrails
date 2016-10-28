@@ -123,7 +123,7 @@ function hideAllPartials() {
 
 function showNewContent(product) {
   $('#content').fadeIn('slow', function() {
-    timedPadNav(7);
+    timedPadNav(10);
   });
   //initializeBook(product);
 };

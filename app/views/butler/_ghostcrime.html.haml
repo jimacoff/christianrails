@@ -1,5 +1,5 @@
 #ghostcrime.hidden
-  = image_tag('butler/cover-cut.png', alt: "Ghostcrime", height: "443", title: "PROCESSING", width: "500" )
+  = image_tag('butler/cover-cut.png', alt: "Ghostcrime", title: "PROCESSING", id: 'ghostcrime-cover-image')
   %br
   %br
 
@@ -15,12 +15,8 @@
   %br
   %br
   %a{href: '../'}
-    = image_tag('butler/ordernow.png', alt: "Order now!", title: "Order now!" )
+    = image_tag('butler/ordernow.png', alt: "Order now!", title: "Order now!", id: 'gc-ordernow-button' )
   %br
 
   %h5.courier.diminutive{align: "center"}
-    %span.whitener Paperback
-    %span.grayer |
-    %span.whitener 275 pages
-    %span.grayer |
-    %span.whitener $20
+    %span.whitener Paperback, ePub + PDF available

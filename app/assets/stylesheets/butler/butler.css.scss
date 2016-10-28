@@ -371,6 +371,28 @@ nav {
   height: 600px;
 }
 
+#snapback-cover-image {
+  width: 650px;
+  height: 492px;
+}
+
+#snapback-title-image {
+  width: 600px;
+  height: 162px;
+}
+#snapback-illustrated-image {
+  width: 600px;
+  height: 50px;
+}
+#ghostcrime-cover-image {
+  width: 500px;
+  height: 443px;
+}
+#gc-ordernow-button {
+  width: 344px;
+  height: 94px;
+}
+
 /////////////////////////////////////////////////
 /* Mobile layout */
 
@@ -390,6 +412,26 @@ nav {
     display: none;
   }
 
+  #snapback-cover-image {
+    width: 325px;
+    height: 246px;
+  }
+  #snapback-title-image {
+    width: 300px;
+    height: 81px;
+  }
+  #snapback-illustrated-image {
+    width: 300px;
+    height: 27px;
+  }
+  #ghostcrime-cover-image {
+    width: 333px;
+    height: 295px;
+  }
+  #gc-ordernow-button {
+    width: 258px;
+    height: 70px;
+  }
 }
 
 
@@ -456,6 +498,19 @@ nav {
   .silver-image {
     width: 444px;
     height: 303px;
+  }
+
+  #snapback-cover-image {
+    width: 325px;
+    height: 246px;
+  }
+  #snapback-title-image {
+    width: 300px;
+    height: 81px;
+  }
+  #snapback-illustrated-image {
+    width: 300px;
+    height: 27px;
   }
 }
 
