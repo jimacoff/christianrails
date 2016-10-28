@@ -345,20 +345,20 @@ nav {
 #nav-mobile {
   margin-left: auto;
   margin-right: auto;
-  max-width: 400px;
+  max-width: 300px;
   min-width: 300px;
 }
 
 // specific images
 
 .silver-image {
-  width: 666px;
-  height: 460px;
+  width: 600px;
+  height: 414px;
 }
 
 .precious-image {
-  height: 375px;
-  width: 500px;
+  height: 325px;
+  width: 433px;
 }
 
 #df-cover-image {
@@ -391,6 +391,38 @@ nav {
 #gc-ordernow-button {
   width: 344px;
   height: 94px;
+}
+#blog-goban-image {
+  width: 600px;
+  height: 444px;
+}
+#mobile-gray-cover {
+  display: none;
+}
+// DF
+#df-comic-image {
+  width: 700px;
+  height: 541px;
+}
+#df-alpha-image {
+  width: 497px;
+  height: 438px;
+}
+#df-android-image {
+  width: 400px;
+  height: 240px;
+}
+#diamond-find-lp {
+  width: 725px;
+  height: 537px;
+}
+#df-terminus {
+  width: 725px;
+  height: 271px;
+}
+#about-image {
+  width: 500px;
+  height: 375px;
 }
 
 /////////////////////////////////////////////////
@@ -431,6 +463,54 @@ nav {
   #gc-ordernow-button {
     width: 258px;
     height: 70px;
+  }
+  #blackink-cover-image {
+    width: 350px;
+    height: 350px;
+  }
+  .silver-image {
+    width: 333px;
+    height: 230px;
+  }
+  .precious-image {
+    height: 225px;
+    width: 300px;
+  }
+  #mobile-gray-cover {
+    display: block;
+  }
+
+  #gray-cover {
+    display: none;
+  }
+  #blog-goban-image {
+    width: 300px;
+    height: 222px;
+  }
+  // DF
+  #df-comic-image {
+    width: 350px;
+    height: 271px;
+  }
+  #df-alpha-image {
+    width: 249px;
+    height: 219px;
+  }
+  #df-android-image {
+    width: 200px;
+    height: 120px;
+  }
+  #diamond-find-lp {
+    width: 387px;
+    height: 268px;
+  }
+  #df-terminus {
+    width: 387px;
+    height: 135px;
+  }
+  #about-image {
+    width: 250px;
+    height: 187px;
   }
 }
 
@@ -496,8 +576,8 @@ nav {
   }
 
   .silver-image {
-    width: 444px;
-    height: 303px;
+    width: 333px;
+    height: 230px;
   }
 
   #snapback-cover-image {
@@ -533,28 +613,25 @@ nav {
     margin: 0 10px;
   }
 
-  .silver-image {
-    width: 333px;
-    height: 230px;
-  }
-
-  .precious-image {
-    height: 225px;
-    width: 300px;
-  }
-
-  #gray-cover {
-    display: none;
-  }
-
   #df-cover-image {
     height: 180px;
     width: 300px;
   }
-
   #blackink-cover-image {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
+  }
+  #df-comic-image {
+    width: 300px;
+    height: 232px;
+  }
+  #diamond-find-lp {
+    width: 300px;
+    height: 207px;
+  }
+  #df-terminus {
+    width: 300px;
+    height: 104px;
   }
 }
 

@@ -102,7 +102,7 @@ module ButlerHelper
   end
 
   def sample_butler_posts
-    all_butler_posts[0..3]
+    all_butler_posts[0..4]
   end
 
   def butler_entities
