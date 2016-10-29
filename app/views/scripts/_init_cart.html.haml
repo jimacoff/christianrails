@@ -1,5 +1,6 @@
-:javascript
-  var keys = #{@cart.keys};
-  for(var i in keys) {
-    addToCart(keys[i]);
-  }
+- if @cart
+  :javascript
+    var keys = #{@cart.keys};
+    for(var i in keys) {
+      addToCart(keys[i]);
+    }

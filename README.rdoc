@@ -1,16 +1,18 @@
 == About this project
 
-Christianrails is a monolithic web application that serves as the homepage of author/programmer Christian DeWolf.  A version can be found at https://www.christiandewolf.com. It features:
+Christianrails is a monolithic web application that serves as the homepage of author/programmer Christian DeWolf. A version can be found at https://www.christiandewolf.com. It features:
 
 - an eBook store powered by PayPal, with admin backend
 - a blog engine
 - Diamond Find, a Story Choice Adventure
 - the homepage for Wolf Butler Art & Software, a digital publishing company
 - ghostCRM, a stripped-down CRM for managing contacts + obligations
+- a blog about living with a badger
 - a graveyard, with pages for failed projects
 
 Release notes:
 
+- 1.2.4 - Another responsive redesign
 - 1.2.3 - Badger blog integrated
 - 1.2.2 - BinaryWoods story editor implemented for admins; new Go area
 - 1.2.1 - CRM v.1.1 -> auto-mailer and upgrades
@@ -35,4 +37,4 @@ This application uses:
 * Ruby  2.1.2
 * Rails 4.2.4
 
-Licensed under the Apache License, Version 2.0.  Images may not be used in any derivative work or for profit.
+Licensed under the Apache License, Version 2.0. Images may not be used in any derivative work or for profit.

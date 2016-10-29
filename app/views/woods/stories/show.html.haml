@@ -3,40 +3,42 @@
     %span= "Score: #{current_player.total_score}"
 
 #imagepanel.zero-margin.center
-  = image_tag("#{@story.pic_name}/title.png", class: "rounded")
+  = image_tag("#{@story.pic_name}/title.png", class: "df-image")
 
 .center
-  %table.zero-margin.center{style: "width: 60%"}
-    %tr
-      %td{style: "vertical-align: top;"}
-        - if current_user
-          = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
 
-        - else
-          %h3= "Play #{@story.name} now!"
-          = link_to 'Sign in', user_session_path, class: 'megapink'
-          or
-          = link_to 'Create an account for free!', new_user_registration_path, class: 'megapink'
+  #df-play-or-signup-button
+    - if current_user
+      = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
 
-        #storyinfopanel.zero-margin.center
-          %h3.center Story Stats
-          %table.zero-margin.center
-            %tr
-              %td= @story.total_plays
-              %td= "#{@story.left_count} / #{@story.right_count}"
-            %tr
-              %th Total plays
-              %th Lefts / Rights
+    - else
+      %h3= "Play #{@story.name} now!"
+      = link_to 'Sign in', user_session_path, class: 'megapink'
+      or
+      = link_to 'Create an account for free!', new_user_registration_path, class: 'megapink'
 
-      %td
-        #highscore-table.zero-margin.center
-          %h3.center High Scores
-          %table.zero-margin.center
-            - @highscores.each do |h|
-              %tr
-                %td
-                  %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
-                %td= h[1]
+  #df-col1
+    #highscore-table.zero-margin.center
+      %h3.center High Scores
+      %table.zero-margin.center
+        - @highscores.each do |h|
+          %tr
+            %td
+              %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
+            %td= h[1]
+
+  #df-col2
+    #storyinfopanel.zero-margin.center
+      %h3.center Story Stats
+      %table.zero-margin.center
+        %tr
+          %td= @story.total_plays
+          %td= "#{@story.left_count} / #{@story.right_count}"
+        %tr
+          %th Total plays
+          %th Lefts / Rights
+
+
   - if current_user && current_user.player && current_player.owns_story?(@story)
     %br
     = button_to "Manage this story", manage_woods_story_path(@story), class: "minory-button", method: :get

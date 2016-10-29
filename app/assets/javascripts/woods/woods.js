@@ -120,12 +120,12 @@ function showItem() {
   if( item_gallery[item_index]['value'] > 0 ) {
     itemDesc += "\xa0\xa0\xa0\xa0Value: " + item_gallery[item_index]['value'].toString();
   }
-  $('#imagepanel').html( "<img src='/assets/" + storyname + "/d_" + item_gallery[item_index]['value'] + ".jpg' class='rounded'>" );
+  $('#imagepanel').html( "<img src='/assets/" + storyname + "/d_" + item_gallery[item_index]['value'] + ".jpg' class='df-image'>" );
   $('#item-desc').html( itemDesc + "<br/>" + item_gallery[item_index]['legend'] );
 }
 
 function showStoryTitle() {
-  $('#imagepanel').html( "<img src='/assets/" + storyname + "/title.png' class='rounded'>" );
+  $('#imagepanel').html( "<img src='/assets/" + storyname + "/title.png' class='df-image'>" );
 }
 
 function paintPanel() {

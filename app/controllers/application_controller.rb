@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   before_action :verify_is_admin
 
-  before_action :get_products, :get_cart
   after_action :store_location
 
   around_action :set_time_zone, if: :current_user

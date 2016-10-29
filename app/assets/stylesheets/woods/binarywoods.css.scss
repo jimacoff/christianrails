@@ -32,19 +32,13 @@ a {
 }
 
 #woods-wrapper {
-  max-width:      1050px;
-  min-width:      625px;
+  width:      750px;
   margin-left:    auto;
   margin-right:   auto;
   padding-top:    0;
   padding-bottom: 50px;
-  padding-left:   40px;
-  padding-right:  40px;
-}
-
-.rounded {
-  border-radius: 30px;
-  border: 0px solid;
+  padding-left:   0;
+  padding-right:  0;
 }
 
 .panel {
@@ -342,4 +336,99 @@ a {
 
 #possibleitem-box {
   background-color: $honey-yellow;
+}
+
+.df-image {
+  border-radius: 30px;
+  border: 0px solid;
+}
+
+#df-col1 {
+  display: inline-block;
+}
+
+#df-col2 {
+  display: inline-block;
+}
+
+/////////
+
+// STILL P. BIG
+@media screen and (max-width: 1040px) {
+  .header-words {
+    display: none;
+  }
+
+  #woods-wrapper {
+
+  }
+
+  .df-image {
+    height: 330px;
+    width: 550px;
+  }
+
+}
+
+// SOMEWHAT SMALL
+@media screen and (max-width: 800px) {
+  #woods-wrapper {
+    width:      550px;
+  padding-left:   10px;
+  padding-right:  10px;
+  }
+
+  .df-image {
+    height: 300px;
+    width: 500px;
+  }
+
+  #nodepanel, #findpanel {
+    width: 500px;
+  }
+
+  #df-col1 {
+    display: block;
+    margin-top: 20px;
+  }
+  #df-col2 {
+    display: block;
+  }
+}
+
+// THE VERY SMALLEST
+@media screen and (max-width: 600px) {
+  #woods-wrapper {
+    width: 360px;
+    padding-left:   0;
+    padding-right:  0;
+  }
+  .df-image {
+    height: 216px;
+    width: 360px;
+  }
+
+  #nodepanel, #findpanel {
+    width: 360px;
+  }
+  #statspanel {
+    margin-top: 20px;
+  }
+  // text
+  #story-pane {
+    p {
+      font-size: 80%;
+    }
+  }
+  #item-desc {
+    font-size: 80%;
+  }
+  .binary-button {
+    font-size: 90%;
+    min-height: 40px;
+  }
+  #left-button, #right-button {
+    font-size: 1em;
+  }
+
 }

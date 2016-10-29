@@ -2,8 +2,10 @@ class StoreController < ApplicationController
 
   include BlogHelper
 
-  skip_before_action :verify_is_admin
+  before_action :get_products, :get_cart
   before_action :get_sample_blog_posts, only: [:index]
+
+  skip_before_action :verify_is_admin
 
   def index
     @price_combos = PriceCombo.all
