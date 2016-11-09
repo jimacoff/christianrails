@@ -1,7 +1,6 @@
 class Crm::TasksController < Crm::CrmController
 
   before_action :set_crm_task_secure, only: [:edit, :update, :destroy, :complete, :bypass]
-
   before_action :set_destination, only: [:complete, :bypass]
 
   def index
