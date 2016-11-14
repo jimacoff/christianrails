@@ -54,4 +54,4 @@
           %input{type: "hidden", name: "hosted_button_id", value: product.physical_code}
           %input.pp-button{type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_107x26.png", border: "0", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
       %td.small-width
-        %span= "#{number_to_currency( Product::STANDARD_BOOK_PRICE, precision: 2 )}"
+        %span= "#{number_to_currency( product.physical_price, precision: 2 )}"

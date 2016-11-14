@@ -1,6 +1,5 @@
 class Product < ActiveRecord::Base
 
-  STANDARD_BOOK_PRICE = 20
   STANDARD_SHIPPING   = 5
 
   has_many :releases, inverse_of: :product, dependent: :destroy
