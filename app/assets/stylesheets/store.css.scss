@@ -48,9 +48,9 @@ th {
   padding: 5px;
   border-radius: 0 0 10px 10px;
   margin-top: -9px;
-  margin-right: 4px;
+  margin-left: 4px;
   text-align: right;
-  float: right;
+  float: left;
 }
 
 .pricedetails-processing {
@@ -69,6 +69,7 @@ th {
 #checkout {
   position: absolute;
   top: -26px;
+  z-index: 500;
 }
 
 #discount_price {
@@ -148,7 +149,7 @@ th {
 }
 
 .discount {
-  color: $honey-yellow;
+  color: $grass-green;
 }
 
 .new-price {
@@ -298,7 +299,7 @@ th {
 ////////// BEGIN RESPONSIVE ////////////////
 
 @media screen and (min-width: 1px) {
-  // STEP 0 -- VERY SMALL
+  // STEP 1 -- VERY SMALL
 
   // #super-wrapper {
   //   margin: 0 auto;
@@ -363,14 +364,18 @@ th {
   }
 
   #checkout {
-    left: 35px;
+    left: -4px;
+  }
+
+  #dealzone {
+    right: 0;
   }
 
 }
 
 
 @media screen and (min-width: 601px) {
-  // STEP 1 -- SMALL
+  // STEP 2 -- SMALLISH
 
   #ghostcrm-banner {
     margin-bottom: 15px;
@@ -428,10 +433,13 @@ th {
     left: 135px;
   }
 
+  #dealzone {
+    right: 40px;
+  }
 }
 
 @media screen and (min-width: 801px) {
-  // STEP 2 -- MEDIUM
+  // STEP 3 -- MEDIUM
   #super-wrapper {
     margin: 0 auto;
     padding: 25px;
@@ -466,7 +474,7 @@ th {
 }
 
 @media screen and (min-width: 1341px)  {
-  // STEP 3 -- THE MAX
+  // STEP 4 -- THE MAX
   #super-wrapper {
     text-align: center;
   }
