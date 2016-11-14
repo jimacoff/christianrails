@@ -15,3 +15,13 @@
     %tr.actions
       %td
       %td= f.submit 'Save', class: 'store-button'
+
+  .current-deals
+    %h4 Products in deal:
+    - if @price_combo.products.size == 0
+      %strong None yet. Hit the console.
+    - else
+      %ul
+        - @price_combo.products.each do |p|
+          %li
+            %strong= p.title

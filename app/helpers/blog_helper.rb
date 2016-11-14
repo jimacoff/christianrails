@@ -4,6 +4,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20161113_snapback_released",
+        category: "Writing and Publishing",
+        tags: ["Snapback", "self-publishing", "Go", "Hal-Con", "deals"]
+      },
+      {
         title: "20161022_snapback_to_the_printers",
         category: "Writing and Publishing",
         tags: ["Snapback", "Hal-Con", "self-publishing", "Go", "e-commerce"]
