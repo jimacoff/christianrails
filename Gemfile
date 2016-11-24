@@ -9,12 +9,16 @@ gem 'factory_girl_rails', '~> 4.0'
 gem 'haml'
 gem 'haml-rails'
 gem 'highline'
+gem 'httparty'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
+gem 'mandrill-api'
 gem 'mocha'
+gem 'non-stupid-digest-assets'
 gem 'paypal-sdk-rest'
 gem 'pg'
 gem 'rails', '4.2.4'
+gem 'rake', '~> 10.4.2'
 gem 'redcarpet'
 gem 'sass-rails'
 gem 'seed_dump'
@@ -22,10 +26,10 @@ gem 'sqlite3'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
-gem 'rake', '~> 10.4.2'
-gem "non-stupid-digest-assets"
-gem "mandrill-api"
-gem 'httparty'
+
+group :production do
+  gem 'figaro'
+end
 
 group :doc do
   gem 'sdoc', require: false

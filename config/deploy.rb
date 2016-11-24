@@ -44,7 +44,7 @@ namespace :deploy do
   desc 'Get the vars'
   task :get_vars do
     on roles :all do
-      execute "cp /var/www/christianrails/releases/.rbenv-vars /var/www/christianrails/current"
+      execute "cp /var/www/christianrails/releases/.application.yml /var/www/christianrails/current/config/application.yml"
     end
   end
 

@@ -21,3 +21,6 @@
 .DS_Store
 .agignore
 /coverage
+
+# Ignore application configuration
+/config/application.yml
