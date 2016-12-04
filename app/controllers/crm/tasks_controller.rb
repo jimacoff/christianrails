@@ -23,30 +23,24 @@ class Crm::TasksController < Crm::CrmController
     @task = Crm::Task.new(crm_task_params)
     @task.assistant = current_assistant
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to crm_tasks_path, notice: 'Task was successfully created.' }
-      else
-        format.html { render action: 'new' }
-      end
+    if @task.save
+      redirect_to crm_tasks_path, notice: 'Task was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @task.update(crm_task_params)
-        format.html { redirect_to crm_tasks_path, notice: 'Task was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @task.update(crm_task_params)
+      redirect_to crm_tasks_path, notice: 'Task was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to crm_tasks_path }
-    end
+    redirect_to crm_tasks_path
   end
 
   def closed
@@ -60,16 +54,13 @@ class Crm::TasksController < Crm::CrmController
     @task.status_id = Crm::Task::STATUS_COMPLETE
     @task.closed_at = Time.current
 
-    respond_to do |format|
+    recurral_notification = spawn_next_if_recurring
 
-      recurral_notification = spawn_next_if_recurring
-
-      if @task.save
-        format.html { redirect_to @dest, notice: 'Task completed.' + recurral_notification }
-      else
-        flash[:alert] = "Could not complete this task. Please file a bug report."
-        format.html { redirect_to @dest }
-      end
+    if @task.save
+      redirect_to @dest, notice: 'Task completed.' + recurral_notification
+    else
+      flash[:alert] = "Could not complete this task. Please file a bug report."
+      redirect_to @dest
     end
   end
 
@@ -79,17 +70,16 @@ class Crm::TasksController < Crm::CrmController
 
     recurral_notification = spawn_next_if_recurring
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @dest, notice: 'Task bypassed.' + recurral_notification  }
-      else
-        flash[:alert] = "Could not bypass this task. Please file a bug report."
-        format.html { redirect_to @dest }
-      end
+    if @task.save
+      redirect_to @dest, notice: 'Task bypassed.' + recurral_notification
+    else
+      flash[:alert] = "Could not bypass this task. Please file a bug report."
+      redirect_to @dest
     end
   end
 
   private
+
     def set_crm_task_secure
       @task = Crm::Task.find(params[:id])
       redirect_to(root_path) unless owns_assistant?( @task.assistant )

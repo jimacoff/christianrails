@@ -68,13 +68,11 @@ class Crm::AssistantsController < Crm::CrmController
       @assistant = nil
     end
 
-    respond_to do |format|
-      if @assistant
-        format.html { redirect_to crm_path, notice: "Your Assistant #{@assistant.name} has been created!" }
-      else
-        flash[:alert] = "We could not create your Assistant. You may already have one."
-        format.html { redirect_to crm_path }
-      end
+    if @assistant
+      redirect_to crm_path, notice: "Your Assistant #{@assistant.name} has been created!"
+    else
+      flash[:alert] = "We could not create your Assistant. You may already have one."
+      redirect_to crm_path
     end
   end
 
@@ -95,13 +93,11 @@ class Crm::AssistantsController < Crm::CrmController
   def update
     @assistant = current_assistant
 
-    respond_to do |format|
-      if @assistant.update_attributes( crm_assistant_params )
-        format.html { redirect_to crm_path, notice: "Your Assistant's settings have been updated!" }
-      else
-        flash[:alert] = "We could not update your Assistant. Please file a bug report."
-        format.html { redirect_to crm_path }
-      end
+    if @assistant.update_attributes( crm_assistant_params )
+      redirect_to crm_path, notice: "Your Assistant's settings have been updated!"
+    else
+      flash[:alert] = "We could not update your Assistant. Please file a bug report."
+      redirect_to crm_path
     end
   end
 

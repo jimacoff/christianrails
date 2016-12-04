@@ -22,30 +22,24 @@ class Crm::IdeasController < Crm::CrmController
     @idea = Crm::Idea.new(crm_idea_params)
     @idea.assistant = current_assistant
 
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to crm_ideas_path, notice: 'Idea was successfully created.' }
-      else
-        format.html { render action: 'new' }
-      end
+    if @idea.save
+      redirect_to crm_ideas_path, notice: 'Idea was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @idea.update(crm_idea_params)
-        format.html { redirect_to crm_ideas_path, notice: 'Idea was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @idea.update(crm_idea_params)
+      redirect_to crm_ideas_path, notice: 'Idea was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @idea.destroy
-    respond_to do |format|
-      format.html { render action: 'index' }
-    end
+    render action: 'index'
   end
 
   def closed
@@ -59,13 +53,11 @@ class Crm::IdeasController < Crm::CrmController
     @idea.status_id = Crm::Idea::STATUS_COMPLETE
     @idea.completed_on = Time.current
 
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to crm_ideas_path, notice: "Idea complete!" }
-      else
-        flash[:alert] = "Could not complete this idea. Please file a bug report."
-        format.html { redirect_to crm_ideas_path }
-      end
+    if @idea.save
+      redirect_to crm_ideas_path, notice: "Idea complete!"
+    else
+      flash[:alert] = "Could not complete this idea. Please file a bug report."
+      redirect_to crm_ideas_path
     end
   end
 
@@ -73,13 +65,11 @@ class Crm::IdeasController < Crm::CrmController
     @idea.status_id = Crm::Idea::STATUS_ABANDONED
     @idea.completed_on = Time.current
 
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to crm_ideas_path, notice: 'Idea abandoned!' }
-      else
-        flash[:alert] = "Could not abandon this idea! Please file a bug report. Or maybe this is a sign."
-        format.html { redirect_to crm_ideas_path }
-      end
+    if @idea.save
+      redirect_to crm_ideas_path, notice: 'Idea abandoned!'
+    else
+      flash[:alert] = "Could not abandon this idea! Please file a bug report. Or maybe this is a sign."
+      redirect_to crm_ideas_path
     end
   end
 

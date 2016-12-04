@@ -27,32 +27,26 @@ class Crm::BooksController < Crm::CrmController
     @book = Crm::Book.new(crm_book_params)
     @book.assistant = current_assistant
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to crm_books_path, notice: 'Book was successfully created.' }
-        set_book_finished_time_if_read
-      else
-        format.html { render action: 'new' }
-      end
+    if @book.save
+      redirect_to crm_books_path, notice: 'Book was successfully created.'
+      set_book_finished_time_if_read
+    else
+      render action: 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @book.update(crm_book_params)
-        set_book_finished_time_if_read
-        format.html { redirect_to crm_books_path, notice: 'Book was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @book.update(crm_book_params)
+      set_book_finished_time_if_read
+      redirect_to crm_books_path, notice: 'Book was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @book.destroy
-    respond_to do |format|
-      format.html { redirect_to crm_books_path, notice: 'Book was successfully destroyed.' }
-    end
+    redirect_to crm_books_path, notice: 'Book was successfully destroyed.'
   end
 
   def have_read
@@ -66,13 +60,11 @@ class Crm::BooksController < Crm::CrmController
     @book.status_id = Crm::Book::STATUS_READING
     @book.finished_at = Time.current
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to crm_books_path, notice: "Now reading #{@book.title}!" }
-      else
-        flash[:alert] = "Could not start this book. Please file a bug report and start reading anyway."
-        format.html { redirect_to crm_books_path }
-      end
+    if @book.save
+      redirect_to crm_books_path, notice: "Now reading #{@book.title}!"
+    else
+      flash[:alert] = "Could not start this book. Please file a bug report and start reading anyway."
+      redirect_to crm_books_path
     end
   end
 
@@ -80,13 +72,11 @@ class Crm::BooksController < Crm::CrmController
     @book.status_id = Crm::Book::STATUS_READ
     @book.finished_at = Time.current
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to crm_books_path, notice: 'Book finished! Congratulations. Time to start another.' }
-      else
-        flash[:alert] = "Could not mark as finished! Please file a bug report."
-        format.html { redirect_to crm_books_path }
-      end
+    if @book.save
+      redirect_to crm_books_path, notice: 'Book finished! Congratulations. Time to start another.'
+    else
+      flash[:alert] = "Could not mark as finished! Please file a bug report."
+      redirect_to crm_books_path
     end
   end
 

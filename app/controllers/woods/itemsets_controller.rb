@@ -16,23 +16,16 @@ class Woods::ItemsetsController < Woods::WoodsController
   def create
     @itemset = Woods::Itemset.new(woods_itemset_params)
 
-    respond_to do |format|
-      if @itemset.save
-        format.html { redirect_to @itemset, notice: 'Itemset was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @itemset }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @itemset.errors, status: :unprocessable_entity }
-      end
+    if @itemset.save
+      redirect_to @itemset, notice: 'Itemset was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def destroy
     @itemset.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_itemsets_url }
-      format.json { head :no_content }
-    end
+    redirect_to woods_itemsets_url
   end
 
   private

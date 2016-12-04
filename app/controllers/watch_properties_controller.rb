@@ -61,9 +61,7 @@ class WatchPropertiesController < ApplicationController
 
   def destroy
     @watch_property.destroy
-    respond_to do |format|
-      format.html { redirect_to watch_properties_url, notice: 'WatchProperty was successfully destroyed.' }
-    end
+    redirect_to watch_properties_url, notice: 'WatchProperty was successfully destroyed.'
   end
 
   private

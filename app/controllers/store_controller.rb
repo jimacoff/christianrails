@@ -117,12 +117,9 @@ class StoreController < ApplicationController
       Rails.logger.error(e.to_s)
     end
 
-    respond_to do |format|
-      flash[:notice] = note if note
-      flash[:alert] = alert if alert
-      format.html { redirect_to root_path }
-    end
-
+    flash[:notice] = note if note
+    flash[:alert] = alert if alert
+    redirect_to root_path
   end
 
   def download
@@ -155,19 +152,13 @@ class StoreController < ApplicationController
     end
 
     Rails.logger.warn(@error)
-
-    respond_to do |format|
-      flash[:alert] = @error
-      format.html { redirect_to root_path }
-    end
-
+    flash[:alert] = @error
+    redirect_to root_path
   end
 
   def order_success
-    respond_to do |format|
-      flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
-      format.html { redirect_to root_path }
-    end
+    flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
+    redirect_to root_path
   end
 
   private

@@ -28,13 +28,11 @@ class Crm::MeetingsController < Crm::CrmController
 
     @meeting.assistant = current_assistant
 
-    respond_to do |format|
-      if @meeting.save
-        format.html { redirect_to crm_meetings_path, notice: 'Meeting was successfully created.' }
-      else
-        get_contacts
-        format.html { render action: 'new' }
-      end
+    if @meeting.save
+      redirect_to crm_meetings_path, notice: 'Meeting was successfully created.'
+    else
+      get_contacts
+      render action: 'new'
     end
   end
 
@@ -42,20 +40,16 @@ class Crm::MeetingsController < Crm::CrmController
     @contact = Crm::Contact.find( crm_meeting_params[:contact_id] )
     verify_contact
 
-    respond_to do |format|
-      if @meeting.update(crm_meeting_params)
-        format.html { redirect_to crm_meetings_path, notice: 'Meeting was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @meeting.update(crm_meeting_params)
+      redirect_to crm_meetings_path, notice: 'Meeting was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @meeting.destroy
-    respond_to do |format|
-      format.html { render action: 'index' }
-    end
+    render action: 'index'
   end
 
   def past
@@ -69,14 +63,11 @@ class Crm::MeetingsController < Crm::CrmController
     @meeting.status_id = Crm::Meeting::STATUS_COMPLETE
     @meeting.closed_at = Time.current
 
-    respond_to do |format|
-
-      if @meeting.save
-        format.html { redirect_to @dest, notice: 'Meeting completed.' }
-      else
-        flash[:alert] = "Could not complete this meeting. Please file a bug report."
-        format.html { redirect_to @dest }
-      end
+    if @meeting.save
+      redirect_to @dest, notice: 'Meeting completed.'
+    else
+      flash[:alert] = "Could not complete this meeting. Please file a bug report."
+      redirect_to @dest
     end
   end
 
@@ -84,17 +75,16 @@ class Crm::MeetingsController < Crm::CrmController
     @meeting.status_id = Crm::Meeting::STATUS_BYPASSED
     @meeting.closed_at = Time.current
 
-    respond_to do |format|
-      if @meeting.save
-        format.html { redirect_to @dest, notice: 'Meeting bypassed.' }
-      else
-        flash[:alert] = "Could not bypass this meeting. Please file a bug report."
-        format.html { redirect_to @dest }
-      end
+    if @meeting.save
+      redirect_to @dest, notice: 'Meeting bypassed.'
+    else
+      flash[:alert] = "Could not bypass this meeting. Please file a bug report."
+      redirect_to @dest
     end
   end
 
   private
+
     def set_crm_meeting_secure
       @meeting = Crm::Meeting.find(params[:id])
       redirect_to(root_path) unless owns_assistant?( @meeting.assistant )

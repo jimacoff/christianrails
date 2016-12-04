@@ -41,7 +41,6 @@ class ApplicationController < ActionController::Base
     end
 
     def verify_is_admin
-
       unless controller_path.start_with?('devise') || controller_path.start_with?('registrations')
         if !current_user
           redirect_to(root_path)

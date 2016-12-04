@@ -12,35 +12,24 @@ class Woods::PalettesController < Woods::WoodsController
   def create
     @palette = Woods::Palette.new(woods_palette_params)
 
-    respond_to do |format|
-      if @palette.save
-        format.html { redirect_to @palette, notice: 'Palette was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @palette }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @palette.errors, status: :unprocessable_entity }
-      end
+    if @palette.save
+      redirect_to @palette, notice: 'Palette was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @palette.update(woods_palette_params)
-        format.html { redirect_to woods_story_palettes_path, notice: 'Palette was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to woods_story_palettes_path }
-        format.json { render json: @palette.errors, status: :unprocessable_entity }
-      end
+    if @palette.update(woods_palette_params)
+      redirect_to woods_story_palettes_path, notice: 'Palette was successfully updated.'
+    else
+      redirect_to woods_story_palettes_path
     end
   end
 
   def destroy
     @palette.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_palettes_url }
-      format.json { head :no_content }
-    end
+    redirect_to woods_palettes_url
   end
 
   private

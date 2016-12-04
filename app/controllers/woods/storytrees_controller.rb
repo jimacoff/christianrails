@@ -44,9 +44,7 @@ class Woods::StorytreesController < Woods::WoodsController
     @storytree.save!
     create_nodes_for_storytree
 
-    respond_to do |format|
-      format.html { redirect_to manage_woods_story_path( @story ), notice: 'Storytree was successfully created.' }
-    end
+    redirect_to manage_woods_story_path( @story ), notice: 'Storytree was successfully created.'
   end
 
   private

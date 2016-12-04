@@ -34,12 +34,8 @@ class Woods::ItemsController < Woods::WoodsController
     end
 
     Rails.logger.warn(@error)
-
-    respond_to do |format|
-      flash[:alert] = @error
-      format.html { redirect_to root_path }
-    end
-
+    flash[:alert] = @error
+    redirect_to root_path
   end
 
   ## ADMIN ONLY
@@ -47,38 +43,28 @@ class Woods::ItemsController < Woods::WoodsController
   def create
     @item = Woods::Item.new(woods_item_params)
 
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @item }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    if @item.save
+      redirect_to @item, notice: 'Item was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @item.update(woods_item_params.except(:authenticity_token))
-        format.html { redirect_to woods_story_itemset_path(@story, @itemset), notice: 'Item was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to woods_story_itemsets_path(@story, @itemset) }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    if @item.update(woods_item_params.except(:authenticity_token))
+      redirect_to woods_story_itemset_path(@story, @itemset), notice: 'Item was successfully updated.'
+    else
+      redirect_to woods_story_itemsets_path(@story, @itemset)
     end
   end
 
   def destroy
     @item.destroy
-    respond_to do |format|
-      format.html { redirect_to woods_items_url }
-      format.json { head :no_content }
-    end
+    redirect_to woods_items_url
   end
 
   private
+
     def set_woods_params
       @item = Woods::Item.find(params[:id])
       @story = Woods::Story.find(params[:story_id])

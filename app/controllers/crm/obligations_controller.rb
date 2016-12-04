@@ -28,13 +28,11 @@ class Crm::ObligationsController < Crm::CrmController
 
     @obligation.assistant = current_assistant
 
-    respond_to do |format|
-      if @obligation.save
-        format.html { redirect_to crm_obligations_path, notice: 'Obligation was successfully created.' }
-      else
-        get_contacts
-        format.html { render action: 'new' }
-      end
+    if @obligation.save
+      redirect_to crm_obligations_path, notice: 'Obligation was successfully created.'
+    else
+      get_contacts
+      render action: 'new'
     end
   end
 
@@ -42,20 +40,16 @@ class Crm::ObligationsController < Crm::CrmController
     @contact = Crm::Contact.find( crm_obligation_params[:contact_id] )
     verify_contact
 
-    respond_to do |format|
-      if @obligation.update(crm_obligation_params)
-        format.html { redirect_to crm_obligations_path, notice: 'Obligation was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @obligation.update(crm_obligation_params)
+      redirect_to crm_obligations_path, notice: 'Obligation was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @obligation.destroy
-    respond_to do |format|
-      format.html { render action: 'index' }
-    end
+    render action: 'index'
   end
 
   def closed
@@ -69,13 +63,11 @@ class Crm::ObligationsController < Crm::CrmController
     @obligation.status_id = Crm::Obligation::STATUS_COMPLETE
     @obligation.closed_at = Time.current
 
-    respond_to do |format|
-      if @obligation.save
-        format.html { redirect_to @dest, notice: 'Obligation completed.' }
-      else
-        flash[:alert] = "Could not complete this obligation. Please file a bug report."
-        format.html { redirect_to @dest }
-      end
+    if @obligation.save
+      redirect_to @dest, notice: 'Obligation completed.'
+    else
+      flash[:alert] = "Could not complete this obligation. Please file a bug report."
+      redirect_to @dest
     end
   end
 
@@ -83,17 +75,16 @@ class Crm::ObligationsController < Crm::CrmController
     @obligation.status_id = Crm::Obligation::STATUS_BYPASSED
     @obligation.closed_at = Time.current
 
-    respond_to do |format|
-      if @obligation.save
-        format.html { redirect_to @dest, notice: 'Obligation bypassed.' }
-      else
-        flash[:alert] = "Could not bypass this obligation. Please file a bug report."
-        format.html { redirect_to @dest }
-      end
+    if @obligation.save
+      redirect_to @dest, notice: 'Obligation bypassed.'
+    else
+      flash[:alert] = "Could not bypass this obligation. Please file a bug report."
+      redirect_to @dest
     end
   end
 
   private
+
     def set_crm_obligation_secure
       @obligation = Crm::Obligation.find(params[:id])
       redirect_to(root_path) unless owns_assistant?( @obligation.assistant )

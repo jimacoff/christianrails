@@ -19,30 +19,24 @@ class ReleasesController < ApplicationController
     @release = Release.new(release_params)
     @release.product = @product
 
-    respond_to do |format|
-      if @release.save
-        format.html { redirect_to product_releases_url, notice: 'Release was successfully created.' }
-      else
-        format.html { render action: 'new' }
-      end
+    if @release.save
+      redirect_to product_releases_url, notice: 'Release was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @release.update(release_params)
-        format.html { redirect_to product_releases_url, notice: 'Release was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @release.update(release_params)
+      redirect_to product_releases_url, notice: 'Release was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @release.destroy
-    respond_to do |format|
-      format.html { redirect_to product_releases_url, notice: 'Release was successfully destroyed.' }
-    end
+    redirect_to product_releases_url, notice: 'Release was successfully destroyed.'
   end
 
   private

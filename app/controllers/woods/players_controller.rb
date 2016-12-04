@@ -4,7 +4,7 @@ class Woods::PlayersController < Woods::WoodsController
 
   ## PUBLIC
 
-  # shows the player's 'profile' + stats + finds
+  # shows the player's public 'profile' + stats + finds
   def show
     @player = Woods::Player.find( woods_player_params[:id] )
   end
