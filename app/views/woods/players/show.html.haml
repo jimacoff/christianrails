@@ -28,7 +28,7 @@
 
   %br
   .center
-    - if current_user.admin?
+    - if current_user && current_user.admin?
       = link_to "Admin: Players index", woods_players_path
       |
     = link_to "Back to Diamond Find", diamondfind_path, class: "niceblue"
