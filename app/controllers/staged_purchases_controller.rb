@@ -2,10 +2,7 @@ class StagedPurchasesController < ApplicationController
   before_action :set_staged_purchase, only: [:destroy]
   skip_before_action :verify_is_admin, only: [:create, :destroy]
 
-  def index
-    # dashboard for admin
-    @staged_purchases = StagedPurchase.all
-  end
+  ## PUBLIC
 
   def create
     if current_user
@@ -35,7 +32,14 @@ class StagedPurchasesController < ApplicationController
     end
   end
 
+  # ADMIN ONLY
+
+  def index
+    @staged_purchases = StagedPurchase.all
+  end
+
   private
+
     def set_staged_purchase
       @staged_purchase = StagedPurchase.find(params[:id])
     end

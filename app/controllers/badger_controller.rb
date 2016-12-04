@@ -7,6 +7,8 @@ class BadgerController < ApplicationController
   before_action :get_all_blog_posts
   skip_before_action :verify_is_admin
 
+  ## PUBLIC
+
   def index
     get_sample_posts
   end

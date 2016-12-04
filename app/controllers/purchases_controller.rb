@@ -1,5 +1,7 @@
 class PurchasesController < ApplicationController
 
+  ## ADMIN ONLY
+
   def index
     @purchases = Purchase.all.includes(:product)
   end

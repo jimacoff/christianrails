@@ -2,6 +2,8 @@ class ReleasesController < ApplicationController
   before_action :set_release, only: [:edit, :update, :destroy]
   before_action :get_product, only: [:index, :new, :create, :update, :edit]
 
+  ## ADMIN ONLY
+
   def index
     @releases = @product.releases
   end

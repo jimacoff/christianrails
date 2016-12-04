@@ -2,8 +2,9 @@ class Crm::MeetingsController < Crm::CrmController
 
   before_action :set_crm_meeting_secure, only: [:edit, :update, :destroy, :complete, :bypass]
   before_action :get_contacts, only: [:index, :new, :edit]
-
   before_action :set_destination, only: [:complete, :bypass]
+
+  ## LOGGED-IN ASSISTANTS ONLY
 
   def index
     @meetings = Crm::Meeting.where(assistant_id: current_assistant.id)

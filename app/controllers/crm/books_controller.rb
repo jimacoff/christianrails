@@ -2,6 +2,8 @@ class Crm::BooksController < Crm::CrmController
 
   before_action :set_crm_book_secure, only: [:edit, :update, :destroy, :start_reading, :finish ]
 
+  ## LOGGED-IN ASSISTANTS ONLY
+
   def index
     @reading_books = Crm::Book.where(assistant_id: current_assistant.id)
                       .where(status_id: Crm::Book::STATUS_READING)

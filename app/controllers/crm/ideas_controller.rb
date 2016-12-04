@@ -2,6 +2,8 @@ class Crm::IdeasController < Crm::CrmController
 
   before_action :set_crm_idea_secure, only: [:edit, :update, :destroy, :complete, :abandon ]
 
+  ## LOGGED-IN ASSISTANTS ONLY
+
   def index
     @ideas = Crm::Idea.where(assistant_id: current_assistant.id)
                       .where(status_id: Crm::Idea::STATUS_OPEN)

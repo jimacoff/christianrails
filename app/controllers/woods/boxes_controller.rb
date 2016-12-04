@@ -1,6 +1,7 @@
 class Woods::BoxesController < Woods::WoodsController
 
-  # TODO if ever non-admin-facing, verify user can do such a thing
+  ## ADMIN ONLY
+  # if ever non-admin-facing, verify user can do such a thing
 
   def upsert
     begin

@@ -3,6 +3,8 @@ class Crm::AssistantsController < Crm::CrmController
   skip_before_action :verify_has_assistant, only: [:index, :create, :send_daily_emails]
   skip_before_action :verify_authenticity_token, only: [:send_daily_emails]
 
+  ## PUBLIC
+
   def index
     @assistant = current_assistant || Crm::Assistant.new
 
@@ -76,6 +78,20 @@ class Crm::AssistantsController < Crm::CrmController
     end
   end
 
+  def send_daily_emails
+    Crm::Assistant.where(email_me_daily: true).each do |assistant|
+      if assistant.ripe_for_email?
+        send_daily_summary( assistant )
+      end
+    end
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
+  ## LOGGED-IN ASSISTANT ONLY
+
   def update
     @assistant = current_assistant
 
@@ -91,18 +107,6 @@ class Crm::AssistantsController < Crm::CrmController
 
   def settings
     @assistant = current_assistant
-  end
-
-  def send_daily_emails
-    Crm::Assistant.where(email_me_daily: true).each do |assistant|
-      if assistant.ripe_for_email?
-        send_daily_summary( assistant )
-      end
-    end
-
-    respond_to do |format|
-      format.json { head :no_content }
-    end
   end
 
   private

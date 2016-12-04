@@ -3,6 +3,8 @@ class Woods::ItemsetsController < Woods::WoodsController
   before_action :set_woods_itemset, only: [:show, :destroy]
   before_action :set_woods_story
 
+  ## ADMIN ONLY
+
   def index
     @itemsets = Woods::Itemset.includes(:items).where(story_id: @story.id)
   end

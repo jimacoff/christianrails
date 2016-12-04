@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  ## ADMIN ONLY
+
   def index
   end
 

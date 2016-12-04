@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
-  layout "binarywoods"
 
   before_action :set_user
-  skip_before_action :verify_is_admin
-
-  def show
-  end
 
   private
 

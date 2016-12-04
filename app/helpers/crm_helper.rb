@@ -1,7 +1,7 @@
 module CrmHelper
 
   def owns_assistant?(assistant)
-    current_user && current_user.assistant && current_user.assistant == assistant
+    current_user && current_user.assistant && (current_user.assistant == assistant)
   end
 
   def verify_has_assistant

@@ -2,6 +2,8 @@ class Crm::ContactsController < Crm::CrmController
 
   before_action :set_crm_contact_secure, only: [:edit, :update, :destroy]
 
+  ## LOGGED-IN ASSISTANTS ONLY
+
   def index
     @contacts = current_assistant.contacts.order('firstname asc')
   end

@@ -5,6 +5,8 @@ class BlogController < ApplicationController
   skip_before_action :verify_is_admin
   before_action :get_all_blog_posts
 
+  ## PUBLIC
+
   def index
   end
 

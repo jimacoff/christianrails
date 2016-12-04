@@ -2,9 +2,7 @@ class OrdersController < ApplicationController
   skip_before_action :verify_is_admin, only: [:show, :receipts]
   before_action :set_order, only: [:show]
 
-  def index
-    @orders = Order.all
-  end
+  ## PUBLIC
 
   def show
     unless current_user && current_user == @order.user
@@ -16,6 +14,12 @@ class OrdersController < ApplicationController
     if current_user
       @orders = current_user.orders
     end
+  end
+
+  ## ADMIN ONLY
+
+  def index
+    @orders = Order.all
   end
 
   private

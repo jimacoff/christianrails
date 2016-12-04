@@ -1,9 +1,7 @@
 class NewsletterSignupsController < ApplicationController
   skip_before_action :verify_is_admin, only: [:create]
 
-  def index
-    @newsletter_signups = NewsletterSignup.order('created_at desc')
-  end
+  ## PUBLIC
 
   def create
     @newsletter_signup = NewsletterSignup.new(newsletter_signup_params)
@@ -16,6 +14,12 @@ class NewsletterSignupsController < ApplicationController
         format.json { render json: @newsletter_signup.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  ## ADMIN ONLY
+
+  def index
+    @newsletter_signups = NewsletterSignup.order('created_at desc')
   end
 
   private

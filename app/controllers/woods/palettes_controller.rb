@@ -3,6 +3,8 @@ class Woods::PalettesController < Woods::WoodsController
   before_action :set_woods_palette, only: [:update, :destroy]
   before_action :set_woods_story
 
+  ## ADMIN ONLY
+
   def index
     @palettes = Woods::Palette.all
   end

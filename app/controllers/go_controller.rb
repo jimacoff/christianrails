@@ -4,6 +4,8 @@ class GoController < ApplicationController
 
   skip_before_action :verify_is_admin, only: [:index]
 
+  ## PUBLIC
+
   def index
   end
 

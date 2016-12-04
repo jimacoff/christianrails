@@ -3,6 +3,8 @@ class Woods::ItemsController < Woods::WoodsController
   before_action :set_woods_params, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_is_admin, only: [:download]
 
+  # PUBLIC
+
   def download
     item_id = woods_item_params[:item_id]
     if current_user
@@ -39,6 +41,8 @@ class Woods::ItemsController < Woods::WoodsController
     end
 
   end
+
+  ## ADMIN ONLY
 
   def create
     @item = Woods::Item.new(woods_item_params)

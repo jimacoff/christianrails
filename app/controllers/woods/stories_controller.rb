@@ -1,34 +1,13 @@
 class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export]
-
   before_action :verify_is_published, except: [:index, :show, :manage, :export]
   skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
 
-  def index
-    @stories = Woods::Story.all
-  end
+  ## PUBLIC
 
   def show
     @highscores = Woods::Player.all.collect{|p| [p.username, p.total_score, p.id]}.sort{ |x,y| y[1] <=> x[1]}[0..4]
-  end
-
-  def manage
-    @storytrees = @story.storytrees
-    @lefts = @story.left_count
-    @rights = @story.right_count
-
-    @storytree = Woods::Storytree.new
-  end
-
-  def export
-    @storytrees = @story.storytrees
-    @nodes = []
-    @storytrees.each do |storytree|
-      storytree.nodes.each do |node|
-        @nodes << node
-      end
-    end
   end
 
   def play
@@ -115,7 +94,30 @@ class Woods::StoriesController < Woods::WoodsController
         format.json { render json: @node, status: :unprocessable_entity }
       end
     end
+  end
 
+  ## ADMIN ONLY
+
+  def index
+    @stories = Woods::Story.all
+  end
+
+  def manage
+    @storytrees = @story.storytrees
+    @lefts = @story.left_count
+    @rights = @story.right_count
+
+    @storytree = Woods::Storytree.new
+  end
+
+  def export
+    @storytrees = @story.storytrees
+    @nodes = []
+    @storytrees.each do |storytree|
+      storytree.nodes.each do |node|
+        @nodes << node
+      end
+    end
   end
 
   private

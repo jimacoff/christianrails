@@ -2,6 +2,8 @@ class PoliciesController < ApplicationController
 
   skip_before_action :verify_is_admin
 
+  ## PUBLIC
+
   def terms_of_use
   end
 

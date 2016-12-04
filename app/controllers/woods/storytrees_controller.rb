@@ -3,6 +3,8 @@ class Woods::StorytreesController < Woods::WoodsController
   before_action :set_woods_storytree, only: [:show, :destroy]
   before_action :set_woods_story
 
+  ## ADMIN ONLY
+
   # the story editor
   def show
     @nodes = @storytree.nodes.order('tree_index asc')

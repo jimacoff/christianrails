@@ -9,6 +9,8 @@ class ButlerController < ApplicationController
 
   skip_before_action :verify_is_admin
 
+  ## PUBLIC
+
   def index
     get_sample_posts
   end

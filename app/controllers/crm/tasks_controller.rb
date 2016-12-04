@@ -3,6 +3,8 @@ class Crm::TasksController < Crm::CrmController
   before_action :set_crm_task_secure, only: [:edit, :update, :destroy, :complete, :bypass]
   before_action :set_destination, only: [:complete, :bypass]
 
+  ## LOGGED-IN ASSISTANTS ONLY
+
   def index
     @tasks = Crm::Task.where(assistant_id: current_assistant.id)
                       .where(status_id: Crm::Task::STATUS_OPEN)

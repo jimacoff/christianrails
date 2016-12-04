@@ -4,7 +4,7 @@ require 'constraints/whitelist'
 Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
-  resources :users, only: [:show]
+  #resources :users, only: []
 
   resources :blog, only: [:index] do
     collection do

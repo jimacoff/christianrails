@@ -2,13 +2,17 @@ class Woods::PlayersController < Woods::WoodsController
 
   skip_before_action :verify_is_admin, only: [:show]
 
-  def index
-    @players = Woods::Player.all
+  ## PUBLIC
+
+  # shows the player's 'profile' + stats + finds
+  def show
+    @player = Woods::Player.find( woods_player_params[:id] )
   end
 
-  def show
-    # shows the player's 'profile' + stats + finds
-    @player = Woods::Player.find( woods_player_params[:id] )
+  ## ADMIN ONLY
+
+  def index
+    @players = Woods::Player.all
   end
 
   private
