@@ -1,4 +1,4 @@
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
 
   STANDARD_SHIPPING   = 5
 

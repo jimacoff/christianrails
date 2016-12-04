@@ -1,4 +1,4 @@
-class Log < ActiveRecord::Base
+class Log < ApplicationRecord
   belongs_to :user, inverse_of: :logs
 
   validates_presence_of :description, :location

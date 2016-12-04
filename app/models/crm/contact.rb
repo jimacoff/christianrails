@@ -1,4 +1,4 @@
-class Crm::Contact < ActiveRecord::Base
+class Crm::Contact < ApplicationRecord
   belongs_to :assistant
 
   def full_name

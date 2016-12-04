@@ -1,4 +1,4 @@
-class Woods::Paintball < ActiveRecord::Base
+class Woods::Paintball < ApplicationRecord
   belongs_to :node
   belongs_to :palette
 

@@ -1,4 +1,4 @@
-class Woods::Palette < ActiveRecord::Base
+class Woods::Palette < ApplicationRecord
   belongs_to :story
   has_many :paintballs, dependent: :destroy
 

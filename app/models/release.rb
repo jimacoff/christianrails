@@ -1,4 +1,4 @@
-class Release < ActiveRecord::Base
+class Release < ApplicationRecord
 
   FORMATS = %w(ePub PDF Kobo Book)
 

@@ -1,4 +1,4 @@
-class Crm::Obligation < ActiveRecord::Base
+class Crm::Obligation < ApplicationRecord
   belongs_to :assistant
   belongs_to :contact
 

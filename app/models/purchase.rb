@@ -1,4 +1,4 @@
-class Purchase < ActiveRecord::Base
+class Purchase < ApplicationRecord
   belongs_to :product, inverse_of: :purchases
   belongs_to :order, inverse_of: :purchases
   belongs_to :user, inverse_of: :purchases

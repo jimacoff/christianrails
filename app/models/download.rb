@@ -1,4 +1,4 @@
-class Download < ActiveRecord::Base
+class Download < ApplicationRecord
   belongs_to :release, inverse_of: :downloads
   belongs_to :user, inverse_of: :downloads
   belongs_to :product, inverse_of: :downloads

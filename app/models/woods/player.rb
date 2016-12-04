@@ -1,4 +1,4 @@
-class Woods::Player < ActiveRecord::Base
+class Woods::Player < ApplicationRecord
   has_many :finds,        dependent: :destroy
   has_many :scorecards,   dependent: :destroy
   has_many :footprints,   through: :scorecards

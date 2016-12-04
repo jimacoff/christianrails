@@ -1,4 +1,4 @@
-class PriceCombo < ActiveRecord::Base
+class PriceCombo < ApplicationRecord
   has_and_belongs_to_many :products, inverse_of: :price_combos
   has_many :orders, inverse_of: :price_combo
 

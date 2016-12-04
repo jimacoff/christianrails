@@ -1,4 +1,4 @@
-class Woods::ItemDownload < ActiveRecord::Base
+class Woods::ItemDownload < ApplicationRecord
   belongs_to :item, inverse_of: :item_downloads
   belongs_to :player, inverse_of: :item_downloads
 

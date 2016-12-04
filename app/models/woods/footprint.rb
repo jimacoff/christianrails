@@ -1,4 +1,4 @@
-class Woods::Footprint < ActiveRecord::Base
+class Woods::Footprint < ApplicationRecord
   belongs_to :scorecard, inverse_of: :footprints
   belongs_to :storytree
 

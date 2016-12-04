@@ -1,4 +1,4 @@
-class Crm::Mailout < ActiveRecord::Base
+class Crm::Mailout < ApplicationRecord
   belongs_to :assistant
 
   validates_presence_of :assistant, :type_id

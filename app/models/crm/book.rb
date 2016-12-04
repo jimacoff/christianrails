@@ -1,4 +1,4 @@
-class Crm::Book < ActiveRecord::Base
+class Crm::Book < ApplicationRecord
   belongs_to :assistant
 
   validates_presence_of :title, :author

@@ -1,4 +1,4 @@
-class Crm::Idea < ActiveRecord::Base
+class Crm::Idea < ApplicationRecord
   belongs_to :assistant
 
   validates_presence_of :name

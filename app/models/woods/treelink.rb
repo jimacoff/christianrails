@@ -1,4 +1,4 @@
-class Woods::Treelink < ActiveRecord::Base
+class Woods::Treelink < ApplicationRecord
   belongs_to :node
 
   belongs_to :linked_tree, class_name: "Woods::Storytree", foreign_key: "linked_tree_id"

@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
   has_many :purchases, inverse_of: :order
   belongs_to :price_combo, inverse_of: :orders
   belongs_to :user, inverse_of: :orders

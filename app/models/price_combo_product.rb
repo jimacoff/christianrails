@@ -1,3 +1,3 @@
-class PriceComboProduct < ActiveRecord::Base
+class PriceComboProduct < ApplicationRecord
 
 end

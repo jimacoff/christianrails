@@ -1,4 +1,4 @@
-class Woods::Storytree < ActiveRecord::Base
+class Woods::Storytree < ApplicationRecord
   belongs_to :story
   has_many :nodes, dependent: :destroy
 

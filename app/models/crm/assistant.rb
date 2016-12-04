@@ -1,4 +1,4 @@
-class Crm::Assistant < ActiveRecord::Base
+class Crm::Assistant < ApplicationRecord
   has_many :contacts,    dependent: :destroy
   has_many :obligations, dependent: :destroy
   has_many :meetings,    dependent: :destroy

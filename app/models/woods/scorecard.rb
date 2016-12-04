@@ -1,4 +1,4 @@
-class Woods::Scorecard < ActiveRecord::Base
+class Woods::Scorecard < ApplicationRecord
   belongs_to :player, inverse_of: :scorecards
   has_many :footprints, dependent: :destroy
   belongs_to :story

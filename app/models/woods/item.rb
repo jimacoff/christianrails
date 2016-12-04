@@ -1,4 +1,4 @@
-class Woods::Item < ActiveRecord::Base
+class Woods::Item < ApplicationRecord
   belongs_to :itemset
   belongs_to :story
 

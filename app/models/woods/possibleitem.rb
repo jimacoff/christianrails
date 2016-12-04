@@ -1,4 +1,4 @@
-class Woods::Possibleitem < ActiveRecord::Base
+class Woods::Possibleitem < ApplicationRecord
   belongs_to :node
   belongs_to :itemset
 

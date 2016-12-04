@@ -1,4 +1,4 @@
-class Woods::Itemset < ActiveRecord::Base
+class Woods::Itemset < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :possibleitems, dependent: :destroy

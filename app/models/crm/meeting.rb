@@ -1,4 +1,4 @@
-class Crm::Meeting < ActiveRecord::Base
+class Crm::Meeting < ApplicationRecord
   belongs_to :assistant
   belongs_to :contact
 

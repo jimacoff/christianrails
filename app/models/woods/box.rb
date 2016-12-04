@@ -1,4 +1,4 @@
-class Woods::Box < ActiveRecord::Base
+class Woods::Box < ApplicationRecord
   belongs_to :node
   belongs_to :itemset, inverse_of: :boxes
 

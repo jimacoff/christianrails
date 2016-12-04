@@ -1,4 +1,4 @@
-class StagedPurchase < ActiveRecord::Base
+class StagedPurchase < ApplicationRecord
   belongs_to :user
   belongs_to :product
 

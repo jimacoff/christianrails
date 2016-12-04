@@ -1,4 +1,4 @@
-class Woods::Node < ActiveRecord::Base
+class Woods::Node < ApplicationRecord
 
   belongs_to :storytree
 

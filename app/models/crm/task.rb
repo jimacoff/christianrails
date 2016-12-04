@@ -1,4 +1,4 @@
-class Crm::Task < ActiveRecord::Base
+class Crm::Task < ApplicationRecord
   belongs_to :assistant
 
   validates_presence_of :due_at, :name, :type_id
