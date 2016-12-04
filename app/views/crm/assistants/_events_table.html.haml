@@ -19,7 +19,12 @@
       - else
         - rowclass = ""
 
-      %tr{class: "#{rowclass}"}
+      - if event[:date] < (DateTime.current - (DateTime.current.hour + 1).hours)
+        - overdueclass = "overdue"
+      - else
+        - overdueclass = ""
+
+      %tr{class: "#{rowclass} #{overdueclass}"}
         %td= event[:name]
         %td= event[:with]
         %td

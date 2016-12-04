@@ -77,6 +77,10 @@
   color: darken($alt-smoke-gray, 20%);
 }
 
+.overdue {
+  color: $rust-red;
+}
+
 .meeting-table {
   tr:nth-child(odd)  { background-color: $ice-blue; }
   tr:nth-child(even) { background-color: $soft-cyan; }
