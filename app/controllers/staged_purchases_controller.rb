@@ -21,6 +21,7 @@ class StagedPurchasesController < ApplicationController
         end
       rescue
         record_bad_data(Log::STORE, "Attempted to create StagedPurchase for invalid productID #{staged_purchase_params['product_id']}")
+        render json: {}, status: :unprocessable_entity
       end
     end
   end

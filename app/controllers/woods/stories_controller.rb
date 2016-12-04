@@ -35,6 +35,8 @@ class Woods::StoriesController < Woods::WoodsController
 
     @story.total_plays += 1
     @story.save
+
+    record_positive_event(Log::WOODS, "#{current_user.username} started a game of #{@story.name}")
   end
 
   # JSON endpoint

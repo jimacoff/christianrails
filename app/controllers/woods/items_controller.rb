@@ -22,6 +22,7 @@ class Woods::ItemsController < Woods::WoodsController
             file_name = "#{item.value} - #{item.name}.jpg"
             send_file "#{Rails.root}/../../downloads/#{file_name}"
             Woods::ItemDownload.create(player: current_player, item: item)
+            record_positive_event(Log::WOODS, "#{current_user.username} downloaded #{item.name}")
             return
           end
         else

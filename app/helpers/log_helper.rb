@@ -31,7 +31,7 @@ module LogHelper
     end
 
     def safe_current_user_id
-      current_user.id if defined?(current_user)
+      current_user.id if defined?(current_user) && current_user
     end
 
 end

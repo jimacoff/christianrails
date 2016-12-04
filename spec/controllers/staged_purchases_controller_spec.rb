@@ -62,9 +62,10 @@ RSpec.describe StagedPurchasesController, type: :controller do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved staged_purchase as @staged_purchase" do
+      it "returns an empty hash" do
         post :create, {:staged_purchase => invalid_attributes, format: :json}, valid_session
-        expect(assigns(:staged_purchase)).to be_a_new(StagedPurchase)
+        expect( JSON.parse(response.body) ).to be_a(Hash)
+        expect( JSON.parse(response.body) ).to eq({})
       end
     end
   end
