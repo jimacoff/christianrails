@@ -8,7 +8,8 @@ class NewsletterSignupsController < ApplicationController
 
     respond_to do |format|
       if @newsletter_signup.save
-        send_notifications
+        send_email_notifications
+        record_positive_event(Log::STORE, "New newsletter signup")
         format.json { render json: @newsletter_signup, status: :created }
       else
         format.json { render json: @newsletter_signup.errors, status: :unprocessable_entity }
@@ -28,7 +29,7 @@ class NewsletterSignupsController < ApplicationController
       params.require(:newsletter_signup).permit(:email)
     end
 
-    def send_notifications
+    def send_email_notifications
       NewsletterMailer.welcome(@newsletter_signup).deliver_now
       AdminMailer.newsletter_signup(@newsletter_signup).deliver_now
     end

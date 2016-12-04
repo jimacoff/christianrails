@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def send_registration_notification
+    record_positive_event(Log::STORE, "New account created")
     AdminMailer.account_signup(@user).deliver_now
   end
 

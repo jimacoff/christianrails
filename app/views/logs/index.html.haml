@@ -1,0 +1,21 @@
+%h1 Logs
+
+%table.product-table
+  %thead
+    %tr
+      %th Date/Time
+      %th Location
+      %th User
+      %th Description
+      / %th
+
+  %tbody
+    - @logs.each do |log|
+      %tr
+        %td= log.created_at.strftime("%b %e, %Y  %I:%M %p")
+        %td= log.location
+        %td= log.user ? log.user.username : "n/a"
+        %td= log.description
+        / %td= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' }
+
+= render "admin/admin_link"

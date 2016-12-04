@@ -6,16 +6,21 @@ class StagedPurchasesController < ApplicationController
 
   def create
     if current_user
+      begin
+        product = Product.find( staged_purchase_params['product_id'] )
+        @staged_purchase = StagedPurchase.where(user: current_user, product_id: product.id).first
+        @staged_purchase ||= StagedPurchase.new(user: current_user, product_id: product.id)
 
-      @staged_purchase = StagedPurchase.where( user: current_user, product_id: staged_purchase_params['product_id']).first
-      @staged_purchase ||= StagedPurchase.new( user: current_user, product_id: staged_purchase_params['product_id'] )
-
-      respond_to do |format|
-        if @staged_purchase.save
-          format.json { render json: @staged_purchase, status: :created }
-        else
-          format.json { render json: {}, status: :unprocessable_entity }
+        respond_to do |format|
+          if @staged_purchase.save
+            record_positive_event(Log::STORE, "Item added to cart: #{product.title}")
+            format.json { render json: @staged_purchase, status: :created }
+          else
+            format.json { render json: {}, status: :unprocessable_entity }
+          end
         end
+      rescue
+        record_bad_data(Log::STORE, "Attempted to create StagedPurchase for invalid productID #{staged_purchase_params['product_id']}")
       end
     end
   end
@@ -24,6 +29,7 @@ class StagedPurchasesController < ApplicationController
     if current_user
       if @staged_purchase.user.id == current_user.id
         @staged_purchase.destroy
+        record_event(Log::STORE, "Item removed from cart: #{@staged_purchase.product.title}")
       end
 
       respond_to do |format|

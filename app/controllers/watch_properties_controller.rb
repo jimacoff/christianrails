@@ -12,14 +12,15 @@ class WatchPropertiesController < ApplicationController
       if !watch_property.last_checked || watch_property.last_checked + 23.hours < DateTime.now
         response = HTTParty.get( watch_property.url )
         if response.body.include?( watch_property.expected_response ) && response.code == 200
-          Rails.logger.info("Property check succeeded for #{ watch_property.name }!")
           watch_property.last_checked = DateTime.now
           watch_property.save
+          record_scheduled_event(Log::BACKEND, "#{watch_property.name} is currently available.")
         else
           AdminMailer.watch_property_alert( watch_property ).deliver_now
+          record_warning(Log::BACKEND, "#{watch_property.name} did not respond as expected.")
         end
       else
-        ## TODO log it
+        record_suspicious_event(Log::BACKEND, "WatchProperty check invoked sooner than expected.")
       end
     end
 

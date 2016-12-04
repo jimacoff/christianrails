@@ -12,6 +12,7 @@ Christianrails is a monolithic web application that serves as the homepage of au
 
 Release notes:
 
+- 1.2.5 - Better logging
 - 1.2.4 - Another responsive redesign
 - 1.2.3 - Badger blog integrated
 - 1.2.2 - BinaryWoods story editor implemented for admins; new Go area

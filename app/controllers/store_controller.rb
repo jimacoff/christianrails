@@ -27,6 +27,7 @@ class StoreController < ApplicationController
     if @gc_product && current_user && store_params[:gc] == "crm"
       if @available_products.collect{ |x| x.id }.include?( @gc_product.id )
         @gc_crm = "add-to-cart"
+        record_positive_event(Log::STORE, "Ghostcrime added to cart from CRM")
       end
     end
 
@@ -45,7 +46,7 @@ class StoreController < ApplicationController
   def check_out
     if current_user && current_user.staged_purchases.size > 0
       staged = current_user.staged_purchases
-      titles = staged.collect{ |s| s.product.title }
+      desc = staged.collect{ |s| s.product.title }.join(' + ') + ' eBooks'
 
       total_cost = 0
       staged.map { |st| total_cost += st.product.price }
@@ -69,13 +70,14 @@ class StoreController < ApplicationController
               tax: '%.2f' % (total_cost * Purchase::TAX_RATE ).round(2).to_s
             }
           },
-          description: titles.join(' + ') + ' eBooks'
+          description: desc
         }]
       })
 
       if @payment.create
         # redirect off to PayPal to get approval
         redirect_url = @payment.links.find {|link| link.rel == 'approval_url'}
+        record_positive_event(Log::STORE, "Checkout initiated: #{desc}")
         render js: "window.location = '#{redirect_url.href}'"
       else
         flash[:alert] = @payment.error
@@ -96,9 +98,10 @@ class StoreController < ApplicationController
         gross_price = StagedPurchase.gross_cart_value_for(current_user.id)
         discount = PriceCombo.total_cart_discount_for(current_user.id)
         tax = (gross_price - discount) * Purchase::TAX_RATE
+        total = gross_price - discount + tax
 
         order = Order.create(user: current_user, payer_id: store_params[:PayerID], payment_id: store_params[:paymentId],
-                             discount: discount, tax: tax, total: gross_price - discount + tax)
+                             discount: discount, tax: tax, total: total)
 
         staged.each do |staged_purchase|
           Purchase.create(product: staged_purchase.product, order: order, price: staged_purchase.product.price)
@@ -106,6 +109,7 @@ class StoreController < ApplicationController
         end
 
         note = 'Thanks for your support! Download your new books below.'
+        record_positive_event(Log::STORE, "Checkout completed for $#{total}")
 
         ChristianMailer.ebook_receipt( order ).deliver_now
       else
@@ -140,6 +144,7 @@ class StoreController < ApplicationController
             file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
             send_file "#{Rails.root}/../../downloads/#{file_name}"
             Download.create(user: current_user, release: release)
+            record_positive_event(Log::STORE, "Download initiated for: #{file_name}")
             return
           end
         else
@@ -151,7 +156,7 @@ class StoreController < ApplicationController
       @error = "Unauthorized download attempted on release: #{release_id} by a guest user."
     end
 
-    Rails.logger.warn(@error)
+    record_suspicious_event(Log::STORE, @error)
     flash[:alert] = @error
     redirect_to root_path
   end

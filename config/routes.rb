@@ -34,6 +34,8 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  resources :logs, only: [:index]
+
   resources :store, only: [:index] do
     collection do
       get  'updated_prices'

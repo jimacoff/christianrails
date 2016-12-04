@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :purchases, through: :orders, inverse_of: :user
   has_many :orders, inverse_of: :user
   has_many :staged_purchases, inverse_of: :user
+  has_many :logs, inverse_of: :user
 
   has_one :player, class_name: "Woods::Player", dependent: :destroy
   has_one :assistant, class_name: "Crm::Assistant", dependent: :destroy
