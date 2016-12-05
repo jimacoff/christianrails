@@ -5,10 +5,14 @@ RSpec.describe StoreController, type: :controller do
   render_views
 
   let(:user)    { FactoryGirl.create(:user) }
+
   before (:each) do
     sign_in user
 
-    controller.class.skip_before_filter :verify_is_admin
+    user.admin = true
+    user.save
+
+    #controller.class.skip_before_action :verify_is_admin
   end
 
   describe 'index' do
@@ -164,7 +168,7 @@ RSpec.describe StoreController, type: :controller do
 
     it "should create purchases for each staged purchase" do
 
-      get 'complete_order', paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id'
+      get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( StagedPurchase.count ).to eq(0)
       expect( Purchase.count ).to eq(2)
@@ -173,7 +177,7 @@ RSpec.describe StoreController, type: :controller do
 
     it "should create an order with the correct total, tax and no discount" do
       expect {
-        get :complete_order, { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
+        get :complete_order, params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
       }.to change{ Order.count }.by (1)
 
       order = Order.first
@@ -188,7 +192,7 @@ RSpec.describe StoreController, type: :controller do
       combo1.products << product1
       combo1.products << product2
 
-      get 'complete_order', paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id'
+      get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       order = Order.first
 
@@ -220,7 +224,7 @@ RSpec.describe StoreController, type: :controller do
     it 'should download for an authorized logged-in user' do
       controller.stubs(:send_file).returns("Download successful").once
 
-      get 'download', release_id: release1.id
+      get 'download', params: { release_id: release1.id }
       expect( response.status ).to eq(200)
       expect( assigns[:error] ).to be_nil
     end
@@ -230,7 +234,7 @@ RSpec.describe StoreController, type: :controller do
 
       controller.stubs(:send_file).returns("Download successful").never
 
-      get 'download', release_id: release1.id
+      get 'download', params: { release_id: release1.id }
       expect( response.status ).to eq(302)
       expect( assigns[:error] ).to_not be_nil
     end
@@ -238,7 +242,7 @@ RSpec.describe StoreController, type: :controller do
     it 'should NOT download if user does not own the product' do
       controller.stubs(:send_file).returns("Download successful").never
 
-      get 'download', release_id: release2.id
+      get 'download', params: { release_id: release2.id }
       expect( response.status ).to eq(302)
       expect( assigns[:error] ).to_not be_nil
     end
@@ -246,7 +250,7 @@ RSpec.describe StoreController, type: :controller do
     it 'should NOT download anything if release_id is invalid' do
       controller.stubs(:send_file).returns("Download successful").never
 
-      get 'download', release_id: invalid_release_id
+      get 'download', params: { release_id: invalid_release_id }
       expect( response.status ).to eq(302)
       expect( assigns[:error] ).to_not be_nil
     end
@@ -255,7 +259,7 @@ RSpec.describe StoreController, type: :controller do
       controller.stubs(:send_file).returns("Download successful").times( Download::LIMIT )
 
       ( Download::LIMIT + 1 ).times do
-        get 'download', release_id: release1.id
+        get 'download', params: { release_id: release1.id }
       end
       expect( assigns[:error] ).to_not be_nil
     end

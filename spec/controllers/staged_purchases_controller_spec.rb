@@ -15,8 +15,10 @@ RSpec.describe StagedPurchasesController, type: :controller do
       country: 'CA'
     })
     sign_in @user
+    @user.admin = true
+    @user.save
 
-    controller.class.skip_before_filter :verify_is_admin
+    #controller.class.skip_before_action :verify_is_admin
   end
 
   let(:product)   { FactoryGirl.create(:product) }
@@ -40,7 +42,7 @@ RSpec.describe StagedPurchasesController, type: :controller do
   describe "GET #index" do
     it "assigns all staged_purchases as @staged_purchases" do
       staged_purchase = StagedPurchase.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(assigns(:staged_purchases)).to eq([staged_purchase])
     end
   end
@@ -49,12 +51,12 @@ RSpec.describe StagedPurchasesController, type: :controller do
     context "with valid params" do
       it "creates a new StagedPurchase" do
         expect {
-          post :create, {:staged_purchase => valid_attributes, format: :json}, valid_session
+          post :create, params: {:staged_purchase => valid_attributes, format: :json}, session: valid_session
         }.to change(StagedPurchase, :count).by(1)
       end
 
       it "assigns a newly created staged_purchase as @staged_purchase" do
-        post :create, {:staged_purchase => valid_attributes, format: :json}, valid_session
+        post :create, params: {:staged_purchase => valid_attributes, format: :json}, session: valid_session
         expect(assigns(:staged_purchase)).to be_a(StagedPurchase)
         expect(assigns(:staged_purchase)).to be_persisted
       end
@@ -63,7 +65,7 @@ RSpec.describe StagedPurchasesController, type: :controller do
 
     context "with invalid params" do
       it "returns an empty hash" do
-        post :create, {:staged_purchase => invalid_attributes, format: :json}, valid_session
+        post :create, params: {:staged_purchase => invalid_attributes, format: :json}, session: valid_session
         expect( JSON.parse(response.body) ).to be_a(Hash)
         expect( JSON.parse(response.body) ).to eq({})
       end
@@ -74,7 +76,7 @@ RSpec.describe StagedPurchasesController, type: :controller do
     it "destroys the requested staged_purchase" do
       staged_purchase = StagedPurchase.create! valid_attributes
       expect {
-        delete :destroy, {id: staged_purchase.id, format: :json}, valid_session
+        delete :destroy, params: {id: staged_purchase.id, format: :json}, session: valid_session
       }.to change(StagedPurchase, :count).by(-1)
     end
   end

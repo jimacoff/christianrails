@@ -28,4 +28,7 @@ Christianrails::Application.configure do
   # number of complex assets.
   config.assets.debug = false
 
+  # replaces queit_assets gem
+  config.assets.quiet = true
+
 end

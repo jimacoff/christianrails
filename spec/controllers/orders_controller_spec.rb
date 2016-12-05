@@ -14,9 +14,11 @@ RSpec.describe OrdersController, type: :controller do
       password_confirmation: '12345678',
       country: 'CA'
     })
+    @user.admin = true
+    @user.save
     sign_in @user
 
-    controller.class.skip_before_filter :verify_is_admin
+    #controller.class.skip_before_action :verify_is_admin
   end
 
   let(:price_combo)   { FactoryGirl.create(:price_combo) }
@@ -47,7 +49,7 @@ RSpec.describe OrdersController, type: :controller do
     let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
 
     it "assigns all orders as @orders" do
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(assigns(:orders)).to eq([order])
     end
   end
@@ -58,7 +60,7 @@ RSpec.describe OrdersController, type: :controller do
     let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
 
     it "retrieves an order for a user" do
-      get :show, {id: order.id}, valid_session
+      get :show, params: {id: order.id}, session: valid_session
 
       expect(response).to be_success
       expect(assigns(:order)).to eq(order)

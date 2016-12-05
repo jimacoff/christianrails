@@ -16,7 +16,7 @@ RSpec.describe PurchasesController, type: :controller do
     })
     sign_in @user
 
-    controller.class.skip_before_filter :verify_is_admin
+    controller.class.skip_before_action :verify_is_admin
   end
 
   let(:product)   { FactoryGirl.create(:product) }
@@ -42,7 +42,7 @@ RSpec.describe PurchasesController, type: :controller do
   describe "GET #index" do
     it "assigns all purchases as @purchases" do
       purchase = Purchase.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(assigns(:purchases)).to eq([purchase])
     end
   end

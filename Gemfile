@@ -1,24 +1,24 @@
 source 'https://rubygems.org'
 
+gem 'rails', '~> 5.0.0'
+
+gem 'devise', '~> 4.1.0'
 gem 'capistrano'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rbenv'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'devise', '4.1.0'
 gem 'factory_girl_rails', '~> 4.0'
 gem 'haml'
 gem 'haml-rails'
 gem 'highline'
 gem 'httparty'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'mandrill-api'
 gem 'mocha'
 gem 'non-stupid-digest-assets'
 gem 'paypal-sdk-rest'
 gem 'pg'
-gem 'rails', '4.2.4'
-gem 'rake', '~> 10.4.2'
+gem 'rake'
 gem 'redcarpet'
 gem 'sass-rails'
 gem 'seed_dump'
@@ -35,13 +35,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
-  gem 'quiet_assets'
-end
-
 group :test do
   gem 'rspec-rails'
   gem 'simplecov', require: false
+  gem 'rails-controller-testing'
 end
 
 # Use ActiveModel has_secure_password

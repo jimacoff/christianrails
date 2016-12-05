@@ -22,7 +22,7 @@ RSpec.describe AdminController, type: :controller do
   describe "GET #index" do
 
     it "should not allow access to non-admin user" do
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(response).to redirect_to(root_path)
     end
 
@@ -30,7 +30,7 @@ RSpec.describe AdminController, type: :controller do
       @user.admin = true
       @user.save
 
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(response).to be_ok
     end
   end
