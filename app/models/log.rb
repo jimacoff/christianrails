@@ -1,5 +1,5 @@
 class Log < ApplicationRecord
-  belongs_to :user, inverse_of: :logs
+  belongs_to :user, inverse_of: :logs, optional: true
 
   validates_presence_of :description, :location
 

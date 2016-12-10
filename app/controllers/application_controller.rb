@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   after_action :store_location
   around_action :set_time_zone, if: :current_user
 
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, prepend: true
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.

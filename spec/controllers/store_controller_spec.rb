@@ -211,7 +211,7 @@ RSpec.describe StoreController, type: :controller do
     let!(:release1)  { FactoryGirl.create(:release, product: product1) }
     let!(:release2)  { FactoryGirl.create(:release, product: product2) }
 
-    let(:order) { FactoryGirl.create(:order, user: user) }
+    let!(:order) { FactoryGirl.create(:order, user: user) }
 
     let!(:purchase1)  { FactoryGirl.create(:purchase, product: product1, order: order) }
 

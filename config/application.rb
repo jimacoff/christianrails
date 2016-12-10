@@ -32,5 +32,7 @@ module Christianrails
 
     config.assets.paths << Rails.root.join("app", "assets", "stylesheets", "woods")
 
+    ActiveSupport.halt_callback_chains_on_return_false = false
+
   end
 end
