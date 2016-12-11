@@ -76,6 +76,13 @@ Christianrails::Application.configure do
   }
   config.action_mailer.default_url_options = { host: ENV["SMTP_DOMAIN"] }
 
+  config.middleware.use ExceptionNotification::Rack,
+  email: {
+    email_prefix: "[LOL] ",
+    sender_address: %{"Christianrails Alertz" <me@christiandewolf.com>},
+    exception_recipients: %w{me@christiandewolf.com}
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
   config.i18n.fallbacks = true

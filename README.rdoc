@@ -12,6 +12,7 @@ Christianrails is a monolithic web application that serves as the homepage of au
 
 Release notes:
 
+- 1.3.0 - Rails 5 upgrade
 - 1.2.5 - Better logging
 - 1.2.4 - Another responsive redesign
 - 1.2.3 - Badger blog integrated
@@ -35,7 +36,7 @@ Release notes:
 
 This application uses:
 
-* Ruby  2.1.2
-* Rails 4.2.4
+* Ruby  2.3.1
+* Rails 5.0.0.1
 
 Licensed under the Apache License, Version 2.0. Images may not be used in any derivative work or for profit.

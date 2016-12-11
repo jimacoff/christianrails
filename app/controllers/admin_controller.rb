@@ -15,6 +15,10 @@ class AdminController < ApplicationController
     end
   end
 
+  def cause_exception
+    1/0
+  end
+
   def receipttest
     @failure = false
     begin

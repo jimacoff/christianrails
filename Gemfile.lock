@@ -68,6 +68,9 @@ GEM
     docile (1.1.5)
     erubis (2.7.0)
     eventmachine (1.2.1)
+    exception_notification (4.2.1)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     excon (0.54.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -253,6 +256,7 @@ DEPENDENCIES
   capistrano-bundler (~> 1.1.2)
   capistrano-rbenv
   devise (~> 4.1.0)
+  exception_notification
   factory_girl_rails (~> 4.0)
   figaro
   haml

@@ -69,6 +69,7 @@ Christianrails::Application.routes.draw do
       get 'emailtest'
       get 'receipttest'
       get 'crm_stats'
+      get 'cause_exception'
     end
   end
 
