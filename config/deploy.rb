@@ -37,7 +37,7 @@ namespace :deploy do
   desc 'Precompile assets'
   task :precompile do
     on roles :all do
-      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rake assets:precompile"
+      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rails assets:precompile"
     end
   end
 
@@ -51,7 +51,7 @@ namespace :deploy do
   desc 'Migrate the DB'
   task :migrate do
     on roles :all do
-      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rake db:migrate"
+      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rails db:migrate"
     end
   end
 
