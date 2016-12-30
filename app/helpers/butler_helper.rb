@@ -4,6 +4,11 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
+        title: "20161230_obligatory_2016_listicle",
+        category: "Summaries of Time",
+        tags: ["Listicle", "Year in review", "milk technologies", "cats"]
+      },
+      {
         title: "20160826_did_not_get_the_social_media_job",
         category: "Freelancing Stories",
         tags: ["freelancing", "Twitter", "style", "failure", "watches"]
