@@ -73,6 +73,12 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  resources :diversions, only: [:index] do
+    collection do
+      get 'rainfield'
+    end
+  end
+
   namespace :woods do
     resources :players
 
