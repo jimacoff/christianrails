@@ -4,6 +4,11 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
+        title: "20170116_4_things_computer_world_got_right",
+        category: "Music & Lyrics",
+        tags: ["music", "Kraftwerk", "computers", "business", "numbers", "money", "people"]
+      },
+      {
         title: "20161230_obligatory_2016_listicle",
         category: "Summaries of Time",
         tags: ["Listicle", "Year in review", "milk technologies", "cats"]
