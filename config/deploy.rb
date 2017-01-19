@@ -34,17 +34,17 @@ namespace :deploy do
   #   system "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   # end
 
-  desc 'Precompile assets'
-  task :precompile do
-    on roles :all do
-      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rails assets:precompile"
-    end
-  end
-
   desc 'Get the vars'
   task :get_vars do
     on roles :all do
       execute "cp /var/www/christianrails/releases/.application.yml /var/www/christianrails/current/config/application.yml"
+    end
+  end
+
+  desc 'Precompile assets'
+  task :precompile do
+    on roles :all do
+      execute "cd /var/www/christianrails/current && RAILS_ENV=production #{fetch(:rbenv_prefix)} rails assets:precompile"
     end
   end
 
