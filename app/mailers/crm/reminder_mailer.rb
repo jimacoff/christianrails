@@ -21,7 +21,13 @@ class Crm::ReminderMailer < ActionMailer::Base
                 "Get your life together.",
                 "Make today work for you.",
                 "Take control of your day.",
-                "Get it done."
+                "Get it done.",
+                "Nothing can stop you today.",
+                "Obliterate your obligations.",
+                "You know you're the best. Prove it.",
+                "Success is imminent. Just do the work.",
+                "Continue being unstoppable.",
+                "You have immense power. Use it."
               ]
       subjs[ Random.rand( subjs.size )]
     end
