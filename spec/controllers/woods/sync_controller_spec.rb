@@ -32,7 +32,7 @@ RSpec.describe Woods::SyncController, type: :controller do
     let!(:node3) { FactoryGirl.create(:node, storytree_id: storytree.id, tree_index: 3) }
 
     it "finds a node that exists" do
-      get :find_node_by_desc, params: {story_name: story.name, storytree_name: storytree.name, tree_index: 2}, format: :json
+      get :find_node_by_desc, params: {story_name: story.name, storytree_name: storytree.name, tree_index: 2, sync_token: 'lol-a-sync-token'}, format: :json
 
       expect( response ).to be_success
       resp = JSON.parse( response.body )
@@ -42,21 +42,32 @@ RSpec.describe Woods::SyncController, type: :controller do
       expect( resp['story_id'] ).to eq( story.id )
     end
 
-    it "does not return an ID for a node that doesn't exist" do
-      get :find_node_by_desc, params: {story_name: story.name, storytree_name: storytree.name, tree_index: 4}, format: :json
+    it "does not return information for a node that doesn't exist" do
+      get :find_node_by_desc, params: {story_name: story.name, storytree_name: storytree.name,
+                                       tree_index: 4, sync_token: 'lol-a-sync-token'}, format: :json
       expect( response ).to_not be_success
       resp = JSON.parse( response.body )
       expect( resp['errors'] ).to eq( "Node does not exist." )
 
-      get :find_node_by_desc, params: {story_name: "Flarn", storytree_name: storytree.name, tree_index: 2}, format: :json
+      get :find_node_by_desc, params: {story_name: "Flarn", storytree_name: storytree.name,
+                                       tree_index: 2, sync_token: 'lol-a-sync-token'}, format: :json
       expect( response ).to_not be_success
       resp = JSON.parse( response.body )
       expect( resp['errors'] ).to eq( "Node does not exist." )
 
-      get :find_node_by_desc, params: {story_name: story.name, storytree_name: "Cran", tree_index: 2}, format: :json
+      get :find_node_by_desc, params: {story_name: story.name, storytree_name: "Cran",
+                                       tree_index: 2, sync_token: 'lol-a-sync-token'}, format: :json
       expect( response ).to_not be_success
       resp = JSON.parse( response.body )
       expect( resp['errors'] ).to eq( "Node does not exist." )
+    end
+
+    it "does not return information if your sync token is incorrect" do
+      get :find_node_by_desc, params: {story_name: story.name, storytree_name: storytree.name,
+                                       tree_index: 2, sync_token: 'LOLOLOLO-a-sync-token'}, format: :json
+      expect( response ).to_not be_success
+      resp = JSON.parse( response.body )
+      expect( resp['errors'] ).to eq( "Invalid sync token." )
     end
   end
 

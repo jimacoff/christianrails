@@ -7,12 +7,14 @@ class Woods::SyncController < Woods::WoodsController
   #        uses a story-specific token to authenticate.
   def find_node_by_desc
     @node = @invalid_token = nil
-    @story     = Woods::Story.where( name: params[:story_name] ).first
-    if @story.sync_token && !@story.sync_token.empty? && (@story.sync_token == params[:sync_token])
-      @storytree = Woods::Storytree.where( story_id: @story.id, name: params[:storytree_name] ).first if @story
-      @node      = Woods::Node.where( storytree_id: @storytree.id, tree_index: params[:tree_index].to_i ).first if @story && @storytree
-    else
-      @invalid_token = true
+    @story = Woods::Story.where( name: params[:story_name] ).first
+    if @story
+      if @story.sync_token && !@story.sync_token.empty? && (@story.sync_token == params[:sync_token])
+        @storytree = Woods::Storytree.where( story_id: @story.id, name: params[:storytree_name] ).first if @story
+        @node      = Woods::Node.where( storytree_id: @storytree.id, tree_index: params[:tree_index].to_i ).first if @story && @storytree
+      else
+        @invalid_token = true
+      end
     end
 
     respond_to do |format|
