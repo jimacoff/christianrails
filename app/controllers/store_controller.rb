@@ -12,10 +12,13 @@ class StoreController < ApplicationController
   def index
     @price_combos = PriceCombo.all
     @owned_products = []
+    @diamondfind = Woods::Story.where(name: "Diamond Find").first
 
     if current_user
       @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
-      @finds = current_user.player.finds.joins(:item).where('woods_items.value > ?', 0) if current_user.player
+      @finds = current_user.player.finds.joins(:item)
+                                        .where('woods_items.value > ?', 0)
+                                        .where('woods_finds.story_id = ?', @diamondfind.id) if current_user.player
     end
     @finds ||= nil
 

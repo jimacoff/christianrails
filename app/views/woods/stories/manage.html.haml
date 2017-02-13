@@ -29,17 +29,22 @@
       .woods-box
         = render "new_storytree_form"
 
+      %br
+
       #story-stats-div
         %h2 Stats
-        %table.woods-table
-          %tr
-            %td Lefts
-            %td Rights
-          %tr
-            %td= @lefts
-            %td= @rights
+        - if @lefts || @rights
+          %table.woods-table
+            %tr
+              %td Lefts
+              %td Rights
+            %tr
+              %td= @lefts
+              %td= @rights
+        - else
+          %p No plays yet!
 
 
 %br
 %br
-= link_to 'Back to story', @story
+= link_to "Back to #{@story.name} frontpage", @story

@@ -8,27 +8,29 @@
 
   - if @player.finds.size > 0
 
-    %table.player-finds-table.modest-width
-      %thead
-        - if current_player && current_player.id == @player.id
+    - @finds_by_story.each do |k,v|
+      %table.player-finds-table.modest-width
+        %thead
+          - if current_player && current_player.id == @player.id
+            %tr
+              %th{colspan: 2, style: "text-align: center;"}
+                %h2.center= k.name
+                = link_to k.store_link_text, root_path, class: "niceblue"
           %tr
-            %th{colspan: 2, style: "text-align: center;"}
-              = link_to "Download your diamonds!", root_path, class: "niceblue"
-        %tr
-          %th
-            %h3= "Total finds: #{ @player.finds.size }"
-          %th Value
+            %th
+              %h3= "Total finds: #{ v.size }"
+            %th Value
 
-      %tbody
+        %tbody
 
-        - @player.finds.each do |f|
-          %tr
-            %td= f.item.name
-            %td= f.item.value
+          - v.each do |f|
+            %tr
+              %td= f.item.name
+              %td= f.item.value
 
   %br
   .center
     - if current_user && current_user.admin?
       = link_to "Admin: Players index", woods_players_path
       |
-    = link_to "Back to Diamond Find", diamondfind_path, class: "niceblue"
+    = link_to "Play Diamond Find", diamondfind_path, class: "niceblue"
