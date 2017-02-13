@@ -22,9 +22,10 @@ class Woods::Player < ApplicationRecord
     finds.collect{ |f| f.item.itemset_id }.uniq.include?(itemset_id_to_check)
   end
 
-  def total_score
+  def total_score(story_id = nil)
+    relevant_finds = story_id ? finds.where(story_id: story_id) : finds
     score = 0
-    finds.each do |f|
+    relevant_finds.each do |f|
       score += f.item.value
     end
     score

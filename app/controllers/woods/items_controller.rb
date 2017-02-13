@@ -1,6 +1,7 @@
 class Woods::ItemsController < Woods::WoodsController
 
-  before_action :set_woods_params, only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_item,   only: [:show, :edit, :update, :destroy]
+  before_action :set_woods_params, only: [:show, :edit, :update, :destroy, :create]
   skip_before_action :verify_is_admin, only: [:download]
 
   # PUBLIC
@@ -43,16 +44,17 @@ class Woods::ItemsController < Woods::WoodsController
 
   def create
     @item = Woods::Item.new(woods_item_params)
+    @item.itemset_id = @itemset.id
 
-    if @item.save
-      redirect_to @item, notice: 'Item was successfully created.'
+    if @item.save!
+      redirect_to woods_story_itemset_path(@story, @itemset), notice: 'Item was successfully created.'
     else
-      render action: 'new'
+      redirect_to woods_story_itemset_path(@story, @itemset)
     end
   end
 
   def update
-    if @item.update(woods_item_params.except(:authenticity_token))
+    if @item.update(woods_item_params)
       redirect_to woods_story_itemset_path(@story, @itemset), notice: 'Item was successfully updated.'
     else
       redirect_to woods_story_itemsets_path(@story, @itemset)
@@ -66,13 +68,16 @@ class Woods::ItemsController < Woods::WoodsController
 
   private
 
-    def set_woods_params
+    def set_woods_item
       @item = Woods::Item.find(params[:id])
+    end
+
+    def set_woods_params
       @story = Woods::Story.find(params[:story_id])
       @itemset = Woods::Itemset.find(params[:itemset_id])
     end
 
     def woods_item_params
-      params.permit(:authenticity_token, :item_id, :name, :legend, :value)
+      params.require(:woods_item).permit(:item_id, :name, :legend, :value, :itemset_id)
     end
 end

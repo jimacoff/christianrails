@@ -12,15 +12,22 @@
             %td= st.max_level
 
       %br
-      = link_to "Items", woods_story_itemsets_path(@story)
-      |
-      = link_to "Palettes", woods_story_palettes_path(@story)
-      %br
-      %br
+      .woods-box
+        = link_to "Items/itemsets", woods_story_itemsets_path(@story)
+        %br
+        %br
+        = link_to "Manage Palettes", woods_story_palettes_path(@story)
+        %br
+        %br
+        = link_to "Edit story header info", edit_woods_story_path(@story)
+        %br
+        %br
+        = link_to "Export story as JSON", export_woods_story_path(@story)
 
 
     %td{style: "vertical-align: top;"}
-      = render "new_storytree_form"
+      .woods-box
+        = render "new_storytree_form"
 
       #story-stats-div
         %h2 Stats
@@ -32,9 +39,7 @@
             %td= @lefts
             %td= @rights
 
-      %br
-      %br
-      = link_to "Export story as JSON", export_woods_story_path(@story)
+
 %br
 %br
 = link_to 'Back to story', @story

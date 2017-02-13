@@ -1,28 +1,29 @@
 %h1 Palettes
 
-%table.modest-width
-  %tr
-    %td
-      = select_tag 'palettes', options_from_collection_for_select(@palettes, "id", "name"), multiple: true, class: 'item-selectbox', onchange: "selectPalette( parseInt( $(this).val() ) );"
-    %td
-      #paletteform.hidden
-        = form_tag(woods_story_palette_path(@story, @palettes.first), method: :put) do
-          %span Name:
-          = text_field_tag :name, nil, size: 40
-          %br
-          %span Foreground colour:
-          = text_field_tag :fore_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
+- if @palettes.size > 0
+  %table.modest-width
+    %tr
+      %td
+        = select_tag 'palettes', options_from_collection_for_select(@palettes, "id", "name"), multiple: true, class: 'item-selectbox', onchange: "selectPalette( parseInt( $(this).val() ) );"
+      %td
+        #paletteform.hidden
+          = form_tag(woods_story_palette_path(@story, @palettes.first), id: 'update-palette-form', method: :put) do
+            %span Name:
+            = text_field_tag 'woods_palette[name]', nil, size: 40
+            %br
+            %span Foreground colour:
+            = text_field_tag 'woods_palette[fore_colour]', nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
 
-          %br
-          %span Background colour:
-          = text_field_tag :back_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
+            %br
+            %span Background colour:
+            = text_field_tag 'woods_palette[back_colour]', nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
 
-          %br
-          %span Alt-background colour:
-          = text_field_tag :alt_colour, nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
+            %br
+            %span Alt-background colour:
+            = text_field_tag 'woods_palette[alt_colour]', nil, class: 'jscolor colourbox', onChange: "paintTestPanel();"
 
-          %br
-          = submit_tag :Update
+            %br
+            = submit_tag :Update
 
 %br
 
@@ -32,8 +33,12 @@
       You agree to stick up posters, as long as there's a diamond in it for you. You and the Mayor shake hands and then he reveals an unrealistically large stack of posters -- at least three thousand -- that you must put on walls with tape he has also provided. You take the posters and leave the office, but after sticking up five posters you're already tiring of the task. Do you finish the job like you agreed, or dispose of the posters in a sewer grate and return in a few hours to collect your diamond?
   %button#one-button.binary-button{style: "width: 200px;"} One button
   %button#another-button.binary-button{style: "width: 200px;"} Another button
+  %br
+  %br
 
-%br
+.woods-box
+  %h3 New Palette
+  = render 'form'
 
 = link_to 'Back to story manager', manage_woods_story_path(@story)
 
@@ -47,11 +52,11 @@
     $('#colourtest').removeClass('hidden');
 
     var the_palette = $.grep(palettes, function(e){ return e.id === selected_id; })[0];
-    $('#name').val(the_palette.name);
+    $('#woods_palette_name').val(the_palette.name);
 
-    $('#fore_colour').val(the_palette.fore_colour);
-    $('#back_colour').val(the_palette.back_colour);
-    $('#alt_colour').val(the_palette.alt_colour);
+    $('#woods_palette_fore_colour').val(the_palette.fore_colour);
+    $('#woods_palette_back_colour').val(the_palette.back_colour);
+    $('#woods_palette_alt_colour').val(the_palette.alt_colour);
 
     $('.colourbox').each(function() {
       $(this).focus();
@@ -59,13 +64,13 @@
     $('#palettes').focus();
     paintTestPanel();
 
-    $('form').attr("action", "/woods/stories/" + story_id + "/palettes/" + the_palette.id);
+    $('#update-palette-form').attr("action", "/woods/stories/" + story_id + "/palettes/" + the_palette.id);
   }
 
   function paintTestPanel() {
-    var fore = '#' + $('#fore_colour').val(),
-        back = '#' + $('#back_colour').val(),
-        alt  = '#' + $('#alt_colour').val();
+    var fore = '#' + $('#woods_palette_fore_colour').val(),
+        back = '#' + $('#woods_palette_back_colour').val(),
+        alt  = '#' + $('#woods_palette_alt_colour').val();
 
     $('.binary-button').css('border-color', back);
 

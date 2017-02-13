@@ -11,4 +11,8 @@
         %td= link_to i.name, woods_story_itemset_path(@story, i)
 %br
 
+.woods-box
+  %h3 New Itemset
+  = render 'form'
+
 = link_to "Back to story manager", manage_woods_story_path(@story)

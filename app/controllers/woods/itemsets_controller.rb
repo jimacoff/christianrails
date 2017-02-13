@@ -7,19 +7,22 @@ class Woods::ItemsetsController < Woods::WoodsController
 
   def index
     @itemsets = Woods::Itemset.includes(:items).where(story_id: @story.id)
+    @itemset = Woods::Itemset.new(story_id: @story.id)
   end
 
   def show
     @items = Woods::Item.where(itemset_id: @itemset.id)
+    @item = Woods::Item.new(itemset_id: @itemset.id)
   end
 
   def create
     @itemset = Woods::Itemset.new(woods_itemset_params)
+    @itemset.story_id = @story.id
 
     if @itemset.save
-      redirect_to @itemset, notice: 'Itemset was successfully created.'
+      redirect_to woods_story_itemsets_path(@story, @itemset), notice: 'Itemset was successfully created.'
     else
-      render action: 'new'
+      redirect_to woods_story_itemsets_path(@story, @itemset)
     end
   end
 
@@ -38,6 +41,6 @@ class Woods::ItemsetsController < Woods::WoodsController
     end
 
     def woods_itemset_params
-      params[:woods_itemset]
+      params.require(:woods_itemset).permit(:name)
     end
 end

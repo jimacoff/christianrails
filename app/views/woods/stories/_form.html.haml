@@ -1,10 +1,20 @@
 = form_for @story do |f|
   - if @story.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@story.errors.count, "error")} prohibited this woods_story from being saved:"
+      %h2= "#{pluralize(@story.errors.count, "error")} prohibited this Story from being saved:"
       %ul
         - @story.errors.full_messages.each do |msg|
           %li= msg
 
-  .actions
-    = f.submit 'Save'
+  %table.modest-width.zero-margin
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name, required: true
+
+    %tr.field
+      %td= f.label "Store link text"
+      %td= f.text_field :store_link_text
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'

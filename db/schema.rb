@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204154236) do
+ActiveRecord::Schema.define(version: 20170212233404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,10 +113,9 @@ ActiveRecord::Schema.define(version: 20161204154236) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["release_id"], name: "index_downloads_on_release_id", using: :btree
+    t.index ["user_id"], name: "index_downloads_on_user_id", using: :btree
   end
-
-  add_index "downloads", ["release_id"], name: "index_downloads_on_release_id", using: :btree
-  add_index "downloads", ["user_id"], name: "index_downloads_on_user_id", using: :btree
 
   create_table "logs", force: :cascade do |t|
     t.string   "description"
@@ -191,9 +189,8 @@ ActiveRecord::Schema.define(version: 20161204154236) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "physical_code"
+    t.index ["product_id"], name: "index_releases_on_product_id", using: :btree
   end
-
-  add_index "releases", ["product_id"], name: "index_releases_on_product_id", using: :btree
 
   create_table "staged_purchases", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -225,11 +222,10 @@ ActiveRecord::Schema.define(version: 20161204154236) do
     t.string   "last_name",              default: ""
     t.boolean  "crm_access",             default: true
     t.string   "time_zone",              default: "UTC"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "watch_properties", force: :cascade do |t|
     t.string   "name"
@@ -269,10 +265,9 @@ ActiveRecord::Schema.define(version: 20161204154236) do
     t.integer  "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_woods_item_downloads_on_item_id", using: :btree
+    t.index ["player_id"], name: "index_woods_item_downloads_on_player_id", using: :btree
   end
-
-  add_index "woods_item_downloads", ["item_id"], name: "index_woods_item_downloads_on_item_id", using: :btree
-  add_index "woods_item_downloads", ["player_id"], name: "index_woods_item_downloads_on_player_id", using: :btree
 
   create_table "woods_items", force: :cascade do |t|
     t.string   "name",       limit: 100,              null: false
@@ -359,14 +354,15 @@ ActiveRecord::Schema.define(version: 20161204154236) do
   end
 
   create_table "woods_stories", force: :cascade do |t|
-    t.string   "name",        limit: 50,                   null: false
+    t.string   "name",            limit: 50,                   null: false
     t.integer  "player_id"
-    t.string   "description", limit: 1000
+    t.string   "description",     limit: 1000
     t.integer  "entry_tree"
     t.integer  "total_plays"
-    t.boolean  "published",                default: false
+    t.boolean  "published",                    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "store_link_text"
   end
 
   create_table "woods_storytrees", force: :cascade do |t|

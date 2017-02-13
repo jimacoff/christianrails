@@ -1,24 +1,29 @@
 %h1= @itemset.name
 
-%table.modest-width
-  %tr
-    %td
-      = select_tag 'items', options_from_collection_for_select(@items, "id", "name"), multiple: true, class: 'item-selectbox', onchange: "selectItem( parseInt( $(this).val() ) );"
-    %td
-      #itemform.hidden
-        = form_tag(woods_story_itemset_item_path(@story, @itemset, @items.first || Woods::Item.new), method: :put) do
-          %span Name:
-          = text_field_tag :name, nil, size: 40
-          %br
-          %span Description:
-          %br
-          = text_area_tag :legend, nil, { rows: 10, cols: 40 }
-          %br
-          %span Value:
-          = number_field_tag :value, nil, { step: 1, min: -50, max: 150 }
+- if @items.size > 0
+  %table.modest-width
+    %tr
+      %td
+        = select_tag 'items', options_from_collection_for_select(@items, "id", "name"), multiple: true, class: 'item-selectbox', onchange: "selectItem( parseInt( $(this).val() ) );"
+      %td
+        #itemform.hidden
+          = form_tag(woods_story_itemset_item_path(@story, @itemset, @items.first), id: 'updateitem-form', method: :put) do
+            %span Name:
+            = text_field_tag 'woods_item[name]', nil, size: 40
+            %br
+            %span Description:
+            %br
+            = text_area_tag 'woods_item[legend]', nil, { rows: 10, cols: 40 }
+            %br
+            %span Value:
+            = number_field_tag 'woods_item[value]', nil, { step: 1, min: -50, max: 150 }
 
-          %br
-          = submit_tag :Update
+            %br
+            = submit_tag :Update
+
+.woods-box
+  %h3 Add new item
+  = render '/woods/items/form'
 
 %br
 
@@ -34,9 +39,9 @@
     $('#itemform').removeClass('hidden');
 
     var the_item = $.grep(items, function(e){ return e.id === selected_id; })[0];
-    $('#name').val(the_item.name);
-    $('#legend').val(the_item.legend);
-    $('#value').val( the_item.value );
+    $('#woods_item_name').val(the_item.name);
+    $('#woods_item_legend').val(the_item.legend);
+    $('#woods_item_value').val( the_item.value );
 
-    $('form').attr("action", "/woods/stories/" + story_id + "/itemsets/" + itemset_id + "/items/" + the_item.id);
+    $('#updateitem-form').attr("action", "/woods/stories/" + story_id + "/itemsets/" + itemset_id + "/items/" + the_item.id);
   }

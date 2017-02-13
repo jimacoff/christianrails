@@ -1,6 +1,6 @@
 #statspanel.zero-margin.center
   - if current_user && current_user.player
-    %span= "Score: #{current_player.total_score}"
+    %span= "Score: #{current_player.total_score(@story.id)}"
 
 #imagepanel.zero-margin.center
   = image_tag("#{@story.pic_name}/title.png", class: "df-image")

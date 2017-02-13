@@ -1,10 +1,15 @@
-= form_for @item do |f|
+= form_for @item, url: woods_story_itemset_items_path(@story, @itemset, @item), id: 'newitem-form', method: :post do |f|
   - if @item.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@item.errors.count, "error")} prohibited this woods_item from being saved:"
+      %h2= "#{pluralize(@item.errors.count, "error")} prohibited this Item from being saved:"
       %ul
         - @item.errors.full_messages.each do |msg|
           %li= msg
+
+  %table.modest-width
+    %tr.field
+      %td= f.label :name
+      %td= f.text_field :name, required: true
 
   .actions
     = f.submit 'Save'

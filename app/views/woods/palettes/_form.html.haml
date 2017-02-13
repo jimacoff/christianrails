@@ -1,10 +1,15 @@
-= form_for @palette do |f|
+= form_for @palette, url: woods_story_palettes_path(@story, @palette), method: :post do |f|
   - if @palette.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@palette.errors.count, "error")} prohibited this woods_palette from being saved:"
+      %h2= "#{pluralize(@palette.errors.count, "error")} prohibited this palette from being saved:"
       %ul
         - @palette.errors.full_messages.each do |msg|
           %li= msg
+
+  %table.modest-width
+    .field
+      %td= f.label :name
+      %td= f.text_field :name, required: true
 
   .actions
     = f.submit 'Save'

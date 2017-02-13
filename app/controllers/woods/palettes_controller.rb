@@ -6,16 +6,18 @@ class Woods::PalettesController < Woods::WoodsController
   ## ADMIN ONLY
 
   def index
-    @palettes = Woods::Palette.all
+    @palettes = Woods::Palette.where(story_id: @story.id)
+    @palette = Woods::Palette.new
   end
 
   def create
     @palette = Woods::Palette.new(woods_palette_params)
+    @palette.story_id = @story.id
 
     if @palette.save
-      redirect_to @palette, notice: 'Palette was successfully created.'
+      redirect_to woods_story_palettes_path, notice: 'Palette was successfully created.'
     else
-      render action: 'new'
+      redirect_to woods_story_palettes_path
     end
   end
 
@@ -42,6 +44,6 @@ class Woods::PalettesController < Woods::WoodsController
     end
 
     def woods_palette_params
-      params.permit(:name, :fore_colour, :back_colour, :alt_colour, :story_id)
+      params.require(:woods_palette).permit(:name, :fore_colour, :back_colour, :alt_colour, :story_id)
     end
 end
