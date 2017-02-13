@@ -3,7 +3,7 @@ require 'capistrano-bundler'
 
 set :application, 'christianrails'
 
-set :scm, :git
+# set :scm, :git
 set :repo_url, 'https://github.com/christiancodes/christianrails.git'
 
 set :deploy_to, '/var/www/christianrails'
