@@ -1,7 +1,7 @@
 class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update]
-  before_action :verify_is_published, except: [:index, :show, :manage, :export]
+  before_action :verify_is_published, except: [:index, :show, :manage, :export, :create, :edit, :update]
   skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
 
   ## PUBLIC
@@ -42,7 +42,7 @@ class Woods::StoriesController < Woods::WoodsController
   # JSON endpoint
   def move_to
     begin
-      @node = Woods::Node.find( woods_story_params[:target_node] )
+      @node = Woods::Node.find( params[:target_node] )
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
 
       #security check
@@ -55,7 +55,7 @@ class Woods::StoriesController < Woods::WoodsController
         @scorecard = @scorecard.first
       end
 
-      dir = woods_story_params[:dir]
+      dir = params[:dir]
       if dir == "L"
         @scorecard.lefts += 1
         @scorecard.save
@@ -102,6 +102,26 @@ class Woods::StoriesController < Woods::WoodsController
 
   def index
     @stories = Woods::Story.all
+    @story = Woods::Story.new
+  end
+
+  def create
+    @story = Woods::Story.new(woods_story_params)
+    @story.player_id = current_player.id
+    @story.published = false
+    @story.total_plays = 0
+
+    if @story.save
+      @storytree = Woods::Storytree.new( name: "Intro", max_level: 1, story_id: @story.id )
+      @storytree.save!
+      create_nodes_for_storytree( @storytree )
+      @story.entry_tree = @storytree.id
+      @story.save
+
+      redirect_to woods_stories_path(@story), notice: 'Story was successfully created.'
+    else
+      redirect_to woods_stories_path(@story)
+    end
   end
 
   def edit
@@ -135,10 +155,10 @@ class Woods::StoriesController < Woods::WoodsController
 
   private
     def set_woods_story
-      @story = Woods::Story.find( woods_story_params[:id] )
+      @story = Woods::Story.find( params[:id] )
     end
 
     def woods_story_params
-      params.permit(:id, :target_node, :dir, :store_link_text, :name)
+      params.require(:woods_story).permit(:store_link_text, :name, :description)
     end
 end

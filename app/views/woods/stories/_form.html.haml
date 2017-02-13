@@ -6,7 +6,7 @@
         - @story.errors.full_messages.each do |msg|
           %li= msg
 
-  %table.modest-width.zero-margin
+  %table.modest-width
     %tr.field
       %td= f.label :name
       %td= f.text_field :name, required: true
@@ -14,6 +14,10 @@
     %tr.field
       %td= f.label "Store link text"
       %td= f.text_field :store_link_text
+
+    %tr.field
+      %td= f.label "Description"
+      %td= f.text_area :description, rows: 8, cols: 37, class: "no-resize"
 
     %tr.actions
       %td

@@ -82,7 +82,7 @@ Christianrails::Application.routes.draw do
   namespace :woods do
     resources :players
 
-    resources :stories, except: [:create, :destroy] do
+    resources :stories, except: [:destroy] do
       member do
         get 'play'
         get 'move_to'
