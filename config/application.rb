@@ -38,7 +38,7 @@ module Christianrails
       allow do
         origins '*'
         #resource '*', headers: :any, methods: [:get, :post, :options]
-        resource '/woods/sync',
+        resource '/woods/sync/find_node_by_desc.json',
           headers: :any,
           methods: [:get, :post],
           credentials: true,
