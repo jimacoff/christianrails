@@ -4,6 +4,7 @@ class Woods::NodesController < Woods::WoodsController
   before_action :set_woods_story_and_storytree, only: [:update]
 
   skip_before_action :verify_is_admin, only: [:update]
+  skip_before_action :verify_authenticity_token, only: [:update]
 
   ## PUBLIC but requires sync_token if not admin
 

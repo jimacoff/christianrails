@@ -323,16 +323,48 @@ function pushNodeToLive() {
 
   request.done(function(data, textStatus, jqXHR) {
     console.log(data);
-    // TODO update node upstream after confirmation
-
-    // printUpdatedUpstream();
+    // get ids & update node upstream after confirmation
+    pushCurrentNodeToLive(data.story_id, data.storytree_id, data.node.id);
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
-    console.log("Error occured: " + textStatus);
+    console.log("Error occured getting upstream node: " + textStatus);
     printErrorPushingLive(textStatus);
   });
 
+}
+
+function pushCurrentNodeToLive(remoteStoryId, remoteStorytreeId, remoteNodeId) {
+  if( $('#moverule-box').css('display') === "none" ) {
+    var theMoverule = -1;
+  } else {
+    var theMoverule = $('#moverule-select').val();
+  }
+
+  request = void 0;
+  request = $.ajax({
+      type: 'PUT',
+      format: 'json',
+      url: 'https://www.christiandewolf.com/woods/stories/' + remoteStoryId + '/storytrees/' + remoteStorytreeId + '/nodes/' + remoteNodeId + '.json',
+      data: {
+        woods_node: {
+          moverule_id: theMoverule,
+          name: $('#node-name-box').val(),
+          left_text:  $('#left-text-box').val(),
+          right_text: $('#right-text-box').val(),
+          node_text:  $('#node-content-box').val()
+        }
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    printUpdatedUpstream();
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured pushing to upstream node: " + textStatus);
+    printErrorPushingLive(textStatus);
+  });
 }
 
 ////////////
