@@ -128,6 +128,10 @@ function printErrorPushingLive(err) {
   $('#error-console').append('ERROR PUSHING LIVE!\n');
 }
 
+function printErrorPullingLive(err) {
+  $('#error-console').append('ERROR PULLING LIVE NODE!\n');
+}
+
 function saveAccoutrements( currentNode ) {
   if( treelinkModified ) {
     treelinkEnabled = $('#treelink-checkbox').prop('checked');
@@ -307,6 +311,38 @@ function updatePossibleitemLocally(callback_data) {
 
 // SYNCING
 
+// populates panel with node data but does not save yet
+function pullDownNodeFromLive() {
+  request = void 0;
+  request = $.ajax({
+      type: 'GET',
+      format: 'json',
+      url: 'https://www.christiandewolf.com/woods/sync/find_node_by_desc.json',
+      data: {
+        story_name: storyName,
+        storytree_name: storytreeName,
+        tree_index: currentNode['tree_index'],
+        sync_token: $('#sync-token-field').val()
+      }
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+    console.log(data);
+    $('#node-name-box').val( data.node.name );
+    $('#node-content-box').val( data.node.node_text );
+    $('#left-text-box').val( data.node.left_text );
+    $('#right-text-box').val( data.node.right_text );
+    if(currentNode['moverule_id'] !== -1) {
+      $('#moverule-select').val( data.node.moverule_id )
+    }
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured getting upstream node: " + textStatus);
+    printErrorPullingLive(textStatus);
+  });
+}
+
 function pushNodeToLive() {
   request = void 0;
   request = $.ajax({
@@ -329,7 +365,7 @@ function pushNodeToLive() {
 
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log("Error occured getting upstream node: " + textStatus);
-    printErrorPushingLive(textStatus);
+    printErrorPullingLive(textStatus);
   });
 
 }
@@ -353,7 +389,8 @@ function pushCurrentNodeToLive(remoteStoryId, remoteStorytreeId, remoteNodeId) {
           left_text:  $('#left-text-box').val(),
           right_text: $('#right-text-box').val(),
           node_text:  $('#node-content-box').val()
-        }
+        },
+        sync_token: $('#sync-token-field').val()
       }
     });
 

@@ -22,6 +22,7 @@ class Woods::NodesController < Woods::WoodsController
     if !@error && @node.update( woods_node_params )
       render json: @node, status: :ok
     else
+      record_suspicious_event("Node#update", "Someone trying to update notes w/o authorization.") if @error == "Not authorized."
       render json: @error || @node.errors, status: :unprocessable_entity
     end
   end

@@ -10,11 +10,15 @@ class Woods::SyncController < Woods::WoodsController
     token = Rails.application.config.sync_token
 
     if @story = Woods::Story.where( name: params[:story_name] ).first
-      if @story.allow_remote_syncing && !token.empty? && (token == params[:sync_token])
-        @storytree = Woods::Storytree.where( story_id: @story.id, name: params[:storytree_name] ).first if @story
-        @node      = Woods::Node.where( storytree_id: @storytree.id, tree_index: params[:tree_index].to_i ).first if @story && @storytree
+      if @story.allow_remote_syncing
+        if !token.empty? && (token == params[:sync_token])
+          @storytree = Woods::Storytree.where( story_id: @story.id, name: params[:storytree_name] ).first if @story
+          @node      = Woods::Node.where( storytree_id: @storytree.id, tree_index: params[:tree_index].to_i ).first if @story && @storytree
+        else
+          @invalid_token = true
+        end
       else
-        @invalid_token = true
+        @remote_syncing_not_enabled = true
       end
     end
 
@@ -24,6 +28,8 @@ class Woods::SyncController < Woods::WoodsController
       else
         if @invalid_token
           format.json { render json: {errors: "Invalid sync token."}, status: :forbidden }
+        elsif @remote_syncing_not_enabled
+          format.json { render json: {errors: "Remote syncing not enabled."}, status: :forbidden }
         else
           format.json { render json: {errors: "Node does not exist."}, status: :unprocessable_entity }
         end
