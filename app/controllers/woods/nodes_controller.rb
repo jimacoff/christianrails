@@ -5,8 +5,6 @@ class Woods::NodesController < Woods::WoodsController
 
   skip_before_action :verify_is_admin, only: [:update]
 
-  respond_with :json
-
   ## PUBLIC but requires sync_token if not admin
 
   def update
