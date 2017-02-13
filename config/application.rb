@@ -43,7 +43,7 @@ module Christianrails
           methods: [:get, :post],
           credentials: true,
           max_age: 0
-        end
+
       end
     end
 
