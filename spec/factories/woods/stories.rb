@@ -5,7 +5,7 @@ FactoryGirl.define do
       "story_#{n}"
     end
     published true
-    sync_token "lol-a-sync-token"
+    allow_remote_syncing true
   end
 
 end

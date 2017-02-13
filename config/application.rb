@@ -46,5 +46,6 @@ module Christianrails
       end
     end
 
+    config.sync_token = ENV['SYNC_TOKEN']
   end
 end

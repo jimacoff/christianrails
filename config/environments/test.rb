@@ -33,4 +33,6 @@ Christianrails::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  config.sync_token = 'lol-a-sync-token'
 end

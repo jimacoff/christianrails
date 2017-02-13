@@ -20,8 +20,8 @@
       %td= f.text_area :description, rows: 8, cols: 37, class: "no-resize"
 
     %tr.field
-      %td= f.label "Sync token"
-      %td= f.text_field :sync_token
+      %td= f.label "Allow remote syncing"
+      %td= f.check_box :allow_remote_syncing, value: @story.allow_remote_syncing
 
     %tr.actions
       %td

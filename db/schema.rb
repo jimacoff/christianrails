@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213200426) do
+ActiveRecord::Schema.define(version: 20170213220203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -353,16 +353,16 @@ ActiveRecord::Schema.define(version: 20170213200426) do
   end
 
   create_table "woods_stories", force: :cascade do |t|
-    t.string   "name",            limit: 50,                   null: false
+    t.string   "name",                 limit: 50,                   null: false
     t.integer  "player_id"
-    t.string   "description",     limit: 1000
+    t.string   "description",          limit: 1000
     t.integer  "entry_tree"
     t.integer  "total_plays"
-    t.boolean  "published",                    default: false
+    t.boolean  "published",                         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "store_link_text"
-    t.string   "sync_token"
+    t.boolean  "allow_remote_syncing",              default: false
   end
 
   create_table "woods_storytrees", force: :cascade do |t|

@@ -9,10 +9,11 @@ class Woods::NodesController < Woods::WoodsController
 
   def update
     @error = "Not authorized."
+    token = Rails.application.config.sync_token
 
     if current_player && current_player.owns_story?( @story )
       @error = nil
-    elsif @story.sync_token && !@story.sync_token.empty? && (@story.sync_token == params[:sync_token])
+    elsif @story.allow_remote_syncing && !token.empty? && (token == params[:sync_token])
       @error = nil
     end
     @error = "Story/Tree/Node do not match." unless (@storytree.story_id == @story.id) && (@node.storytree_id == @storytree.id)
