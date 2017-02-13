@@ -297,6 +297,13 @@ function updatePossibleitemLocally(callback_data) {
   possibleitemModified = false;
 }
 
+// SYNCING
+
+function pushNodeToLive() {
+  // TODO but it'll require Cross-origin, ugh
+}
+
+
 ////////////
 
 function refreshAllPanels() {

@@ -16,7 +16,7 @@ class Woods::NodesController < Woods::WoodsController
       if !@error && @node.update(woods_node_params)
         format.json { render json: @node, status: :ok }
       else
-        format.json { render json: @node.errors, status: :unprocessable_entity }
+        format.json { render json: @error || @node.errors, status: :unprocessable_entity }
       end
     end
   end

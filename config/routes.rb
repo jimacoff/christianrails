@@ -4,7 +4,6 @@ require 'constraints/whitelist'
 Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
-  #resources :users, only: []
 
   resources :blog, only: [:index] do
     collection do
@@ -79,6 +78,7 @@ Christianrails::Application.routes.draw do
     end
   end
 
+  ##### BINARYWOODS ###########
   namespace :woods do
     resources :players
 
@@ -109,16 +109,20 @@ Christianrails::Application.routes.draw do
         end
       end
     end
-  end
 
-  resources :newsletter_signups, only: [:index, :create]
+    resources :sync, only: [] do
+      collection do
+        get 'find_node_by_desc'
+      end
+    end
+  end
 
   post '/woods/items/download', to: 'woods/items#download'
   get  '/woods',                to: 'woods/stories#index'
+  get '/diamondfind',           to: 'woods/stories#show', defaults: { id: 1 }
+  get '/diamondfind/play',      to: 'woods/stories#play', defaults: { id: 1 }
 
-  get '/diamondfind',      to: 'woods/stories#show', defaults: { id: 1 }
-  get '/diamondfind/play', to: 'woods/stories#play', defaults: { id: 1 }
-
+  ##### GHOSTCRM ##############
   namespace :crm do
     resources :assistants, only: [:index, :create, :update] do
       collection do
@@ -176,6 +180,9 @@ Christianrails::Application.routes.draw do
   end
   get '/crm', to: 'crm/assistants#index'
 
+  #### OTHER STUFF ################
+  resources :newsletter_signups, only: [:index, :create]
+
   get '/go',  to: 'go#index'
 
   resources :graveyard, only: [] do
@@ -200,6 +207,8 @@ Christianrails::Application.routes.draw do
 
   get '/thisbadger',           to: 'badger#index'
   get '/badger',               to: 'badger#index'
+
+  #### ROOT & ERRORS ##########
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')
