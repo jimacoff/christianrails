@@ -316,7 +316,8 @@ function pushNodeToLive() {
       data: {
         story_name: storyName,
         storytree_name: storytreeName,
-        tree_index: currentNode['tree_index']
+        tree_index: currentNode['tree_index'],
+        sync_token: $('#sync-token-field').val()
       }
     });
 

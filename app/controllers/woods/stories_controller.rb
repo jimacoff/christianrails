@@ -159,6 +159,6 @@ class Woods::StoriesController < Woods::WoodsController
     end
 
     def woods_story_params
-      params.require(:woods_story).permit(:store_link_text, :name, :description)
+      params.require(:woods_story).permit(:store_link_text, :name, :description, :sync_token)
     end
 end

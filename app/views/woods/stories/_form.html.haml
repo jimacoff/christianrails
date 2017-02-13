@@ -19,6 +19,10 @@
       %td= f.label "Description"
       %td= f.text_area :description, rows: 8, cols: 37, class: "no-resize"
 
+    %tr.field
+      %td= f.label "Sync token"
+      %td= f.text_field :sync_token
+
     %tr.actions
       %td
       %td= f.submit 'Save', class: 'store-button'

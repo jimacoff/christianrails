@@ -3,21 +3,26 @@ class Woods::NodesController < Woods::WoodsController
   before_action :set_woods_node,                only: [:update]
   before_action :set_woods_story_and_storytree, only: [:update]
 
-  ## ADMIN ONLY
+  skip_before_action :verify_is_admin, only: [:update]
+
+  respond_with :json
+
+  ## PUBLIC but requires sync_token if not admin
 
   def update
-    @error = nil
+    @error = "Not authorized."
 
-    unless current_player && current_player.owns_story?( @story ) && (@storytree.story_id == @story.id) && (@node.storytree_id == @storytree.id)
-      @error = "User does not have access to story."
+    if current_player && current_player.owns_story?( @story )
+      @error = nil
+    elsif @story.sync_token && !@story.sync_token.empty? && (@story.sync_token == params[:sync_token])
+      @error = nil
     end
+    @error = "Story/Tree/Node do not match." unless (@storytree.story_id == @story.id) && (@node.storytree_id == @storytree.id)
 
-    respond_to do |format|
-      if !@error && @node.update(woods_node_params)
-        format.json { render json: @node, status: :ok }
-      else
-        format.json { render json: @error || @node.errors, status: :unprocessable_entity }
-      end
+    if !@error && @node.update( woods_node_params )
+      render json: @node, status: :ok
+    else
+      render json: @error || @node.errors, status: :unprocessable_entity
     end
   end
 
