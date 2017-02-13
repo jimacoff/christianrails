@@ -4,7 +4,7 @@ class AddPaintballs < ActiveRecord::Migration
       t.integer :node_id
       t.integer :palette_id
       t.boolean :enabled
-      t.integer :story_id   # TODO DROP
+      t.integer :story_id
 
       t.timestamps
     end

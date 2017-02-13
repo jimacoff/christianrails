@@ -7,10 +7,10 @@ class AddNodes < ActiveRecord::Migration
         t.string :right_text, limit: 30
         t.integer :storytree_id
         t.integer :tree_index
-        t.string :image    # TODO DROP
+        t.string :image
         t.string :main_text, limit: 1500
 
-        t.integer :last_author   # TODO DROP
+        t.integer :last_author
 
         t.timestamps
     end

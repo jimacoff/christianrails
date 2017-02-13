@@ -5,7 +5,7 @@ class AddPossibleitems < ActiveRecord::Migration
       t.boolean :perpetual
       t.integer :itemset_id
       t.integer :node_id
-      t.integer :story_id  # TODO DROP
+      t.integer :story_id
 
       t.timestamps
     end

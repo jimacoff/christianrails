@@ -4,7 +4,7 @@ class AddBoxes < ActiveRecord::Migration
       t.string :name
       t.integer :itemset_id
       t.boolean :enabled
-      t.integer :story_id  # TODO drop later
+      t.integer :story_id
       t.integer :node_id
 
       t.timestamps

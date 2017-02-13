@@ -8,7 +8,7 @@ class Woods::Story < ApplicationRecord
 
   belongs_to :player
 
-  validates_presence_of :name, :player#, :entry_tree TODO get this in there
+  validates_presence_of :name, :player
 
   def nodes
     nodes = []

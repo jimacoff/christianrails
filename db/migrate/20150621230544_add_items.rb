@@ -6,7 +6,7 @@ class AddItems < ActiveRecord::Migration
     t.string :legend, limit: 1500
     t.string :image
     t.integer :itemset_id
-    t.string :thumb    # TODO DROP
+    t.string :thumb
 
     t.timestamps
   end

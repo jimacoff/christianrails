@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212233404) do
+ActiveRecord::Schema.define(version: 20170213164438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -294,7 +294,6 @@ ActiveRecord::Schema.define(version: 20170212233404) do
     t.integer  "storytree_id"
     t.integer  "tree_index"
     t.string   "node_text",    limit: 3000
-    t.integer  "last_author"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
