@@ -197,7 +197,7 @@ Christianrails::Application.routes.draw do
   get '/butler/category',      to: 'butler#category'
   get '/butler/tag',           to: 'butler#tag'
 
-  resources :badger, only: [:index] do
+  resources :badger, only: [:index] do  # badger doesn't have categories
     collection do
       get 'show_post'
       get 'archives'

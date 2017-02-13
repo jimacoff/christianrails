@@ -120,6 +120,14 @@ function printError(err) {
   $('#error-console').append('ERROR SAVING NODE!\n');
 }
 
+function printUpdatedUpstream() {
+  $('#error-console').append('Pushed node to live.\n');
+}
+
+function printErrorPushingLive(err) {
+  $('#error-console').append('ERROR PUSHING LIVE!\n');
+}
+
 function saveAccoutrements( currentNode ) {
   if( treelinkModified ) {
     treelinkEnabled = $('#treelink-checkbox').prop('checked');
@@ -300,9 +308,31 @@ function updatePossibleitemLocally(callback_data) {
 // SYNCING
 
 function pushNodeToLive() {
-  // TODO but it'll require Cross-origin, ugh
-}
+  request = void 0;
+  request = $.ajax({
+      type: 'GET',
+      format: 'json',
+      url: 'https://www.christiandewolf.com/woods/sync/find_node_by_desc.json',
+      data: {
+        story_name: storyName,
+        storytree_name: storytreeName,
+        tree_index: currentNode['tree_index']
+      }
+    });
 
+  request.done(function(data, textStatus, jqXHR) {
+    console.log(data);
+    // TODO update node upstream after confirmation
+
+    // printUpdatedUpstream();
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error occured: " + textStatus);
+    printErrorPushingLive(textStatus);
+  });
+
+}
 
 ////////////
 

@@ -22,6 +22,9 @@
   var storyId = #{ @story.id };
   var storytreeId = #{ @storytree.id };
 
+  var storyName = #{ "\"" + @story.name + "\"" };
+  var storytreeName = #{ "\"" + @storytree.name + "\"" };
+
   var treelinks = #{@treelinks.to_json};
   var possibleitems = #{@possibleitems.to_json};
   var boxes = #{@boxes.to_json};
