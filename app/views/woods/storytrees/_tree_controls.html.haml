@@ -13,7 +13,10 @@
     %input#move-to-top-button.editor-button{type: 'button', value: 'Move to top', onclick: 'moveToTop();'}
     %input#revert-changes-button.editor-button{type: 'button', value: 'Revert changes', onclick: 'revertChanges();'}
     %input#save-node-now.editor-button{type: 'button', value: 'Save node now', onclick: 'saveNodeNow();'}
-    %p#filled-nodes-counter
+    %br
+    %span#filled-nodes-counter
+    %br
+    %span#filled-percentage
 
   #error-console-wrapper
     %textarea#error-console{rows: 6, cols: 45}

@@ -585,7 +585,6 @@ function advancedColourMap() {
       $('#left-of-current-cell').parent().css('opacity', 1);
     }
   }
-
 }
 
 // movement
@@ -685,6 +684,7 @@ function countFilledNodes() {
     }
   }
   $('#filled-nodes-counter').html( filled + '/' + nodes.length + ' filled');
+  $('#filled-percentage').html( ( filled / nodes.length * 100 ).toFixed(1) + '% complete');
 }
 
 function isPenultimateLevel() {
