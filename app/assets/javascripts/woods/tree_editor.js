@@ -328,13 +328,25 @@ function pullDownNodeFromLive() {
 
   request.done(function(data, textStatus, jqXHR) {
     console.log(data);
+    var oldName = $('#node-name-box').val();
+    var oldText = $('#node-content-box').val();
+    var oldLeft  = $('#left-text-box').val();
+    var oldRight = $('#right-text-box').val();
+    var oldRule  = $('#moverule-select').val();
+
     $('#node-name-box').val( data.node.name );
     $('#node-content-box').val( data.node.node_text );
     $('#left-text-box').val( data.node.left_text );
     $('#right-text-box').val( data.node.right_text );
     if(currentNode['moverule_id'] !== -1) {
-      $('#moverule-select').val( data.node.moverule_id )
+      $('#moverule-select').val( data.node.moverule_id );
     }
+
+    if(oldName !== $('#node-name-box').val() ||
+       oldText !== $('#node-content-box').val() ||
+       oldLeft !== $('#left-text-box').val() ||
+       oldRight !== $('#right-text-box').val() ||
+       oldRule !== $('#moverule-select').val()) { touchNode(); }
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {

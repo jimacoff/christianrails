@@ -17,7 +17,6 @@
 
   #error-console-wrapper
     %textarea#error-console{rows: 6, cols: 45}
-    %span Sync token:
-    %input#sync-token-field.woods-text{type: 'textbox', size: 22, style: 'display: inline-block;'}
+    %input#sync-token-field.woods-text{type: 'hidden', value: "#{ Rails.application.config.sync_token }"}
     %input#pull-from-live.editor-button{type: 'button', value: 'Pull from live', onclick: 'pullDownNodeFromLive();', style: 'display: inline-block;'}
     %input#push-to-live.editor-button{type: 'button', value: 'PUSH to live', onclick: 'pushNodeToLive();', style: 'display: inline-block;'}
