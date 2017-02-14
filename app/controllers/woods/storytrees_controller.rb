@@ -40,7 +40,7 @@ class Woods::StorytreesController < Woods::WoodsController
 
   def create
     @storytree = Woods::Storytree.new(woods_storytree_params)
-    @storytree.story_id = woods_storytree_params[:story_id]
+    @storytree.story_id = params[:story_id]
     @storytree.save!
     create_nodes_for_storytree( @storytree )
 
