@@ -29,7 +29,7 @@ module WoodsHelper
   def penultimate_level?(max_level, cursor)
     top_threshold = ( 2 ** max_level ) / 2
     bottom_threshold = top_threshold / 2
-    (cursor < top_threshold) && (cursor <= bottom_threshold)
+    (cursor < top_threshold) && (cursor >= bottom_threshold)
   end
 
 end
