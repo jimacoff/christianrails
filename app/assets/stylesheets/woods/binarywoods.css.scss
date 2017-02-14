@@ -288,8 +288,8 @@ a {
   margin: 10px;
   text-align: center;
   cursor: pointer;
-  vertical-align: middle;
   background-color: $white;
+  display: table;
 }
 
 .highlighted-cell {
@@ -307,6 +307,9 @@ a {
 
 .map-cell-text {
   margin-top: 20px;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 80%;
 }
 
 .right-side-editor {

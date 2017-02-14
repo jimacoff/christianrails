@@ -572,10 +572,12 @@ function advancedColourMap() {
     }
   });
 
-  if( getLevel( nodes[cursor-1]['tree_index'] ) !== getLevel( nodes[cursor]['tree_index'] ) ) {
-    $('#right-of-current-cell').parent().css('opacity', 0.25);
-  } else {
-    $('#right-of-current-cell').parent().css('opacity', 1);
+  if(cursor < nodes.length) {
+    if( getLevel( nodes[cursor-1]['tree_index'] ) !== getLevel( nodes[cursor]['tree_index'] ) ) {
+      $('#right-of-current-cell').parent().css('opacity', 0.25);
+    } else {
+      $('#right-of-current-cell').parent().css('opacity', 1);
+    }
   }
 
   if(cursor > 1) {
