@@ -509,6 +509,8 @@ function updateControls() {
   countFilledNodes();
 }
 
+var dsh = '---';
+
 function updateMap() {
   if(cursor > 1) {
     $('#parent-cell').html( nodes[Math.floor(cursor / 2) - 1]['name'] );
@@ -523,8 +525,8 @@ function updateMap() {
     }
 
   } else {
-    $('#parent-cell').html('---');
-    $('#left-of-current-cell').html('---');
+    $('#parent-cell').html(dsh);
+    $('#left-of-current-cell').html(dsh);
 
     $('#left-parent-spacer').hide();
     $('#right-parent-spacer').hide();
@@ -533,24 +535,24 @@ function updateMap() {
   if(cursor < nodes.length) {
     $('#right-of-current-cell').html( nodes[cursor]['name'] );
   } else {
-    $('#right-of-current-cell').html('---');
+    $('#right-of-current-cell').html(dsh);
   }
 
   $('#current-cell').html(nodes[cursor - 1]['name']);
 
   if( cursor * 2 > nodes.length) {
-    $('#l-cell').html('---');
-    $('#r-cell').html('---');
+    $('#l-cell').html(dsh);
+    $('#r-cell').html(dsh);
   } else {
     $('#l-cell').html( nodes[(cursor * 2) - 1]['name'] );
     $('#r-cell').html( nodes[(cursor * 2)    ]['name'] );
   }
 
   if( cursor * 4 > nodes.length) {
-    $('#ll-cell').html('---');
-    $('#lr-cell').html('---');
-    $('#rl-cell').html('---');
-    $('#rr-cell').html('---');
+    $('#ll-cell').html(dsh);
+    $('#lr-cell').html(dsh);
+    $('#rl-cell').html(dsh);
+    $('#rr-cell').html(dsh);
   } else {
     $('#ll-cell').html( nodes[(cursor * 4) - 1]['name'] );
     $('#lr-cell').html( nodes[(cursor * 4)    ]['name'] );
@@ -558,8 +560,33 @@ function updateMap() {
     $('#rr-cell').html( nodes[(cursor * 4) + 2]['name'] );
   }
 
+  advancedColourMap();
 }
 
+function advancedColourMap() {
+  $('.map-cell-text').each(function() {
+    if($( this ).text() === dsh ) {
+      $( this ).parent().css('opacity', 0.25);
+    } else {
+      $( this ).parent().css('opacity', 1);
+    }
+  });
+
+  if( getLevel( nodes[cursor-1]['tree_index'] ) !== getLevel( nodes[cursor]['tree_index'] ) ) {
+    $('#right-of-current-cell').parent().css('opacity', 0.25);
+  } else {
+    $('#right-of-current-cell').parent().css('opacity', 1);
+  }
+
+  if(cursor > 1) {
+    if( getLevel( nodes[cursor-1]['tree_index'] ) !== getLevel( nodes[cursor-2]['tree_index'] ) ) {
+      $('#left-of-current-cell').parent().css('opacity', 0.25);
+    } else {
+      $('#left-of-current-cell').parent().css('opacity', 1);
+    }
+  }
+
+}
 
 // movement
 
@@ -666,6 +693,15 @@ function isPenultimateLevel() {
 
 function isBottomLevel() {
   return (cursor * 2 > nodes.length);
+}
+
+function getLevel(treeIndex) {
+  var lCount = 1;
+  if(treeIndex === 1) { return 1; }
+  while((treeIndex + 1) > 2**lCount) {
+    lCount += 1;
+  }
+  return lCount;
 }
 
 // colouring
