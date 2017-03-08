@@ -114,22 +114,31 @@ function saveCurrentNode(currentNodeId) {
 
 function printSaveSuccess(obj) {
   $('#error-console').append('Saved ' + obj + '.\n');
+  scrollToBottomOfLogBox();
 }
 
 function printError(err) {
   $('#error-console').append('ERROR SAVING NODE!\n');
+  scrollToBottomOfLogBox();
 }
 
 function printUpdatedUpstream() {
   $('#error-console').append('Pushed node to live.\n');
+  scrollToBottomOfLogBox();
 }
 
 function printErrorPushingLive(err) {
   $('#error-console').append('ERROR PUSHING LIVE!\n');
+  scrollToBottomOfLogBox();
 }
 
 function printErrorPullingLive(err) {
   $('#error-console').append('ERROR PULLING LIVE NODE!\n');
+  scrollToBottomOfLogBox();
+}
+
+function scrollToBottomOfLogBox() {
+  $('#error-console').scrollTop($('#error-console')[0].scrollHeight);
 }
 
 function saveAccoutrements( currentNode ) {
