@@ -113,8 +113,13 @@ class Crm::AssistantsController < Crm::CrmController
     end
 
     def send_daily_summary(assistant)
-      Crm::ReminderMailer.daily_summary( assistant ).deliver_now
-      create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
+      attempts = 3
+      begin
+        Crm::ReminderMailer.daily_summary( assistant ).deliver_now
+        create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
+      rescue SocketError
+        retry if (attempts -= 1) >= 0
+      end
     end
 
     def create_new_mailout_record(assistant, type)
