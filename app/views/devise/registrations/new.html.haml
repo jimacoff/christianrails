@@ -26,6 +26,12 @@
     %br
     = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm your password"
 
+  .field
+    = f.label :send_me_emails, "Can I email you occasionally about future releases?"
+    %br
+    = f.check_box :send_me_emails, checked: 'checked'
+    = f.label :send_me_emails, "Yes, please"
+
   .actions.center
     = f.submit "Create an account", class: "store-button bigger"
     %br
