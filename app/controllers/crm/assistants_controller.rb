@@ -118,6 +118,8 @@ class Crm::AssistantsController < Crm::CrmController
         Crm::ReminderMailer.daily_summary( assistant ).deliver_now
         create_new_mailout_record( assistant, Crm::Mailout::TYPE_DAILY_SUMMARY )
       rescue SocketError
+        record_warning(Log::CRM, "Socket Error sending email for #{assistant.name}.")
+        sleep 3
         retry if (attempts -= 1) >= 0
       end
     end
