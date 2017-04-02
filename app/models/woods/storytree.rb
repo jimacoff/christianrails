@@ -52,7 +52,7 @@ class Woods::Storytree < ApplicationRecord
     tree_string
   end
 
-  def most_popular_node_by_level
+  def most_popular_nodes_by_level
     most_popular_nodes = []
     level_sizes = nodes_at_level
     pos_on_level = 0; level_num = 0
@@ -63,9 +63,13 @@ class Woods::Storytree < ApplicationRecord
       pos_on_level += 1
 
       if pos_on_level >= level_sizes[level_num]
-        index_of_most_popular = popularities_at_level.index( popularities_at_level.max )
-        tree_index_of_pop = (2 ** level_num) + index_of_most_popular
-        most_popular_nodes[level_num] = get_node_at_index(tree_index_of_pop).name
+        max_val = popularities_at_level.max
+        most_popular_nodes[level_num] = []
+        indexes_of_most_popular = popularities_at_level.each_index.select{ |x| popularities_at_level[x] == max_val }
+        indexes_of_most_popular.each do |most_pop_index|
+          tree_index_of_pop = (2 ** level_num) + most_pop_index
+          most_popular_nodes[level_num] << get_node_at_index(tree_index_of_pop).name
+        end
         popularities_at_level = []
         level_num += 1
         pos_on_level = 0
