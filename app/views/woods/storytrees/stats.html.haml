@@ -9,6 +9,6 @@
       %td= level.join(", ")
 
 #story-pane.pane.glass
-  %p.center= @storytree.generate_popularity_tree#.gsub("\n",'')
+  %p.center= @storytree.generate_popularity_tree
 
 = link_to '<< Story manager', manage_woods_story_path(@story)

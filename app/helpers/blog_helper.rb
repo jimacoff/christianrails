@@ -4,6 +4,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20170402_a_dream_of_spring",
+        category: "Rare Public Appearances",
+        tags: ["Geequinox", "Convention", "self-publishing", "Go", "Hal-Con"]
+      },
+      {
         title: "20161201_a_snapback_review",
         category: "Writing and Publishing",
         tags: ["Snapback", "self-publishing", "Go", "reviews", "Ghostcrime"]

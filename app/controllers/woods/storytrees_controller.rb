@@ -48,7 +48,6 @@ class Woods::StorytreesController < Woods::WoodsController
   end
 
   def stats
-    @statsprint = @storytree.node_popularity
   end
 
   private
