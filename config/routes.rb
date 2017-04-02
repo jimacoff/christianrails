@@ -91,6 +91,9 @@ Christianrails::Application.routes.draw do
       end
 
       resources :storytrees, only: [:show, :create] do
+        member do
+          get 'stats'
+        end
         resources :nodes, only: [:update]
       end
 

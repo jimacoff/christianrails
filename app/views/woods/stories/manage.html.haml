@@ -6,10 +6,12 @@
         %tr
           %th Tree name
           %th Size
+          %th
         - @storytrees.each do |st|
           %tr
             %td= link_to st.name, woods_story_storytree_path(@story, st)
             %td= st.max_level
+            %td= link_to "Stats", stats_woods_story_storytree_path(@story, st)
 
       %br
       .woods-box
@@ -43,7 +45,6 @@
               %td= @rights
         - else
           %p No plays yet!
-
 
 %br
 %br

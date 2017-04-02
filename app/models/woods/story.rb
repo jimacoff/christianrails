@@ -23,11 +23,11 @@ class Woods::Story < ApplicationRecord
   end
 
   def left_count
-    Woods::Scorecard.where(story_id: id).map{ |sc| sc.lefts }.reduce(:+)
+    Woods::Scorecard.where(story_id: id).map{ |sc| sc.lefts }.reduce(:+) || 0
   end
 
   def right_count
-    Woods::Scorecard.where(story_id: id).map{ |sc| sc.rights }.reduce(:+)
+    Woods::Scorecard.where(story_id: id).map{ |sc| sc.rights }.reduce(:+) || 0
   end
 
 end

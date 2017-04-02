@@ -1,0 +1,14 @@
+%h1= "Stats Breakdown for #{@storytree.name}"
+
+%table.woods-table
+  %th Level
+  %th Most popular node
+  - @storytree.most_popular_node_by_level.each_with_index do |level, i|
+    %tr
+      %td= (i + 1).to_s
+      %td= level
+
+#story-pane.pane.glass
+  %p.center= @storytree.generate_popularity_tree#.gsub("\n",'')
+
+= link_to '<< Story manager', manage_woods_story_path(@story)

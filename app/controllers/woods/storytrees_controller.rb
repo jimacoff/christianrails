@@ -1,6 +1,6 @@
 class Woods::StorytreesController < Woods::WoodsController
 
-  before_action :set_woods_storytree, only: [:show, :destroy]
+  before_action :set_woods_storytree, only: [:show, :destroy, :stats]
   before_action :set_woods_story
 
   ## ADMIN ONLY
@@ -45,6 +45,10 @@ class Woods::StorytreesController < Woods::WoodsController
     create_nodes_for_storytree( @storytree )
 
     redirect_to manage_woods_story_path( @story ), notice: 'Storytree was successfully created.'
+  end
+
+  def stats
+    @statsprint = @storytree.node_popularity
   end
 
   private
