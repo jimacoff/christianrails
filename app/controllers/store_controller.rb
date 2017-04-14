@@ -19,6 +19,9 @@ class StoreController < ApplicationController
       @finds = current_user.player.finds.joins(:item)
                                         .where('woods_items.value > ?', 0)
                                         .where('woods_finds.story_id = ?', @diamondfind.id) if current_user.player
+    elsif !current_user && current_player
+      @finds = current_player.finds.joins(:item).where('woods_items.value > ?', 0)
+                                                .where('woods_finds.story_id = ?', @diamondfind.id)
     end
     @finds ||= nil
 

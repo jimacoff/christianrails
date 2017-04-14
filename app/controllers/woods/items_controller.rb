@@ -32,6 +32,7 @@ class Woods::ItemsController < Woods::WoodsController
       end
 
     else
+      record_suspicious_event(Log::Store, "Unauthorized download attempted on item: #{item_id} by a guest user.")
       @error = "Unauthorized download attempted on item: #{item_id} by a guest user."
     end
 

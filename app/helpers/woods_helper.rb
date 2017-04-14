@@ -9,7 +9,15 @@ module WoodsHelper
   end
 
   def current_player
-    current_user.player if current_user && current_user.player
+    if current_user && current_user.player
+      current_user.player
+    elsif session[:woods_player_id] && !session[:woods_player_id].blank?
+      begin
+        Woods::Player.find( session[:woods_player_id] )
+      rescue
+        nil
+      end
+    end
   end
 
   def create_nodes_for_storytree( storytree )

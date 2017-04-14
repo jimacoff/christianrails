@@ -1,19 +1,26 @@
-- has_diamonds = current_user && current_user.player && @finds && @finds.size > 0
-- if has_diamonds
+- logged_in_and_has_diamonds = current_user && current_user.player && @finds && @finds.size > 0
+- guest_and_has_diamonds = !current_user && @finds && @finds.size > 0
+
+- if logged_in_and_has_diamonds || guest_and_has_diamonds
   %p
     You've been busy
     %a{title: "Diamond Find", href: diamondfind_path, class: "niceblue"} finding diamonds,
-    and now you can download your finds in HD! All wallpapers are 1600x900.
-
+    - if logged_in_and_has_diamonds
+      and now you can download your finds in HD! All wallpapers are 1600x900.
+    - else
+      but if you want to keep them, you'll have to create a free account.
   %table#finds-table
     - @finds.each do |f|
       %tr
         %td
-          = button_to "JPEG", { controller: 'woods/items', action: 'download', item_id: f.item.id }, class: 'store-button'
+          - if logged_in_and_has_diamonds
+            = button_to "JPEG", { controller: 'woods/items', action: 'download', item_id: f.item.id }, class: "store-button"
+          - else
+            %button.store-button{onclick: "goToSignUp();"}= "Sign up!"
         %td{style: "text-align: left;"}
           .store-format.embolden= f.item.name
 - else
   %p
     Explore the soulless Diamond City and trek to the staggering Diamond Mountains on a hypnotizing hunt for diamonds!
     %a{title: "Diamond Find", href: diamondfind_path, class: "niceblue"} Diamond Find
-    is a free diamond-finding adventure with over 500 endings and 100 legendary diamonds to discover.
+    is a diamond-finding adventure with over 500 endings and 100 legendary diamonds to discover.

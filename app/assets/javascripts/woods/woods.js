@@ -152,3 +152,7 @@ function paintPanel() {
 function goToStore() {
   window.location = "/";
 }
+
+function goToSignUp() {
+  window.location = "/users/sign_up";
+}

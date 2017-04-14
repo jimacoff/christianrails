@@ -7,7 +7,8 @@ class Woods::StoriesController < Woods::WoodsController
   ## PUBLIC
 
   def show
-    @highscores = Woods::Player.all.collect{|p| [p.username, p.total_score(@story.id), p.id]}.sort{ |x,y| y[1] <=> x[1]}[0..4]
+    @highscores = Woods::Player.where.not(user_id: nil).collect{ |p| [p.username, p.total_score(@story.id), p.id] }
+                                                       .sort{ |x,y| y[1] <=> x[1] }[0..4]
   end
 
   def play
@@ -21,13 +22,22 @@ class Woods::StoriesController < Woods::WoodsController
     @node = @node.add_accoutrements_and_make_json!
 
     if !current_user
-      redirect_to diamondfind_path and return
+      if session[:woods_player_id] && !session[:woods_player_id].blank?
+        the_player = Woods::Player.find( session[:woods_player_id] )
+      else
+        the_player = Woods::Player.create
+        session[:woods_player_id] = the_player.id
+      end
     elsif current_user && !current_user.player
-      current_user.player = Woods::Player.create(user_id: current_user.id)
+      the_player = Woods::Player.create(user_id: current_user.id)
+      current_user.player = the_player
+      current_user.save
+    else
+      the_player = current_user.player
     end
 
     @items = []
-    items_player_has = Woods::Item.find( current_player.finds.collect(&:item_id) )
+    items_player_has = Woods::Item.find( the_player.finds.collect(&:item_id) )
     items_player_has.each do |i|
       @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
     end
@@ -36,7 +46,7 @@ class Woods::StoriesController < Woods::WoodsController
     @story.total_plays += 1
     @story.save
 
-    record_positive_event(Log::WOODS, "#{current_user.username} started a game of #{@story.name}")
+    record_positive_event(Log::WOODS, "#{the_player.username} started a game of #{@story.name}")
   end
 
   # JSON endpoint
@@ -44,8 +54,6 @@ class Woods::StoriesController < Woods::WoodsController
     begin
       @node = Woods::Node.find( params[:target_node] )
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
-
-      #security check
       redirect_to woods_story_path( @story ) and return if !@storytree.story.published
 
       @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
@@ -85,6 +93,7 @@ class Woods::StoriesController < Woods::WoodsController
       @footprint.step!( @node['tree_index'] )
 
     rescue => e
+      record_warning(Log::WOODS, e.to_s)
       Rails.logger.warn("Something's wrong: " + e.to_s)
     end
 
@@ -92,7 +101,6 @@ class Woods::StoriesController < Woods::WoodsController
       if @node
         format.json { render json: @node, status: :ok }
       else
-        # TODO better error here
         format.json { render json: @node, status: :unprocessable_entity }
       end
     end

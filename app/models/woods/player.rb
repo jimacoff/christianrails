@@ -6,12 +6,12 @@ class Woods::Player < ApplicationRecord
 
   has_many :stories
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
-  validates_presence_of :user
+  GUEST = "Guest"
 
   def username
-    self.user.username
+    self.user ? self.user.username : GUEST
   end
 
   def has_item?(item_id_to_check)

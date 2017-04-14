@@ -8,17 +8,15 @@
 .center
 
   #df-play-or-signup-button
-    - if current_user
-      - if @story.name == "Diamond Find"
-        = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
-      - else
-        = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "bright-button", method: :get
-
+    - if @story.name == "Diamond Find"
+      = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
     - else
-      %h3= "Play #{@story.name} now!"
-      = link_to 'Sign in', user_session_path, class: 'megapink'
-      or
-      = link_to 'Create an account for free!', new_user_registration_path, class: 'megapink'
+      = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "bright-button", method: :get
+
+    - if !current_user
+      %p
+        = link_to 'Create an account for free', new_user_registration_path, class: 'megapink'
+        to save your progress.
 
   #df-col1
     #highscore-table.zero-margin.center

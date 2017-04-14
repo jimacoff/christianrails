@@ -12,6 +12,7 @@ Christianrails is a monolithic web application that serves as the homepage of au
 
 Release notes:
 
+- 1.4.0 - Diamond Find playable by non-registered players
 - 1.3.2 - BinaryWoods story editor improved w/ environment syncing
 - 1.3.1 - Diversions area
 - 1.3.0 - Rails 5 upgrade

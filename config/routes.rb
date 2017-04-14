@@ -3,7 +3,7 @@ require 'constraints/whitelist'
 
 Christianrails::Application.routes.draw do
 
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
   resources :blog, only: [:index] do
     collection do
@@ -16,7 +16,6 @@ Christianrails::Application.routes.draw do
 
   resources :staged_purchases,     only:   [:index, :create, :destroy]
   resources :price_combos,         except: [:show]
-
   resources :purchases,            only:   [:index]
   get '/user_report',              to: 'purchases#user_report'
 
