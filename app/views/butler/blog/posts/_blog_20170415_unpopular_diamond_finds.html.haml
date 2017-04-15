@@ -1,0 +1,103 @@
+%h2.blog-title Unpopular Versions of Diamond Find I Have Made
+
+%p
+  It began with a series of barely legible comics.
+
+= image_tag "butler/blog/df2.jpg", id: 'df-comic-image'
+
+%p
+  Who can say why? But in the fall of 2011 I had an idea for an interactive story based on this idea. I became obsessed and so sat down and wrote a little Java program that would construct one in a CSV file. I'd only build the engine to actually read/play the file four months later, after I'd written over 80,000 words of diamond adventures, because I'm committed like that.
+
+////////////
+
+%br
+
+%h3.purpler Diamond Find: Alpha (2012)
+%p
+  A minimal reader did the job, and with a little character art it was playable:
+
+= image_tag "butler/blog/alpha.png", id: 'df-alpha-image'
+
+%p
+  I sent it around to a few people to do editing and testing, but knew at this point I knew it could be more. I added a second CSV with more encounters and B-stories, including branching consequence trees for finding some of the unique diamonds, and a questionable storyline where the Feds send their best profiler to hunt you down after you assassinate a city councillor for a diamond.
+%h4.left.grayer Total users: ~10
+%br
+%br
+
+////////////
+
+%h3.purpler Diamond Find for Android (2012)
+%p
+  Designing the game for a phone presented the challenge of text size -- how to fit the content into a screen so small? I was also thinking ahead to smartwatches, which I still believe are the future. It was at this point that I decided it would work best as a speed-reading game, and thus implemented it as a flashy, lightning-fast comedy brain trainer. I even tracked down Volker Tripp, who'd done music for some of my <a title="ShadowWraith" href="http://www.youtube.com/watch?v=UmkD-2YBW0A&amp;list=PL3CE2FD5D6670E858" target="_blank">favourite games</a> in the 90's, to license some of his MOD music for the soundtrack. However, he stopped responding to my emails after a little while, which was disappointing, but also saved me 1300 euros. This version was the first to feature HD diamond graphics.
+
+= image_tag "butler/blog/android.png", id: 'df-android-image'
+
+%h4.left.grayer Total users: ~35
+%br
+%br
+
+////////////
+
+%h3.purpler Diamond Find LP (2013)
+%p
+  I definitely wanted to capture a hip demographic, and market research pointed straight to vinyl. While it took a bit of editing, I managed to fit the game onto two sides of an LP and pressed a limited edition copy:
+
+= image_tag "butler/blog/diamondfindLP.jpg", id: 'diamond-find-lp'
+
+%p
+  However, it failed to attract a minimum bid at auction and thus remains unsold. This collector's item can be yours though, for the right price! Serious inquiries only.
+%h4.left.grayer Total users: 0 (still in mint condition)
+%br
+%br
+
+////////////
+
+%h3.purpler Diamond Find Terminus (2013)
+%p
+  After dismissing the idea to port the game to the more popular iOS, I decided to make a website where people could play Diamond Find for free! At first the plan was to implement it in Ruby on Rails, and thus I ported the game to Ruby, creating a terminal-based skeleton:
+
+= image_tag "butler/blog/terminus.png", id: 'df-terminus'
+
+%p
+  Functional, but I was still more comfortable with Java at the time, and shelved Terminus after only a week.
+%h4.left.grayer Total users: 2
+%br
+%br
+
+////////////
+
+%h3.purpler Diamond Find on FractalFic (2014)
+%p
+  Far more ambitious than what I reasonably had time and money to build, the FractalFic platform was designed not only to run Diamond Find, but also to allow users to write and publish their own Diamond Find-style adventures. For mass appeal, I even watered down the city councillor murder plot by making the gun chocolate.
+
+= image_tag("fractalfic/site-player.png", id: "df-fractalfic", alt: "Diamond Find running on FractalFic", width: '650px')
+
+%p It drove me into debt and depression, but the Java and web skills I learned during its nine-month build were enough to secure me an entry-level dev job. Success!
+
+%p
+  FractalFic, however, was a failure. Despite receiving some press coverage (from
+  = succeed ")," do
+    %a{href: "http://clamblog.blogspot.ca/2014/06/chowder-and-chat-programmer-visits-house.html", target: 'blank'} Clamblog
+  only a few people ever wrote stories, and the cost of running the server was not offset by the 'freemium' pricing model I'd set up. It ran for a year and a half before I pulled the plug.
+
+%h4.left.grayer Total users: Unknown (did not implement tracking)
+%br
+%br
+
+////////////
+
+%h3.purpler Diamond Find, Today
+%p But I couldn't let it just die. Years later, now proficient in Ruby on Rails, I knew I could implement a new version in a very short time. And did I ever!
+
+= image_tag "butler/blog/df-binarywoods.png", id: 'df-binarywoods'
+
+%p It's free, open-source, and if you sign up, you can save all the diamonds you find to your profile & even download HD versions as wallpapers. It may be the best version of Diamond Find ever!
+
+%p
+  So will you just
+  = link_to "fucking play it?", diamondfind_path, target: "blank"
+  I... I can't keep doing this.
+
+%h4.left.grayer
+  Total users (live count):
+  %span.oranger= Woods::Player.all.count

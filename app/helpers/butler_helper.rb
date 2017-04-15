@@ -4,6 +4,11 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
+        title: "20170415_unpopular_diamond_finds",
+        category: "Software Development",
+        tags: ["listicle", "Diamond Find", "Android", "FractalFic", "obsession", "ClamBlog"]
+      },
+      {
         title: "20170116_4_things_computer_world_got_right",
         category: "Music & Lyrics",
         tags: ["music", "Kraftwerk", "computers", "business", "numbers", "money", "people"]
@@ -11,7 +16,7 @@ module ButlerHelper
       {
         title: "20161230_obligatory_2016_listicle",
         category: "Summaries of Time",
-        tags: ["Listicle", "Year in review", "milk technologies", "cats"]
+        tags: ["listicle", "year in review", "milk technologies", "cats"]
       },
       {
         title: "20160826_did_not_get_the_social_media_job",
@@ -21,92 +26,87 @@ module ButlerHelper
       {
         title: "20160212_2015_in_review",
         category: "Summaries of Time",
-        tags: ["Listicle", "Year in review", "Food", "Music", "Driving"]
+        tags: ["listicle", "year in review", "food", "music", "driving"]
       },
       {
         title: "20151126_actually_did_publish_that_book",
         category: "Books and Publishing",
-        tags: ["Success at life", "Books", "Ghostcrime", "Paperback"]
+        tags: ["success at life", "books", "Ghostcrime", "paperback"]
       },
       {
         title: "20150822_new_book_forthcoming",
         category: "Books and Publishing",
-        tags: ["Anticipation", "Ghostcrime"]
+        tags: ["anticipation", "Ghostcrime"]
       },
       {
         title: "20150515_victoria_day_hacks",
         category: "Life Haxx",
-        tags: ["Listicle", "Coding", "Holidays", "Royalty"]
+        tags: ["listicle", "coding", "holidays", "royalty", "queens"]
       },
       {
         title: "20150311_go_is_great",
         category: "Go",
-        tags: ["Listicle", "Go", "Board games", "House of Cards"]
+        tags: ["listicle", "Go", "board games", "House of Cards"]
       },
       {
         title: "20141231_2014_in_review",
         category: "Summaries of Time",
-        tags: ["Listicle", "Year in review", "Darkness"]
+        tags: ["listicle", "year in review", "darkness"]
       },
       {
         title: "20141123_breaking_badger_news",
         category: "Books and Publishing",
-        tags: ["Badger", "Blog"]
+        tags: ["badger", "blog"]
       },
       {
         title: "20140829_fractalfic_launched",
         category: "Software Development",
-        tags: ["Coding", "FractalFic", "Interactive fiction"]
+        tags: ["coding", "FractalFic", "interactive fiction"]
       },
       {
         title: "20140804_not_buying_enough",
         category: "Business",
-        tags: ["Marketing", "Business", "Consumerism", "Essay"]
+        tags: ["marketing", "business", "consumerism", "essay"]
       },
       {
         title: "20140628_press_to_impress",
         category: "Books and Publishing",
-        tags: ["News", "FractalFic", "ClamBlog"]
-      },
-      {
-        title: "20140508_unpopular_diamond_finds",
-        category: "Software Development",
-        tags: ["Listicle", "Diamond Find", "Android", "Vinyl", "FractalFic"]
+        tags: ["news", "FractalFic", "ClamBlog"]
       },
       {
         title: "20140429_lara_game_reviews",
         category: "Gaming",
-        tags: ["PC games", "Walking simulators", "Disorienting"]
+        tags: ["PC games", "walking simulators", "disorienting"]
       },
       {
         title: "20140208_bird_related_games",
         category: "Gaming",
-        tags: ["Mobile games", "Birds"]
+        tags: ["mobile games", "birds"]
       },
       {
         title: "20131231_2013_in_review",
         category: "Summaries of Time",
-        tags: ["Listicle", "Year in review", "Food", "Coding"]
+        tags: ["listicle", "year in review", "food", "coding"]
       },
       {
         title: "20131216_animal_go_moves",
         category: "Go",
-        tags: ["Listicle", "Go", "Animals", "Birds", "Board games"]
+        tags: ["listicle", "Go", "animals", "birds", "board games"]
       },
       {
         title: "20131023_deer_hunter_2014",
         category: "Gaming",
-        tags: ["Animal killing", "Guns", "Not a real game"]
+        tags: ["animal killing", "guns", "not a real game"]
       },
       {
         title: "20130815_grocery_shopping_tips",
         category: "Life Haxx",
-        tags: ["Listicle", "Food", "Shopping", "Deals", "Gnawing hunger"]
+        tags: ["listicle", "food", "shopping", "deals", "gnawing hunger"]
       },
       {
         title: "20130725_i_hate_marketing_in_2013",
         category: "Business",
-        tags: ["Marketing", "Buzzwords", "Consultants"]
+        tags: ["marketing", "buzzwords", "consultants"]
       }
     ]
   end
