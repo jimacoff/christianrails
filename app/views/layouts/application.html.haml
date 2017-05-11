@@ -1,6 +1,8 @@
 !!! 5
 
 - main_title = "Christian DeWolf - Coding & Creative"
+- main_desc = "Download or order SNAPBACK, new from the author of GHOSTCRIME and DIAMOND FIND."
+
 %html
   %head
     %title= main_title
@@ -11,16 +13,16 @@
     = javascript_include_tag "main", "data-turbolinks-track" => true
     = csrf_meta_tags
 
-    %meta{ property: "og:image", content: "http://www.christiandewolf.com/ghostcrime-books.png" }
     %meta{ property: "og:title", content: "#{ main_title }" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com" }
-    %meta{ property: "og:description", content: "Download or order SNAPBACK, new from the author of GHOSTCRIME and DIAMOND FIND." }
+    %meta{ property: "og:description", content: "#{ main_desc }" }
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
 
     %meta{ name: "twitter:card", content: "summary" }
     %meta{ name: "twitter:site", content: "@dewolfchristian" }
-    %meta{ name: "twitter:title", content: "Christian DeWolf - Coding & Creative" }
-    %meta{ name: "twitter:description", content: "Download or order SNAPBACK, new from the author of GHOSTCRIME and DIAMOND FIND." }
-    %meta{ name: "twitter:image", content: "http://www.christiandewolf.com/ghostcrime-books.png" }
+    %meta{ name: "twitter:title", content: "#{ main_title }" }
+    %meta{ name: "twitter:description", content: "#{ main_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
 
     %meta{ name: "viewport", content: "width=device-width", initial: { scale: 1 } }
 

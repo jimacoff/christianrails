@@ -1,4 +1,8 @@
 !!! 5
+
+- badger_title = "I Found This Badger"
+- badger_desc  = "I found this badger and named it Jesse and these are our stories."
+
 %html
   %head
     %title I Found This Badger
@@ -13,15 +17,15 @@
     = csrf_meta_tags
 
     %meta{ property: "og:image", content: "https://www.christiandewolf.com/thisbadger.png" }
-    %meta{ property: "og:title", content: "I Found This Badger" }
+    %meta{ property: "og:title", content: "#{ badger_title }" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com/thisbadger" }
-    %meta{ property: "og:description", content: "I found this badger and named it Jesse and these are our stories." }
+    %meta{ property: "og:description", content: "#{ badger_desc }" }
 
     %meta{ name: "twitter:card", content: "summary" }
     %meta{ name: "twitter:site", content: "@dewolfchristian" }
-    %meta{ name: "twitter:title", content: "I Found This Badger" }
-    %meta{ name: "twitter:description", content: "I found this badger and named it Jesse and these are our stories." }
-    %meta{ name: "twitter:image", content: "http://www.christiandewolf.com/thisbadger.png" }
+    %meta{ name: "twitter:title", content: "#{ badger_title }" }
+    %meta{ name: "twitter:description", content: "#{ badger_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/thisbadger.png" }
 
     = favicon_link_tag "badger.ico"
 

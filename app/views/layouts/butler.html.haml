@@ -1,4 +1,9 @@
 !!! 5
+
+- butler_title = @post ? @post[:title] : "Wolf Butler Art & Software"
+- butler_desc = "Digital comedy publishing. Get GHOSTCRIME today! Books, blogs + applications + more."
+- butler_short_desc = "Digital comedy publishing from programmer/writer Christian DeWolf."
+
 %html
   %head
     %title Wolf Butler Art & Software
@@ -15,16 +20,16 @@
     = javascript_include_tag "butler/butler", "data-turbolinks-track" => true
     = csrf_meta_tags
 
-    %meta{ property: "og:image", content: "http://www.christiandewolf.com/wolfbutler-ink.png" }
-    %meta{ property: "og:title", content: "Wolf Butler Art & Software" }
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/wolfbutler-ink.png" }
+    %meta{ property: "og:title", content: "#{ @post ? @post[:full_title] : butler_title }" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com/butler" }
-    %meta{ property: "og:description", content: "Digital comedy publishing from programmer/writer Christian DeWolf." }
+    %meta{ property: "og:description", content: "#{ @post ? @post[:desc] : butler_short_desc }" }
 
     %meta{ name: "twitter:card", content: "summary" }
     %meta{ name: "twitter:site", content: "@dewolfchristian" }
-    %meta{ name: "twitter:title", content: "Wolf Butler Art & Software" }
-    %meta{ name: "twitter:description", content: "Digital comedy publisher of GHOSTCRIME, the latest in sci-fi/comedy/horror. Books, blogs + applications + more." }
-    %meta{ name: "twitter:image", content: "http://www.christiandewolf.com/ghostcrime-books.png" }
+    %meta{ name: "twitter:title", content: "#{ @post ? @post[:full_title] : butler_title }" }
+    %meta{ name: "twitter:description", content: "#{ @post ? @post[:desc] : butler_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
 
     = favicon_link_tag "tumbler.ico"
 
