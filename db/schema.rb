@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322020125) do
+ActiveRecord::Schema.define(version: 20170521233956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,15 +108,6 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.text     "notes"
   end
 
-  create_table "downloads", force: :cascade do |t|
-    t.integer  "release_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["release_id"], name: "index_downloads_on_release_id", using: :btree
-    t.index ["user_id"], name: "index_downloads_on_user_id", using: :btree
-  end
-
   create_table "logs", force: :cascade do |t|
     t.string   "description"
     t.string   "location"
@@ -133,7 +124,16 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.datetime "updated_at",                       null: false
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "store_downloads", force: :cascade do |t|
+    t.integer  "release_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["release_id"], name: "index_store_downloads_on_release_id", using: :btree
+    t.index ["user_id"], name: "index_store_downloads_on_user_id", using: :btree
+  end
+
+  create_table "store_orders", force: :cascade do |t|
     t.string   "payer_id"
     t.string   "payment_id"
     t.integer  "price_combo_id"
@@ -145,19 +145,19 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.integer  "user_id"
   end
 
-  create_table "price_combos", force: :cascade do |t|
+  create_table "store_price_combos", force: :cascade do |t|
     t.string   "name"
     t.decimal  "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "price_combos_products", id: false, force: :cascade do |t|
+  create_table "store_price_combos_products", id: false, force: :cascade do |t|
     t.integer "price_combo_id"
     t.integer "product_id"
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "store_products", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
     t.string   "short_desc"
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.integer  "physical_price", default: 20
   end
 
-  create_table "purchases", force: :cascade do |t|
+  create_table "store_purchases", force: :cascade do |t|
     t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.decimal  "price"
   end
 
-  create_table "releases", force: :cascade do |t|
+  create_table "store_releases", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "format"
     t.datetime "release_date"
@@ -189,10 +189,10 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "physical_code"
-    t.index ["product_id"], name: "index_releases_on_product_id", using: :btree
+    t.index ["product_id"], name: "index_store_releases_on_product_id", using: :btree
   end
 
-  create_table "staged_purchases", force: :cascade do |t|
+  create_table "store_staged_purchases", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "product_id", null: false
     t.datetime "created_at", null: false
@@ -383,9 +383,9 @@ ActiveRecord::Schema.define(version: 20170322020125) do
     t.datetime "updated_at"
   end
 
-  add_foreign_key "downloads", "releases"
-  add_foreign_key "downloads", "users"
-  add_foreign_key "releases", "products"
+  add_foreign_key "store_downloads", "store_releases", column: "release_id"
+  add_foreign_key "store_downloads", "users"
+  add_foreign_key "store_releases", "store_products", column: "product_id"
   add_foreign_key "woods_item_downloads", "woods_items", column: "item_id"
   add_foreign_key "woods_item_downloads", "woods_players", column: "player_id"
 end

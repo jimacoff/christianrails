@@ -1,15 +1,9 @@
 class UsersController < ApplicationController
 
-  before_action :set_user
+  ### ADMIN ONLY
 
-  private
-
-  def set_user
-    @user = User.find(user_params[:id])
-  end
-
-  def user_params
-    params.permit(:id)
+  def report
+    @users = User.all.order('created_at DESC')
   end
 
 end

@@ -1,0 +1,15 @@
+- if @order
+
+  %h2 Receipt
+  %h4 ChristianDeWolf.com eBook Marketplace
+
+  .dotbox
+    = render 'order_info'
+
+  = link_to "Back to receipts", receipts_store_orders_path
+
+- else
+  %h3 Invalid receipt ID.  Ensure you are logged in and try again.
+
+  %br
+  = link_to "Back to store", root_path

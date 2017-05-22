@@ -1,6 +1,6 @@
-%h3 Did the receipt work...?
-
 - if @failure
-  %h1 No !!
+  %h3 It definitely did not work!!
+- else
+  %h3 Check your email.
 
 = link_to "Back to admin area", admin_index_path

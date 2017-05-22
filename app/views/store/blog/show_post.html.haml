@@ -1,0 +1,10 @@
+.blog
+  %p.embolden.right= "#{date_of( @post[:title] )}"
+
+  = render "store/blog/posts/blog_#{ @post[:title] }"
+  = render "store/blog/post_footer", locals: { post: @post }
+
+%br
+%br
+
+= link_to "Back to Archives", archives_store_blog_index_path, class: "embolden"

@@ -2,7 +2,7 @@
 
 .blog
   - @blog_posts.each do |post|
-    = render '/blog/embed_post', locals: { post: post }
+    = render '/store/blog/embed_post', locals: { post: post }
     %hr
 
-.center= link_to "Archives", archives_blog_index_path
+.center= link_to "Archives", archives_store_blog_index_path

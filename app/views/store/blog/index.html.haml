@@ -1,0 +1,8 @@
+.blog
+  - @blog_posts.each do |post|
+    = render 'store/blog/embed_post', locals: { post: post }
+    %hr
+
+%br
+%br
+= link_to "Home", root_path

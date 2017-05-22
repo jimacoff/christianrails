@@ -5,9 +5,9 @@
         %td.small-width.center
           = image_tag( "#{product.image}", class: "store-image" )
         %td
-          = render "store_product_content", { product: product }
+          = render "store/store_product_content", { product: product }
 
 .mobile-product
   = image_tag( "#{product.image}", class: "store-image" )
 
-  = render "store_product_content", { product: product }
+  = render "store/store_product_content", { product: product }

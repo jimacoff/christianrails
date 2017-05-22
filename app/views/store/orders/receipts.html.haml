@@ -1,0 +1,21 @@
+%h1 Receipts
+
+- if @orders
+  %table.product-table
+    %thead
+      %tr
+        %th Total
+        %th Date
+        %th
+
+    %tbody
+    - @orders.each do |order|
+      %tr
+        %td= number_to_currency( order.total, precision: 2)
+        %td= order.created_at.strftime("%B %e, %Y")
+        %td= link_to 'View receipt', store_order_path(order)
+- else
+  %h3 Please log in to view your receipts.
+
+%br
+= link_to 'Back to store', root_path

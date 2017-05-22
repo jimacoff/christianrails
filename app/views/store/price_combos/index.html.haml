@@ -1,0 +1,18 @@
+%h1 Price Combos
+
+%table.product-table
+  %thead
+    %tr
+      %th Name
+      %th Discount
+      %th
+
+  %tbody
+    - @price_combos.each do |price_combo|
+      %tr
+        %td= link_to price_combo.name, edit_store_price_combo_path(price_combo)
+        %td= number_to_currency( price_combo.discount, precision: 2) || 0
+        %td= link_to 'Destroy', price_combo, method: :delete, data: { confirm: 'Are you sure?' }
+= link_to '+ Add Combo', new_store_price_combo_path
+
+= render "admin/admin_link"

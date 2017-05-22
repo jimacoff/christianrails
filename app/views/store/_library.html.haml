@@ -5,14 +5,14 @@
   - prods.each_with_index do |prod, i|
     - if i > 0
       %hr
-    = render 'store_product', { product: prod }
+    = render 'store/store_product', { product: prod }
 
 %hr
-= render 'diamond_machine'
+= render 'store/diamond_machine'
 %hr
-= render 'badger_machine'
+= render 'store/badger_machine'
 %hr
-= render 'wolfbutler'
+= render 'store/wolfbutler'
 
 %br
 %p.diminutive.center All prices expressed in CAD. Prices do not include tax or shipping. All downloads are DRM-free.

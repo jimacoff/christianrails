@@ -1,0 +1,12 @@
+#super-wrapper
+  #store-wrapper.panel
+    = render "store/dealzone"
+    = render 'store/library'
+
+  #store-col2
+    #newsletter-wrapper.panel= render 'store/leadbox'
+    #ghostcrm-banner
+      %a{href: crm_path}
+        = image_tag "ghostcrm-banner.png", alt: 'ghostCRM - the CRM tie-in to GHOSTCRIME', title: 'ghostCRM - the CRM tie-in to GHOSTCRIME', id: 'ghostcrm-banner-image'
+    #blog-wrapper.panel= render 'store/blog_sample'
+    #about-wrapper.panel= render 'store/about'

@@ -8,9 +8,8 @@
     %title= main_title
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
 
-    = javascript_include_tag "application", "data-turbolinks-track" => true
-    = javascript_include_tag "dealzone", "data-turbolinks-track" => true
-    = javascript_include_tag "main", "data-turbolinks-track" => true
+    = javascript_include_tag "application",    "data-turbolinks-track" => true
+    = javascript_include_tag "store/dealzone", "data-turbolinks-track" => true
     = csrf_meta_tags
 
     %meta{ property: "og:title", content: "#{ main_title }" }
@@ -43,7 +42,7 @@
       %p.alert.alert-danger
         = alert
 
-    - if controller_name == 'store' && action_name == 'index'
+    - if controller_name == 'dealzone' && action_name == 'index'
       = yield
     - else
       .smart-panel.panel
@@ -51,6 +50,6 @@
 
     = render "store/footer"
 
-    = render "scripts/init_cart"
+    = render "store/scripts/init_cart"
 
     %h5.right= "v #{app_version}"

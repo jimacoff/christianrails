@@ -5,48 +5,12 @@ Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
-  resources :blog, only: [:index] do
+  resources :users, only: [] do
     collection do
-      get 'show_post'
-      get 'archives'
-      get 'category'
-      get 'tag'
+      get 'report'
     end
   end
-
-  resources :staged_purchases,     only:   [:index, :create, :destroy]
-  resources :price_combos,         except: [:show]
-  resources :purchases,            only:   [:index]
-  get '/user_report',              to: 'purchases#user_report'
-
-  resources :products, except: [:show] do
-    collection do
-      get 'downloads'
-    end
-    resources :releases, except: [:show]
-  end
-
-  resources :orders, only: [:index, :show] do
-    collection do
-      get 'receipts'
-    end
-  end
-
   resources :logs, only: [:index]
-
-  resources :store, only: [:index] do
-    collection do
-      get  'updated_prices'
-      post 'check_out'
-      get  'complete_order'
-      post 'download'
-      get  'order_success'
-    end
-  end
-  get '/complete_order', to: 'store#complete_order'
-  get '/order_success',  to: 'store#order_success'
-
-
   resources :policies, only: [] do
     collection do
       get 'terms_of_use'
@@ -55,13 +19,12 @@ Christianrails::Application.routes.draw do
       get 'refund'
     end
   end
-
   resources :watch_properties, except: [:show] do
     collection do
       post 'check_properties', constraints: Whitelist.new
     end
   end
-
+  resources :newsletter_signups, only: [:index, :create]
   resources :admin, only: [:index] do
     collection do
       get 'emailtest'
@@ -71,11 +34,47 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  resources :diversions, only: [:index] do
-    collection do
-      get 'rainfield'
+  ### THE STORE #######
+  namespace :store do
+    resources :dealzone, only: [:index] do
+      collection do
+        get  'updated_prices'
+        post 'check_out'
+        get  'complete_order'
+        post 'download'
+        get  'order_success'
+      end
+    end
+
+    resources :blog, only: [:index] do
+      collection do
+        get 'show_post'
+        get 'archives'
+        get 'category'
+        get 'tag'
+      end
+    end
+
+    resources :staged_purchases,     only:   [:index, :create, :destroy]
+    resources :price_combos,         except: [:show]
+    resources :purchases,            only:   [:index]
+
+    resources :products, except: [:show] do
+      collection do
+        get 'downloads'
+      end
+      resources :releases, except: [:show]
+    end
+
+    resources :orders, only: [:index, :show] do
+      collection do
+        get 'receipts'
+      end
     end
   end
+  get '/complete_order', to: 'store/dealzone#complete_order'
+  get '/order_success',  to: 'store/dealzone#order_success'
+  get '/store',          to: 'store/dealzone#index'
 
   ##### BINARYWOODS ###########
   namespace :woods do
@@ -118,7 +117,6 @@ Christianrails::Application.routes.draw do
       end
     end
   end
-
   post '/woods/items/download', to: 'woods/items#download'
   get  '/woods',                to: 'woods/stories#index'
   get '/diamondfind',           to: 'woods/stories#show', defaults: { id: 1 }
@@ -178,15 +176,18 @@ Christianrails::Application.routes.draw do
         post 'finish'
       end
     end
-
   end
   get '/crm', to: 'crm/assistants#index'
 
-  #### OTHER STUFF ################
-  resources :newsletter_signups, only: [:index, :create]
-
+  ### GO STUFF AND DIVERSIONS #######
+  resources :diversions, only: [:index] do
+    collection do
+      get 'rainfield'
+    end
+  end
   get '/go',  to: 'go#index'
 
+  ### GRAVEYARD #######
   resources :graveyard, only: [] do
     collection do
       get 'fractalfic'
@@ -194,11 +195,14 @@ Christianrails::Application.routes.draw do
   end
   get '/fractalfic', to: 'graveyard#fractalfic'
 
+
+  ### BUTLER STUFF ######
   get '/butler',               to: 'butler#index'
   get '/butler/show_post',     to: 'butler#show_post'
   get '/butler/category',      to: 'butler#category'
   get '/butler/tag',           to: 'butler#tag'
 
+  #### BADGER STUFF ######
   resources :badger, only: [:index] do  # badger doesn't have categories
     collection do
       get 'show_post'
@@ -206,15 +210,14 @@ Christianrails::Application.routes.draw do
       get 'tag'
     end
   end
-
-  get '/thisbadger',           to: 'badger#index'
-  get '/badger',               to: 'badger#index'
+  get '/thisbadger', to: 'badger#index'
+  get '/badger',     to: 'badger#index'
 
   #### ROOT & ERRORS ##########
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')
-  root 'store#index'
+  root 'store/dealzone#index'
 
   get 'page_not_found', to: "errors#show", code: '404'
   %w( 404 422 500 ).each do |code|

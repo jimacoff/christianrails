@@ -4,10 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :downloads, inverse_of: :user
-  has_many :purchases, through: :orders, inverse_of: :user
-  has_many :orders, inverse_of: :user
-  has_many :staged_purchases, inverse_of: :user
+  has_many :downloads, inverse_of: :user, class_name: 'Store::Download'
+  has_many :purchases, through: :orders, inverse_of: :user, class_name: 'Store::Purchase'
+  has_many :orders, inverse_of: :user, class_name: 'Store::Order'
+  has_many :staged_purchases, inverse_of: :user, class_name: 'Store::StagedPurchase'
+
   has_many :logs, inverse_of: :user
 
   has_one :player, class_name: "Woods::Player", dependent: :destroy

@@ -14,7 +14,7 @@
           = link_to "Admin", main_app.admin_index_path
           ·
         - if current_user.purchases.size > 0
-          = link_to "Receipts", main_app.receipts_orders_path
+          = link_to "Receipts", main_app.receipts_store_orders_path
           ·
         - if current_player && current_player.scorecards.size > 0 && controller_path.starts_with?("woods")
           = link_to 'Scores', main_app.woods_player_path(current_player)

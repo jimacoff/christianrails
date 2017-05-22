@@ -1,18 +1,16 @@
 class ApplicationController < ActionController::Base
-
   include ApplicationHelper
-  include StoreHelper
   include WoodsHelper
   include CrmHelper
   include LogHelper
 
   before_action :verify_is_admin
-  after_action :store_location
+  after_action :remember_location
   around_action :set_time_zone, if: :current_user
 
   protect_from_forgery with: :exception, prepend: true
 
-  def store_location
+  def remember_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     return unless request.get?
     if (request.path != "/users/sign_in" &&

@@ -1,2 +1,0 @@
-class PriceComboProduct < ApplicationRecord
-end
