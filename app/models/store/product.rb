@@ -41,11 +41,12 @@ class Store::Product < ApplicationRecord
     self.releases.where.not(format: "Book")
   end
 
+  def physical_release
+    self.releases.where(format: "Book").take
+  end
+
   def has_physical_release?
-    self.releases.each do |r|
-      return true if r.format == "Book"
-    end
-    false
+    self.physical_release ? true : false
   end
 
   def has_digital_release?
@@ -53,10 +54,9 @@ class Store::Product < ApplicationRecord
   end
 
   def physical_code
-    self.releases.each do |r|
-      return r.physical_code if !r.physical_code.nil?
+    if self.physical_release
+      self.physical_release.physical_code
     end
-    nil
   end
 
 end
