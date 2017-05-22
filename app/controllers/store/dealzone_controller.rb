@@ -148,7 +148,7 @@ class Store::DealzoneController < Store::StoreController
       if !@error
         if current_user.has_product?(product.id)
           if current_user.downloads.where(release_id: release.id).size >= Store::Download::LIMIT
-            @error = "Download limit of #{Store::Download::LIMIT} reached on release id: #{release_id} by user id: #{current_user.id}."
+            @error = "Download limit of #{Store::Download::LIMIT} reached on #{product.title} #{release.format} by user: #{current_user.username}."
           else
             file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
             send_file "#{Rails.root}/../../downloads/#{file_name}"

@@ -12,13 +12,13 @@ class Woods::ItemsController < Woods::WoodsController
       begin
         item = Woods::Item.find(item_id)
       rescue
-        @error = "Download attempted on invalid item id: #{item_id} by user id: #{current_user.id}."
+        @error = "Download attempted on invalid item id: #{item_id} by user: #{current_user.username}."
       end
 
       if !@error
         if current_user.player.has_item?(item.id)
           if current_player.item_downloads.where(item_id: item.id).size >= Woods::ItemDownload::LIMIT
-            @error = "Download limit of #{Woods::ItemDownload::LIMIT} reached on item id: #{item_id} by user id: #{current_user.id}."
+            @error = "Download limit of #{Woods::ItemDownload::LIMIT} reached on #{item.name} by user: #{current_user.username}."
           else
             file_name = "#{item.value} - #{item.name}.jpg"
             send_file "#{Rails.root}/../../downloads/#{file_name}"
@@ -27,12 +27,12 @@ class Woods::ItemsController < Woods::WoodsController
             return
           end
         else
-          @error = "Download attempted on unauthorized item id: #{item.id} by user id: #{current_user.id}."
+          @error = "Download attempted on unauthorized item id: #{item.id} by user: #{current_user.username}."
         end
       end
 
     else
-      record_suspicious_event(Log::Store, "Unauthorized download attempted on item: #{item_id} by a guest user.")
+      record_suspicious_event(Log::Store, "Unauthorized download attempted on #{item.name} by a guest user.")
       @error = "Unauthorized download attempted on item: #{item_id} by a guest user."
     end
 
