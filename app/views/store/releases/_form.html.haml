@@ -1,4 +1,4 @@
-= form_for [@product, @release], url: store_product_releases_url(@product, @release) do |f|
+= form_for [:store, @product, @release], url: store_product_releases_url(@product, @release) do |f|
   - if @release.errors.any?
     #error_explanation
       %h2= "#{pluralize(@release.errors.count, "error")} prohibited this release from being saved:"
@@ -26,3 +26,9 @@
     %tr.actions
       %td
       %td= f.submit 'Save', class: 'store-button'
+
+:javascript
+  // fix the damn route generation
+  if( $('.edit_store_release')[0] ) {
+    $('.edit_store_release')[0].action = $('.edit_store_release')[0].action.replace('releases.', 'releases/');
+  }
