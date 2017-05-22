@@ -24,10 +24,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def associate_orphan_woods_player_with_new_user
-    if !current_user.player && session[:woods_player_id] && !session[:woods_player_id].blank?
-      player_to_associate = Woods::Player.find( session[:woods_player_id] )
-      current_user.player = player_to_associate
-      pp "### Associating orphan player with logging-in user."
+    if current_user
+      if !current_user.player && session[:woods_player_id] && !session[:woods_player_id].blank?
+        player_to_associate = Woods::Player.find( session[:woods_player_id] )
+        current_user.player = player_to_associate
+        pp "### Associating orphan player with logging-in user."
+      end
     end
   end
 
