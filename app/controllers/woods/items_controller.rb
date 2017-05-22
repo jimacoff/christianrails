@@ -7,7 +7,7 @@ class Woods::ItemsController < Woods::WoodsController
   # PUBLIC
 
   def download
-    item_id = woods_item_params[:item_id]
+    item_id = params[:item_id]
     if current_user
       begin
         item = Woods::Item.find(item_id)
