@@ -1,0 +1,52 @@
+!!! 5
+
+- computers_blog_title = @post ? @post[:title] : "Do you like COMPUTERS"
+- computers_blog_desc = "A blog about them that I have"
+
+%html
+  %head
+    %title Do you like COMPUTERS
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "computers/computers",   media: "all", "data-turbolinks-track" => true
+
+    %link{ rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css" }
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/computers-cover.png" }
+    %meta{ property: "og:title", content: "#{ computers_blog_title }" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/computers" }
+    %meta{ property: "og:description", content: "#{ computers_blog_desc }" }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "#{ computers_blog_title }" }
+    %meta{ name: "twitter:description", content: "#{ computers_blog_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/computers-cover.png" }
+
+    = favicon_link_tag "tumbler.ico"
+
+  %body.noselect
+
+    = render "computers/header"
+
+    - if notice
+      %p.alert.alert-notice
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
+
+    #computers-content
+
+      #mobile-title
+        %h1 Do you like COMPUTERS
+
+      = render 'computers/computers_nav'
+
+      = yield
+
+    = render "computers/footer"

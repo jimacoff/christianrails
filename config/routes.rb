@@ -213,6 +213,17 @@ Christianrails::Application.routes.draw do
   get '/thisbadger', to: 'badger#index'
   get '/badger',     to: 'badger#index'
 
+  #### COMPUTER BLOG STUFF ######
+  resources :computers, only: [:index] do
+    collection do
+      get 'show_post'
+      get 'archives'
+      get 'category'
+      get 'tag'
+    end
+  end
+  get '/computers', to: 'computers#index'
+
   #### ROOT & ERRORS ##########
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')

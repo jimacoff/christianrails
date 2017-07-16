@@ -1,0 +1,11 @@
+.center
+  %h1 Archives
+
+#archive-wrapper
+  - @blog_posts.each do |post|
+    = render 'link_to_post', locals: { post: post }
+    %br
+
+.center
+  %br
+  = link_to "Home", computers_path, class: 'bit-larger'

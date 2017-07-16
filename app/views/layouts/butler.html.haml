@@ -1,8 +1,8 @@
 !!! 5
 
-- butler_title = @post ? @post[:title] : "Wolf Butler Art & Software"
-- butler_desc = "Digital comedy publishing. Get GHOSTCRIME today! Books, blogs + applications + more."
-- butler_short_desc = "Digital comedy publishing from programmer/writer Christian DeWolf."
+- butler_title      = @post ? @post[:full_title] : "Wolf Butler Art & Software"
+- butler_desc       = @post ? @post[:desc] : "Digital comedy publishing. Get GHOSTCRIME today! Books, blogs + applications + more."
+- butler_short_desc = @post ? @post[:desc] : "Digital comedy publishing from programmer/writer Christian DeWolf."
 
 %html
   %head
@@ -21,14 +21,14 @@
     = csrf_meta_tags
 
     %meta{ property: "og:image", content: "https://www.christiandewolf.com/wolfbutler-ink.png" }
-    %meta{ property: "og:title", content: "#{ @post ? @post[:full_title] : butler_title }" }
+    %meta{ property: "og:title", content: "#{ butler_title }" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com/butler" }
-    %meta{ property: "og:description", content: "#{ @post ? @post[:desc] : butler_short_desc }" }
+    %meta{ property: "og:description", content: "#{ butler_short_desc }" }
 
     %meta{ name: "twitter:card", content: "summary" }
     %meta{ name: "twitter:site", content: "@dewolfchristian" }
-    %meta{ name: "twitter:title", content: "#{ @post ? @post[:full_title] : butler_title }" }
-    %meta{ name: "twitter:description", content: "#{ @post ? @post[:desc] : butler_desc }" }
+    %meta{ name: "twitter:title", content: "#{ butler_title }" }
+    %meta{ name: "twitter:description", content: "#{ butler_desc }" }
     %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
 
     = favicon_link_tag "tumbler.ico"

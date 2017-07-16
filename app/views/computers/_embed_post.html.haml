@@ -1,0 +1,6 @@
+.computers-post
+  %p.embolden.subtle.datemargin= "#{date_of( locals[:post][:slug] ).strftime("%B %e, %Y") }"
+  = render "computers/post_header", locals: { post: locals[:post] }
+  = render "computers/posts/blog_#{ locals[:post][:slug] }"
+  = render "computers/post_footer", locals: { post: locals[:post] }
+

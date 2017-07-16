@@ -16,8 +16,7 @@ function togglePhysical(product_id) {
   }
 }
 
-function goToSignUp() {  window.location = "/users/sign_up";  }
-
+function goToSignUp() { window.location = "/users/sign_up"; }
 function showDealzone() { $('#dealzone').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); }
 function hideDealzone() { $('#dealzone').fadeOut(); $('#checkout').fadeOut(); }
 function possiblyHideDealzone() { if(Object.keys(cart).length === 0) { hideDealzone(); } }
