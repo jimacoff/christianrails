@@ -1,5 +1,4 @@
 require 'constraints/domain_constraint'
-require 'constraints/whitelist'
 
 Christianrails::Application.routes.draw do
 
@@ -19,11 +18,7 @@ Christianrails::Application.routes.draw do
       get 'refund'
     end
   end
-  resources :watch_properties, except: [:show] do
-    collection do
-      post 'check_properties', constraints: Whitelist.new
-    end
-  end
+  resources :watch_properties, except: [:show]
   resources :newsletter_signups, only: [:index, :create]
   resources :admin, only: [:index] do
     collection do
@@ -127,7 +122,6 @@ Christianrails::Application.routes.draw do
     resources :assistants, only: [:index, :create, :update] do
       collection do
         get  'settings'
-        post 'send_daily_emails', constraints: Whitelist.new
       end
     end
     resources :contacts, except: [:show]
