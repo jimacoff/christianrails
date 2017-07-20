@@ -29,6 +29,7 @@ module CrmHelper
 
   def send_out_daily_emails
     Crm::Assistant.where(email_me_daily: true).each do |assistant|
+      puts "Checking assistant: #{ assistant.name }"
       if assistant.ripe_for_email?
         send_daily_summary( assistant )
       end
@@ -38,6 +39,7 @@ module CrmHelper
   private
 
     def send_daily_summary(assistant)
+      puts "Sending daily summary..."
       attempts = 3
       begin
         Crm::ReminderMailer.daily_summary( assistant ).deliver_now
