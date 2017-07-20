@@ -87,6 +87,7 @@ class Crm::Assistant < ApplicationRecord
   end
 
   def ripe_for_email?
+    puts "Assistant's hour: #{Time.current.in_time_zone( self.user.time_zone ).hour}"
     Time.current.in_time_zone( self.user.time_zone ).hour == EMAIL_SEND_TIME
   end
 
