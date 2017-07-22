@@ -12,7 +12,7 @@ module BlogHelper
       {
         title: "20170716_on_writing_novellas",
         category: WRITING_AND_PUBLISHING,
-        tags: ["Snapback", "novellas", "illustrations", "Hal-Con", "Go", "self-publishing"]
+        tags: ["Snapback", "novellas", "illustrations", "Hal-Con", "Ghostcrime", "self-publishing"]
       },
       {
         title: "20170402_a_dream_of_spring",
