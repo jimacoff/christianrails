@@ -1,7 +1,7 @@
 #user-wrapper.glass
   - if current_user
     .center
-      Welcome, #{current_user.first_name}!
+      .span Welcome, #{current_user.first_name}.
 
       %p.diminutive.lineheight-spacer
         - if current_user.has_crm_access?
@@ -28,4 +28,4 @@
       = link_to 'Sign up', main_app.new_user_registration_path
 
       %p.diminutive.lineheight-spacer
-        Join for free today!
+        Start a library now.

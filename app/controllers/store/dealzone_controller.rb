@@ -41,10 +41,8 @@ class Store::DealzoneController < Store::StoreController
 
   def updated_prices
     if current_user
-      price_json = get_updated_prices
-
       respond_to do |format|
-        format.json { render json: price_json }
+        format.json { render json: get_updated_prices }
       end
     end
   end

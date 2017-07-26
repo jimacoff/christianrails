@@ -5,7 +5,7 @@
   - prods.each_with_index do |prod, i|
     - if i > 0
       %hr
-    = render 'store/store_product', { product: prod }
+    = render 'store/store_preview', { product: prod }
 
 %hr
 = render 'store/diamond_machine'

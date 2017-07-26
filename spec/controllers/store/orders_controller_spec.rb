@@ -17,8 +17,6 @@ RSpec.describe Store::OrdersController, type: :controller do
     @user.admin = true
     @user.save
     sign_in @user
-
-    #controller.class.skip_before_action :verify_is_admin
   end
 
   let(:price_combo)   { FactoryGirl.create(:price_combo) }

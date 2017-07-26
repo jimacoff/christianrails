@@ -1,0 +1,12 @@
+#gc-header
+  .left-header{style: "display: inline-block;"}
+
+    #ghostcrime-logo-wrapper
+
+      %a{ href: root_path }= image_tag( "ghostcrime-posterlogo.png", alt: "Ghostcrime logo" )
+
+    .header-words.ghost-align
+      %h1#mynameis= @gc_title
+      %p#imake= @gc_slogan
+
+  = render "layouts/userbar"

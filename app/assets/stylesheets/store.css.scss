@@ -174,7 +174,7 @@ th {
 }
 
 .store-image {
-  border-radius: 5px;
+  border-radius: 36px;
   float: left;
 }
 
@@ -295,6 +295,29 @@ th {
 
 #mobile-badger, #mobile-diamonds, .mobile-product {
   text-align: center;
+}
+
+.money-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.digi-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.product-text {
+  font-family: CMUSerifRoman;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.2em;
 }
 ////////// BEGIN RESPONSIVE ////////////////
 

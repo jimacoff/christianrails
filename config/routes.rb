@@ -71,6 +71,10 @@ Christianrails::Application.routes.draw do
   get '/order_success',  to: 'store/dealzone#order_success'
   get '/store',          to: 'store/dealzone#index'
 
+  # store product pages
+  get '/ghostcrime',  to: 'store/ghostcrime#index'
+  get '/snapback',    to: 'store/snapback#index'
+
   ##### BINARYWOODS ###########
   namespace :woods do
     resources :players
@@ -180,6 +184,7 @@ Christianrails::Application.routes.draw do
     end
   end
   get '/go',  to: 'go#index'
+
 
   ### GRAVEYARD #######
   resources :graveyard, only: [] do
