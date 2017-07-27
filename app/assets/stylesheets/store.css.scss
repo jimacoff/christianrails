@@ -25,32 +25,36 @@ th {
   background-color: $white;
 }
 
-#dealzone {
-  position: absolute;
-  z-index: 100;
-  top: -100px;
-  right: 40px;
-  display: inline-block;
+#cartwidget {
+  background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #868680 50%, #000000 95%) !important;
+  border-radius: 10px;
+  width: 360px;
+  padding: 10px 2px;
+  border: 2px solid $black;
+  margin: 15px 0;
 }
 
-.dealzone-image {
+.cartwidget-image {
   border-radius: 30px 30px 0 0;
 }
 
-.dealzone-prod-details {
+.cartwidget-prod-details {
   border-radius: 0 0 30px 30px;
-  background-color: $sky-cyan;
+  background-color: $dark-gray;
   margin-top: -9px;
 }
 
-#dealzone-pricedetails {
-  background-color: $smoke-gray;
+#cartwidget-pricedetails {
+  background-color: $dark-gray;
   padding: 5px;
-  border-radius: 0 0 10px 10px;
-  margin-top: -9px;
-  margin-left: 4px;
-  text-align: right;
-  float: left;
+  border-radius: 10px;
+  margin: 10px 2px;
+  text-align: center;
+}
+
+#check_out_button {
+  display: block;
+  margin: 3px auto;
 }
 
 .pricedetails-processing {
@@ -59,17 +63,6 @@ th {
 
 #store-wrapper {
   position: relative;
-}
-
-#deal-products, #checkout {
-  display: inline-block;
-  z-index: 100;
-}
-
-#checkout {
-  position: absolute;
-  top: -26px;
-  z-index: 500;
 }
 
 #discount_price {
@@ -176,6 +169,7 @@ th {
 .store-image {
   border-radius: 36px;
   float: left;
+  cursor: pointer;
 }
 
 .menu {
@@ -297,20 +291,30 @@ th {
   text-align: center;
 }
 
+// holds the digital and physical widgets
 .money-flex {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.digi-flex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
+.digital-widget {
+  background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
+  border-radius: 10px;
+  width: 250px;
+  padding: 10px;
+  border: 2px solid $black;
+  margin: 15px;
+}
+
+.physical-widget {
+  background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #606060 50%, #000000 95%) !important;
+  border-radius: 10px;
+  width: 250px;
+  padding: 10px;
+  border: 2px solid $black;
+  margin: 15px;
 }
 
 .product-text {
@@ -386,14 +390,6 @@ th {
     margin: 0 auto;
   }
 
-  #checkout {
-    left: -4px;
-  }
-
-  #dealzone {
-    right: 0;
-  }
-
 }
 
 
@@ -452,13 +448,6 @@ th {
     margin: 0;
   }
 
-  #checkout {
-    left: 135px;
-  }
-
-  #dealzone {
-    right: 40px;
-  }
 }
 
 @media screen and (min-width: 801px) {

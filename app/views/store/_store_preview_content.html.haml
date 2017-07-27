@@ -22,9 +22,7 @@
 
       %td.small-width
         - if !current_user
-          %div{id:"sign_in_#{product.id})"}=button_to 'Learn more', "/ghostcrime", class: 'store-button', method: :get
-        - elsif !current_user.has_product?(product.id)
-          %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
-        - else
+          %div{id:"sign_in_#{product.id})"}=button_to 'Learn more', "/#{product.slug}", class: 'store-button', method: :get
+        - elsif current_user.has_product?(product.id)
           - product.digital_releases.each do |rel|
             .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'

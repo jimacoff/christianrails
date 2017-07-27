@@ -1,0 +1,30 @@
+- paypal_image = "https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"
+
+- unless !@cart || !@all_products
+  - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
+
+#cartwidget{style: "#{display_setting}"}
+
+  %span.artifika{style: 'margin-bottom: 5px;'} My Basket
+
+  #deal-products
+    - if @all_products.size > 0
+      - @all_products.each do |prod|
+        = render 'store/cartwidget_product', {prod: prod}
+
+  #checkout{style: "#{display_setting}"}
+
+    .cartwidget-pricedetails
+      %span.cartwidget-discount
+        %span.discount_label Save:
+        %span.discount_price.new-price
+
+      %span.cartwidget-total
+        %span.embolden Total:
+        %span.total_price.embolden $0.00
+
+    %input{id: "check_out_button", onclick: "doCheckout();", type: "image", src: paypal_image, alt: "Check out with PayPal" }
+
+    .hidden.center{id: "processing"}
+      = image_tag("spin.gif")
+      %span{style: "vertical-align: 10px;"} Processing...
