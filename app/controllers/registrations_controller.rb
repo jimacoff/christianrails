@@ -1,8 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  include StoreHelper
+
   after_action :send_registration_notification, only: [:create]
-  after_action :sign_up_to_mailing_list, only: [:create]
+  after_action :sign_up_to_mailing_list,        only: [:create]
   after_action :associate_orphan_woods_player_with_new_user, only: [:create]
+  # after_action :give_free_gifts, only: [:create]  ## TODO enable later
 
   private
 
@@ -16,7 +19,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def send_registration_notification
     record_positive_event(Log::STORE, "New account created")
-    AdminMailer.account_signup(@user).deliver_now
+    AdminMailer.account_signup( @user ).deliver_now
   end
 
   def sign_up_to_mailing_list
@@ -28,8 +31,13 @@ class RegistrationsController < Devise::RegistrationsController
       if !current_user.player && session[:woods_player_id] && !session[:woods_player_id].blank?
         player_to_associate = Woods::Player.find( session[:woods_player_id] )
         current_user.player = player_to_associate
-        pp "### Associating orphan player with logging-in user."
       end
+    end
+  end
+
+  def give_free_gifts
+    if snapback = Store::Product.where( title: "Snapback: Fuseki" ).take
+      give_product_to_user!( snapback, @user, "On sign-up" )
     end
   end
 

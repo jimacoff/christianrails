@@ -8,6 +8,7 @@ class Store::Product < ApplicationRecord
   has_many :downloads, through: :releases, inverse_of: :product
 
   has_many :purchases, inverse_of: :product
+  has_many :free_gifts, inverse_of: :product
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
   validates_presence_of :title, :author, :price
