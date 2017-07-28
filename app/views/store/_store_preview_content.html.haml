@@ -10,18 +10,21 @@
       %td.small-width
         .store-format.embolden Coming soon
       %td.small-width
+
     - else
       %td.small-width
-        - release_array = []
-        - product.digital_releases.each do |release|
-          - release_array << release.format
-        - if product.has_physical_release?
-          - release_array << "Paperback"
-        - release_text = release_array.join(" / ")
-        .store-format.embolden #{release_text}
+        - if !current_user || (current_user && !current_user.has_product?(product.id))
+          - release_array = []
+          - product.digital_releases.each do |release|
+            - release_array << release.format
+          - release_array << "Paperback" if product.has_physical_release?
+          - release_text = release_array.join(" / ")
+          .store-format.embolden #{release_text}
+        - elsif current_user.has_product?(product.id)
+          .store-format.embolden Download now:
 
       %td.small-width
-        - if !current_user
+        - if !current_user || (current_user && !current_user.has_product?(product.id))
           %div{id:"sign_in_#{product.id})"}=button_to 'Learn more', "/#{product.slug}", class: 'store-button', method: :get
         - elsif current_user.has_product?(product.id)
           - product.digital_releases.each do |rel|

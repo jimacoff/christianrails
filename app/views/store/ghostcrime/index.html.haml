@@ -1,3 +1,10 @@
 = render "store/ghostcrime_book"
 = render "store/store_product", { product: @gc_product }
 = render "store/cartwidget"
+
+:javascript
+  $(document).ready(function() {
+    if( "#{ @gc_crm }" === "add-to-cart") {
+      addToCart("#{ @gc_product.id }");
+    }
+  });
