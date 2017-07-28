@@ -20,7 +20,6 @@ class Store::GhostcrimeController < Store::StoreController
     @available_products = @all_products - @owned_products
 
     # for auto-adding of GC from the params
-    @gc_product = Store::Product.where(title: "Ghostcrime").first
     @gc_crm = ""
     if @gc_product && current_user && params[:gc] == "crm"
       if @available_products.collect{ |x| x.id }.include?( @gc_product.id )

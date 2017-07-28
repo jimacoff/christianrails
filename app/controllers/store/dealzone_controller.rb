@@ -100,13 +100,13 @@ class Store::DealzoneController < Store::StoreController
 
         staged = current_user.staged_purchases
         gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
-        discount = Store::PriceCombo.total_cart_discount_for( current_user.id )
-        tax = (gross_price - discount) * Store::Purchase::TAX_RATE
+        discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
+        tax  = (gross_price - discount) * Store::Purchase::TAX_RATE
         total = gross_price - discount + tax
 
         order = Store::Order.create(user: current_user,
-                             payer_id: params[:PayerID], payment_id: params[:paymentId],
-                             discount: discount, tax: tax, total: total)
+                                    payer_id: params[:PayerID], payment_id: params[:paymentId],
+                                    discount: discount, tax: tax, total: total)
 
         staged.each do |staged_purchase|
           Store::Purchase.create(product: staged_purchase.product,
