@@ -2,6 +2,11 @@
 = render "store/store_product", { product: @gc_product }
 = render "store/cartwidget"
 
+
+%br
+%br
+= render "store/footer"
+
 :javascript
   $(document).ready(function() {
     if( "#{ @gc_crm }" === "add-to-cart") {
