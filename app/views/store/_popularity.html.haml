@@ -1,20 +1,20 @@
-#business-window
+#popularity-index
 
   %p.diminutive.artifika{style: 'color: black; text-align: center !important'}
     %strong Digital Popularity Indexes
 
-  .business-products-wrapper
+  .popular-products-wrapper
     - @all_products.each do |product|
-      .business-product
+      .popular-product
         %a{href: "/#{ product.slug }"}
-          = image_tag( "#{product.small_image}" , class: "business-window-image swell skoosh")
+          = image_tag( "#{product.popularity_image}" , class: "popularity-index-image swell skoosh")
         %p.order-count.left.artifika= "#{product.order_count}"
         %br
 
     // DF stats
-    .business-product
+    .popular-product
       %a{href: "/diamondfind"}
-        = image_tag( "diamondfind-icon.png" , class: "business-window-image swell skoosh")
+        = image_tag( "diamondfind-icon.png" , class: "popularity-index-image swell skoosh")
       %p.order-count.left.artifika= "#{ Woods::Player.all.count }"
       %br
 %br

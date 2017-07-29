@@ -359,15 +359,15 @@ th {
   font-size: 1.2em;
 }
 
-// BUSINESS WINDOW STUFF
+// POPULARITY INDEX STUFF
 
-#business-window {
+#popularity-index {
   h1 {
     color: black;
   }
 }
 
-.business-window-image {
+.popularity-index-image {
   width: 75px;
   height: 75px;
   border-radius: 30px;
@@ -375,7 +375,7 @@ th {
   cursor: pointer;
 }
 
-.business-product {
+.popular-product {
   display: inline-block;
   margin: 4px;
   padding: 2px;
@@ -386,7 +386,7 @@ th {
   color: black;
 }
 
-.business-products-wrapper {
+.popular-products-wrapper {
   text-align: center !important;
 }
 
