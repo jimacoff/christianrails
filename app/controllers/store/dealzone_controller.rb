@@ -156,7 +156,7 @@ class Store::DealzoneController < Store::StoreController
           if current_user.downloads.where(release_id: release.id).size >= Store::Download::LIMIT
             @error = "Download limit of #{Store::Download::LIMIT} reached on #{product.title} #{release.format} by user: #{current_user.username}."
           else
-            file_name = "#{product.title} - #{product.author}.#{release.format.downcase}"
+            file_name = "#{product.filename} - #{product.author}.#{release.format.downcase}"
             send_file "#{Rails.root}/../../downloads/#{file_name}"
             Store::Download.create(user: current_user, release: release)
             record_positive_event(Log::STORE, "Download initiated for: #{file_name}")

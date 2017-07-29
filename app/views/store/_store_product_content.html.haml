@@ -30,7 +30,7 @@
               %button.store-button{class:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to cart
             - else
               - product.digital_releases.each do |rel|
-                .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
+                .left= button_to rel.format, { action: 'download', controller: 'dealzone', release_id: rel.id }, class: 'store-button'
 
           %td
             -# DISPLAY PRICE IF APPLICABLE
