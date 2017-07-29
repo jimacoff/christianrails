@@ -351,6 +351,38 @@ th {
   font-style: normal;
   font-size: 1.2em;
 }
+
+// BUSINESS WINDOW STUFF
+
+#business-window {
+  h1 {
+    color: black;
+  }
+}
+
+.business-window-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 30px;
+  float: left;
+  cursor: pointer;
+}
+
+.business-product {
+  display: inline-block;
+  margin: 4px;
+  padding: 2px;
+}
+
+.order-count {
+  margin-left: 5px;
+  color: black;
+}
+
+.business-products-wrapper {
+  text-align: center !important;
+}
+
 ////////// BEGIN RESPONSIVE ////////////////
 
 @media screen and (min-width: 1px) {
