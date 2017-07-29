@@ -57,6 +57,18 @@ th {
   margin-left: 10px;
 }
 
+.standalone-cart {
+  border-radius: 30px;
+ background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 );
+  width: 360px;
+  padding: 10px 2px;
+  border: 1px solid $white;
+  margin: 15px auto;
+}
+
 #check_out_button {
   display: block;
   margin: 3px auto;

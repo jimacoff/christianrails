@@ -1,8 +1,8 @@
 var cart = {}
 
 function goToSignUp() { window.location = "/users/sign_up"; }
-function showCartWidget() { $('#cartwidget').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); }
-function hideCartWidget() { $('#cartwidget').fadeOut(); $('#checkout').fadeOut(); }
+function showCartWidget() { $('#cartwidget').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); $('.empty-cart').hide();}
+function hideCartWidget() { $('#cartwidget').fadeOut(); $('#checkout').fadeOut(); $('.empty-cart').show(); }
 function possiblyHideCartWidget() { if(Object.keys(cart).length === 0) { hideCartWidget(); } }
 function enableAddToCartButton(product_id)  { $('.add_to_cart_' + product_id).prop("disabled", false); $('.add_to_cart_' + product_id).text("Add to cart"); }
 function disableAddToCartButton(product_id) { $('.add_to_cart_' + product_id).prop("disabled", true);  $('.add_to_cart_' + product_id).text("Added to cart"); }
@@ -14,14 +14,12 @@ function hideProductInCartWidget(product_id) { $(".cartwidget_item_"  + product_
 function addToCart(product_id) {
   showCartWidget();
   disableAddToCartButton(product_id);
-  //hidePriceOfProduct(product_id);
   showProductInCartWidget(product_id);
   createStagedPurchase(product_id);
 }
 
 function removeFromCart(product_id) {
   enableAddToCartButton(product_id);
-  //showPriceOfProduct(product_id);
   hideProductInCartWidget(product_id);
   removeStagedPurchase(product_id);
 }

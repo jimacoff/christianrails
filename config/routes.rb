@@ -71,6 +71,7 @@ Christianrails::Application.routes.draw do
   get '/complete_order', to: 'store/dealzone#complete_order'
   get '/order_success',  to: 'store/dealzone#order_success'
   get '/store',          to: 'store/dealzone#index'
+  get '/cart',           to: 'store/dealzone#cart'
 
   # store product pages
   get '/ghostcrime',  to: 'store/ghostcrime#index'

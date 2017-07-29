@@ -4,7 +4,7 @@
       .span Welcome, #{current_user.first_name}.
 
       %p.diminutive.lineheight-spacer
-        = link_to "", main_app.cart_store_dealzone_index_path, class: 'cart-link-highlight'
+        = link_to "", main_app.cart_path, class: 'cart-link-highlight'
         %span.cart-dot ·
         - if current_user.has_crm_access?
           - if controller_path.starts_with?("crm")

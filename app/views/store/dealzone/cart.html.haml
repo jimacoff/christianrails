@@ -1,7 +1,12 @@
+- unless !@cart || !@all_products
+  - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
+
 .center
   %h1{style: 'color: black;'} My Cart
 
-  = render "store/cartwidget_content"
+  .standalone-cart
+    = render "store/cartwidget_content", {display_setting: display_setting}
+    .empty-cart Your cart is empty.
 
   %br
   = link_to "Return to store", root_path

@@ -2,7 +2,5 @@
   - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
 
 #cartwidget{style: "#{display_setting}"}
-
   %span.artifika{style: 'margin-bottom: 5px;'} My Cart
-
-  = render 'store/cartwidget_content'
+  = render 'store/cartwidget_content', {display_setting: display_setting}

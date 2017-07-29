@@ -3,8 +3,7 @@
     - @all_products.each do |prod|
       = render 'store/cartwidget_product', {prod: prod}
 
-#checkout
-
+#checkout{style: "#{ display_setting }"}
   .cartwidget-pricedetails
     %span.cartwidget-discount
       %span.discount_label Save:
