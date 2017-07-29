@@ -42,7 +42,7 @@
       %p.alert.alert-danger
         = alert
 
-    - if controller_name == 'dealzone' && action_name == 'index'
+    - if controller_name == 'dealzone' && ( ['index', 'cart'].include?(action_name) )
       = yield
     - else
       .smart-panel.panel

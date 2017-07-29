@@ -53,6 +53,10 @@ th {
   text-align: center;
 }
 
+.cartwidget-total {
+  margin-left: 10px;
+}
+
 #check_out_button {
   display: block;
   margin: 3px auto;
@@ -107,7 +111,7 @@ th {
 }
 
 .store-button:active {
-  background-color: $ice-blue;
+  color: $alt-smoke-gray !important;
   outline: none;
 }
 

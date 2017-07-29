@@ -33,6 +33,7 @@ Christianrails::Application.routes.draw do
   namespace :store do
     resources :dealzone, only: [:index] do
       collection do
+        get  'cart'
         get  'updated_prices'
         post 'check_out'
         get  'complete_order'
@@ -118,8 +119,8 @@ Christianrails::Application.routes.draw do
   end
   post '/woods/items/download', to: 'woods/items#download'
   get  '/woods',                to: 'woods/stories#index'
-  get '/diamondfind',           to: 'woods/stories#show', defaults: { id: 1 }
-  get '/diamondfind/play',      to: 'woods/stories#play', defaults: { id: 1 }
+  get  '/diamondfind',          to: 'woods/stories#show', defaults: { id: 1 }
+  get  '/diamondfind/play',     to: 'woods/stories#play', defaults: { id: 1 }
 
   ##### GHOSTCRM ##############
   namespace :crm do

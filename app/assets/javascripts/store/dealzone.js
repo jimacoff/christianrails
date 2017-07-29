@@ -4,8 +4,8 @@ function goToSignUp() { window.location = "/users/sign_up"; }
 function showCartWidget() { $('#cartwidget').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); }
 function hideCartWidget() { $('#cartwidget').fadeOut(); $('#checkout').fadeOut(); }
 function possiblyHideCartWidget() { if(Object.keys(cart).length === 0) { hideCartWidget(); } }
-function enableAddToCartButton(product_id)  { $('.add_to_cart_' + product_id).prop("disabled", false); $('.add_to_cart_' + product_id).text("Add to basket"); }
-function disableAddToCartButton(product_id) { $('.add_to_cart_' + product_id).prop("disabled", true);  $('.add_to_cart_' + product_id).text("Added to basket"); }
+function enableAddToCartButton(product_id)  { $('.add_to_cart_' + product_id).prop("disabled", false); $('.add_to_cart_' + product_id).text("Add to cart"); }
+function disableAddToCartButton(product_id) { $('.add_to_cart_' + product_id).prop("disabled", true);  $('.add_to_cart_' + product_id).text("Added to cart"); }
 function showPriceOfProduct(product_id)  { $("." + product_id + "_price").fadeIn();  $("." + product_id + "_new_price").fadeIn(); }
 function hidePriceOfProduct(product_id)  { $("." + product_id + "_price").fadeOut(); $("." + product_id + "_new_price").fadeOut(); }
 function showProductInCartWidget(product_id) { $(".cartwidget_item_"  + product_id).fadeIn().css("display","inline-block").addClass('totalable'); }
@@ -41,6 +41,16 @@ function updatePrices() {
   request.error(function(jqXHR, textStatus, errorThrown) {
     console.log(textStatus);
   });
+}
+
+function updateUserbarCartLink() {
+  if( Object.keys(cart).length > 0 ) {
+    $('.cart-link-highlight').text("Cart (" + Object.keys(cart).length + ")");
+    $('.cart-dot').show();
+  } else {
+    $('.cart-link-highlight').text("");
+    $('.cart-dot').hide();
+  }
 }
 
 function drawNewPrices(price_data) {
@@ -98,6 +108,7 @@ function createStagedPurchase(product_id) {
   request.done(function(data, textStatus, jqXHR) {
     cart[data['product_id']] = data['id'];
     updatePrices();
+    updateUserbarCartLink();
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
@@ -117,6 +128,7 @@ function removeStagedPurchase(product_id) {
     delete cart[data['product_id']];
     possiblyHideCartWidget();
     updatePrices();
+    updateUserbarCartLink();
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {

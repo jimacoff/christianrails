@@ -39,6 +39,14 @@ class Store::DealzoneController < Store::StoreController
 
   end
 
+  # a dedicated page for viewing your cart & checking out
+  def cart
+    unless current_user
+      redirect_to root_path
+    end
+  end
+
+  ## JSON
   def updated_prices
     if current_user
       respond_to do |format|
