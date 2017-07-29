@@ -1,5 +1,9 @@
 class AdminController < ApplicationController
 
+  include StoreHelper
+
+  before_action :get_products, only: [:index]
+
   ## ADMIN ONLY
 
   def index

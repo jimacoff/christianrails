@@ -38,6 +38,10 @@ class Store::Product < ApplicationRecord
     total_discount
   end
 
+  def order_count
+    self.purchases.size
+  end
+
   def digital_releases
     self.releases.where.not(format: "Book")
   end

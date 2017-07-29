@@ -78,7 +78,7 @@ module BlogHelper
   end
 
   def sample_blog_posts
-    all_blog_posts[0..4]
+    all_blog_posts[0..3]
   end
 
 end
