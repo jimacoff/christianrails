@@ -6,13 +6,15 @@
   .business-products-wrapper
     - @all_products.each do |product|
       .business-product
-        = image_tag( "#{product.small_image}" , class: "business-window-image swell")
+        %a{href: "/#{ product.slug }"}
+          = image_tag( "#{product.small_image}" , class: "business-window-image swell skoosh")
         %p.order-count.left.artifika= "#{product.order_count}"
         %br
 
     // DF stats
     .business-product
-      = image_tag( "diamondfind-icon.png" , class: "business-window-image swell")
+      %a{href: "/diamondfind"}
+        = image_tag( "diamondfind-icon.png" , class: "business-window-image swell skoosh")
       %p.order-count.left.artifika= "#{ Woods::Player.all.count }"
       %br
 %br

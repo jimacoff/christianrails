@@ -126,6 +126,13 @@ th {
 .store-button:active {
   color: $alt-smoke-gray !important;
   outline: none;
+  transform: scale(0.90) !important;
+  -webkit-transform: scale(0.90) !important;
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
 }
 
 .store-button:focus {

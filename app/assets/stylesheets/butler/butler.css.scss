@@ -110,6 +110,20 @@ table.center {
   }
 }
 
+.swell, .skoosh {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
+
+.swell:hover {
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+}
+
 .blog-title {
   color: $servile-purple;
   margin-left: 20px;
