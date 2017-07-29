@@ -1,5 +1,11 @@
 :javascript
   $(document).ready(function() {
+
+    // if desktop >900px, destroy all the mobile page placeholders
+    if( window.innerWidth > 900 ) {
+      $('.mobile-placeholder-page').remove();
+    }
+
     $('.devrama-book').DrBook({
       width: 268,
       height: 400,
