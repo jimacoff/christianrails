@@ -10,6 +10,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20170729_webstore_upgrade",
+        category: SOFTWARE_DEVELOPMENT,
+        tags: ["programming", "self-publishing", "Snapback", "Ghostcrime"]
+      },
+      {
         title: "20170716_on_writing_novellas",
         category: WRITING_AND_PUBLISHING,
         tags: ["Snapback", "novellas", "illustrations", "Hal-Con", "Ghostcrime", "self-publishing"]
@@ -42,7 +47,7 @@ module BlogHelper
       {
         title: "20160816_tie_in_for_ghostcrime",
         category: SOFTWARE_DEVELOPMENT,
-        tags: ["CRM", "Ghostcrime", "organization", "business", "books", "tie-ins"]
+        tags: ["CRM", "Ghostcrime", "organization", "business", "books", "tie-ins", "programming"]
       },
       {
         title: "20160808_between_contracts",
