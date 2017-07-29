@@ -19,8 +19,8 @@
     %tbody
       - @reading_books.each do |book|
         %tr
-          %td= book.is_ghostcrime? ? ( link_to book.title,  root_path + "?gc=crm", class: 'blog-link' ) : book.title
-          %td= book.is_ghostcrime? ? ( link_to book.author, root_path + "?gc=crm", class: 'blog-link' ) : book.author
+          %td= book.is_ghostcrime? ? ( link_to book.title,  ghostcrime_path + "?gc=crm", class: 'blog-link' ) : book.title
+          %td= book.is_ghostcrime? ? ( link_to book.author, ghostcrime_path + "?gc=crm", class: 'blog-link' ) : book.author
           %td= book.desire_to_read
           %td
             = link_to 'Finish', finish_crm_book_path( book ), method: :post
@@ -43,8 +43,8 @@
     %tbody
       - @unread_books.each do |book|
         %tr
-          %td= book.is_ghostcrime? ? ( link_to book.title,  root_path + "?gc=crm", class: 'blog-link' ) : book.title
-          %td= book.is_ghostcrime? ? ( link_to book.author, root_path + "?gc=crm", class: 'blog-link' ) : book.author
+          %td= book.is_ghostcrime? ? ( link_to book.title,  ghostcrime_path + "?gc=crm", class: 'blog-link' ) : book.title
+          %td= book.is_ghostcrime? ? ( link_to book.author, ghostcrime_path + "?gc=crm", class: 'blog-link' ) : book.author
           %td= book.desire_to_read
           %td
             = link_to 'Start reading', start_reading_crm_book_path( book ), method: :post

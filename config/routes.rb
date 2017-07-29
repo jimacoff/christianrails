@@ -33,6 +33,7 @@ Christianrails::Application.routes.draw do
   namespace :store do
     resources :dealzone, only: [:index] do
       collection do
+        get  'cart'
         get  'updated_prices'
         post 'check_out'
         get  'complete_order'
@@ -70,6 +71,11 @@ Christianrails::Application.routes.draw do
   get '/complete_order', to: 'store/dealzone#complete_order'
   get '/order_success',  to: 'store/dealzone#order_success'
   get '/store',          to: 'store/dealzone#index'
+  get '/cart',           to: 'store/dealzone#cart'
+
+  # store product pages
+  get '/ghostcrime',  to: 'store/ghostcrime#index'
+  get '/snapback',    to: 'store/snapback#index'
 
   ##### BINARYWOODS ###########
   namespace :woods do
@@ -114,8 +120,8 @@ Christianrails::Application.routes.draw do
   end
   post '/woods/items/download', to: 'woods/items#download'
   get  '/woods',                to: 'woods/stories#index'
-  get '/diamondfind',           to: 'woods/stories#show', defaults: { id: 1 }
-  get '/diamondfind/play',      to: 'woods/stories#play', defaults: { id: 1 }
+  get  '/diamondfind',          to: 'woods/stories#show', defaults: { id: 1 }
+  get  '/diamondfind/play',     to: 'woods/stories#play', defaults: { id: 1 }
 
   ##### GHOSTCRM ##############
   namespace :crm do
@@ -180,6 +186,7 @@ Christianrails::Application.routes.draw do
     end
   end
   get '/go',  to: 'go#index'
+
 
   ### GRAVEYARD #######
   resources :graveyard, only: [] do

@@ -1,57 +1,61 @@
--# - if product.has_physical_release?
--#   %button.store-button.physical-button{id:"toggle_physical_#{product.id}", onclick:"togglePhysical( #{product.id} )"} Order a physical copy
+-# This is the main store layout for a product.
 
-%h2{id:"#{product.id}_title"}= product.title
-%p= product.long_desc
+%p.product-text{style: 'white-space: pre-line;'}= product.long_desc
 
-%table.full-width{id: "digital_download_#{product.id}"}
-  %tr
-    - if product.coming_soon
-      %td.small-width
-      %td.small-width
-        .store-format.embolden Coming soon
-      %td.small-width
-    - else
-      %td.small-width
-        - if !current_user || !current_user.has_product?(product.id)
-          // display the release format names
-          - release_array = []
-          - product.digital_releases.each do |release|
-            - release_array << release.format
-          - release_text = release_array.join(" / ")
-          .store-format.embolden #{release_text}
-        - else
-          .store-format.embolden Download:
+- if product.coming_soon
+  .store-format.embolden Coming soon
 
-      %td.small-width
-        - if !current_user
-          %div{id:"sign_in_#{product.id})"}=button_to 'Start a library', new_user_registration_path, class: 'store-button', method: :get
-        - elsif !current_user.has_product?(product.id)
-          %button.store-button{id:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to basket
-        - else
-          - product.digital_releases.each do |rel|
-            .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
+- else
+  .money-flex
+    .digital-widget
+      %table
+        %tr
+          %td{colspan: 2}
+            -# display the release format names
+            - if !current_user || !current_user.has_product?(product.id)
+              - release_array = []
+              - product.digital_releases.each do |release|
+                - release_array << release.format
+              - release_text = release_array.join(" / ")
+              .store-format.embolden.center #{release_text}
+            - else
+              .store-format.embolden.center Download:
+
+        %tr
+          %td{style: 'width: 50%;'}
+            -# BUTTONS TO ADD TO CART, DOWNLOAD OR SIGN IN
+            - if !current_user
+              %div{id:"sign_in_#{product.id})"}=button_to 'Start a library', new_user_registration_path, class: 'store-button', method: :get
+            - elsif !current_user.has_product?(product.id)
+              %button.store-button{class:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to cart
+            - else
+              - product.digital_releases.each do |rel|
+                .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
+
+          %td
+            -# DISPLAY PRICE IF APPLICABLE
+            - if !current_user || !current_user.has_product?(product.id)
+              .new-price{class:"#{product.id}_new_price", style: 'display: inline-block; margin-right: 10px;'}
+              .store-price{class:"#{product.id}_price", style: 'display: inline-block;'}= number_to_currency( product.price, precision: 2 )
 
       - if !current_user || !current_user.has_product?(product.id)
-        %td.small-width
-          %table
-            %tr
-              %td
-                .new-price{id:"#{product.id}_new_price"}
-              %td
-                .store-price{id:"#{product.id}_price"}= number_to_currency( product.price, precision: 2 )
+        %p.diminutive{style: "color: grey !important;"} Purchase access to all DRM-free formats.
       - else
-        %td.small-width
+        %p.diminutive{style: "color: grey !important;"} All downloads are DRM-free.
 
-- if product.has_physical_release?
-  %table.full-width{id: "physical_order_#{product.id}"}
-    %tr
-      %td.small-width
-        %strong Paperback
-      %td.small-width.left
-        %form.center{action: "https://www.paypal.com/cgi-bin/webscr", method: "post", target: "_top"}
-          %input{type: "hidden", name: "cmd", value: "_s-xclick"}
-          %input{type: "hidden", name: "hosted_button_id", value: product.physical_code}
-          %input.pp-button{type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_107x26.png", border: "0", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
-      %td.small-width
-        %span= "#{number_to_currency( product.physical_price, precision: 2 )}"
+    - if product.has_physical_release?
+      .physical-widget
+        %table
+          %tr
+            %td{colspan: 2}
+              %strong Paperback
+          %tr
+            %td
+              %form.center{action: "https://www.paypal.com/cgi-bin/webscr", method: "post", target: "_top"}
+                %input{type: "hidden", name: "cmd", value: "_s-xclick"}
+                %input{type: "hidden", name: "hosted_button_id", value: product.physical_code}
+                %input.pp-button{type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_107x26.png", border: "0", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
+            %td
+              %span= "#{number_to_currency( product.physical_price, precision: 2 )}"
+
+        %p.diminutive{style: "color: grey !important;"} Price does not include tax or shipping.

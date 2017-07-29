@@ -1,0 +1,27 @@
+#deal-products
+  - if @all_products.size > 0
+    - @all_products.each do |prod|
+      = render 'store/cartwidget_product', {prod: prod}
+
+#checkout{style: "#{ display_setting }"}
+  .cartwidget-pricedetails
+    %span.cartwidget-discount
+      %span.discount_label Save:
+      %span.discount_price.new-price
+
+    %span.cartwidget-total
+      %span.embolden Subtotal:
+      %span.total_price.embolden $0.00
+
+  - paypal_image = "https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"
+  %input{id: "check_out_button", onclick: "doCheckout();", type: "image", src: paypal_image, alt: "Check out with PayPal" }
+
+  %p.diminutive.center{style: "color: grey !important;"} All prices expressed in CAD & do not include tax.
+
+  // errors
+  %p.checkout-errors.center.hidden{style: "color: white !important;"} Sorry - an error occurred. Please try again.
+  %p.checkout-errors-severe.center.hidden{style: "color: white !important;"} OK, I guess it's broken. Please shame Christian on Twitter: @dewolfchristian
+
+  .hidden.center{id: "processing"}
+    = image_tag("spin.gif", class: 'spinner')
+    %span{style: "vertical-align: 10px;"} Processing...

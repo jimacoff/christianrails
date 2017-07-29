@@ -11,8 +11,6 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
     user.admin = true
     user.save
-
-    #controller.class.skip_before_action :verify_is_admin
   end
 
   describe 'index' do

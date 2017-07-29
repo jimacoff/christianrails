@@ -15,8 +15,8 @@ RSpec.describe Store::PurchasesController, type: :controller do
       country: 'CA'
     })
     sign_in @user
-
-    controller.class.skip_before_action :verify_is_admin
+    @user.admin = true
+    @user.save
   end
 
   let(:product)   { FactoryGirl.create(:product) }

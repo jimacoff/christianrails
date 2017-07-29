@@ -17,8 +17,6 @@ RSpec.describe Store::PriceCombosController, type: :controller do
     sign_in @user
     @user.admin = true
     @user.save
-
-    #controller.class.skip_before_action :verify_is_admin
   end
 
   let(:valid_attributes) {

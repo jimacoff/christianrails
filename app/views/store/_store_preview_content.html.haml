@@ -1,0 +1,29 @@
+-# This is a preview of the product, linking to its dedicated store page
+
+%h2{id:"#{product.id}_title"}= product.title
+%p= product.short_desc
+
+%table.full-width{id: "digital_download_#{product.id}"}
+  %tr
+    - if product.coming_soon
+      %td.small-width
+        .store-format.embolden Coming soon
+
+    - else
+      %td.small-width
+        - if !current_user || (current_user && !current_user.has_product?(product.id))
+          - release_array = []
+          - product.digital_releases.each do |release|
+            - release_array << release.format
+          - release_array << "Paperback" if product.has_physical_release?
+          - release_text = release_array.join(" / ")
+          .store-format.embolden #{release_text}
+        - elsif current_user.has_product?(product.id)
+          .store-format.embolden Download now:
+
+      %td.small-width
+        - if !current_user || (current_user && !current_user.has_product?(product.id))
+          %div{id:"sign_in_#{product.id})"}=button_to 'Learn more', "/#{product.slug}", class: 'store-button', method: :get
+        - elsif current_user.has_product?(product.id)
+          - product.digital_releases.each do |rel|
+            .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'

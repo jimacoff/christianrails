@@ -1,9 +1,11 @@
 #user-wrapper.glass
   - if current_user
     .center
-      Welcome, #{current_user.first_name}!
+      .span Welcome, #{current_user.first_name}.
 
       %p.diminutive.lineheight-spacer
+        = link_to "", main_app.cart_path, class: 'cart-link-highlight embolden'
+        %span.cart-dot ·
         - if current_user.has_crm_access?
           - if controller_path.starts_with?("crm")
             = link_to "Main site", main_app.root_path
@@ -28,4 +30,4 @@
       = link_to 'Sign up', main_app.new_user_registration_path
 
       %p.diminutive.lineheight-spacer
-        Join for free today!
+        Start a library now.

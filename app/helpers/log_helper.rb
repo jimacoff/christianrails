@@ -24,6 +24,10 @@ module LogHelper
     create_new_log_event(Log::TYPE_WARNING, location, desc)
   end
 
+  def record_gifting(location, desc)
+    create_new_log_event(Log::TYPE_GIFT, location, desc)
+  end
+
   private
 
     def create_new_log_event(type_id, location, desc)

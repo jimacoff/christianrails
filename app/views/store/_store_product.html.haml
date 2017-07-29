@@ -1,13 +1,8 @@
+-# How a product appears in the Library
+
 .desktop-product
   .product-object
-    %table
-      %tr
-        %td.small-width.center
-          = image_tag( "#{product.image}", class: "store-image" )
-        %td
-          = render "store/store_product_content", { product: product }
+    = render "store/store_product_content", { product: product }
 
 .mobile-product
-  = image_tag( "#{product.image}", class: "store-image" )
-
   = render "store/store_product_content", { product: product }

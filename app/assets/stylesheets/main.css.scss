@@ -15,6 +15,10 @@ table {
   width: 100%;
 }
 
+.artifika {
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
 // HEADER STUFF
 
 #header {
@@ -52,6 +56,10 @@ table {
   float: right;
   position: static;
   padding: 0 5px 0 5px;
+}
+
+.cart-link-highlight {
+  color: $pumpkin-orange !important;
 }
 
 // PANELS ETC

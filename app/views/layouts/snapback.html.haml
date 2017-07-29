@@ -1,0 +1,57 @@
+!!! 5
+%html
+  %head
+    %title Snapback - by Christian DeWolf
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "snapback/snapback",  media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "vendor/devrama-book",  media: "all", "data-turbolinks-track" => true
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "store/dealzone", "data-turbolinks-track" => true
+    = javascript_include_tag "vendor/jquery.devrama.book.min", "data-turbolinks-track" => true
+
+    = csrf_meta_tags
+
+    - @sb_title  = "Snapback"
+    - @sb_slogan = "."
+    - @sb_desc_author = "Ancient board game adventure from the author of GHOSTCRIME."
+
+    %meta{ property: "og:title", content: "#{ @sb_title }" }
+    %meta{ property: "og:description", content: "#{@sb_slogan} #{@sb_desc_author}" }
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/snapback-books.png" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/snapback" }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "#{ @sb_title }" }
+    %meta{ name: "twitter:description", content: "#{@sb_slogan} #{@sb_desc_author}" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/snapback-books.png" }
+
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+    = favicon_link_tag "goban.ico"
+
+  %body.background
+
+    = render "store/snapback/header"
+
+    #mobile-title
+      = image_tag 'snapback-title-word.png'
+
+    #gc-wrapper
+      - if notice
+        %p.alert.alert-notice
+          = notice
+      - if alert
+        %p.alert.alert-danger
+          = alert
+
+      #snapback-content
+        = yield
+
+    %h5.right= "v #{app_version}"
+
+    = render "store/scripts/init_cart"
+    = render "store/scripts/init_novella"
+

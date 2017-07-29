@@ -1,0 +1,10 @@
+#sb-header
+  .left-header{style: "display: inline-block;"}
+
+    #snapback-logo-wrapper
+      %a{ href: root_path }= image_tag( "snapback-character-stones.png", alt: "Snapback logo" )
+
+    .header-words.ghost-align
+      = image_tag 'snapback-title-word.png'
+
+  = render "layouts/userbar"

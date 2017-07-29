@@ -1,4 +1,5 @@
 class Store::ProductsController < Store::StoreController
+
   before_action :set_product, only: [:edit, :update, :destroy]
 
   ## ADMIN ONLY
@@ -42,12 +43,13 @@ class Store::ProductsController < Store::StoreController
   end
 
   private
+
     def set_product
-      @product = Store::Product.find(params[:id])
+      @product = Store::Product.find( params[:id] )
     end
 
     def product_params
       params.require(:store_product).permit(:title, :author, :short_desc, :long_desc, :price, :physical_price,
-                                      :rank, :image, :small_image, :coming_soon)
+                                            :rank, :image, :small_image, :logo_image, :coming_soon, :slug)
     end
 end

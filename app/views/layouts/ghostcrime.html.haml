@@ -1,0 +1,56 @@
+!!! 5
+%html
+  %head
+    %title Ghostcrime - by Christian DeWolf
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "ghostcrime/ghostcrime",  media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "vendor/devrama-book",  media: "all", "data-turbolinks-track" => true
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "store/dealzone", "data-turbolinks-track" => true
+    = javascript_include_tag "vendor/jquery.devrama.book.min", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    - @gc_title  = "GHOSTCRIME"
+    - @gc_slogan = "Nothing's illegal when you're dead."
+    - @gc_desc_author = "A sci-fi detective comedy by Christian DeWolf."
+
+    %meta{ property: "og:title", content: "#{ @gc_title }" }
+    %meta{ property: "og:description", content: "#{@gc_slogan} #{@gc_desc_author}" }
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/ghostcrime" }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "#{ @gc_title }" }
+    %meta{ name: "twitter:description", content: "#{@gc_slogan} #{@gc_desc_author}" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
+
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+    = favicon_link_tag "crm.ico"
+
+  %body.background
+
+    = render "store/ghostcrime/header"
+
+    #mobile-title
+      %h1= @gc_title
+      %p= @gc_slogan
+
+    #gc-wrapper
+      - if notice
+        %p.alert.alert-notice
+          = notice
+      - if alert
+        %p.alert.alert-danger
+          = alert
+
+      #ghostcrime-content
+        = yield
+
+    %h5.right= "v #{app_version}"
+
+    = render "store/scripts/init_cart"
+    = render "store/scripts/init_novel"

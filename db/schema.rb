@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521233956) do
+ActiveRecord::Schema.define(version: 20170729150513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,14 @@ ActiveRecord::Schema.define(version: 20170521233956) do
     t.index ["user_id"], name: "index_store_downloads_on_user_id", using: :btree
   end
 
+  create_table "store_free_gifts", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.string   "origin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "store_orders", force: :cascade do |t|
     t.string   "payer_id"
     t.string   "payment_id"
@@ -160,7 +168,7 @@ ActiveRecord::Schema.define(version: 20170521233956) do
   create_table "store_products", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
-    t.string   "short_desc"
+    t.text     "short_desc"
     t.text     "long_desc"
     t.decimal  "price"
     t.datetime "created_at",                     null: false
@@ -170,6 +178,8 @@ ActiveRecord::Schema.define(version: 20170521233956) do
     t.string   "small_image"
     t.boolean  "coming_soon",    default: false
     t.integer  "physical_price", default: 20
+    t.string   "slug"
+    t.string   "logo_image"
   end
 
   create_table "store_purchases", force: :cascade do |t|

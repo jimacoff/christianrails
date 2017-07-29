@@ -9,8 +9,9 @@ class Log < ApplicationRecord
   TYPE_SUSPICIOUS_EVENT = 3
   TYPE_SCHEDULED_EVENT = 4
   TYPE_WARNING = 5
+  TYPE_GIFT = 6
 
-  TYPES = ["Event", "Positive event", "Bad data", "Suspicious event", "Scheduled event", "Warning"]
+  TYPES = ["Event", "Positive event", "Bad data", "Suspicious event", "Scheduled event", "Warning", "Free gift"]
 
   ## Locations
   STORE  = "Store"

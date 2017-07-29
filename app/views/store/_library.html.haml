@@ -5,7 +5,7 @@
   - prods.each_with_index do |prod, i|
     - if i > 0
       %hr
-    = render 'store/store_product', { product: prod }
+    = render 'store/store_preview', { product: prod }
 
 %hr
 = render 'store/diamond_machine'
@@ -15,12 +15,4 @@
 = render 'store/wolfbutler'
 
 %br
-%p.diminutive.center All prices expressed in CAD. Prices do not include tax or shipping. All downloads are DRM-free.
-
-:javascript
-
-  $(document).ready(function() {
-    if( "#{ @gc_crm }" === "add-to-cart") {
-      addToCart("#{ @gc_product.id }");
-    }
-  });
+%p.diminutive.center All eBook purchases from this site are DRM-free.

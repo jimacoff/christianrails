@@ -42,13 +42,14 @@
       %p.alert.alert-danger
         = alert
 
-    - if controller_name == 'dealzone' && action_name == 'index'
+    - if controller_name == 'dealzone' && ( ['index', 'cart'].include?(action_name) )
       = yield
     - else
       .smart-panel.panel
         = yield
 
-    = render "store/footer"
+    #footer-bar.center
+      = render "store/footer"
 
     = render "store/scripts/init_cart"
 
