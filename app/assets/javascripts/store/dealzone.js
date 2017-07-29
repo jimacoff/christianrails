@@ -1,4 +1,5 @@
 var cart = {}
+var checkoutErrorCount = 0;
 
 function goToSignUp() { window.location = "/users/sign_up"; }
 function showCartWidget() { $('#cartwidget').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); $('.empty-cart').hide();}
@@ -141,17 +142,24 @@ function doCheckout() {
       url: '/store/dealzone/check_out'
     });
   $('#check_out_button').addClass('hidden');
-  $('#cartwidget-pricedetails').addClass('pricedetails-processing');
   $('#processing').removeClass('hidden');
+  $('.checkout-errors').addClass('hidden');
+  $('.checkout-errors-severe').addClass('hidden');
 
   request.done(function(data, textStatus, jqXHR) {
+    checkoutErrorCount = 0;
     console.log("Checking out.");
   });
 
   request.error(function(jqXHR, textStatus, errorThrown) {
-    $('#check_out_button').addClass('hidden');
-    $('#cartwidget-pricedetails').removeClass('pricedetails-processing');
-    $('#processing').removeClass('hidden');
+    $('#check_out_button').removeClass('hidden');
+    $('#processing').addClass('hidden');
+    checkoutErrorCount += 1;
+    if( checkoutErrorCount > 1 ) {
+      $('.checkout-errors-severe').removeClass('hidden');
+    } else {
+      $('.checkout-errors').removeClass('hidden');
+    }
     console.log("Error occured: " + textStatus);
   });
 

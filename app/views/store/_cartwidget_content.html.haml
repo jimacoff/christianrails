@@ -18,6 +18,10 @@
 
   %p.diminutive.center{style: "color: grey !important;"} All prices expressed in CAD & do not include tax.
 
+  // errors
+  %p.checkout-errors.center.hidden{style: "color: white !important;"} Sorry - an error occurred. Please try again.
+  %p.checkout-errors-severe.center.hidden{style: "color: white !important;"} OK, I guess it's broken. Please shame Christian on Twitter: @dewolfchristian.
+
   .hidden.center{id: "processing"}
     = image_tag("spin.gif", class: 'spinner')
     %span{style: "vertical-align: 10px;"} Processing...
