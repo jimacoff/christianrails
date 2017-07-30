@@ -1,8 +1,5 @@
 #popularity-index
 
-  %p.diminutive.artifika{style: 'color: black; text-align: center !important'}
-    %strong Digital Popularity Indexes
-
   .popular-products-wrapper
     - @all_products.each do |product|
       .popular-product
@@ -17,5 +14,7 @@
         = image_tag( "diamondfind-icon.png" , class: "popularity-index-image swell skoosh")
       %p.order-count.left.artifika= "#{ Woods::Player.all.count }"
       %br
-%br
+
+  %p.diminutive.artifika{style: 'color: black; text-align: center !important'}
+    %strong Digital Popularity Indexes
 %br
