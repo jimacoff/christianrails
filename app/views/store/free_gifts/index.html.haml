@@ -1,5 +1,8 @@
 %h1 Free Gifts
 
+= link_to '+ New Gift', new_store_free_gift_path
+%br
+
 %table.products-table
   %thead
     %tr
@@ -16,6 +19,6 @@
         %td= free_gift.origin
         %td= free_gift.created_at
 
-= link_to '+ New Gift', new_store_free_gift_path
+%strong= "#{@free_gifts.size} total gifts."
 
 = render "admin/admin_link"

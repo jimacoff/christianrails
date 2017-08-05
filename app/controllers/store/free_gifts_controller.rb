@@ -3,7 +3,7 @@ class Store::FreeGiftsController < Store::StoreController
   ## ADMIN ONLY
 
   def index
-    @free_gifts = Store::FreeGift.all
+    @free_gifts = Store::FreeGift.order('created_at desc')
   end
 
   def new
