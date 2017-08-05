@@ -10,6 +10,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20170805_snapback_for_free",
+        category: WRITING_AND_PUBLISHING,
+        tags: ["Snapback", "deals", "self-publishing", "diamonds", "CRM"]
+      },
+      {
         title: "20170729_webstore_upgrade",
         category: SOFTWARE_DEVELOPMENT,
         tags: ["programming", "self-publishing", "Snapback", "Ghostcrime"]
