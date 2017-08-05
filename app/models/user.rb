@@ -28,7 +28,7 @@ class User < ApplicationRecord
     self.free_gifts.each do |free_gift|
       products << free_gift.product
     end
-    products
+    products.uniq
   end
 
   def has_product?(product_id)
