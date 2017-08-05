@@ -5,7 +5,7 @@
 
       %p.diminutive.lineheight-spacer
         = link_to "", main_app.cart_path, class: 'cart-link-highlight embolden'
-        %span.cart-dot ·
+        %span.cart-dot{style: 'display: none;'} ·
         - if current_user.has_crm_access?
           - if controller_path.starts_with?("crm")
             = link_to "Main site", main_app.root_path

@@ -1,8 +1,8 @@
 - if @cart
   :javascript
-    $('.cart-dot').hide();
     var keys = #{@cart.keys};
     for(var i in keys) {
+      $('.cart-dot').show();
       addToCart(keys[i]);
     }
 
