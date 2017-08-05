@@ -67,6 +67,8 @@ Christianrails::Application.routes.draw do
         get 'receipts'
       end
     end
+
+    resources :free_gifts, only: [:index, :new, :create]
   end
   get '/complete_order', to: 'store/dealzone#complete_order'
   get '/order_success',  to: 'store/dealzone#order_success'

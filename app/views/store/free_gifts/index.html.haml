@@ -1,0 +1,21 @@
+%h1 Free Gifts
+
+%table.products-table
+  %thead
+    %tr
+      %th Product
+      %th User
+      %th Origin
+      %th Date
+
+  %tbody
+    - @free_gifts.each do |free_gift|
+      %tr
+        %td= free_gift.product.title
+        %td= free_gift.user.fullname
+        %td= free_gift.origin
+        %td= free_gift.created_at
+
+= link_to '+ New Gift', new_store_free_gift_path
+
+= render "admin/admin_link"

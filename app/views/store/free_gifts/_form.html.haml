@@ -1,0 +1,25 @@
+= form_for @free_gift do |f|
+  - if @free_gift.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@free_gift.errors.count, "error")} prohibited this gift from being saved:"
+      %ul
+        - @free_gift.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.modest-width
+
+    %tr.field
+      %td= f.label "For"
+      %td= f.select :user_id, options_from_collection_for_select( @users, :id, :full_name, @free_gift.user_id || params[:user_id]), class: ""
+
+    %tr.field
+      %td= f.label "Product"
+      %td= f.select :product_id, options_from_collection_for_select( @products, :id, :title, @free_gift.product_id || params[:product_id]), class: ""
+
+    %tr.field
+      %td= f.label :origin
+      %td= f.text_field :origin, value: "Admin panel"
+
+    %tr.actions
+      %td
+      %td= f.submit 'Save', class: 'store-button'
