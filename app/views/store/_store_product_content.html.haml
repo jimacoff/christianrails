@@ -31,8 +31,11 @@
                 %button.store-button{class:"add_to_cart_#{product.id}", onclick:"addToCart( #{product.id} )"} Add to cart
             %td
               -# DISPLAY PRICE
-              .new-price{class:"#{product.id}_new_price", style: 'display: inline-block; margin-right: 10px;'}
-              .store-price{class:"#{product.id}_price", style: 'display: inline-block;'}= number_to_currency( product.price, precision: 2 )
+              - if product.price > 0
+                .new-price{class:"#{product.id}_new_price", style: 'display: inline-block; margin-right: 10px;'}
+                .store-price{class:"#{product.id}_price", style: 'display: inline-block;'}= number_to_currency( product.price, precision: 2 )
+              - else
+                .new-price Free on sign-up!
 
           - else
             %td
