@@ -44,7 +44,7 @@ RSpec.describe Store::OrdersController, type: :controller do
   describe "GET #index" do
 
     let(:order)    { FactoryGirl.create(:order, user: @user) }
-    let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
+    let!(:digital_purchase) { FactoryGirl.create(:digital_purchase, order: order) }
 
     it "assigns all orders as @orders" do
       get :index, params: {}, session: valid_session
@@ -55,7 +55,7 @@ RSpec.describe Store::OrdersController, type: :controller do
   describe "GET #show" do
 
     let(:order)    { FactoryGirl.create(:order, user: @user) }
-    let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
+    let!(:digital_purchase) { FactoryGirl.create(:digital_purchase, order: order) }
 
     it "retrieves an order for a user" do
       get :show, params: {id: order.id}, session: valid_session
@@ -68,9 +68,9 @@ RSpec.describe Store::OrdersController, type: :controller do
   describe "receipts" do
 
     let(:order)    { FactoryGirl.create(:order, user: @user) }
-    let!(:purchase) { FactoryGirl.create(:purchase, order: order) }
+    let!(:digital_purchase) { FactoryGirl.create(:digital_purchase, order: order) }
 
-    it "retrieves receipts for a logged-in user with purchases" do
+    it "retrieves receipts for a logged-in user with digital_purchases" do
       get :receipts
 
       expect(response).to be_success

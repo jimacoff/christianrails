@@ -4,11 +4,11 @@
 %p= @order.payment_id
 
 %ul
-  - @order.purchases.each do |purchase|
+  - @order.digital_purchases.each do |digital_purchase|
     %li
       %p
-        %span= "#{purchase.product.title} : "
-        %span= number_to_currency( purchase.price, precision: 2 )
+        %span= "#{digital_purchase.product.title} : "
+        %span= number_to_currency( digital_purchase.price, precision: 2 )
 
       - if @order.discount > 0
         %p

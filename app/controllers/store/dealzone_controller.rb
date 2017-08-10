@@ -75,11 +75,11 @@ class Store::DealzoneController < Store::StoreController
         },
         transactions: [{
           amount: {
-            total: '%.2f' % (total_cost * (1 + Store::Purchase::TAX_RATE) ).round(2).to_s,
+            total: '%.2f' % (total_cost * (1 + Store::DigitalPurchase::TAX_RATE) ).round(2).to_s,
             currency: 'CAD',
             details: {
               subtotal: total_cost.to_s,
-              tax: '%.2f' % (total_cost * Store::Purchase::TAX_RATE ).round(2).to_s
+              tax: '%.2f' % (total_cost * Store::DigitalPurchase::TAX_RATE ).round(2).to_s
             }
           },
           description: desc
@@ -109,7 +109,7 @@ class Store::DealzoneController < Store::StoreController
         staged = current_user.staged_purchases
         gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
         discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
-        tax  = (gross_price - discount) * Store::Purchase::TAX_RATE
+        tax  = (gross_price - discount) * Store::DigitalPurchase::TAX_RATE
         total = gross_price - discount + tax
 
         order = Store::Order.create(user: current_user,
@@ -117,9 +117,9 @@ class Store::DealzoneController < Store::StoreController
                                     discount: discount, tax: tax, total: total)
 
         staged.each do |staged_purchase|
-          Store::Purchase.create(product: staged_purchase.product,
-                                 order: order,
-                                 price: staged_purchase.product.price)
+          Store::DigitalPurchase.create(product: staged_purchase.product,
+                                        order: order,
+                                        price: staged_purchase.product.price)
           staged_purchase.destroy
         end
 

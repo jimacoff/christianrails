@@ -1,14 +1,12 @@
 class Store::Product < ApplicationRecord
 
-  STANDARD_SHIPPING = 5
-
   has_many :releases, inverse_of: :product, dependent: :destroy
   accepts_nested_attributes_for :releases
 
   has_many :downloads, through: :releases, inverse_of: :product
 
-  has_many :purchases, inverse_of: :product
-  has_many :free_gifts, inverse_of: :product
+  has_many :digital_purchases, inverse_of: :product
+  has_many :free_gifts,        inverse_of: :product
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
   validates_presence_of :title, :author, :price
@@ -39,7 +37,7 @@ class Store::Product < ApplicationRecord
   end
 
   def order_count
-    self.purchases.size
+    self.digital_purchases.size
   end
 
   def digital_releases

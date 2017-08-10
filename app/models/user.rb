@@ -4,13 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :downloads,                   inverse_of: :user, class_name: 'Store::Download'
-  has_many :purchases, through: :orders, inverse_of: :user, class_name: 'Store::Purchase'
-  has_many :orders,                      inverse_of: :user, class_name: 'Store::Order'
-  has_many :staged_purchases,            inverse_of: :user, class_name: 'Store::StagedPurchase'
-  has_many :free_gifts,                  inverse_of: :user, class_name: 'Store::FreeGift'
-
   has_many :logs, inverse_of: :user
+
+  has_many :downloads,                           inverse_of: :user, class_name: 'Store::Download'
+  has_many :digital_purchases, through: :orders, inverse_of: :user, class_name: 'Store::DigitalPurchase'
+  has_many :orders,                              inverse_of: :user, class_name: 'Store::Order'
+  has_many :staged_purchases,                    inverse_of: :user, class_name: 'Store::StagedPurchase'
+  has_many :free_gifts,                          inverse_of: :user, class_name: 'Store::FreeGift'
 
   has_one :player,    class_name: "Woods::Player",  dependent: :destroy
   has_one :assistant, class_name: "Crm::Assistant", dependent: :destroy
@@ -21,8 +21,8 @@ class User < ApplicationRecord
   def products
     products = []
     self.orders.each do |order|
-      order.purchases.each do |purchase|
-        products << purchase.product
+      order.digital_purchases.each do |digital_purchase|
+        products << digital_purchase.product
       end
     end
     self.free_gifts.each do |free_gift|

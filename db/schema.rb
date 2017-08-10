@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729222011) do
+ActiveRecord::Schema.define(version: 20170810213612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,24 @@ ActiveRecord::Schema.define(version: 20170729222011) do
     t.datetime "updated_at",                       null: false
   end
 
+  create_table "store_digital_purchases", force: :cascade do |t|
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "order_id"
+    t.decimal  "price"
+  end
+
+  create_table "store_distributions", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "purchaser_id"
+    t.integer  "quantity"
+    t.text     "message"
+    t.integer  "status_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "store_downloads", force: :cascade do |t|
     t.integer  "release_id"
     t.integer  "user_id"
@@ -182,14 +200,6 @@ ActiveRecord::Schema.define(version: 20170729222011) do
     t.string   "logo_image"
     t.string   "filename"
     t.string   "popularity_image"
-  end
-
-  create_table "store_purchases", force: :cascade do |t|
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "order_id"
-    t.decimal  "price"
   end
 
   create_table "store_releases", force: :cascade do |t|

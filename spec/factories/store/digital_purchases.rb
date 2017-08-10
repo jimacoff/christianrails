@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :purchase, class: 'Store::Purchase' do
+  factory :digital_purchase, class: 'Store::DigitalPurchase' do
     product
     order
     price 3.99

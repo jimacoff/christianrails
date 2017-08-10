@@ -53,7 +53,7 @@ Christianrails::Application.routes.draw do
 
     resources :staged_purchases,     only:   [:index, :create, :destroy]
     resources :price_combos,         except: [:show]
-    resources :purchases,            only:   [:index]
+    resources :digital_purchases,    only:   [:index]
 
     resources :products, except: [:show] do
       collection do

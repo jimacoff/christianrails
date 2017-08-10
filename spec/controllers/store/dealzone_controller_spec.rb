@@ -29,9 +29,9 @@ RSpec.describe Store::DealzoneController, type: :controller do
     let(:order2)     { FactoryGirl.create(:order, price_combo: combo2, user: user) }
     let(:order3)     { FactoryGirl.create(:order, price_combo: combo3, user: user) }
 
-    let!(:purchase1) { FactoryGirl.create(:purchase, product: product2, order: order1) }
-    let!(:purchase2) { FactoryGirl.create(:purchase, product: product4, order: order2) }
-    let!(:purchase3) { FactoryGirl.create(:purchase, product: product5, order: order3) }
+    let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, product: product2, order: order1) }
+    let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, product: product4, order: order2) }
+    let!(:digital_purchase3) { FactoryGirl.create(:digital_purchase, product: product5, order: order3) }
 
     it 'should retrieve all price combos' do
       get 'index'
@@ -168,8 +168,8 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
-      expect( Store::StagedPurchase.count ).to eq(0)
-      expect( Store::Purchase.count ).to eq(2)
+      expect( Store::StagedPurchase.count  ).to eq(0)
+      expect( Store::DigitalPurchase.count ).to eq(2)
     end
 
     it "should create an order with the correct total, tax and no discount" do
@@ -180,7 +180,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       order = Store::Order.first
 
       expect( order.discount ).to eq(0)
-      expect( order.tax ).to eq( ( product1.price + product2.price ) * Store::Purchase::TAX_RATE )
+      expect( order.tax ).to eq( ( product1.price + product2.price ) * Store::DigitalPurchase::TAX_RATE )
       expect( order.total ).to eq( product1.price + product2.price + order.tax )
     end
 
@@ -194,7 +194,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       order = Store::Order.first
 
       expect( order.discount ).to eq( 2.50 )
-      expect( order.tax ).to eq( ((product1.price + product2.price) - order.discount) * Store::Purchase::TAX_RATE )
+      expect( order.tax ).to eq( ((product1.price + product2.price) - order.discount) * Store::DigitalPurchase::TAX_RATE )
       expect( order.total ).to eq( product1.price + product2.price + order.tax - order.discount )
     end
 
@@ -210,7 +210,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
     let!(:order) { FactoryGirl.create(:order, user: user) }
 
-    let!(:purchase1)  { FactoryGirl.create(:purchase, product: product1, order: order) }
+    let!(:digital_purchase1)  { FactoryGirl.create(:digital_purchase, product: product1, order: order) }
 
     let(:invalid_release_id) {-33}
 

@@ -6,7 +6,7 @@ RSpec.describe Store::Product, type: :model do
   let(:release2) { FactoryGirl.create(:release, format: "PDF") }
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:purchase) { FactoryGirl.create(:purchase, user: user) }
+  let(:digital_purchase) { FactoryGirl.create(:digital_purchase, user: user) }
 
   let!(:download1) { FactoryGirl.create(:download, release: release1) }
   let!(:download2) { FactoryGirl.create(:download, release: release1) }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Store::PurchasesController, type: :controller do
+RSpec.describe Store::DigitalPurchasesController, type: :controller do
 
   render_views
 
@@ -40,10 +40,10 @@ RSpec.describe Store::PurchasesController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all purchases as @purchases" do
-      purchase = Store::Purchase.create! valid_attributes
+    it "assigns all purchases as @digital_purchases" do
+      purchase = Store::DigitalPurchase.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:purchases)).to eq([purchase])
+      expect(assigns(:digital_purchases)).to eq([purchase])
     end
   end
 

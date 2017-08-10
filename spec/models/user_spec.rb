@@ -6,9 +6,9 @@ RSpec.describe User, type: :model do
 
   let(:order) { FactoryGirl.create(:order) }
 
-  let!(:purchase1) { FactoryGirl.create(:purchase, order: order, product: product) }
-  let!(:purchase2) { FactoryGirl.create(:purchase, order: order) }
-  let!(:purchase3) { FactoryGirl.create(:purchase, order: order) }
+  let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, order: order, product: product) }
+  let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, order: order) }
+  let!(:digital_purchase3) { FactoryGirl.create(:digital_purchase, order: order) }
 
   let(:download1) { FactoryGirl.create(:download) }
   let(:download2) { FactoryGirl.create(:download) }
@@ -52,13 +52,13 @@ RSpec.describe User, type: :model do
     expect( u.orders.count ).to eq(1)
   end
 
-  it "should have many purchases through orders" do
+  it "should have many digital_purchases through orders" do
     u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     order.user = u
     order.save
 
-    expect( u.purchases.count ).to eq(3)
+    expect( u.digital_purchases.count ).to eq(3)
   end
 
   it "should have many downloads" do
@@ -95,8 +95,8 @@ RSpec.describe User, type: :model do
 
     let(:order1)   { FactoryGirl.create(:order, user: user_who_buys) }
 
-    let!(:purchase1) { FactoryGirl.create(:purchase, order: order1, product: product1) }
-    let!(:purchase2) { FactoryGirl.create(:purchase, order: order1, product: product2) }
+    let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, order: order1, product: product1) }
+    let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, order: order1, product: product2) }
 
     describe "products" do
 
