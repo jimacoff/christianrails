@@ -6,7 +6,7 @@
       .popular-product
         %a{href: "/#{ product.slug }"}
           = image_tag( "#{product.popularity_image}" , class: "popularity-index-image swell skoosh")
-        %p.order-count.left.artifika= "#{product.order_count}"
+        %p.order-count.left.artifika= "#{ product.order_count + product.physical_sales }"
         %br
 
     // DF stats

@@ -50,7 +50,7 @@ class Store::ProductsController < Store::StoreController
 
     def product_params
       params.require(:store_product).permit(:title, :author, :short_desc, :long_desc, :price, :physical_price,
-                                            :rank, :image, :small_image, :logo_image, :coming_soon, :slug, :filename,
-                                            :popularity_image)
+                                            :physical_sales, :rank, :image, :small_image, :logo_image, :coming_soon,
+                                            :slug, :filename, :popularity_image)
     end
 end
