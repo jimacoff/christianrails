@@ -149,7 +149,7 @@ img.center {
 }
 
 .footer, .push {
-  height: 7em;
+  height: 10em;
   text-align: center;
 }
 
@@ -349,6 +349,11 @@ nav {
   margin-right: auto;
   max-width: 300px;
   min-width: 300px;
+}
+
+#wb-being-scaled {
+  cursor: pointer;
+  text-align: center;
 }
 
 // specific images
