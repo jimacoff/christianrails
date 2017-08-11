@@ -49,6 +49,6 @@ class Store::ReleasesController < Store::StoreController
     end
 
     def release_params
-      params.require(:store_release).permit(:product_id, :format, :release_date, :size, :version, :physical_code)
+      params.require(:store_release).permit(:product_id, :format, :release_date, :size, :version, :isbn, :physical_code)
     end
 end
