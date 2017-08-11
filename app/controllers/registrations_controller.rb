@@ -31,8 +31,8 @@ class RegistrationsController < Devise::RegistrationsController
 
     def give_free_gifts
       if @user
-        if snapback = Store::Product.where( title: "Snapback: Fuseki" ).take
-          give_product_to_user!( snapback, @user, "On sign-up" )
+        Store::Product.where( free_on_signup: true ).each do |free_product|
+          give_product_to_user!( free_product, @user, "On sign-up" )
         end
       end
     end

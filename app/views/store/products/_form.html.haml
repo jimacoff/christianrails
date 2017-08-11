@@ -23,6 +23,9 @@
       %td= f.label :price
       %td= f.text_field :price, value: ( number_with_precision( f.object.price, precision: 2) || 0)
     %tr.field
+      %td= f.label :free_on_signup
+      %td= f.check_box :free_on_signup, value: @product.free_on_signup
+    %tr.field
       %td= f.label :physical_price
       %td= f.text_field :physical_price, value: ( number_with_precision( f.object.physical_price, precision: 2) || 0)
     %tr.field
