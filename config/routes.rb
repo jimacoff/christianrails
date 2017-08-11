@@ -217,6 +217,19 @@ Christianrails::Application.routes.draw do
   get '/thisbadger', to: 'badger#index'
   get '/badger',     to: 'badger#index'
 
+
+  #### STARTUP BLOG ETC ######
+  resources :badstartup, only: [:index] do
+    collection do
+      get 'show_post'
+      get 'archives'
+      get 'category'
+      get 'tag'
+    end
+  end
+  get '/badstartup', to: 'badstartup#index'
+
+
   #### COMPUTER BLOG STUFF ######
   resources :computers, only: [:index] do
     collection do

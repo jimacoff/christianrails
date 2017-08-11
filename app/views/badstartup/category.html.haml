@@ -1,0 +1,15 @@
+#blog
+  - if @category_posts.size > 0
+    %h3{style: "text-align: center;"}
+      %span.subtle Category:
+      %span.pop= @category
+
+    - @category_posts.each do |post|
+      = render 'badstartup/embed_post', locals: { post: post }
+      %br
+      %hr
+
+  - else
+    %h1 No such category!
+
+= link_to "Home", badstartup_path

@@ -1,0 +1,5 @@
+.badstartup-post
+  %p.embolden.subtle.datemargin= "#{date_of( locals[:post][:slug] ).strftime("%B %e, %Y") }"
+  = render "badstartup/post_header", locals: { post: locals[:post] }
+  = render "badstartup/posts/blog_#{ locals[:post][:slug] }"
+  = render "badstartup/post_footer", locals: { post: locals[:post] }

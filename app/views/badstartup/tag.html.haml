@@ -1,0 +1,15 @@
+#blog
+  - if @tag_posts.size > 0
+    %h3{style: "text-align: center;"}
+      %span.subtle Tagged with:
+      %span.pop= @tag
+
+    - @tag_posts.each do |post|
+      = render 'badstartup/embed_post', locals: { post: post }
+      %br
+
+  - else
+    %h1 No such tag!
+
+.center
+  = link_to "Home", badstartup_path
