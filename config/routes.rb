@@ -179,7 +179,8 @@ Christianrails::Application.routes.draw do
       end
     end
   end
-  get '/crm', to: 'crm/assistants#index'
+  get '/crm',      to: 'crm/assistants#index'
+  get '/ghostcrm', to: 'crm/assistants#index'
 
   ### GO STUFF AND DIVERSIONS #######
   resources :diversions, only: [:index] do

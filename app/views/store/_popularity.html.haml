@@ -1,6 +1,7 @@
 #popularity-index
 
   .popular-products-wrapper
+    // GC and Snapback
     - @all_products.each do |product|
       .popular-product
         %a{href: "/#{ product.slug }"}
@@ -12,8 +13,23 @@
     .popular-product
       %a{href: "/diamondfind"}
         = image_tag( "diamondfind-icon.png" , class: "popularity-index-image swell skoosh")
-      %p.order-count.left.artifika= "#{ Woods::Player.all.count }"
+      %p.order-count.left.artifika= "#{ Woods::Player.count }"
       %br
+
+    // ghostCRM
+    .popular-product
+      %a{href: "/crm"}
+        = image_tag( "ghostcrm-logo.png" , class: "popularity-index-image swell skoosh")
+      %p.order-count.left.artifika= "#{ Crm::Assistant.count }"
+      %br
+
+    // badger blog
+    .popular-product
+      %a{href: "/thisbadger"}
+        = image_tag( "badger-circle.png" , class: "popularity-index-image swell skoosh")
+      %p.order-count.left.artifika= "--"  # temporarily no way to measure popularity
+      %br
+
 
   %p.diminutive.artifika{style: 'color: black; text-align: center !important'}
     %strong Digital Popularity Indexes
