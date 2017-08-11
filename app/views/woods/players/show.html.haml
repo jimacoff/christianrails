@@ -15,7 +15,7 @@
             %tr
               %th{colspan: 2, style: "text-align: center;"}
                 %h2.center= k.name
-                = link_to k.store_link_text, root_path, class: "niceblue"
+                = link_to k.store_link_text, root_path + "##{ k.slug }", class: "niceblue"
           %tr
             %th
               %h3= "Total finds: #{ v.size }"

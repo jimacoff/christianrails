@@ -149,8 +149,8 @@ function paintPanel() {
   $('#story-pane').css("background-image", "linear-gradient(top, " + back + " 0%," + alt + " 100%)");
 }
 
-function goToStore() {
-  window.location = "/";
+function goToStore(target_name = "") {
+  window.location = "/#" + target_name;
 }
 
 function goToSignUp() {

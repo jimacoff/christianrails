@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811154427) do
+ActiveRecord::Schema.define(version: 20170811192143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 20170811154427) do
     t.boolean  "crm_access",             default: true
     t.string   "time_zone",              default: "UTC"
     t.boolean  "send_me_emails",         default: false
+    t.integer  "books_given",            default: 0
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
@@ -387,6 +388,7 @@ ActiveRecord::Schema.define(version: 20170811154427) do
     t.datetime "updated_at"
     t.string   "store_link_text"
     t.boolean  "allow_remote_syncing",              default: false
+    t.string   "slug",                              default: ""
   end
 
   create_table "woods_storytrees", force: :cascade do |t|

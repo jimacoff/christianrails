@@ -5,7 +5,7 @@
     %button#gallery-button.minory-button{class: "#{current_player.finds.size > 0 ? '' : 'hidden'}", onclick: "showItemViewer();"} View gallery
   %span
     - if current_user
-      %button#go-to-store-button.minory-button.hidden{onclick: "goToStore();"}= @story.store_link_text
+      %button#go-to-store-button.minory-button.hidden{onclick: "goToStore( '#{ @story.slug }' );"}= @story.store_link_text
     - else
       %button#go-to-store-button.minory-button.hidden{onclick: "goToSignUp();"}= "Save my progress!"
 
