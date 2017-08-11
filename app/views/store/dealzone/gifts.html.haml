@@ -1,0 +1,10 @@
+%h1.center Gifts
+
+%p What better gift than a book?
+
+- @all_products.each do |product|
+  %p= product.title
+
+
+
+= link_to "Back to store", root_path

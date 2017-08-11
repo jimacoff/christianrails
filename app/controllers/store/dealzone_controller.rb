@@ -39,6 +39,10 @@ class Store::DealzoneController < Store::StoreController
 
   end
 
+  # a page to facilitate the bulk-purchase of gifts for your friends
+  def gifts
+  end
+
   # a dedicated page for viewing your cart & checking out
   def cart
     unless current_user

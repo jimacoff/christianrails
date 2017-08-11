@@ -4,7 +4,7 @@ Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
-  resources :users, only: [] do
+  resources :users, only: [:show] do
     collection do
       get 'report'
     end
@@ -29,7 +29,9 @@ Christianrails::Application.routes.draw do
     end
   end
 
-  ### THE STORE #######
+
+###### THE STORE #######
+
   namespace :store do
     resources :dealzone, only: [:index] do
       collection do
@@ -74,12 +76,15 @@ Christianrails::Application.routes.draw do
   get '/order_success',  to: 'store/dealzone#order_success'
   get '/store',          to: 'store/dealzone#index'
   get '/cart',           to: 'store/dealzone#cart'
+  get '/gifts/',         to: 'store/dealzone#gifts'
 
   # store product pages
   get '/ghostcrime',  to: 'store/ghostcrime#index'
   get '/snapback',    to: 'store/snapback#index'
 
-  ##### BINARYWOODS ###########
+
+######## BINARYWOODS ###########
+
   namespace :woods do
     resources :players
 
@@ -125,7 +130,9 @@ Christianrails::Application.routes.draw do
   get  '/diamondfind',          to: 'woods/stories#show', defaults: { id: 1 }
   get  '/diamondfind/play',     to: 'woods/stories#play', defaults: { id: 1 }
 
-  ##### GHOSTCRM ##############
+
+######## GHOSTCRM ##############
+
   namespace :crm do
     resources :assistants, only: [:index, :create, :update] do
       collection do
@@ -182,7 +189,9 @@ Christianrails::Application.routes.draw do
   get '/crm',      to: 'crm/assistants#index'
   get '/ghostcrm', to: 'crm/assistants#index'
 
-  ### GO STUFF AND DIVERSIONS #######
+
+###### GO STUFF AND DIVERSIONS #######
+
   resources :diversions, only: [:index] do
     collection do
       get 'rainfield'
@@ -191,22 +200,16 @@ Christianrails::Application.routes.draw do
   get '/go',  to: 'go#index'
 
 
-  ### GRAVEYARD #######
-  resources :graveyard, only: [] do
-    collection do
-      get 'fractalfic'
-    end
-  end
-  get '/fractalfic', to: 'graveyard#fractalfic'
+##### BUTLER STUFF ######
 
-
-  ### BUTLER STUFF ######
   get '/butler',               to: 'butler#index'
   get '/butler/show_post',     to: 'butler#show_post'
   get '/butler/category',      to: 'butler#category'
   get '/butler/tag',           to: 'butler#tag'
 
-  #### BADGER STUFF ######
+
+####### BADGER STUFF ######
+
   resources :badger, only: [:index] do  # badger doesn't have categories
     collection do
       get 'show_post'
@@ -218,7 +221,8 @@ Christianrails::Application.routes.draw do
   get '/badger',     to: 'badger#index'
 
 
-  #### STARTUP BLOG ETC ######
+###### STARTUP BLOG ETC ######
+
   resources :badstartup, only: [:index] do
     collection do
       get 'show_post'
@@ -230,7 +234,8 @@ Christianrails::Application.routes.draw do
   get '/badstartup', to: 'badstartup#index'
 
 
-  #### COMPUTER BLOG STUFF ######
+####### COMPUTER BLOG STUFF ######
+
   resources :computers, only: [:index] do
     collection do
       get 'show_post'
@@ -241,7 +246,19 @@ Christianrails::Application.routes.draw do
   end
   get '/computers', to: 'computers#index'
 
-  #### ROOT & ERRORS ##########
+
+###### GRAVEYARD #######
+
+  resources :graveyard, only: [] do
+    collection do
+      get 'fractalfic'
+    end
+  end
+  get '/fractalfic', to: 'graveyard#fractalfic'
+
+
+
+####### ROOTS & ERRORS ##########
 
   get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
   get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')

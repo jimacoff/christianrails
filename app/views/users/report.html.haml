@@ -14,7 +14,7 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.username
+        %td= link_to user.username, user_path( user )
         %td= user.full_name
         %td= user.email
         %td= user.created_at.strftime("%b %e '%y")

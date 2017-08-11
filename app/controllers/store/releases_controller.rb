@@ -40,6 +40,7 @@ class Store::ReleasesController < Store::StoreController
   end
 
   private
+
     def set_product
       @product = Store::Product.find(params[:product_id])
     end
@@ -51,4 +52,5 @@ class Store::ReleasesController < Store::StoreController
     def release_params
       params.require(:store_release).permit(:product_id, :format, :release_date, :size, :version, :isbn, :physical_code)
     end
+
 end
