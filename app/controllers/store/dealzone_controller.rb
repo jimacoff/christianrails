@@ -41,6 +41,7 @@ class Store::DealzoneController < Store::StoreController
 
   # a page to facilitate the bulk-purchase of gifts for your friends
   def gifts
+    @available_gifts = @all_products.where(free_on_signup: false)
   end
 
   # a dedicated page for viewing your cart & checking out
@@ -60,13 +61,29 @@ class Store::DealzoneController < Store::StoreController
   end
 
   def check_out
-    if current_user && current_user.staged_purchases.size > 0
-      staged = current_user.staged_purchases
-      desc = staged.collect{ |s| s.product.title }.join(' + ') + ' eBooks'
+    if current_user
 
-      total_cost = 0
-      staged.map { |st| total_cost += st.product.price }
-      total_cost -= Store::PriceCombo.total_cart_discount_for(current_user.id)
+      target_urls = {}
+
+      if params[:target] == "cart" && current_user.staged_purchases.size > 0
+        target_urls[:complete] = complete_order_url
+        target_urls[:abort]    = root_url
+
+        staged = current_user.staged_purchases
+        desc = staged.collect{ |s| s.product.title }.join(' + ') + ' eBooks'
+        total_cost = 0
+        staged.map { |st| total_cost += st.product.price }
+        total_cost -= Store::PriceCombo.total_cart_discount_for( current_user.id )
+
+      elsif params[:target] == "gifts"
+        target_urls[:complete] = complete_gift_order
+        target_urls[:abort]    = gifts_url
+
+        # TODO calculate cost + discount for gifts in the gift basket
+        product = Store::Product.find( params[:gifts] )
+        @staged_purchase = Store::StagedPurchase.where(user: current_user, product_id: product.id).first
+        @staged_purchase ||= Store::StagedPurchase.new(user: current_user, product_id: product.id)
+      end
 
       @payment = PayPal::SDK::REST::Payment.new({
         intent: 'sale',
@@ -74,8 +91,8 @@ class Store::DealzoneController < Store::StoreController
           payment_method: 'paypal'
         },
         redirect_urls: {
-          return_url: complete_order_url,
-          cancel_url: root_url
+          return_url: target_urls[:complete],
+          cancel_url: target_urls[:abort]
         },
         transactions: [{
           amount: {
@@ -97,17 +114,18 @@ class Store::DealzoneController < Store::StoreController
         render js: "window.location = '#{redirect_url.href}'"
       else
         flash[:alert] = @payment.error
-        render js: "window.location = '#{root_url}'"
+        render js: "window.location = '#{ target_urls[:abort] }'"
       end
-
+    else
+      # TODO no user error
     end
   end
 
+  # gets params back from paypal --> :paymentId, :token, :PayerID
   def complete_order
     begin
       if current_user
-        # gets params back --> :paymentId, :token, :PayerID
-        payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
+        payment = PayPal::SDK::REST::Payment.find( params[:paymentId] )
         payment.execute( payer_id: params[:PayerID] )
 
         staged = current_user.staged_purchases
@@ -120,6 +138,7 @@ class Store::DealzoneController < Store::StoreController
                                     payer_id: params[:PayerID], payment_id: params[:paymentId],
                                     discount: discount, tax: tax, total: total)
 
+        # turn all StagedPurchases into DigitalPurchases
         staged.each do |staged_purchase|
           Store::DigitalPurchase.create(product: staged_purchase.product,
                                         order: order,
@@ -127,7 +146,7 @@ class Store::DealzoneController < Store::StoreController
           staged_purchase.destroy
         end
 
-        note = 'Thanks for your support! Download your new books below.'
+        note = 'Order successful! Download your new books below.'
         record_positive_event(Log::STORE, "Checkout completed for $#{total}")
 
         ChristianMailer.ebook_receipt( order ).deliver_now
@@ -142,6 +161,58 @@ class Store::DealzoneController < Store::StoreController
 
     flash[:notice] = note if note
     flash[:alert] = alert if alert
+
+    redirect_to root_path
+  end
+
+  # gets params back from paypal --> :paymentId, :token, :PayerID
+  def complete_gift_order
+    begin
+      if current_user
+        payment = PayPal::SDK::REST::Payment.find( params[:paymentId] )
+        payment.execute( payer_id: params[:PayerID] )
+
+        # TODO calculate discount, tax, total
+        staged = current_user.staged_purchases
+        gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
+        discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
+        tax  = (gross_price - discount) * Store::DigitalPurchase::TAX_RATE
+        total = gross_price - discount + tax
+
+        order = Store::Order.create(user: current_user,
+                                    payer_id: params[:PayerID], payment_id: params[:paymentId],
+                                    discount: discount, tax: tax, total: total)
+
+        # TODO turn staged gifts into actual purchases
+        staged.each do |staged_purchase|
+          Store::DigitalPurchase.create(product: staged_purchase.product,
+                                        order: order,
+                                        price: staged_purchase.product.price)
+          staged_purchase.destroy
+        end
+
+        note = 'Your gifts have been sent!'
+        record_positive_event(Log::STORE, "Gifting checkout completed for $#{total}")
+
+        # TODO make a custom receipt?
+        ChristianMailer.ebook_receipt( order ).deliver_now
+      else
+        alert = 'Please log in. If you are having difficulties, please contact the author.'
+      end
+
+    rescue => e
+      alert = "Error executing payment. Please contact the author."
+      Rails.logger.error(e.to_s)
+    end
+
+    flash[:notice] = note if note
+    flash[:alert] = alert if alert
+
+    redirect_to gifts_path
+  end
+
+  def order_success
+    flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
     redirect_to root_path
   end
 
@@ -177,11 +248,6 @@ class Store::DealzoneController < Store::StoreController
 
     record_suspicious_event(Log::STORE, @error)
     flash[:alert] = @error
-    redirect_to root_path
-  end
-
-  def order_success
-    flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
     redirect_to root_path
   end
 

@@ -1,10 +1,23 @@
-%h1.center Gifts
+%h2.center Send out an eBook blast!
 
-%p What better gift than a book?
+%p.center Buy digital copies in bulk for cheap and send them to all your friends. It's what your financial advisor would recommend.
 
-- @all_products.each do |product|
-  %p= product.title
+%br
+
+- @available_gifts.each do |product|
+  .available-gift-wrapper
+    .preview-image{onclick: "goToProductPage( \"#{product.slug}\" );"}= image_tag( "#{product.logo_image}", class: "store-image" )
+    %h2= product.title
+    %p= product.short_desc
+
+    %label Quantity:
+    %input{id: "#{ product.id }_qty", type: 'number', onblur: "updateGiftBasket();", value: 5}
+
+  %br
+  // price calculator + shows any free books they'll get
+  // check out button
+  = render '/store/gift_checkout'
 
 
-
+%br
 = link_to "Back to store", root_path

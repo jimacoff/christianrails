@@ -1,10 +1,25 @@
-var cart = {}
+var cart = {};
+var gift_basket = {};
 var checkoutErrorCount = 0;
 
 function goToSignUp() { window.location = "/users/sign_up"; }
-function showCartWidget() { $('#cartwidget').fadeIn().css("display","inline-block");  $('#checkout').fadeIn(); $('.empty-cart').hide();}
-function hideCartWidget() { $('#cartwidget').fadeOut(); $('#checkout').fadeOut(); $('.empty-cart').show(); }
-function possiblyHideCartWidget() { if(Object.keys(cart).length === 0) { hideCartWidget(); } }
+
+function showCartWidget() {
+  $('#cartwidget').fadeIn().css("display","inline-block");
+  $('#checkout').fadeIn();
+  $('.empty-cart').hide();
+}
+function hideCartWidget() {
+  $('#cartwidget').fadeOut();
+  $('#checkout').fadeOut();
+  $('.empty-cart').show();
+}
+
+function possiblyHideCartWidget() {
+  if(Object.keys(cart).length === 0) {
+    hideCartWidget();
+  }
+}
 function enableAddToCartButton(product_id)  { $('.add_to_cart_' + product_id).prop("disabled", false); $('.add_to_cart_' + product_id).text("Add to cart"); }
 function disableAddToCartButton(product_id) { $('.add_to_cart_' + product_id).prop("disabled", true);  $('.add_to_cart_' + product_id).text("Added to cart"); }
 function showPriceOfProduct(product_id)  { $("." + product_id + "_price").fadeIn();  $("." + product_id + "_new_price").fadeIn(); }
@@ -135,11 +150,15 @@ function removeStagedPurchase(product_id) {
   });
 }
 
-function doCheckout() {
+function doCheckout(target, basket = null) {
   request = void 0;
   request = $.ajax({
       type: 'POST',
-      url: '/store/dealzone/check_out'
+      url: '/store/dealzone/check_out',
+      data: {
+        target: target,
+        basket: basket
+      }
     });
   $('#check_out_button').addClass('hidden');
   $('#processing').removeClass('hidden');
@@ -163,4 +182,8 @@ function doCheckout() {
     console.log("Error occured: " + textStatus);
   });
 
+}
+
+function updateGiftBasket() {
+  basket = {lol: 'yo'};
 }

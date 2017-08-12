@@ -39,8 +39,8 @@ Christianrails::Application.routes.draw do
         get  'updated_prices'
         post 'check_out'
         get  'complete_order'
-        post 'download'
         get  'order_success'
+        post 'download'
       end
     end
 
