@@ -1,6 +1,6 @@
-module StartupHelper
+module QuailHelper
 
-  def all_badstartup_posts
+  def all_scalequail_posts
     # Add new posts at the top.
     [
       {
@@ -13,8 +13,8 @@ module StartupHelper
     ]
   end
 
-  def sample_badstartup_posts
-    all_badstartup_posts[0..0]
+  def sample_scalequail_posts
+    all_scalequail_posts[0..0]
   end
 
 end

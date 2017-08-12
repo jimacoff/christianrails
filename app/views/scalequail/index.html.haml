@@ -1,0 +1,7 @@
+#blog
+  - @sample_posts.each do |post|
+    = render 'scalequail/embed_post', locals: { post: post }
+    %br
+
+  .center
+    %a.page-link.bit-larger{href: archives_scalequail_index_path} Archives

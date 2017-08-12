@@ -1,0 +1,52 @@
+!!! 5
+
+- scalequail_blog_title = @post ? @post[:title] : "ScaleQuail"
+- scalequail_blog_desc = "This bird'll scale anything!"
+
+%html
+  %head
+    %title ScaleQuail
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "scalequail/scalequail",   media: "all", "data-turbolinks-track" => true
+
+    %link{ rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css" }
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/scalequail-cover.png" }
+    %meta{ property: "og:title", content: "#{ scalequail_blog_title }" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/scalequail" }
+    %meta{ property: "og:description", content: "#{ scalequail_blog_desc }" }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "#{ scalequail_blog_title }" }
+    %meta{ name: "twitter:description", content: "#{ scalequail_blog_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/scalequail-cover.png" }
+
+    = favicon_link_tag "tumbler.ico"
+
+  %body.noselect
+
+    = render "scalequail/header"
+
+    - if notice
+      %p.alert.alert-notice
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
+
+    #scalequail-content
+
+      #mobile-title
+        %h1 ScaleQuail
+
+      = render 'scalequail/scalequail_nav'
+
+      = yield
+
+    = render "scalequail/footer"

@@ -2,12 +2,12 @@
   #category-holder
     %span#posted-in.radical-diminutive.embolden Posted in:
 
-    %span= link_to locals[:post][:category], category_badstartup_index_path + "?name=" + locals[:post][:category], class: "category-link"
+    %span= link_to locals[:post][:category], category_scalequail_index_path + "?name=" + locals[:post][:category], class: "category-link"
 
   #tags-holder
     %span#tags-tag.radical-diminutive.embolden Tags:
 
     - locals[:post][:tags].each do |tag|
-      %span= link_to tag, tag_badstartup_index_path + "?name=" + tag, class: "tag-link"
+      %span= link_to tag, tag_scalequail_index_path + "?name=" + tag, class: "tag-link"
 
   %br

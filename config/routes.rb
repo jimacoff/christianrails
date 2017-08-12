@@ -223,7 +223,7 @@ Christianrails::Application.routes.draw do
 
 ###### STARTUP BLOG ETC ######
 
-  resources :badstartup, only: [:index] do
+  resources :scalequail, only: [:index] do
     collection do
       get 'show_post'
       get 'archives'
@@ -231,7 +231,7 @@ Christianrails::Application.routes.draw do
       get 'tag'
     end
   end
-  get '/badstartup', to: 'badstartup#index'
+  get '/scalequail', to: 'scalequail#index'
 
 
 ####### COMPUTER BLOG STUFF ######
