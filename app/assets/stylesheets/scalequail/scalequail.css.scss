@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 }
 
 .bit-larger {
-  font-size: 1.25em;
+  font-size: 1.25em !important;
 }
 
 #mobile-title {
@@ -98,12 +98,21 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 }
 
 #archive-wrapper {
-  max-width: 275px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
 .datemargin {
   margin-bottom: -10px;
+}
+
+.diminutive {
+  font-size: 65% !important;
+}
+
+.ital {
+  display: inline-block;
+  font-style: italic;
 }
 
 /////  RESPONSIVE //////
