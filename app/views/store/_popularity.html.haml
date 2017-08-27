@@ -32,8 +32,10 @@
 
 
   %p.diminutive.artifika{style: 'color: black; text-align: center !important'}
-    %strong Digital Popularity Indexes (
-    %strong
-      %a{href: scalequail_path} ?
-    %strong )
+    - if locals && locals[:disambiguation]
+      %strong Digital Popularity Indexes
+      %strong (
+      %strong
+        %a{href: scalequail_path} ?
+      %strong )
 %br

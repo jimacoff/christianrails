@@ -1,4 +1,2 @@
 %a.no-dec{href: "show_post?post=#{ locals[:post][:slug] }"}
-  %span.whitener= "#{date_of( locals[:post][:slug] )}"
-  %span.grayer --
-  %span.embolden= "#{title_of( locals[:post][:slug] )}"
+  %span.embolden= "#{ locals[:post][:title] }"

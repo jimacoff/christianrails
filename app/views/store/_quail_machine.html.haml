@@ -1,0 +1,19 @@
+#desktop-quail
+  %table
+    %tr
+      %td.small-width.center{style: "vertical-align: text-top;"}
+        %br
+        %a{href: scalequail_path}
+          = image_tag( "scalequail-circle.png", class: "store-image" )
+
+      %td
+        %h2 ScaleQuail
+        = render "store/quail_machine_content"
+
+#mobile-quail
+  %a{href: scalequail_path}
+    = image_tag( "scalequail-circle.png", class: "store-image" )
+
+  %h2 ScaleQuail
+
+  = render "store/quail_machine_content"

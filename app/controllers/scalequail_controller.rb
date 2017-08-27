@@ -1,6 +1,7 @@
 class ScalequailController < ApplicationController
 
   include QuailHelper
+  include StoreHelper
 
   layout "scalequail"
 
@@ -17,13 +18,14 @@ class ScalequailController < ApplicationController
   end
 
   def show_post
-    slug = params[:post]
-    if !lookup_context.find_all("/scalequail/posts/_blog_#{ slug }").any?
+    req_post = params[:post]
+    posts = @blog_posts.select{ |x| x[:slug] == req_post }
+    @post = posts[0]
+
+    if @post && !lookup_context.find_all("/scalequail/posts/_blog_#{ @post[:sequence] }_#{ @post[:slug] }").any?
       redirect_to page_not_found_path and return
     end
-    slugs = @blog_posts.collect{ |x| x[:slug] }
-    @post = @blog_posts[ slugs.index( slug ) ]
-
+    get_products
     render 'scalequail/show_post'
   end
 
