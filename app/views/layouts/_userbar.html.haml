@@ -25,9 +25,20 @@
 
   - else
     .center
-      = link_to 'Sign in', main_app.user_session_path
+      = link_to 'Log in', main_app.user_session_path
       ·
       = link_to 'Sign up', main_app.new_user_registration_path
 
       %p.diminutive.lineheight-spacer
-        Start a library now.
+        - if controller_path.starts_with?("crm")
+          Make a start.
+        - elsif controller_path.starts_with?("badger")
+          Do you like badgers?
+        - elsif controller_path.starts_with?("woods")
+          Save your progress.
+        - elsif controller_path.starts_with?("go")
+          Unlock more Go secrets.
+        - elsif controller_path.starts_with?("computers")
+          Create a "digital" account.
+        - else
+          Start a library now.
