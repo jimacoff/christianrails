@@ -8,7 +8,7 @@ body {
 .scalequail-block {
   white-space: pre;
   background-color: $light-gray;
-  color: $medium-purple;
+  color: $quail-brown;
   border-radius: 5px;
 }
 
@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 .scalequail-post {
   a {
     font-weight: bold;
-    color: $pumpkin-orange;
+    color: $quail-blue-l;
   }
 
   p {
@@ -45,11 +45,11 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 
 .tag-link {
   font-size: 0.8em;
-  color: $bright-purple !important;
+  color: $quail-blue-l !important;
 }
 
 .pop {
-  color: $bright-purple;
+  color: $quail-brown;
 }
 
 #user-wrapper {
@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 }
 
 #scalequail-footer-bar {
-  border: 1px $black solid;
+  border: 1px $quail-slate solid;
   max-width: 300px;
   border-radius: 30px;
   margin: 30px auto 0 auto;

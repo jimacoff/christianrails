@@ -333,6 +333,14 @@ img.center {
   font-size: 80% !important;
 }
 
+a.tag-link {
+  color: $bright-purple !important;
+}
+
+a.category-link {
+  color: $link-blue !important;
+}
+
 nav, #nav-mobile {
   z-index: 999;
   align: top;
