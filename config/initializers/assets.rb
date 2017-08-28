@@ -1,1 +1,19 @@
-Rails.application.config.assets.precompile += %w( woods/binarywoods.css crm/crm.css ghostcrime/ghostcrime.css snapback/snapback.css butler/* butler/butler.js store/dealzone.js woods/woods.js woods/tree_editor.js go/go.css badger/badger.css scalequail/scalequail.css computers/computers.css vendor/devrama-book.css vendor/jscolor.min.js vendor/jquery.devrama.book.min.js)
+Rails.application.config.assets.precompile += %w(
+                                                  woods/binarywoods.css
+                                                  crm/crm.css
+                                                  ghostcrime/ghostcrime.css
+                                                  snapback/snapback.css
+                                                  butler/*
+                                                  butler/butler.js
+                                                  store/dealzone.js
+                                                  woods/woods.js
+                                                  woods/tree_editor.js
+                                                  go/go.css
+                                                  badger/badger.css
+                                                  scalequail/scalequail.css
+                                                  scalequail/quail.js
+                                                  computers/computers.css
+                                                  vendor/devrama-book.css
+                                                  vendor/jscolor.min.js
+                                                  vendor/jquery.devrama.book.min.js
+                                                )

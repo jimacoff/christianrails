@@ -22,7 +22,7 @@ class ScalequailController < ApplicationController
     posts = @blog_posts.select{ |x| x[:slug] == req_post }
     @post = posts[0]
 
-    if @post && !lookup_context.find_all("/scalequail/posts/_blog_#{ @post[:sequence] }_#{ @post[:slug] }").any?
+    if !@post || !lookup_context.find_all("/scalequail/posts/_blog_#{ @post[:sequence] }_#{ @post[:slug] }").any?
       redirect_to page_not_found_path and return
     end
     get_products
