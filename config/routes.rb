@@ -80,8 +80,11 @@ Christianrails::Application.routes.draw do
 
   # store product pages
   get '/ghostcrime',  to: 'store/ghostcrime#index'
-  get '/snapback',    to: 'store/snapback#index'
-
+  get '/snapback',    to: 'store/snapback#fuseki'
+  get '/snapback-1',  to: 'store/snapback#fuseki'
+  get '/snapback-2',  to: 'store/snapback#shimari'
+  get '/snapback-fuseki',  to: 'store/snapback#fuseki'
+  get '/snapback-shimari', to: 'store/snapback#shimari'
 
 ######## BINARYWOODS ###########
 
