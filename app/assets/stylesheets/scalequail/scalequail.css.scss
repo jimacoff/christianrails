@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   font-weight: bold;
   line-height: 55px;
   text-align: center;
-  margin-top: -50px;
+  margin-top: -30px;
 }
 
 #scalequail-nav {
@@ -152,6 +152,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
     padding: 15px;
   }
 
+  .quail-title-image {
+    width: 300px;
+  }
+
 }
 
 @media screen and (min-width: 450px) {
@@ -162,6 +166,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 
   #mobile-title {
     display: block;
+  }
+
+  .quail-title-image {
+    width: 400px;
   }
 }
 
@@ -187,6 +195,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
     width: 95px;
   }
 
+  .quail-title-image {
+    width: 400px;
+  }
+
 }
 
 @media screen and (min-width: 750px) {
@@ -197,6 +209,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 
   #mobile-title {
     display: none;
+  }
+
+  .quail-title-image {
+    width: 500px;
   }
 }
 
@@ -228,6 +244,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   #logo-wrapper {
     height: 95px;
     width: 160px;
+  }
+
+  .quail-title-image {
+    width: 500px;
   }
 
 }
