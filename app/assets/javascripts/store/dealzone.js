@@ -187,3 +187,7 @@ function doCheckout(target, basket = null) {
 function updateGiftBasket() {
   basket = {lol: 'yo'};
 }
+
+function scrollToBookDesc() {
+  $("html, body").animate({ scrollTop: $('.book-desc').offset().top - 20}, "slow");
+}

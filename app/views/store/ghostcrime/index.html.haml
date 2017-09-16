@@ -1,8 +1,15 @@
 = render "store/ghostcrime_book"
 
-%p.product-text In a future where robots have rights, the Magnetifax Police Department has to tiptoe around as they investigate new, mechanized murders. But when perpetually sad Detective Stebbins finds traces of the supernatural at his crime scene, he's going to have to prove his sanity before anyone will believe they're now in pursuit of GHOSTCRIME.
+.book-desc
+  %p.product-text In a future where robots have rights, the Magnetifax Police Department has to tiptoe around as they investigate new, mechanized murders. But when perpetually sad Detective Stebbins finds traces of the supernatural at his crime scene, he's going to have to prove his sanity before anyone will believe they're now in pursuit of GHOSTCRIME.
 
-%p.product-text 260 pages.
+
+  %p.product-text
+    Cover art by
+    = succeed "." do
+      = link_to "Bruce Delo", "https://www.flyknifecomics.com"
+    260 pages.
+
 
 = render "store/store_product", { product: @gc_product }
 = render "store/cartwidget"

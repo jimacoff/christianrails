@@ -1,15 +1,16 @@
 = render "store/fuseki_book"
 
-%p.product-text Studying the ancient game of Go does not make Felix the most popular guy at his rural high school. But when an old friend from the past comes into town with fantastical stories of a secret Go academy, Felix and his classmates are swept away on an international adventure. But it's more dangerous than they bargained for …
+.book-desc
+  %p.product-text Studying the ancient game of Go does not make Felix the most popular guy at his rural high school. But when an old friend from the past comes into town with fantastical stories of a secret Go academy, Felix and his classmates are swept away on an international adventure. But it's more dangerous than they bargained for …
 
-%p.product-text
-  The first novella in the Snapback series.
+  %p.product-text
+    The first novella in the Snapback series.
 
-%p.product-text
-  Illustrated by
-  = succeed "." do
-    = link_to "Dawn Davis", "http://www.playerprophet.com"
-  63 pages.
+  %p.product-text
+    Illustrated by
+    = succeed "." do
+      = link_to "Dawn Davis", "http://www.playerprophet.com"
+    63 pages.
 
 = render "store/store_product", { product: @sb_v1_product }
 = render "store/cartwidget"
