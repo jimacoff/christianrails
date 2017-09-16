@@ -1,7 +1,25 @@
 = render "store/shimari_book"
+
+%p.product-text Studying Go at the exclusive and highly secret Shimari Academy sounded good in theory — but the work is relentless, all the professors are psychotic, and a powerful student society demands fealty. When their classmates start turning up dead, Lindsay and Felix discover that dropping out isn’t an option …
+
+%p.product-text
+  The second novella in the Snapback series.
+
+%p.product-text
+  Illustrated by
+  = succeed "." do
+    = link_to "Dawn Davis", "http://www.playerprophet.com"
+  80 pages.
+
 = render "store/store_product", { product: @sb_v2_product }
 = render "store/cartwidget"
 
+%h2 Preceded by:
+%a{href: snapback_fuseki_path}
+  = image_tag "snapback-icon.png"
+  %h2= "<< Volume 1: Fuseki"
+
+%br
 %br
 %br
 = render "store/footer"

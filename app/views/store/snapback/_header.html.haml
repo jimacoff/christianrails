@@ -2,9 +2,18 @@
   .left-header{style: "display: inline-block;"}
 
     #snapback-logo-wrapper
-      %a{ href: root_path }= image_tag( "snapback-character-stones.png", alt: "Snapback logo" )
 
-    .header-words.ghost-align
-      = image_tag 'snapback-title-word.png'
+      - if action_name == 'fuseki'
+        %a{ href: root_path }= image_tag( "snapback-character-stones.png", alt: "Snapback logo" )
+
+        .header-words.ghost-align
+          = image_tag 'snapback-title-word.png'
+          .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-one-text-white.png", width: '300px'
+
+      - else
+        %a{ href: root_path }= image_tag( "snapback-character-stones.png", alt: "Snapback logo" )
+        .header-words.ghost-align
+          = image_tag 'snapback-title-word.png'
+          .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-two-text-white.png", width: '300px'
 
   = render "layouts/userbar"
