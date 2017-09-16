@@ -38,6 +38,10 @@
 
     #mobile-title
       = image_tag 'snapback-title-word.png'
+      - if action_name == 'fuseki'
+        .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-one-text-white.png", width: '300px'
+      - else
+        .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-two-text-white.png", width: '300px'
 
     #gc-wrapper
       - if notice
