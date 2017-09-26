@@ -394,6 +394,11 @@ th {
   text-align: center !important;
 }
 
+.library-ruler {
+  margin: 15px 0 15px 0;
+ // border: $light-gray 1px solid;
+}
+
 ////////// BEGIN RESPONSIVE ////////////////
 
 @media screen and (min-width: 1px) {

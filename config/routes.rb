@@ -205,10 +205,11 @@ Christianrails::Application.routes.draw do
 
 ##### BUTLER STUFF ######
 
-  get '/butler',               to: 'butler#index'
-  get '/butler/show_post',     to: 'butler#show_post'
-  get '/butler/category',      to: 'butler#category'
-  get '/butler/tag',           to: 'butler#tag'
+  get '/wolfbutler',       to: 'butler#index'
+  get '/butler',           to: 'butler#index'
+  get '/butler/show_post', to: 'butler#show_post'
+  get '/butler/category',  to: 'butler#category'
+  get '/butler/tag',       to: 'butler#tag'
 
 
 ####### BADGER STUFF ######

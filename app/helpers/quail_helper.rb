@@ -61,7 +61,7 @@ module QuailHelper
   end
 
   def sample_scalequail_posts
-    all_scalequail_posts[0..0]
+    all_scalequail_posts[1..1]
   end
 
   # generates dates that always feel relevant, sort of like scalequail itself
