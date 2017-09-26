@@ -124,6 +124,21 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   font-style: italic;
 }
 
+.scaling-in-progress {
+  padding: 5px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 30px;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 350px;
+}
+
+.in-progress-quail {
+  margin-right: 15px;
+}
 /////  RESPONSIVE //////
 
 // small
