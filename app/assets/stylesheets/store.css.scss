@@ -267,9 +267,11 @@ th {
 
 #footer-bar {
   border-radius: 30px;
-  background-color: $soft-cyan;
+  background-color: white;
   width: 640px;
   margin: 0 auto;
+  opacity: 0.9;
+  color: black;
 }
 
 #error_explanation {
