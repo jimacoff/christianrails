@@ -33,7 +33,7 @@ module QuailHelper
       {
         sequence: 4,
         slug:  "scaling_time_has_come",
-        title: "Scaling Time Has Come",
+        title: "Scaling time has come",
         desc:  "My startup is about to get growth-hacked into the profitsphere.",
         category: "Scaling up",
         tags:  ["scaling"],
@@ -47,16 +47,16 @@ module QuailHelper
         category: "Scaling up",
         tags:  ["scaling"],
         date: "20170826"
-      },
-      {
-        sequence: 6,
-        slug:  "scaling_up_digital_sales_using_peoples_existing_friendships",
-        title: "Scaling up Digital Sales using peoples' existing friendships",
-        desc:  "Make sure people are giving the gift of You this holiday season.",
-        category: "Scaling up",
-        tags:  ["scaling"],
-        date: "20170826"
-      }
+      }#,
+      # {
+      #   sequence: 6,
+      #   slug:  "scaling_up_digital_sales_using_peoples_existing_friendships",
+      #   title: "Scaling up Digital Sales using peoples' existing friendships",
+      #   desc:  "Make sure people are giving the gift of You this holiday season.",
+      #   category: "Scaling up",
+      #   tags:  ["scaling"],
+      #   date: "20170826"
+      # }
     ]
   end
 

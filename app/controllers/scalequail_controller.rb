@@ -36,6 +36,7 @@ class ScalequailController < ApplicationController
       @category_posts << post if post[:category] == @category
     end
 
+    get_products
     render 'scalequail/category'
   end
 
@@ -46,6 +47,7 @@ class ScalequailController < ApplicationController
       @tag_posts << post if post[:tags].include? @tag
     end
 
+    get_products
     render 'scalequail/tag'
   end
 
