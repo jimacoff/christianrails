@@ -170,12 +170,52 @@ function toggleWaterfallMode() {
   waterfall = !waterfall;
 }
 
+// save current node and progress to left-most blank node
 function saveAndMoveOn() {
-  // TODO save current node and progress to left-most blank node
   console.log('Saving and moving on...');
-  //saveNodeNow();
+  saveNodeNow();
 
+  // if at bottom, navigate earliest blank node index
+  if( isBottomLevel() ) {
+    moveToNewNode( findEarliestBlankNode() );
+  } else {
+    if( leftNodeBlank() ) {
+      moveLeft();
+    } else if ( rightNodeBlank() ) {
+      moveRight();
+    } else {
+      moveToNewNode( findEarliestBlankNode() );
+    }
+  }
+}
 
+// when finished a path in Waterfall, it sends you to the earliest blank node. or the top, if none.
+// returns in tree index format, ie. 1-1023
+function findEarliestBlankNode() {
+  var inspecting = 0;
+  while ( inspecting <= nodes.length ) {
+    if (nodes[ inspecting ].node_text === "") {
+      return inspecting + 1; // convert into tree index format
+    }
+    inspecting += 1;
+  }
+  return 1;
+}
+
+function leftNodeBlank() {
+  var tracer = cursor * 2;
+  if( nodes[tracer - 1].node_text === "" ) {
+    return true;
+  }
+  return false;
+}
+
+function rightNodeBlank() {
+  var tracer = (cursor * 2) + 1;
+  if( nodes[tracer - 1].node_text === "" ) {
+    return true;
+  }
+  return false;
 }
 
 // get the parent nodes & the relevant left/right choices
