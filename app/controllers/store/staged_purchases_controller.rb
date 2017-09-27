@@ -6,14 +6,17 @@ class Store::StagedPurchasesController < Store::StoreController
 
   def create
     if current_user
+      fresh_add = false
       begin
         product = Store::Product.find( staged_purchase_params['product_id'] )
-        @staged_purchase = Store::StagedPurchase.where(user: current_user, product_id: product.id).first
-        @staged_purchase ||= Store::StagedPurchase.new(user: current_user, product_id: product.id)
+        unless @staged_purchase = Store::StagedPurchase.where(user: current_user, product_id: product.id).first
+          @staged_purchase = Store::StagedPurchase.new(user: current_user, product_id: product.id)
+          fresh_add = true
+        end
 
         respond_to do |format|
           if @staged_purchase.save
-            record_positive_event(Log::STORE, "Item added to cart: #{product.title}")
+            record_positive_event(Log::STORE, "Item added to cart: #{product.title}") if fresh_add
             format.json { render json: @staged_purchase, status: :created }
           else
             format.json { render json: {}, status: :unprocessable_entity }
