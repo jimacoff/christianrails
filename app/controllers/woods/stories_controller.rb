@@ -2,6 +2,7 @@ class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update]
   before_action :verify_is_published, except: [:index, :show, :manage, :export, :create, :edit, :update]
+
   skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
 
   ## PUBLIC

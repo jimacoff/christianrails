@@ -1,5 +1,7 @@
-function move(story_id, button) {
+// BinaryWoods story player.
+// JS relating to the Tree Editor can be found in tree_editor.js
 
+function move(story_id, button) {
   var target_node;
 
   if( current_node.linked_node ) {

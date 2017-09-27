@@ -2,6 +2,7 @@ class Woods::ItemsController < Woods::WoodsController
 
   before_action :set_woods_item,   only: [:show, :edit, :update, :destroy]
   before_action :set_woods_params, only: [:show, :edit, :update, :destroy, :create]
+
   skip_before_action :verify_is_admin, only: [:download]
 
   # PUBLIC
