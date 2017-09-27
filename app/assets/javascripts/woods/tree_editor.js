@@ -200,7 +200,18 @@ function updateWaterfallText() {
     }
   }
 
-  // TODO also add a note about how close to bottom of tree you are & what you should be doing
+  // add a note about how close to bottom of tree you are & what you should be doing
+  if( isAtEndingStructureRoot() ) {
+    backstory.push("[You're at the root of an ending structure. Two more decisions.]");
+  } else if( isTwoAwayFromBottom() ) {
+    backstory.push("[Last decision before ending pause.]");
+  } else if( isPenultimateLevel() ) {
+    backstory.push("[Time to write an ending pause...]");
+  } else if( isBottomLevel() ) {
+    backstory.push("[Write the bottom of the tree.]");
+  } else {
+    backstory.push("[Level " + getLevel(cursor) + " of " + getLevel(nodes.length) + "]");
+  }
 
   textBackstory = backstory.join('\n\n');
 
@@ -769,6 +780,14 @@ function countFilledNodes() {
   }
   $('#filled-nodes-counter').html( filled + '/' + nodes.length + ' filled');
   $('#filled-percentage').html( ( filled / nodes.length * 100 ).toFixed(1) + '% complete');
+}
+
+function isAtEndingStructureRoot() {
+  return (cursor * 16 > nodes.length) && !isTwoAwayFromBottom() && !isPenultimateLevel() && !isBottomLevel();
+}
+
+function isTwoAwayFromBottom() {
+  return (cursor * 8 > nodes.length) && !isPenultimateLevel() && !isBottomLevel();
 }
 
 function isPenultimateLevel() {
