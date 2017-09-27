@@ -459,7 +459,6 @@ function pullDownNodeFromLive() {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log(data);
     var oldName = $('#node-name-box').val();
     var oldText = $('#node-content-box').val();
     var oldLeft  = $('#left-text-box').val();
@@ -502,7 +501,6 @@ function pushNodeToLive() {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    console.log(data);
     // get ids & update node upstream after confirmation
     pushCurrentNodeToLive(data.story_id, data.storytree_id, data.node.id);
   });

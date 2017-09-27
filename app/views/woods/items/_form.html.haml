@@ -1,3 +1,5 @@
+// This form is used to create new items. Editing items takes place in itemsets#show. Because, uh
+
 = form_for @item, url: woods_story_itemset_items_path(@story, @itemset, @item), id: 'newitem-form', method: :post do |f|
   - if @item.errors.any?
     #error_explanation

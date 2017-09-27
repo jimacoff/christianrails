@@ -15,13 +15,15 @@ class Woods::Node < ApplicationRecord
   MOVERULE_VARIABLE_ITEM = 4
   MOVERULE_SINGlE_BOX = 5
   MOVERULE_PERPETUAL_BOX = 6
+  MOVERULE_WIN_CHECK = 7
   MOVERULES = [
     [1, "50/50 toggler"],
     [2, "Left/right switch"],
     [3, "Perpetual item on left"],
     [4, "Variable item on left"],
     [5, "Single-use box on left"],
-    [6, "Perpetual box on left"]
+    [6, "Perpetual box on left"],
+    [7, "Move left if win"]
   ]
 
   def add_accoutrements_and_make_json!(player_id = nil, footprint = nil, item_found = nil)
@@ -85,6 +87,9 @@ class Woods::Node < ApplicationRecord
     when perpetual_box?
       can_open_box?(player_id) ? left : right
 
+    when win_check?
+      has_won_game?(player_id) ? left : right
+
     else
       raise "ERROR: Unknown moverule!"
     end
@@ -116,12 +121,27 @@ class Woods::Node < ApplicationRecord
 
 private
 
+  # check player inventory for required item
   def can_open_box?(player_id)
     if box = left.box
       itemset_required = box.itemset
-      player = Woods::Player.find(player_id)
-      player.has_item_in_itemset?(itemset_required.id)
+      player = Woods::Player.find( player_id )
+      player.has_item_in_itemset?( itemset_required.id )
     end
+  end
+
+  # check player inventory for all winning_condition items
+  def has_won_game?(player_id)
+    items_required = []
+    self.storytree.story.items.each do |item|
+      items_required << item.id if item.winning_condition
+    end
+
+    player = Woods::Player.find( player_id )
+    items_required.each do |req_item_id|
+      return false if !player.has_item?(req_item_id)
+    end
+    true
   end
 
   ## moverule helpers
@@ -149,6 +169,11 @@ private
   def perpetual_box?
     moverule_id == MOVERULE_PERPETUAL_BOX
   end
+
+  def win_check?
+    moverule_id == MOVERULE_WIN_CHECK
+  end
+
 
   # further helpers
   def item?

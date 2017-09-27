@@ -57,6 +57,8 @@ class Woods::ItemsController < Woods::WoodsController
 
   def update
     if @item.update(woods_item_params)
+      @item.winning_condition = woods_item_params.keys.include?("winning_condition")
+      @item.save
       redirect_to woods_story_itemset_path(@story, @itemset), notice: 'Item was successfully updated.'
     else
       redirect_to woods_story_itemsets_path(@story, @itemset)
@@ -80,6 +82,6 @@ class Woods::ItemsController < Woods::WoodsController
     end
 
     def woods_item_params
-      params.require(:woods_item).permit(:item_id, :name, :legend, :value, :itemset_id)
+      params.require(:woods_item).permit(:item_id, :name, :legend, :value, :itemset_id, :winning_condition)
     end
 end
