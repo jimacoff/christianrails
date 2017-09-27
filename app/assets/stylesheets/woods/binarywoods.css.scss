@@ -253,7 +253,7 @@ a {
   margin-top: 10px;
 }
 
-#primary-controls, #alt-tree-controls, #error-console-wrapper {
+#primary-controls, #alt-tree-controls, #error-console-wrapper, #waterfall-controls {
   text-align: center;
   width: 160px;
   display: inline-block;
@@ -316,7 +316,7 @@ a {
   display: inline-block;
 }
 
-#parent-button, #left-button, #right-button, #slide-left-button, #slide-right-button {
+#parent-button, #left-button, #right-button, #slide-left-button, #slide-right-button, #save-and-move-on {
   border-radius: 10px;
   background-color: $white;
 }
@@ -326,7 +326,7 @@ a {
   width: 125px;
 }
 
-#left-button, #right-button {
+#left-button, #right-button, #save-and-move-on {
   font-size: 1.5em;
   height: 40px;
 }
@@ -364,6 +364,22 @@ a {
 
 #df-col2 {
   display: inline-block;
+}
+
+///// WATERFALL STUFF ////////
+
+.waterfall-panel {
+  display: none;
+  width: 550px;
+  p {
+    font-size: 11px;
+    white-space: pre-line;
+    line-height: 11px;
+  }
+}
+
+#waterfall-controls {
+  display: none;
 }
 
 /////////

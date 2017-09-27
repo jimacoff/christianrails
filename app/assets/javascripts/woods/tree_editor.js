@@ -141,6 +141,78 @@ function scrollToBottomOfLogBox() {
   $('#error-console').scrollTop($('#error-console')[0].scrollHeight);
 }
 
+//// WATERFALL MODE ///////
+
+function toggleWaterfallMode() {
+  if( waterfall ) {
+    // hide waterfall panels + buttons
+    $('.waterfall-panel').hide();
+    $('#waterfall-controls').hide();
+
+    $('#tree-map').fadeIn();
+    $('#primary-controls').fadeIn();
+
+    $('#move-to-top-button').prop('disabled', false);
+
+    $('#waterfall-toggler').val('Switch to Waterfall mode');
+  } else {
+    // show waterfall panels + buttons
+    $('#tree-map').hide();
+    $('#primary-controls').hide();
+
+    $('.waterfall-panel').fadeIn();
+    $('#waterfall-controls').css('display', 'inline-block');
+
+    $('#move-to-top-button').prop('disabled', true);
+
+    $('#waterfall-toggler').val('Switch to Classic mode');
+  }
+  waterfall = !waterfall;
+}
+
+function saveAndMoveOn() {
+  // TODO save current node and progress to left-most blank node
+  console.log('Saving and moving on...');
+  //saveNodeNow();
+
+
+}
+
+// get the parent nodes & the relevant left/right choices
+function updateWaterfallText() {
+  var tracer = cursor;
+  var newTracer;
+  var backstory = [];
+  var backstorySize = 2;
+
+  for(var i = 0; i < backstorySize; i++) {
+    newTracer = Math.floor(tracer / 2);
+    if( newTracer > 0 ) {
+
+      // determine if this was left or right node
+      if ( tracer % 2 === 0 ) {
+        backstory.unshift( nodes[newTracer - 1].left_text.toUpperCase() );
+      } else {
+        backstory.unshift( nodes[newTracer - 1].right_text.toUpperCase() );
+      }
+      backstory.unshift( nodes[newTracer - 1].node_text );
+      tracer = newTracer;
+    }
+  }
+
+  // TODO also add a note about how close to bottom of tree you are & what you should be doing
+
+  textBackstory = backstory.join('\n\n');
+
+  if( textBackstory === "" ) {
+    textBackstory = "First node of tree -- start writing!";
+  }
+  // display the backstory in the waterfall text panel
+  $('.waterfall-text').text( textBackstory );
+}
+
+//// SAVERS //////
+
 function saveAccoutrements( currentNode ) {
   if( treelinkModified ) {
     treelinkEnabled = $('#treelink-checkbox').prop('checked');
@@ -273,7 +345,7 @@ function saveBox(setEnabled, nodeId, itemsetId) {
   });
 }
 
-/// Local updates
+////// Local updating //////
 
 function updateNodeLocally(callback_data) {
   var nodes_array_index = callback_data['tree_index'] - 1;
@@ -431,6 +503,7 @@ function refreshAllPanels() {
   refreshNodeEditor();
   updateControls();
   updateMap();
+  updateWaterfallText();
 }
 
 function refreshNodeEditor() {

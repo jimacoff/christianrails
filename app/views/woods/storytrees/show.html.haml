@@ -1,11 +1,10 @@
+// The Main Tree Editor
 = render "node_editor"
 .right-side-editor
   = render "tree_map"
+  = render "waterfall_module"
   = render "tree_controls"
-
 %br
-
-
 
 :javascript
 
@@ -34,8 +33,8 @@
   var itemsets = #{@itemsets.to_json};
   var storytrees = #{@storytrees.to_json};
 
+  var waterfall = false;
+
   $(document).ready(function() {
-    refreshNodeEditor()
-    updateControls();
-    updateMap();
+    refreshAllPanels();
   });
