@@ -15,7 +15,10 @@ class Woods::Node < ApplicationRecord
   MOVERULE_VARIABLE_ITEM = 4
   MOVERULE_SINGlE_BOX = 5
   MOVERULE_PERPETUAL_BOX = 6
-  MOVERULE_WIN_CHECK = 7
+  MOVERULE_WIN_CHECK_1 = 7
+  MOVERULE_WIN_CHECK_2 = 8
+  MOVERULE_WIN_CHECK_3 = 9
+  MOVERULE_WIN_CHECK_4 = 10
   MOVERULES = [
     [1, "50/50 toggler"],
     [2, "Left/right switch"],
@@ -23,7 +26,10 @@ class Woods::Node < ApplicationRecord
     [4, "Variable item on left"],
     [5, "Single-use box on left"],
     [6, "Perpetual box on left"],
-    [7, "Move left if win"]
+    [7, "Move left if win condition #1"],
+    [8, "Move left if win condition #2"],
+    [9, "Move left if win condition #3"],
+    [10, "Move left if win condition #4"],
   ]
 
   def add_accoutrements_and_make_json!(player_id = nil, footprint = nil, item_found = nil)
@@ -134,7 +140,7 @@ private
   def has_won_game?(player_id)
     items_required = []
     self.storytree.story.items.each do |item|
-      items_required << item.id if item.winning_condition
+      items_required << item.id if item.winning_condition == self.win_number
     end
 
     player = Woods::Player.find( player_id )
@@ -171,9 +177,21 @@ private
   end
 
   def win_check?
-    moverule_id == MOVERULE_WIN_CHECK
+    [MOVERULE_WIN_CHECK_1, MOVERULE_WIN_CHECK_2, MOVERULE_WIN_CHECK_3, MOVERULE_WIN_CHECK_4].include?( moverule_id )
   end
 
+  # what have I even become
+  def win_number
+    if self.moverule_id == MOVERULE_WIN_CHECK_1
+      1
+    elsif self.moverule_id == MOVERULE_WIN_CHECK_2
+      2
+    elsif self.moverule_id == MOVERULE_WIN_CHECK_3
+      3
+    elsif self.moverule_id == MOVERULE_WIN_CHECK_4
+      4
+    end
+  end
 
   # further helpers
   def item?

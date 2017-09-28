@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927231132) do
+ActiveRecord::Schema.define(version: 20170928204312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -315,14 +315,14 @@ ActiveRecord::Schema.define(version: 20170927231132) do
   end
 
   create_table "woods_items", force: :cascade do |t|
-    t.string   "name",              limit: 100,                  null: false
+    t.string   "name",              limit: 100,              null: false
     t.integer  "value",                          default: 1
     t.string   "legend",            limit: 3000
     t.string   "image",             limit: 60
     t.integer  "itemset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "winning_condition",              default: false
+    t.integer  "winning_condition",              default: 0
   end
 
   create_table "woods_itemsets", force: :cascade do |t|

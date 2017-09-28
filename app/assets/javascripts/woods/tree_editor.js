@@ -172,7 +172,6 @@ function toggleWaterfallMode() {
 
 // save current node and progress to left-most blank node
 function saveAndMoveOn() {
-  console.log('Saving and moving on...');
   saveNodeNow();
 
   // if at bottom, navigate earliest blank node index
@@ -231,7 +230,7 @@ function updateWaterfallText() {
 
       // determine if this was left or right node
       if ( tracer % 2 === 0 ) {
-        backstory.unshift( nodes[newTracer - 1].left_text.toUpperCase() );
+        backstory.unshift( nodes[newTracer - 1].left_text.toUpperCase() + "\n" );
       } else {
         backstory.unshift( nodes[newTracer - 1].right_text.toUpperCase() );
       }

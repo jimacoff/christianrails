@@ -18,7 +18,7 @@
             %span Value:
             = number_field_tag 'woods_item[value]', nil, { step: 1, min: -50, max: 150 }
             %span Winning condition:
-            = check_box_tag 'woods_item[winning_condition]', ""
+            = number_field_tag 'woods_item[winning_condition]', nil, { step: 1, min: 0, max: 4 }
             %br
             = submit_tag :Update
 
@@ -45,7 +45,7 @@
     $('#woods_item_name').val(the_item.name);
     $('#woods_item_legend').val(the_item.legend);
     $('#woods_item_value').val( the_item.value );
-    $('#woods_item_winning_condition')[0].checked = the_item.winning_condition;
+    $('#woods_item_winning_condition').val( the_item.winning_condition );
 
     $('#updateitem-form').attr("action", "/woods/stories/" + story_id + "/itemsets/" + itemset_id + "/items/" + the_item.id);
   }
