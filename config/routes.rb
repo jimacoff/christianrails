@@ -36,6 +36,7 @@ Christianrails::Application.routes.draw do
     resources :dealzone, only: [:index] do
       collection do
         get  'cart'
+        get  'library'
         get  'updated_prices'
         post 'check_out'
         get  'complete_order'
@@ -76,7 +77,8 @@ Christianrails::Application.routes.draw do
   get '/order_success',  to: 'store/dealzone#order_success'
   get '/store',          to: 'store/dealzone#index'
   get '/cart',           to: 'store/dealzone#cart'
-  #get '/gifts/',         to: 'store/dealzone#gifts'
+  get '/gifts/',         to: 'store/dealzone#gifts'
+  get '/library/',       to: 'store/dealzone#library'
 
   # store product pages
   get '/ghostcrime',  to: 'store/ghostcrime#index'

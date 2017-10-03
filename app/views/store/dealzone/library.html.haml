@@ -1,0 +1,13 @@
+%h1 My Library
+
+- if current_user
+  - @owned_products.each do |product|
+    = render 'store/store_preview', { product: product }
+
+  - @giftable_products.each do |giftable|
+    - puts "TODO"
+
+
+-# else
+
+

@@ -4,16 +4,16 @@
   - prods = prods.sort{|a,b| a.rank <=> b.rank }
   - prods.each_with_index do |prod, i|
     - if i > 0
-      %hr.library-ruler
+      %hr.storefront-ruler
     = render 'store/store_preview', { product: prod }
 
-%hr.library-ruler
+%hr.storefront-ruler
 = render 'store/quail_machine'
-%hr.library-ruler
+%hr.storefront-ruler
 = render 'store/diamond_machine'
-%hr.library-ruler
+%hr.storefront-ruler
 = render 'store/badger_machine'
-%hr.library-ruler
+%hr.storefront-ruler
 = render 'store/wolfbutler'
 
 %br

@@ -39,6 +39,14 @@ class Store::DealzoneController < Store::StoreController
 
   end
 
+  # GET - displays the user's downloadable books & givable gifts
+  def library  # TODO
+    if current_user
+      @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
+      @giftable_products = []
+    end
+  end
+
   # a page to facilitate the bulk-purchase of gifts for your friends
   def gifts
     @available_gifts = @all_products.where(free_on_signup: false)

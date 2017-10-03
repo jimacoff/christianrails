@@ -23,6 +23,10 @@ class Store::FreeGiftsController < Store::StoreController
     end
   end
 
+  # TODO
+  def give
+  end
+
   private
 
     def free_gift_params

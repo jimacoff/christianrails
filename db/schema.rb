@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928204312) do
+ActiveRecord::Schema.define(version: 20171003233510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,10 +153,11 @@ ActiveRecord::Schema.define(version: 20170928204312) do
 
   create_table "store_free_gifts", force: :cascade do |t|
     t.integer  "product_id"
-    t.integer  "user_id"
+    t.integer  "recipient_id"
     t.string   "origin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "giver_id"
   end
 
   create_table "store_orders", force: :cascade do |t|
@@ -202,16 +203,6 @@ ActiveRecord::Schema.define(version: 20170928204312) do
     t.string   "popularity_image"
     t.integer  "physical_sales",   default: 0
     t.boolean  "free_on_signup",   default: false
-  end
-
-  create_table "store_purchased_gifts", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "purchaser_id"
-    t.integer  "recipient_id"
-    t.integer  "order_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "purchased_by_id"
   end
 
   create_table "store_releases", force: :cascade do |t|

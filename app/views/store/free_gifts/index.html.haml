@@ -7,7 +7,8 @@
   %thead
     %tr
       %th Product
-      %th User
+      %th Giver
+      %th Recipient
       %th Origin
       %th Date
 
@@ -15,7 +16,8 @@
     - @free_gifts.each do |free_gift|
       %tr
         %td= free_gift.product.title
-        %td= free_gift.user.fullname
+        %td= free_gift.giver.fullname
+        %td= free_gift.recipient ? free_gift.recipient.fullname : ""
         %td= free_gift.origin
         %td= free_gift.created_at
 
