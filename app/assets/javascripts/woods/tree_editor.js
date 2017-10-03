@@ -150,7 +150,6 @@ function toggleWaterfallMode() {
     $('#waterfall-controls').hide();
 
     $('#tree-map').fadeIn();
-    $('#primary-controls').fadeIn();
 
     $('#move-to-top-button').prop('disabled', false);
 
@@ -158,7 +157,6 @@ function toggleWaterfallMode() {
   } else {
     // show waterfall panels + buttons
     $('#tree-map').hide();
-    $('#primary-controls').hide();
 
     $('.waterfall-panel').fadeIn();
     $('#waterfall-controls').css('display', 'inline-block');
