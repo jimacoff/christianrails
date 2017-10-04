@@ -83,6 +83,30 @@ th {
   text-align: center;
 }
 
+.gift-form-wrapper {
+  display: none;
+}
+
+.gift-input {
+  //height: 50px;
+  font-size: 1.1em;
+  max-width: 200px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.gift-name-input {
+  //height: 50px;
+  font-size: 1.1em;
+  max-width: 120px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.gift-submit {
+  display: inline-block;
+}
+
 #store-wrapper {
   position: relative;
 }

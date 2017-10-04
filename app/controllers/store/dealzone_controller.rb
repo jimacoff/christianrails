@@ -148,7 +148,7 @@ class Store::DealzoneController < Store::StoreController
         note = 'Order successful! Download your new books below.'
         record_positive_event(Log::STORE, "Checkout completed for $#{total}")
 
-        ChristianMailer.ebook_receipt( order ).deliver_now
+        StoreMailer.ebook_receipt( order ).deliver_now
       else
         alert = 'Please log in. If you are having difficulties, please contact the author.'
       end
@@ -194,7 +194,7 @@ class Store::DealzoneController < Store::StoreController
         record_positive_event(Log::STORE, "Gifting checkout completed for $#{total}")
 
         # TODO make a custom receipt?
-        ChristianMailer.ebook_receipt( order ).deliver_now
+        StoreMailer.ebook_receipt( order ).deliver_now
       else
         alert = 'Please log in. If you are having difficulties, please contact the author.'
       end

@@ -192,7 +192,9 @@ function scrollToBookDesc() {
   $("html, body").animate({ scrollTop: $('.book-desc').offset().top - 20}, "slow");
 }
 
-// enable the gift-sender fields on the product
+// show the gift-sender fields on the product
 function popSendGiftControls(product_id) {
-// TODO
+  //$('.send_a_gift_' + product_id).prop('disabled', true);
+  $('.send_a_gift_' + product_id).hide();
+  $('.form_wrap_' + product_id).fadeIn();
 }

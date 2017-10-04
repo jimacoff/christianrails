@@ -27,7 +27,7 @@ class AdminController < ApplicationController
     @failure = false
     begin
       @order = current_user.orders.first # mine!
-      ChristianMailer.ebook_receipt( @order ).deliver_now
+      StoreMailer.ebook_receipt( @order ).deliver_now
     rescue => e
       Rails.logger.warn(e)
       @failure = true

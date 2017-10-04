@@ -1,5 +1,18 @@
-class Users::InvitationsController < Devise::InvitationsController
+class InvitationsController < Devise::InvitationsController
+
+  include StoreHelper
+
+  after_action :give_free_gifts_after_invite, only: [:update]
+
   private
+
+  def give_free_gifts_after_invite
+    if @user
+      Store::Product.where( free_on_signup: true ).each do |free_product|
+        give_product_to_user!( free_product, @user, "On sign-up" )
+      end
+    end
+  end
 
   # this is called when creating invitation. should return an instance of resource class
   def invite_resource

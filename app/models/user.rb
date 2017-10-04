@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :received_gifts,         inverse_of: :recipient, class_name: 'Store::FreeGift', foreign_key: "recipient_id"
   has_many :given_gifts,            inverse_of: :giver,     class_name: 'Store::FreeGift', foreign_key: "giver_id"
 
+  belongs_to :invited_for_product, class_name: 'Store::Product', foreign_key: "invited_for_product_id", optional: true
+
   has_one :player,    class_name: "Woods::Player",  dependent: :destroy
   has_one :assistant, class_name: "Crm::Assistant", dependent: :destroy
 

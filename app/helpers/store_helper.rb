@@ -10,13 +10,13 @@ module StoreHelper
     @sendables          = {}.tap do |hash|
                             @sendable_gifts.each do |gift|
                               if hash[gift.product_id]
-                                hash[gift.product_id] << gift.recipient_id
+                                hash[gift.product_id] << gift_id_if_not_yet_sent(gift)
                               else
-                                hash[gift.product_id] = [gift.recipient_id]
+                                hash[gift.product_id] = [gift_id_if_not_yet_sent(gift)]
                               end
                             end
                           end
-    @price_combos       = Store::PriceCombo.all
+    @price_combos = Store::PriceCombo.all
   end
 
   def get_cart
@@ -29,5 +29,11 @@ module StoreHelper
     Store::FreeGift.create(product_id: product.id, recipient_id: user.id, origin: origin)
     record_gifting( Log::STORE, "Product #{product.title} given to #{user.fullname}")
   end
+
+  private
+
+    def gift_id_if_not_yet_sent(gift)
+      gift.id if !gift.recipient
+    end
 
 end

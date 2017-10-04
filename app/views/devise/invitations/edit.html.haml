@@ -1,0 +1,35 @@
+%h2.center= "Accept your gift"
+
+%p
+  = "#{resource.invited_by.fullname} wants to give you a digital copy of"
+  = succeed "." do
+    %strong= "#{resource.invited_for_product.title}"
+
+%p For signing up, you'll also receive:
+
+%ul
+  - Store::Product.where( free_on_signup: true ).each do |free_product|
+    %li
+      %strong= free_product.title
+
+%p= "Please set a username and password which you'll use to access your Library:"
+
+= form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f|
+  = devise_error_messages!
+  = f.hidden_field :invitation_token
+  %p
+    = f.label :username
+    %br
+    = f.text_field :username
+
+  - if f.object.class.require_password_on_accepting
+    %p
+      = f.label :password
+      %br
+      = f.password_field :password
+    %p
+      = f.label :password_confirmation
+      %br
+      = f.password_field :password_confirmation
+
+  %p= f.submit "Activate account", class: 'store-button'

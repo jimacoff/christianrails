@@ -71,7 +71,11 @@ Christianrails::Application.routes.draw do
       end
     end
 
-    resources :free_gifts, only: [:index, :new, :create]
+    resources :free_gifts, only: [:index, :new, :create] do
+      member do
+        post 'give'
+      end
+    end
   end
   get '/complete_order', to: 'store/dealzone#complete_order'
   get '/order_success',  to: 'store/dealzone#order_success'
