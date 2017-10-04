@@ -35,8 +35,8 @@
 
 :javascript
   // load the intro node into the JS + set up item gallery
-  var current_node = #{@node.to_json};
-  var item_gallery = #{@items};
+  var current_node = #{ raw( @node.to_json)  };
+  var item_gallery = #{ raw( @items.to_json) };
   var item_index = 0;
   var pop_item = false;
   var storyname = '#{@story.pic_name}';

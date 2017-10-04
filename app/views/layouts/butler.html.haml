@@ -96,7 +96,7 @@
 
 :javascript
 
-  var entities = #{ @entities.to_json };
+  var entities = #{ raw( @entities.to_json ) } ;
 
   $(document).ready(function() {
     // Create cross browser requestAnimationFrame method:

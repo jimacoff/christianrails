@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0'
 
-gem 'devise', '~> 4.1.0'
+gem 'devise',           '~> 4.2'
+gem 'devise_invitable', '~> 1.7.0'
 gem 'capistrano'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-rbenv'
