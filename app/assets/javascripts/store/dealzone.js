@@ -191,3 +191,8 @@ function updateGiftBasket() {
 function scrollToBookDesc() {
   $("html, body").animate({ scrollTop: $('.book-desc').offset().top - 20}, "slow");
 }
+
+// enable the gift-sender fields on the product
+function popSendGiftControls(product_id) {
+// TODO
+}

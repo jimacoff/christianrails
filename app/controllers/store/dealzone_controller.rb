@@ -10,12 +10,9 @@ class Store::DealzoneController < Store::StoreController
   ## PUBLIC
 
   def index
-    @price_combos = Store::PriceCombo.all
-    @owned_products = []
     @diamondfind = Woods::Story.where(name: "Diamond Find").first
 
     if current_user
-      @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
       @finds = current_user.player.finds.joins(:item)
                                         .where('woods_items.value > ?', 0)
                                         .where('woods_finds.story_id = ?', @diamondfind.id) if current_user.player
@@ -24,8 +21,6 @@ class Store::DealzoneController < Store::StoreController
                                                 .where('woods_finds.story_id = ?', @diamondfind.id)
     end
     @finds ||= nil
-
-    @available_products = @all_products - @owned_products
 
     # for auto-adding of GC from the params
     @gc_product = Store::Product.where(title: "Ghostcrime").first
@@ -40,11 +35,7 @@ class Store::DealzoneController < Store::StoreController
   end
 
   # GET - displays the user's downloadable books & givable gifts
-  def library  # TODO
-    if current_user
-      @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
-      @giftable_products = []
-    end
+  def library
   end
 
   # a page to facilitate the bulk-purchase of gifts for your friends

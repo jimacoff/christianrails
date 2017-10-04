@@ -27,3 +27,13 @@
         - elsif current_user.has_product?(product.id)
           - product.digital_releases.each do |rel|
             .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
+
+  - if @sendables.keys.include?( product.id ) # is somehow determined to be giftable
+    %tr
+      %td.small-width
+        %span.store-format.embolden Gift copies:
+        - sendables = @sendables[product.id]
+        %span.store-format= "#{sendables.size - sendables.count(nil)} / #{sendables.size} given"
+      %td
+        - if sendables.count(nil) > 0
+          %button.gift-button{class:"send_a_gift_#{product.id}", onclick:"popSendGiftControls( #{product.id} )"} Send a gift

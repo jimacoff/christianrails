@@ -9,15 +9,6 @@ class Store::GhostcrimeController < Store::StoreController
 
   def index
     @gc_product = Store::Product.where(title: "Ghostcrime").first
-    @price_combos = Store::PriceCombo.all
-
-    if current_user
-      @owned_products = current_user.products.sort{ |a,b| a.rank <=> b.rank}
-    else
-      @owned_products = []
-    end
-
-    @available_products = @all_products - @owned_products
 
     # for auto-adding of GC from the params
     @gc_crm = ""

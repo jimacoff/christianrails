@@ -1,12 +1,12 @@
 %h1 My Library
 
+- prods = ( @owned_products + @giftable_products ).flatten.uniq
+- prods = prods.sort{ |a,b| a.rank <=> b.rank } if prods.size > 0
+
 - if current_user
-  - @owned_products.each do |product|
+  - prods.each do |product|
     = render 'store/store_preview', { product: product }
 
-  - @giftable_products.each do |giftable|
-    - puts "TODO"
-
--# else
-
-
+- else
+  %p You don't appear to be logged in!
+  = link_to "Home", root_path
