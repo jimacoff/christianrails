@@ -16,10 +16,10 @@
     - @free_gifts.each do |free_gift|
       %tr
         %td= free_gift.product.title
-        %td= free_gift.giver.fullname
+        %td= free_gift.giver ? free_gift.giver.fullname : ""
         %td= free_gift.recipient ? free_gift.recipient.fullname : ""
         %td= free_gift.origin
-        %td= free_gift.created_at
+        %td= free_gift.created_at.strftime("%B %e, %Y")
 
 %strong= "#{@free_gifts.size} total gifts."
 
