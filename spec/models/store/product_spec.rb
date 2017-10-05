@@ -51,14 +51,6 @@ RSpec.describe Store::Product, type: :model do
     expect( p.downloads ).to include(download1, download2, download3)
   end
 
-  it "has users who were invited for it" do
-    user.invited_for_product = product
-    user.save
-
-    expect( product.users
-
-  end
-
   describe 'discount_for' do
 
     let(:combo)    { FactoryGirl.create(:price_combo, discount: 5.00) }

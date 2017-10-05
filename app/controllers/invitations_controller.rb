@@ -6,6 +6,11 @@ class InvitationsController < Devise::InvitationsController
 
   private
 
+  def after_accept_path_for(resource)
+    root_path
+  end
+
+
   def give_free_gifts_after_invite
     if @user
       Store::Product.where( free_on_signup: true ).each do |free_product|

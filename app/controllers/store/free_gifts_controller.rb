@@ -40,7 +40,8 @@ class Store::FreeGiftsController < Store::StoreController
             @free_gift.recipient = existing_user
             @free_gift.save
 
-            flash[:notice] = "Gift information sent!"
+            record_gifting( Log::STORE, "#{current_user.fullname} gave #{@free_gift.product.title} to #{existing_user.fullname}!")
+            flash[:notice] = "Gift notification sent!"
           end
         else
           new_user = User.invite!( { email: params[:email],
@@ -52,6 +53,7 @@ class Store::FreeGiftsController < Store::StoreController
           @free_gift.recipient = new_user  # give the gift
           @free_gift.save
 
+          record_gifting( Log::STORE, "#{current_user.fullname} gave #{@free_gift.product.title} to #{new_user.fullname}!")
           flash[:notice] = "Gift information sent!"
         end
       else

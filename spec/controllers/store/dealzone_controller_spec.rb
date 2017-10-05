@@ -164,12 +164,12 @@ RSpec.describe Store::DealzoneController, type: :controller do
     let!(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
     let!(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
 
-    it "should create purchases for each staged purchase" do
-
+    it "should create purchases and gifts for each staged purchase" do
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( Store::StagedPurchase.count  ).to eq(0)
       expect( Store::DigitalPurchase.count ).to eq(2)
+      expect( Store::FreeGift.count ).to eq(2)
     end
 
     it "should create an order with the correct total, tax and no discount" do

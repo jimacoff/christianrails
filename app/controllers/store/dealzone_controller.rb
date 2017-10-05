@@ -137,15 +137,18 @@ class Store::DealzoneController < Store::StoreController
                                     payer_id: params[:PayerID], payment_id: params[:paymentId],
                                     discount: discount, tax: tax, total: total)
 
-        # turn all StagedPurchases into DigitalPurchases
+        # turn all StagedPurchases into DigitalPurchases. Create giftable spares
         staged.each do |staged_purchase|
           Store::DigitalPurchase.create(product: staged_purchase.product,
                                         order: order,
                                         price: staged_purchase.product.price)
+          Store::FreeGift.create( product: staged_purchase.product,
+                                  giver: current_user,
+                                  origin: "Spare on purchase")
           staged_purchase.destroy
         end
 
-        note = 'Order successful! Download your new books below.'
+        note = "Success! Download your books below & share a copy with a friend."
         record_positive_event(Log::STORE, "Checkout completed for $#{total}")
 
         StoreMailer.ebook_receipt( order ).deliver_now
