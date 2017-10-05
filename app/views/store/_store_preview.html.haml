@@ -9,7 +9,7 @@
         %td
           = render "store/store_preview_content", { product: product }
 
-.mobile-product{onclick: 'goToProductPage();'}
+.mobile-product
   .preview-image{onclick: "goToProductPage( \"#{product.slug}\" );"}= image_tag( "#{product.logo_image}", class: "store-image" )
 
   = render "store/store_preview_content", { product: product }

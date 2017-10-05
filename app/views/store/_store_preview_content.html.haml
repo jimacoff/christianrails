@@ -36,7 +36,7 @@
         %span.store-format= "#{sendables.count(nil)} / #{sendables.size} given"
       %td
         - if sendables.count(nil) < sendables.size
-          %button.gift-button{class:"send_a_gift_#{product.id}", onclick:"popSendGiftControls( #{product.id} )"} Send a gift
+          %button.gift-button{type: 'button', class: "send_a_gift_#{product.id}", onclick: "popSendGiftControls( #{product.id} )"} Send a gift
 
 - if sendables && sendables.count(nil) < sendables.size
   %table.full-width
