@@ -20,9 +20,21 @@ module StoreHelper
   end
 
   def get_cart
-    @cart = current_user ? {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id)
-                                                               .each{ |sp| hash[sp.product_id] = sp.id }
-                                 } : {}
+    @cart = {}
+    if current_user
+      @cart[:books]  = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id).each{ |sp| hash[sp.product_id] = sp.id } }
+      @cart[:prices] = get_updated_prices
+    end
+  end
+
+  def get_updated_prices
+    price_json = {}
+    price_json[:total_discount] = Store::PriceCombo.total_cart_discount_for( current_user.id ).to_f
+
+    @all_products.each do |prod|
+      price_json[prod.id] = [prod.price.to_f, prod.discount_for(current_user.id).to_f]
+    end
+    price_json
   end
 
   def give_product_to_user!( product, user, origin )

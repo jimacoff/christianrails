@@ -16,7 +16,7 @@ function hideCartWidget() {
 }
 
 function possiblyHideCartWidget() {
-  if(Object.keys(cart).length === 0) {
+  if(Object.keys( cart.books ).length === 0) {
     hideCartWidget();
   }
 }
@@ -32,6 +32,16 @@ function addToCart(product_id) {
   disableAddToCartButton(product_id);
   showProductInCartWidget(product_id);
   createStagedPurchase(product_id);
+}
+
+// adds it to the JS cart but does not actually create the staged purchase
+function showProductInCart(product_id) {
+  showCartWidget();
+  disableAddToCartButton(product_id);
+  showProductInCartWidget(product_id);
+
+  updatePrices();
+  updateUserbarCartLink();
 }
 
 function removeFromCart(product_id) {
@@ -58,8 +68,8 @@ function updatePrices() {
 }
 
 function updateUserbarCartLink() {
-  if( Object.keys(cart).length > 0 ) {
-    $('.cart-link-highlight').text("Cart (" + Object.keys(cart).length + ")");
+  if( Object.keys( cart.books ).length > 0 ) {
+    $('.cart-link-highlight').text("Cart (" + Object.keys( cart.books ).length + ")");
     $('.cart-dot').show();
   } else {
     $('.cart-link-highlight').text("");
@@ -68,6 +78,8 @@ function updateUserbarCartLink() {
 }
 
 function drawNewPrices(price_data) {
+  cart.prices = price_data;
+
   // the discount
   if(price_data.total_discount !== 0) {
     $('.discount_price').html("$" + price_data.total_discount.toFixed(2));
@@ -120,7 +132,7 @@ function createStagedPurchase(product_id) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    cart[data['product_id']] = data['id'];
+    cart.books[data['product_id']] = data['id'];
     updatePrices();
     updateUserbarCartLink();
   });
@@ -134,12 +146,12 @@ function removeStagedPurchase(product_id) {
   request = void 0;
   request = $.ajax({
       type: 'DELETE',
-      url: '/store/staged_purchases/' + cart[product_id] + '.json',
+      url: '/store/staged_purchases/' + cart.books[product_id] + '.json',
       dataType: 'json'
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    delete cart[data['product_id']];
+    delete cart.books[data['product_id']];
     possiblyHideCartWidget();
     updatePrices();
     updateUserbarCartLink();

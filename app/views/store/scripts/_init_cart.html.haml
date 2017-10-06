@@ -1,9 +1,10 @@
-- if @cart
+- if @cart && @cart[:books]
   :javascript
-    var keys = #{@cart.keys};
+    var cart = #{ raw( @cart.to_json ) }
+    var keys = Object.keys( cart.books);
     for(var i in keys) {
       $('.cart-dot').show();
-      addToCart(keys[i]);
+      showProductInCart( keys[i]) ;
     }
 
 :javascript
