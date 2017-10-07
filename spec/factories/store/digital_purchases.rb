@@ -3,5 +3,6 @@ FactoryGirl.define do
     product
     order
     price 3.99
+    type_id Store::DigitalPurchase::TYPE_DIGITAL_SINGLE
   end
 end

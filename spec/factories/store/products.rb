@@ -8,5 +8,8 @@ FactoryGirl.define do
     long_desc "This book is REALLY good."
     price 7.77
     rank 1
+
+    giftpackable true
+    giftpack_price 14.44
   end
 end

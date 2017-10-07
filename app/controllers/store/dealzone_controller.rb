@@ -4,7 +4,7 @@ class Store::DealzoneController < Store::StoreController
 
   before_action :get_products, :get_cart
   before_action :get_sample_blog_posts, only: [:index]
-  before_action :get_staged_purchases,  only: [:checkout]
+  before_action :get_staged_purchases,  only: [:check_out]
 
   skip_before_action :verify_is_admin
 
@@ -181,6 +181,7 @@ class Store::DealzoneController < Store::StoreController
       end
 
     rescue => e
+pp e
       alert = "Error executing payment. Please contact the author."
       Rails.logger.error(e.to_s)
     end
@@ -245,7 +246,7 @@ class Store::DealzoneController < Store::StoreController
 
     def generate_description_for_checkout
       desc = ""
-      desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBooks'  if @staged_products.size > 0
+      desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBooks' if @staged_products.size > 0
       desc += " & " if desc != "" && @staged_giftpacks.size > 0
       desc += @staged_giftpacks.collect{ |s| s.product.title + " 5-pack" }.join(' + ') if @staged_giftpacks.size > 0
       desc
