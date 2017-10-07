@@ -55,6 +55,12 @@
     %tr.field
       %td= f.label :filename
       %td= f.text_field :filename
+    %tr.field
+      %td= f.label :giftpackable
+      %td= f.check_box :giftpackable, value: @product.giftpackable
+    %tr.field
+      %td= f.label :giftpack_price
+      %td= f.text_field :giftpack_price, value: ( number_with_precision( f.object.giftpack_price, precision: 2) || 0)
 
     %tr.actions
       %td

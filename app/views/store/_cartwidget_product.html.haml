@@ -1,6 +1,5 @@
 -# The tab of the item in the cart
-
-- is_hidden = !@cart.has_key?(prod.id) ? "display: none;" : "display: inline-block;"
+- is_hidden = !@cart[:books].has_key?(prod.id) ? "display: none;" : "display: inline-block;"
 
 %span{ class: "cartwidget_item_#{prod.id}", style: "#{is_hidden}"}
   .center= image_tag( "#{prod.small_image}" , class: "cartwidget-image")

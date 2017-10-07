@@ -1,7 +1,8 @@
 #deal-products
   - if @all_products.size > 0
     - @all_products.each do |prod|
-      = render 'store/cartwidget_product', {prod: prod}
+      = render 'store/cartwidget_product',  {prod: prod}
+      = render 'store/cartwidget_giftpack', {prod: prod}
 
 #checkout{style: "#{ display_setting }"}
   .cartwidget-pricedetails

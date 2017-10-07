@@ -22,7 +22,12 @@ module StoreHelper
   def get_cart
     @cart = {}
     if current_user
-      @cart[:books]  = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id).each{ |sp| hash[sp.product_id] = sp.id } }
+      @cart[:books]  = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
+                                                                  type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE)
+                                                           .each{ |sp| hash[sp.product_id] = sp.id } }
+      @cart[:giftpacks] = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
+                                                                     type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK)
+                                                              .each{ |sp| hash[sp.product_id] = sp.id } }
       @cart[:prices] = get_updated_prices
     end
   end

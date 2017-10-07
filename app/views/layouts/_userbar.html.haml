@@ -4,7 +4,8 @@
       .span
         Welcome,
         = succeed "." do
-          = link_to "#{current_user.first_name}", user_path( current_user )
+          - #link_to "#{current_user.first_name}", user_path( current_user )
+          = "#{current_user.first_name}"
       %p.diminutive.lineheight-spacer
         = link_to "", main_app.cart_path, class: 'cart-link-highlight embolden'
         %span.cart-dot{style: 'display: none;'} ·
