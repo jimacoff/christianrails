@@ -68,7 +68,7 @@ class Store::FreeGiftsController < Store::StoreController
   private
 
     def free_gift_params
-      params.require(:store_free_gift).permit(:user_id, :product_id, :origin)
+      params.require(:store_free_gift).permit(:recipient_id, :product_id, :origin)
     end
 
     def set_free_gift_secure

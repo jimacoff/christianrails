@@ -9,20 +9,19 @@
       %table
         %tr
           %td{colspan: 3}
-            -# display the release format names
             -# display the digital release format names
-            - if !current_user || !current_user.has_product?(product.id)
-              - release_array = []
-              - product.digital_releases.each do |release|
-                - release_array << release.format
-              - release_text = release_array.join(" / ")
-              .store-format.embolden.center #{release_text}
-            - else
-              .store-format.embolden.center Download:
+            - release_array = []
+            - product.digital_releases.each do |release|
+              - release_array << release.format
+            - release_text = release_array.join(" / ")
+            .store-format.embolden.center #{release_text}
 
         %tr
           %td
-            %p One for me
+            - if !current_user || !current_user.has_product?(product.id)
+              %p One for me
+            - else
+              %p Download:
 
           - if !current_user || !current_user.has_product?(product.id)
             %td{style: 'width: 50%;'}

@@ -1,5 +1,5 @@
 -# The tab of the Giftpack in the cart
-- is_hidden = !@cart[:giftpacks].has_key?(prod.id) ? "display: none;" : "display: inline-block;"
+- is_hidden = ( @cart == {} || !@cart[:giftpacks].has_key?(prod.id) ) ? "display: none;" : "display: inline-block;"
 
 %span{ class: "cartwidget_giftpack_item_#{prod.id}", style: "#{is_hidden}"}
   .center.gift-overlay-container

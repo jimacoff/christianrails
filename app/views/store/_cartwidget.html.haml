@@ -1,6 +1,7 @@
-- unless !@cart || !@all_products
+- display_setting = "display: none;"
+- unless @cart == {} || !@all_products
   - cartsize = @cart[:books].keys.length + @cart[:giftpacks].keys.length
-  - display_setting = ( cartsize == 0 ? "display: none;" : "display: inline-block;" )
+  - display_setting = "display: inline-block;" if cartsize > 0
 
 #cartwidget{style: "#{display_setting}"}
   %span.artifika{style: 'margin-bottom: 5px;'} My Cart
