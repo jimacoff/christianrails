@@ -107,6 +107,29 @@ th {
   display: inline-block;
 }
 
+.gift-overlay-container {
+  position: relative;
+  height: 109px;
+  width: 100px;
+}
+
+.gift-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.gift-overlay-text {
+  position: absolute;
+  height: 100px;
+
+  left: 40px;
+  top: 0;
+  z-index: 100;
+  font-size: 3em;
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
 #store-wrapper {
   position: relative;
 }
@@ -211,6 +234,7 @@ th {
 
   background-color: $blue-smoke;
   margin-right: auto;
+  z-index: 200;
 }
 
 .physical-button {
