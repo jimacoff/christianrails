@@ -37,7 +37,7 @@ module StoreHelper
     price_json[:total_discount] = Store::PriceCombo.total_cart_discount_for( current_user.id ).to_f
 
     @all_products.each do |prod|
-      price_json[prod.id] = [prod.price.to_f, prod.discount_for(current_user.id).to_f]
+      price_json[prod.id] = [prod.price.to_f, prod.discount_for(current_user.id).to_f] # this is a dumb format
     end
     price_json
   end

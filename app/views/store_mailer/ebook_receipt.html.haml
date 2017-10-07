@@ -7,7 +7,8 @@
   - @order.digital_purchases.each do |digital_purchase|
     %li
       %p
-        %span= "#{digital_purchase.product.title} : "
+        - type = digital_purchase.single? ? "ebook" : "5-pack"
+        %span= "#{digital_purchase.product.title} #{type}: "
         %span= number_to_currency( digital_purchase.price, precision: 2 )
 
       - if @order.discount > 0

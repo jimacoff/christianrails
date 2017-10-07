@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007012003) do
+ActiveRecord::Schema.define(version: 20171007175733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,10 +126,11 @@ ActiveRecord::Schema.define(version: 20171007012003) do
 
   create_table "store_digital_purchases", force: :cascade do |t|
     t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "order_id"
     t.decimal  "price"
+    t.integer  "type_id",    default: 0
   end
 
   create_table "store_distributions", force: :cascade do |t|
@@ -218,14 +219,6 @@ ActiveRecord::Schema.define(version: 20171007012003) do
     t.string   "physical_code"
     t.string   "isbn",          default: ""
     t.index ["product_id"], name: "index_store_releases_on_product_id", using: :btree
-  end
-
-  create_table "store_staged_gifts", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "user_id"
-    t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "store_staged_purchases", force: :cascade do |t|

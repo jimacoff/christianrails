@@ -105,7 +105,7 @@ function updateUserbarCartLink() {
 function drawNewPrices(price_data) {
   cart.prices = price_data;
 
-  // the discount
+  // display the discount
   if(price_data.total_discount !== 0) {
     $('.discount_price').html("$" + price_data.total_discount.toFixed(2));
   } else {
@@ -114,14 +114,17 @@ function drawNewPrices(price_data) {
 
   // the checkout total
   var cartWidgetItems = $("[class^='cartwidget_price_']"),
+      cartWidgetGifts = $("[class^='cartwidget_giftpack_price_']"),
       total = 0;
+  var allItems = $.merge( cartWidgetItems, cartWidgetGifts );
 
-  cartWidgetItems.each(function( i ) {
-    if($($(this).parents()[1]).hasClass("totalable")){
-      total += Number(this.innerHTML.replace(/[^0-9\.]+/g,""));
+  allItems.each(function( i ) {
+    if( $($(this).parents()[1]).hasClass("totalable") ){
+      total += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
     }
   });
 
+  // display total. display differently if discount
   if(price_data.total_discount > 0) {
     total -= price_data.total_discount;
     $('.total_price').addClass('discount');
@@ -130,7 +133,6 @@ function drawNewPrices(price_data) {
     $('.total_price').removeClass('discount');
     $('.discount_label').html('');
   }
-
   $('.total_price').text("$" + total.toFixed(2));
 
   // update the satisfiable discounts

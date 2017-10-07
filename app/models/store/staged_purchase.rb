@@ -6,12 +6,17 @@ class Store::StagedPurchase < ApplicationRecord
 
   TYPE_DIGITAL_SINGLE     = 0
   TYPE_DIGITAL_GIFT_PACK  = 1
-  TYPE_PHYSICAL_SINGLE    = 2
 
   def self.gross_cart_value_for(user_id)
     total = 0
-    Store::StagedPurchase.includes(:product).where(user_id: user_id).each do |sp|
+    Store::StagedPurchase.includes(:product).where(user_id: user_id,
+                                                   type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE).each do |sp|
       total += sp.product.price
+    end
+
+    Store::StagedPurchase.includes(:product).where(user_id: user_id,
+                                                   type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK).each do |sp|
+      total += sp.product.giftpack_price
     end
     total
   end

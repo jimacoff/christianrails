@@ -4,6 +4,7 @@ class Store::DealzoneController < Store::StoreController
 
   before_action :get_products, :get_cart
   before_action :get_sample_blog_posts, only: [:index]
+  before_action :get_staged_purchases,  only: [:checkout]
 
   skip_before_action :verify_is_admin
 
@@ -61,62 +62,55 @@ class Store::DealzoneController < Store::StoreController
 
   def check_out
     if current_user
-
       target_urls = {}
 
-      if params[:target] == "cart" && current_user.staged_purchases.size > 0
+      if current_user.staged_purchases.size > 0
         target_urls[:complete] = complete_order_url
         target_urls[:abort]    = root_url
 
-        staged = current_user.staged_purchases
-        desc = staged.collect{ |s| s.product.title }.join(' + ') + ' eBooks'
-        total_cost = 0
-        staged.map { |st| total_cost += st.product.price }
-        total_cost -= Store::PriceCombo.total_cart_discount_for( current_user.id )
+        desc = generate_description_for_checkout
+        total_cost = calculate_total_cost_for_user
 
-      elsif params[:target] == "gifts"
-        target_urls[:complete] = complete_gift_order
-        target_urls[:abort]    = gifts_url
-
-        # TODO calculate cost + discount for gifts in the gift basket
-        product = Store::Product.find( params[:gifts] )
-        @staged_purchase = Store::StagedPurchase.where(user: current_user, product_id: product.id).first
-        @staged_purchase ||= Store::StagedPurchase.new(user: current_user, product_id: product.id)
-      end
-
-      @payment = PayPal::SDK::REST::Payment.new({
-        intent: 'sale',
-        payer: {
-          payment_method: 'paypal'
-        },
-        redirect_urls: {
-          return_url: target_urls[:complete],
-          cancel_url: target_urls[:abort]
-        },
-        transactions: [{
-          amount: {
-            total: '%.2f' % (total_cost * (1 + Store::DigitalPurchase::TAX_RATE) ).round(2).to_s,
-            currency: 'CAD',
-            details: {
-              subtotal: total_cost.to_s,
-              tax: '%.2f' % (total_cost * Store::DigitalPurchase::TAX_RATE ).round(2).to_s
-            }
+        @payment = PayPal::SDK::REST::Payment.new({
+          intent: 'sale',
+          payer: {
+            payment_method: 'paypal'
           },
-          description: desc
-        }]
-      })
+          redirect_urls: {
+            return_url: target_urls[:complete],
+            cancel_url: target_urls[:abort]
+          },
+          transactions: [{
+            amount: {
+              total: '%.2f' % (total_cost * (1 + Store::DigitalPurchase::TAX_RATE) ).round(2).to_s,
+              currency: 'CAD',
+              details: {
+                subtotal: total_cost.to_s,
+                tax: '%.2f' % (total_cost * Store::DigitalPurchase::TAX_RATE ).round(2).to_s
+              }
+            },
+            description: desc
+          }]
+        })
 
-      if @payment.create
-        # redirect off to PayPal to get approval
-        redirect_url = @payment.links.find {|link| link.rel == 'approval_url'}
-        record_positive_event(Log::STORE, "Checkout initiated: #{desc}")
-        render js: "window.location = '#{redirect_url.href}'"
+        if @payment.create
+          # redirect off to PayPal to get approval
+          redirect_url = @payment.links.find {|link| link.rel == 'approval_url'}
+          record_positive_event(Log::STORE, "Checkout initiated: #{desc}")
+          render js: "window.location = '#{ redirect_url.href }'"
+        else
+          flash[:alert] = @payment.error
+          render js: "window.location = '#{ target_urls[:abort] }'"
+        end
+
       else
-        flash[:alert] = @payment.error
-        render js: "window.location = '#{ target_urls[:abort] }'"
+        flash[:alert] = "You are not logged in."
+        redirect_to root_path
       end
+
     else
-      # TODO no user error
+      flash[:alert] = "You are not logged in."
+      redirect_to root_path
     end
   end
 
@@ -136,19 +130,49 @@ class Store::DealzoneController < Store::StoreController
         order = Store::Order.create(user: current_user,
                                     payer_id: params[:PayerID], payment_id: params[:paymentId],
                                     discount: discount, tax: tax, total: total)
+        for_self  = false
+        gift_pack = false
 
-        # turn all StagedPurchases into DigitalPurchases. Create giftable spares
+        # turn all StagedPurchases into DigitalPurchases or FreeGifts, depending
         staged.each do |staged_purchase|
-          Store::DigitalPurchase.create(product: staged_purchase.product,
-                                        order: order,
-                                        price: staged_purchase.product.price)
-          Store::FreeGift.create( product: staged_purchase.product,
-                                  giver: current_user,
-                                  origin: "Spare on purchase")
+          if staged_purchase.single?
+            for_self = true
+            Store::DigitalPurchase.create(product: staged_purchase.product,
+                                          order: order,
+                                          price: staged_purchase.product.price,
+                                          type_id: Store::DigitalPurchase::TYPE_DIGITAL_SINGLE)
+            # give them a giftable spare
+            Store::FreeGift.create( product: staged_purchase.product,
+                                    giver: current_user,
+                                    origin: "Spare on purchase")
+
+          elsif staged_purchase.gift_pack?
+            gift_pack = true
+            Store::DigitalPurchase.create(product: staged_purchase.product,
+                                          order: order,
+                                          price: staged_purchase.product.giftpack_price,
+                                          type_id: Store::DigitalPurchase::TYPE_DIGITAL_GIFT_PACK)
+            # give them the gifts to give
+            Store::DigitalPurchase::GIFTPACK_SIZE.times do
+              Store::FreeGift.create( product: staged_purchase.product,
+                                      giver: current_user,
+                                      origin: "Gift pack")
+            end
+          end
+
           staged_purchase.destroy
         end
 
-        note = "Success! Download your books below & share a copy with a friend."
+        # custom note based on what they bought
+        if for_self && gift_pack
+          note = "Success! Download your books and send your gifts below."
+        elsif for_self
+          note = "Success! Download your books below & share a free copy with a friend."
+        elsif gift_pack
+          note = "Success! Send your gifts below."
+        else
+          note = "Success!" ## but shouldn't happen
+        end
         record_positive_event(Log::STORE, "Checkout completed for $#{total}")
 
         StoreMailer.ebook_receipt( order ).deliver_now
@@ -167,52 +191,7 @@ class Store::DealzoneController < Store::StoreController
     redirect_to root_path
   end
 
-  # gets params back from paypal --> :paymentId, :token, :PayerID
-  def complete_gift_order
-    begin
-      if current_user
-        payment = PayPal::SDK::REST::Payment.find( params[:paymentId] )
-        payment.execute( payer_id: params[:PayerID] )
-
-        # TODO calculate discount, tax, total
-        staged = current_user.staged_purchases
-        gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
-        discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
-        tax  = (gross_price - discount) * Store::DigitalPurchase::TAX_RATE
-        total = gross_price - discount + tax
-
-        order = Store::Order.create(user: current_user,
-                                    payer_id: params[:PayerID], payment_id: params[:paymentId],
-                                    discount: discount, tax: tax, total: total)
-
-        # TODO turn staged gifts into actual purchases
-        staged.each do |staged_purchase|
-          Store::DigitalPurchase.create(product: staged_purchase.product,
-                                        order: order,
-                                        price: staged_purchase.product.price)
-          staged_purchase.destroy
-        end
-
-        note = 'Your gifts have been sent!'
-        record_positive_event(Log::STORE, "Gifting checkout completed for $#{total}")
-
-        # TODO make a custom receipt?
-        StoreMailer.ebook_receipt( order ).deliver_now
-      else
-        alert = 'Please log in. If you are having difficulties, please contact the author.'
-      end
-
-    rescue => e
-      alert = "Error executing payment. Please contact the author."
-      Rails.logger.error(e.to_s)
-    end
-
-    flash[:notice] = note if note
-    flash[:alert] = alert if alert
-
-    redirect_to gifts_path
-  end
-
+  # for physical books
   def order_success
     flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
     redirect_to root_path
@@ -257,6 +236,27 @@ class Store::DealzoneController < Store::StoreController
 
     def get_sample_blog_posts
       @blog_posts = sample_blog_posts
+    end
+
+    def get_staged_purchases
+      @staged_products  = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE )    : []
+      @staged_giftpacks = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK ) : []
+    end
+
+    def generate_description_for_checkout
+      desc = ""
+      desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBooks'  if @staged_products.size > 0
+      desc += " & " if desc != "" && @staged_giftpacks.size > 0
+      desc += @staged_giftpacks.collect{ |s| s.product.title + " 5-pack" }.join(' + ') if @staged_giftpacks.size > 0
+      desc
+    end
+
+    def calculate_total_cost_for_user
+      total_cost = 0
+      @staged_products.map  { |st| total_cost += st.product.price }
+      @staged_giftpacks.map { |sg| total_cost += sg.product.giftpack_price }
+      total_cost -= Store::PriceCombo.total_cart_discount_for( current_user.id )
+      total_cost
     end
 
 end

@@ -8,9 +8,7 @@ class Store::OrdersController < Store::StoreController
   end
 
   def receipts
-    if current_user
-      @orders = current_user.orders
-    end
+    @orders = current_user.orders if current_user
   end
 
   ## ADMIN ONLY

@@ -24,7 +24,7 @@ class User < ApplicationRecord
   def products
     products = []
     self.orders.each do |order|
-      order.digital_purchases.each do |digital_purchase|
+      order.digital_purchases.where(type_id: Store::DigitalPurchase::TYPE_DIGITAL_SINGLE).each do |digital_purchase|
         products << digital_purchase.product
       end
     end

@@ -4,8 +4,9 @@
 %table.product-table.small-width
   %tbody
     - @order.digital_purchases.each do |digital_purchase|
+      - type = digital_purchase.single? ? "ebook" : "5-pack"
       %tr
-        %td= digital_purchase.product.title
+        %td= "#{digital_purchase.product.title} #{type}"
         %td= number_to_currency( digital_purchase.price, precision: 2 )
 
   - if @order.discount > 0
