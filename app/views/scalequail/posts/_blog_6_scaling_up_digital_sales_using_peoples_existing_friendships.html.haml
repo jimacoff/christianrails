@@ -52,12 +52,12 @@
   = succeed "." do
     %a{href: "/scalequail/show_post?post=business_algorithms_for_a_successful_scale"} need a place for the auto-mailer
 
-%h3 Stage 3: The auto-nudger
+%h3 Stage 3: The gift nudger
 
 %p
   If someone has a gift sitting around in their account that they haven't given to somebody, they need to be reminded. Luckily, I've already got an auto-mailer in the app, and with the addition of a daily
   = link_to "cron job", "https://en.wikipedia.org/wiki/Cron"
-  that checks which gifts are getting stale, an auto-nudger is easy to implement:
+  that checks which gifts are getting stale, a gift nudger is easy to implement:
 
 .center
   = image_tag "scalequail/gift-nudger.png", class: "quailpost-image"
@@ -73,6 +73,7 @@
 
 %p
   Now that we've scaled digital distribution a bit, let's move onto physical. I've got boxes of books in my office that are taking up space, and I
-  %a.coming-soon{onclick: "comingSoon( $(this) );"} need to turn them back into money.
+  %a.coming-soon{onclick: "comingSoon( $(this) );"} need them to go away,
+  preferably by converting them into money.
   / TODO reactivate link when post is implemented
-  /%a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem"} need to turn them back into money.
+  /%a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem"} need them to go away,
