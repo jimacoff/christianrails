@@ -11,5 +11,6 @@ FactoryGirl.define do
     end
     password "it_is_a_word"
     sign_in_count 0
+    last_gift_nudge nil
   end
 end

@@ -47,6 +47,25 @@ module StoreHelper
     record_gifting( Log::STORE, "Product #{product.title} given to #{user.fullname}")
   end
 
+  # called by cron
+  def nudge_users_about_unsent_gifts
+    stale_gifts = Store::FreeGift.where(recipient_id: nil).where('created_at < ?', DateTime.current - 1.week)
+    nudgable_users = stale_gifts.collect{ |x| x.giver }.uniq
+    nudgable_users.each do |user|
+      # nudge if they haven't been nudged in a while
+      if !user.last_gift_nudge || user.last_gift_nudge < DateTime.current - 1.week
+        an_unsent_product = user.unsent_products[0]
+        StoreMailer.gift_nudge( an_unsent_product, user ).deliver_now
+
+        user.last_gift_nudge = DateTime.current
+        user.save
+
+        record_scheduled_event(Log::BACKEND, "Nudged #{user.fullname} about unsent gift(s).")
+      end
+    end
+  end
+
+  ###########
   private
 
     def gift_id_if_not_yet_sent(gift)

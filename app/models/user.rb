@@ -34,6 +34,10 @@ class User < ApplicationRecord
     products.uniq
   end
 
+  def unsent_products
+    self.given_gifts.where(recipient_id: nil).collect{ |x| x.product }
+  end
+
   def has_product?(product_id)
     self.products.collect(&:id).include?(product_id)
   end

@@ -22,4 +22,13 @@ class StoreMailer < ActionMailer::Base
     mail(subject: subject, to: @recipient.email)
   end
 
+  def gift_nudge(product, user)
+    @product = product
+    @user    = user
+
+    subject = "You still have gifts to send!"
+
+    mail(subject: subject, to: @user.email)
+  end
+
 end
