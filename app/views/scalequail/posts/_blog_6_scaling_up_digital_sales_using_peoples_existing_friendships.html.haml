@@ -1,0 +1,78 @@
+%p I've got a lot of growth to hack in my comedy startup, but luckily, there's some low-hanging fruit in my eBook store that I can pick off. My profit margin is highest on digital products -- and I don't have to do any extra work when one is purchased -- so it only makes sense to try to "scale up" these sales numbers first.
+
+%p Currently people are buying them one at a time, for themselves. Talk about a 1x multiplier!
+
+%p Today we're going to implement a system where customers can send books as gifts to their friends. As a proof-of-concept, I'm going to set it up so every time someone buys a book, they get an extra copy that they can freely gift.
+
+%h3 Stage 1: Sending books to others
+
+%p First I'm going to have to change how books are owned by users with an addition of a FreeGift database object to store the sender/receiver/product information. Luckily, I wrote my eBook store myself, and I know exactly what needs doing for the upgrade.
+
+%p
+  Unfortunately, I wrote it two years ago! The code is, well, not
+  %em garbage
+  per se, but it wasn't built with scaling in mind. The silver lining, however, is that it's mostly Ruby, my favourite language of all.
+
+%p
+  It took a few database migrations, an integration with the
+  = link_to "devise_invitable gem", "https://github.com/scambra/devise_invitable"
+  to invite recipients to create accounts to accept their books, and a new interface to actually do it, but it wasn't too much trouble. If you're following along at home, and you have a dev to do all the technical stuff, just tell them to get it done and give them an arbitrary deadline. They love that!
+
+.center
+  = image_tag "scalequail/upgraded-store.png", class: "quailpost-image"
+  %p.caption
+    The exciting new ability to do
+    %em multiple things
+    with a product.
+
+%p In terms of scaling, though, the best I can rate this is a 2x multiplier. Each book purchase gets a second book out into the world, and it could create a new fan. But it doesn't directly increase revenue.
+
+%p But now that the application has a gifting mechanic, I can package multiple gifts together and sell those! And if you got the book for free, maybe you'll buy a discounted pack of five to send to your own friends. That's the hope, anyway.
+
+%h3 Stage 2: Buying packs of giftable books
+
+%p
+  To start, I have to upgrade the shopping cart system. Again, I wrote this back in 2015, but this time, most of the code is JavaScript. Much less pleasant than Ruby, but a necessary evil when doing internet-related work like this. Again, if you have a dev working for you, just ask them to
+  %em layer in
+  the new feature. It shouldn't be too hard for them.
+
+%p With some more database modifications, a cart redesign, a store interface overhaul, changes to the receipts, and some extra automated tests to make sure everything's still working, this feature is done:
+
+.center
+  = image_tag "scalequail/upgraded-cart.png", class: "quailpost-image"
+  %p.caption
+    The cart, now capable of holding
+    %em multiple types of the same product.
+    It's the future.
+
+%p With all this in the bag, I'm going to rate this as a 5x scale. Rest assured I'm going to be pushing people to give the gift of Me when holiday-time comes around!
+
+%p
+  But we can't quite go to sleep just yet -- we
+  = succeed "." do
+    %a{href: "/scalequail/show_post?post=business_algorithms_for_a_successful_scale"} need a place for the auto-mailer
+
+%h3 Stage 3: The auto-nudger
+
+%p
+  If someone has a gift sitting around in their account that they haven't given to somebody, they need to be reminded. Luckily, I've already got an auto-mailer in the app, and with the addition of a daily
+  = link_to "cron job", "https://en.wikipedia.org/wiki/Cron"
+  that checks which gifts are getting stale, an auto-nudger is easy to implement:
+
+.center
+  = image_tag "scalequail/gift-nudger.png", class: "quailpost-image"
+  %p.caption
+    Sweet, sweet Ruby code. Open-sourced
+    = succeed "." do
+      = link_to "here", "https://github.com/christiancodes/christianrails/"
+
+%p
+  As an author, you don't want to annoy your readers until they're at least most of the way through one of your books, so obviously, get your dev to make sure that you don't nudge people
+  %em too often.
+  I'm doing once a week.
+
+%p
+  Now that we've scaled digital distribution a bit, let's move onto physical. I've got boxes of books in my office that are taking up space, and I
+  %a.coming-soon{onclick: "comingSoon( $(this) );"} need to turn them back into money.
+  / TODO reactivate link when post is implemented
+  /%a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem"} need to turn them back into money.

@@ -139,6 +139,16 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 .in-progress-quail {
   margin-right: 15px;
 }
+
+.quailpost-image {
+  border-radius: 10px;
+}
+
+.caption {
+  margin: -5px 0 10px 0;
+  font-size: 80% !important;
+}
+
 /////  RESPONSIVE //////
 
 // small
@@ -168,6 +178,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   }
 
   .quail-title-image {
+    width: 300px;
+  }
+
+  .quailpost-image {
     width: 300px;
   }
 
