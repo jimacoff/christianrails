@@ -151,6 +151,34 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   end
 
+  describe 'check_out' do
+
+    let(:froom_product) { FactoryGirl.create(:product, title: "Lol Froom") }
+    let(:vroom_product) { FactoryGirl.create(:product, title: "Lol Vroom") }
+    let(:brool_product) { FactoryGirl.create(:product, title: "Lol Brool") }
+
+    let(:staged_purchase)  { FactoryGirl.create(:staged_purchase, user: user, product: froom_product) }
+    let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: vroom_product) }
+    let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: brool_product, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
+
+    it "sends off to PayPal if everything is fine" do
+      staged_purchase.save
+      staged_purchase2.save
+      staged_giftpack_purchase.save
+
+      expect{
+        post 'check_out'
+      }.to change(Log, :count).by( 1 )
+      expect( response ).to_not redirect_to( root_path )
+    end
+
+    it "redirects home if no staged purchases" do
+      post 'check_out'
+      expect( response ).to redirect_to( root_path )
+    end
+
+  end
+
   describe 'complete_order' do
 
     before :each do

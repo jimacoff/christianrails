@@ -1,30 +1,11 @@
 class Store::FreeGiftsController < Store::StoreController
 
+  skip_before_action :verify_is_admin, only: [:give]
   before_action :set_free_gift_secure, only: [:give]
 
-  ## ADMIN ONLY
+  ## PUBLIC
 
-  def index
-    @free_gifts = Store::FreeGift.order('created_at desc')
-  end
-
-  def new
-    @free_gift = Store::FreeGift.new
-    @products  = Store::Product.all
-    @users     = User.all
-  end
-
-  def create
-    @free_gift = Store::FreeGift.new(free_gift_params)
-
-    if @free_gift.save
-      redirect_to store_free_gifts_url, notice: 'Free gift was successfully created.'
-    else
-      flash[:alert] = "Origin is required."
-      redirect_to new_store_free_gift_path
-    end
-  end
-
+  # POST
   def give
     if params[:email] && params[:first_name] && params[:last_name]
       if !@free_gift.given?
@@ -63,6 +44,29 @@ class Store::FreeGiftsController < Store::StoreController
       flash[:alert] = "Bad params. Need first_name, last_name & email."
     end
     redirect_to library_path
+  end
+
+  ## ADMIN ONLY
+
+  def index
+    @free_gifts = Store::FreeGift.order('created_at desc')
+  end
+
+  def new
+    @free_gift = Store::FreeGift.new
+    @products  = Store::Product.all
+    @users     = User.all
+  end
+
+  def create
+    @free_gift = Store::FreeGift.new(free_gift_params)
+
+    if @free_gift.save
+      redirect_to store_free_gifts_url, notice: 'Free gift was successfully created.'
+    else
+      flash[:alert] = "Origin is required."
+      redirect_to new_store_free_gift_path
+    end
   end
 
   private

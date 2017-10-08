@@ -60,6 +60,7 @@ class Store::DealzoneController < Store::StoreController
     end
   end
 
+  # POST
   def check_out
     if current_user
       target_urls = {}
@@ -104,7 +105,7 @@ class Store::DealzoneController < Store::StoreController
         end
 
       else
-        flash[:alert] = "You are not logged in."
+        flash[:alert] = "You don't have anything in your cart."
         redirect_to root_path
       end
 
@@ -181,7 +182,6 @@ class Store::DealzoneController < Store::StoreController
       end
 
     rescue => e
-pp e
       alert = "Error executing payment. Please contact the author."
       Rails.logger.error(e.to_s)
     end
@@ -246,7 +246,8 @@ pp e
 
     def generate_description_for_checkout
       desc = ""
-      desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBooks' if @staged_products.size > 0
+      desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBook' if @staged_products.size > 0
+      desc += 's' if @staged_products.size > 1
       desc += " & " if desc != "" && @staged_giftpacks.size > 0
       desc += @staged_giftpacks.collect{ |s| s.product.title + " 5-pack" }.join(' + ') if @staged_giftpacks.size > 0
       desc
