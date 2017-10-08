@@ -5,7 +5,7 @@ class ScalequailController < ApplicationController
 
   layout "scalequail"
 
-  before_action :get_all_blog_posts
+  before_action :get_all_blog_posts, :get_products
   skip_before_action :verify_is_admin
 
   ## PUBLIC
@@ -25,7 +25,7 @@ class ScalequailController < ApplicationController
     if !@post || !lookup_context.find_all("/scalequail/posts/_blog_#{ @post[:sequence] }_#{ @post[:slug] }").any?
       redirect_to page_not_found_path and return
     end
-    get_products
+
     render 'scalequail/show_post'
   end
 
@@ -36,7 +36,6 @@ class ScalequailController < ApplicationController
       @category_posts << post if post[:category] == @category
     end
 
-    get_products
     render 'scalequail/category'
   end
 
@@ -47,7 +46,6 @@ class ScalequailController < ApplicationController
       @tag_posts << post if post[:tags].include? @tag
     end
 
-    get_products
     render 'scalequail/tag'
   end
 

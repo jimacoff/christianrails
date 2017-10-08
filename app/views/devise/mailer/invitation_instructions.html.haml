@@ -1,0 +1,17 @@
+%p= "Hi #{ @resource.first_name },"
+
+%p
+  = "#{ @resource.invited_by.fullname } thought you'd enjoy reading"
+  = succeed "," do
+    %strong= "#{ @resource.invited_for_product.title }"
+  = "and has given you a free digital copy!"
+
+%p
+  To accept the gift, visit
+  = link_to "ChristianDeWolf.com", accept_invitation_url(@resource, invitation_token: @token)
+  and set a password to access your Library.
+
+%p
+  If you don't want to accept the book, please ignore this email. Your account won't be created until you access the link above and set your password.
+
+%p Christian DeWolf, Wolf Butler Art & Software

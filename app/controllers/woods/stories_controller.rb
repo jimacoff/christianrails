@@ -42,7 +42,6 @@ class Woods::StoriesController < Woods::WoodsController
     items_player_has.each do |i|
       @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
     end
-    @items = @items.to_json
 
     @story.total_plays += 1
     @story.save

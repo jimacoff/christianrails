@@ -8,30 +8,29 @@
 
 :javascript
 
-  var nodes = #{@nodes.to_json};
+  var nodes = #{ raw( @nodes.to_json ) };
   var max_node_index = nodes.length;
   var cursor = 1;
 
-  var nodeModified = false;
-  var paintballModified = false;
-  var treelinkModified = false;
+  var nodeModified         = false;
+  var paintballModified    = false;
+  var treelinkModified     = false;
   var possibleitemModified = false;
-  var boxModified = false;
+  var boxModified          = false;
 
-  var storyId = #{ @story.id };
-  var storytreeId = #{ @storytree.id };
+  var storyId       = #{ @story.id };
+  var storytreeId   = #{ @storytree.id };
 
-  var storyName = #{ "\"" + @story.name + "\"" };
+  var storyName     = #{ "\"" + @story.name + "\"" };
   var storytreeName = #{ "\"" + @storytree.name + "\"" };
 
-  var treelinks = #{@treelinks.to_json};
-  var possibleitems = #{@possibleitems.to_json};
-  var boxes = #{@boxes.to_json};
-  var paintballs = #{@paintballs.to_json};
-
-  var palettes = #{@palettes.to_json};
-  var itemsets = #{@itemsets.to_json};
-  var storytrees = #{@storytrees.to_json};
+  var treelinks     = #{ raw( @treelinks.to_json ) };
+  var boxes         = #{ raw( @boxes.to_json ) };
+  var paintballs    = #{ raw( @paintballs.to_json ) };
+  var palettes      = #{ raw( @palettes.to_json ) };
+  var itemsets      = #{ raw( @itemsets.to_json ) };
+  var storytrees    = #{ raw( @storytrees.to_json ) };
+  var possibleitems = #{ raw( @possibleitems.to_json ) };
 
   var waterfall = false;
 

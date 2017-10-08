@@ -83,6 +83,56 @@ th {
   text-align: center;
 }
 
+.gift-form-wrapper {
+  display: none;
+}
+
+.gift-input {
+  //height: 50px;
+  font-size: 1.1em;
+  max-width: 200px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.gift-name-input {
+  //height: 50px;
+  font-size: 1.1em;
+  max-width: 120px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.gift-submit {
+  display: inline-block;
+}
+
+.gift-overlay-container {
+  position: relative;
+  height: 109px;
+  width: 100px;
+}
+
+.gift-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.gift-overlay-text {
+  position: absolute;
+  height: 100px;
+
+  left: 40px;
+  top: 0;
+  z-index: 100;
+  font-size: 3em;
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+  p {
+    color: white !important;
+  }
+}
+
 #store-wrapper {
   position: relative;
 }
@@ -102,11 +152,30 @@ th {
 
 .store-button {
   color: $off-white;
-  background: #bdb2fe;
+  background: $button-slate;
   background: -moz-linear-gradient(top, $l-slate-purple 0%, $slate-purple 50%, $l-slate-purple 100%);
   background: -webkit-linear-gradient(top, $l-slate-purple 0%,$slate-purple 50%, $l-slate-purple 100%);
   background: linear-gradient(to bottom, $l-slate-purple 0%,$slate-purple 50%, $l-slate-purple 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$l-slate-purple', endColorstr='$l-slate-purple',GradientType=0 );
+
+  border: $black 1px solid;
+  border-radius: 5px;
+  padding: 6px;
+  margin-right: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+}
+
+.gift-button {
+  color: $off-white;
+  background: $button-slate;
+  background: -moz-linear-gradient(   top, $light-jade 0%, $health-green 50%, $light-jade 100%);
+  background: -webkit-linear-gradient(top, $light-jade 0%, $health-green 50%, $light-jade 100%);
+  background: linear-gradient(  to bottom, $light-jade 0%, $health-green 50%, $light-jade 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$light-jade', endColorstr='$light-jade',GradientType=0 );
 
   border: $black 1px solid;
   border-radius: 5px;
@@ -127,7 +196,7 @@ th {
   margin: 25px 0;
 }
 
-.store-button:active {
+.store-button:active, .gift-button:active {
   color: $alt-smoke-gray !important;
   outline: none;
   transform: scale(0.90) !important;
@@ -139,11 +208,11 @@ th {
           transition: all 0.5s ease;
 }
 
-.store-button:focus {
+.store-button:focus, .gift-button:focus {
   outline: none;
 }
 
-.store-button:disabled {
+.store-button:disabled, .gift-button:disabled {
   color: black;
 }
 
@@ -168,6 +237,7 @@ th {
 
   background-color: $blue-smoke;
   margin-right: auto;
+  z-index: 200;
 }
 
 .physical-button {
@@ -342,7 +412,7 @@ th {
 .digital-widget {
   background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
   border-radius: 10px;
-  width: 250px;
+  width: 350px;
   padding: 10px;
   border: 2px solid $black;
   margin: 15px;
@@ -395,7 +465,7 @@ th {
   text-align: center !important;
 }
 
-.library-ruler {
+.storefront-ruler {
   margin: 15px 0 15px 0;
  // border: $light-gray 1px solid;
 }

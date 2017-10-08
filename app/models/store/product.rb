@@ -1,5 +1,4 @@
 class Store::Product < ApplicationRecord
-
   has_many :releases, inverse_of: :product, dependent: :destroy
   accepts_nested_attributes_for :releases
 
@@ -7,7 +6,8 @@ class Store::Product < ApplicationRecord
 
   has_many :digital_purchases, inverse_of: :product
   has_many :free_gifts,        inverse_of: :product
-  has_many :purchased_gifts,   inverse_of: :product
+  has_many :users_invited_for,  inverse_of: :invited_for_product, class_name: '::User', foreign_key: "invited_for_product_id"
+
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
   validates_presence_of :title, :author, :price

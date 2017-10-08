@@ -1,7 +1,7 @@
 module QuailHelper
 
   def all_scalequail_posts
-    # Add new posts at the top.
+    # Add new posts at the bottom.
     [
       {
         sequence: 1,
@@ -47,16 +47,16 @@ module QuailHelper
         category: "Scaling up",
         tags:  ["scaling"],
         date: "20170826"
-      }#,
-      # {
-      #   sequence: 6,
-      #   slug:  "scaling_up_digital_sales_using_peoples_existing_friendships",
-      #   title: "Scaling up Digital Sales using peoples' existing friendships",
-      #   desc:  "Make sure people are giving the gift of You this holiday season.",
-      #   category: "Scaling up",
-      #   tags:  ["scaling"],
-      #   date: "20170826"
-      # }
+      },
+      {
+        sequence: 6,
+        slug:  "scaling_up_digital_sales_using_peoples_existing_friendships",
+        title: "Scaling up digital sales using peoples' existing friendships",
+        desc:  "Make sure people are giving the gift of You this holiday season.",
+        category: "Scaling up",
+        tags:  ["scaling"],
+        date: "20171008"
+      }
     ]
   end
 

@@ -5,10 +5,16 @@ module BlogHelper
   RARE_PUBLIC_APPEARANCES = "Rare Public Appearances"
   SOFTWARE_DEVELOPMENT    = "Software Development"
   FREELANCE_LIFE          = "Freelance Life"
+  JUST_BUSINESS           = "Just Business"
 
   def all_blog_posts
     # Add new posts at the top.
     [
+      {
+        title: "20171006_important_quail_bulletin",
+        category: JUST_BUSINESS,
+        tags: ["business", "ScaleQuail"]
+      },
       {
         title: "20170926_snapback_shimari_released",
         category: WRITING_AND_PUBLISHING,

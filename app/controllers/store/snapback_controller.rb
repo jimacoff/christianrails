@@ -15,13 +15,4 @@ class Store::SnapbackController < Store::StoreController
     @sb_v2_product = Store::Product.where(title: "Snapback: Shimari").first
   end
 
-
-  private
-
-    def pull_in_store_data
-      @price_combos = Store::PriceCombo.all
-      @owned_products = current_user ? current_user.products.sort{ |a,b| a.rank <=> b.rank} : []
-      @available_products = @all_products - @owned_products
-    end
-
 end

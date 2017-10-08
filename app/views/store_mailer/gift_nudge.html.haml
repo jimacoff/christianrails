@@ -1,0 +1,16 @@
+%p= "Hi #{ @user.first_name },"
+
+%p
+  You have a free copy of
+  %strong= "#{ @product.title }"
+  in your library that you can send to a friend!
+
+%p
+  Just log into
+  = link_to "ChristianDeWolf.com", "https://www.christiandewolf.com"
+  and enter their information, and they'll be notified that you're sending them a free book.
+
+%p
+  Thanks for spreading the word,
+
+= render 'signature'

@@ -33,12 +33,12 @@ RSpec.describe Store::DealzoneController, type: :controller do
     let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, product: product4, order: order2) }
     let!(:digital_purchase3) { FactoryGirl.create(:digital_purchase, product: product5, order: order3) }
 
-    it 'should retrieve all price combos' do
+    it 'retrieves all price combos' do
       get 'index'
       expect( assigns(:price_combos).count ).to eq(3)
     end
 
-    it 'should retrieve all products the user owns and the others available' do
+    it 'retrieves all products the user owns and the others available' do
       get 'index'
       expect( assigns(:all_products).count ).to eq(5)
       expect( assigns(:owned_products).count ).to eq(3)
@@ -56,7 +56,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
     let(:staged_purchase)  { FactoryGirl.create(:staged_purchase) }
 
-    it 'should return info for all products and a total discount' do
+    it 'returns info for all products and a total discount' do
       get :updated_prices, format: :json
       resp = JSON.parse(response.body)
 
@@ -64,7 +64,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( resp.keys ).to include(product_1.id.to_s, product_2.id.to_s, product_3.id.to_s, product_4.id.to_s)
     end
 
-    it 'should return a discount for product with satisfiable price combo' do
+    it 'returns a discount for product with satisfiable price combo' do
       combo1 = Store::PriceCombo.create(name: "Mini deal",   discount: -0.50)
       combo2 = Store::PriceCombo.create(name: "Bigger deal", discount: -1.00)
       # set up combo 1
@@ -84,7 +84,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( resp["total_discount"] ).to eq(0)  # no combos actually satisfied yet
     end
 
-    it 'should return a combined discount for product with 2 satisfiable price combos' do
+    it 'returns a combined discount for product with 2 satisfiable price combos' do
       combo1 = Store::PriceCombo.create(name: "Mini deal",   discount: -0.50)
       combo2 = Store::PriceCombo.create(name: "Bigger deal", discount: -1.00)
       # set up combo 1
@@ -104,7 +104,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( resp["total_discount"] ).to eq(0)   # none satisfied yet
     end
 
-    it 'should return a total discount for satisfied combo and discount for potential combo as well' do
+    it 'returns a total discount for satisfied combo and discount for potential combo as well' do
       combo1 = Store::PriceCombo.create(name: "Sober deal",   discount: -0.99)
       combo2 = Store::PriceCombo.create(name: "Unbridled deal", discount: -3.99)
       # set up combo 1
@@ -129,7 +129,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( resp["total_discount"] ).to eq(-0.99)  # sober deal satisfied
     end
 
-    it 'should not return a discount for product with no satisfiable price combo' do
+    it 'does NOT return a discount for product with no satisfiable price combo' do
       combo1 = Store::PriceCombo.create(name: "Mini deal",   discount: -0.50)
       combo2 = Store::PriceCombo.create(name: "Bigger deal", discount: -1.00)
       # set up combo 1
@@ -161,18 +161,33 @@ RSpec.describe Store::DealzoneController, type: :controller do
     let(:product1) { FactoryGirl.create(:product, price: 3.00) }
     let(:product2) { FactoryGirl.create(:product, price: 7.00) }
 
-    let!(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
-    let!(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
+    let(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
+    let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
 
-    it "should create purchases for each staged purchase" do
+    let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
 
+    it "creates purchases and gifts for each staged purchase" do
+      staged_purchase1.save; staged_purchase2.save
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( Store::StagedPurchase.count  ).to eq(0)
       expect( Store::DigitalPurchase.count ).to eq(2)
+      expect( Store::FreeGift.count ).to eq(2)
     end
 
-    it "should create an order with the correct total, tax and no discount" do
+    it "creates purchases and gifts for a staged purchase that's a gift pack purchase" do
+      staged_giftpack_purchase.save
+
+      get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
+
+      expect( Store::StagedPurchase.count  ).to eq(0)
+      expect( Store::DigitalPurchase.count ).to eq(1)
+      expect( Store::FreeGift.count ).to eq(5)
+    end
+
+    it "creates an order with the correct total, tax and no discount" do
+      staged_purchase1.save; staged_purchase2.save
+
       expect {
         get :complete_order, params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
       }.to change{ Store::Order.count }.by (1)
@@ -184,7 +199,9 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( order.total ).to eq( product1.price + product2.price + order.tax )
     end
 
-    it "should create an order with the correct discount when applicable" do
+    it "creates an order with the correct discount when applicable" do
+      staged_purchase1.save; staged_purchase2.save
+
       combo1 = Store::PriceCombo.create(name: "Great deal", discount: 2.50)
       combo1.products << product1
       combo1.products << product2
@@ -218,7 +235,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       controller.stubs(:render)
     end
 
-    it 'should download for an authorized logged-in user' do
+    it 'downloads for an authorized logged-in user' do
       controller.stubs(:send_file).returns("Download successful").once
 
       get 'download', params: { release_id: release1.id }
@@ -226,7 +243,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( assigns[:error] ).to be_nil
     end
 
-    it 'should NOT download if no user logged in' do
+    it 'does NOT download if no user logged in' do
       sign_out user
 
       controller.stubs(:send_file).returns("Download successful").never
@@ -236,7 +253,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( assigns[:error] ).to_not be_nil
     end
 
-    it 'should NOT download if user does not own the product' do
+    it 'does NOT download if user does not own the product' do
       controller.stubs(:send_file).returns("Download successful").never
 
       get 'download', params: { release_id: release2.id }
@@ -244,7 +261,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( assigns[:error] ).to_not be_nil
     end
 
-    it 'should NOT download anything if release_id is invalid' do
+    it 'does NOT download anything if release_id is invalid' do
       controller.stubs(:send_file).returns("Download successful").never
 
       get 'download', params: { release_id: invalid_release_id }
@@ -252,7 +269,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( assigns[:error] ).to_not be_nil
     end
 
-    it 'should NOT download if user has downloaded release too many times' do
+    it 'does NOT download if user has downloaded release too many times' do
       controller.stubs(:send_file).returns("Download successful").times( Store::Download::LIMIT )
 
       ( Store::Download::LIMIT + 1 ).times do

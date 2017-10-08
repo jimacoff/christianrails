@@ -49,7 +49,6 @@ RSpec.describe Store::Product, type: :model do
 
     expect( p.downloads.count ).to eq(3)
     expect( p.downloads ).to include(download1, download2, download3)
-
   end
 
   describe 'discount_for' do

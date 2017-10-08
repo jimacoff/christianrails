@@ -44,7 +44,7 @@
 
 :javascript
 
-  var palettes = #{@palettes.to_json};
+  var palettes = #{ raw(@palettes.to_json) };
   var story_id = #{@story.id};
 
   function selectPalette(selected_id) {

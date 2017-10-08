@@ -13,7 +13,7 @@
       %tr
         %td= number_to_currency( order.total, precision: 2)
         %td= order.created_at.strftime("%B %e, %Y")
-        %td= link_to 'View receipt', store_order_path(order)
+        %td= link_to 'View receipt', store_order_path( order )
 - else
   %h3 Please log in to view your receipts.
 

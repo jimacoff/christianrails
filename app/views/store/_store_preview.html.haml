@@ -1,15 +1,15 @@
--# How a product appears in the Library
+-# How a product appears in the Storefront
 
 .desktop-product
   .product-object
     %table
       %tr
-        %td.small-width.center
-          .preview-image{onclick: "goToProductPage( \"#{product.slug}\" );"}= image_tag( "#{product.logo_image}", class: "store-image" )
+        %td.small-width.center{style: "vertical-align: text-top;"}
+          .preview-image{style: 'margin-top: 20px;', onclick: "goToProductPage( \"#{product.slug}\" );"}= image_tag( "#{product.logo_image}", class: "store-image" )
         %td
           = render "store/store_preview_content", { product: product }
 
-.mobile-product{onclick: 'goToProductPage();'}
+.mobile-product
   .preview-image{onclick: "goToProductPage( \"#{product.slug}\" );"}= image_tag( "#{product.logo_image}", class: "store-image" )
 
   = render "store/store_preview_content", { product: product }

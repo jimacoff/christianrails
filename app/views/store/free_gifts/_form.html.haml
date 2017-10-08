@@ -10,7 +10,7 @@
 
     %tr.field
       %td= f.label "For"
-      %td= f.select :user_id, options_from_collection_for_select( @users, :id, :full_name, @free_gift.user_id || params[:user_id]), class: ""
+      %td= f.select :recipient_id, options_from_collection_for_select( @users, :id, :full_name, @free_gift.recipient_id || params[:recipient_id]), class: ""
 
     %tr.field
       %td= f.label "Product"

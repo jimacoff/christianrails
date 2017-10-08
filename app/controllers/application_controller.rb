@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   after_action :remember_location
   around_action :set_time_zone, if: :current_user
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   protect_from_forgery with: :exception, prepend: true
 
   def remember_location
@@ -35,13 +37,20 @@ class ApplicationController < ActionController::Base
     end
 
     def verify_is_admin
-      unless controller_path.start_with?('devise') || controller_path.start_with?('registrations')
+      unless controller_path.start_with?('devise') || controller_path.start_with?('registrations')  || controller_path.start_with?('invitations')
         if !current_user
           redirect_to(root_path)
         else
           redirect_to(root_path) unless current_user.admin?
         end
       end
+    end
+
+  protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :invited_for_product_id])
+      devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username])
     end
 
 end

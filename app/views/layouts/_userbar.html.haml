@@ -1,11 +1,17 @@
 #user-wrapper.glass
   - if current_user
     .center
-      .span Welcome, #{current_user.first_name}.
-
+      .span
+        Welcome,
+        = succeed "." do
+          - #link_to "#{current_user.first_name}", user_path( current_user )
+          = "#{current_user.first_name}"
       %p.diminutive.lineheight-spacer
         = link_to "", main_app.cart_path, class: 'cart-link-highlight embolden'
         %span.cart-dot{style: 'display: none;'} ·
+        - if @owned_products && @owned_products.size > 0
+          = link_to "Library", main_app.library_path, class: 'library-link-highlight embolden'
+          %span.library-dot ·
         - if current_user.has_crm_access?
           - if controller_path.starts_with?("crm")
             = link_to "Parent site", main_app.root_path

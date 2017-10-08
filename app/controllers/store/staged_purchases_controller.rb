@@ -8,9 +8,12 @@ class Store::StagedPurchasesController < Store::StoreController
     if current_user
       fresh_add = false
       begin
-        product = Store::Product.find( staged_purchase_params['product_id'] )
-        unless @staged_purchase = Store::StagedPurchase.where(user: current_user, product_id: product.id).first
-          @staged_purchase = Store::StagedPurchase.new(user: current_user, product_id: product.id)
+        product = Store::Product.find( staged_purchase_params[:product_id] )
+        type_id = staged_purchase_params[:type_id].to_i
+        unless @staged_purchase = Store::StagedPurchase.where( user: current_user,
+                                                               product_id: product.id,
+                                                               type_id: type_id ).first
+          @staged_purchase = Store::StagedPurchase.new(user: current_user, product_id: product.id, type_id: type_id)
           fresh_add = true
         end
 
@@ -55,6 +58,6 @@ class Store::StagedPurchasesController < Store::StoreController
     end
 
     def staged_purchase_params
-      params.require(:staged_purchase).permit(:product_id)
+      params.require(:staged_purchase).permit(:product_id, :type_id)
     end
 end

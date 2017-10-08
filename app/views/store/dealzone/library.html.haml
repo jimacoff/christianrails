@@ -1,0 +1,14 @@
+%h1.center My Library
+
+- prods = ( @owned_products + @giftable_products ).flatten.uniq
+- prods = prods.sort{ |a,b| a.rank <=> b.rank } if prods.size > 0
+
+- if current_user
+  - prods.each do |product|
+    = render 'store/store_preview', { product: product }
+
+- else
+  %p You don't appear to be logged in!
+
+.center
+  = link_to "Home", root_path

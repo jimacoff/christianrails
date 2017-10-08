@@ -27,3 +27,29 @@
         - elsif current_user.has_product?(product.id)
           - product.digital_releases.each do |rel|
             .left= button_to rel.format, { action: 'download', release_id: rel.id }, class: 'store-button'
+
+  - if @sendables.keys.include?( product.id ) # is somehow determined to be giftable
+    %tr
+      %td.small-width
+        %span.store-format.embolden Gift copies:
+        - sendables = @sendables[product.id]
+        %span.store-format= "#{sendables.count(nil)} / #{sendables.size} given"
+      %td
+        - if sendables.count(nil) < sendables.size
+          %button.gift-button{type: 'button', class: "send_a_gift_#{product.id}", onclick: "popSendGiftControls( #{product.id} )"} Send a gift
+
+- if sendables && sendables.count(nil) < sendables.size
+  %table.full-width
+    %tr
+      %td.half-width
+        .gift-form-wrapper{class: "form_wrap_#{product.id}"}
+          = form_tag(give_store_free_gift_path( sendables.compact[0] ), id: "gift_form_#{product.id}", method: :post) do
+            %span.store-format.embolden Give to:
+            %div
+              %div
+                %span= text_field_tag :first_name, nil, size: 12, placeholder: "First name", class: "gift-name-input", minlength: 1, required: true
+                %span= text_field_tag :last_name, nil, size: 12, placeholder: "Last name", class: "gift-name-input", minlength: 1, required: true
+              %span= email_field_tag :email, nil, size: 30, placeholder: "Email address", class: "gift-input", minlength: 5, required: true
+              %span
+                = submit_tag "Send", class: 'gift-button gift-submit'
+          %p.diminutive This will invite the recipient to create an account to accept the gift.

@@ -34,7 +34,7 @@
 
 :javascript
 
-  var items = #{@items.to_json};
+  var items = #{ raw(@items.to_json ) };
   var story_id = #{@story.id};
   var itemset_id = #{@itemset.id};
 
