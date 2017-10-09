@@ -231,7 +231,7 @@ Christianrails::Application.routes.draw do
   get '/badger',     to: 'badger#index'
 
 
-###### STARTUP BLOG ETC ######
+###### SCALEQUAIL STUFF ######
 
   resources :scalequail, only: [:index] do
     collection do
