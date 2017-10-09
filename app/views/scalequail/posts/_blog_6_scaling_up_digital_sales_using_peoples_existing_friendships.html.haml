@@ -1,7 +1,7 @@
 %p
   I've got a lot of
   %a{href: "/scalequail/show_post?post=scaling_time_has_come"} growth to hack
-  in my comedy startup, but luckily, there's some low-hanging fruit in my eBook store that I can pick off. My profit margin is highest on digital products -- and I don't have to do any extra work when one is purchased -- so it only makes sense to try to "scale up" these sales numbers first.
+  in my comedy startup, but luckily, there's some low-hanging fruit in my eBook store that I can pick off. My profit margin is highest on digital products — and I don't have to do any extra work when one is purchased — so it only makes sense to try to "scale up" these sales numbers first.
 
 %p Currently people are buying them one at a time, for themselves. Talk about a 1x multiplier!
 
@@ -28,14 +28,14 @@
     %em multiple things
     with a product.
 
-%p In terms of scaling, though, the best I can rate this is a 2x multiplier. Each book purchase gets a second book out into the world, and it could create a new fan. But it doesn't directly increase revenue.
+%p In terms of scaling, though, the best I can rate this is a 2x multiplier. Each book purchase gets a second book out into the world, and it could create a new fan, but it doesn't directly increase revenue.
 
 %p But now that the application has a gifting mechanic, I can package multiple gifts together and sell those! And if you got the book for free, maybe you'll buy a discounted pack of five to send to your own friends. That's the hope, anyway.
 
 %h3 Stage 2: Buying packs of giftable books
 
 %p
-  To start, I have to upgrade the shopping cart system. Again, I wrote this back in 2015, but this time, most of the code is JavaScript. Much less pleasant than Ruby, but a necessary evil when doing internet-related work like this. Again, if you have a dev working for you, just ask them to
+  To start, I have to upgrade the shopping cart system. I wrote this back in 2015 as well, but this time, most of the code is JavaScript. Much less pleasant than tranquil Ruby. Again, if you have a dev working for you, just ask them to
   %em layer in
   the new feature. It shouldn't be too hard for them.
 
@@ -48,17 +48,17 @@
     %em multiple types of the same product.
     It's the future.
 
-%p With all this in the bag, I'm going to rate this as a 5x scale. Rest assured I'm going to be pushing people to give the gift of Me when holiday-time comes around!
+%p With all this in the bag, I'm going to rate this as a 5x scale. Rest assured I'm going to be pushing this feature when holiday-time comes around.
 
 %p
-  But we can't quite go to sleep just yet -- we
+  But we can't go to sleep just yet — we
   = succeed "." do
     %a{href: "/scalequail/show_post?post=business_algorithms_for_a_successful_scale"} need a place for the auto-mailer
 
 %h3 Stage 3: The gift nudger
 
 %p
-  If someone has a gift sitting around in their account that they haven't given to somebody, they need to be reminded. Luckily, I've already got an auto-mailer in the app, and with the addition of a daily
+  If someone has a gift sitting around in their account that they haven't given to anyone, they need to be reminded. Luckily, I've already got an auto-mailer in the app, and with the addition of a daily
   = link_to "cron job", "https://en.wikipedia.org/wiki/Cron"
   that checks which gifts are getting stale, a gift nudger is easy to implement:
 
