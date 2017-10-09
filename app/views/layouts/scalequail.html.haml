@@ -1,19 +1,19 @@
 !!! 5
 
 - scalequail_blog_title = @post ? @post[:title] : "ScaleQuail"
-- scalequail_blog_desc = "This bird'll scale anything!"
+- scalequail_blog_desc  = @post ? @post[:desc] : "This bird'll scale anything!"
 
 %html
   %head
     %title ScaleQuail
 
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "application",             media: "all", "data-turbolinks-track" => true
     = stylesheet_link_tag "scalequail/scalequail",   media: "all", "data-turbolinks-track" => true
 
     %link{ rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css" }
-    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+    %link{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Artifika',  type: 'text/css' }
 
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "application",      "data-turbolinks-track" => true
     = javascript_include_tag "scalequail/quail", "data-turbolinks-track" => true
     = csrf_meta_tags
 
