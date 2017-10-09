@@ -1,6 +1,6 @@
 class GraveyardController < ApplicationController
 
-  skip_before_action :verify_is_admin
+  skip_before_action :verify_is_admin, only: [:fractalfic]
 
   ## PUBLIC
 

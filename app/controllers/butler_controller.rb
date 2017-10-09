@@ -15,9 +15,6 @@ class ButlerController < ApplicationController
     get_sample_posts
   end
 
-  def archives
-  end
-
   def show_post
     post_name = butler_params[:post]
     if !lookup_context.find_all("/butler/blog/posts/_blog_#{ post_name }").any?
