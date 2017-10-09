@@ -14,6 +14,7 @@
     = f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "New password"
     = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm your password"
 
-  .actions
+  .center
     = f.submit "Change my password", class: "store-button bigger"
-    = render "devise/shared/links"
+    %br
+    = link_to "Home", root_path
