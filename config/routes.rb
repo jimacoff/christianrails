@@ -270,8 +270,14 @@ Christianrails::Application.routes.draw do
 
 ####### ROOTS & ERRORS ##########
 
-  get '/', to: 'graveyard#fractalfic', constraints: DomainConstraint.new('fractalfic.com')
-  get '/', to: 'butler#index',         constraints: DomainConstraint.new('wolfbutler.com')
+  get '/', to: 'graveyard#fractalfic',                     constraints: DomainConstraint.new('fractalfic.com')
+  get '/', to: 'butler#index',                             constraints: DomainConstraint.new('wolfbutler.com')
+  get '/', to: 'woods/stories#show', defaults: { id: 1 },  constraints: DomainConstraint.new('diamondfind.ca')
+  get '/', to: 'badger#index',                             constraints: DomainConstraint.new('thisbadger.com')
+  get '/', to: 'store/ghostcrime#index',                   constraints: DomainConstraint.new('ghostcrime.com')
+  get '/', to: 'crm/assistants#index',                     constraints: DomainConstraint.new('ghostcrm.ca')
+  get '/', to: 'scalequail#index',                         constraints: DomainConstraint.new('scalequail.com')
+  get '/', to: 'store/dealzone#index',                     constraints: DomainConstraint.new('christiandewolfe.com')
   root 'store/dealzone#index'
 
   get 'page_not_found', to: "errors#show", code: '404'
