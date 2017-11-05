@@ -11,6 +11,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20171105_november_news",
+        category: JUST_BUSINESS,
+        tags: ["status update", "ScaleQuail", "Diamond Find", "business"]
+      },
+      {
         title: "20171006_important_quail_bulletin",
         category: JUST_BUSINESS,
         tags: ["business", "ScaleQuail"]
