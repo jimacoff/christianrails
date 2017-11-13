@@ -53,7 +53,8 @@ module StoreHelper
                                  .where('created_at < ?', last_week)
     nudgable_users = stale_gifts.collect{ |g| g.giver }.uniq
     nudgable_users.each do |user|
-      if !user.last_gift_nudge || user.last_gift_nudge < last_week
+      # Temporarily cripple the constant nudging until email overhaul
+      if !user.last_gift_nudge # || user.last_gift_nudge < last_week
         StoreMailer.gift_nudge( user.unsent_products[0], user ).deliver_now
         user.last_gift_nudge = DateTime.current
         user.save
