@@ -8,6 +8,7 @@ class MoneyCentsOverhaul < ActiveRecord::Migration[5.0]
     add_column :store_price_combos,       :discount_cents,       :integer,   default: 0
     add_column :store_products,           :price_cents,          :integer,   default: 0
     add_column :store_products,           :giftpack_price_cents, :integer,   default: 0
+    add_column :store_products,           :physical_price_cents, :integer,   default: 0
 
     # convert all
     Store::DigitalPurchase.all.each do |dp|
