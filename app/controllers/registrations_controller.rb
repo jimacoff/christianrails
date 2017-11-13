@@ -10,18 +10,20 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
     def send_registration_notification
-      if @user
+      if @user && @user.persisted?
         record_positive_event(Log::STORE, "New account created")
         AdminMailer.account_signup( @user ).deliver_now
       end
     end
 
     def sign_up_to_mailing_list
-      NewsletterSignup.create(email: @user.email) if @user.send_me_emails
+      if @user && @user.persisted? && @user.send_me_emails
+        NewsletterSignup.create(email: @user.email)
+      end
     end
 
     def associate_orphan_woods_player_with_new_user
-      if current_user
+      if @user && @user.persisted?
         if !current_user.player && session[:woods_player_id] && !session[:woods_player_id].blank?
           player_to_associate = Woods::Player.find( session[:woods_player_id] )
           current_user.player = player_to_associate
@@ -30,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def give_free_gifts
-      if @user
+      if @user && @user.persisted?
         Store::Product.where( free_on_signup: true ).each do |free_product|
           give_product_to_user!( free_product, @user, "On sign-up" )
         end
