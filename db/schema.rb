@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007205648) do
+ActiveRecord::Schema.define(version: 20171113042612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,11 +126,11 @@ ActiveRecord::Schema.define(version: 20171007205648) do
 
   create_table "store_digital_purchases", force: :cascade do |t|
     t.integer  "product_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "order_id"
-    t.decimal  "price"
-    t.integer  "type_id",    default: 0
+    t.integer  "type_id",     default: 0
+    t.integer  "price_cents", default: 0
   end
 
   create_table "store_distributions", force: :cascade do |t|
@@ -165,19 +165,30 @@ ActiveRecord::Schema.define(version: 20171007205648) do
     t.string   "payer_id"
     t.string   "payment_id"
     t.integer  "price_combo_id"
-    t.decimal  "total"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.decimal  "tax"
-    t.decimal  "discount"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
+    t.integer  "total_cents",    default: 0
+    t.integer  "tax_cents",      default: 0
+    t.integer  "discount_cents", default: 0
+  end
+
+  create_table "store_physical_purchases", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "variety_pack_id"
+    t.integer  "order_id"
+    t.integer  "price_cents"
+    t.integer  "quantity"
+    t.integer  "type_id",         default: 2
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "store_price_combos", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "discount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "discount_cents", default: 0
   end
 
   create_table "store_price_combos_products", id: false, force: :cascade do |t|
@@ -190,22 +201,27 @@ ActiveRecord::Schema.define(version: 20171007205648) do
     t.string   "author"
     t.text     "short_desc"
     t.text     "long_desc"
-    t.decimal  "price"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "rank"
     t.string   "image"
     t.string   "small_image"
-    t.boolean  "coming_soon",      default: false
-    t.integer  "physical_price",   default: 20
+    t.boolean  "coming_soon",          default: false
+    t.integer  "physical_price",       default: 20
     t.string   "slug"
     t.string   "logo_image"
     t.string   "filename"
     t.string   "popularity_image"
-    t.integer  "physical_sales",   default: 0
-    t.boolean  "free_on_signup",   default: false
-    t.boolean  "giftpackable",     default: false
-    t.decimal  "giftpack_price"
+    t.integer  "physical_sales",       default: 0
+    t.boolean  "free_on_signup",       default: false
+    t.boolean  "giftpackable",         default: false
+    t.integer  "price_cents",          default: 0
+    t.integer  "giftpack_price_cents", default: 0
+  end
+
+  create_table "store_products_variety_packs", id: false, force: :cascade do |t|
+    t.integer "variety_pack_id"
+    t.integer "product_id"
   end
 
   create_table "store_releases", force: :cascade do |t|
@@ -227,6 +243,14 @@ ActiveRecord::Schema.define(version: 20171007205648) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "type_id",    default: 0
+  end
+
+  create_table "store_variety_packs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price_cents"
+    t.string   "image_slug"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|

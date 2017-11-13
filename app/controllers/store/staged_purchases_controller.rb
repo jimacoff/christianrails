@@ -4,6 +4,7 @@ class Store::StagedPurchasesController < Store::StoreController
 
   ## PUBLIC
 
+  # JSON
   def create
     if current_user
       fresh_add = false
@@ -32,6 +33,7 @@ class Store::StagedPurchasesController < Store::StoreController
     end
   end
 
+  # JSON
   def destroy
     if current_user
       if @staged_purchase.user.id == current_user.id

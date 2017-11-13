@@ -15,27 +15,26 @@ RSpec.describe Store::Product, type: :model do
   it "should validate" do
     p = Store::Product.new
     expect( p ).to_not be_valid
-    expect( p.errors.messages.keys ).to include(:title, :author, :price)
+    expect( p.errors.messages.keys ).to include(:title, :author)
 
-    expect( p.errors.messages[:title] ).to include("can't be blank")
+    expect( p.errors.messages[:title]  ).to include("can't be blank")
     expect( p.errors.messages[:author] ).to include("can't be blank")
-    expect( p.errors.messages[:price] ).to include("can't be blank")
-    expect( p.errors.messages[:rank] ).to include("is not a number")
+    expect( p.errors.messages[:rank]   ).to include("is not a number")
 
     p.title = "Ghostcrime"
     p.author = "Christian DeWolf"
-    p.price = "Jam"
+    p.price_cents = "Jam"
     p.rank = 1
 
     expect( p ).to_not be_valid
-    expect( p.errors.messages[:price] ).to include("is not a number")
+    expect( p.errors.messages[:price_cents] ).to include("is not a number")
 
-    p.price = 2.33
+    p.price_cents = 2_33
     expect( p ).to be_valid
   end
 
   it "should have many releases" do
-    p = Store::Product.create(title: "Black Ink", author: "Christian DeWolf", price: 9.99, rank: 1)
+    p = Store::Product.create(title: "Black Ink", author: "Christian DeWolf", price_cents: 9_99, rank: 1)
     p.releases << release1
     p.releases << release2
 
@@ -43,7 +42,7 @@ RSpec.describe Store::Product, type: :model do
   end
 
   it "should have many downloads, through releases" do
-    p = Store::Product.create(title: "Dream Lawyer", author: "Christian DeWolf", price: 2.99, rank: 4)
+    p = Store::Product.create(title: "Dream Lawyer", author: "Christian DeWolf", price_cents: 2_99, rank: 4)
 
     p.releases << release1 << release2
 
@@ -53,7 +52,7 @@ RSpec.describe Store::Product, type: :model do
 
   describe 'discount_for' do
 
-    let(:combo)    { FactoryGirl.create(:price_combo, discount: 5.00) }
+    let(:combo)    { FactoryGirl.create(:price_combo, discount_cents: 5_00) }
     let(:product1) { FactoryGirl.create(:product) }
     let(:product2) { FactoryGirl.create(:product) }
 
@@ -62,8 +61,8 @@ RSpec.describe Store::Product, type: :model do
       Store::StagedPurchase.create(user: user, product: product1)
       Store::StagedPurchase.create(user: user, product: product2)
 
-      expect( product1.discount_for(user)).to eq(combo.discount)
-      expect( product2.discount_for(user)).to eq(combo.discount)
+      expect( product1.discount_for(user)).to eq( combo.discount_cents )
+      expect( product2.discount_for(user)).to eq( combo.discount_cents )
     end
 
     it 'should NOT return a discount for products when user has NOT satisfied price combo' do

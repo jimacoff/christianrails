@@ -4,14 +4,16 @@ class Store::Product < ApplicationRecord
 
   has_many :downloads, through: :releases, inverse_of: :product
 
-  has_many :digital_purchases, inverse_of: :product
-  has_many :free_gifts,        inverse_of: :product
+  has_many :digital_purchases,  inverse_of: :product
+  has_many :free_gifts,         inverse_of: :product
   has_many :users_invited_for,  inverse_of: :invited_for_product, class_name: '::User', foreign_key: "invited_for_product_id"
 
   has_and_belongs_to_many :price_combos, inverse_of: :products
 
-  validates_presence_of :title, :author, :price
-  validates_numericality_of :price, :rank
+  validates_presence_of :title, :author, :price_cents
+  validates_numericality_of :rank
+
+  monetize :price_cents, :giftpack_price_cents
 
   def discount_for(user_id)
     total_discount = 0
@@ -31,7 +33,7 @@ class Store::Product < ApplicationRecord
             potential_discount = false
           end
         end
-        total_discount += combo.discount if potential_discount
+        total_discount += combo.discount_cents if potential_discount
       end
     end
     total_discount

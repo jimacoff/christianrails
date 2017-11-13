@@ -40,8 +40,8 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
     it 'retrieves all products the user owns and the others available' do
       get 'index'
-      expect( assigns(:all_products).count ).to eq(5)
-      expect( assigns(:owned_products).count ).to eq(3)
+      expect( assigns(:all_products).count      ).to eq(5)
+      expect( assigns(:owned_products).count    ).to eq(3)
       expect( assigns(:available_products).count).to eq(2)
     end
 
@@ -49,10 +49,10 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   describe 'updated prices' do
 
-    let!(:product_1)   { FactoryGirl.create(:product, title: "The main event", price: 5.05) }
-    let!(:product_2)   { FactoryGirl.create(:product, title: "Bonus material", price: 3.00) }
-    let!(:product_3)   { FactoryGirl.create(:product, title: "Some other product", price: 4.00) }
-    let!(:product_4)   { FactoryGirl.create(:product, title: "Some other product", price: 7.00) }
+    let!(:product_1)   { FactoryGirl.create(:product, title: "The main event",     price_cents: 5_05) }
+    let!(:product_2)   { FactoryGirl.create(:product, title: "Bonus material",     price_cents: 3_00) }
+    let!(:product_3)   { FactoryGirl.create(:product, title: "Some other product", price_cents: 4_00) }
+    let!(:product_4)   { FactoryGirl.create(:product, title: "Some other product", price_cents: 7_00) }
 
     let(:staged_purchase)  { FactoryGirl.create(:staged_purchase) }
 
@@ -65,8 +65,8 @@ RSpec.describe Store::DealzoneController, type: :controller do
     end
 
     it 'returns a discount for product with satisfiable price combo' do
-      combo1 = Store::PriceCombo.create(name: "Mini deal",   discount: -0.50)
-      combo2 = Store::PriceCombo.create(name: "Bigger deal", discount: -1.00)
+      combo1 = Store::PriceCombo.create(name: "Mini deal",   discount_cents: -0_50)
+      combo2 = Store::PriceCombo.create(name: "Bigger deal", discount_cents: -1_00)
       # set up combo 1
       combo1.products << product_1
       combo1.products << product_2
@@ -79,14 +79,14 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get :updated_prices, format: :json
       resp = JSON.parse(response.body)
 
-      expect( resp[product_1.id.to_s] ).to eq([5.05,-0.5])
-      expect( resp[product_3.id.to_s] ).to eq([4.0, -1.0])
+      expect( resp[product_1.id.to_s] ).to eq([5_05, -0_50])
+      expect( resp[product_3.id.to_s] ).to eq([4_00, -1_00])
       expect( resp["total_discount"] ).to eq(0)  # no combos actually satisfied yet
     end
 
     it 'returns a combined discount for product with 2 satisfiable price combos' do
-      combo1 = Store::PriceCombo.create(name: "Mini deal",   discount: -0.50)
-      combo2 = Store::PriceCombo.create(name: "Bigger deal", discount: -1.00)
+      combo1 = Store::PriceCombo.create(name: "Mini deal",   discount_cents:   -50)
+      combo2 = Store::PriceCombo.create(name: "Bigger deal", discount_cents: -1_00)
       # set up combo 1
       combo1.products << product_1
       combo1.products << product_2
@@ -100,13 +100,13 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get :updated_prices, format: :json
       resp = JSON.parse(response.body)
 
-      expect( resp[product_2.id.to_s] ).to eq([3.0,-1.5])
+      expect( resp[product_2.id.to_s] ).to eq([3_00, -1_50])
       expect( resp["total_discount"] ).to eq(0)   # none satisfied yet
     end
 
     it 'returns a total discount for satisfied combo and discount for potential combo as well' do
-      combo1 = Store::PriceCombo.create(name: "Sober deal",   discount: -0.99)
-      combo2 = Store::PriceCombo.create(name: "Unbridled deal", discount: -3.99)
+      combo1 = Store::PriceCombo.create(name: "Sober deal",     discount_cents:   -99)
+      combo2 = Store::PriceCombo.create(name: "Unbridled deal", discount_cents: -3_99)
       # set up combo 1
       combo1.products << product_1
       combo1.products << product_2
@@ -121,17 +121,17 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get :updated_prices, format: :json
       resp = JSON.parse(response.body)
 
-      expect( resp[product_1.id.to_s] ).to eq([5.05,-0.99])
-      expect( resp[product_2.id.to_s] ).to eq([3.0, -0.99])
-      expect( resp[product_3.id.to_s] ).to eq([4.0, 0])
-      expect( resp[product_4.id.to_s] ).to eq([7.0, -3.99])
+      expect( resp[product_1.id.to_s] ).to eq([5_05, -99])
+      expect( resp[product_2.id.to_s] ).to eq([3_00, -99])
+      expect( resp[product_3.id.to_s] ).to eq([4_00,  0])
+      expect( resp[product_4.id.to_s] ).to eq([7_00, -3_99])
 
-      expect( resp["total_discount"] ).to eq(-0.99)  # sober deal satisfied
+      expect( resp["total_discount"] ).to eq(-99)  # sober deal satisfied
     end
 
     it 'does NOT return a discount for product with no satisfiable price combo' do
-      combo1 = Store::PriceCombo.create(name: "Mini deal",   discount: -0.50)
-      combo2 = Store::PriceCombo.create(name: "Bigger deal", discount: -1.00)
+      combo1 = Store::PriceCombo.create(name: "Mini deal",   discount_cents: -0.50)
+      combo2 = Store::PriceCombo.create(name: "Bigger deal", discount_cents: -1.00)
       # set up combo 1
       combo1.products << product_1
       combo1.products << product_2
@@ -142,9 +142,9 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get :updated_prices, format: :json
       resp = JSON.parse(response.body)
 
-      expect( resp[product_1.id.to_s] ).to eq([5.05,0])
-      expect( resp[product_2.id.to_s] ).to eq([3.0, 0])
-      expect( resp[product_3.id.to_s] ).to eq([4.0, 0])
+      expect( resp[product_1.id.to_s] ).to eq([5_05, 0])
+      expect( resp[product_2.id.to_s] ).to eq([3_00, 0])
+      expect( resp[product_3.id.to_s] ).to eq([4_00, 0])
 
       expect( resp["total_discount"] ).to eq(0)
     end
@@ -186,8 +186,8 @@ RSpec.describe Store::DealzoneController, type: :controller do
       PayPal::SDK::REST::Payment.any_instance.stubs(:execute).returns(true)
     end
 
-    let(:product1) { FactoryGirl.create(:product, price: 3.00) }
-    let(:product2) { FactoryGirl.create(:product, price: 7.00) }
+    let(:product1) { FactoryGirl.create(:product, price_cents: 3_00) }
+    let(:product2) { FactoryGirl.create(:product, price_cents: 7_00) }
 
     let(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
     let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
@@ -200,7 +200,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
       expect( Store::StagedPurchase.count  ).to eq(0)
       expect( Store::DigitalPurchase.count ).to eq(2)
-      expect( Store::FreeGift.count ).to eq(2)
+      expect( Store::FreeGift.count        ).to eq(2)
     end
 
     it "creates purchases and gifts for a staged purchase that's a gift pack purchase" do
@@ -210,7 +210,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
       expect( Store::StagedPurchase.count  ).to eq(0)
       expect( Store::DigitalPurchase.count ).to eq(1)
-      expect( Store::FreeGift.count ).to eq(5)
+      expect( Store::FreeGift.count        ).to eq(5)
     end
 
     it "creates an order with the correct total, tax and no discount" do
@@ -222,7 +222,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
       order = Store::Order.first
 
-      expect( order.discount ).to eq(0)
+      expect( order.discount_cents ).to eq(0)
       expect( order.tax ).to eq( ( product1.price + product2.price ) * Store::DigitalPurchase::TAX_RATE )
       expect( order.total ).to eq( product1.price + product2.price + order.tax )
     end
@@ -230,7 +230,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
     it "creates an order with the correct discount when applicable" do
       staged_purchase1.save; staged_purchase2.save
 
-      combo1 = Store::PriceCombo.create(name: "Great deal", discount: 2.50)
+      combo1 = Store::PriceCombo.create(name: "Great deal", discount_cents: 2_50)
       combo1.products << product1
       combo1.products << product2
 
@@ -238,7 +238,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
       order = Store::Order.first
 
-      expect( order.discount ).to eq( 2.50 )
+      expect( order.discount_cents ).to eq( 2_50 )
       expect( order.tax ).to eq( ((product1.price + product2.price) - order.discount) * Store::DigitalPurchase::TAX_RATE )
       expect( order.total ).to eq( product1.price + product2.price + order.tax - order.discount )
     end

@@ -6,10 +6,10 @@ FactoryGirl.define do
     author "Authro"
     short_desc "This book is good."
     long_desc "This book is REALLY good."
-    price 7.77
+    price_cents 7_77
     rank 1
 
     giftpackable true
-    giftpack_price 14.44
+    giftpack_price_cents 14_44
   end
 end

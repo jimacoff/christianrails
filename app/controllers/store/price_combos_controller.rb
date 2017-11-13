@@ -43,6 +43,6 @@ class Store::PriceCombosController < Store::StoreController
     end
 
     def price_combo_params
-      params.require(:store_price_combo).permit(:name, :discount)
+      params.require(:store_price_combo).permit(:name, :discount_cents)
     end
 end

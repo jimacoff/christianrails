@@ -25,7 +25,7 @@ RSpec.describe Store::ProductsController, type: :controller do
       author: "Me!",
       short_desc: "A short desc",
       long_desc: "Longer description",
-      price: 8.88,
+      price_cents: 8_88,
       rank: 1,
       coming_soon: true
     }
@@ -109,7 +109,7 @@ RSpec.describe Store::ProductsController, type: :controller do
           author: "New author",
           short_desc: "Better short desc",
           long_desc: "Better longer description",
-          price: 16.66,
+          price_cents: 16_66,
           rank: 2,
           coming_soon: false
         }
@@ -120,12 +120,12 @@ RSpec.describe Store::ProductsController, type: :controller do
         put :update, params: {id: product.to_param, store_product: new_attributes}, session: valid_session
         product.reload
 
-        expect( product.title ).to eq("New title")
-        expect( product.author ).to eq("New author")
-        expect( product.short_desc ).to eq("Better short desc")
-        expect( product.long_desc ).to eq("Better longer description")
-        expect( product.price ).to eq(16.66)
-        expect( product.rank ).to eq(2)
+        expect( product.title       ).to eq("New title")
+        expect( product.author      ).to eq("New author")
+        expect( product.short_desc  ).to eq("Better short desc")
+        expect( product.long_desc   ).to eq("Better longer description")
+        expect( product.price_cents ).to eq(16_66)
+        expect( product.rank        ).to eq(2)
         expect(assigns(:product).coming_soon).to be_falsy
       end
 

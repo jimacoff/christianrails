@@ -95,7 +95,7 @@ RSpec.describe Store::PriceCombosController, type: :controller do
       let(:new_attributes) {
         {
           name: "Superdeal",
-          discount: 2.99
+          discount_cents: 2_99
         }
       }
 
@@ -105,7 +105,7 @@ RSpec.describe Store::PriceCombosController, type: :controller do
         price_combo.reload
 
         expect( price_combo.name ).to eq("Superdeal")
-        expect( price_combo.discount ).to eq(2.99)
+        expect( price_combo.discount_cents ).to eq(2_99)
       end
 
       it "assigns the requested price_combo as @price_combo" do
