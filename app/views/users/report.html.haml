@@ -14,12 +14,12 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= link_to user.username, user_path( user )
+        %td= link_to (user.username || "INVITED"), user_path( user )
         %td= user.full_name
         %td= user.email
         %td= user.created_at.strftime("%b %e '%y")
-        %td= user.last_sign_in_at.strftime("%b %e '%y")
-        %td= user.player ? "X" : ""
+        %td= user.last_sign_in_at ? user.last_sign_in_at.strftime("%b %e '%y") : "Never"
+        %td= user.player    ? "X" : ""
         %td= user.assistant ? "X" : ""
 
 %strong Total users: #{@users.count}
