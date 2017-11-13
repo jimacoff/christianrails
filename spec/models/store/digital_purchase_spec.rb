@@ -8,15 +8,14 @@ RSpec.describe Store::DigitalPurchase, type: :model do
   it "should validate" do
     p = Store::DigitalPurchase.new
     expect( p ).to_not be_valid
-    expect( p.errors.messages.keys ).to include(:product, :order, :price)
+    expect( p.errors.messages.keys ).to include(:product, :order)
 
     expect( p.errors.messages[:product] ).to include("can't be blank")
     expect( p.errors.messages[:order]   ).to include("can't be blank")
-    expect( p.errors.messages[:price]   ).to include("can't be blank")
 
     p.product = product
     p.order = order
-    p.price = 3.55
+    p.price_cents = 3_55
 
     expect( p ).to be_valid
   end

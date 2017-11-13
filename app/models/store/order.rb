@@ -4,5 +4,7 @@ class Store::Order < ApplicationRecord
   belongs_to :price_combo,         inverse_of: :orders
   belongs_to :user,                inverse_of: :orders
 
-  validates_presence_of :payer_id, :payment_id, :total
+  validates_presence_of :payer_id, :payment_id, :total_cents
+
+  monetize :total_cents, :tax_cents, :discount_cents
 end

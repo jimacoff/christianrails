@@ -70,7 +70,10 @@ class Store::DealzoneController < Store::StoreController
         target_urls[:abort]    = root_url
 
         desc = generate_description_for_checkout
-        total_cost = calculate_total_cost_for_user
+        total_cost_cents = calculate_total_cost_for_user
+        total_cost          = ( total_cost_cents.to_f / 100.to_f ).round(2)
+        total_cost_with_tax = ( (total_cost_cents * ( Store::DigitalPurchase::TAX_RATE + 1 ) ) / 100.to_f ).round(2)
+        tax_formatted       = ( (total_cost_cents *   Store::DigitalPurchase::TAX_RATE )       / 100.to_f ).round(2)
 
         @payment = PayPal::SDK::REST::Payment.new({
           intent: 'sale',
@@ -83,11 +86,11 @@ class Store::DealzoneController < Store::StoreController
           },
           transactions: [{
             amount: {
-              total: '%.2f' % (total_cost * (1 + Store::DigitalPurchase::TAX_RATE) ).round(2).to_s,
+              total: total_cost_with_tax,
               currency: 'CAD',
               details: {
-                subtotal: total_cost.to_s,
-                tax: '%.2f' % (total_cost * Store::DigitalPurchase::TAX_RATE ).round(2).to_s
+                subtotal: total_cost,
+                tax:      tax_formatted
               }
             },
             description: desc
@@ -130,7 +133,7 @@ class Store::DealzoneController < Store::StoreController
 
         order = Store::Order.create(user: current_user,
                                     payer_id: params[:PayerID], payment_id: params[:paymentId],
-                                    discount: discount, tax: tax, total: total)
+                                    discount_cents: discount, tax_cents: tax, total_cents: total)
         for_self  = false
         gift_pack = false
 
@@ -140,7 +143,7 @@ class Store::DealzoneController < Store::StoreController
             for_self = true
             Store::DigitalPurchase.create(product: staged_purchase.product,
                                           order: order,
-                                          price: staged_purchase.product.price,
+                                          price: staged_purchase.product.price_cents,
                                           type_id: Store::DigitalPurchase::TYPE_DIGITAL_SINGLE)
             # give them a giftable spare
             Store::FreeGift.create( product: staged_purchase.product,
@@ -151,7 +154,7 @@ class Store::DealzoneController < Store::StoreController
             gift_pack = true
             Store::DigitalPurchase.create(product: staged_purchase.product,
                                           order: order,
-                                          price: staged_purchase.product.giftpack_price,
+                                          price: staged_purchase.product.giftpack_price_cents,
                                           type_id: Store::DigitalPurchase::TYPE_DIGITAL_GIFT_PACK)
             # give them the gifts to give
             Store::DigitalPurchase::GIFTPACK_SIZE.times do
@@ -255,8 +258,8 @@ class Store::DealzoneController < Store::StoreController
 
     def calculate_total_cost_for_user
       total_cost = 0
-      @staged_products.map  { |st| total_cost += st.product.price }
-      @staged_giftpacks.map { |sg| total_cost += sg.product.giftpack_price }
+      @staged_products.map  { |st| total_cost += st.product.price_cents }
+      @staged_giftpacks.map { |sg| total_cost += sg.product.giftpack_price_cents }
       total_cost -= Store::PriceCombo.total_cart_discount_for( current_user.id )
       total_cost
     end

@@ -7,20 +7,20 @@
       - type = digital_purchase.single? ? "ebook" : "5-pack"
       %tr
         %td= "#{digital_purchase.product.title} #{type}"
-        %td= number_to_currency( digital_purchase.price, precision: 2 )
+        %td= Money.new( digital_purchase.price ).format
 
   - if @order.discount > 0
     %tr
       %th= "Discount:"
-      %th.greener= number_to_currency( @order.discount, precision: 2 )
+      %th.greener= Money.new( @order.discount ).format
 
   %tr
     %th= "Tax:"
-    %th= number_to_currency( @order.tax, precision: 2 )
+    %th= Money.new( @order.tax ).format
 
   %tr
     %th= "Total:"
-    %th= number_to_currency( @order.total, precision: 2)
+    %th= Money.new( @order.total ).format
 %p.diminutive All prices expressed in CAD.
 
 %br

@@ -11,7 +11,7 @@
     %tbody
     - @orders.each do |order|
       %tr
-        %td= number_to_currency( order.total, precision: 2)
+        %td= Money.new( order.total_cents ).format
         %td= order.created_at.strftime("%B %e, %Y")
         %td= link_to 'View receipt', store_order_path( order )
 - else

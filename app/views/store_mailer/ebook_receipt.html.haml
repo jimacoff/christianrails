@@ -9,20 +9,20 @@
       %p
         - type = digital_purchase.single? ? "ebook" : "5-pack"
         %span= "#{digital_purchase.product.title} #{type}: "
-        %span= number_to_currency( digital_purchase.price, precision: 2 )
+        %span= Money.new( digital_purchase.price_cents ).format
 
       - if @order.discount > 0
         %p
           %span= "Discount: "
-          %span= number_to_currency( @order.discount, precision: 2 )
+          %span= Money.new( @order.discount_cents ).format
 
       %p
         %span= "Tax: "
-        %span= number_to_currency( @order.tax, precision: 2 )
+        %span= Money.new( @order.tax_cents ).format
 
       %p
         %span= "Total: "
-        %span= number_to_currency( @order.total, precision: 2)
+        %span= Money.new( @order.total_cents ).format
 
 %p All prices expressed in CAD.
 

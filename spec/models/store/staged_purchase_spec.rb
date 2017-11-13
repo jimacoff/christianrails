@@ -11,7 +11,7 @@ RSpec.describe Store::StagedPurchase, type: :model do
     expect( sp.errors.messages.keys ).to include(:product, :user)
 
     expect( sp.errors.messages[:product] ).to include("can't be blank")
-    expect( sp.errors.messages[:user] ).to include("can't be blank")
+    expect( sp.errors.messages[:user] ).to    include("can't be blank")
 
     sp.product = product
     sp.user = user
@@ -42,7 +42,7 @@ RSpec.describe Store::StagedPurchase, type: :model do
     let!(:staged_purchase3) { FactoryGirl.create(:staged_purchase, user: user, product: product3) }
 
     it "should get the gross cart value" do
-      expect( Store::StagedPurchase.gross_cart_value_for(user.id) ).to eq(9.40)
+      expect( Store::StagedPurchase.gross_cart_value_for(user.id) ).to eq(9_40)
     end
 
   end

@@ -4,5 +4,5 @@
 %span{ class: "cartwidget_item_#{prod.id}", style: "#{is_hidden}"}
   .center= image_tag( "#{prod.small_image}" , class: "cartwidget-image")
   .cartwidget-prod-details.center
-    %span{ class: "cartwidget_price_#{prod.id}", style: "color: white !important;" }= number_to_currency( prod.price, precision: 2 )
+    %span{ class: "cartwidget_price_#{prod.id}", style: "color: white !important;" }= Money.new( prod.price_cents ).format
     %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_#{prod.id}", onclick:"removeFromCart(#{prod.id})"} X

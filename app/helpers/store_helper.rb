@@ -34,10 +34,10 @@ module StoreHelper
 
   def get_updated_prices
     price_json = {}
-    price_json[:total_discount] = Store::PriceCombo.total_cart_discount_for( current_user.id ).to_f
+    price_json[:total_discount] = Store::PriceCombo.total_cart_discount_for( current_user.id )
 
     @all_products.each do |prod|
-      price_json[prod.id] = [prod.price.to_f, prod.discount_for(current_user.id).to_f] # this is a dumb format
+      price_json[prod.id] = [ prod.price_cents, prod.discount_for(current_user.id) ] # this is a dumb format
     end
     price_json
   end
@@ -46,7 +46,6 @@ module StoreHelper
     Store::FreeGift.create(product_id: product.id, recipient_id: user.id, origin: origin)
     record_gifting( Log::STORE, "Product #{product.title} given to #{user.fullname}")
   end
-
 
   def nudge_users_about_unsent_gifts
     last_week = DateTime.current - 1.week

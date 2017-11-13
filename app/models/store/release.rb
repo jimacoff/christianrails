@@ -16,4 +16,5 @@ class Store::Release < ApplicationRecord
       errors.add(:physical_code, "can't be blank")
     end
   end
+
 end

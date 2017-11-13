@@ -23,4 +23,5 @@ class Store::OrdersController < Store::StoreController
       @order = Store::Order.find( params[:id] )
       redirect_to root_path unless current_user && current_user == @order.user
     end
+
 end
