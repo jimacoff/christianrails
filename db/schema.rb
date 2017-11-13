@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113042612) do
+ActiveRecord::Schema.define(version: 20171113182348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,7 +207,6 @@ ActiveRecord::Schema.define(version: 20171113042612) do
     t.string   "image"
     t.string   "small_image"
     t.boolean  "coming_soon",          default: false
-    t.integer  "physical_price",       default: 20
     t.string   "slug"
     t.string   "logo_image"
     t.string   "filename"
@@ -217,6 +216,7 @@ ActiveRecord::Schema.define(version: 20171113042612) do
     t.boolean  "giftpackable",         default: false
     t.integer  "price_cents",          default: 0
     t.integer  "giftpack_price_cents", default: 0
+    t.integer  "physical_price_cents", default: 0
   end
 
   create_table "store_products_variety_packs", id: false, force: :cascade do |t|

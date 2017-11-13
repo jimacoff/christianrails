@@ -1,13 +1,13 @@
 class MoneyCentsOverhaul < ActiveRecord::Migration[5.0]
   def change
 
-    add_column :store_digital_purchases,  :price_cents,          :integer
-    add_column :store_orders,             :total_cents,          :integer
-    add_column :store_orders,             :tax_cents,            :integer
-    add_column :store_orders,             :discount_cents,       :integer
-    add_column :store_price_combos,       :discount_cents,       :integer
-    add_column :store_products,           :price_cents,          :integer
-    add_column :store_products,           :giftpack_price_cents, :integer
+    add_column :store_digital_purchases,  :price_cents,          :integer,   default: 0
+    add_column :store_orders,             :total_cents,          :integer,   default: 0
+    add_column :store_orders,             :tax_cents,            :integer,   default: 0
+    add_column :store_orders,             :discount_cents,       :integer,   default: 0
+    add_column :store_price_combos,       :discount_cents,       :integer,   default: 0
+    add_column :store_products,           :price_cents,          :integer,   default: 0
+    add_column :store_products,           :giftpack_price_cents, :integer,   default: 0
 
     # convert all
     Store::DigitalPurchase.all.each do |dp|

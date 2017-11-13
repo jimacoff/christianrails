@@ -6,6 +6,8 @@ class Store::PhysicalPurchase < ApplicationRecord
 
   validates_presence_of :order, :price_cents, :type
 
+  monetize :price_cents
+
   # correspond to staged_purchase type_id
   TYPE_PHYSICAL_SINGLE      = 2
   TYPE_PHYSICAL_VARIETYPACK = 3

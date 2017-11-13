@@ -7,5 +7,5 @@
     .gift-overlay-text
       %p x5
   .cartwidget-prod-details.center
-    %span{ class: "cartwidget_giftpack_price_#{prod.id}", style: "color: white !important;" }= number_to_currency( prod.giftpack_price, precision: 2 )
-    %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_giftpack_#{prod.id}", onclick:"removeFromCart(#{prod.id}, true)"} X
+    %span{ class: "cartwidget_giftpack_price_#{prod.id}", style: "color: white !important;" }= Money.new( prod.giftpack_price ).format
+    %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_giftpack_#{prod.id}", onclick: "removeFromCart(#{prod.id}, true)"}= "X"

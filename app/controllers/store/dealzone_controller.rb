@@ -70,9 +70,10 @@ class Store::DealzoneController < Store::StoreController
         target_urls[:abort]    = root_url
 
         desc = generate_description_for_checkout
-        total_cost = calculate_total_cost_for_user
-        total_cost_formatted = ( ( (total_cost * ( Store::DigitalPurchase::TAX_RATE + 1 ) ) / 100 ).round(2) ).to_s
-        tax_formatted        = ( ( (total_cost * ( Store::DigitalPurchase::TAX_RATE) )      / 100 ).round(2) ).to_s
+        total_cost_cents = calculate_total_cost_for_user
+        total_cost          = ( total_cost_cents.to_f / 100.to_f ).round(2)
+        total_cost_with_tax = ( (total_cost_cents * ( Store::DigitalPurchase::TAX_RATE + 1 ) ) / 100.to_f ).round(2)
+        tax_formatted       = ( (total_cost_cents *   Store::DigitalPurchase::TAX_RATE )       / 100.to_f ).round(2)
 
         @payment = PayPal::SDK::REST::Payment.new({
           intent: 'sale',
@@ -85,10 +86,10 @@ class Store::DealzoneController < Store::StoreController
           },
           transactions: [{
             amount: {
-              total: total_cost_formatted,
+              total: total_cost_with_tax,
               currency: 'CAD',
               details: {
-                subtotal: total_cost_formatted,
+                subtotal: total_cost,
                 tax:      tax_formatted
               }
             },

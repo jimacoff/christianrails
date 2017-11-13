@@ -34,7 +34,7 @@
               -# DISPLAY PRICE
               - if product.price > 0
                 .new-price{class:"#{product.id}_new_price", style: 'display: inline-block; margin-right: 10px;'}
-                .store-price{class:"#{product.id}_price", style: 'display: inline-block;'}= number_to_currency( product.price, precision: 2 )
+                .store-price{class:"#{product.id}_price", style: 'display: inline-block;'}= Money.new( product.price_cents ).format
               - else
                 .new-price Free on sign-up!
 
@@ -58,7 +58,7 @@
             %td
               -# DISPLAY GIFTPACK PRICE
               .new-price{class:"#{product.id}_new_giftpack_price", style: 'display: inline-block; margin-right: 10px;'}
-              .store-price{class:"#{product.id}_giftpack_price", style: 'display: inline-block;'}= number_to_currency( product.giftpack_price, precision: 2 )
+              .store-price{class:"#{product.id}_giftpack_price", style: 'display: inline-block;'}= Money.new( product.giftpack_price_cents ).format
 
       - if !current_user || !current_user.has_product?(product.id)
         %p.diminutive{style: "color: grey !important;"} Purchase access to all DRM-free formats.
@@ -78,6 +78,6 @@
                 %input{type: "hidden", name: "hosted_button_id", value: product.physical_code}
                 %input.pp-button{type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_107x26.png", border: "0", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
             %td
-              %span= "#{number_to_currency( product.physical_price, precision: 2 )}"
+              %span= "#{ Money.new( product.physical_price_cents ).format }"
 
         %p.diminutive{style: "color: grey !important;"} Price does not include tax or shipping.
