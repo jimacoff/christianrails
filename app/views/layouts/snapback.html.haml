@@ -14,18 +14,17 @@
     = csrf_meta_tags
 
     - @sb_title  = "Snapback"
-    - @sb_slogan = "."
-    - @sb_desc_author = "Ancient board game adventure from the author of GHOSTCRIME."
+    - @sb_desc_author = "Serial Go adventure from the author of GHOSTCRIME."
 
     %meta{ property: "og:title", content: "#{ @sb_title }" }
-    %meta{ property: "og:description", content: "#{@sb_slogan} #{@sb_desc_author}" }
+    %meta{ property: "og:description", content: "#{@sb_desc_author}" }
     %meta{ property: "og:image", content: "https://www.christiandewolf.com/snapback-books.jpg" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com/snapback" }
 
     %meta{ name: "twitter:card", content: "summary" }
     %meta{ name: "twitter:site", content: "@dewolfchristian" }
     %meta{ name: "twitter:title", content: "#{ @sb_title }" }
-    %meta{ name: "twitter:description", content: "#{@sb_slogan} #{@sb_desc_author}" }
+    %meta{ name: "twitter:description", content: "#{@sb_desc_author}" }
     %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/snapback-books.jpg" }
 
     %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
