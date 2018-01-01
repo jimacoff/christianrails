@@ -15,18 +15,20 @@
       %tr
         %td= order.created_at.strftime("%b %e '%y")
         %td= order.user.username
-        %td= Money.new( order.digital_purchases.map(&:price).reduce(0, :+) ).format
-        %td= Money.new( order.discount ).format
-        %td= Money.new( order.tax ).format
-        %td= Money.new( order.total ).format
+        %td= Money.new( order.digital_purchases.map(&:price_cents).reduce(0, :+) ).format
+        %td= Money.new( order.discount_cents ).format
+        %td= Money.new( order.tax_cents ).format
+        %td= Money.new( order.total_cents ).format
 
+  // TOTALS ROW
   %thead
     %tr
       %th
       %th
-      %td.embolden= Money.new( @orders.collect{|o| o.digital_purchases.map(&:price).reduce(0, :+) }.reduce(0, :+) ).format
-      %td.embolden= Money.new( @orders.collect{|o| o.discount}.reduce(0, :+) ).format
-      %td.embolden= Money.new( @orders.collect{|o| o.tax}.reduce(0, :+) ).format
-      %td.embolden= Money.new( @orders.collect{|o| o.total}.reduce(0, :+) ).format
+      %td.embolden= Money.new( @orders.collect{ |o| o.digital_purchases.map(&:price_cents).reduce(0, :+) }.reduce(0, :+) ).format
+      %td.embolden= Money.new( @orders.collect{ |o| o.discount_cents }.reduce(0, :+) ).format
+      %td.embolden= Money.new( @orders.collect{ |o| o.tax_cents      }.reduce(0, :+) ).format
+      %td.embolden= Money.new( @orders.collect{ |o| o.total_cents    }.reduce(0, :+) ).format
 
 = render "admin/admin_link"
+
