@@ -4,6 +4,13 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
+        title: "20171231_another_year_to_evaluate",
+        full_title: "2017: Another Year to Evaluate",
+        category: "Summaries of Time",
+        tags: ["listicle", "year in review"],
+        desc: "I'm sure I can find some highlights in this dark year."
+      },
+      {
         title: "20170415_unpopular_diamond_finds",
         full_title: "Unpopular Versions of Diamond Find I Have Made",
         category: "Software Development",
