@@ -34,17 +34,17 @@ module Christianrails
 
     ActiveSupport.halt_callback_chains_on_return_false = false
 
-    # config.middleware.insert_before 0, Rack::Cors do
-    #   allow do
-    #     origins '*'
-    #     #resource '*', headers: :any, methods: [:get, :post, :options]
-    #     resource '*',
-    #       headers: :any,
-    #       methods: [:get, :put],
-    #       credentials: true,
-    #       max_age: 0
-    #   end
-    # end
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        #resource '*', headers: :any, methods: [:get, :post, :options]
+        resource '*',
+          headers: :any,
+          methods: [:get, :put],
+          credentials: true,
+          max_age: 0
+      end
+    end
 
     config.sync_token = ENV['SYNC_TOKEN']
   end
