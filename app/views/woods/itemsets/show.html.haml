@@ -20,6 +20,9 @@
             %span Winning condition:
             = number_field_tag 'woods_item[winning_condition]', nil, { step: 1, min: 0, max: 4 }
             %br
+            %span Image:
+            = text_field_tag 'woods_item[image]', nil, size: 40
+            %br
             = submit_tag :Update
 
 .woods-box
@@ -46,6 +49,7 @@
     $('#woods_item_legend').val(the_item.legend);
     $('#woods_item_value').val( the_item.value );
     $('#woods_item_winning_condition').val( the_item.winning_condition );
+    $('#woods_item_image').val( the_item.image );
 
     $('#updateitem-form').attr("action", "/woods/stories/" + story_id + "/itemsets/" + itemset_id + "/items/" + the_item.id);
   }
