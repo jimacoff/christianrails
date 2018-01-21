@@ -4,11 +4,13 @@
   %thead
     %tr
       %th Itemset
+      %th # items
 
   %tbody
     - @itemsets.each do |i|
       %tr
         %td= link_to i.name, woods_story_itemset_path(@story, i)
+        %td= i.items.size
 %br
 
 .woods-box
