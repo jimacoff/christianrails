@@ -409,6 +409,9 @@ function updateNodeLocally(callback_data) {
 function updateTreelinkLocally(callback_data) {
   var theTreeIndex = callback_data['tree_index'];
 
+  if(!treelinks[ theTreeIndex ]) {
+    treelinks[ theTreeIndex ] = {};
+  }
   treelinks[ theTreeIndex ]['linked_tree_id'] = callback_data['linked_tree_id'];
   treelinks[ theTreeIndex ]['enabled']        = callback_data['enabled'];
   treelinkModified = false;
@@ -417,6 +420,9 @@ function updateTreelinkLocally(callback_data) {
 function updatePaintballLocally(callback_data) {
   var theTreeIndex = callback_data['tree_index'];
 
+  if(!paintballs[ theTreeIndex ]) {
+    paintballs[ theTreeIndex ] = {};
+  }
   paintballs[ theTreeIndex ]['palette_id'] = callback_data['palette_id'];
   paintballs[ theTreeIndex ]['enabled']    = callback_data['enabled'];
   paintballModified = false;
@@ -425,6 +431,9 @@ function updatePaintballLocally(callback_data) {
 function updateBoxLocally(callback_data) {
   var theTreeIndex = callback_data['tree_index'];
 
+  if(!boxes[ theTreeIndex ]) {
+    boxes[ theTreeIndex ] = {};
+  }
   boxes[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
   boxes[ theTreeIndex ]['enabled']    = callback_data['enabled'];
   boxModified = false;
@@ -433,6 +442,9 @@ function updateBoxLocally(callback_data) {
 function updatePossibleitemLocally(callback_data) {
   var theTreeIndex = callback_data['tree_index'];
 
+  if(!possibleitems[ theTreeIndex ]) {
+    possibleitems[ theTreeIndex ] = {};
+  }
   possibleitems[ theTreeIndex ]['itemset_id'] = callback_data['itemset_id'];
   possibleitems[ theTreeIndex ]['enabled']    = callback_data['enabled'];
   possibleitemModified = false;
