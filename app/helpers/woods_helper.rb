@@ -5,7 +5,7 @@ module WoodsHelper
   end
 
   def verify_is_published
-    redirect_to(root_path) unless @story && @story.published?
+    redirect_to root_path unless @story && ( @story.published? || current_user.admin? )
   end
 
   def current_player
