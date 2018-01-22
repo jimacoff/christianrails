@@ -5,12 +5,16 @@
     %tr
       %th Itemset
       %th # items
+      %th Instances hidden
+      %th Boxes
 
   %tbody
     - @itemsets.each do |i|
       %tr
         %td= link_to i.name, woods_story_itemset_path(@story, i)
         %td= i.items.size
+        %td= i.possibleitems.size == 0 ? "" : i.possibleitems.size
+        %td= i.boxes.size == 0 ? "" : i.boxes.size
 %br
 
 .woods-box
