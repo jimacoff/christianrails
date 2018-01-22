@@ -54,7 +54,6 @@ class Woods::StoriesController < Woods::WoodsController
     begin
       @node = Woods::Node.find( params[:target_node] )
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
-      redirect_to woods_story_path( @story ) and return if !@storytree.story.published
 
       @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
       if @scorecard.size == 0
