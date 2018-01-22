@@ -5,6 +5,7 @@ class Woods::Story < ApplicationRecord
   has_many :itemsets,     dependent: :destroy
   has_many :items,        through: :itemsets
   has_many :palettes,     dependent: :destroy
+  has_many :scorecards
 
   belongs_to :player
 
