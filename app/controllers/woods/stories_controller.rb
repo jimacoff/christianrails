@@ -55,28 +55,21 @@ class Woods::StoriesController < Woods::WoodsController
       @node = Woods::Node.find( params[:target_node] )
       @storytree = Woods::Storytree.find( @node['storytree_id'] )
 
-      @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id)
-      if @scorecard.size == 0
+      unless @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id).take
         @scorecard = Woods::Scorecard.create!(player_id: current_player.id, story_id: @story.id)
-      else
-        @scorecard = @scorecard.first
       end
 
-      dir = params[:dir]
-      if dir == "L"
+      if params[:dir] == "L"
         @scorecard.lefts += 1
         @scorecard.save
-      elsif dir == "R"
+      elsif params[:dir] == "R"
         @scorecard.rights += 1
         @scorecard.save
       end
 
-      @footprint = @scorecard.footprints.where(storytree_id: @storytree.id)
-      unless @footprint.size > 0
+      unless @footprint = @scorecard.footprints.where(storytree_id: @storytree.id).take
         @footprint = Woods::Footprint.create!(scorecard_id: @scorecard.id, storytree_id: @storytree.id)
         @footprint.construct_for_tree!
-      else
-        @footprint = @footprint.first
       end
 
       # any finds?
@@ -96,13 +89,12 @@ class Woods::StoriesController < Woods::WoodsController
       Rails.logger.warn("Something's wrong: " + e.to_s)
     end
 
-    respond_to do |format|
-      if @node
-        format.json { render json: @node, status: :ok }
-      else
-        format.json { render json: @node, status: :unprocessable_entity }
-      end
+    if @node
+      render json: @node, status: :ok
+    else
+      render json: {}, status: :unprocessable_entity
     end
+
   end
 
   ## ADMIN ONLY
@@ -119,8 +111,8 @@ class Woods::StoriesController < Woods::WoodsController
     @story.total_plays = 0
 
     if @story.save
-      @storytree = Woods::Storytree.new( name: "Intro", max_level: 1, story_id: @story.id )
-      @storytree.save!
+      @storytree = Woods::Storytree.create( name: "Intro", max_level: 1, story_id: @story.id )
+
       create_nodes_for_storytree( @storytree )
       @story.entry_tree = @storytree.id
       @story.save

@@ -145,7 +145,7 @@ Christianrails::Application.routes.draw do
   namespace :crm do
     resources :assistants, only: [:index, :create, :update] do
       collection do
-        get  'settings'
+        get 'settings'
       end
     end
     resources :contacts, except: [:show]
