@@ -14,7 +14,7 @@ class Woods::StoriesController < Woods::WoodsController
 
   def play
     begin
-      @storytree = Woods::Storytree.find(@story.entry_tree)
+      @storytree = Woods::Storytree.find( @story.entry_tree )
     rescue
       raise "Invalid entry tree?!?"
     end
@@ -38,7 +38,7 @@ class Woods::StoriesController < Woods::WoodsController
     end
 
     @items = []
-    items_player_has = Woods::Item.find( the_player.finds.collect(&:item_id) )
+    items_player_has = Woods::Item.find( the_player.finds.where(story_id: @story.id).collect(&:item_id) )
     items_player_has.each do |i|
       @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
     end
@@ -51,9 +51,9 @@ class Woods::StoriesController < Woods::WoodsController
 
   # JSON endpoint
   def move_to
-    begin
-      @node = Woods::Node.find( params[:target_node] )
-      @storytree = Woods::Storytree.find( @node['storytree_id'] )
+    #begin
+      @node = Woods::Node.find( params[:target_node].to_i )
+      @storytree = @node.storytree
 
       unless @scorecard = Woods::Scorecard.includes(:footprints).where(player_id: current_player.id, story_id: @story.id).take
         @scorecard = Woods::Scorecard.create!(player_id: current_player.id, story_id: @story.id)
@@ -72,27 +72,38 @@ class Woods::StoriesController < Woods::WoodsController
         @footprint.construct_for_tree!
       end
 
-      # any finds?
+      # any finds at this location?
       if @node.possibleitem && @node.possibleitem.enabled && @footprint.item_at_index?(@node.tree_index)
-        items_player_has = current_player.finds.collect(&:item_id)
+
+        # determine what the player has currently
+        item_ids_player_has = current_player.finds.where( story_id: @story.id ).collect(&:item_id)
+
+        # get the itemset & figure out what item the player found
         itemset_found = Woods::Itemset.includes(:items).find( @node.possibleitem.itemset_id )
-        found = itemset_found.calculate_item_found(items_player_has)
-        Woods::Find.create( player_id: current_player.id, item_id: found.id, story_id: @story.id ) if found
+        item_found = itemset_found.calculate_item_found( item_ids_player_has )
+
+        if item_found.is_a?( Woods::Item )
+          Woods::Find.create( player_id: current_player.id, item_id: item_found.id, story_id: @story.id ) if item_found
+        else
+          @errors = item_found.to_s
+          item_found = nil
+        end
       end
 
-      @node = @node.add_accoutrements_and_make_json!(current_player.id, @footprint, found)
+      @node = @node.add_accoutrements_and_make_json!( current_player.id, @footprint, item_found )
 
       @footprint.step!( @node['tree_index'] )
 
-    rescue => e
-      record_warning(Log::WOODS, e.to_s)
-      Rails.logger.warn("Something's wrong: " + e.to_s)
-    end
+    #rescue => e
+     # record_warning(Log::WOODS, e.to_s)
+     # @errors = e.to_s
+     # Rails.logger.warn("Something's wrong: " + @errors)
+    #end
 
-    if @node
-      render json: @node, status: :ok
+    if @errors
+      render json: {errors: @errors}, status: :unprocessable_entity
     else
-      render json: {}, status: :unprocessable_entity
+      render json: @node, status: :ok
     end
 
   end

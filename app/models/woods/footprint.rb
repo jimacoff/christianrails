@@ -9,7 +9,7 @@ class Woods::Footprint < ApplicationRecord
   def construct_for_tree!
     self.footprint_data = 'o' * ( 2**self.storytree.max_level - 1)
     scatter_objects_in_tree!
-    self.save
+    self.save!
   end
 
   def step!(tree_index)
@@ -37,27 +37,28 @@ class Woods::Footprint < ApplicationRecord
 private
 
   def scatter_objects_in_tree!
-    var_items = []
+    var_item_indexes = []
     self.storytree.possibleitems.includes(:node).where(enabled: true).each do |poss_item|
       if poss_item.perpetual
-        self.footprint_data[poss_item.node.tree_index - 1] = 'i'
+        self.footprint_data[ poss_item.node.tree_index - 1 ] = 'i'
       else
-        var_items << poss_item.node.tree_index
+        var_item_indexes << poss_item.node.tree_index
       end
     end
 
-    solidified_item_tree_indexes = decide_on_var_items(var_items)
+    solidified_item_tree_indexes = decide_on_var_items( var_item_indexes )
     solidified_item_tree_indexes.each do |sol|
       self.footprint_data[sol - 1] = 'i'
     end
   end
 
-  def decide_on_var_items(var_items)
+  def decide_on_var_items( var_item_indexes )
     solidified_items = []
 
-    if var_items.size > 0
-      try_i = var_items[0]
+    if var_item_indexes.size > 0
 
+      # determine what level the items are going to live on
+      try_i = var_item_indexes[0]
       level_of_items = 1
       if try_i > 1
         while (try_i + 1) > 2**level_of_items do
@@ -67,20 +68,21 @@ private
 
       if level_of_items == 3
         # special case -- only 1 item possible in 2 spots
-        solidified_items << var_items[ Random.rand(var_items.size) ]
+        solidified_items << var_item_indexes[ Random.rand(var_item_indexes.size) ]
       else
         # iterate through each group of 8 endings & choose a variable item
         nodes_in_level = 2 ** (level_of_items - 1)
         sections_in_level = nodes_in_level / 8
 
         sections_in_level.times do |i|
+          # place items in section
           starting_index = (nodes_in_level) + (8 * i)
           ending_index = starting_index + 7
           range = starting_index..ending_index
 
-          items_in_this_range = var_items & range.to_a
+          items_in_this_range = var_item_indexes & range.to_a
 
-          solidified_items << items_in_this_range[ Random.rand(items_in_this_range.size) ]
+          solidified_items << items_in_this_range[ Random.rand(items_in_this_range.size) ] if items_in_this_range.size > 0
         end
       end
     end

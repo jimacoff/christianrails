@@ -1,8 +1,8 @@
 #woods-anchor
 #statspanel.zero-margin.center
-  %span#score-span= "Score: #{current_player.total_score}"
+  %span#score-span= "Score: #{current_player.total_score( @story.id )}"
   %span
-    %button#gallery-button.minory-button{class: "#{current_player.finds.size > 0 ? '' : 'hidden'}", onclick: "showItemViewer();"} View gallery
+    %button#gallery-button.minory-button{class: "#{current_player.finds.where(story_id: @story.id).size > 0 ? '' : 'hidden'}", onclick: "showItemViewer();"} View gallery
   %span
     - if current_user
       %button#go-to-store-button.minory-button.hidden{onclick: "goToStore( '#{ @story.slug }' );"}= @story.store_link_text
