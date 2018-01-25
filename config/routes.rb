@@ -138,7 +138,8 @@ Christianrails::Application.routes.draw do
   get  '/woods',                to: 'woods/stories#index'
   get  '/diamondfind',          to: 'woods/stories#show', defaults: { id: 1 }
   get  '/diamondfind/play',     to: 'woods/stories#play', defaults: { id: 1 }
-
+  get  '/thecalicobrief',       to: 'woods/stories#show', defaults: { id: 15 }
+  get  '/thecalicobrief/play',  to: 'woods/stories#play', defaults: { id: 15 }
 
 ######## GHOSTCRM ##############
 

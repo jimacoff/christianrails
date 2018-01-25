@@ -10,6 +10,8 @@
   #df-play-or-signup-button
     - if @story.name == "Diamond Find"
       = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
+    - elsif @story.name == "The Calico Brief"
+      = button_to "Play #{@story.name} now!", thecalicobrief_play_path, class: "bright-button", method: :get
     - else
       = button_to "Play #{@story.name} now!", play_woods_story_path(@story), class: "bright-button", method: :get
 
