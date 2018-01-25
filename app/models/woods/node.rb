@@ -145,7 +145,7 @@ private
 
     player = Woods::Player.find( player_id )
     items_required.each do |req_item_id|
-      return false if !player.has_item?(req_item_id)
+      return false if !player.has_item?( req_item_id )
     end
     true
   end

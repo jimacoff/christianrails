@@ -1,19 +1,19 @@
 Rails.application.config.assets.precompile += %w(
-                                                  woods/binarywoods.css
-                                                  crm/crm.css
-                                                  ghostcrime/ghostcrime.css
-                                                  snapback/snapback.css
+                                                  badger/badger.css
                                                   butler/*
                                                   butler/butler.js
-                                                  store/dealzone.js
-                                                  woods/woods.js
-                                                  woods/tree_editor.js
-                                                  go/go.css
-                                                  badger/badger.css
-                                                  scalequail/scalequail.css
-                                                  scalequail/quail.js
                                                   computers/computers.css
+                                                  crm/crm.css
+                                                  ghostcrime/ghostcrime.css
+                                                  go/go.css
+                                                  scalequail/quail.js
+                                                  scalequail/scalequail.css
+                                                  snapback/snapback.css
+                                                  store/dealzone.js
                                                   vendor/devrama-book.css
-                                                  vendor/jscolor.min.js
                                                   vendor/jquery.devrama.book.min.js
+                                                  vendor/jscolor.min.js
+                                                  woods/binarywoods.css
+                                                  woods/tree_editor.js
+                                                  woods/woods.js
                                                 )

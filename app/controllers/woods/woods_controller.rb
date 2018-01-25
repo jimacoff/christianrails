@@ -1,7 +1,7 @@
 class Woods::WoodsController < ApplicationController
   layout "binarywoods"
 
-  rescue_from Exception, with: :render_error
+  #rescue_from Exception, with: :render_error
 
   private
 
