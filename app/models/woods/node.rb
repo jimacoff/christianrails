@@ -140,7 +140,7 @@ private
   def has_won_game?(player_id)
     items_required = []
     self.storytree.story.items.each do |item|
-      items_required << item.id if item.winning_condition == self.win_number
+      items_required << item.id if item.winning_condition == win_number
     end
 
     player = Woods::Player.find( player_id )
