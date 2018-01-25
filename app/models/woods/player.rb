@@ -47,4 +47,10 @@ class Woods::Player < ApplicationRecord
     Woods::ItemDownload.where(player_id: id).size
   end
 
+  # clears scorecard, footprints + finds for story
+  def reset_for_story!( story_id )
+    self.finds.where( story_id: story_id ).destroy_all
+    self.scorecards.where( story_id: story_id ).destroy_all # destroys footprints too
+  end
+
 end

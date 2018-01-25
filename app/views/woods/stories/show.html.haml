@@ -23,10 +23,11 @@
       %h3.center High Scores
       %table.zero-margin.center
         - @highscores.each do |h|
-          %tr
-            %td
-              %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
-            %td= h[1]
+          - unless h[1] == 0
+            %tr
+              %td
+                %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
+              %td= h[1]
 
   #df-col2
     #storyinfopanel.zero-margin.center

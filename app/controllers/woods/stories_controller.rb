@@ -9,7 +9,7 @@ class Woods::StoriesController < Woods::WoodsController
 
   def show
     @highscores = Woods::Player.where.not(user_id: nil).collect{ |p| [p.username, p.total_score(@story.id), p.id] }
-                                                       .sort{ |x,y| y[1] <=> x[1] }[0..4]
+                                                        .sort{ |x,y| y[1] <=> x[1] }[0..4]
   end
 
   def play
