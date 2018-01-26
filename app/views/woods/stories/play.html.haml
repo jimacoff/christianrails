@@ -14,12 +14,9 @@
 
 #nodepanel.zero-margin.noselect
   #story-pane.pane.glass
-    %p= @node['node_text'].gsub("\n",'')
   #choice-pane.pane.center
     %button#left-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'L');"}
-      = @node['left_text']
     %button#right-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'R');"}
-      = @node['right_text']
     %button#big-button.binary-button{onclick: "move(" + @story.id.to_s + ", 'C');"}
       Continue
 
@@ -41,5 +38,4 @@
   var pop_item = false;
   var storyname = '#{@story.pic_name}';
 
-  scrollToAnchor();
-
+  drawNewNode();
