@@ -24,6 +24,10 @@
       %td= f.text_field :slug
 
     %tr.field
+      %td= f.label :published
+      %td= f.check_box :published, value: @story.published
+
+    %tr.field
       %td= f.label "Allow remote syncing"
       %td= f.check_box :allow_remote_syncing, value: @story.allow_remote_syncing
 
