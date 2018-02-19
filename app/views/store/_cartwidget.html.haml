@@ -4,5 +4,6 @@
   - display_setting = "display: inline-block;" if cartsize > 0
 
 #cartwidget{style: "#{display_setting}"}
+  = image_tag( "shopping_cart_icon.png", alt: "Cart icon", class: 'cart-icon' )
   %span.artifika{style: 'margin-bottom: 5px;'} My Cart
   = render 'store/cartwidget_content', {display_setting: display_setting}

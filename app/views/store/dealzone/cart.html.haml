@@ -2,7 +2,8 @@
   - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
 
 .center
-  %h1{style: 'color: black;'} My Cart
+  = image_tag( "shopping_cart_icon.png", alt: "Cart icon", class: 'cart-icon' )
+  %h1{style: 'color: black; display: inline;'} My Cart
 
   .standalone-cart
     = render "store/cartwidget_content", {display_setting: display_setting}
