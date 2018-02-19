@@ -11,8 +11,8 @@ class Store::DealzoneController < Store::StoreController
   ## PUBLIC
 
   def index
+    # fetch Diamond Find info for the Diamond Machine
     @diamondfind = Woods::Story.where(name: "Diamond Find").first
-
     if current_user
       @finds = current_user.player.finds.joins(:item)
                                         .where('woods_items.value > ?', 0)
@@ -40,6 +40,7 @@ class Store::DealzoneController < Store::StoreController
   end
 
   # a page to facilitate the bulk-purchase of gifts for your friends
+  # ROUTE DISABLED
   def gifts
     @available_gifts = @all_products.where(free_on_signup: false)
   end

@@ -1,11 +1,12 @@
 -# The tab of the Giftpack in the cart
 - is_hidden = ( @cart == {} || !@cart[:giftpacks].has_key?(prod.id) ) ? "display: none;" : "display: inline-block;"
 
-%span{ class: "cartwidget_giftpack_item_#{prod.id}", style: "#{is_hidden}"}
-  .center.gift-overlay-container
-    = image_tag( "#{prod.small_image}" , class: "cartwidget-image gift-overlay")
-    .gift-overlay-text
-      %p x5
-  .cartwidget-prod-details.center
-    %span{ class: "cartwidget_giftpack_price_#{prod.id}", style: "color: white !important;" }= Money.new( prod.giftpack_price ).format
-    %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_giftpack_#{prod.id}", onclick: "removeFromCart(#{prod.id}, true)"}= "X"
+%div{ class: "cartwidget-item cartwidget_giftpack_item_#{prod.id}", style: "#{is_hidden}"}
+  %span= image_tag( "#{prod.small_image}", class: "cartwidget-image")
+  %span.cartwidget-prod-details
+    .cartwidget-details-line1
+      %span{ class: "cartwidget-title" }= "#{prod.title}"
+    .cartwidget-details-line2
+      %span{ class: "cartwidget-itemtype" }= "eBook Gift 5-Pack"
+      %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_giftpack_#{prod.id}", onclick: "removeFromCart(#{prod.id}, true)"}= "X"
+      %span{ class: "cartwidget_giftpack_price_#{prod.id} cartwidget-price" }= Money.new( prod.giftpack_price ).format

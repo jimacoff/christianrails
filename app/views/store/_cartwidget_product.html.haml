@@ -1,8 +1,12 @@
 -# The tab of the item in the cart
-- is_hidden = (@cart == {} || !@cart[:books].has_key?(prod.id)) ? "display: none;" : "display: inline-block;"
+- is_hidden = ( @cart == {} || !@cart[:books].has_key?(prod.id)) ? "display: none;" : "display: inline-block;"
 
-%span{ class: "cartwidget_item_#{prod.id}", style: "#{is_hidden}"}
-  .center= image_tag( "#{prod.small_image}" , class: "cartwidget-image")
-  .cartwidget-prod-details.center
-    %span{ class: "cartwidget_price_#{prod.id}", style: "color: white !important;" }= Money.new( prod.price_cents ).format
-    %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_#{prod.id}", onclick:"removeFromCart(#{prod.id})"} X
+%div{ class: "cartwidget-item cartwidget_item_#{prod.id}", style: "#{is_hidden}"}
+  %span= image_tag( "#{prod.small_image}" , class: "cartwidget-image")
+  %span.cartwidget-prod-details
+    .cartwidget-details-line1
+      %span{ class: "cartwidget-title" }= prod.title
+    .cartwidget-details-line2
+      %span{ class: "cartwidget-itemtype" }= "Personal eBook"
+      %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_#{prod.id}", onclick:"removeFromCart(#{prod.id})"} X
+      %span{ class: "cartwidget_price_#{prod.id} cartwidget-price" }= Money.new( prod.price_cents ).format

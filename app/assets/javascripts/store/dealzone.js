@@ -119,7 +119,7 @@ function drawNewPrices(price_data) {
   var allItems = $.merge( cartWidgetItems, cartWidgetGifts );
 
   allItems.each(function( i ) {
-    if( $($(this).parents()[1]).hasClass("totalable") ){
+    if( $($(this).parents()[2]).hasClass("totalable") ){
       total += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
     }
   });
