@@ -50,6 +50,7 @@ th {
 
 .cartwidget-itemtype {
   color: white !important;
+  font-size: 0.8em;
 }
 
 .cartwidget-price {
@@ -68,13 +69,6 @@ th {
 
 .cartwidget-prod-details {
   display: inline;
-}
-
-#cartwidget-pricedetails {
-  background-color: $dark-gray;
-  padding: 5px;
-  margin: 20px 2px;
-  text-align: center;
 }
 
 .cartwidget-total {
