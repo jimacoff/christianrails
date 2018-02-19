@@ -49,9 +49,9 @@ class Store::ProductsController < Store::StoreController
     end
 
     def product_params
-      params.require(:store_product).permit(:title, :author, :short_desc, :long_desc, :price_cents, :physical_price_cents,
+      params.require(:store_product).permit(:title, :author, :short_desc, :long_desc, :price, :physical_price,
                                             :physical_sales, :rank, :image, :small_image, :logo_image, :coming_soon,
-                                            :slug, :filename, :popularity_image, :free_on_signup, :giftpack_price_cents,
-                                            :giftpackable)
+                                            :slug, :filename, :popularity_image, :free_on_signup, :giftpack_price,
+                                            :giftpackable, :shipping_cost)
     end
 end

@@ -9,13 +9,13 @@
     = f.text_field :username, autocomplete: "off", placeholder: "Enter a username"
 
   .field
-    = f.label "Please enter your first and last names:"
+    = f.label "Please enter your name (will not be shared with others):"
     %br
     = f.text_field :first_name, autocomplete: "off", placeholder: "First name", class: "half"
     = f.text_field :last_name, autocomplete: "off", placeholder: "Last name", class: "half"
 
   .field
-    = f.label "Please enter your email address:"
+    = f.label "Please enter your email address (will not be shared with others):"
     %br
     = f.email_field :email, autocomplete: "off", placeholder: "Email address"
 
@@ -25,6 +25,17 @@
     = f.password_field :password, autocomplete: "off", placeholder: "Enter a password"
     %br
     = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm your password"
+
+  .field
+    = f.label :purchaser, "Will you be purchasing books for a store or library?"
+    %br
+    = f.check_box :purchaser, checked: '', onchange: "updateCompanyField();"
+    = f.label :purchaser, "Yes"
+
+  .field.companyfield.hidden
+    = f.label :company, "What is the name of your organization?"
+    %br
+    = f.text_field :company, autocomplete: "off", placeholder: "My company name"
 
   .field
     = f.label :send_me_emails, "Can I email you occasionally about future releases?"
@@ -38,3 +49,13 @@
     %br
     %span
       #{ link_to "Log in", new_session_path(resource_name)  } | #{ link_to "Home", root_path }
+
+:javascript
+
+  function updateCompanyField() {
+    if ( $('#user_purchaser')[0].checked ) {
+      $('.companyfield').removeClass("hidden");
+    } else {
+      $('.companyfield').addClass("hidden");
+    }
+  }

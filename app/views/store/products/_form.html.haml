@@ -29,6 +29,9 @@
       %td= f.label :physical_price
       %td= f.text_field :physical_price, value: Money.new( f.object.physical_price_cents )
     %tr.field
+      %td= f.label :shipping_cost
+      %td= f.text_field :shipping_cost, value: Money.new( f.object.shipping_cost_cents )
+    %tr.field
       %td= f.label :physical_sales
       %td= f.number_field :physical_sales
     %tr.field

@@ -13,7 +13,7 @@ class Store::Product < ApplicationRecord
   validates_presence_of :title, :author, :price_cents
   validates_numericality_of :rank
 
-  monetize :price_cents, :giftpack_price_cents, :physical_price_cents
+  monetize :price_cents, :giftpack_price_cents, :physical_price_cents, :shipping_cost_cents
 
   def discount_for(user_id)
     total_discount = 0
