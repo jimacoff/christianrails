@@ -67,13 +67,34 @@ th {
   margin-right: 10px;
 }
 
+#checkout, .paypal-stuff {
+  margin-left: 50px;
+}
+
+// holds the cart total stuff
+.cartwidget-pricedetails {
+  text-align: right;
+  width: 200px;
+}
+
 .cartwidget-prod-details {
   display: inline;
 }
 
-.cartwidget-total {
-  margin-left: 10px;
+.cartwidget-subtotal {
 }
+
+.cartwidget-shipping {
+}
+
+.cartwidget-total {
+}
+
+.cartwidget-tax {
+
+}
+
+
 
 .standalone-cart {
   border-radius: 30px;

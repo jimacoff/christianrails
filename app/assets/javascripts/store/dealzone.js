@@ -115,27 +115,51 @@ function drawNewPrices(price_data) {
   // the checkout total
   var cartWidgetItems = $("[class^='cartwidget_price_']"),
       cartWidgetGifts = $("[class^='cartwidget_giftpack_price_']"),
-      total = 0;
+      subtotal = 0,
+      total = 0,
+      shipping = 0,
+      tax = 0;
   var allItems = $.merge( cartWidgetItems, cartWidgetGifts );
 
   allItems.each(function( i ) {
     if( $($(this).parents()[2]).hasClass("totalable") ){
-      total += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
+      subtotal += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
     }
   });
 
   // display total. display differently if discount
   if(price_data.total_discount > 0) {
-    total -= price_data.total_discount;
+    subtotal -= price_data.total_discount;
     $('.total_price').addClass('discount');
     $('.discount_label').html('Save:');
   } else {
     $('.total_price').removeClass('discount');
     $('.discount_label').html('');
   }
+  $('.subtotal_price').text("$" + subtotal.toFixed(2));
+
+  // add tax calculation
+  // 15% for eBooks
+  tax = subtotal * 0.15
+  $('.tax_amount').text("$" + tax.toFixed(2));
+
+  // TODO 5% for physical books
+
+
+  // add shipping calculation
+  if (shipping > 0) {
+    $('.cartwidget-shipping').removeClass("hidden");
+    $('.shipping_price').text("$" + shipping.toFixed(2));
+  } else {
+    $('.cartwidget-shipping').addClass("hidden");
+    $('.shipping_price').text("");
+  }
+
+  // add final total
+  total = subtotal + tax + shipping;
   $('.total_price').text("$" + total.toFixed(2));
 
-  // update the satisfiable discounts
+  // update the satisfiable discounts in the cart items
   $.each(price_data, function(k, v) {
     if(k !== 'discount_price'){
       if( v[1] > 0 ) {
