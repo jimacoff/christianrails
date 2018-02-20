@@ -1,6 +1,7 @@
 -# This is a preview of the product, linking to its dedicated store page
 
-%h2{id:"#{product.id}_title"}= product.title
+%a{href: "/#{product.slug}", style: "color: $slate-gray;"}
+  %h2.slate{id:"#{product.id}_title"}= product.title
 %p= product.short_desc
 
 %table.full-width{id: "digital_download_#{product.id}"}

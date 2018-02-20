@@ -7,7 +7,8 @@
           = image_tag( "badger-circle.png", class: "store-image" )
 
       %td
-        %h2 I Found This Badger
+        %a{href: "/thisbadger", style: "color: $slate-gray;"}
+          %h2.slate I Found This Badger
         = render "store/badger_machine_content"
 
 #mobile-badger
