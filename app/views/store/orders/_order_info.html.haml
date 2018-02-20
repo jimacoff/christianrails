@@ -9,6 +9,12 @@
         %td= "#{digital_purchase.product.title} #{type}"
         %td= Money.new( digital_purchase.price ).format
 
+    - @order.physical_purchases.each do |physical_purchase|
+      - type = physical_purchase.single? ? "Paperback" : "multipack"
+      %tr
+        %td= "#{physical_purchase.product.title} #{type}"
+        %td= Money.new( physical_purchase.price ).format
+
   - if @order.discount > 0
     %tr
       %th= "Discount:"
@@ -17,6 +23,11 @@
   %tr
     %th= "Tax:"
     %th= Money.new( @order.tax ).format
+
+  - if @order.shipping_cost_cents > 0
+    %tr
+      %th= "Shipping:"
+      %th= Money.new( @order.shipping_cost_cents ).format
 
   %tr
     %th= "Total:"

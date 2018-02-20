@@ -156,15 +156,18 @@ RSpec.describe Store::DealzoneController, type: :controller do
     let(:froom_product) { FactoryGirl.create(:product, title: "Lol Froom") }
     let(:vroom_product) { FactoryGirl.create(:product, title: "Lol Vroom") }
     let(:brool_product) { FactoryGirl.create(:product, title: "Lol Brool") }
+    let(:physi_product) { FactoryGirl.create(:product, title: "Physi prod") }
 
     let(:staged_purchase)  { FactoryGirl.create(:staged_purchase, user: user, product: froom_product) }
     let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: vroom_product) }
     let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: brool_product, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
+    let(:staged_physical_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: physi_product, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
 
     it "sends off to PayPal if everything is fine" do
       staged_purchase.save
       staged_purchase2.save
       staged_giftpack_purchase.save
+      staged_physical_purchase.save
 
       expect{
         post 'check_out'
@@ -186,24 +189,27 @@ RSpec.describe Store::DealzoneController, type: :controller do
       PayPal::SDK::REST::Payment.any_instance.stubs(:execute).returns(true)
     end
 
-    let(:product1) { FactoryGirl.create(:product, price_cents: 3_00) }
+    let(:product1) { FactoryGirl.create(:product, price_cents: 3_00, shipping_cost_cents: 5_00) }
     let(:product2) { FactoryGirl.create(:product, price_cents: 7_00) }
 
     let(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
     let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
 
     let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
+    let(:staged_physical_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
 
-    it "creates purchases and gifts for each staged purchase" do
+
+    it "creates purchases and gifts for each normal eBook staged purchase" do
       staged_purchase1.save; staged_purchase2.save
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( Store::StagedPurchase.count  ).to eq(0)
       expect( Store::DigitalPurchase.count ).to eq(2)
       expect( Store::FreeGift.count        ).to eq(2)
+      expect( Store::Order.count ).to eq(1)
     end
 
-    it "creates purchases and gifts for a staged purchase that's a gift pack purchase" do
+    it "creates purchases and gifts for a staged purchase that's a 5x gift pack purchase" do
       staged_giftpack_purchase.save
 
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
@@ -211,10 +217,26 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( Store::StagedPurchase.count  ).to eq(0)
       expect( Store::DigitalPurchase.count ).to eq(1)
       expect( Store::FreeGift.count        ).to eq(5)
+      expect( Store::Order.count ).to eq(1)
+    end
+
+    it "creates purchases for a staged purchase that's a physical book" do
+      staged_physical_purchase.save
+
+      get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
+
+      expect( Store::StagedPurchase.count  ).to eq(0)
+      expect( Store::PhysicalPurchase.count ).to eq(1)
+      expect( Store::Order.count ).to eq(1)
+
+      order = Store::Order.take
+      expect( order.shipping_cost_cents ).to eq( 5_00 )
+      expect( order.tax_cents ).to eq( 50 )  # $10 * 5%
+      expect( order.total_cents ).to eq( 15_50 )
     end
 
     it "creates an order with the correct total, tax and no discount" do
-      staged_purchase1.save; staged_purchase2.save
+      staged_purchase1.save; staged_purchase2.save; staged_physical_purchase.save
 
       expect {
         get :complete_order, params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
@@ -223,8 +245,9 @@ RSpec.describe Store::DealzoneController, type: :controller do
       order = Store::Order.first
 
       expect( order.discount_cents ).to eq(0)
-      expect( order.tax ).to eq( ( product1.price + product2.price ) * Store::DigitalPurchase::TAX_RATE )
-      expect( order.total ).to eq( product1.price + product2.price + order.tax )
+      expect( order.shipping_cost_cents ).to eq( 5_00 )
+      expect( order.tax_cents ).to eq( ( (product1.price_cents + product2.price_cents ) * Store::DigitalPurchase::TAX_RATE) + (product1.physical_price_cents * Store::PhysicalPurchase::TAX_RATE) )
+      expect( order.total_cents ).to eq( product1.price_cents + product2.price_cents + product1.physical_price_cents + order.tax_cents + order.shipping_cost_cents )
     end
 
     it "creates an order with the correct discount when applicable" do
@@ -239,8 +262,9 @@ RSpec.describe Store::DealzoneController, type: :controller do
       order = Store::Order.first
 
       expect( order.discount_cents ).to eq( 2_50 )
-      expect( order.tax ).to eq( ((product1.price + product2.price) - order.discount) * Store::DigitalPurchase::TAX_RATE )
-      expect( order.total ).to eq( product1.price + product2.price + order.tax - order.discount )
+      expect( order.shipping_cost_cents ).to eq( 0 )
+      expect( order.tax_cents ).to be_within(1).of( ((product1.price_cents + product2.price_cents) - order.discount_cents) * Store::DigitalPurchase::TAX_RATE )
+      expect( order.total_cents ).to eq( product1.price_cents + product2.price_cents + order.tax_cents - order.discount_cents )
     end
 
   end

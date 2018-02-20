@@ -1,0 +1,12 @@
+-# The tab of the Physical Book in the cart
+- is_hidden = ( @cart == {} || !@cart[:physicalbooks].has_key?(prod.id) ) ? "display: none;" : "display: inline-block;"
+
+%div{ class: "cartwidget-item cartwidget_physical_item_#{prod.id}", style: "#{is_hidden}"}
+  %span= image_tag( "#{prod.small_image}", class: "cartwidget-image")
+  %span.cartwidget-prod-details
+    .cartwidget-details-line1
+      %span{ class: "cartwidget-title" }= "#{prod.title}"
+    .cartwidget-details-line2
+      %span{ class: "cartwidget-itemtype" }= "Paperback"
+      %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_physical_book_#{prod.id}", onclick: "removeFromCart(#{prod.id}, 'physical')"}= "X"
+      %span{ class: "cartwidget_physical_price_#{prod.id} cartwidget-price" }= Money.new( prod.physical_price ).format

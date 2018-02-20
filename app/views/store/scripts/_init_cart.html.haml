@@ -1,4 +1,5 @@
-- if @cart && (@cart[:books] || @cart[:giftpacks] )
+- if @cart && (@cart[:books] || @cart[:giftpacks] || @cart[:physicalbooks] )
+
   :javascript
     var cart = #{ raw( @cart.to_json ) };
     var single_prods = Object.keys( cart.books );
@@ -9,7 +10,12 @@
     var gift_packs = Object.keys( cart.giftpacks );
     for(var i in gift_packs) {
       $('.cart-dot').show();
-      showProductInCart( gift_packs[i], true ) ;
+      showProductInCart( gift_packs[i], "giftpack" ) ;
+    }
+    var physical_books = Object.keys( cart.physicalbooks );
+    for(var i in physical_books) {
+      $('.cart-dot').show();
+      showProductInCart( physical_books[i], "physical" ) ;
     }
 
 :javascript

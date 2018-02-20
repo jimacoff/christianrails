@@ -5,6 +5,7 @@ class Store::Product < ApplicationRecord
   has_many :downloads, through: :releases, inverse_of: :product
 
   has_many :digital_purchases,  inverse_of: :product
+  has_many :physical_purchases,  inverse_of: :product
   has_many :free_gifts,         inverse_of: :product
   has_many :users_invited_for,  inverse_of: :invited_for_product, class_name: '::User', foreign_key: "invited_for_product_id"
 

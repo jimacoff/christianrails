@@ -4,7 +4,7 @@ class Store::PhysicalPurchase < ApplicationRecord
   belongs_to :order,   inverse_of: :physical_purchases
   belongs_to :user,    inverse_of: :physical_purchases
 
-  validates_presence_of :order, :price_cents, :type
+  validates_presence_of :order, :price_cents, :type_id
 
   monetize :price_cents
 
@@ -13,7 +13,7 @@ class Store::PhysicalPurchase < ApplicationRecord
   TYPE_PHYSICAL_VARIETYPACK = 3
   TYPE_PHYSICAL_MULTIPACK   = 4
 
-  TAX_RATE = 0.15
+  TAX_RATE = 0.05
   MULTIPACK_SIZE = 5
 
   def single?

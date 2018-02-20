@@ -28,6 +28,9 @@ module StoreHelper
       @cart[:giftpacks] = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
                                                                      type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK)
                                                               .each{ |sp| hash[sp.product_id] = sp.id } }
+      @cart[:physicalbooks] = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
+                                                                     type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE)
+                                                              .each{ |sp| hash[sp.product_id] = sp.id } }
       @cart[:prices] = get_updated_prices
     end
   end
@@ -35,6 +38,7 @@ module StoreHelper
   def get_updated_prices
     price_json = {}
     price_json[:total_discount] = Store::PriceCombo.total_cart_discount_for( current_user.id )
+    price_json[:total_shipping] = Store::StagedPurchase.total_cart_shipping_for( current_user.id )
 
     @all_products.each do |prod|
       price_json[prod.id] = [ prod.price_cents, prod.discount_for(current_user.id) ] # this is a dumb format

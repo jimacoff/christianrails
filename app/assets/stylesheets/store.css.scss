@@ -94,6 +94,9 @@ th {
 
 }
 
+.physical-area {
+  margin-top: 20px;
+}
 
 
 .standalone-cart {
@@ -437,15 +440,6 @@ th {
   background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
   border-radius: 10px;
   width: 350px;
-  padding: 10px;
-  border: 2px solid $black;
-  margin: 15px;
-}
-
-.physical-widget {
-  background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
-  border-radius: 10px;
-  width: 250px;
   padding: 10px;
   border: 2px solid $black;
   margin: 15px;

@@ -16,6 +16,11 @@
             - release_text = release_array.join(" / ")
             .store-format.embolden.center #{release_text}
 
+            - if !current_user || !current_user.has_product?(product.id)
+              %p.diminutive{style: "color: grey !important;"} Purchase access to all DRM-free formats.
+            - else
+              %p.diminutive{style: "color: grey !important;"} All downloads are DRM-free.
+
         %tr
           %td
             - if !current_user || !current_user.has_product?(product.id)
@@ -27,7 +32,7 @@
             %td{style: 'width: 50%;'}
               -# BUTTONS TO ADD TO CART, DOWNLOAD OR SIGN IN
               - if !current_user
-                %div{id:"sign_in_#{product.id})"}= button_to 'Start a library', new_user_registration_path, class: 'store-button', method: :get
+                %div{id:"sign_in_#{product.id})"}= button_to 'Sign up to download!', new_user_registration_path, class: 'store-button', method: :get
               - elsif !current_user.has_product?(product.id)
                 %button.store-button{class:"add_to_cart_#{product.id}", onclick: "addToCart( #{product.id} )"} Add to cart
             %td
@@ -54,30 +59,38 @@
               - if !current_user
                 %div{id:"sign_in_#{product.id})"}= button_to 'Sign up to send gifts!', new_user_registration_path, class: 'store-button', method: :get
               - else
-                %button.store-button{class:"add_giftpack_to_cart_#{product.id}", onclick: "addToCart( #{product.id}, true )"} Add to cart
+                %button.store-button{class:"add_giftpack_to_cart_#{product.id}", onclick: "addToCart( #{product.id}, 'giftpack' )"} Add to cart
             %td
               -# DISPLAY GIFTPACK PRICE
               .new-price{class:"#{product.id}_new_giftpack_price", style: 'display: inline-block; margin-right: 10px;'}
               .store-price{class:"#{product.id}_giftpack_price", style: 'display: inline-block;'}= Money.new( product.giftpack_price_cents ).format
 
-      - if !current_user || !current_user.has_product?(product.id)
-        %p.diminutive{style: "color: grey !important;"} Purchase access to all DRM-free formats.
-      - else
-        %p.diminutive{style: "color: grey !important;"} All downloads are DRM-free.
 
-    - if product.has_physical_release?
-      .physical-widget
-        %table
-          %tr
-            %td{colspan: 2}
-              %strong Paperback
-          %tr
-            %td
-              %form.center{action: "https://www.paypal.com/cgi-bin/webscr", method: "post", target: "_top"}
-                %input{type: "hidden", name: "cmd", value: "_s-xclick"}
-                %input{type: "hidden", name: "hosted_button_id", value: product.physical_code}
-                %input.pp-button{type: "image", src: "https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_107x26.png", border: "0", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
-            %td
-              %span= "#{ Money.new( product.physical_price_cents ).format }"
 
-        %p.diminutive{style: "color: grey !important;"} Price does not include tax or shipping.
+
+      // PHYSICAL BOOK ORDERING
+      - if product.has_physical_release?
+        .physical-area
+          .store-format.embolden.center Paperback
+          %p.diminutive{style: "color: grey !important;"} Requires additional shipping fee
+          %table
+            %tr
+              %td{colspan: 2}
+                %strong Single copy
+
+              - if !current_user
+                %td{style: 'width: 50%;'}
+                  -# BUTTONS TO ADD TO CART OR SIGN IN
+                  %div{id:"sign_in_#{product.id})"}= button_to 'Sign in to order!', new_user_registration_path, class: 'store-button', method: :get
+
+              - else
+                %td
+                  .center
+                    %button.store-button{class:"add_physical_book_to_cart_#{product.id}", onclick: "addToCart( #{product.id}, 'physical' )"} Add to cart
+
+              %td
+                -# DISPLAY PRICE
+                .store-price{class:"#{product.id}_physical_price", style: 'display: inline-block;'}= Money.new( product.physical_price_cents ).format
+
+      %br
+      %p.diminutive{style: "color: grey !important;"} Prices are expressed in CAD and do not include tax.

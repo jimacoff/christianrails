@@ -22,6 +22,11 @@ class Store::StagedPurchase < ApplicationRecord
                                                    type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK).each do |sp|
       total += sp.product.giftpack_price_cents
     end
+
+    Store::StagedPurchase.includes(:product).where(user_id: user_id,
+                                                   type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE).each do |sp|
+      total += sp.product.physical_price_cents
+    end
     total
   end
 
@@ -31,6 +36,21 @@ class Store::StagedPurchase < ApplicationRecord
 
   def gift_pack?
     type_id == TYPE_DIGITAL_GIFT_PACK
+  end
+
+  def physical_single?
+    type_id == TYPE_PHYSICAL_SINGLE
+  end
+
+  # static
+
+  def self.total_cart_shipping_for( user_id )
+    total_shipping = 0
+    Store::StagedPurchase.includes(:product).where(user_id: user_id,
+                                                   type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE).each do |sp|
+      total_shipping += sp.product.shipping_cost_cents
+    end
+    total_shipping
   end
 
 end

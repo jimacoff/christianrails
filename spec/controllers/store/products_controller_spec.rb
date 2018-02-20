@@ -109,7 +109,7 @@ RSpec.describe Store::ProductsController, type: :controller do
           author: "New author",
           short_desc: "Better short desc",
           long_desc: "Better longer description",
-          price_cents: 16_66,
+          price: 16.66,
           rank: 2,
           coming_soon: false
         }

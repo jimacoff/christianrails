@@ -15,7 +15,7 @@ function hideCartWidget() {
 }
 
 function possiblyHideCartWidget() {
-  if(Object.keys( cart.books ).length + Object.keys( cart.giftpacks ).length === 0) {
+  if(Object.keys( cart.books ).length + Object.keys( cart.giftpacks ).length + Object.keys( cart.physicalbooks ).length === 0) {
     hideCartWidget();
   }
 }
@@ -36,42 +36,59 @@ function hidePriceOfGiftpack(product_id)  { $("." + product_id + "_price").fadeO
 function showGiftpackInCartWidget(product_id) { $(".cartwidget_giftpack_item_"  + product_id).fadeIn().css("display","inline-block").addClass('totalable'); }
 function hideGiftpackInCartWidget(product_id) { $(".cartwidget_giftpack_item_"  + product_id).fadeOut().removeClass('totalable'); }
 
+// physical book
+function enableAddPhysicalBookToCartButton(product_id)  { $('.add_physical_book_to_cart_' + product_id).prop("disabled", false); $('.add_physical_book_to_cart_' + product_id).text("Add to cart"); }
+function disableAddPhysicalBookToCartButton(product_id) { $('.add_physical_book_to_cart_' + product_id).prop("disabled", true);  $('.add_physical_book_to_cart_' + product_id).text("Added to cart"); }
+function showPriceOfPhysicalBook(product_id)  { $("." + product_id + "_physical_price").fadeIn();  $("." + product_id + "_new_physical_price").fadeIn(); }
+function hidePriceOfPhysicalBook(product_id)  { $("." + product_id + "_physical_price").fadeOut(); $("." + product_id + "_new_physical_price").fadeOut(); }
+function showPhysicalBookInCartWidget(product_id) { $(".cartwidget_physical_item_"  + product_id).fadeIn().css("display","inline-block").addClass('totalable'); }
+function hidePhysicalBookInCartWidget(product_id) { $(".cartwidget_physical_item_"  + product_id).fadeOut().removeClass('totalable'); }
 
-function addToCart(product_id, giftpack = false) {
+
+function addToCart(product_id, type = null) {
   showCartWidget();
-  if ( !giftpack ) {
+  if ( !type ) {
     disableAddToCartButton(product_id);
     showProductInCartWidget(product_id);
-  } else {
+  } else if (type === "giftpack") {
     disableAddGiftpackToCartButton(product_id);
     showGiftpackInCartWidget(product_id);
+  } else if (type === "physical"){
+    disableAddPhysicalBookToCartButton(product_id);
+    showPhysicalBookInCartWidget(product_id);
   }
-  createStagedPurchase(product_id, giftpack);
+  createStagedPurchase(product_id, type);
 }
 
 // adds it to the JS cart but does not actually create the staged purchase
-function showProductInCart(product_id, giftpack = false) {
+function showProductInCart(product_id, type = null) {
   showCartWidget();
-  if ( !giftpack ) {
+  if ( !type ) {
     disableAddToCartButton(product_id);
     showProductInCartWidget(product_id);
-  } else {
+  } else if (type === "giftpack") {
     disableAddGiftpackToCartButton(product_id);
     showGiftpackInCartWidget(product_id);
+  } else if (type == "physical") {
+    disableAddPhysicalBookToCartButton(product_id);
+    showPhysicalBookInCartWidget(product_id);
   }
   updatePrices();
   updateUserbarCartLink();
 }
 
-function removeFromCart(product_id, giftpack = false) {
-  if ( !giftpack ) {
+function removeFromCart(product_id, type = null) {
+  if ( !type ) {
     enableAddToCartButton(product_id);
     hideProductInCartWidget(product_id);
-  } else {
+  } else if (type === "giftpack") {
     enableAddGiftpackToCartButton(product_id);
     hideGiftpackInCartWidget(product_id);
+  } else if (type == "physical") {
+    enableAddPhysicalBookToCartButton(product_id);
+    hidePhysicalBookInCartWidget(product_id);
   }
-  removeStagedPurchase(product_id, giftpack);
+  removeStagedPurchase(product_id, type);
 }
 
 function updatePrices() {
@@ -92,7 +109,7 @@ function updatePrices() {
 }
 
 function updateUserbarCartLink() {
-  var n_cart_items = Object.keys( cart.books ).length + Object.keys( cart.giftpacks ).length;
+  var n_cart_items = Object.keys( cart.books ).length + Object.keys( cart.giftpacks ).length + Object.keys( cart.physicalbooks ).length;
   if( n_cart_items > 0 ) {
     $('.cart-link-highlight').text("Cart (" + n_cart_items + ")");
     $('.cart-dot').show();
@@ -115,17 +132,30 @@ function drawNewPrices(price_data) {
   // the checkout total
   var cartWidgetItems = $("[class^='cartwidget_price_']"),
       cartWidgetGifts = $("[class^='cartwidget_giftpack_price_']"),
+      cartWidgetBooks = $("[class^='cartwidget_physical_price_']"),
       subtotal = 0,
       total = 0,
-      shipping = 0,
+      shipping = (cart.prices.total_shipping / 100.0),
+      smallTaxTotal = 0,
+      largeTaxTotal = 0,
       tax = 0;
-  var allItems = $.merge( cartWidgetItems, cartWidgetGifts );
 
-  allItems.each(function( i ) {
-    if( $($(this).parents()[2]).hasClass("totalable") ){
+  // separate taxable totals
+  // 5% physical books
+  cartWidgetBooks.each(function (j) {
+    if( $($(this).parents()[2]).hasClass("totalable") ) {
+      smallTaxTotal += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
       subtotal += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
     }
   });
+  // 15% digital books
+  $.merge( cartWidgetItems, cartWidgetGifts).each(function (j) {
+    if( $($(this).parents()[2]).hasClass("totalable") ){
+      largeTaxTotal += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
+      subtotal += Number( this.innerHTML.replace(/[^0-9\.]+/g,"") );
+    }
+  });
+
 
   // display total. display differently if discount
   if(price_data.total_discount > 0) {
@@ -138,12 +168,11 @@ function drawNewPrices(price_data) {
   }
   $('.subtotal_price').text("$" + subtotal.toFixed(2));
 
-  // add tax calculation
-  // 15% for eBooks
-  tax = subtotal * 0.15
-  $('.tax_amount').text("$" + tax.toFixed(2));
 
-  // TODO 5% for physical books
+  // add tax calculation
+  // 15% for eBooks & 5% for physical books
+  tax = ( smallTaxTotal * 0.05 ) + ( largeTaxTotal * 0.15 );
+  $('.tax_amount').text("$" + tax.toFixed(2));
 
 
   // add shipping calculation
@@ -159,6 +188,7 @@ function drawNewPrices(price_data) {
   total = subtotal + tax + shipping;
   $('.total_price').text("$" + total.toFixed(2));
 
+
   // update the satisfiable discounts in the cart items
   $.each(price_data, function(k, v) {
     if(k !== 'discount_price'){
@@ -173,22 +203,36 @@ function drawNewPrices(price_data) {
   });
 }
 
-function createStagedPurchase(product_id, giftpack = false) {
+function createStagedPurchase(product_id, type = null) {
+  var typeId;
+  if (!type) {
+    typeId = 0;
+  } else if (type === "giftpack") {
+    typeId = 1;
+  } else if (type === "physical") {
+    typeId = 2;
+  }
+
   request = void 0;
   request = $.ajax({
       type: 'POST',
       url: '/store/staged_purchases.json',
       dataType: 'json',
-      data: { 'staged_purchase': {
-        'product_id' : product_id,
-        'type_id' : giftpack ? 1 : 0 } }
+      data: {
+        'staged_purchase': {
+          'product_id' : product_id,
+          'type_id' : typeId
+        }
+      }
     });
 
   request.done(function(data, textStatus, jqXHR) {
     if( data['type_id'] === 0) {
       cart.books[data['product_id']] = data['id'];
-    } else {
+    } else if (data['type_id'] === 1) {
       cart.giftpacks[data['product_id']] = data['id'];
+    } else if (data['type_id'] === 2) {
+      cart.physicalbooks[data['product_id']] = data['id'];
     }
     updatePrices();
     updateUserbarCartLink();
@@ -199,8 +243,8 @@ function createStagedPurchase(product_id, giftpack = false) {
   });
 }
 
-function removeStagedPurchase(product_id, giftpack = false) {
-  spID = giftpack ? cart.giftpacks[product_id] : cart.books[product_id];
+function removeStagedPurchase(product_id, type = null) {
+  spID = !type ? cart.books[product_id] : ( type === "giftpack" ? cart.giftpacks[product_id] : cart.physicalbooks[product_id] ) ;
   request = void 0;
   request = $.ajax({
       type: 'DELETE',
@@ -209,10 +253,12 @@ function removeStagedPurchase(product_id, giftpack = false) {
     });
 
   request.done(function(data, textStatus, jqXHR) {
-    if( data['type_id'] === 0) {
+    if( data['type_id'] === 0 ) {
       delete cart.books[data['product_id']];
-    } else {
+    } else if ( data['type_id'] === 1 ) {
       delete cart.giftpacks[data['product_id']];
+    } else {
+      delete cart.physicalbooks[data['product_id']];
     }
     possiblyHideCartWidget();
     updatePrices();

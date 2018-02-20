@@ -4,12 +4,13 @@ class Store::DealzoneController < Store::StoreController
 
   before_action :get_products, :get_cart
   before_action :get_sample_blog_posts, only: [:index]
-  before_action :get_staged_purchases,  only: [:check_out]
+  before_action :get_staged_purchases,  only: [:check_out, :complete_order]
 
   skip_before_action :verify_is_admin
 
   ## PUBLIC
 
+  # GET - main page of site
   def index
     # fetch Diamond Find info for the Diamond Machine
     @diamondfind = Woods::Story.where(name: "Diamond Find").first
@@ -45,14 +46,14 @@ class Store::DealzoneController < Store::StoreController
     @available_gifts = @all_products.where(free_on_signup: false)
   end
 
-  # a dedicated page for viewing your cart & checking out
+  # GET - a dedicated page for viewing your cart & checking out
   def cart
     unless current_user
       redirect_to root_path
     end
   end
 
-  ## JSON
+  ## GET - JSON
   def updated_prices
     if current_user
       respond_to do |format|
@@ -71,10 +72,12 @@ class Store::DealzoneController < Store::StoreController
         target_urls[:abort]    = root_url
 
         desc = generate_description_for_checkout
-        total_cost_cents = calculate_total_cost_for_user
-        total_cost          = ( total_cost_cents.to_f / 100.to_f ).round(2)
-        total_cost_with_tax = ( (total_cost_cents * ( Store::DigitalPurchase::TAX_RATE + 1 ) ) / 100.to_f ).round(2)
-        tax_formatted       = ( (total_cost_cents *   Store::DigitalPurchase::TAX_RATE )       / 100.to_f ).round(2)
+        total_cost_cents    = calculate_total_cost_for_user
+        total_tax           = calculate_total_tax_for_user
+
+        total_cost          = ( total_cost_cents.to_f / 100.to_f ).round(2) # as decimal
+        tax_formatted       = ( total_tax / 100.to_f ).round(2)
+        total_cost_with_tax = ( (total_cost_cents + total_tax) / 100.to_f ).round(2)
 
         @payment = PayPal::SDK::REST::Payment.new({
           intent: 'sale',
@@ -129,16 +132,18 @@ class Store::DealzoneController < Store::StoreController
         staged = current_user.staged_purchases
         gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
         discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
-        tax  = (gross_price - discount) * Store::DigitalPurchase::TAX_RATE
-        total = gross_price - discount + tax
+        tax  = calculate_total_tax_for_user
+        shipping = calculate_total_shipping_for_user
+        total = gross_price - discount + tax + shipping
 
         order = Store::Order.create(user: current_user,
                                     payer_id: params[:PayerID], payment_id: params[:paymentId],
-                                    discount_cents: discount, tax_cents: tax, total_cents: total)
+                                    discount_cents: discount, tax_cents: tax, total_cents: total, shipping_cost_cents: shipping)
         for_self  = false
         gift_pack = false
+        phys_single = false
 
-        # turn all StagedPurchases into DigitalPurchases or FreeGifts, depending
+        # turn all StagedPurchases into DigitalPurchases, FreeGifts or DigitalPurchases, depending
         staged.each do |staged_purchase|
           if staged_purchase.single?
             for_self = true
@@ -163,14 +168,32 @@ class Store::DealzoneController < Store::StoreController
                                       giver: current_user,
                                       origin: "Gift pack")
             end
+          elsif staged_purchase.physical_single?
+            phys_single = true
+            Store::PhysicalPurchase.create(product: staged_purchase.product,
+                                           order: order,
+                                           price: staged_purchase.product.physical_price_cents,
+                                           type_id: Store::PhysicalPurchase::TYPE_PHYSICAL_SINGLE)
           end
 
           staged_purchase.destroy
         end
 
         # custom note based on what they bought
-        if for_self && gift_pack
+        if phys_single && for_self && gift_pack
+          note = "Success! Your shipment will be fulfilled shortly & you can find your digital copy and gift copies below."
+
+        # 2 of a kind
+        elsif phys_single && for_self
+          note = "Success! Your shipment will be fulfilled shortly & you can read your digital copy immediately below."
+        elsif phys_single && gift_pack
+          note = "Success! Your shipment will be fulfilled shortly & you can send your gifts below."
+        elsif for_self && gift_pack
           note = "Success! Download your books and send your gifts below."
+
+        # one kind
+        elsif phys_single
+          note = "Success! Your shipment will be fulfilled shortly."
         elsif for_self
           note = "Success! Download your books below & share a free copy with a friend."
         elsif gift_pack
@@ -244,25 +267,57 @@ class Store::DealzoneController < Store::StoreController
     end
 
     def get_staged_purchases
-      @staged_products  = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE )    : []
-      @staged_giftpacks = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK ) : []
+      @staged_products       = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE )    : []
+      @staged_giftpacks      = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK ) : []
+      @staged_physical_books = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE )   : []
     end
 
     def generate_description_for_checkout
-      desc = ""
-      desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBook' if @staged_products.size > 0
-      desc += 's' if @staged_products.size > 1
-      desc += " & " if desc != "" && @staged_giftpacks.size > 0
-      desc += @staged_giftpacks.collect{ |s| s.product.title + " 5-pack" }.join(' + ') if @staged_giftpacks.size > 0
-      desc
+      if @staged_products.size + @staged_giftpacks.size + @staged_physical_books.size > 3
+        desc = "Assorted books"
+      else
+        desc = ""
+        desc += @staged_products.collect{  |s| s.product.title }.join(' + ') + ' eBook' if @staged_products.size > 0
+        desc += 's' if @staged_products.size > 1
+        desc += " & " if desc != "" && @staged_giftpacks.size > 0
+        desc += @staged_giftpacks.collect{ |s| s.product.title + " 5-pack" }.join(' + ') if @staged_giftpacks.size > 0
+        desc += " & " if desc != "" && @staged_physical_books.size > 0
+        desc += @staged_physical_books.collect{ |s| s.product.title + " paperback" }.join(' + ') if @staged_physical_books.size > 0
+        desc
+      end
     end
 
     def calculate_total_cost_for_user
       total_cost = 0
       @staged_products.map  { |st| total_cost += st.product.price_cents }
       @staged_giftpacks.map { |sg| total_cost += sg.product.giftpack_price_cents }
+      @staged_physical_books.map { |sg| total_cost += sg.product.physical_price_cents + sg.product.shipping_cost_cents }
       total_cost -= Store::PriceCombo.total_cart_discount_for( current_user.id )
       total_cost
+    end
+
+    def calculate_total_tax_for_user
+      small_tax = 0
+      large_tax = 0
+      large_taxable_amount = 0
+
+      # large tax, discounted
+      digital_products = @staged_products + @staged_giftpacks
+      @staged_products.map       { |st| large_taxable_amount += st.product.price_cents          }
+      @staged_giftpacks.map      { |sg| large_taxable_amount += sg.product.giftpack_price_cents }
+      discount = Store::PriceCombo.total_cart_discount_for( current_user.id )
+      large_tax = (large_taxable_amount - discount) * Store::DigitalPurchase::TAX_RATE
+
+      # small tax
+      @staged_physical_books.map { |sg| small_tax += sg.product.physical_price_cents * Store::PhysicalPurchase::TAX_RATE }
+
+      small_tax + large_tax
+    end
+
+    def calculate_total_shipping_for_user
+      total_shipping = 0
+      @staged_physical_books.map { |sp| total_shipping += sp.product.shipping_cost_cents }
+      total_shipping
     end
 
 end

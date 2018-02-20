@@ -8,5 +8,5 @@
       %span{ class: "cartwidget-title" }= "#{prod.title}"
     .cartwidget-details-line2
       %span{ class: "cartwidget-itemtype" }= "eBook Gift 5-Pack"
-      %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_giftpack_#{prod.id}", onclick: "removeFromCart(#{prod.id}, true)"}= "X"
+      %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_giftpack_#{prod.id}", onclick: "removeFromCart(#{prod.id}, 'giftpack')"}= "X"
       %span{ class: "cartwidget_giftpack_price_#{prod.id} cartwidget-price" }= Money.new( prod.giftpack_price ).format
