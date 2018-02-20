@@ -173,6 +173,17 @@ RSpec.describe Store::DealzoneController, type: :controller do
         post 'check_out'
       }.to change(Log, :count).by( 1 )
       expect( response ).to_not redirect_to( root_path )
+
+      sent_subtotal = assigns[:payment].transactions[0].amount.details.subtotal
+      sent_tax      = assigns[:payment].transactions[0].amount.details.tax
+      sent_total    = assigns[:payment].transactions[0].amount.total
+
+      digital_prices = froom_product.price_cents + vroom_product.price_cents + brool_product.giftpack_price_cents
+      physical_prices = physi_product.physical_price_cents
+
+      expect( sent_subtotal ).to eq( ( ( digital_prices + physical_prices + physi_product.shipping_cost_cents ) / 100.0 ).round(2).to_s )
+      expect( sent_tax ).to eq( (((digital_prices * Store::DigitalPurchase::TAX_RATE) + (physical_prices * Store::PhysicalPurchase::TAX_RATE)) / 100.0 ).round(2).to_s + "0" )
+      expect( sent_total ).to eq( (sent_subtotal.to_f + sent_tax.to_f).to_s )
     end
 
     it "redirects home if no staged purchases" do
