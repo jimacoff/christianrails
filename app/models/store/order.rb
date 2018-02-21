@@ -1,6 +1,6 @@
 class Store::Order < ApplicationRecord
-  has_many   :digital_purchases,   inverse_of: :order
-  has_many   :physical_purchases,  inverse_of: :order
+  has_many   :digital_purchases,   inverse_of: :order, dependent: :destroy
+  has_many   :physical_purchases,  inverse_of: :order, dependent: :destroy
 
   belongs_to :price_combo,         inverse_of: :orders
   belongs_to :user,                inverse_of: :orders

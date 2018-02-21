@@ -215,7 +215,13 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( Store::StagedPurchase.count  ).to eq(0)
+
       expect( Store::DigitalPurchase.count ).to eq(2)
+      digital_purchase1 = Store::DigitalPurchase.all[0]
+      expect( digital_purchase1.price_cents ).to eq(3_00)
+      digital_purchase2 = Store::DigitalPurchase.all[1]
+      expect( digital_purchase2.price_cents ).to eq(7_00)
+
       expect( Store::FreeGift.count        ).to eq(2)
       expect( Store::Order.count ).to eq(1)
     end
@@ -226,8 +232,12 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( Store::StagedPurchase.count  ).to eq(0)
+
       expect( Store::DigitalPurchase.count ).to eq(1)
-      expect( Store::FreeGift.count        ).to eq(5)
+      digital_purchase = Store::DigitalPurchase.take
+      expect( digital_purchase.price_cents ).to eq(14_44) # giftpack price
+
+      expect( Store::FreeGift.count ).to eq(5)
       expect( Store::Order.count ).to eq(1)
     end
 
@@ -237,9 +247,12 @@ RSpec.describe Store::DealzoneController, type: :controller do
       get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
 
       expect( Store::StagedPurchase.count  ).to eq(0)
-      expect( Store::PhysicalPurchase.count ).to eq(1)
-      expect( Store::Order.count ).to eq(1)
 
+      expect( Store::PhysicalPurchase.count ).to eq(1)
+      physical_purchase = Store::PhysicalPurchase.take
+      expect( physical_purchase.price_cents ).to eq(10_00)
+
+      expect( Store::Order.count ).to eq(1)
       order = Store::Order.take
       expect( order.shipping_cost_cents ).to eq( 5_00 )
       expect( order.tax_cents ).to eq( 50 )  # $10 * 5%

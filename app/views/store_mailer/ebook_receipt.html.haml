@@ -3,26 +3,39 @@
 %p= @order.created_at.strftime("%B %e, %Y  %I:%M %p")
 %p= @order.payment_id
 
-%ul
-  - @order.digital_purchases.each do |digital_purchase|
-    %li
-      %p
-        - type = digital_purchase.single? ? "ebook" : "5-pack"
-        %span= "#{digital_purchase.product.title} #{type}: "
-        %span= Money.new( digital_purchase.price_cents ).format
+%hr
 
-      - if @order.discount > 0
-        %p
-          %span= "Discount: "
-          %span= Money.new( @order.discount_cents ).format
+- @order.digital_purchases.each do |digital_purchase|
+  %p
+    - type = digital_purchase.single? ? "ebook" : "5-pack"
+    %span= "#{digital_purchase.product.title} #{type}: "
+    %span= Money.new( digital_purchase.price_cents ).format
 
-      %p
-        %span= "Tax: "
-        %span= Money.new( @order.tax_cents ).format
+- @order.physical_purchases.each do |physical_purchase|
+  %p
+    - type = physical_purchase.single? ? "paperback" : "multipack"
+    %span= "#{physical_purchase.product.title} #{type}: "
+    %span= Money.new( physical_purchase.price_cents ).format
 
-      %p
-        %span= "Total: "
-        %span= Money.new( @order.total_cents ).format
+- if @order.discount > 0
+  %p
+    %span= "Discount: "
+    %span= Money.new( @order.discount_cents ).format
+
+%p
+  %span= "Tax: "
+  %span= Money.new( @order.tax_cents ).format
+
+- if @order.shipping_cents > 0
+  %p
+    %span= "Shipping: "
+    %span= Money.new( @order.shipping_cost_cents ).format
+
+%p
+  %span= "Total: "
+  %span= Money.new( @order.total_cents ).format
+
+%hr
 
 %p All prices expressed in CAD.
 

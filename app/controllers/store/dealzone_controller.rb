@@ -149,7 +149,7 @@ class Store::DealzoneController < Store::StoreController
             for_self = true
             Store::DigitalPurchase.create(product: staged_purchase.product,
                                           order: order,
-                                          price: staged_purchase.product.price_cents,
+                                          price_cents: staged_purchase.product.price_cents,
                                           type_id: Store::DigitalPurchase::TYPE_DIGITAL_SINGLE)
             # give them a giftable spare
             Store::FreeGift.create( product: staged_purchase.product,
@@ -160,7 +160,7 @@ class Store::DealzoneController < Store::StoreController
             gift_pack = true
             Store::DigitalPurchase.create(product: staged_purchase.product,
                                           order: order,
-                                          price: staged_purchase.product.giftpack_price_cents,
+                                          price_cents: staged_purchase.product.giftpack_price_cents,
                                           type_id: Store::DigitalPurchase::TYPE_DIGITAL_GIFT_PACK)
             # give them the gifts to give
             Store::DigitalPurchase::GIFTPACK_SIZE.times do
@@ -172,7 +172,7 @@ class Store::DealzoneController < Store::StoreController
             phys_single = true
             Store::PhysicalPurchase.create(product: staged_purchase.product,
                                            order: order,
-                                           price: staged_purchase.product.physical_price_cents,
+                                           price_cents: staged_purchase.product.physical_price_cents,
                                            type_id: Store::PhysicalPurchase::TYPE_PHYSICAL_SINGLE)
           end
 
