@@ -1,0 +1,17 @@
+%h1 Physical Purchases
+
+%table
+  %thead
+    %tr
+      %th Product
+      %th Purchased by
+      %th Date
+
+  %tbody
+    - @physical_purchases.each do |physical_purchase|
+      %tr
+        %td= physical_purchase.product.title
+        %td= physical_purchase.order.user.username
+        %td= physical_purchase.created_at
+
+= render "admin/admin_link"
