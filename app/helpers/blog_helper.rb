@@ -11,6 +11,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20180224_new_stuff_in_the_works",
+        category: WRITING_AND_PUBLISHING,
+        tags: ["writing", "new things", "self-publishing", "Geequinox", "conventions", "wolfOS"]
+      },
+      {
         title: "20171211_holiday_sale",
         category: WRITING_AND_PUBLISHING,
         tags: ["deals", "Ghostcrime", "Snapback", "self-publishing"]
