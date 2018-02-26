@@ -1,7 +1,7 @@
 !!! 5
 
-- computers_blog_title = @post ? @post[:title] : "Do you like COMPUTERS"
-- computers_blog_desc = "A blog about them that I have, if so"
+- computers_smart_title = @post ? @post[:title] : "Do you like COMPUTERS"
+- computers_smart_desc  = @post ? @post[:desc]  : "A blog about them that I have, if so"
 
 %html
   %head
@@ -17,17 +17,17 @@
     = csrf_meta_tags
 
     %meta{ property: "og:image", content: "https://www.christiandewolf.com/computers-cover.png" }
-    %meta{ property: "og:title", content: "#{ computers_blog_title }" }
+    %meta{ property: "og:title", content: "#{ computers_smart_title }" }
     %meta{ property: "og:url",   content: "https://www.christiandewolf.com/computers" }
-    %meta{ property: "og:description", content: "#{ computers_blog_desc }" }
+    %meta{ property: "og:description", content: "#{ computers_smart_desc }" }
 
     %meta{ name: "twitter:card", content: "summary" }
     %meta{ name: "twitter:site", content: "@dewolfchristian" }
-    %meta{ name: "twitter:title", content: "#{ computers_blog_title }" }
-    %meta{ name: "twitter:description", content: "#{ computers_blog_desc }" }
+    %meta{ name: "twitter:title", content: "#{ computers_smart_title }" }
+    %meta{ name: "twitter:description", content: "#{ computers_smart_desc }" }
     %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/computers-cover.png" }
 
-    = favicon_link_tag "tumbler.ico"
+    = favicon_link_tag "computers.ico"
 
   %body.noselect
 

@@ -28,6 +28,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   font-style: normal;
 }
 
+h2 {
+  margin-top: 40px;
+}
+
 .computers-post {
   a {
     font-weight: bold;
@@ -93,7 +97,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 }
 
 #archive-wrapper {
-  max-width: 275px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
