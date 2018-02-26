@@ -428,7 +428,7 @@ th {
   color: $dark-gray;
 }
 
-#mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail {
+#mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers {
   text-align: center;
 }
 
@@ -544,10 +544,10 @@ th {
 
   // }
 
-  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail {
+  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers {
     display: block;
   }
-  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail {
+  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail, #desktop-computers {
     display: none;
   }
   .store-image {
@@ -605,10 +605,10 @@ th {
     float: left;
   }
 
-  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail {
+  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers {
     display: none;
   }
-  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail {
+  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail, #desktop-computers {
     display: block;
   }
 
