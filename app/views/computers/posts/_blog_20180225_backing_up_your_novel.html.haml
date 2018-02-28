@@ -3,13 +3,11 @@
   %strong.emphasis getting stolen
   before you can finish writing it?
 
-%p I do.
+%p I do. It's not completely rational. No one's going to want to finish it themselves and publish it. No, most likely it'd be someone I've wronged over the years finally taking sweet vengeance, or an unlucky bout of ransomware.
 
-%p It's not completely rational. No one's going to want to finish it themselves and publish it. No, most likely it'd be someone I've wronged over the years finally taking sweet vengeance, or an unlucky bout of ransomware.
+%p I bring this up because I want to talk about backups today. How are you backing up your in-progress novel? Are you doing it after every writing session?
 
-%p I bring this up because I want to talk about backups today. How are you backing up your novel in progress? Are you doing it after every writing session?
-
-%p You might not even be writing a novel. I'm not judging you, but I warn you that the rest of this post, which is targeting people who are, may be lost on you.
+%p You might not even be writing a novel. I'm not judging you, but I warn you that the rest of this post, which is targeted at people who are, may be lost on you.
 
 %p Without further ado, here is the rest of the post.
 
@@ -34,18 +32,18 @@
   No, see... the email server is owned by a different huge corporation! We've already established that you're paranoid about that sort of thing, because that's
   %strong.emphasis potentially how novels get stolen.
 
-%p So stop emailing your novel to yourself, because you'll end up with a huge folder of old versions, and you also might accidentally forward it to somebody who shouldn't see it. You've definitely made mistakes of that severity before.
+%p So stop emailing your novel to yourself, because, at best, you'll end up with a huge folder of old versions, and you also might accidentally forward it to somebody who shouldn't have it. You've definitely made mistakes of that severity before.
 
 /// EXTERNAL HARD DRIVE
 %h2 External hard drive & fireproof safe
 
-%p If you want to keep everything so it's under your control, and ensure your data can survive a computer failure, you're probably looking at an external hard drive. Get an SSD for its data integrity, but don't worry too much about size. This is only for your most important backups. I don't doubt you have terabytes worth of data that's valuable to you, but I'm guessing the really, really important stuff is small.
+%p If you want to keep everything so it's under your control, and ensure your data can survive a computer failure, you're probably looking at an external hard drive. Get an SSD for its data integrity, but don't worry too much about size. This is only for your most important backups. I don't doubt you have terabytes worth of data that's valuable to you, but I'm guessing the really, really important stuff, like your novel, is small.
 
 %p Now, I've certainly got enough enemies at this point that I've mentally prepared for the consequences of getting firebombed. You? At any rate, if your data's important enough -- and we all know how important our novels are -- you're going to want it in a fireproof safe.
 
-%p So get one of those, and make it a habit to copy your novel files to your external drive and lock it away after every session.
+%p So get one of those, and make it a habit to copy your novel to your external drive and lock it away after every session.
 
-%p The problem with this solution is you're not going to do that. It's too much hassle to connect the drive, and feels too paranoid to lock it up every day. Hard to justify to loved ones. Plus, you'll still end up with that folder of files called Novel_NEW.doc, Novel_NEWEST.doc, etc. You'll end up hating the hard drive.
+%p The problem with this solution is you're not going to do that. It's too much hassle to connect up the drive, and feels too paranoid to lock it up every day. Hard to justify to loved ones. Plus, you'll still end up with that folder of files called Novel_NEW.doc, Novel_NEWEST.doc, etc. You'll end up hating the hard drive.
 
 /// RASPBERRY PI
 %h2 Raspberry Pi & fireproof safe
@@ -58,21 +56,28 @@
   as your Git server.
 
 %p
-  Never used Git? It puts your files under version control, which is like turning on Track Changes folder-wide. Every line you modify is tracked, and at the end of your session, you can review each change, packaging them all together into a "commit." That's what you'll push to your Git server, which will store a complete history of all commits and your project's current state. It's designed to be used on the command line, but if you aren't comfortable, there are plenty of graphical Git clients like
+  Did I just lose you? I didn't say the solution was going to be non-technical, but since you've read this far into a blog that's ostensibly
+  %em about
+  computers, you might as well consider this option.
+
+%p
+  If you've never used Git: it puts your files under version control, which is like turning on Track Changes folder-wide. Every line you modify is recorded, and at the end of your session, you can review each change, packaging them all together into a "commit." Your external Git server will store a complete history of all commits and your project's current state, and you can push your latest version to it -- wirelessly -- in seconds. Git's designed to be used on the command line, but if you aren't comfortable with that, there are plenty of graphical Git clients like
   = link_to "SourceTree", "https://www.sourcetreeapp.com", title: "SourceTree Git client"
   that'll help you view and commit your daily changes.
 
-%p Start by getting yourself a Raspberry Pi, either one with built-in wireless capability or an older one into which you'll plug a wireless USB dongle. Also make sure the SD card that acts as the Pi's hard disk is big enough to store your most valuable files. This may seem like a lot of things to buy, but the Raspberry Pi is pretty cheap, and with those extras, plus a case and power supply for the Pi, you're probably looking at a comparable price to a quality external hard drive.
+%p Start by getting yourself a Raspberry Pi, either one with built-in wireless capability or an older one into which you'll plug a wireless USB dongle. Make sure the SD card that acts as the Pi's hard disk is big enough to store your most valuable files. You'll also need a power supply for the Pi and probably a small case for it. This may seem like a lot of things to buy, but the Raspberry Pi is pretty cheap, and even with those extras, you're looking at a comparable price to a quality external hard drive.
 
-%p Then run your Raspberry Pi from inside the fireproof box! Keep the box open during the Pi's operation, and when you're done committing your changes, unplug the Pi and close the box for the night. It's easy enough to work into a routine, and doesn't look paranoid enough that your loved ones will ridicule you for having mental illness.
+%p Once you've got the Raspberry Pi up and running & hooked into your wireless network, initialize a bare Git repo on it and set it as your novel's Git remote. Commit the whole project in its current state, and you're all backed up.
+
+%p Then run your Raspberry Pi from inside your fireproof safe! Keep the safe open during the Pi's operation, and when you're done committing your changes, unplug the Pi and close the safe for the night. It's easy enough to work into a routine, and doesn't look paranoid enough that your loved ones will ridicule you for having mental illness.
 
 %p
   This solution's not perfect -- you have to
   %a{ href: "https://try.github.io/levels/1/challenges/1", title: "A Git tutorial" }
     = succeed "," do
       learn how to use Git
-  for one -- but once you start, you may find it's the best way to work on big projects. I know you'll love the feeling of having your project backed up and fireproofed in just a few seconds.
+  for one -- but once you start, you may find it's the best way to work on big projects. I know you'll love the feeling of having your novel backed up and fireproofed in just a few seconds.
 
 %p
   That, and the piece of mind that no one's going to
-  %strong.emphasis STEAL YOUR NOVEL.
+  %strong.emphasis STEAL IT.
