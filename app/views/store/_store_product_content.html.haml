@@ -32,7 +32,7 @@
             %td{style: 'width: 50%;'}
               -# BUTTONS TO ADD TO CART, DOWNLOAD OR SIGN IN
               - if !current_user
-                %div{id:"sign_in_#{product.id})"}= button_to 'Sign up to download!', new_user_registration_path, class: 'store-button', method: :get
+                %div{id:"sign_in_#{product.id})"}= button_to 'Create an account', new_user_registration_path, class: 'store-button', method: :get
               - elsif !current_user.has_product?(product.id)
                 %button.store-button{class:"add_to_cart_#{product.id}", onclick: "addToCart( #{product.id} )"} Add to cart
             %td
@@ -57,7 +57,7 @@
             %td
               -# BUTTON TO ADD GIFTPACK TO CART, OR SIGN IN
               - if !current_user
-                %div{id:"sign_in_#{product.id})"}= button_to 'Sign up to send gifts!', new_user_registration_path, class: 'store-button', method: :get
+                %div{id:"sign_in_#{product.id})"}= button_to 'Create an account', new_user_registration_path, class: 'store-button', method: :get
               - else
                 %button.store-button{class:"add_giftpack_to_cart_#{product.id}", onclick: "addToCart( #{product.id}, 'giftpack' )"} Add to cart
             %td
@@ -81,7 +81,7 @@
               - if !current_user
                 %td{style: 'width: 50%;'}
                   -# BUTTONS TO ADD TO CART OR SIGN IN
-                  %div{id:"sign_in_#{product.id})"}= button_to 'Sign in to order!', new_user_registration_path, class: 'store-button', method: :get
+                  %div{id:"sign_in_#{product.id})"}= button_to 'Create an account', new_user_registration_path, class: 'store-button', method: :get
 
               - else
                 %td

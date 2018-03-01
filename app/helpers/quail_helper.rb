@@ -56,6 +56,15 @@ module QuailHelper
         category: "Scaling up",
         tags:  ["scaling"],
         date: "20171008"
+      },
+      {
+        sequence: 7,
+        slug:  "cracking_the_physical_distribution_problem",
+        title: "Cracking the physical distribution problem",
+        desc:  "Obviously we're going to use software to do this.",
+        category: "Scaling up",
+        tags:  ["scaling"],
+        date: "20171008"
       }
     ]
   end

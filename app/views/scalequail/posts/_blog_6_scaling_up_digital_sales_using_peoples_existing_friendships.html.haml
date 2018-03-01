@@ -22,7 +22,7 @@
   to invite recipients to create accounts to accept their books, and a new interface to actually do it, but it wasn't too much trouble. If you're following along at home, and you have a dev to do all the technical stuff, just tell them to get it done and give them an arbitrary deadline. They prefer that.
 
 .center
-  = image_tag "scalequail/upgraded-store.png", class: "quailpost-image"
+  = image_tag "scalequail/upgraded-store.png", class: "quailpost-image", alt: "The upgraded store"
   %p.caption
     The exciting new ability to do
     %em multiple things
@@ -42,7 +42,7 @@
 %p With some more database modifications, a cart redesign, a store interface overhaul, changes to the receipts, and some extra automated tests to make sure everything's still working, this feature is done:
 
 .center
-  = image_tag "scalequail/upgraded-cart.png", class: "quailpost-image"
+  = image_tag "scalequail/upgraded-cart.png", class: "quailpost-image", alt: "An improved cart"
   %p.caption
     The cart, now capable of holding
     %em multiple types of the same product.
@@ -63,7 +63,7 @@
   that checks which gifts are getting stale, a gift nudger is easy to implement:
 
 .center
-  = image_tag "scalequail/gift-nudger.png", class: "quailpost-image"
+  = image_tag "scalequail/gift-nudger.png", class: "quailpost-image", alt: "Code for the gift nudger"
   %p.caption
     Sweet, sweet Ruby code. Open-sourced
     = succeed "." do
@@ -76,7 +76,4 @@
 
 %p
   Now that we've scaled digital distribution a bit, let's move onto physical. I've got boxes of books in my office that are taking up space, and I
-  %a.coming-soon{onclick: "comingSoon( $(this) );"} need them to go away,
-  preferably by converting them into money.
-  / TODO reactivate link when post is implemented
-  /%a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem"} need them to go away,
+  %a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem"} need to liquidate them.

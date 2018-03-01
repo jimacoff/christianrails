@@ -1,0 +1,49 @@
+%p
+  I'm
+  %a{href: "/scalequail/show_post?post=scaling_time_has_come"} scaling
+  my comedy business one piece at a time, and today I'm focusing on "amping up" the physical distribution of my novels.
+
+%p It's pretty bad right now.
+
+%p I have PayPal buttons for each book so buyers can order without creating an account like they'd do for eBook purchases. I'll get an email that one's been purchased, make a label, put it on an envelope (if I even have any that day! This business is a mess), and walk it to the post office. It's nearby, but the whole process is still a pain for a single sale.
+
+%p
+  Plus, if someone wants to buy, say,
+  = link_to "Ghostcrime", ghostcrime_path
+  and
+  = link_to "Snapback", snapback_path
+  together, they have to go to PayPal twice. Ridiculous!
+  %em And
+  because the user never creates an account, they can't consent to be emailed later for any promo blasts.
+
+%p There are ways that I can make the fulfillment process less time-consuming — dedicated label printer, etc — but it's still going to be some work for every sale. However, it can be effectively 5-10x less work if I'm selling 5-10 books at once! Libraries and bookstores are going to want multiple copies, so I need an easy way for them to order in bulk.
+
+%p
+  I've been apprehensive about this in the past. What if I get inundated with orders? What if I
+  %em don't have enough books
+  to fill them?
+
+%p
+  This is the most unintuitive thing to me about business. I got into this so I could wake up at noon and create things on my own time, not so I could do supply chain management. And yet, I'm looking to
+  %em actively cause
+  this problem for myself. So I'm going to solve it right now.
+
+%p With the printable book files on hand and the printing company just an email away, I can have more books within 5 business days. Plus, if orders are steady enough, I can anticipate when I'm going to run low and order more. So it turns out this isn't even a business problem, just a psychological one.
+
+%p
+  So I should definitely go ahead and implement a new bulk ordering interface and cost calculator, but first I want to overhaul my cart system to allow purchase of both physical and digital books at the same time, removing the one-off PayPal buttons. That way, I get the new user signup no matter what's purchased, and customers who want to support me can buy multiple books at once, including eBooks for themselves and the
+  %a{href: "/scalequail/show_post?post=scaling_up_digital_sales_using_peoples_existing_friendships"} gift multipacks
+  I introduced in the last scale.
+
+%p I'll implement this now:
+
+.center
+  = image_tag "scalequail/even-newer-cart.png", class: "quailpost-image", alt: "A new, improved cart"
+  %p.caption
+    Paperbacks and eBooks, together? That'll cost you.
+
+%p Ah, the shipping fees seem a little high, but the functionality is there now. I also ordered in some packing materials, ie. good envelopes, tape, bubble wrap and an office-quality labeler. These books have to go out fast and arrive looking professional.
+
+%p
+  With the bug in the shipping calculation now fixed, I'm going to tentatively rate this scale a 2x — it improves user experience and my userbase, but it's not so big. The bigger scale, and challenge, is the
+  %a.coming-soon{onclick: "comingSoon( $(this) );"} retailer portal.
