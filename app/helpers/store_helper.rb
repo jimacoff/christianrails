@@ -70,18 +70,14 @@ module StoreHelper
 
   # Adding items to cart based on a click
   def specialty_cart_add
-    if current_user
-
-      # Adding Ghostcrime from ghostCRM
-      if params[:gc] == "crm"
-        if @gc_product = Store::Product.where(title: "Ghostcrime").first
-          if @available_products.collect{ |x| x.id }.include?( @gc_product.id )
-            @gc_crm = "add-to-cart"
-            record_positive_event(Log::STORE, "Ghostcrime added to cart from CRM")
-          end
+    # Adding Ghostcrime from ghostCRM
+    if params[:gc] == "crm"
+      if @gc_product = Store::Product.where(title: "Ghostcrime").first
+        if current_user && @available_products.collect{ |x| x.id }.include?( @gc_product.id )
+          @gc_crm = "add-to-cart"
+          record_positive_event(Log::STORE, "Ghostcrime added to cart from CRM")
         end
       end
-
     end
   end
 
