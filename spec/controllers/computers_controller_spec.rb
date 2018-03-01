@@ -35,7 +35,7 @@ RSpec.describe ComputersController, type: :controller do
 
   describe "GET #show_post" do
     it "should allow access" do
-      get :show_post, params: {post: "20170527_git_for_authors" }, session: valid_session
+      get :show_post, params: {post: "20180225_backing_up_your_novel" }, session: valid_session
       expect( response ).to be_ok
     end
   end

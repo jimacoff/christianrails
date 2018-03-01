@@ -9,6 +9,7 @@ class Store::GhostcrimeController < Store::StoreController
   ## PUBLIC
 
   def index
+    @gc_product = Store::Product.where(title: "Ghostcrime").first
   end
 
 end
