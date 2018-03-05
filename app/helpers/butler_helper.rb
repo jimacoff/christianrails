@@ -148,13 +148,13 @@ module ButlerHelper
         full_title: "Grocery Shopping Tips",
         category: "Life Haxx",
         tags: ["listicle", "food", "shopping", "deals", "gnawing hunger"],
-        desc: "Maximize your grocery experience with these HOT tips."
+        desc: "Maximize your grocery experience with THESE hot tips."
       },
       {
         title: "20130725_i_hate_marketing_in_2013",
         full_title: "Marketing in 2013 and How Much I Hate It",
         category: "Business",
-        tags: ["marketing", "buzzwords", "consultants"],
+        tags: ["marketing", "buzzwords", "consultants", "business"],
         desc: "What is this business coming to?"
       }
     ]

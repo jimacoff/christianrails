@@ -1,5 +1,5 @@
+%h1#blog-header Books
 - prods = [ @owned_products + @available_products ].flatten
-
 - if prods.size > 0
   - prods = prods.sort{|a,b| a.rank <=> b.rank }
   - prods.each_with_index do |prod, i|
@@ -7,15 +7,20 @@
       %hr.storefront-ruler
     = render 'store/store_preview', { product: prod }
 
-%hr.storefront-ruler
+%br
+%h1#blog-header Games
+= render 'store/diamond_machine'
+
+%br
+%h1#blog-header Blogs
 = render 'store/quail_machine'
 %hr.storefront-ruler
 = render 'store/computer_machine'
 %hr.storefront-ruler
-= render 'store/diamond_machine'
-%hr.storefront-ruler
 = render 'store/badger_machine'
-%hr.storefront-ruler
+
+%br
+%h1#blog-header Companies
 = render 'store/wolfbutler'
 
 %br
