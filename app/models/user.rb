@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :downloads,                           inverse_of: :user, class_name: 'Store::Download'
   has_many :digital_purchases, through: :orders, inverse_of: :user, class_name: 'Store::DigitalPurchase'
+  has_many :physical_purchases, through: :orders, inverse_of: :user, class_name: 'Store::PhysicalPurchase'
   has_many :orders,                              inverse_of: :user, class_name: 'Store::Order'
   has_many :staged_purchases,                    inverse_of: :user, class_name: 'Store::StagedPurchase'
   has_many :received_gifts,         inverse_of: :recipient, class_name: 'Store::FreeGift', foreign_key: "recipient_id"

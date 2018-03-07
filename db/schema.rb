@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219232135) do
+ActiveRecord::Schema.define(version: 20180307032734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,13 +176,12 @@ ActiveRecord::Schema.define(version: 20180219232135) do
 
   create_table "store_physical_purchases", force: :cascade do |t|
     t.integer  "product_id"
-    t.integer  "variety_pack_id"
     t.integer  "order_id"
     t.integer  "price_cents"
     t.integer  "quantity"
-    t.integer  "type_id",         default: 2
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "type_id",     default: 2
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "store_price_combos", force: :cascade do |t|
@@ -221,11 +220,6 @@ ActiveRecord::Schema.define(version: 20180219232135) do
     t.integer  "shipping_cost_cents",  default: 0
   end
 
-  create_table "store_products_variety_packs", id: false, force: :cascade do |t|
-    t.integer "variety_pack_id"
-    t.integer "product_id"
-  end
-
   create_table "store_releases", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "format"
@@ -245,14 +239,6 @@ ActiveRecord::Schema.define(version: 20180219232135) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "type_id",    default: 0
-  end
-
-  create_table "store_variety_packs", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "price_cents"
-    t.string   "image_slug"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|

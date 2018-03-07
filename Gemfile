@@ -46,6 +46,8 @@ group :test do
   gem 'rails-controller-testing'
 end
 
+gem 'rails-erd', group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
