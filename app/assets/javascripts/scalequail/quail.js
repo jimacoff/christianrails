@@ -12,7 +12,20 @@ function comingSoon( clicked ) {
   }, 2500);
 }
 
-
 function hideComingSoonBox() {
   $('.scaling-in-progress').fadeOut();
 }
+
+// modified from https://codepen.io/roborich/pen/wpAsm
+var background_image_parallax = function($object){
+  var multiplier = 1.5;
+  multiplier = 1 - multiplier;
+  var $doc = $(document);
+  $object.css({"background-attatchment" : "fixed"});
+
+  $(window).scroll(function(){
+    var from_top = $doc.scrollTop(),
+        bg_css = '-200px ' + ((multiplier * from_top) + 200) + 'px';
+    $object.css({"background-position" : bg_css });
+  });
+};
