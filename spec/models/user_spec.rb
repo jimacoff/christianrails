@@ -98,6 +98,9 @@ RSpec.describe User, type: :model do
     let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, order: order1, product: product1) }
     let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, order: order1, product: product2) }
 
+    let(:loyal_user) { FactoryGirl.create(:user) }
+    let!(:lifetime_membership) { FactoryGirl.create(:lifetime_membership, user: loyal_user) }
+
     describe "products" do
 
       it "gets all the products the user has purchased" do
@@ -109,10 +112,16 @@ RSpec.describe User, type: :model do
 
     describe "has_product?" do
 
-      it 'should return true when user has purchased product, false otherwise' do
+      it 'returns true when user has purchased product, false otherwise' do
         expect( user_who_buys.has_product?(product1.id) ).to be_truthy
         expect( user_who_buys.has_product?(product2.id) ).to be_truthy
         expect( user_who_buys.has_product?(product3.id) ).to be_falsy
+      end
+
+      it "returns true if the user has a lifetime lifetime_membership" do
+        expect( loyal_user.has_product?(product1.id) ).to be_truthy
+        expect( loyal_user.has_product?(product2.id) ).to be_truthy
+        expect( loyal_user.has_product?(product3.id) ).to be_truthy
       end
 
     end

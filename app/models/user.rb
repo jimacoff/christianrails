@@ -41,7 +41,12 @@ class User < ApplicationRecord
   end
 
   def has_product?(product_id)
+    return true if self.has_lifetime_membership?
     self.products.collect(&:id).include?(product_id)
+  end
+
+  def has_lifetime_membership?
+    !!self.lifetime_membership
   end
 
   def full_name
