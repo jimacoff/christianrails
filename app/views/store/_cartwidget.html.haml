@@ -1,7 +1,6 @@
 - display_setting = "display: none;"
 - unless @cart == {} || !@all_products
-  - cartsize = @cart[:books].keys.length + @cart[:giftpacks].keys.length + @cart[:physicalbooks].keys.length
-  - display_setting = "display: inline-block;" if cartsize > 0
+  - display_setting = "display: inline-block;" if @cartsize > 0
 
 #cartwidget{style: "#{display_setting}"}
   = image_tag( "shopping_cart_icon.png", alt: "Cart icon", class: 'cart-icon' )

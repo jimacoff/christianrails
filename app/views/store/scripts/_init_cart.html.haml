@@ -1,5 +1,4 @@
-- if @cart && (@cart[:books] || @cart[:giftpacks] || @cart[:physicalbooks] )
-
+- if @cart
   :javascript
     var cart = #{ raw( @cart.to_json ) };
     var single_prods = Object.keys( cart.books );
@@ -16,6 +15,11 @@
     for(var i in physical_books) {
       $('.cart-dot').show();
       showProductInCart( physical_books[i], "physical" ) ;
+    }
+    var memberships = Object.keys( cart.memberships );
+    for(var i in memberships) {
+      $('.cart-dot').show();
+      showProductInCart( null, "membership" ) ;   // null product_id
     }
 
 :javascript

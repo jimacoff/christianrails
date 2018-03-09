@@ -37,6 +37,7 @@ Christianrails::Application.routes.draw do
       collection do
         get  'cart'
         get  'library'
+        get  'memberships'
         get  'updated_prices'
         post 'check_out'
         get  'complete_order'
@@ -82,6 +83,7 @@ Christianrails::Application.routes.draw do
   get '/order_success',  to: 'store/dealzone#order_success'
   get '/store',          to: 'store/dealzone#index'
   get '/cart',           to: 'store/dealzone#cart'
+  get '/memberships',    to: 'store/dealzone#memberships'
   # get '/gifts/',         to: 'store/dealzone#gifts'
   get '/library/',       to: 'store/dealzone#library'
 

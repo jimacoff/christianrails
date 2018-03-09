@@ -25,7 +25,7 @@ RSpec.describe Store::StagedPurchasesController, type: :controller do
   let(:valid_attributes) {
     {
       product_id: product.id,
-      user_id: @user.id
+      type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE
     }
   }
 
@@ -39,7 +39,10 @@ RSpec.describe Store::StagedPurchasesController, type: :controller do
 
   describe "GET #index" do
     it "assigns all staged_purchases as @staged_purchases" do
-      staged_purchase = Store::StagedPurchase.create! valid_attributes
+      staged_purchase = Store::StagedPurchase.new valid_attributes
+      staged_purchase.user = @user
+      staged_purchase.save
+
       get :index, params: {}, session: valid_session
       expect(assigns(:staged_purchases)).to eq([staged_purchase])
     end
@@ -53,12 +56,11 @@ RSpec.describe Store::StagedPurchasesController, type: :controller do
         }.to change(Store::StagedPurchase, :count).by(1)
       end
 
-      it "assigns a newly created staged_purchase as @staged_purchase" do
-        post :create, params: {staged_purchase: valid_attributes, format: :json}, session: valid_session
-        expect(assigns(:staged_purchase)).to be_a(Store::StagedPurchase)
-        expect(assigns(:staged_purchase)).to be_persisted
+      it "creates a new productless StagedPurchase" do
+        expect {
+          post :create, params: {staged_purchase: {type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP}, format: :json}, session: valid_session
+        }.to change(Store::StagedPurchase, :count).by(1)
       end
-
     end
 
     context "with invalid params" do
@@ -72,7 +74,10 @@ RSpec.describe Store::StagedPurchasesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested staged_purchase" do
-      staged_purchase = Store::StagedPurchase.create! valid_attributes
+      staged_purchase = Store::StagedPurchase.new valid_attributes
+      staged_purchase.user = @user
+      staged_purchase.save
+
       expect {
         delete :destroy, params: {id: staged_purchase.id, format: :json}, session: valid_session
       }.to change(Store::StagedPurchase, :count).by(-1)

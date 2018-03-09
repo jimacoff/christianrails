@@ -1,0 +1,15 @@
+%h1.center Lifetime Memberships
+
+%p
+
+%p You'll get:
+
+%ul
+  %li
+    %p Personal access to all digital releases, in perpetuity
+
+
+// BUTTON TO ADD IT TO THE CART
+= button_to "Add to cart", cart_path + "?membership=lifetime", class: "bright-button", method: :get
+
+= link_to "Back to store", store_path

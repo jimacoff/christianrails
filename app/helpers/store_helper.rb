@@ -21,6 +21,7 @@ module StoreHelper
 
   def get_cart
     @cart = {}
+    @cartsize = 0
     if current_user
       @cart[:books]  = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
                                                                   type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE)
@@ -31,7 +32,15 @@ module StoreHelper
       @cart[:physicalbooks] = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
                                                                      type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE)
                                                               .each{ |sp| hash[sp.product_id] = sp.id } }
+      @cart[:memberships] = {}.tap{ |hash| Store::StagedPurchase.where(user_id: current_user.id,
+                                                                     type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP)
+                                                              .each{ |sp| hash['membership'] = sp.id } }
       @cart[:prices] = get_updated_prices
+
+      @cartsize = @cart[:books].keys.length +
+                  @cart[:giftpacks].keys.length +
+                  @cart[:physicalbooks].keys.length +
+                  @cart[:memberships].keys.length
     end
   end
 
@@ -43,6 +52,7 @@ module StoreHelper
     @all_products.each do |prod|
       price_json[prod.id] = [ prod.price_cents, prod.discount_for(current_user.id) ] # this is a dumb format
     end
+    price_json['membership'] = [ Store::LifetimeMembership::CURRENT_PRICE_CENTS, 0 ] # no discount
     price_json
   end
 
@@ -78,6 +88,11 @@ module StoreHelper
           record_positive_event(Log::STORE, "Ghostcrime added to cart from CRM")
         end
       end
+    end
+
+    if params[:membership] == "lifetime"
+      @lifemem = "add-to-cart"
+      record_positive_event(Log::STORE, "Lifetime Membership added to cart from memberships page")
     end
   end
 

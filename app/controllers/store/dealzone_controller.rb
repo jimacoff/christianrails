@@ -30,6 +30,10 @@ class Store::DealzoneController < Store::StoreController
   def library
   end
 
+  # GET - page about lifetime memberships
+  def memberships
+  end
+
   # a page to facilitate the bulk-purchase of gifts for your friends
   # ROUTE DISABLED
   def gifts

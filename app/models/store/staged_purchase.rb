@@ -1,8 +1,9 @@
 class Store::StagedPurchase < ApplicationRecord
   belongs_to :user
-  belongs_to :product
+  belongs_to :product, optional: true
 
-  validates_presence_of :user, :product
+  validates_presence_of :user
+  validate :has_product_if_required
 
   TYPE_DIGITAL_SINGLE     = 0
   TYPE_DIGITAL_GIFT_PACK  = 1
@@ -10,6 +11,8 @@ class Store::StagedPurchase < ApplicationRecord
   TYPE_PHYSICAL_SINGLE    = 2
   TYPE_PHYSICAL_5_PACK    = 3
   TYPE_PHYSICAL_BUNDLE    = 4
+
+  TYPE_LIFETIME_MEMBERSHIP = 5
 
   def single?
     type_id == TYPE_DIGITAL_SINGLE
@@ -21,6 +24,10 @@ class Store::StagedPurchase < ApplicationRecord
 
   def physical_single?
     type_id == TYPE_PHYSICAL_SINGLE
+  end
+
+  def lifetime_membership?
+    type_id == TYPE_LIFETIME_MEMBERSHIP
   end
 
   # static
@@ -52,5 +59,14 @@ class Store::StagedPurchase < ApplicationRecord
     end
     total
   end
+
+  private
+
+    def has_product_if_required
+      if !self.product && [ TYPE_DIGITAL_SINGLE, TYPE_DIGITAL_GIFT_PACK, TYPE_PHYSICAL_SINGLE,
+                            TYPE_PHYSICAL_5_PACK, TYPE_PHYSICAL_BUNDLE ].include?( self.type_id )
+        errors.add(:product_id, "required for this type of StagedPurchase")
+      end
+    end
 
 end

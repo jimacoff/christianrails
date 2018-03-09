@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :staged_purchases,                    inverse_of: :user, class_name: 'Store::StagedPurchase'
   has_many :received_gifts,         inverse_of: :recipient, class_name: 'Store::FreeGift', foreign_key: "recipient_id"
   has_many :given_gifts,            inverse_of: :giver,     class_name: 'Store::FreeGift', foreign_key: "giver_id"
+  has_one :lifetime_membership,    inverse_of: :user, class_name: 'Store::LifetimeMembership'
 
   belongs_to :invited_for_product, class_name: 'Store::Product', foreign_key: "invited_for_product_id", optional: true
 

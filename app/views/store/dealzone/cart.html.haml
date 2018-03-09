@@ -1,5 +1,5 @@
 - unless !@cart || !@all_products
-  - display_setting = @cart.size == 0 ? "display: none;" : "display: inline-block;"
+  - display_setting = @cartsize == 0 ? "display: none;" : "display: inline-block;"
 
 .center
   = image_tag( "shopping_cart_icon.png", alt: "Cart icon", class: 'cart-icon' )
@@ -13,3 +13,10 @@
   = link_to "Return to store", root_path
   %br
   %br
+
+:javascript
+  $(document).ready(function() {
+    if( "#{ @lifemem }" === "add-to-cart") {
+      addToCart( null, 5 );
+    }
+  });

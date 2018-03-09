@@ -7,11 +7,10 @@ RSpec.describe Store::StagedPurchase, type: :model do
 
   it "should validate" do
     sp = Store::StagedPurchase.new
+    sp.type_id = Store::StagedPurchase::TYPE_DIGITAL_SINGLE
     expect( sp ).to_not be_valid
-    expect( sp.errors.messages.keys ).to include(:product, :user)
-
-    expect( sp.errors.messages[:product] ).to include("can't be blank")
-    expect( sp.errors.messages[:user] ).to    include("can't be blank")
+    expect( sp.errors.messages.keys ).to include(:user)
+    expect( sp.errors.messages[:user] ).to include("can't be blank")
 
     sp.product = product
     sp.user = user

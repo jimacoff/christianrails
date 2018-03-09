@@ -5,6 +5,7 @@
       = render 'store/cartwidget_giftpack', {prod: prod}
       = render 'store/cartwidget_physical', {prod: prod}
 
+/ display_setting is set in the parent view, either cart.html or _cartwidget.html.
 #checkout{style: "#{ display_setting }"}
   .cartwidget-pricedetails
     %p.cartwidget-discount

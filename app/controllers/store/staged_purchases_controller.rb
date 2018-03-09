@@ -9,25 +9,39 @@ class Store::StagedPurchasesController < Store::StoreController
     if current_user
       fresh_add = false
       begin
-        product = Store::Product.find( staged_purchase_params[:product_id] )
         type_id = staged_purchase_params[:type_id].to_i
-        unless @staged_purchase = Store::StagedPurchase.where( user: current_user,
-                                                               product_id: product.id,
-                                                               type_id: type_id ).first
-          @staged_purchase = Store::StagedPurchase.new(user: current_user, product_id: product.id, type_id: type_id)
-          fresh_add = true
+
+        if product_id = staged_purchase_params[:product_id] ## REAL PRODUCT
+          product = Store::Product.find( product_id.to_i )
+          unless @staged_purchase = Store::StagedPurchase.where( user: current_user,
+                                                                 product_id: product.id,
+                                                                 type_id: type_id ).first
+            @staged_purchase = Store::StagedPurchase.new(user_id: current_user.id, product_id: product.id, type_id: type_id)
+            fresh_add = true
+            the_title = product.title
+          end
+
+        else  ## lifetime membership
+          unless @staged_purchase = Store::StagedPurchase.where( user: current_user,
+                                                                 product_id: nil,
+                                                                 type_id: type_id ).first
+            @staged_purchase = Store::StagedPurchase.new(user_id: current_user.id, type_id: type_id)
+            fresh_add = true
+            the_title = "Lifetime Membership"
+          end
         end
 
         respond_to do |format|
-          if @staged_purchase.save
-            record_positive_event(Log::STORE, "Item added to cart: #{product.title}") if fresh_add
+          if @staged_purchase.save!
+            record_positive_event(Log::STORE, "Item added to cart: #{ the_title }") if fresh_add
             format.json { render json: @staged_purchase, status: :created }
           else
             format.json { render json: {}, status: :unprocessable_entity }
           end
         end
+
       rescue
-        record_bad_data(Log::STORE, "Attempted to create StagedPurchase for invalid productID #{staged_purchase_params['product_id']}")
+        record_bad_data(Log::STORE, "Attempted to create StagedPurchase for invalid productID #{staged_purchase_params[:product_id]}")
         render json: {}, status: :unprocessable_entity
       end
     end
@@ -38,7 +52,11 @@ class Store::StagedPurchasesController < Store::StoreController
     if current_user
       if @staged_purchase.user.id == current_user.id
         @staged_purchase.destroy
-        record_event(Log::STORE, "Item removed from cart: #{@staged_purchase.product.title}")
+        if @staged_purchase.product
+          record_event(Log::STORE, "Item removed from cart: #{@staged_purchase.product.title}")
+        else
+          record_event(Log::STORE, "Item removed from cart: LifetimeMembership")
+        end
       end
 
       respond_to do |format|

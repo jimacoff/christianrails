@@ -1,0 +1,12 @@
+-# The tab of the LifetimeMembership in the cart
+- is_hidden = ( @cart == {} || !@cart[:memberships].has_key?('membership') ) ? "display: none;" : "display: inline-block;"
+
+%div{ class: "cartwidget-item cartwidget_membership", style: "#{is_hidden}"}
+  %span= image_tag( "", class: "cartwidget-image")
+  %span.cartwidget-prod-details
+    .cartwidget-details-line1
+      %span{ class: "cartwidget-title" }= "Lifetime Membership"
+    .cartwidget-details-line2
+      %span{ class: "cartwidget-itemtype" }= "Perpetual"
+      %button.store-button.diminutive.remove-button{ class: "cartwidget_remove_membership", onclick: "removeFromCart()"}= "X"
+      %span{ class: "cartwidget_membership_price cartwidget-price" }= Money.new( Store::LifetimeMembership::CURRENT_PRICE_CENTS ).format
