@@ -155,7 +155,7 @@ function drawNewPrices(price_data) {
 
   // the checkout total
   var cartWidgetItems = $("[class^='cartwidget_price_']"),
-      cartWidgetMemberships = $("[class^='cartwidget_membership_price_']"),
+      cartWidgetMemberships = $("[class^='cartwidget_membership_price']"),
       cartWidgetGifts = $("[class^='cartwidget_giftpack_price_']"),
       cartWidgetBooks = $("[class^='cartwidget_physical_price_']"),
       subtotal = 0,
@@ -318,7 +318,7 @@ function removeStagedPurchase(product_id, type = null) {
     } else if ( data['type_id'] === 2 ) {
       delete cart.physicalbooks[data['product_id']];
     } else if ( data['type_id'] === 5 ) {
-      delete cart.memberships[data['membership']];
+      delete cart.memberships['membership'];
     }
     possiblyHideCartWidget();
     updatePrices();

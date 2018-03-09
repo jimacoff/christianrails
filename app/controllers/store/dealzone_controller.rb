@@ -215,7 +215,7 @@ class Store::DealzoneController < Store::StoreController
 
   # for physical books
   def order_success
-    flash[:notice] = "Order complete! Your book(s) will be shipped within 48 hours."
+    flash[:notice] = "Order complete! Your book(s) will be shipped within 2 business days."
     redirect_to root_path
   end
 
