@@ -15,6 +15,11 @@
         %td= "#{physical_purchase.product.title} #{type}"
         %td= Money.new( physical_purchase.price ).format
 
+    - @order.lifetime_memberships.each do |lifetime_membership|
+      %tr
+        %td= "Lifetime Membership"
+        %td= Money.new( lifetime_membership.cost_cents ).format
+
   - if @order.discount > 0
     %tr
       %th= "Discount:"

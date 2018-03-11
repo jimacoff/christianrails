@@ -128,7 +128,7 @@ class Store::DealzoneController < Store::StoreController
         staged = current_user.staged_purchases
         gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
         discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
-        tax  = calculate_tax_for_user
+        tax      = calculate_tax_for_user
         shipping = calculate_total_shipping_for_user
         total = gross_price - discount + tax + shipping
 

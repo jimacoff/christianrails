@@ -254,7 +254,7 @@ th {
   margin-right: 10px;
 }
 
-#bookdeal-button {
+#bookdeal-button, #membership-button {
   cursor: pointer;
 }
 
@@ -529,12 +529,12 @@ th {
     display: block;
   }
 
-  #ghostcrm-banner, #bookdeal-banner {
+  #ghostcrm-banner, #bookdeal-banner, #membership-banner {
     margin: 0 auto 15px auto;
     text-align: center;
   }
 
-  #ghostcrm-banner-image, #bookdeal-button {
+  #ghostcrm-banner-image, #bookdeal-button, #membership-button {
     width: 323px;
     height: 100px;
   }
@@ -565,13 +565,13 @@ th {
 @media screen and (min-width: 601px) {
   // STEP 2 -- SMALLISH
 
-  #ghostcrm-banner, #bookdeal-banner {
+  #ghostcrm-banner, #bookdeal-banner, #membership-banner {
     margin-bottom: 15px;
     margin-left: 25px;
     text-align: center;
   }
 
-  #ghostcrm-banner-image, #bookdeal-button {
+  #ghostcrm-banner-image, #bookdeal-button, #membership-button {
     width: 490px;
     height: 150px;
   }
@@ -660,7 +660,7 @@ th {
     text-align: center;
   }
 
-  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper, #ghostcrm-banner, #bookdeal-banner  {
+  #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper, #ghostcrm-banner, #bookdeal-banner, #membership-banner  {
     display: inline-block;
     vertical-align: top;
     text-align: left;

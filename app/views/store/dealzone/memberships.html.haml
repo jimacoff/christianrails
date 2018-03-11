@@ -1,15 +1,33 @@
 %h1.center Lifetime Memberships
 
-%p
+%p Purchasing a lifetime eBook membership is the ultimate gesture of local author support.
 
-%p You'll get:
+%hr
+
+%p For $20, you'll get:
 
 %ul
   %li
     %p Personal access to all digital releases, in perpetuity
+  %li
+    %p Notifications when new books are available for download
 
+%hr
 
-// BUTTON TO ADD IT TO THE CART
-= button_to "Add to cart", cart_path + "?membership=lifetime", class: "bright-button", method: :get
+// GO TO CART & ADD THE PRODUCT
+- if current_user
+  .center
+    %a{href: cart_path + "?membership=lifetime", alt: "Add Membership To Cart"}
+      = image_tag "membership-to-cart.png", class: 'swell'
+- else
+  .center
+    %p
+      = link_to 'Log in', main_app.user_session_path
+      or
+      = link_to 'Sign up',  main_app.new_user_registration_path
+      for a free account first.
 
-= link_to "Back to store", store_path
+%br
+
+.center
+  = link_to "Back to store", store_path
