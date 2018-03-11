@@ -2,7 +2,7 @@
 - is_hidden = ( @cart == {} || !@cart[:memberships].has_key?('membership') ) ? "display: none;" : "display: inline-block;"
 
 %div{ class: "cartwidget-item cartwidget_membership", style: "#{is_hidden}"}
-  %span= image_tag( "", class: "cartwidget-image")
+  %span= image_tag( "lifetime-cart.png", class: "cartwidget-image")
   %span.cartwidget-prod-details
     .cartwidget-details-line1
       %span{ class: "cartwidget-title" }= "Lifetime Membership"
