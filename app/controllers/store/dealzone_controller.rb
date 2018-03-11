@@ -65,13 +65,15 @@ class Store::DealzoneController < Store::StoreController
         target_urls[:complete] = complete_order_url
         target_urls[:abort]    = root_url
 
-        desc = generate_description_for_checkout
-        total_cost_cents    = calculate_total_cost_for_user
-        total_tax           = calculate_total_tax_for_user
+        checkout_description = generate_description_for_checkout
 
-        total_cost          = ( total_cost_cents.to_f / 100.to_f ).round(2) # as decimal
-        tax_formatted       = ( total_tax / 100.to_f ).round(2)
-        total_cost_with_tax = ( (total_cost_cents + total_tax) / 100.to_f ).round(2)
+        gross_price_cents = calculate_gross_price_for_user
+        total_tax_cents   = calculate_tax_for_user
+
+        gross_price_formatted = ( gross_price_cents.to_f / 100.to_f ).round(2) # as decimal
+        tax_formatted         = ( total_tax_cents / 100.to_f ).round(2)
+
+        net_cost_with_tax = ( (gross_price_cents + total_tax_cents) / 100.to_f ).round(2)
 
         @payment = PayPal::SDK::REST::Payment.new({
           intent: 'sale',
@@ -84,21 +86,21 @@ class Store::DealzoneController < Store::StoreController
           },
           transactions: [{
             amount: {
-              total: total_cost_with_tax,
+              total: net_cost_with_tax,
               currency: 'CAD',
               details: {
-                subtotal: total_cost,
+                subtotal: gross_price_formatted,
                 tax:      tax_formatted
               }
             },
-            description: desc
+            description: checkout_description
           }]
         })
 
         if @payment.create
           # redirect off to PayPal to get approval
           redirect_url = @payment.links.find {|link| link.rel == 'approval_url'}
-          record_positive_event(Log::STORE, "Checkout initiated: #{desc}")
+          record_positive_event(Log::STORE, "Checkout initiated: #{ checkout_description }")
           render js: "window.location = '#{ redirect_url.href }'"
         else
           flash[:alert] = @payment.error
@@ -126,7 +128,7 @@ class Store::DealzoneController < Store::StoreController
         staged = current_user.staged_purchases
         gross_price = Store::StagedPurchase.gross_cart_value_for( current_user.id )
         discount    = Store::PriceCombo.total_cart_discount_for( current_user.id )
-        tax  = calculate_total_tax_for_user
+        tax  = calculate_tax_for_user
         shipping = calculate_total_shipping_for_user
         total = gross_price - discount + tax + shipping
 
@@ -136,8 +138,9 @@ class Store::DealzoneController < Store::StoreController
         for_self  = false
         gift_pack = false
         phys_single = false
+        lifetime_membership = false
 
-        # turn all StagedPurchases into DigitalPurchases, FreeGifts or DigitalPurchases, depending
+        # turn all StagedPurchases into DigitalPurchases, FreeGifts or PhysicalPurchases, depending
         staged.each do |staged_purchase|
           if staged_purchase.single?
             for_self = true
@@ -168,13 +171,21 @@ class Store::DealzoneController < Store::StoreController
                                            order: order,
                                            price_cents: staged_purchase.product.physical_price_cents,
                                            type_id: Store::PhysicalPurchase::TYPE_PHYSICAL_SINGLE)
+          elsif staged_purchase.lifetime_membership?
+            lifetime_membership = true
+            Store::LifetimeMembership.create(order: order,
+                                             user_id: current_user.id,
+                                             cost_cents: Store::LifetimeMembership::CURRENT_PRICE_CENTS)
           end
 
           staged_purchase.destroy
         end
 
         # custom note based on what they bought
-        if phys_single && for_self && gift_pack
+        if lifetime_membership
+          note = "Success! You're now a lifetime member. Download your books below."
+
+        elsif phys_single && for_self && gift_pack
           note = "Success! Your shipment will be fulfilled shortly & you can find your digital copy and gift copies below."
 
         # 2 of a kind
@@ -264,10 +275,17 @@ class Store::DealzoneController < Store::StoreController
       @staged_products       = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_SINGLE )    : []
       @staged_giftpacks      = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK ) : []
       @staged_physical_books = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE )   : []
+      @staged_memberships    = current_user ? current_user.staged_purchases.where( type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP ) : []
     end
 
     def generate_description_for_checkout
-      if @staged_products.size + @staged_giftpacks.size + @staged_physical_books.size > 3
+      if @staged_memberships.size > 0
+        if @staged_products.size + @staged_giftpacks.size + @staged_physical_books.size > 3
+          desc = "Lifetime Membership & books"
+        else
+          desc = "Lifetime Membership"
+        end
+      elsif @staged_products.size + @staged_giftpacks.size + @staged_physical_books.size > 3
         desc = "Assorted books"
       else
         desc = ""
@@ -281,24 +299,27 @@ class Store::DealzoneController < Store::StoreController
       end
     end
 
-    def calculate_total_cost_for_user
-      total_cost = 0
-      @staged_products.map  { |st| total_cost += st.product.price_cents }
-      @staged_giftpacks.map { |sg| total_cost += sg.product.giftpack_price_cents }
-      @staged_physical_books.map { |sg| total_cost += sg.product.physical_price_cents + sg.product.shipping_cost_cents }
-      total_cost -= Store::PriceCombo.total_cart_discount_for( current_user.id )
-      total_cost
+    def calculate_gross_price_for_user
+      gross_price = 0
+
+      @staged_products.map       { |s| gross_price += s.product.price_cents }
+      @staged_giftpacks.map      { |s| gross_price += s.product.giftpack_price_cents }
+      @staged_physical_books.map { |s| gross_price += s.product.physical_price_cents + s.product.shipping_cost_cents }
+      @staged_memberships.map    { |s| gross_price += Store::LifetimeMembership::CURRENT_PRICE_CENTS }
+
+      gross_price -= Store::PriceCombo.total_cart_discount_for( current_user.id )
+      gross_price
     end
 
-    def calculate_total_tax_for_user
+    def calculate_tax_for_user
       small_tax = 0
       large_tax = 0
       large_taxable_amount = 0
 
       # large tax, discounted
-      digital_products = @staged_products + @staged_giftpacks
       @staged_products.map       { |st| large_taxable_amount += st.product.price_cents          }
       @staged_giftpacks.map      { |sg| large_taxable_amount += sg.product.giftpack_price_cents }
+      @staged_memberships.map    { |sm| large_taxable_amount += Store::LifetimeMembership::CURRENT_PRICE_CENTS }
       discount = Store::PriceCombo.total_cart_discount_for( current_user.id )
       large_tax = (large_taxable_amount - discount) * Store::DigitalPurchase::TAX_RATE
 

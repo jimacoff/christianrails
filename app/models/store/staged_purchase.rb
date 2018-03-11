@@ -36,7 +36,9 @@ class Store::StagedPurchase < ApplicationRecord
     total_shipping = 0
     Store::StagedPurchase.includes(:product).where(user_id: user_id,
                                                    type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE).each do |sp|
-      total_shipping += sp.product.shipping_cost_cents
+      if sp.product
+        total_shipping += sp.product.shipping_cost_cents
+      end
     end
     total_shipping
   end
@@ -56,6 +58,11 @@ class Store::StagedPurchase < ApplicationRecord
     Store::StagedPurchase.includes(:product).where(user_id: user_id,
                                                    type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE).each do |sp|
       total += sp.product.physical_price_cents
+    end
+
+    Store::StagedPurchase.where(user_id: user_id,
+                                type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP).each do |sp|
+      total += Store::LifetimeMembership::CURRENT_PRICE_CENTS
     end
     total
   end
