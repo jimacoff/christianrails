@@ -19,7 +19,7 @@ module QuailHelper
         desc:  "\"Scaling up\" might be a little overrated, actually, thank you",
         category: "Scaling up",
         tags:  ["scaling"],
-        date: "20170826"
+        date: "20170827"
       },
       {
         sequence: 3,
@@ -28,7 +28,7 @@ module QuailHelper
         desc:  "Does your startup have the raw materials to start scaling? I explain what that means in the post.",
         category: "Scaling up",
         tags:  ["scaling"],
-        date: "20170826"
+        date: "20170828"
       },
       {
         sequence: 4,
@@ -37,7 +37,7 @@ module QuailHelper
         desc:  "My startup is about to get growth-hacked into the profitsphere.",
         category: "Scaling up",
         tags:  ["scaling"],
-        date: "20170826"
+        date: "20170829"
       },
       {
         sequence: 5,
@@ -46,7 +46,7 @@ module QuailHelper
         desc:  "Codify your startup principles with these reductive rules of thumb.",
         category: "Scaling up",
         tags:  ["scaling"],
-        date: "20170826"
+        date: "20170830"
       },
       {
         sequence: 6,
@@ -73,7 +73,7 @@ module QuailHelper
         desc:  "Maybe this doesn't even work -- but we're going to find out.",
         category: "Scaling up",
         tags:  ["scaling"],
-        date: "20180306"
+        date: "20180311"
       }
     ]
   end

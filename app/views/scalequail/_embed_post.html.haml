@@ -1,5 +1,5 @@
 .scalequail-post
-  %p.embolden.subtle.datemargin= "#{ quail_date.strftime("%B %e, %Y") }"
+  %p.embolden.subtle.datemargin= "#{ locals[:post][:date].to_date.strftime("%B %e, %Y") }"
   = render "scalequail/post_header", locals: { post: locals[:post] }
   = render "scalequail/posts/blog_#{ locals[:post][:sequence].to_s + "_" + locals[:post][:slug] }"
   = render "scalequail/post_footer", locals: { post: locals[:post] }
