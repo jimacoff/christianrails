@@ -1,0 +1,74 @@
+%p
+  I just got done
+  %a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem"} enhancing my eBook store
+  to sell physical books alongside their digital counterparts, but I've got one more product I want to add: the Lifetime Membership.
+
+%p
+  I tried the membership model before, years ago, with the
+  = succeed "." do
+    = link_to "Wolf Butler Precious Metals Reserve", butler_path + "#reserve"
+  The concept was, for just over $10, I would snail-mail you a hand-drawn comic, but there was a possibility you'd receive a real silver coin. I'm still kind of suprised it wasn't successful.
+
+%p
+  Anyway, now that I have more books published, I don't have to go the expensive precious metals route. The concept of this new one is as follows:
+
+%p
+  %strong You give me $20, taxes in, and I give you access to all the eBooks I offer, in perpetuity.
+
+%p
+  Detractors might say that it's not Monthly Recurring Revenue, or that it cashes out a customer's lifetime value immediately. While it's true that it's not a semi-reliable payment every month, like some sort of author-landlord/tenant relationship, it doesn't have to be the last thing you ever purchase from me. You can still buy physical books, or
+  %a{href: "/scalequail/show_post?post=scaling_up_digital_sales_using_peoples_existing_friendships"} eBook gift packs
+  for your friends, if you're so inclined.
+
+%p
+  Other detractors might do the math and say, even if you bought digital copies of both eBooks I have for sale,
+  = link_to "Ghostcrime", ghostcrime_path
+  and
+  = link_to "Snapback Volume 2", snapback_shimari_path
+  (I already give away
+  = link_to "Volume 1", snapback_fuseki_path
+  for free on account creation), it'd still only cost five dollars, and that $20 is overcharging!
+
+%p But I've produced one book a year for the last 3 years, and I plan to continue. You're paying for future output now, making an investment in my creative output. Plus, my thinking here is that by paying a premium, you'll value the purchase more. You'll keep checking back to see if I'm making good use of your generous contribution.
+
+%p The alternative is the Patreon model — a smaller donation every month in exchange for a trickle of output. But I don't think it's a good fit for me. Anything small I produce, I make available to everybody, and the paid products are all major works I want to monetize to the fullest extent. Plus, the more transactions there are in total, the more I lose in fees.
+
+%p Luckily, all of these detractors are hypothetical strawmen, so without anyone to stop me, I'm going to go ahead and implement Lifetime Memberships, and see if it works.
+
+%p This is somewhat similar to how ScaleQuail itself got started.
+
+%p
+  Development-wise, it's another database table and some backend logic to grant products to lifetime members, plus a new page to advertise it and
+  %em another
+  cart upgrade. What can I say? I originally designed the cart to hold book-like products, not abstract concepts of loyalty.
+
+%p
+  Half-way through the cart re-write, the change is proving to be more extensive than I anticipated. The current code associates cart items with "Products", ie. books, and since a lifetime membership isn't that, the cart has to work differently to sell them. I have to modify the receipt, the backend price calculation, etc etc. It's painfully un-scalable.
+
+%p
+  How I
+  %em should have
+  designed it was to decouple Books from Products, so the default mechanic of putting Products in the cart would never have to change, but the Product object could be smarter and either have a book associated or something else.
+
+%p
+  I'm a lot better at database design now than when I first built this system two years ago, so I won't be too hard on myself, but I really should re-write it. Since I'm nearing completion on this effort, though, I'm going to keep pushing forward.
+
+%p Fuck it. It's done:
+
+.center
+  = image_tag "scalequail/membership-in-the-cart.png", class: "quailpost-image", alt: "A membership in the cart"
+  %p.caption
+    $19.99? What a deal!
+
+%p
+  So now I can push this on social media. Maybe I can make a few hundred dollars tonight.
+
+.center
+  %a{href: memberships_path}
+    = image_tag "scalequail/new-membership-banner.png", class: "quailpost-image", alt: "Now, with memberships", title: "Purchase a lifetime membership!"
+  %p.caption
+    A banner for the homepage. Click on it!
+
+%p
+  Speaking of social media, I'm really terrible at using it to promote myself. In fact, it may be my biggest barrier to scaling this business. Next, I'm going to
+  %a.coming-soon{onclick: "comingSoon( $(this) );"} automate the worst parts.

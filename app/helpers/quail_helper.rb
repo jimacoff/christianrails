@@ -65,6 +65,15 @@ module QuailHelper
         category: "Scaling up",
         tags:  ["scaling"],
         date: "20180228"
+      },
+      {
+        sequence: 8,
+        slug:  "overcharging_for_loyalty",
+        title: "Overcharging for loyalty: a classic scale",
+        desc:  "Maybe this doesn't even work -- but we're going to find out.",
+        category: "Scaling up",
+        tags:  ["scaling"],
+        date: "20180306"
       }
     ]
   end
