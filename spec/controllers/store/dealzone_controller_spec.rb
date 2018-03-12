@@ -162,12 +162,14 @@ RSpec.describe Store::DealzoneController, type: :controller do
     let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: vroom_product) }
     let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: brool_product, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
     let(:staged_physical_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: physi_product, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
+    let(:staged_membership) { FactoryGirl.create(:staged_purchase, user: user, type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP) }
 
     it "sends off to PayPal if everything is fine" do
       staged_purchase.save
       staged_purchase2.save
       staged_giftpack_purchase.save
       staged_physical_purchase.save
+      staged_membership.save
 
       expect{
         post 'check_out'
@@ -178,12 +180,15 @@ RSpec.describe Store::DealzoneController, type: :controller do
       sent_tax      = assigns[:payment].transactions[0].amount.details.tax
       sent_total    = assigns[:payment].transactions[0].amount.total
 
-      digital_prices = froom_product.price_cents + vroom_product.price_cents + brool_product.giftpack_price_cents
+      digital_prices = froom_product.price_cents + vroom_product.price_cents + brool_product.giftpack_price_cents + Store::LifetimeMembership::CURRENT_PRICE_CENTS
       physical_prices = physi_product.physical_price_cents
 
-      expect( sent_subtotal ).to eq( ( ( digital_prices + physical_prices + physi_product.shipping_cost_cents ) / 100.0 ).round(2).to_s )
-      expect( sent_tax ).to eq( (((digital_prices * Store::DigitalPurchase::TAX_RATE) + (physical_prices * Store::PhysicalPurchase::TAX_RATE)) / 100.0 ).round(2).to_s + "0" )
-      expect( sent_total ).to eq( (sent_subtotal.to_f + sent_tax.to_f).to_s )
+      # phys price: $10 --> $0.50 tax
+      # digital: $47.36 --> $7.61 tax
+
+      expect( sent_subtotal ).to eq( "57.36" )
+      expect( sent_tax ).to eq( "7.61" )
+      expect( sent_total ).to eq( "64.97" )
     end
 
     it "redirects home if no staged purchases" do
@@ -208,6 +213,8 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
     let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
     let(:staged_physical_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
+
+    let(:staged_membership) { FactoryGirl.create(:staged_purchase, user: user, type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP) }
 
 
     it "creates purchases and gifts for each normal eBook staged purchase" do
@@ -257,6 +264,27 @@ RSpec.describe Store::DealzoneController, type: :controller do
       expect( order.shipping_cost_cents ).to eq( 5_00 )
       expect( order.tax_cents ).to eq( 50 )  # $10 * 5%
       expect( order.total_cents ).to eq( 15_50 )
+    end
+
+    it "creates a LifetimeMembership for a staged purchase that's for that" do
+      staged_membership.save
+
+      get 'complete_order', params: { paymentId: "some_payment_id", token: 'some_token', PayerID: 'some_payer_id' }
+
+      expect( Store::StagedPurchase.count  ).to eq(0)
+
+      expect( Store::LifetimeMembership.count ).to eq(1)
+      lifetime_membership = Store::LifetimeMembership.take
+      expect( lifetime_membership.cost_cents ).to eq(17_38)
+
+      expect( Store::Order.count ).to eq(1)
+      order = Store::Order.take
+      expect( order.shipping_cost_cents ).to eq( 0 )
+      expect( order.tax_cents ).to eq( 2_61 )  # 19_99 - 17_38
+      expect( order.total_cents ).to eq( 19_99 )
+
+      expect( order.lifetime_memberships ).to include( lifetime_membership )
+      expect( lifetime_membership.order ).to eq( order )
     end
 
     it "creates an order with the correct total, tax and no discount" do

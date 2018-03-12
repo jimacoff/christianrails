@@ -321,12 +321,11 @@ class Store::DealzoneController < Store::StoreController
       @staged_giftpacks.map      { |sg| large_taxable_amount += sg.product.giftpack_price_cents }
       @staged_memberships.map    { |sm| large_taxable_amount += Store::LifetimeMembership::CURRENT_PRICE_CENTS }
       discount = Store::PriceCombo.total_cart_discount_for( current_user.id )
-      large_tax = (large_taxable_amount - discount) * Store::DigitalPurchase::TAX_RATE
+      large_tax = (large_taxable_amount - discount).to_f * Store::DigitalPurchase::TAX_RATE
 
       # small tax
-      @staged_physical_books.map { |sg| small_tax += sg.product.physical_price_cents * Store::PhysicalPurchase::TAX_RATE }
-
-      small_tax + large_tax
+      @staged_physical_books.map { |sg| small_tax += sg.product.physical_price_cents.to_f * Store::PhysicalPurchase::TAX_RATE }
+      (small_tax + large_tax).ceil
     end
 
     def calculate_total_shipping_for_user
