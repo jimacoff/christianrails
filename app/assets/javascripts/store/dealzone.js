@@ -75,24 +75,23 @@ function addToCart(product_id, type = null) {
 // adds it to the JS cart but does not actually create the staged purchase
 function showProductInCart(product_id, type = null) {
   showCartWidget();
-  if ( !type ) {
-    disableAddToCartButton(product_id);
-    showProductInCartWidget(product_id);
-  } else if (type === "giftpack") {
-    disableAddGiftpackToCartButton(product_id);
-    showGiftpackInCartWidget(product_id);
-  } else if (type == "physical") {
-    disableAddPhysicalBookToCartButton(product_id);
-    showPhysicalBookInCartWidget(product_id);
+  if( !product_id ) {
+    showLifetimeMembershipInCartWidget();
+  } else {
+    if ( !type ) {
+      disableAddToCartButton(product_id);
+      showProductInCartWidget(product_id);
+    } else if (type === "giftpack") {
+      disableAddGiftpackToCartButton(product_id);
+      showGiftpackInCartWidget(product_id);
+    } else if (type == "physical") {
+      disableAddPhysicalBookToCartButton(product_id);
+      showPhysicalBookInCartWidget(product_id);
+    }
   }
+
   updatePrices();
   updateUserbarCartLink();
-}
-
-function showMembershipInCart() {
-  showCartWidget();
-
-  // TODO
 }
 
 function removeFromCart(product_id, type = null) {
