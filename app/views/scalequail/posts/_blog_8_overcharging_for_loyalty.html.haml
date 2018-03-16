@@ -16,9 +16,9 @@
   %strong You give me $20, taxes in, and I give you access to all the eBooks I offer, in perpetuity.
 
 %p
-  Detractors might say that it's not Monthly Recurring Revenue, or that it cashes out a customer's lifetime value immediately. While it's true that it's not a semi-reliable payment every month, like some sort of author-landlord/tenant relationship, it doesn't have to be the last thing you ever purchase from me. You can still buy physical books, or
+  Detractors might say that it's not Monthly Recurring Revenue, or that it cashes out a customer's lifetime value immediately. While it's true that it's not a semi-reliable payment every month, like some sort of author-landlord/tenant relationship, it doesn't have to be the last thing the customer ever purchases from me. They can still buy physical books, or
   %a{href: "/scalequail/show_post?post=scaling_up_digital_sales_using_peoples_existing_friendships"} eBook gift packs
-  for your friends, if you're so inclined.
+  for their friends, if they're so inclined.
 
 %p
   Other detractors might do the math and say, even if you bought digital copies of both eBooks I have for sale,
@@ -29,9 +29,9 @@
   = link_to "Volume 1", snapback_fuseki_path
   for free on account creation), it'd still only cost five dollars, and that $20 is overcharging!
 
-%p But I've produced one book a year for the last 3 years, and I plan to continue. You're paying for future output now, making an investment in my creative output. Plus, my thinking here is that by paying a premium, you'll value the purchase more. You'll keep checking back to see if I'm making good use of your generous contribution.
+%p But I've produced one book a year for the last 3 years, and I plan to continue. You're paying for future output now, making an investment in my creative output. Plus, my thinking here is that by paying a premium, you'll value the purchase more. Maybe you'll keep checking back to see if I'm making good use of your generous contribution.
 
-%p The alternative is the Patreon model — a smaller donation every month in exchange for a trickle of output. But I don't think it's a good fit for me. Anything small I produce, I make available to everybody, and the paid products are all major works I want to monetize to the fullest extent. Plus, the more transactions there are in total, the more I lose in fees.
+%p The alternative is the Patreon model — a smaller donation every month in exchange for a trickle of output. But I don't think it's a good fit for me. Anything small I produce, I make available to everybody, and the paid products are all major works I want to monetize to the fullest extent. Plus, the more transactions there are in total, the more I lose in transaction fees.
 
 %p Luckily, all of my previously-mentioned detractors are hypothetical strawmen, so without anyone to stop me, I'm going to go ahead and implement Lifetime Memberships, and see if it works. It's not like I have anything else to do tonight.
 
@@ -41,7 +41,7 @@
   cart upgrade. What can I say? I originally designed the cart to hold book-like products, not abstract concepts of loyalty.
 
 %p
-  Half-way through the cart re-write, the change is proving to be more extensive than I anticipated. The current code associates cart items with "Products", ie. books, and since a lifetime membership isn't that, the cart has to work differently to sell them. I have to modify the receipt, the backend price calculation, etc etc. It's painfully un-scalable.
+  Half-way through the cart re-write, the change is proving to be more extensive than I anticipated. The current code associates cart items with "Products", ie. books, and since a lifetime membership isn't that, the cart has to work differently to sell them. I have to change the mechanism that adds and removes products, update and re-test the backend price calculation, modify the receipt, etc etc. It's painfully un-scalable.
 
 %p
   How I

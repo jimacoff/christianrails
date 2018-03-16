@@ -8,23 +8,41 @@
   %ul
     %li
       %h3 Snapback
-      %p A dark comedy novella series revolving around the ancient board game Go. The first book is free to download if you have an account, and physical copies can also be bought and shipped. The second book is available for purchase.
+      %p
+        A dark comedy novella series revolving around the ancient board game Go. The
+        = link_to "first book", snapback_fuseki_path
+        is free to download if you have an account, and physical copies can also be bought and shipped. The
+        = link_to "second book", snapback_shimari_path
+        is available for purchase.
 
     %li
       %h3 Ghostcrime
-      %p A sci-fi horror comedy crime novel about the role of robots in future Nova Scotian society, and what can happen when there are also ghosts involved. eBooks and physical copies are both available. Full disclosure: this is the one that I most want to succeed.
+      %p
+        A
+        = link_to "sci-fi horror comedy crime novel", ghostcrime_path
+        about the role of robots in future Nova Scotian society, and what can happen when there are also ghosts involved. eBooks and physical copies are both available. Full disclosure: this is the one that I most want to succeed.
 
     %li
       %h3 Diamond Find
-      %p A massive interactive story and possibly the most comprehensive diamond-finding simulator available. Right now you can play for free without signing up for an account, but if you sign up, it saves your diamonds and you can download them as HD wallpapers. Definitely, definitely scalable.
+      %p
+        A
+        = link_to "massive interactive story", diamondfind_path
+        and possibly the most comprehensive diamond-finding simulator available. Right now you can play for free without signing up for an account, but if you sign up, it saves your diamonds and you can download them as HD wallpapers. Definitely, definitely scalable.
 
     %li
       %h3 ghostCRM
-      %p A bare-bones CRM that keeps track of your contacts and reminds you about your obligations and upcoming tasks. It is free to use, though it does attempt to sell you a digital copy of Ghostcrime, the book for which it was designed as a tie-in. ghostCRM will play an integral role in scaling, as its CRM-like functions will help me manage my customer relations.
+      %p
+        A
+        = link_to "bare-bones CRM", crm_path
+        that keeps track of your contacts and reminds you about your obligations and upcoming tasks. It is free to use, though it does attempt to sell you a digital copy of Ghostcrime, the book for which it was designed as a tie-in. ghostCRM will play an integral role in scaling, as its CRM-like functions will help me manage my customer relations.
 
     %li
       %h3 I Found This Badger
-      %p A blog about my experiences living with a badger, and what I learned along the way. Currently there's no way to interact with this blog or give me money because of it.
+      %p
+        A blog about my experiences
+        = succeed "," do
+          = link_to "living with a badger", thisbadger_path
+        and what I learned along the way. Currently there's no way to interact with this blog or give me money because of it.
 
 %p Scaling these may be a challenge, but luckily, I think it can be done.
 
