@@ -34,7 +34,33 @@ RSpec.describe BadgerController, type: :controller do
   end
 
   describe "GET #show_post" do
-    it "should allow access" do
+    it "should allow access to each post" do
+      get :show_post, params: {post: "20160427_food_fight" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20160106_counter_attacks" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20150428_springtime" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20150329_badger_games" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20150226_leaks" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20150128_snow_problem" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20141222_housecoat" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20141126_strategies" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20141119_another_november" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20100204_blanket_statements" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20091127_november" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20091123_a_knock_at_the_door" }, session: valid_session
+      expect( response ).to be_ok
+      get :show_post, params: {post: "20091120_badger_for_business" }, session: valid_session
+      expect( response ).to be_ok
       get :show_post, params: {post: "20091118_i_found_this_badger" }, session: valid_session
       expect( response ).to be_ok
     end

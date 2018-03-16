@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_one :assistant, class_name: "Crm::Assistant", dependent: :destroy
 
   validates_presence_of :username, :first_name, :last_name, :email, :encrypted_password
+  validates_email_format_of :email
 
   # purchased and received-as-gift products
   def products

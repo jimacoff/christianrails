@@ -6,14 +6,12 @@ class NewsletterSignupsController < ApplicationController
   def create
     @newsletter_signup = NewsletterSignup.new(newsletter_signup_params)
 
-    respond_to do |format|
-      if @newsletter_signup.save
-        send_email_notifications
-        record_positive_event(Log::STORE, "New newsletter signup")
-        format.json { render json: @newsletter_signup, status: :created }
-      else
-        format.json { render json: @newsletter_signup.errors, status: :unprocessable_entity }
-      end
+    if @newsletter_signup.save
+      send_email_notifications
+      record_positive_event(Log::STORE, "New newsletter signup")
+      render json: @newsletter_signup, status: :created
+    else
+      render json: @newsletter_signup.errors, status: :unprocessable_entity
     end
   end
 

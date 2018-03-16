@@ -31,6 +31,7 @@ gem 'thin'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
+gem 'validates_email_format_of'
 
 group :production do
   gem 'figaro'

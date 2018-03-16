@@ -4,6 +4,7 @@ class Crm::AssistantsController < Crm::CrmController
 
   ## PUBLIC
 
+  # GET -- either shows non-logged-in landing page or main to-do list
   def index
     @assistant = current_assistant || Crm::Assistant.new
 
@@ -57,6 +58,7 @@ class Crm::AssistantsController < Crm::CrmController
     end
   end
 
+  # POST - makes a new assistant
   def create
     if current_user && !current_user.assistant && current_user.has_crm_access?
       @assistant = Crm::Assistant.create( crm_assistant_params )
@@ -78,6 +80,7 @@ class Crm::AssistantsController < Crm::CrmController
 
   ## LOGGED-IN ASSISTANT ONLY
 
+  # PUT -- updates the assistant
   def update
     @assistant = current_assistant
 
@@ -89,6 +92,7 @@ class Crm::AssistantsController < Crm::CrmController
     end
   end
 
+  # GET -- render the settings page
   def settings
     @assistant = current_assistant
   end

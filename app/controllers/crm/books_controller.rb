@@ -81,6 +81,7 @@ class Crm::BooksController < Crm::CrmController
   end
 
   private
+
     def set_crm_book_secure
       @book = Crm::Book.find(params[:id])
       redirect_to(root_path) unless owns_assistant?( @book.assistant )
@@ -96,4 +97,5 @@ class Crm::BooksController < Crm::CrmController
         @book.save
       end
     end
+
 end
