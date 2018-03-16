@@ -18,7 +18,7 @@ module QuailHelper
         title: "Have you tried NOT scaling your business?",
         desc:  "\"Scaling up\" might be a little overrated, actually, thank you",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20170827"
       },
       {
@@ -27,7 +27,7 @@ module QuailHelper
         title: "The Pre-Scale Checklist",
         desc:  "Does your startup have the raw materials to start scaling? I explain what that means in the post.",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20170828"
       },
       {
@@ -36,7 +36,7 @@ module QuailHelper
         title: "Scaling time has come",
         desc:  "My startup is about to get growth-hacked into the profitsphere.",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20170829"
       },
       {
@@ -45,7 +45,7 @@ module QuailHelper
         title: "Business algorithms for a successful scale",
         desc:  "Codify your startup principles with these reductive rules of thumb.",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20170830"
       },
       {
@@ -54,7 +54,7 @@ module QuailHelper
         title: "Scaling up digital sales using peoples' existing friendships",
         desc:  "Make sure people are giving the gift of You this holiday season.",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20171008"
       },
       {
@@ -63,16 +63,16 @@ module QuailHelper
         title: "Cracking the physical distribution problem",
         desc:  "Obviously we're going to use software to do this.",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20180228"
       },
       {
         sequence: 8,
         slug:  "overcharging_for_loyalty",
         title: "Overcharging for loyalty: a classic scale",
-        desc:  "Maybe this doesn't even work -- but we're going to find out.",
+        desc:  "Maybe this doesn't even work — but we're going to find out.",
         category: "Scaling up",
-        tags:  ["scaling"],
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
         date: "20180311"
       }
     ]
