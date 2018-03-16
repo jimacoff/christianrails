@@ -12,6 +12,7 @@ Christianrails is a monolithic web application that serves as the homepage of au
 
 Release notes:
 
+- 1.5.5 - Many small updates & fixes
 - 1.5.4 - Expanded the cart to allow Lifetime Membership purchases
 - 1.5.3 - Expanded the cart to allow physical purchases
 - 1.5.2 - Added gift-giving & purchasing mechanic to eBook store
