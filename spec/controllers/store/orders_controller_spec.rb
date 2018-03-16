@@ -19,7 +19,7 @@ RSpec.describe Store::OrdersController, type: :controller do
     sign_in @user
   end
 
-  let(:price_combo)   { FactoryGirl.create(:price_combo) }
+  let(:price_combo)   { FactoryBot.create(:price_combo) }
 
   let(:valid_attributes) {
     {
@@ -43,8 +43,8 @@ RSpec.describe Store::OrdersController, type: :controller do
 
   describe "GET #index" do
 
-    let(:order)    { FactoryGirl.create(:order, user: @user) }
-    let!(:digital_purchase) { FactoryGirl.create(:digital_purchase, order: order) }
+    let(:order)    { FactoryBot.create(:order, user: @user) }
+    let!(:digital_purchase) { FactoryBot.create(:digital_purchase, order: order) }
 
     it "assigns all orders as @orders" do
       get :index, params: {}, session: valid_session
@@ -54,8 +54,8 @@ RSpec.describe Store::OrdersController, type: :controller do
 
   describe "GET #show" do
 
-    let(:order)    { FactoryGirl.create(:order, user: @user) }
-    let!(:digital_purchase) { FactoryGirl.create(:digital_purchase, order: order) }
+    let(:order)    { FactoryBot.create(:order, user: @user) }
+    let!(:digital_purchase) { FactoryBot.create(:digital_purchase, order: order) }
 
     it "retrieves an order for a user" do
       get :show, params: {id: order.id}, session: valid_session
@@ -67,8 +67,8 @@ RSpec.describe Store::OrdersController, type: :controller do
 
   describe "receipts" do
 
-    let(:order)    { FactoryGirl.create(:order, user: @user) }
-    let!(:digital_purchase) { FactoryGirl.create(:digital_purchase, order: order) }
+    let(:order)    { FactoryBot.create(:order, user: @user) }
+    let!(:digital_purchase) { FactoryBot.create(:digital_purchase, order: order) }
 
     it "retrieves receipts for a logged-in user with digital_purchases" do
       get :receipts

@@ -4,19 +4,19 @@ RSpec.describe Woods::Itemset, type: :model do
 
   describe "relations" do
 
-    let(:story) { FactoryGirl.create(:story) }
+    let(:story) { FactoryBot.create(:story) }
 
-    let(:itemset) { FactoryGirl.create(:itemset, story: story) }
+    let(:itemset) { FactoryBot.create(:itemset, story: story) }
 
-    let!(:item1) { FactoryGirl.create(:item, itemset: itemset) }
-    let!(:item2) { FactoryGirl.create(:item, itemset: itemset) }
-    let!(:item3) { FactoryGirl.create(:item, itemset: itemset) }
+    let!(:item1) { FactoryBot.create(:item, itemset: itemset) }
+    let!(:item2) { FactoryBot.create(:item, itemset: itemset) }
+    let!(:item3) { FactoryBot.create(:item, itemset: itemset) }
 
-    let!(:box1) { FactoryGirl.create(:box, itemset: itemset) }
-    let!(:box2) { FactoryGirl.create(:box, itemset: itemset) }
+    let!(:box1) { FactoryBot.create(:box, itemset: itemset) }
+    let!(:box2) { FactoryBot.create(:box, itemset: itemset) }
 
-    let!(:possibleitem1)  { FactoryGirl.create(:possibleitem, itemset: itemset) }
-    let!(:possibleitem2)  { FactoryGirl.create(:possibleitem, itemset: itemset) }
+    let!(:possibleitem1)  { FactoryBot.create(:possibleitem, itemset: itemset) }
+    let!(:possibleitem2)  { FactoryBot.create(:possibleitem, itemset: itemset) }
 
     it "should belong to a story" do
       expect( itemset.story ).to eq(story)

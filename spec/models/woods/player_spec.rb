@@ -4,19 +4,19 @@ RSpec.describe Woods::Player, type: :model do
 
   describe "relations" do
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
-    let(:player) { FactoryGirl.create(:player, user: user) }
+    let(:player) { FactoryBot.create(:player, user: user) }
 
-    let!(:story1) { FactoryGirl.create(:story, player: player) }
-    let!(:story2) { FactoryGirl.create(:story, player: player) }
-    let!(:story3) { FactoryGirl.create(:story, player: player) }
+    let!(:story1) { FactoryBot.create(:story, player: player) }
+    let!(:story2) { FactoryBot.create(:story, player: player) }
+    let!(:story3) { FactoryBot.create(:story, player: player) }
 
-    let!(:find1) { FactoryGirl.create(:find, player: player) }
-    let!(:find2) { FactoryGirl.create(:find, player: player) }
+    let!(:find1) { FactoryBot.create(:find, player: player) }
+    let!(:find2) { FactoryBot.create(:find, player: player) }
 
-    let!(:scorecard) { FactoryGirl.create(:scorecard, player: player) }
-    let!(:footprint) { FactoryGirl.create(:footprint, scorecard: scorecard) }
+    let!(:scorecard) { FactoryBot.create(:scorecard, player: player) }
+    let!(:footprint) { FactoryBot.create(:footprint, scorecard: scorecard) }
 
     it "should have many finds" do
       expect( player.finds.count ).to eq(2)

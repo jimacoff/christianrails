@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Store::Download, type: :model do
 
-  let(:product) { FactoryGirl.create(:product) }
-  let(:release) { FactoryGirl.create(:release, product: product) }
-  let(:user)    { FactoryGirl.create(:user) }
+  let(:product) { FactoryBot.create(:product) }
+  let(:release) { FactoryBot.create(:release, product: product) }
+  let(:user)    { FactoryBot.create(:user) }
 
   it "should validate" do
     d = Store::Download.new()

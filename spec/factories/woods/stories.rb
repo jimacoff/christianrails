@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :story, :class => 'Woods::Story' do
     player
     sequence :name do |n|

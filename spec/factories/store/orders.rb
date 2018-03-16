@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :order, class: 'Store::Order' do
     user
     payer_id 'curtis payfield'

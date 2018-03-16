@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :scorecard, :class => 'Woods::Scorecard' do
     player
     story

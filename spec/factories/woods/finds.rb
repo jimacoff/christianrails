@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :find, :class => 'Woods::Find' do
     player
     item

@@ -19,7 +19,7 @@ RSpec.describe Store::GhostcrimeController, type: :controller do
 
   let(:valid_session) { {} }
 
-  let!(:gc_book) { FactoryGirl.create(:product, title: "Ghostcrime") }
+  let!(:gc_book) { FactoryBot.create(:product, title: "Ghostcrime") }
 
   describe "GET #index" do
     it "should allow access" do

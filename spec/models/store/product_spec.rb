@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe Store::Product, type: :model do
 
-  let(:release1) { FactoryGirl.create(:release, format: "ePub") }
-  let(:release2) { FactoryGirl.create(:release, format: "PDF") }
+  let(:release1) { FactoryBot.create(:release, format: "ePub") }
+  let(:release2) { FactoryBot.create(:release, format: "PDF") }
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:digital_purchase) { FactoryGirl.create(:digital_purchase, user: user) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:digital_purchase) { FactoryBot.create(:digital_purchase, user: user) }
 
-  let!(:download1) { FactoryGirl.create(:download, release: release1) }
-  let!(:download2) { FactoryGirl.create(:download, release: release1) }
-  let!(:download3) { FactoryGirl.create(:download, release: release2) }
+  let!(:download1) { FactoryBot.create(:download, release: release1) }
+  let!(:download2) { FactoryBot.create(:download, release: release1) }
+  let!(:download3) { FactoryBot.create(:download, release: release2) }
 
   it "should validate" do
     p = Store::Product.new
@@ -52,9 +52,9 @@ RSpec.describe Store::Product, type: :model do
 
   describe 'discount_for' do
 
-    let(:combo)    { FactoryGirl.create(:price_combo, discount_cents: 5_00) }
-    let(:product1) { FactoryGirl.create(:product) }
-    let(:product2) { FactoryGirl.create(:product) }
+    let(:combo)    { FactoryBot.create(:price_combo, discount_cents: 5_00) }
+    let(:product1) { FactoryBot.create(:product) }
+    let(:product2) { FactoryBot.create(:product) }
 
     it 'should return a discount for products when user has satisfied price combo' do
       combo.products << product1 << product2
@@ -77,17 +77,17 @@ RSpec.describe Store::Product, type: :model do
 
   describe 'physical and digital helpers' do
 
-    let(:prod1) { FactoryGirl.create(:product) }
-    let!(:rel1) { FactoryGirl.create(:release, product: prod1, format: "Book", physical_code: "abcde") }
-    let!(:rel2) { FactoryGirl.create(:release, product: prod1, format: "PDF") }
-    let!(:rel3) { FactoryGirl.create(:release, product: prod1, format: "ePub") }
-    let!(:rel4) { FactoryGirl.create(:release, product: prod1, format: "Kobo") }
+    let(:prod1) { FactoryBot.create(:product) }
+    let!(:rel1) { FactoryBot.create(:release, product: prod1, format: "Book", physical_code: "abcde") }
+    let!(:rel2) { FactoryBot.create(:release, product: prod1, format: "PDF") }
+    let!(:rel3) { FactoryBot.create(:release, product: prod1, format: "ePub") }
+    let!(:rel4) { FactoryBot.create(:release, product: prod1, format: "Kobo") }
 
-    let(:prod2) { FactoryGirl.create(:product) }
-    let!(:rel5) { FactoryGirl.create(:release, product: prod2, format: "Book", physical_code: "ABCDE") }
+    let(:prod2) { FactoryBot.create(:product) }
+    let!(:rel5) { FactoryBot.create(:release, product: prod2, format: "Book", physical_code: "ABCDE") }
 
-    let(:prod3) { FactoryGirl.create(:product) }
-    let!(:rel6) { FactoryGirl.create(:release, product: prod3, format: "PDF") }
+    let(:prod3) { FactoryBot.create(:product) }
+    let!(:rel6) { FactoryBot.create(:release, product: prod3, format: "PDF") }
 
     it "should identify all of a product's digital releases" do
       expect( prod1.digital_releases.count ).to eq(3)

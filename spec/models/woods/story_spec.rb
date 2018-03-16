@@ -4,24 +4,24 @@ RSpec.describe Woods::Story, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:player) { FactoryBot.create(:player) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let!(:storytree1) { FactoryGirl.create(:storytree, story: story) }
-    let!(:storytree2) { FactoryGirl.create(:storytree, story: story) }
+    let(:story) { FactoryBot.create(:story, player: player) }
+    let!(:storytree1) { FactoryBot.create(:storytree, story: story) }
+    let!(:storytree2) { FactoryBot.create(:storytree, story: story) }
 
-    let!(:node1) { FactoryGirl.create(:node, storytree: storytree1) }
-    let!(:node2) { FactoryGirl.create(:node, storytree: storytree1) }
-    let!(:node3) { FactoryGirl.create(:node, storytree: storytree2) }
-    let!(:node4) { FactoryGirl.create(:node, storytree: storytree2) }
+    let!(:node1) { FactoryBot.create(:node, storytree: storytree1) }
+    let!(:node2) { FactoryBot.create(:node, storytree: storytree1) }
+    let!(:node3) { FactoryBot.create(:node, storytree: storytree2) }
+    let!(:node4) { FactoryBot.create(:node, storytree: storytree2) }
 
-    let!(:itemset) { FactoryGirl.create(:itemset, story: story) }
+    let!(:itemset) { FactoryBot.create(:itemset, story: story) }
 
-    let!(:item1) { FactoryGirl.create(:item, itemset: itemset) }
-    let!(:item2) { FactoryGirl.create(:item, itemset: itemset) }
+    let!(:item1) { FactoryBot.create(:item, itemset: itemset) }
+    let!(:item2) { FactoryBot.create(:item, itemset: itemset) }
 
-    let!(:palette1)  { FactoryGirl.create(:palette, story: story) }
-    let!(:palette2)  { FactoryGirl.create(:palette, story: story) }
+    let!(:palette1)  { FactoryBot.create(:palette, story: story) }
+    let!(:palette2)  { FactoryBot.create(:palette, story: story) }
 
     it "should have many storytrees" do
       expect( story.storytrees.count ).to eq(2)

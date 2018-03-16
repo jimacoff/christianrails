@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :footprint, :class => 'Woods::Footprint' do
     storytree
     scorecard

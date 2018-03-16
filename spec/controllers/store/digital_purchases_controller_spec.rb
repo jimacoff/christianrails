@@ -19,9 +19,9 @@ RSpec.describe Store::DigitalPurchasesController, type: :controller do
     @user.save
   end
 
-  let(:product)   { FactoryGirl.create(:product) }
-  let(:user)      { FactoryGirl.create(:user) }
-  let(:order)     { FactoryGirl.create(:order) }
+  let(:product)   { FactoryBot.create(:product) }
+  let(:user)      { FactoryBot.create(:user) }
+  let(:order)     { FactoryBot.create(:order) }
 
   let(:valid_attributes) {
     {

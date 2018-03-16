@@ -2,21 +2,21 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
 
-  let(:product) { FactoryGirl.create(:product, title: "Hella product", rank: 1) }
+  let(:product) { FactoryBot.create(:product, title: "Hella product", rank: 1) }
 
-  let(:order) { FactoryGirl.create(:order) }
+  let(:order) { FactoryBot.create(:order) }
 
-  let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, order: order, product: product) }
-  let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, order: order) }
-  let!(:digital_purchase3) { FactoryGirl.create(:digital_purchase, order: order) }
+  let!(:digital_purchase1) { FactoryBot.create(:digital_purchase, order: order, product: product) }
+  let!(:digital_purchase2) { FactoryBot.create(:digital_purchase, order: order) }
+  let!(:digital_purchase3) { FactoryBot.create(:digital_purchase, order: order) }
 
-  let(:download1) { FactoryGirl.create(:download) }
-  let(:download2) { FactoryGirl.create(:download) }
-  let(:download3) { FactoryGirl.create(:download) }
+  let(:download1) { FactoryBot.create(:download) }
+  let(:download2) { FactoryBot.create(:download) }
+  let(:download3) { FactoryBot.create(:download) }
 
-  let(:staged1) { FactoryGirl.create(:staged_purchase) }
-  let(:staged2) { FactoryGirl.create(:staged_purchase) }
-  let(:staged3) { FactoryGirl.create(:staged_purchase) }
+  let(:staged1) { FactoryBot.create(:staged_purchase) }
+  let(:staged2) { FactoryBot.create(:staged_purchase) }
+  let(:staged3) { FactoryBot.create(:staged_purchase) }
 
 
   it "should validate" do
@@ -87,19 +87,19 @@ RSpec.describe User, type: :model do
 
   describe "product helpers" do
 
-    let(:user_who_buys) { FactoryGirl.create(:user) }
+    let(:user_who_buys) { FactoryBot.create(:user) }
 
-    let(:product1) { FactoryGirl.create(:product, title: "Sick product") }
-    let(:product2) { FactoryGirl.create(:product, title: "Rad product") }
-    let(:product3) { FactoryGirl.create(:product, title: "Lame product") }
+    let(:product1) { FactoryBot.create(:product, title: "Sick product") }
+    let(:product2) { FactoryBot.create(:product, title: "Rad product") }
+    let(:product3) { FactoryBot.create(:product, title: "Lame product") }
 
-    let(:order1)   { FactoryGirl.create(:order, user: user_who_buys) }
+    let(:order1)   { FactoryBot.create(:order, user: user_who_buys) }
 
-    let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, order: order1, product: product1) }
-    let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, order: order1, product: product2) }
+    let!(:digital_purchase1) { FactoryBot.create(:digital_purchase, order: order1, product: product1) }
+    let!(:digital_purchase2) { FactoryBot.create(:digital_purchase, order: order1, product: product2) }
 
-    let(:loyal_user) { FactoryGirl.create(:user) }
-    let!(:lifetime_membership) { FactoryGirl.create(:lifetime_membership, user: loyal_user) }
+    let(:loyal_user) { FactoryBot.create(:user) }
+    let!(:lifetime_membership) { FactoryBot.create(:lifetime_membership, user: loyal_user) }
 
     describe "products" do
 

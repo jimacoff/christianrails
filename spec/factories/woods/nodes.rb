@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :node, :class => 'Woods::Node' do
     moverule_id -1
     storytree

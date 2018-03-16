@@ -168,17 +168,17 @@ RSpec.describe Store::ProductsController, type: :controller do
 
   describe "GET downloads" do
 
-    let(:product1) { FactoryGirl.create(:product) }
-    let(:product2) { FactoryGirl.create(:product) }
+    let(:product1) { FactoryBot.create(:product) }
+    let(:product2) { FactoryBot.create(:product) }
 
-    let(:release1) { FactoryGirl.create(:release, product: product1, format: "PDF") }
-    let(:release2) { FactoryGirl.create(:release, product: product1, format: "ePub") }
-    let(:release3) { FactoryGirl.create(:release, product: product2, format: "PDF") }
+    let(:release1) { FactoryBot.create(:release, product: product1, format: "PDF") }
+    let(:release2) { FactoryBot.create(:release, product: product1, format: "ePub") }
+    let(:release3) { FactoryBot.create(:release, product: product2, format: "PDF") }
 
-    let!(:download1) { FactoryGirl.create(:download, release: release1) }
-    let!(:download2) { FactoryGirl.create(:download, release: release2) }
-    let!(:download3) { FactoryGirl.create(:download, release: release2) }
-    let!(:download4) { FactoryGirl.create(:download, release: release3) }
+    let!(:download1) { FactoryBot.create(:download, release: release1) }
+    let!(:download2) { FactoryBot.create(:download, release: release2) }
+    let!(:download3) { FactoryBot.create(:download, release: release2) }
+    let!(:download4) { FactoryBot.create(:download, release: release3) }
 
     it "should show all the products and their respective downloads" do
       get :index, params: {}, session: valid_session

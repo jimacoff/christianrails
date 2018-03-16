@@ -4,7 +4,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   render_views
 
-  let(:user)    { FactoryGirl.create(:user) }
+  let(:user)    { FactoryBot.create(:user) }
 
   before (:each) do
     sign_in user
@@ -15,23 +15,23 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   describe 'index' do
 
-    let!(:combo1)    { FactoryGirl.create(:price_combo) }
-    let!(:combo2)    { FactoryGirl.create(:price_combo) }
-    let!(:combo3)    { FactoryGirl.create(:price_combo) }
+    let!(:combo1)    { FactoryBot.create(:price_combo) }
+    let!(:combo2)    { FactoryBot.create(:price_combo) }
+    let!(:combo3)    { FactoryBot.create(:price_combo) }
 
-    let!(:product1)  { FactoryGirl.create(:product, title: "Ghostcrime") }
-    let!(:product2)  { FactoryGirl.create(:product) }
-    let!(:product3)  { FactoryGirl.create(:product) }
-    let!(:product4)  { FactoryGirl.create(:product) }
-    let!(:product5)  { FactoryGirl.create(:product) }
+    let!(:product1)  { FactoryBot.create(:product, title: "Ghostcrime") }
+    let!(:product2)  { FactoryBot.create(:product) }
+    let!(:product3)  { FactoryBot.create(:product) }
+    let!(:product4)  { FactoryBot.create(:product) }
+    let!(:product5)  { FactoryBot.create(:product) }
 
-    let(:order1)     { FactoryGirl.create(:order, price_combo: combo1, user: user) }
-    let(:order2)     { FactoryGirl.create(:order, price_combo: combo2, user: user) }
-    let(:order3)     { FactoryGirl.create(:order, price_combo: combo3, user: user) }
+    let(:order1)     { FactoryBot.create(:order, price_combo: combo1, user: user) }
+    let(:order2)     { FactoryBot.create(:order, price_combo: combo2, user: user) }
+    let(:order3)     { FactoryBot.create(:order, price_combo: combo3, user: user) }
 
-    let!(:digital_purchase1) { FactoryGirl.create(:digital_purchase, product: product2, order: order1) }
-    let!(:digital_purchase2) { FactoryGirl.create(:digital_purchase, product: product4, order: order2) }
-    let!(:digital_purchase3) { FactoryGirl.create(:digital_purchase, product: product5, order: order3) }
+    let!(:digital_purchase1) { FactoryBot.create(:digital_purchase, product: product2, order: order1) }
+    let!(:digital_purchase2) { FactoryBot.create(:digital_purchase, product: product4, order: order2) }
+    let!(:digital_purchase3) { FactoryBot.create(:digital_purchase, product: product5, order: order3) }
 
     it 'retrieves all price combos' do
       get 'index'
@@ -49,12 +49,12 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   describe 'updated prices' do
 
-    let!(:product_1)   { FactoryGirl.create(:product, title: "The main event",     price_cents: 5_05) }
-    let!(:product_2)   { FactoryGirl.create(:product, title: "Bonus material",     price_cents: 3_00) }
-    let!(:product_3)   { FactoryGirl.create(:product, title: "Some other product", price_cents: 4_00) }
-    let!(:product_4)   { FactoryGirl.create(:product, title: "Some other product", price_cents: 7_00) }
+    let!(:product_1)   { FactoryBot.create(:product, title: "The main event",     price_cents: 5_05) }
+    let!(:product_2)   { FactoryBot.create(:product, title: "Bonus material",     price_cents: 3_00) }
+    let!(:product_3)   { FactoryBot.create(:product, title: "Some other product", price_cents: 4_00) }
+    let!(:product_4)   { FactoryBot.create(:product, title: "Some other product", price_cents: 7_00) }
 
-    let(:staged_purchase)  { FactoryGirl.create(:staged_purchase) }
+    let(:staged_purchase)  { FactoryBot.create(:staged_purchase) }
 
     it 'returns info for all products and a total discount' do
       get :updated_prices, format: :json
@@ -153,16 +153,16 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   describe 'check_out' do
 
-    let(:froom_product) { FactoryGirl.create(:product, title: "Lol Froom") }
-    let(:vroom_product) { FactoryGirl.create(:product, title: "Lol Vroom") }
-    let(:brool_product) { FactoryGirl.create(:product, title: "Lol Brool") }
-    let(:physi_product) { FactoryGirl.create(:product, title: "Physi prod") }
+    let(:froom_product) { FactoryBot.create(:product, title: "Lol Froom") }
+    let(:vroom_product) { FactoryBot.create(:product, title: "Lol Vroom") }
+    let(:brool_product) { FactoryBot.create(:product, title: "Lol Brool") }
+    let(:physi_product) { FactoryBot.create(:product, title: "Physi prod") }
 
-    let(:staged_purchase)  { FactoryGirl.create(:staged_purchase, user: user, product: froom_product) }
-    let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: vroom_product) }
-    let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: brool_product, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
-    let(:staged_physical_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: physi_product, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
-    let(:staged_membership) { FactoryGirl.create(:staged_purchase, user: user, type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP) }
+    let(:staged_purchase)  { FactoryBot.create(:staged_purchase, user: user, product: froom_product) }
+    let(:staged_purchase2) { FactoryBot.create(:staged_purchase, user: user, product: vroom_product) }
+    let(:staged_giftpack_purchase) { FactoryBot.create(:staged_purchase, user: user, product: brool_product, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
+    let(:staged_physical_purchase) { FactoryBot.create(:staged_purchase, user: user, product: physi_product, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
+    let(:staged_membership) { FactoryBot.create(:staged_purchase, user: user, type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP) }
 
     it "sends off to PayPal if everything is fine" do
       staged_purchase.save
@@ -205,16 +205,16 @@ RSpec.describe Store::DealzoneController, type: :controller do
       PayPal::SDK::REST::Payment.any_instance.stubs(:execute).returns(true)
     end
 
-    let(:product1) { FactoryGirl.create(:product, price_cents: 3_00, shipping_cost_cents: 5_00) }
-    let(:product2) { FactoryGirl.create(:product, price_cents: 7_00) }
+    let(:product1) { FactoryBot.create(:product, price_cents: 3_00, shipping_cost_cents: 5_00) }
+    let(:product2) { FactoryBot.create(:product, price_cents: 7_00) }
 
-    let(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
-    let(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
+    let(:staged_purchase1) { FactoryBot.create(:staged_purchase, user: user, product: product1) }
+    let(:staged_purchase2) { FactoryBot.create(:staged_purchase, user: user, product: product2) }
 
-    let(:staged_giftpack_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
-    let(:staged_physical_purchase) { FactoryGirl.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
+    let(:staged_giftpack_purchase) { FactoryBot.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_DIGITAL_GIFT_PACK) }
+    let(:staged_physical_purchase) { FactoryBot.create(:staged_purchase, user: user, product: product1, type_id: Store::StagedPurchase::TYPE_PHYSICAL_SINGLE) }
 
-    let(:staged_membership) { FactoryGirl.create(:staged_purchase, user: user, type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP) }
+    let(:staged_membership) { FactoryBot.create(:staged_purchase, user: user, type_id: Store::StagedPurchase::TYPE_LIFETIME_MEMBERSHIP) }
 
 
     it "creates purchases and gifts for each normal eBook staged purchase" do
@@ -323,15 +323,15 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   describe 'download' do
 
-    let!(:product1)  { FactoryGirl.create(:product) }
-    let!(:product2)  { FactoryGirl.create(:product) }
+    let!(:product1)  { FactoryBot.create(:product) }
+    let!(:product2)  { FactoryBot.create(:product) }
 
-    let!(:release1)  { FactoryGirl.create(:release, product: product1) }
-    let!(:release2)  { FactoryGirl.create(:release, product: product2) }
+    let!(:release1)  { FactoryBot.create(:release, product: product1) }
+    let!(:release2)  { FactoryBot.create(:release, product: product2) }
 
-    let!(:order) { FactoryGirl.create(:order, user: user) }
+    let!(:order) { FactoryBot.create(:order, user: user) }
 
-    let!(:digital_purchase1)  { FactoryGirl.create(:digital_purchase, product: product1, order: order) }
+    let!(:digital_purchase1)  { FactoryBot.create(:digital_purchase, product: product1, order: order) }
 
     let(:invalid_release_id) {-33}
 

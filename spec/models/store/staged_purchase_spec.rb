@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Store::StagedPurchase, type: :model do
 
-  let(:product) { FactoryGirl.create(:product, rank: 1) }
-  let(:user)    { FactoryGirl.create(:user) }
+  let(:product) { FactoryBot.create(:product, rank: 1) }
+  let(:user)    { FactoryBot.create(:user) }
 
   it "should validate" do
     sp = Store::StagedPurchase.new
@@ -32,13 +32,13 @@ RSpec.describe Store::StagedPurchase, type: :model do
 
   describe "gross_cart_value" do
 
-    let(:product1)  { FactoryGirl.create(:product, price: 2.00) }
-    let(:product2)  { FactoryGirl.create(:product, price: 2.40) }
-    let(:product3)  { FactoryGirl.create(:product, price: 5.00) }
+    let(:product1)  { FactoryBot.create(:product, price: 2.00) }
+    let(:product2)  { FactoryBot.create(:product, price: 2.40) }
+    let(:product3)  { FactoryBot.create(:product, price: 5.00) }
 
-    let!(:staged_purchase1) { FactoryGirl.create(:staged_purchase, user: user, product: product1) }
-    let!(:staged_purchase2) { FactoryGirl.create(:staged_purchase, user: user, product: product2) }
-    let!(:staged_purchase3) { FactoryGirl.create(:staged_purchase, user: user, product: product3) }
+    let!(:staged_purchase1) { FactoryBot.create(:staged_purchase, user: user, product: product1) }
+    let!(:staged_purchase2) { FactoryBot.create(:staged_purchase, user: user, product: product2) }
+    let!(:staged_purchase3) { FactoryBot.create(:staged_purchase, user: user, product: product3) }
 
     it "should get the gross cart value" do
       expect( Store::StagedPurchase.gross_cart_value_for(user.id) ).to eq(9_40)

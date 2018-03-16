@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Store::PriceCombo, type: :model do
 
-  let(:product_1)   { FactoryGirl.create(:product) }
-  let(:product_2)   { FactoryGirl.create(:product) }
+  let(:product_1)   { FactoryBot.create(:product) }
+  let(:product_2)   { FactoryBot.create(:product) }
 
   it "should validate" do
     p = Store::PriceCombo.new
@@ -39,10 +39,10 @@ RSpec.describe Store::PriceCombo, type: :model do
 
   describe 'satisfied_for?' do
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
-    let(:product_1)   { FactoryGirl.create(:product, title: "Book One", price: 5_00) }
-    let(:product_2)   { FactoryGirl.create(:product, title: "Book Two", price: 3_00) }
+    let(:product_1)   { FactoryBot.create(:product, title: "Book One", price: 5_00) }
+    let(:product_2)   { FactoryBot.create(:product, title: "Book Two", price: 3_00) }
 
     it 'should identify a satisfied combo' do
       combo = Store::PriceCombo.create(name: "Reasonably-priced bundle", discount_cents: 2_50)
@@ -69,10 +69,10 @@ RSpec.describe Store::PriceCombo, type: :model do
 
   describe 'combos_satisfied_for' do
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
-    let(:product_1)   { FactoryGirl.create(:product, title: "Book One", price_cents: 5_00) }
-    let(:product_2)   { FactoryGirl.create(:product, title: "Book Two", price_cents: 3_00) }
+    let(:product_1)   { FactoryBot.create(:product, title: "Book One", price_cents: 5_00) }
+    let(:product_2)   { FactoryBot.create(:product, title: "Book Two", price_cents: 3_00) }
 
     it 'should return an array of the price combos satisfied' do
       combo = Store::PriceCombo.create(name: "Some bundle", discount_cents: 6_50)
@@ -89,15 +89,15 @@ RSpec.describe Store::PriceCombo, type: :model do
 
   describe 'total_cart_discount_for' do
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
-    let(:product_1)   { FactoryGirl.create(:product, title: "The main event",        price_cents: 5_00) }
-    let(:product_2)   { FactoryGirl.create(:product, title: "Bonus material",        price_cents: 3_00) }
-    let(:product_3)   { FactoryGirl.create(:product, title: "Some other product",    price_cents: 4_00) }
-    let(:product_4)   { FactoryGirl.create(:product, title: "Surprise product",      price_cents: 2_00) }
-    let(:product_5)   { FactoryGirl.create(:product, title: "A sequel no one wants", price_cents: 6_00) }
+    let(:product_1)   { FactoryBot.create(:product, title: "The main event",        price_cents: 5_00) }
+    let(:product_2)   { FactoryBot.create(:product, title: "Bonus material",        price_cents: 3_00) }
+    let(:product_3)   { FactoryBot.create(:product, title: "Some other product",    price_cents: 4_00) }
+    let(:product_4)   { FactoryBot.create(:product, title: "Surprise product",      price_cents: 2_00) }
+    let(:product_5)   { FactoryBot.create(:product, title: "A sequel no one wants", price_cents: 6_00) }
 
-    let(:staged_purchase)  { FactoryGirl.create(:staged_purchase) }
+    let(:staged_purchase)  { FactoryBot.create(:staged_purchase) }
 
     it 'should return a discount for one satisfied price combo' do
       combo = Store::PriceCombo.create(name: "Pretty good deal", discount_cents: 2_50)

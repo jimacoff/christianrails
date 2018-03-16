@@ -4,10 +4,10 @@ RSpec.describe Woods::Scorecard, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
-    let(:story) { FactoryGirl.create(:story, player: player) }
+    let(:player) { FactoryBot.create(:player) }
+    let(:story) { FactoryBot.create(:story, player: player) }
 
-    let!(:scorecard) { FactoryGirl.create(:scorecard, story: story, player: player) }
+    let!(:scorecard) { FactoryBot.create(:scorecard, story: story, player: player) }
 
     it "should belong to a player" do
       expect( scorecard.player ).to eq(player)

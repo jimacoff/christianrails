@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :price_combo, class: 'Store::PriceCombo' do
     sequence :name do |n|
       "Combo_#{n}"

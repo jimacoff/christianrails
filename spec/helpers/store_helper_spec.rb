@@ -4,9 +4,9 @@ RSpec.describe StoreHelper, type: :helper do
 
   describe "nudge_users_about_unsent_gifts?" do
 
-    let(:user)      { FactoryGirl.create(:user) }
-    let(:product)   { FactoryGirl.create(:product, title: "Flarn book") }
-    let(:free_gift) { FactoryGirl.create(:free_gift, product: product, giver: user) }
+    let(:user)      { FactoryBot.create(:user) }
+    let(:product)   { FactoryBot.create(:product, title: "Flarn book") }
+    let(:free_gift) { FactoryBot.create(:free_gift, product: product, giver: user) }
 
     it "nudges a user about unsent gifts" do
       ActionMailer::Base.deliveries = []

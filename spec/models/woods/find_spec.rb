@@ -4,11 +4,11 @@ RSpec.describe Woods::Find, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let(:item) { FactoryGirl.create(:item) }
+    let(:player) { FactoryBot.create(:player) }
+    let(:story) { FactoryBot.create(:story, player: player) }
+    let(:item) { FactoryBot.create(:item) }
 
-    let(:find) { FactoryGirl.create(:find, player: player, item: item, story: story) }
+    let(:find) { FactoryBot.create(:find, player: player, item: item, story: story) }
 
 
     it "should belong to a player" do

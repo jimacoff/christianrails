@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :player, :class => 'Woods::Player' do
     user
 

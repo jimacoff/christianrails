@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :box, :class => 'Woods::Box' do
     itemset
     node

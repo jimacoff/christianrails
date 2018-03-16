@@ -19,8 +19,8 @@ RSpec.describe Store::SnapbackController, type: :controller do
 
   let(:valid_session) { {} }
 
-  let!(:vol1) { FactoryGirl.create(:product, title: "Snapback: Fuseki") }
-  let!(:vol2) { FactoryGirl.create(:product, title: "Snapback: Shimari") }
+  let!(:vol1) { FactoryBot.create(:product, title: "Snapback: Fuseki") }
+  let!(:vol2) { FactoryBot.create(:product, title: "Snapback: Shimari") }
 
   describe "GET #fuseki" do
     it "should allow access" do

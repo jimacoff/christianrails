@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :physical_purchase, class: 'Store::PhysicalPurchase' do
     product
     order

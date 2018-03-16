@@ -4,11 +4,11 @@ RSpec.describe Woods::Treelink, type: :model do
 
   describe "relations" do
 
-    let(:storytree) { FactoryGirl.create(:storytree) }
+    let(:storytree) { FactoryBot.create(:storytree) }
 
-    let(:node) { FactoryGirl.create(:node) }
+    let(:node) { FactoryBot.create(:node) }
 
-    let!(:treelink)  { FactoryGirl.create(:treelink, node: node, linked_tree: storytree) }
+    let!(:treelink)  { FactoryBot.create(:treelink, node: node, linked_tree: storytree) }
 
     it "should belong to node" do
       expect( treelink.node ).to eq(node)

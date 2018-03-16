@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Store::DigitalPurchase, type: :model do
 
-  let(:product) { FactoryGirl.create(:product) }
-  let(:order)   { FactoryGirl.create(:order) }
+  let(:product) { FactoryBot.create(:product) }
+  let(:order)   { FactoryBot.create(:order) }
 
   it "should validate" do
     p = Store::DigitalPurchase.new

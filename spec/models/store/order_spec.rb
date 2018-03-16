@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Store::Order, type: :model do
 
-  let(:price_combo)       { FactoryGirl.create(:price_combo) }
-  let(:digital_purchase1) { FactoryGirl.create(:digital_purchase) }
-  let(:digital_purchase2) { FactoryGirl.create(:digital_purchase) }
+  let(:price_combo)       { FactoryBot.create(:price_combo) }
+  let(:digital_purchase1) { FactoryBot.create(:digital_purchase) }
+  let(:digital_purchase2) { FactoryBot.create(:digital_purchase) }
 
   it "should validate" do
     o = Store::Order.new()

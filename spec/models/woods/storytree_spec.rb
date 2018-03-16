@@ -4,22 +4,22 @@ RSpec.describe Woods::Storytree, type: :model do
 
   describe "relations" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:player) { FactoryBot.create(:player) }
 
-    let(:story) { FactoryGirl.create(:story, player: player) }
-    let!(:storytree) { FactoryGirl.create(:storytree, story: story) }
+    let(:story) { FactoryBot.create(:story, player: player) }
+    let!(:storytree) { FactoryBot.create(:storytree, story: story) }
 
-    let!(:node1) { FactoryGirl.create(:node, storytree: storytree) }
-    let!(:node2) { FactoryGirl.create(:node, storytree: storytree) }
-    let!(:node3) { FactoryGirl.create(:node, storytree: storytree) }
-    let!(:node4) { FactoryGirl.create(:node, storytree: storytree) }
+    let!(:node1) { FactoryBot.create(:node, storytree: storytree) }
+    let!(:node2) { FactoryBot.create(:node, storytree: storytree) }
+    let!(:node3) { FactoryBot.create(:node, storytree: storytree) }
+    let!(:node4) { FactoryBot.create(:node, storytree: storytree) }
 
-    let!(:box) { FactoryGirl.create(:box, node: node1) }
-    let!(:possibleitem)  { FactoryGirl.create(:possibleitem, node: node1) }
-    let!(:paintball)  { FactoryGirl.create(:paintball, node: node1) }
+    let!(:box) { FactoryBot.create(:box, node: node1) }
+    let!(:possibleitem)  { FactoryBot.create(:possibleitem, node: node1) }
+    let!(:paintball)  { FactoryBot.create(:paintball, node: node1) }
 
-    let!(:footprint1)  { FactoryGirl.create(:footprint, storytree: storytree) }
-    let!(:footprint2)  { FactoryGirl.create(:footprint, storytree: storytree) }
+    let!(:footprint1)  { FactoryBot.create(:footprint, storytree: storytree) }
+    let!(:footprint2)  { FactoryBot.create(:footprint, storytree: storytree) }
 
     it "should belong to a story" do
       expect( storytree.story ).to eq(story)

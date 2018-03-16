@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :staged_purchase, class: 'Store::StagedPurchase' do
     user
     product

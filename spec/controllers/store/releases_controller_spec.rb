@@ -19,7 +19,7 @@ RSpec.describe Store::ReleasesController, type: :controller do
     @user.save
   end
 
-  let(:product) { FactoryGirl.create(:product) }
+  let(:product) { FactoryBot.create(:product) }
 
   let(:valid_attributes) {
     {
@@ -98,7 +98,7 @@ RSpec.describe Store::ReleasesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
 
-      let(:new_product) { FactoryGirl.create(:product) }
+      let(:new_product) { FactoryBot.create(:product) }
       let(:new_attributes) {
         {
           format: "PDF",

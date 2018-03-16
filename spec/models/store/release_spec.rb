@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Store::Release, type: :model do
 
-  let(:product)   { FactoryGirl.create(:product) }
-  let(:user)      { FactoryGirl.create(:user) }
+  let(:product)   { FactoryBot.create(:product) }
+  let(:user)      { FactoryBot.create(:user) }
 
-  let(:download1) { FactoryGirl.create(:download) }
-  let(:download2) { FactoryGirl.create(:download) }
-  let(:download3) { FactoryGirl.create(:download) }
+  let(:download1) { FactoryBot.create(:download) }
+  let(:download2) { FactoryBot.create(:download) }
+  let(:download3) { FactoryBot.create(:download) }
 
   it "should validate" do
     r = Store::Release.new()

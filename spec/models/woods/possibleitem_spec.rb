@@ -4,11 +4,11 @@ RSpec.describe Woods::Possibleitem, type: :model do
 
   describe "relations" do
 
-    let(:node) { FactoryGirl.create(:node) }
+    let(:node) { FactoryBot.create(:node) }
 
-    let(:itemset) { FactoryGirl.create(:itemset) }
+    let(:itemset) { FactoryBot.create(:itemset) }
 
-    let!(:possibleitem) { FactoryGirl.create(:possibleitem, node: node, itemset: itemset) }
+    let!(:possibleitem) { FactoryBot.create(:possibleitem, node: node, itemset: itemset) }
 
     it "should belong to a node" do
       expect( possibleitem.node ).to eq(node)

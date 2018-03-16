@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :palette, :class => 'Woods::Palette' do
     story
 

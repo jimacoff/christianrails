@@ -4,10 +4,10 @@ RSpec.describe Woods::Footprint, type: :model do
 
   describe "relations" do
 
-    let(:storytree) { FactoryGirl.create(:storytree) }
-    let(:scorecard) { FactoryGirl.create(:scorecard) }
+    let(:storytree) { FactoryBot.create(:storytree) }
+    let(:scorecard) { FactoryBot.create(:scorecard) }
 
-    let(:footprint) { FactoryGirl.create(:footprint, storytree: storytree, scorecard: scorecard) }
+    let(:footprint) { FactoryBot.create(:footprint, storytree: storytree, scorecard: scorecard) }
 
     it "should belong to a scorecard" do
       expect( footprint.scorecard ).to eq(scorecard)
@@ -21,17 +21,17 @@ RSpec.describe Woods::Footprint, type: :model do
 
   describe "helper methods" do
 
-    let(:player) { FactoryGirl.create(:player) }
+    let(:player) { FactoryBot.create(:player) }
 
-    let(:scorecard) { FactoryGirl.create(:scorecard, player_id: player.id) }
+    let(:scorecard) { FactoryBot.create(:scorecard, player_id: player.id) }
 
-    let(:storytree1) { FactoryGirl.create(:storytree, max_level: 1) }
-    let(:storytree2) { FactoryGirl.create(:storytree, max_level: 3) }
-    let(:storytree3) { FactoryGirl.create(:storytree, max_level: 5) }
+    let(:storytree1) { FactoryBot.create(:storytree, max_level: 1) }
+    let(:storytree2) { FactoryBot.create(:storytree, max_level: 3) }
+    let(:storytree3) { FactoryBot.create(:storytree, max_level: 5) }
 
-    let(:footprint1) { FactoryGirl.create(:footprint, storytree: storytree1, scorecard: scorecard) }
-    let(:footprint2) { FactoryGirl.create(:footprint, storytree: storytree2, scorecard: scorecard) }
-    let(:footprint3) { FactoryGirl.create(:footprint, storytree: storytree3, scorecard: scorecard) }
+    let(:footprint1) { FactoryBot.create(:footprint, storytree: storytree1, scorecard: scorecard) }
+    let(:footprint2) { FactoryBot.create(:footprint, storytree: storytree2, scorecard: scorecard) }
+    let(:footprint3) { FactoryBot.create(:footprint, storytree: storytree3, scorecard: scorecard) }
 
     describe "construct_for_tree!" do
 

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Store::FreeGift, type: :model do
 
-  let(:product)   { FactoryGirl.create(:product) }
-  let(:recipient) { FactoryGirl.create(:user) }
-  let(:giver)     { FactoryGirl.create(:user) }
+  let(:product)   { FactoryBot.create(:product) }
+  let(:recipient) { FactoryBot.create(:user) }
+  let(:giver)     { FactoryBot.create(:user) }
 
   it "can be given to another user" do
     fg = Store::FreeGift.create(giver: giver, recipient: recipient, product: product, origin: "Just a test")

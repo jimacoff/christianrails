@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :paintball, :class => 'Woods::Paintball' do
     node
     palette

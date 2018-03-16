@@ -24,12 +24,12 @@ RSpec.describe Woods::SyncController, type: :controller do
 
   describe "GET #find_node_by_desc" do
 
-    let(:story) { FactoryGirl.create(:story, name: "Carrot Story") }
-    let(:storytree) { FactoryGirl.create(:storytree, story_id: story.id, name: "Main Tree") }
+    let(:story) { FactoryBot.create(:story, name: "Carrot Story") }
+    let(:storytree) { FactoryBot.create(:storytree, story_id: story.id, name: "Main Tree") }
 
-    let!(:node1) { FactoryGirl.create(:node, storytree_id: storytree.id, tree_index: 1) }
-    let!(:node2) { FactoryGirl.create(:node, storytree_id: storytree.id, tree_index: 2) }
-    let!(:node3) { FactoryGirl.create(:node, storytree_id: storytree.id, tree_index: 3) }
+    let!(:node1) { FactoryBot.create(:node, storytree_id: storytree.id, tree_index: 1) }
+    let!(:node2) { FactoryBot.create(:node, storytree_id: storytree.id, tree_index: 2) }
+    let!(:node3) { FactoryBot.create(:node, storytree_id: storytree.id, tree_index: 3) }
 
     it "finds a node that exists" do
       get :find_node_by_desc, params: {story_name: story.name, storytree_name: storytree.name, tree_index: 2, sync_token: 'lol-a-sync-token'}, format: :json

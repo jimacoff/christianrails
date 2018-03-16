@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :product, class: 'Store::Product' do
     sequence :title do |n|
       "Book_#{n}"

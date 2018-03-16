@@ -21,8 +21,8 @@ RSpec.describe Store::FreeGiftsController, type: :controller do
 
   describe "POST #gift" do
 
-    let(:free_gift) { FactoryGirl.create(:free_gift, giver: @user) }
-    let!(:existing_user) { FactoryGirl.create(:user) }
+    let(:free_gift) { FactoryBot.create(:free_gift, giver: @user) }
+    let!(:existing_user) { FactoryBot.create(:user) }
 
     it "sends an email and gives a gift to a new user" do
       ActionMailer::Base.deliveries = []
