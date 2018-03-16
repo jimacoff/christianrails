@@ -33,9 +33,7 @@
 
 %p The alternative is the Patreon model — a smaller donation every month in exchange for a trickle of output. But I don't think it's a good fit for me. Anything small I produce, I make available to everybody, and the paid products are all major works I want to monetize to the fullest extent. Plus, the more transactions there are in total, the more I lose in fees.
 
-%p Luckily, all of these detractors are hypothetical strawmen, so without anyone to stop me, I'm going to go ahead and implement Lifetime Memberships, and see if it works.
-
-%p This is somewhat similar to how ScaleQuail itself got started.
+%p Luckily, all of my previously-mentioned detractors are hypothetical strawmen, so without anyone to stop me, I'm going to go ahead and implement Lifetime Memberships, and see if it works. It's not like I have anything else to do tonight.
 
 %p
   Development-wise, it's another database table and some backend logic to grant products to lifetime members, plus a new page to advertise it and
@@ -65,10 +63,11 @@
 
 .center
   %a{href: memberships_path}
-    = image_tag "scalequail/new-membership-banner.png", class: "quailpost-image", alt: "Now, with memberships", title: "Purchase a lifetime membership!"
+    = image_tag "scalequail/new-membership-banner.png", class: "quailpost-image swell", alt: "Now, with memberships", title: "Purchase a lifetime membership!"
   %p.caption
-    A banner for the homepage. Click on it!
+    A button for the homepage. Click on it!
 
 %p
-  Speaking of social media, I'm really terrible at using it to promote myself. In fact, it may be my biggest barrier to scaling this business. Next, I'm going to
-  %a.coming-soon{onclick: "comingSoon( $(this) );"} automate the worst parts.
+  Speaking of social media, I'm really terrible at using it to promote myself. In fact, it may be my biggest barrier to scaling this business. Luckily, it's purely psychological, so next I'm going to
+  %a.coming-soon{onclick: "comingSoon( $(this) );"} destroy whatever it is about myself
+  that's holding me back.
