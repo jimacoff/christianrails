@@ -10,11 +10,11 @@ RSpec.describe Woods::Treelink, type: :model do
 
     let!(:treelink)  { FactoryBot.create(:treelink, node: node, linked_tree: storytree) }
 
-    it "should belong to node" do
+    it "belongs to node" do
       expect( treelink.node ).to eq(node)
     end
 
-    it "should belong to storytree, as linked_tree" do
+    it "belongs to storytree, as linked_tree" do
       expect( treelink.linked_tree ).to eq(storytree)
     end
 

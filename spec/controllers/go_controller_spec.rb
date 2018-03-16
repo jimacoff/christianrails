@@ -7,7 +7,7 @@ RSpec.describe GoController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "should allow access" do
+    it "allows access" do
       get :index, params: {}, session: valid_session
       expect( response ).to be_ok
     end

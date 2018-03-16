@@ -17,19 +17,19 @@ RSpec.describe Woods::Node, type: :model do
     let!(:possibleitem)  { FactoryBot.create(:possibleitem, node: node1) }
     let!(:paintball)  { FactoryBot.create(:paintball, node: node1) }
 
-    it "should have a box" do
+    it "has a box" do
       expect( node1.box ).to eq(box)
     end
 
-    it "should have a treelink" do
+    it "has a treelink" do
       expect( node1.treelink ).to eq(treelink)
     end
 
-    it "should have a possibleitem" do
+    it "has a possibleitem" do
       expect( node1.possibleitem ).to eq(possibleitem)
     end
 
-    it "should have a paintball" do
+    it "has a paintball" do
       expect( node1.paintball ).to eq(paintball)
     end
 
@@ -42,7 +42,7 @@ RSpec.describe Woods::Node, type: :model do
     let(:level_3_node) { FactoryBot.create(:node, tree_index: 4) }
     let(:level_8_node) { FactoryBot.create(:node, tree_index: 245) }
 
-    it "should calculate the node's level on the storytree" do
+    it "calculates the node's level on the storytree" do
       expect( level_1_node.level ).to eq( 1 )
       expect( level_2_node.level ).to eq( 2 )
       expect( level_3_node.level ).to eq( 3 )

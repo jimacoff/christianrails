@@ -5,7 +5,7 @@ RSpec.describe Store::StagedPurchase, type: :model do
   let(:product) { FactoryBot.create(:product, rank: 1) }
   let(:user)    { FactoryBot.create(:user) }
 
-  it "should validate" do
+  it "validates" do
     sp = Store::StagedPurchase.new
     sp.type_id = Store::StagedPurchase::TYPE_DIGITAL_SINGLE
     expect( sp ).to_not be_valid
@@ -18,13 +18,13 @@ RSpec.describe Store::StagedPurchase, type: :model do
     expect( sp ).to be_valid
   end
 
-  it "should belong to users" do
+  it "belongs to users" do
     sp = Store::StagedPurchase.create(user: user, product: product)
 
     expect( sp.user.id ).to eq(user.id)
   end
 
-  it "should belong to products" do
+  it "belongs to products" do
     sp = Store::StagedPurchase.create(user: user, product: product)
 
     expect( sp.product.id ).to eq(product.id)
@@ -40,7 +40,7 @@ RSpec.describe Store::StagedPurchase, type: :model do
     let!(:staged_purchase2) { FactoryBot.create(:staged_purchase, user: user, product: product2) }
     let!(:staged_purchase3) { FactoryBot.create(:staged_purchase, user: user, product: product3) }
 
-    it "should get the gross cart value" do
+    it "gets the gross cart value" do
       expect( Store::StagedPurchase.gross_cart_value_for(user.id) ).to eq(9_40)
     end
 

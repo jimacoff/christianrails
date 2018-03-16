@@ -11,15 +11,15 @@ RSpec.describe Woods::Find, type: :model do
     let(:find) { FactoryBot.create(:find, player: player, item: item, story: story) }
 
 
-    it "should belong to a player" do
+    it "belongs to a player" do
       expect( find.player ).to eq(player)
     end
 
-    it "should belong to an item" do
+    it "belongs to an item" do
       expect( find.item ).to eq(item)
     end
 
-    it "should belong to a story" do
+    it "belongs to a story" do
       expect( find.story ).to eq(story)
     end
 

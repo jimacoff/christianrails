@@ -6,6 +6,8 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   let(:user)    { FactoryBot.create(:user) }
 
+  let(:valid_session) { {} }
+
   before (:each) do
     sign_in user
 
@@ -13,7 +15,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
     user.save
   end
 
-  describe 'index' do
+  describe 'GET #index' do
 
     let!(:combo1)    { FactoryBot.create(:price_combo) }
     let!(:combo2)    { FactoryBot.create(:price_combo) }
@@ -47,7 +49,21 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   end
 
-  describe 'updated prices' do
+  describe "GET #library" do
+    it "allows access" do
+      get :library, params: {}, session: valid_session
+      expect( response ).to be_ok
+    end
+  end
+
+  describe "GET #memberships" do
+    it "allows access" do
+      get :memberships, params: {}, session: valid_session
+      expect( response ).to be_ok
+    end
+  end
+
+  describe 'GET #updated_prices' do
 
     let!(:product_1)   { FactoryBot.create(:product, title: "The main event",     price_cents: 5_05) }
     let!(:product_2)   { FactoryBot.create(:product, title: "Bonus material",     price_cents: 3_00) }
@@ -151,7 +167,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   end
 
-  describe 'check_out' do
+  describe 'POST #check_out' do
 
     let(:froom_product) { FactoryBot.create(:product, title: "Lol Froom") }
     let(:vroom_product) { FactoryBot.create(:product, title: "Lol Vroom") }
@@ -198,7 +214,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   end
 
-  describe 'complete_order' do
+  describe 'GET #complete_order' do
 
     before :each do
       PayPal::SDK::REST::Payment.stubs(:find).returns( PayPal::SDK::REST::Payment.new )
@@ -321,7 +337,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   end
 
-  describe 'download' do
+  describe 'GET #download' do
 
     let!(:product1)  { FactoryBot.create(:product) }
     let!(:product2)  { FactoryBot.create(:product) }

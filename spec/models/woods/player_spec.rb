@@ -18,23 +18,23 @@ RSpec.describe Woods::Player, type: :model do
     let!(:scorecard) { FactoryBot.create(:scorecard, player: player) }
     let!(:footprint) { FactoryBot.create(:footprint, scorecard: scorecard) }
 
-    it "should have many finds" do
+    it "has many finds" do
       expect( player.finds.count ).to eq(2)
     end
 
-    it "should have many scorecards" do
+    it "has many scorecards" do
       expect( player.scorecards.count ).to eq(1)
     end
 
-    it "should have many footprints" do
+    it "has many footprints" do
       expect( player.footprints.count ).to eq(1)
     end
 
-    it "should belong to a user" do
+    it "belongs to a user" do
       expect( player.user ).to eq(user)
     end
 
-    it "should have many stories" do
+    it "has many stories" do
       expect( player.stories.count ).to eq(3)
     end
 

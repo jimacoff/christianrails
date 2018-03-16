@@ -11,11 +11,11 @@ RSpec.describe Woods::Palette, type: :model do
     let!(:paintball1) { FactoryBot.create(:paintball, palette: palette) }
     let!(:paintball2) { FactoryBot.create(:paintball, palette: palette) }
 
-    it "should belong to a story" do
+    it "belongs to a story" do
       expect( palette.story ).to eq(story)
     end
 
-    it "should have many paintballs" do
+    it "has many paintballs" do
       expect( palette.paintballs.count ).to eq(2)
     end
 

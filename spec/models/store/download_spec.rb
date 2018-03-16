@@ -6,7 +6,7 @@ RSpec.describe Store::Download, type: :model do
   let(:release) { FactoryBot.create(:release, product: product) }
   let(:user)    { FactoryBot.create(:user) }
 
-  it "should validate" do
+  it "validates" do
     d = Store::Download.new()
     expect( d ).to_not be_valid
     expect( d.errors.messages.keys ).to include(:release, :user)
@@ -20,7 +20,7 @@ RSpec.describe Store::Download, type: :model do
     expect( d ).to be_valid
   end
 
-  it "should relate to users" do
+  it "relates to users" do
     d = Store::Download.create(user: user, release: release)
     expect( d.user.id ).to eq(user.id)
 
@@ -28,7 +28,7 @@ RSpec.describe Store::Download, type: :model do
     expect( u.downloads.count ).to eq(1)
   end
 
-  it "should relate to releases" do
+  it "relates to releases" do
     d = Store::Download.create(user: user, release: release)
     expect( d.release.id ).to eq(release.id)
 
@@ -36,7 +36,7 @@ RSpec.describe Store::Download, type: :model do
     expect( r.downloads.count).to eq(1)
   end
 
-  it "should relate to product, through releases" do
+  it "relates to product, through releases" do
     d = Store::Download.create(user: user, release: release)
 
     expect( d.release ).to eq(release)

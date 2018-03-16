@@ -7,7 +7,7 @@ RSpec.describe GraveyardController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #fractalfic" do
-    it "should allow access" do
+    it "allows access" do
       get :fractalfic, params: {}, session: valid_session
       expect( response ).to be_ok
     end

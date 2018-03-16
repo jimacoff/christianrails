@@ -9,11 +9,11 @@ RSpec.describe Woods::Footprint, type: :model do
 
     let(:footprint) { FactoryBot.create(:footprint, storytree: storytree, scorecard: scorecard) }
 
-    it "should belong to a scorecard" do
+    it "belongs to a scorecard" do
       expect( footprint.scorecard ).to eq(scorecard)
     end
 
-    it "should belong to a storytree" do
+    it "belongs to a storytree" do
       expect( footprint.storytree ).to eq(storytree)
     end
 
@@ -35,7 +35,7 @@ RSpec.describe Woods::Footprint, type: :model do
 
     describe "construct_for_tree!" do
 
-      it 'should construct proper footprints for various sized trees' do
+      it 'constructs proper footprints for various sized trees' do
         footprint1.construct_for_tree!
         expect( footprint1.footprint_data ).to eq('o')
         footprint2.construct_for_tree!
@@ -48,7 +48,7 @@ RSpec.describe Woods::Footprint, type: :model do
 
     describe "step!" do
 
-      it 'should step on the index requested' do
+      it 'steps on the index requested' do
         footprint2.construct_for_tree!
         footprint2.step!(1)
         footprint2.step!(3)
@@ -63,7 +63,7 @@ RSpec.describe Woods::Footprint, type: :model do
 
     describe "print_at_index" do
 
-      it "should retrieve the footprint at the given index" do
+      it "retrieves the footprint at the given index" do
         footprint2.construct_for_tree!
         footprint2.step!(1)
         footprint2.step!(3)

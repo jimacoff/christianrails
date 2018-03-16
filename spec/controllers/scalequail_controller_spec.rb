@@ -20,21 +20,21 @@ RSpec.describe ScalequailController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "should allow access" do
+    it "allows access" do
       get :index, params: {}, session: valid_session
       expect( response ).to be_ok
     end
   end
 
   describe "GET #archives" do
-    it "should allow access" do
+    it "allows access" do
       get :archives, params: {}, session: valid_session
       expect( response ).to be_ok
     end
   end
 
   describe "GET #show_post" do
-    it "should allow access" do
+    it "allows access" do
       get :show_post, params: {post: "let_me_tell_you_about_my_business"}, session: valid_session
       expect( response ).to be_ok
       get :show_post, params: {post: "have_you_tried_not_scaling_your_business"}, session: valid_session
@@ -55,14 +55,14 @@ RSpec.describe ScalequailController, type: :controller do
   end
 
   describe "GET #category" do
-    it "should allow access" do
+    it "allows access" do
       get :category, params: {name: "scaling"}, session: valid_session
       expect( response ).to be_ok
     end
   end
 
   describe "GET #tag" do
-    it "should allow access" do
+    it "allows access" do
       get :tag, params: {name: "business"}, session: valid_session
       expect( response ).to be_ok
     end

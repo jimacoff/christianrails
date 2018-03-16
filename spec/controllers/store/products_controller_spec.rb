@@ -180,7 +180,7 @@ RSpec.describe Store::ProductsController, type: :controller do
     let!(:download3) { FactoryBot.create(:download, release: release2) }
     let!(:download4) { FactoryBot.create(:download, release: release3) }
 
-    it "should show all the products and their respective downloads" do
+    it "shows all the products and their respective downloads" do
       get :index, params: {}, session: valid_session
       expect(assigns(:products)).to include(product1, product2)
 

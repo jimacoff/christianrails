@@ -9,11 +9,11 @@ RSpec.describe Woods::Scorecard, type: :model do
 
     let!(:scorecard) { FactoryBot.create(:scorecard, story: story, player: player) }
 
-    it "should belong to a player" do
+    it "belongs to a player" do
       expect( scorecard.player ).to eq(player)
     end
 
-    it "should belong to a story" do
+    it "belongs to a story" do
       expect( scorecard.story ).to eq(story)
     end
 

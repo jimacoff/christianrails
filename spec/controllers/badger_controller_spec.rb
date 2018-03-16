@@ -20,21 +20,21 @@ RSpec.describe BadgerController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "should allow access" do
+    it "allows access" do
       get :index, params: {}, session: valid_session
       expect( response ).to be_ok
     end
   end
 
   describe "GET #archives" do
-    it "should allow access" do
+    it "allows access" do
       get :archives, params: {}, session: valid_session
       expect( response ).to be_ok
     end
   end
 
   describe "GET #show_post" do
-    it "should allow access to each post" do
+    it "allows access to each post" do
       get :show_post, params: {post: "20160427_food_fight" }, session: valid_session
       expect( response ).to be_ok
       get :show_post, params: {post: "20160106_counter_attacks" }, session: valid_session
@@ -67,7 +67,7 @@ RSpec.describe BadgerController, type: :controller do
   end
 
   describe "GET #tag" do
-    it "should allow access" do
+    it "allows access" do
       get :tag, params: {name: "cold"}, session: valid_session
       expect( response ).to be_ok
     end

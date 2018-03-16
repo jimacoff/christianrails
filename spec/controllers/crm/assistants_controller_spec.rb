@@ -21,7 +21,7 @@ RSpec.describe Crm::AssistantsController, type: :controller do
 
   describe "GET #index" do
 
-    it "should show basic index" do
+    it "renders a basic index" do
       get :index, params: {}, session: valid_session
       expect(response).to be_ok
     end

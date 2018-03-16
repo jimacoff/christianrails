@@ -5,7 +5,7 @@ RSpec.describe Store::PriceCombo, type: :model do
   let(:product_1)   { FactoryBot.create(:product) }
   let(:product_2)   { FactoryBot.create(:product) }
 
-  it "should validate" do
+  it "validates" do
     p = Store::PriceCombo.new
     expect( p ).to_not be_valid
     expect( p.errors.messages.keys ).to include(:name)
@@ -21,7 +21,7 @@ RSpec.describe Store::PriceCombo, type: :model do
     expect( p ).to be_valid
   end
 
-  it "should have and belong to many products" do
+  it "has and belong to many products" do
     p = Store::PriceCombo.create(name: "Cat-related bundle", discount_cents: 4_99)
     p.products << product_1
     p.products << product_2
@@ -29,7 +29,7 @@ RSpec.describe Store::PriceCombo, type: :model do
     expect( p.products.count ).to eq(2)
   end
 
-  it "should have many orders" do
+  it "has many orders" do
     p = Store::PriceCombo.create(name: "Jar-related bundle", discount_cents: 3_99)
     o1 = Store::Order.create(price_combo: p, payment_id: "rakka", payer_id: "snaka",   total_cents: 4_65)
     o2 = Store::Order.create(price_combo: p, payment_id: "arara", payer_id: "maarara", total_cents: 1_75)
@@ -44,7 +44,7 @@ RSpec.describe Store::PriceCombo, type: :model do
     let(:product_1)   { FactoryBot.create(:product, title: "Book One", price: 5_00) }
     let(:product_2)   { FactoryBot.create(:product, title: "Book Two", price: 3_00) }
 
-    it 'should identify a satisfied combo' do
+    it 'identifies a satisfied combo' do
       combo = Store::PriceCombo.create(name: "Reasonably-priced bundle", discount_cents: 2_50)
       combo.products << product_1
       combo.products << product_2
@@ -55,7 +55,7 @@ RSpec.describe Store::PriceCombo, type: :model do
       expect( combo.satisfied_for?(user.id) ).to be_truthy
     end
 
-    it 'should identify an unsatisfied combo' do
+    it 'identifies an unsatisfied combo' do
       combo = Store::PriceCombo.create(name: "Reasonably-priced bundle", discount_cents: 2_50)
       combo.products << product_1
       combo.products << product_2
@@ -74,7 +74,7 @@ RSpec.describe Store::PriceCombo, type: :model do
     let(:product_1)   { FactoryBot.create(:product, title: "Book One", price_cents: 5_00) }
     let(:product_2)   { FactoryBot.create(:product, title: "Book Two", price_cents: 3_00) }
 
-    it 'should return an array of the price combos satisfied' do
+    it 'returns an array of the price combos satisfied' do
       combo = Store::PriceCombo.create(name: "Some bundle", discount_cents: 6_50)
       combo.products << product_1
       combo.products << product_2
@@ -99,7 +99,7 @@ RSpec.describe Store::PriceCombo, type: :model do
 
     let(:staged_purchase)  { FactoryBot.create(:staged_purchase) }
 
-    it 'should return a discount for one satisfied price combo' do
+    it 'returns a discount for one satisfied price combo' do
       combo = Store::PriceCombo.create(name: "Pretty good deal", discount_cents: 2_50)
       combo.products << product_1
       combo.products << product_2
@@ -111,7 +111,7 @@ RSpec.describe Store::PriceCombo, type: :model do
 
     end
 
-    it 'should return a discount for more than one satisfied price combo' do
+    it 'returns a discount for more than one satisfied price combo' do
       combo1 = Store::PriceCombo.create(name: "Pretty good deal", discount_cents: 2_50)
       combo2 = Store::PriceCombo.create(name: "Amazing deal",     discount_cents: 5_25)
       # set up combo 1
@@ -133,7 +133,7 @@ RSpec.describe Store::PriceCombo, type: :model do
       expect( Store::PriceCombo.total_cart_discount_for(user.id) ).to eq(7_75)
     end
 
-    it 'should not return any discounts if no price combos satisfied' do
+    it 'does NOT return any discounts if no price combos satisfied' do
       combo1 = Store::PriceCombo.create(name: "Pretty good deal", discount_cents: 2_50)
       combo2 = Store::PriceCombo.create(name: "Amazing deal",     discount_cents: 5_25)
       # set up combo 1

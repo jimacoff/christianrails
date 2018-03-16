@@ -9,11 +9,11 @@ RSpec.describe Woods::Paintball, type: :model do
 
     let!(:paintball) { FactoryBot.create(:paintball, node: node, palette: palette) }
 
-    it "should belong to a node" do
+    it "belongs to a node" do
       expect( paintball.node ).to eq(node)
     end
 
-    it "should belong to a palette" do
+    it "belongs to a palette" do
       expect( paintball.palette ).to eq(palette)
     end
 

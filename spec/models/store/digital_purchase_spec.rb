@@ -5,7 +5,7 @@ RSpec.describe Store::DigitalPurchase, type: :model do
   let(:product) { FactoryBot.create(:product) }
   let(:order)   { FactoryBot.create(:order) }
 
-  it "should validate" do
+  it "validates" do
     p = Store::DigitalPurchase.new
     expect( p ).to_not be_valid
     expect( p.errors.messages.keys ).to include(:product, :order)
@@ -20,13 +20,13 @@ RSpec.describe Store::DigitalPurchase, type: :model do
     expect( p ).to be_valid
   end
 
-  it "should belong to products" do
+  it "belongs to products" do
     p = Store::DigitalPurchase.create(product: product, order: order)
 
     expect( p.product.id ).to eq(product.id)
   end
 
-  it "should belong to orders" do
+  it "belongs to orders" do
     p = Store::DigitalPurchase.create(product: product, order: order)
 
     expect( p.order ).to eq(order)

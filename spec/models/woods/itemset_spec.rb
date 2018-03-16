@@ -18,19 +18,19 @@ RSpec.describe Woods::Itemset, type: :model do
     let!(:possibleitem1)  { FactoryBot.create(:possibleitem, itemset: itemset) }
     let!(:possibleitem2)  { FactoryBot.create(:possibleitem, itemset: itemset) }
 
-    it "should belong to a story" do
+    it "belongs to a story" do
       expect( itemset.story ).to eq(story)
     end
 
-    it "should have many items" do
+    it "has many items" do
       expect( itemset.items.count ).to eq(3)
     end
 
-    it "should have many possible_items" do
+    it "has many possible_items" do
       expect( itemset.possibleitems.count ).to eq(2)
     end
 
-    it "should have many boxes" do
+    it "has many boxes" do
       expect( itemset.boxes.count ).to eq(2)
     end
 

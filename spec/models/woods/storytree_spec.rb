@@ -21,27 +21,27 @@ RSpec.describe Woods::Storytree, type: :model do
     let!(:footprint1)  { FactoryBot.create(:footprint, storytree: storytree) }
     let!(:footprint2)  { FactoryBot.create(:footprint, storytree: storytree) }
 
-    it "should belong to a story" do
+    it "belongs to a story" do
       expect( storytree.story ).to eq(story)
     end
 
-    it "should have many nodes" do
+    it "has many nodes" do
       expect( storytree.nodes.count ).to eq(4)
     end
 
-    it "should have many boxes" do
+    it "has many boxes" do
       expect( storytree.boxes.count ).to eq(1)
     end
 
-    it "should have many possibleitems" do
+    it "has many possibleitems" do
       expect( storytree.possibleitems.count ).to eq(1)
     end
 
-    it "should have many paintballs" do
+    it "has many paintballs" do
       expect( storytree.paintballs.count ).to eq(1)
     end
 
-    it "should have many footprints" do
+    it "has many footprints" do
       expect( storytree.footprints.count ).to eq(2)
     end
 

@@ -9,7 +9,7 @@ RSpec.describe Store::Release, type: :model do
   let(:download2) { FactoryBot.create(:download) }
   let(:download3) { FactoryBot.create(:download) }
 
-  it "should validate" do
+  it "validates" do
     r = Store::Release.new()
     expect( r ).to_not be_valid
     expect( r.errors.messages.keys ).to include(:product, :format, :release_date)
@@ -25,13 +25,13 @@ RSpec.describe Store::Release, type: :model do
     expect( r ).to be_valid
   end
 
-  it "should have a valid format" do
+  it "has a valid format" do
     r = Store::Release.create(product: product, format: "JSP", release_date: 1.week.ago)
     expect( r ).to_not be_valid
     expect( r.errors.messages[:format] ).to include("JSP is not a valid format")
   end
 
-  it "should have a physical code if it is a book" do
+  it "has a physical code if it is a book" do
     r = Store::Release.create(product: product, format: "Book", release_date: 1.week.ago)
     expect( r ).to_not be_valid
     expect( r.errors.messages[:physical_code] ).to include("can't be blank")
@@ -40,7 +40,7 @@ RSpec.describe Store::Release, type: :model do
     expect( r ).to be_valid
   end
 
-  it "should belong to products" do
+  it "belongs to products" do
     r = Store::Release.create(product: product, format: "PDF", release_date: 1.week.ago)
     p = r.product
     expect( p.id ).to eq(product.id)
@@ -50,7 +50,7 @@ RSpec.describe Store::Release, type: :model do
     expect( rel[0] ).to eq(r)
   end
 
-  it "should have many downloads" do
+  it "has many downloads" do
     r = Store::Release.create(product: product, format: "PDF", release_date: 1.week.ago)
     r.downloads << download1
     r.downloads << download2

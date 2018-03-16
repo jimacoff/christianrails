@@ -11,11 +11,11 @@ RSpec.describe Woods::Box, type: :model do
 
     let!(:box) { FactoryBot.create(:box, node: node1, itemset: itemset) }
 
-    it "should belong to a node" do
+    it "belongs to a node" do
       expect( box.node ).to eq(node1)
     end
 
-    it "should belong to an itemset" do
+    it "belongs to an itemset" do
       expect( box.itemset ).to eq(itemset)
     end
 

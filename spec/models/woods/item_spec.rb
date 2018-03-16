@@ -9,11 +9,11 @@ RSpec.describe Woods::Item, type: :model do
     let(:itemset) { FactoryBot.create(:itemset, story: story) }
     let(:item) { FactoryBot.create(:item, itemset: itemset) }
 
-    it "should belong to an itemset" do
+    it "belongs to an itemset" do
       expect( item.itemset ).to eq(itemset)
     end
 
-    it "should belong to a story" do
+    it "belongs to a story" do
       expect( item.story ).to eq(story)
     end
 

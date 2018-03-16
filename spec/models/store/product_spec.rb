@@ -12,7 +12,7 @@ RSpec.describe Store::Product, type: :model do
   let!(:download2) { FactoryBot.create(:download, release: release1) }
   let!(:download3) { FactoryBot.create(:download, release: release2) }
 
-  it "should validate" do
+  it "validates" do
     p = Store::Product.new
     expect( p ).to_not be_valid
     expect( p.errors.messages.keys ).to include(:title, :author)
@@ -33,7 +33,7 @@ RSpec.describe Store::Product, type: :model do
     expect( p ).to be_valid
   end
 
-  it "should have many releases" do
+  it "has many releases" do
     p = Store::Product.create(title: "Black Ink", author: "Christian DeWolf", price_cents: 9_99, rank: 1)
     p.releases << release1
     p.releases << release2
@@ -41,7 +41,7 @@ RSpec.describe Store::Product, type: :model do
     expect( p.releases.count ).to eq(2)
   end
 
-  it "should have many downloads, through releases" do
+  it "has many downloads, through releases" do
     p = Store::Product.create(title: "Dream Lawyer", author: "Christian DeWolf", price_cents: 2_99, rank: 4)
 
     p.releases << release1 << release2
@@ -56,7 +56,7 @@ RSpec.describe Store::Product, type: :model do
     let(:product1) { FactoryBot.create(:product) }
     let(:product2) { FactoryBot.create(:product) }
 
-    it 'should return a discount for products when user has satisfied price combo' do
+    it 'returns a discount for products when user has satisfied price combo' do
       combo.products << product1 << product2
       Store::StagedPurchase.create(user: user, product: product1)
       Store::StagedPurchase.create(user: user, product: product2)
@@ -65,7 +65,7 @@ RSpec.describe Store::Product, type: :model do
       expect( product2.discount_for(user)).to eq( combo.discount_cents )
     end
 
-    it 'should NOT return a discount for products when user has NOT satisfied price combo' do
+    it 'does NOT return a discount for products when user has NOT satisfied price combo' do
       combo.products << product1 << product2
       Store::StagedPurchase.create(user: user, product: product1)
 
@@ -89,7 +89,7 @@ RSpec.describe Store::Product, type: :model do
     let(:prod3) { FactoryBot.create(:product) }
     let!(:rel6) { FactoryBot.create(:release, product: prod3, format: "PDF") }
 
-    it "should identify all of a product's digital releases" do
+    it "identifies all of a product's digital releases" do
       expect( prod1.digital_releases.count ).to eq(3)
       expect( prod1.digital_releases ).to include( rel2, rel3, rel4 )
 
@@ -100,19 +100,19 @@ RSpec.describe Store::Product, type: :model do
       expect( prod3.digital_releases ).to eq( [ rel6 ] )
     end
 
-    it "should identify if a product has digital releases" do
+    it "identifies if a product has digital releases" do
       expect( prod1.has_digital_release? ).to be_truthy
       expect( prod2.has_digital_release? ).to be_falsy
       expect( prod3.has_digital_release? ).to be_truthy
     end
 
-    it "should identify if a product has physical releases" do
+    it "identifies if a product has physical releases" do
       expect( prod1.has_physical_release? ).to be_truthy
       expect( prod2.has_physical_release? ).to be_truthy
       expect( prod3.has_physical_release? ).to be_falsy
     end
 
-    it "should return a product's physical_code if it has one" do
+    it "returns a product's physical_code if it has one" do
       expect( prod1.physical_code ).to eq("abcde")
       expect( prod2.physical_code ).to eq("ABCDE")
       expect( prod3.physical_code ).to be_nil

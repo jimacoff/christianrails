@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
   let(:staged3) { FactoryBot.create(:staged_purchase) }
 
 
-  it "should validate" do
+  it "validates" do
     u = User.new()
     expect( u ).to_not be_valid
     expect( u.errors.messages.keys ).to include(:username, :first_name, :last_name)
@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
     expect( u ).to be_valid
   end
 
-  it "should have many orders" do
+  it "has many orders" do
     u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     expect( u.orders.count ).to eq(0)
@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
     expect( u.orders.count ).to eq(1)
   end
 
-  it "should have many digital_purchases through orders" do
+  it "has many digital_purchases through orders" do
     u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     order.user = u
@@ -61,7 +61,7 @@ RSpec.describe User, type: :model do
     expect( u.digital_purchases.count ).to eq(3)
   end
 
-  it "should have many downloads" do
+  it "has many downloads" do
     u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     expect( u.downloads.count ).to eq(0)
@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
     expect( u.downloads.count ).to eq(3)
   end
 
-  it "should have many staged purchases" do
+  it "has many staged purchases" do
     u = User.create(username: "Tim", first_name: "Tim", last_name: "Test", country: "CA", email: "tim@test.com", password: "timsword")
 
     expect( u.staged_purchases.count ).to eq(0)

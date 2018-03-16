@@ -23,14 +23,14 @@ RSpec.describe Store::SnapbackController, type: :controller do
   let!(:vol2) { FactoryBot.create(:product, title: "Snapback: Shimari") }
 
   describe "GET #fuseki" do
-    it "should allow access" do
+    it "allows access" do
       get :fuseki, params: {}, session: valid_session
       expect( response ).to be_ok
     end
   end
 
   describe "GET #shimari" do
-    it "should allow access" do
+    it "allows access" do
       get :shimari, params: {}, session: valid_session
       expect( response ).to be_ok
     end
