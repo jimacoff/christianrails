@@ -1,4 +1,4 @@
-%h2.center Create your account!
+%h2.center Create your account
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
@@ -20,7 +20,7 @@
     = f.email_field :email, autocomplete: "off", placeholder: "Email address"
 
   .field
-    = f.label "Please choose a secure password."
+    = f.label "Please choose a secure password:"
     %br
     = f.password_field :password, autocomplete: "off", placeholder: "Enter a password"
     %br
