@@ -208,6 +208,7 @@ Christianrails::Application.routes.draw do
   resources :diversions, only: [:index] do
     collection do
       get 'rainfield'
+      get 'stocks'
     end
   end
   get '/go',  to: 'go#index'

@@ -10,4 +10,9 @@ class DiversionsController < ApplicationController
   def rainfield
   end
 
+  ## ADMIN ONLY FOR NOW
+
+  def stocks
+  end
+
 end

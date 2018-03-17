@@ -16,4 +16,5 @@ Rails.application.config.assets.precompile += %w(
                                                   woods/binarywoods.css
                                                   woods/tree_editor.js
                                                   woods/woods.js
+                                                  stocks/stocks.js
                                                 )
