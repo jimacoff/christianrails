@@ -12,25 +12,33 @@ Game.run = function() {
 
 // logic for every tick of the game loop, ie. 1 'hour'
 Game.update = function() {
-  // either update the last candle or make a new candle off the last one
-  let lastCandle = getLastCandle();
-  let newCandle;
+  let symbolsInPlay = [currentStock]; // TODO expand later
 
-  // make new candle if new day
-  if (gameHour === 0 ) {
-    newCandle = makeNewCandleFrom( lastCandle );
-    addCandleToSymbol( newCandle );
-    lastCandle = newCandle;
+  // Update all symbols in play
+  for (var i = 0; i < symbolsInPlay.length; i++) {
+    // either update the last candle or make a new candle off the last one
+    let lastCandle = getLastCandleOf( symbolsInPlay[i] );
+    let newCandle;
+
+    // make new candle if new day
+    if (gameHour === 0 ) {
+      newCandle = makeNewCandleFrom( lastCandle );
+      addCandleToSymbol( newCandle, symbolsInPlay[i] );
+      lastCandle = newCandle;
+    }
+
+    // update the price of the candle based on factors
+    // TODO expand factors
+    updateLastCandlePriceOf( symbolsInPlay[i],
+                             getRandomStockMove( getCurrentPriceOf( symbolsInPlay[i] ),
+                                                 symbolsInPlay[i].volatilityIndex ) );
   }
-
-  // the events of the hour
-  updateLastCandlePrice( getRandomStockMove( getCurrentPrice() ) );
 
   incrementTime();
 };
 
 Game.draw = function() {
-  drawSymbolInfo();
+  drawStockInfo();
   drawChart();
   drawPlayerInfo();
 };
@@ -45,34 +53,31 @@ var myPortfolio = {
   cash: 1000000,
   stocks: []
 }
-var currentSymbol;
+var currentStock;
 
 // generate symbols, traders
 function initializeGame() {
 
-
   // generate a sector with stocks
   generateSectors();
 
-  currentSymbol = sectors[0].stocks[0]; // first sector, first stock
+  currentStock = sectors[0].stocks[0]; // first sector, first stock
 
-  gameDate = getLastCandle().date;
+  gameDate.setTime( getLastCandleOf( currentStock ).date.getTime() ) ;
 
   // generate an initial AI trader
   traders.push( generateTrader() );
 }
 
-// { date: Fri Mar 16 2018 22:14:29 GMT-0300 (ADT),  open: 100, high: 101.02719683753726,
-//   low: 99.89721696584655, close: 100.70829305278824, volume: 545.33232323 }
-
 // show the interface around the chart
-function drawSymbolInfo() {
-  $('#stock-symbol').text( currentSymbol.symbol );
+function drawStockInfo() {
+  $('#stock-symbol').text( currentStock.symbol );
 }
 
+// Draw the chart for the current symbol
 function drawChart() {
-  let theStockData = currentSymbol.stockData;
-//console.log(theStockData);
+  let theStockData = currentStock.stockData;
+  //console.log(theStockData);
 
   // set the Y axis based on high and low of data
   var yExtent = fc.extentLinear()
@@ -87,6 +92,7 @@ function drawChart() {
 
   var gridlines = fc.annotationSvgGridline();
   var candlestick = fc.seriesSvgCandlestick();
+
   var multi = fc.seriesSvgMulti()
       .series([gridlines, candlestick]);
 
@@ -101,6 +107,12 @@ function drawChart() {
   d3.select('#stock-chart')
     .datum( theStockData )
     .call(chart);
+
+  $('.y-axis').css('margin-left', '10px');
+  // TODO fix the gap
+  //$('.gridline-x').attr('x2', '530');
+  //$('.plot-area').width(560);
+  //$('.plot-area').children('svg').eq(0).attr('width', 560);
 }
 
 function drawPlayerInfo() {
@@ -108,7 +120,7 @@ function drawPlayerInfo() {
 }
 
 function startGame() {
-  window.onEachFrame(Game.run);
+  window.onEachFrame( Game.run );
 }
 
 function generateSectors() {
@@ -132,7 +144,7 @@ function generateStock() {
   stock.offers = [];
   stock.volatilityIndex = 1;
 
-  console.log(stock.stockData);
+  //console.log(stock.stockData);
 
   return stock;
 }
@@ -145,21 +157,20 @@ function generateTrader() {
   return trader;
 }
 
-function getLastCandle() {
-  return currentSymbol.stockData[ currentSymbol.stockData.length - 1 ];
+function getLastCandleOf( symbol ) {
+  return symbol.stockData[ symbol.stockData.length - 1 ];
 }
 
-function getCurrentPrice() {
-  return getLastCandle().close;
+function getCurrentPriceOf( symbol ) {
+  return getLastCandleOf( symbol ).close;
 }
 
 function makeNewCandleFrom( lastCandle ) {
   let newCandle = {};
-
-  // one day later
   let lastDate = lastCandle.date;
+
   newCandle.date = new Date();
-  newCandle.date.setTime(lastDate.getTime() + 86400000);
+  newCandle.date.setTime( lastDate.getTime() + 86400000 );    // one day later
 
   newCandle.open = lastCandle.close;
   newCandle.close = lastCandle.close;
@@ -170,8 +181,8 @@ function makeNewCandleFrom( lastCandle ) {
   return newCandle;
 }
 
-function updateLastCandlePrice( newPrice ) {
-  let lastCandle = getLastCandle();
+function updateLastCandlePriceOf( symbol, newPrice ) {
+  let lastCandle = getLastCandleOf( symbol );
 
   // update price
   lastCandle.close = newPrice;
@@ -185,33 +196,21 @@ function updateLastCandlePrice( newPrice ) {
   }
 }
 
-function makeNewCandle(date, open, high, low, close, volume) {
-  let newCandle = {};
-
-  newCandle.date = date;
-  newCandle.open = open;
-  newCandle.high = high;
-  newCandle.low  = low;
-  newCandle.close = close;
-  newCandle.volume = volume;
-
-  return newCandle;
-}
-
-function addCandleToSymbol( candle ) {
-  currentSymbol.stockData.push( candle );
-  currentSymbol.stockData.shift();
+function addCandleToSymbol( candle, symbol ) {
+  symbol.stockData.push( candle );
+  symbol.stockData.shift();
 }
 
 function incrementTime() {
   gameHour += 1;
   if (gameHour === HOURS_IN_DAY) {
     gameHour = 0;
+    gameDate.setTime( gameDate.getTime() + 86400000 );
   }
 }
 
 // returns a new price based on old price, optional volatilityIndex & optional direction
-function getRandomStockMove( originalPrice, volatilityIndex = null, dir = null) {
+function getRandomStockMove( originalPrice, volatilityIndex, dir = null) {
   let magnitude;
   let direction;
   let volatility;
@@ -223,17 +222,16 @@ function getRandomStockMove( originalPrice, volatilityIndex = null, dir = null) 
     direction = dir;
   }
 
-  // calculate volatility if necessary
-  if ( !volatilityIndex ) {
-    volatilityIndex = currentSymbol.volatilityIndex;  // use the symbol's by default
-  } else {
-    volatility = volatilityIndex;
-  }
-
   // a random magnitude
-  magnitude = Math.random() * volatilityIndex; // TODO figure out this formula
+  magnitude = Math.random() * volatilityIndex;
 
   return !direction ? ( originalPrice - magnitude ) : ( originalPrice + magnitude );
+}
+
+function buyStockWithPortfolio( stock, portfolio, amt ) {
+  // if (  ) {
+
+  // }
 }
 
 //////////////////
