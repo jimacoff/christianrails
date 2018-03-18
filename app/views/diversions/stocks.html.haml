@@ -7,7 +7,7 @@
 #stocks-wrapper
   #stock-info
     %span#stock-symbol
-    #stock-price
+    %span#stock-price
 
   #stock-chart{style: "width: 100%; height: 250px"}
   #player-info
@@ -22,9 +22,14 @@
     %span
       %strong#date-display
 
-  %button{onclick: "buyStockWithPortfolio(currentStock, myPortfolio, 100);"} Buy 100
-
-
+  %button{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 100 );"} Buy 100
+  %button{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 100 );"} Sell 100
+  %br
+  %button{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 500 );"} Buy 500
+  %button{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 500 );"} Sell 500
+  %br
+  %button{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 1000 );"} Buy 1,000
+  %button{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 1000 );"} Sell 1,000
 :javascript
 
   $(document).ready(function() {

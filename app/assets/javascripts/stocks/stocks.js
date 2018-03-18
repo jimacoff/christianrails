@@ -94,6 +94,7 @@ function incrementTime() {
 // show the interface around the chart
 function drawStockInfo() {
   $('#stock-symbol').text( currentStock.symbol );
+  $('#stock-price').text( "$" + getCurrentPriceOf(currentStock) );
 }
 
 // Draw the chart for the current symbol
@@ -141,17 +142,20 @@ function drawPlayerInfo() {
   let portfolioText = "";
   let mySymbols = Object.keys( myPortfolio.stocks );
 
-  $('#player-cash').text( "Cash: $" + myPortfolio.cash );
+  $('#player-cash').text( "Cash: $" + numberWithCommas( round( myPortfolio.cash, 0) ) );
 
   // draw the player's portfolio + value
   for (var i = 0; i < mySymbols.length; i++) {
-    portfolioText += mySymbols[i] + ": $" + currentShareValue( getStockBySymbol(mySymbols[i]),
-                                                               myPortfolio.stocks[ mySymbols[i] ] );
+    if ( myPortfolio.stocks[ mySymbols[i] ] ) {
+      portfolioText += mySymbols[i] + " x " + myPortfolio.stocks[ mySymbols[i] ] +
+                                      " : $" + numberWithCommas ( round ( currentShareValue( getStockBySymbol(mySymbols[i]),
+                                                                                             myPortfolio.stocks[ mySymbols[i] ] ), 0));
+    }
   }
   $('#player-portfolio').text( portfolioText );
 
   // draw players's net worth
-  $('#player-networth').text( "$" + playerNetWorth() );
+  $('#player-networth').text( "$" + numberWithCommas( round( playerNetWorth(), 0) ) );
 }
 
 function drawEnvironmentInfo() {
@@ -164,7 +168,7 @@ function generateSectors() {
   let newSector = {};
 
   newSector.name = "Mining";
-  newSector.stocks = ["FLR"];
+  newSector.symbols = ["FLR"];
 
   sectors.push( newSector );
 }
@@ -181,7 +185,6 @@ function generateStock() {
   stock.volatilityIndex = 1;
 
   //console.log(stock.stockData);
-
   return stock;
 }
 
@@ -197,17 +200,6 @@ function generateTrader() {
 
 function getStockBySymbol( symbol ) {
   return allStocks[ symbol ];
-}
-
-function buyStockWithPortfolio( stock, portfolio, amt ) {
-  let stockCost = currentShareValue( stock, amt );
-  if ( stockCost <= portfolio.cash ) {
-    portfolio.cash -= stockCost;
-    portfolio.stocks[ stock.symbol ] = amt;
-    return true;
-  } else {
-    return false;
-  }
 }
 
 function getLastCandleOf( symbol ) {
@@ -269,10 +261,39 @@ function getRandomStockMove( originalPrice, volatilityIndex, dir = null) {
   return !direction ? ( originalPrice - magnitude ) : ( originalPrice + magnitude );
 }
 
+////// BUYERS AND SELLERS /////
+
+function buyStockWithPortfolio( stock, portfolio, amt ) {
+  let stockCost = currentShareValue( stock, amt );
+  if ( stockCost <= portfolio.cash ) {
+    portfolio.cash -= stockCost;
+    if ( !portfolio.stocks[ stock.symbol ] ) {
+      portfolio.stocks[ stock.symbol ] = amt;
+    } else {
+      portfolio.stocks[ stock.symbol ] += amt;
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function sellStockWithPortfolio( stock, portfolio, amt ) {
+  let stockValue = currentShareValue( stock, amt );
+
+  if ( portfolio.stocks[ stock.symbol ] >= amt ) {
+    portfolio.stocks[ stock.symbol ] -= amt;
+    portfolio.cash += stockValue;
+    return true;
+  } else {
+    return false;
+  }
+}
+
 //////// CALCULATORS /////////
 
 function getCurrentPriceOf( symbol ) {
-  return getLastCandleOf( symbol ).close;
+  return round( getLastCandleOf( symbol ).close , 2) ;
 }
 
 function currentShareValue( stock, lots ) {
@@ -289,6 +310,16 @@ function playerNetWorth() {
   }
 
   return myPortfolio.cash + shareValue;
+}
+
+///////  GENERAL HELPERS
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 //////////////////
