@@ -2,36 +2,43 @@
 %script{src: "https://unpkg.com/d3fc/build/d3fc.min.js"}
 = javascript_include_tag "stocks/stocks"
 
+= stylesheet_link_tag "stocks/stocks"
+
 %h1 STOOOOCKS
 
 #stocks-wrapper
-  #stock-info
-    %span#stock-symbol
-    %span#stock-price
-
-  #stock-chart{style: "width: 100%; height: 250px"}
-  #player-info
-    %span Portfolio:
-    %span#player-cash
-    #player-portfolio
-
-    %span Net worth:
-    %span#player-networth
-
   #environment-info
     %span
       %strong#date-display
 
-  %button{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 100 );"} Buy 100
-  %button{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 100 );"} Sell 100
-  %br
-  %button{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 500 );"} Buy 500
-  %button{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 500 );"} Sell 500
-  %br
-  %button{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 1000 );"} Buy 1,000
-  %button{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 1000 );"} Sell 1,000
-:javascript
+  #stock-info
+    %span
+      %strong#stock-symbol
+    %span#stock-price
 
+  #stock-chart{style: "width: 100%; height: 250px"}
+  #player-info
+    %span Cash:
+    %span
+      %strong#player-cash
+    #player-portfolio
+
+    %span Net worth:
+    %span
+      %strong#player-networth
+
+  %hr
+
+  %button#buy-100{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 100 );"} Buy 100
+  %button#sell-100{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 100 );"} Sell 100
+  %br
+  %button#buy-500{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 500 );"} Buy 500
+  %button#sell-500{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 500 );"} Sell 500
+  %br
+  %button#buy-1000{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 1000 );"} Buy 1,000
+  %button#sell-1000{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 1000 );"} Sell 1,000
+
+:javascript
   $(document).ready(function() {
     initializeGame();
     startGame();

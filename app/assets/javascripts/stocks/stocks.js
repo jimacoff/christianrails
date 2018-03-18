@@ -142,7 +142,7 @@ function drawPlayerInfo() {
   let portfolioText = "";
   let mySymbols = Object.keys( myPortfolio.stocks );
 
-  $('#player-cash').text( "Cash: $" + numberWithCommas( round( myPortfolio.cash, 0) ) );
+  $('#player-cash').text( "$" + numberWithCommas( round( myPortfolio.cash, 0) ) );
 
   // draw the player's portfolio + value
   for (var i = 0; i < mySymbols.length; i++) {
