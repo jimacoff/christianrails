@@ -94,6 +94,9 @@ function incrementTime() {
 // show the interface around the chart
 function drawStockInfo() {
   $('#stock-symbol').text( currentStock.symbol );
+  $('#stock-name').text( currentStock.companyName );
+  //$('#stock-description').text( currentStock.description );
+  // $('#stock-sector').text( currentStock.sector );
   $('#stock-price').text( "$" + getCurrentPriceOf(currentStock) );
 }
 
@@ -147,7 +150,7 @@ function drawPlayerInfo() {
   // draw the player's portfolio + value
   for (var i = 0; i < mySymbols.length; i++) {
     if ( myPortfolio.stocks[ mySymbols[i] ] ) {
-      portfolioText += mySymbols[i] + " x " + myPortfolio.stocks[ mySymbols[i] ] +
+      portfolioText += mySymbols[i] + " x " + numberWithCommas( myPortfolio.stocks[ mySymbols[i] ] ) +
                                       " : $" + numberWithCommas ( round ( currentShareValue( getStockBySymbol(mySymbols[i]),
                                                                                              myPortfolio.stocks[ mySymbols[i] ] ), 0));
     }
@@ -272,6 +275,7 @@ function buyStockWithPortfolio( stock, portfolio, amt ) {
     } else {
       portfolio.stocks[ stock.symbol ] += amt;
     }
+    Game.draw();
     return true;
   } else {
     return false;
@@ -284,6 +288,7 @@ function sellStockWithPortfolio( stock, portfolio, amt ) {
   if ( portfolio.stocks[ stock.symbol ] >= amt ) {
     portfolio.stocks[ stock.symbol ] -= amt;
     portfolio.cash += stockValue;
+    Game.draw();
     return true;
   } else {
     return false;
