@@ -1,5 +1,8 @@
 #blog
   = render 'butler/blog/embed_post', locals: { post: @post }
 
+  // the recommendation engine
+  = render 'butler/blog/recommendations', locals: { post: @post }
+
   %br
   %a.page-link.link{href: "archives"} Archives

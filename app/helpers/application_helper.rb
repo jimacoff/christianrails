@@ -14,6 +14,7 @@ module ApplicationHelper
     end
   end
 
+  # turns a blog post slug into titleized string
   def title_of(post_name)
     post_name[9..-1].gsub('_',' ').titleize
   end

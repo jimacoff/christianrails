@@ -1,0 +1,9 @@
+.recommendations-wrapper
+  %hr
+  %span.other-posts.CMUSerifRoman Other posts you might like:
+
+  .recommended-posts
+    - @recommended_posts.each do |rec_post|
+      = render 'butler/blog/link_to_post', locals: { post: rec_post }
+
+  %hr

@@ -12,6 +12,10 @@ body {
   background-color: $black;
 }
 
+.no-bullets {
+  list-style: none;
+}
+
 .right {
   float: right;
 }
@@ -126,7 +130,7 @@ table.center {
 
 .blog-permalink {
   text-align: center;
-    text-decoration: none !important;
+  text-decoration: none !important;
   h2 {
     cursor: pointer;
   }
@@ -179,6 +183,26 @@ img.center {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+.archive-post-link {
+  margin-bottom: 5px;
+}
+
+// recommendation engine
+
+.recommendations-wrapper {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.other-posts {
+  text-align: left !important;
+  color: white;
+}
+
+.recommended-posts {
+  margin-top: 20px;
 }
 
 /* Colourizers */
@@ -370,7 +394,7 @@ nav {
   text-align: center;
 }
 
-// specific images
+// specific images -- this is the worst ever
 
 .silver-image {
   width: 600px;
