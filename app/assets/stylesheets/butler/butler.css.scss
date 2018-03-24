@@ -124,10 +124,16 @@ table.center {
   -webkit-transform: scale(1.02);
 }
 
+.blog-permalink {
+  text-align: center;
+    text-decoration: none !important;
+  h2 {
+    cursor: pointer;
+  }
+}
+
 .blog-title {
   color: $servile-purple;
-  margin-left: 20px;
-  font-weight: bold;
 }
 
 img.center {

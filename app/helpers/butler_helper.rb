@@ -260,11 +260,6 @@ module ButlerHelper
         pageName: "Archives",
         theme: "classic",
         code: "archives"
-      },
-      {
-        pageName: "Thanks for ordering!",
-        theme: "reserve",
-        code: "ghost-thanks"
       }
     ]
   end
