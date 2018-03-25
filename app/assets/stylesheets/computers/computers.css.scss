@@ -105,6 +105,17 @@ h2 {
   margin-bottom: -10px;
 }
 
+.blog-permalink {
+  text-decoration: none !important;
+  h1 {
+    cursor: pointer;
+  }
+}
+
+.blog-title {
+  color: $slate-gray !important;
+}
+
 /////  RESPONSIVE //////
 
 // small

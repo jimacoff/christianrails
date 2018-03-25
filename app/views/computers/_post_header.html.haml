@@ -1,1 +1,2 @@
-%h1.blog-title= locals[:post][:title]
+%a.blog-permalink{ href: show_post_computers_path + "?post=" + locals[:post][:slug], title: "Permalink" }
+  %h1.blog-title= locals[:post][:title]
