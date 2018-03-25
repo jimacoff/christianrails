@@ -149,6 +149,17 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   font-size: 80% !important;
 }
 
+.blog-permalink {
+  text-decoration: none !important;
+  h2 {
+    cursor: pointer;
+  }
+}
+
+.quail-blog-title {
+  color: $slate-gray !important;
+}
+
 /////  RESPONSIVE //////
 
 // small
