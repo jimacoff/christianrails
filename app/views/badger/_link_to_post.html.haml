@@ -1,4 +1,4 @@
-%a.no-dec{href: "/badger/show_post?post=#{ locals[:post][:title] }"}
-  %span.whitener= "#{date_of( locals[:post][:title] )}"
-  %span.grayer --
-  %span.embolden= "#{title_of( locals[:post][:title] )}"
+%a.no-dec{href: show_post_badger_index_path + "?post=#{ locals[:post][:slug] }"}
+  %span.whitener= "#{ date_of( locals[:post][:slug] ) }"
+  = image_tag "badger.ico", width: '8px', height: '8px', class: 'badger-spacing'
+  %span.embolden= "#{ locals[:post][:full_title] }"

@@ -1,4 +1,5 @@
 .badger-post
-  %p.embolden.subtle.datemargin= "#{date_of( locals[:post][:title] ).strftime("%B %e, %Y") }"
-  = render "badger/posts/blog_#{ locals[:post][:title] }"
+  %p.embolden.subtle.datemargin= "#{date_of( locals[:post][:slug] ).strftime("%B %e, %Y") }"
+  = render 'badger/permalink_title', locals: { post: locals[:post] }
+  = render "badger/posts/blog_#{ locals[:post][:slug] }"
   = render "badger/post_footer", locals: { post: locals[:post] }

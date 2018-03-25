@@ -17,18 +17,19 @@ class BadgerController < ApplicationController
   end
 
   def show_post
-    post_name = badger_params[:post]
+    post_name = params[:post]
     if !lookup_context.find_all("/badger/posts/_blog_#{ post_name }").any?
       redirect_to page_not_found_path and return
     end
-    titles = @blog_posts.collect{ |x| x[:title] }
-    @post = @blog_posts[ titles.index( post_name ) ]
+    slugs = @blog_posts.collect{ |x| x[:slug] }
+    @post = @blog_posts[ slugs.index( post_name ) ]
 
     render 'badger/show_post'
   end
 
   def tag
-    @tag = badger_params[:name]
+    @tag = params[:name]
+
     @tag_posts = []
     @blog_posts.each do |post|
       @tag_posts << post if post[:tags].include? @tag
@@ -38,10 +39,6 @@ class BadgerController < ApplicationController
   end
 
 private
-
-  def badger_params
-    params.permit(:post, :name)
-  end
 
   def get_sample_posts
     @sample_posts = sample_badger_posts

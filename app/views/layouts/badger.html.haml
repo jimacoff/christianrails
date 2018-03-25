@@ -1,7 +1,7 @@
 !!! 5
 
-- badger_title = "I Found This Badger"
-- badger_desc  = "I found this badger and named it Jesse and these are our stories."
+- badger_title = @post ? @post[:full_title]  : "I Found This Badger"
+- badger_desc  = @post ? @post[:description] : "I found this badger and named it Jesse and these are our stories."
 
 %html
   %head

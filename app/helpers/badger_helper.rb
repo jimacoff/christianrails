@@ -4,60 +4,88 @@ module BadgerHelper
     # Add new posts at the top.
     [
       {
-        title: "20160427_food_fight",
-        tags: ["badger", "budgeting", "food", "high-end cheeses", "worrying weight loss"]
+        slug: "20160427_food_fight",
+        full_title: "Food fight",
+        tags: ["badger", "budgeting", "food", "high-end cheeses", "worrying weight loss"],
+        description: "In which tensions in the kitchen escalate"
       },
       {
-        title: "20160106_counter_attacks",
-        tags: ["badger", "cold", "e-commerce", "food safety"]
+        slug: "20160106_counter_attacks",
+        full_title: "Counter attacks",
+        tags: ["badger", "cold", "e-commerce", "food safety"],
+        description: "In which Jesse starts going up on the counter"
       },
       {
-        title: "20150428_springtime",
-        tags: ["badger", "feelings of hope and trepidation", "spring"]
+        slug: "20150428_springtime",
+        full_title: "Springtime",
+        tags: ["badger", "feelings of hope and trepidation", "spring"],
+        description: "In which hopes are renewed"
       },
       {
-        title: "20150329_badger_games",
-        tags: ["badger", "de-humidifier", "monetization", "wholesaling", "winter"]
+        slug: "20150329_badger_games",
+        full_title: "Badger games",
+        tags: ["badger", "de-humidifier", "monetization", "wholesaling", "winter"],
+        description: "In which a harmful pastime becomes painful"
       },
       {
-        title: "20150226_leaks",
-        tags: ["badger", "badger-related deception", "cold", "halifax", "infrastructure"]
+        slug: "20150226_leaks",
+        full_title: "Leaks",
+        tags: ["badger", "badger-related deception", "cold", "halifax", "infrastructure"],
+        description: "In which a ceiling is insufficient"
       },
       {
-        title: "20150128_snow_problem",
-        tags: ["badger", "bubble baths", "halifax", "misery", "winter"]
+        slug: "20150128_snow_problem",
+        full_title: "Snow problem",
+        tags: ["badger", "bubble baths", "halifax", "misery", "winter"],
+        description: "In which Jesse and I take a winter walk"
       },
       {
-        title: "20141222_housecoat",
-        tags: ["badger", "build tools", "cold", "housecoat", "java", "space heater"]
+        slug: "20141222_housecoat",
+        full_title: "Housecoat",
+        tags: ["badger", "build tools", "cold", "housecoat", "java", "space heater"],
+        description: "In which a precious item is borrowed"
       },
       {
-        title: "20141126_strategies",
-        tags: ["badger", "badger-related deception", "consequences", "go", "yoga"]
+        slug: "20141126_strategies",
+        full_title: "Strategies",
+        tags: ["badger", "badger-related deception", "consequences", "go", "yoga"],
+        description: "In which a secret game is played"
       },
       {
-        title: "20141119_another_november",
-        tags: ["badger", "cold", "go", "responsive web technologies", "winter"]
+        slug: "20141119_another_november",
+        full_title: "Another November",
+        tags: ["badger", "cold", "go", "responsive web technologies", "winter"],
+        description: "In which the cycle repeats"
       },
       {
-        title: "20100204_blanket_statements",
-        tags: ["badger", "cold", "consequences", "database design"]
+        slug: "20100204_blanket_statements",
+        full_title: "Blanket statements",
+        tags: ["badger", "cold", "consequences", "database design"],
+        description: "In which a jealousy emerges"
       },
       {
-        title: "20091127_november",
-        tags: ["badger", "cold", "self-loathing"]
+        slug: "20091127_november",
+        full_title: "November",
+        tags: ["badger", "cold", "self-loathing"],
+        description: "In which things cool down considerably"
       },
       {
-        title: "20091123_a_knock_at_the_door",
-        tags: ["badger", "badger-related deception", "consequences", "surveillance"]
+        slug: "20091123_a_knock_at_the_door",
+        full_title: "A knock at the door",
+        tags: ["badger", "badger-related deception", "consequences", "surveillance"],
+        description: "In which Jesse is scrutinized by an official"
       },
       {
-        title: "20091120_badger_for_business",
-        tags: ["badger", "business", "client-oriented", "coffee", "meets deadlines"]
+        slug: "20091120_badger_for_business",
+        full_title: "Bad(ger) for Business",
+        tags: ["badger", "business", "client-oriented", "coffee", "meets deadlines"],
+        description: "In which Jesse causes trouble for my finances"
       },
       {
-        title: "20091118_i_found_this_badger",
-        tags: ["badger", "pets", "serendipity"]
+        slug: "20091118_i_found_this_badger",
+        full_title: "I found this badger",
+        tags: ["badger", "pets", "serendipity"],
+        description: "In which I find a badger"
       }
     ]
   end
