@@ -59,8 +59,6 @@ RSpec.describe ButlerController, type: :controller do
       expect( response ).to be_ok
       get :show_post, params: {post: "20130815_grocery_shopping_tips"}, session: valid_session
       expect( response ).to be_ok
-      get :show_post, params: {post: "20130725_i_hate_marketing_in_2013"}, session: valid_session
-      expect( response ).to be_ok
     end
   end
 
