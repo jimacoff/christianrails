@@ -1,0 +1,9 @@
+- thumb = locals[:post][:thumbnail]
+- if !thumb || thumb == ""
+  - wolves = ['butler-ears', 'butler-face']
+  - thumb = wolves[ Random.rand( wolves.size ) ]
+
+.thumb-post-link
+  %a.no-dec{href: butler_show_post_path + "?post=#{ locals[:post][:title] }"}
+    = image_tag "butler/blog/thumbnails/#{ thumb }.png", height: '125px', width: '200px', class: 'swell skoosh'
+    %h6.diminutive.center.whitener= "#{ locals[:post][:full_title] }"
