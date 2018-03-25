@@ -74,8 +74,8 @@ function moveToTop() {
 
 function scrollToContent(product) {
   var position = window.scrollY,
-      inkContent = 244,
-      mainContent = 180;
+      inkContent = 0, //244,
+      mainContent = 0; //180;
 
   if(product.theme === 'blackink') {
     if(position > inkContent) {
