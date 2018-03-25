@@ -72,7 +72,7 @@ class ButlerController < ApplicationController
         @recommended_posts << get_random_post_excluding( @recommended_posts + [current_post] )
       end
 
-      @recommended_posts.shuffle
+      @recommended_posts.shuffle!
     end
 
     # either the same category or share tags
