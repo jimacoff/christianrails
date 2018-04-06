@@ -160,6 +160,40 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   color: $slate-gray !important;
 }
 
+.quailglow {
+   -webkit-animation: color_change 1.5s infinite alternate;
+      -moz-animation: color_change 1.5s infinite alternate;
+       -ms-animation: color_change 1.5s infinite alternate;
+        -o-animation: color_change 1.5s infinite alternate;
+           animation: color_change 1.5s infinite alternate;
+}
+
+@-webkit-keyframes color_change {
+ from { color: $quail-blue-x;
+        text-shadow: -1px 1px 8px #bbcfef, 1px -1px 8px #fff; }
+   to { color: $quail-blue-l; }
+}
+@-moz-keyframes color_change {
+ from { color: $quail-blue-x;
+        text-shadow: -1px 1px 8px #bbcfef, 1px -1px 8px #fff; }
+   to { color: $quail-blue-l; }
+}
+@-ms-keyframes color_change {
+ from { color: $quail-blue-x;
+        text-shadow: -1px 1px 8px #bbcfef, 1px -1px 8px #fff; }
+   to { color: $quail-blue-l; }
+}
+@-o-keyframes color_change {
+ from { color: $quail-blue-x;
+        text-shadow: -1px 1px 8px #bbcfef, 1px -1px 8px #fff; }
+   to { color: $quail-blue-l; }
+}
+@keyframes color_change {
+ from { color: $quail-blue-x;
+        text-shadow: -1px 1px 8px #bbcfef, 1px -1px 8px #fff; }
+   to { color: $quail-blue-l; }
+}
+
 /////  RESPONSIVE //////
 
 // small
