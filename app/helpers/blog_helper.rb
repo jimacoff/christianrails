@@ -104,6 +104,33 @@ module BlogHelper
         title: "20160411_christian_at_geequinox",
         category: RARE_PUBLIC_APPEARANCES,
         tags: ["Ghostcrime", "Geequinox", "conventions"]
+      },
+      ####
+      {
+        title: "20151126_actually_did_publish_that_book",
+        category: WRITING_AND_PUBLISHING,
+        tags: ["success at life", "books", "Ghostcrime", "paperback"]
+      },
+      ####
+      {
+        title: "20150822_new_book_forthcoming",
+        category: WRITING_AND_PUBLISHING,
+        tags: ["anticipation", "Ghostcrime"]
+      },
+      {
+        title: "20141123_breaking_badger_news",
+        category: WRITING_AND_PUBLISHING,
+        tags: ["badger", "blog"]
+      },
+      {
+        title: "20140829_fractalfic_launched",
+        category: SOFTWARE_DEVELOPMENT,
+        tags: ["coding", "FractalFic", "interactive fiction", "Diamond Find"]
+      },
+      {
+        title: "20140628_press_to_impress",
+        category: WRITING_AND_PUBLISHING,
+        tags: ["FractalFic", "ClamBlog", "Diamond Find", "coding"]
       }
     ]
   end
