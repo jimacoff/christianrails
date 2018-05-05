@@ -7,7 +7,14 @@ class RegistrationsController < Devise::RegistrationsController
   after_action :associate_orphan_woods_player_with_new_user, only: [:create]
   after_action :give_free_gifts, only: [:create]
 
+  invisible_captcha only: [:create], honeypot: :gender, on_spam: :notify_me_about_spam
+
   private
+
+    def notify_me_about_spam
+      record_positive_event(Log::STORE, "InvisibleCaptcha caught a spam signup!")
+      head :ok
+    end
 
     def send_registration_notification
       if @user && @user.persisted?
@@ -41,7 +48,8 @@ class RegistrationsController < Devise::RegistrationsController
 
     def sign_up_params
       params.require(:user).permit(:username, :first_name, :last_name, :country, :email,
-                                   :password, :password_confirmation, :send_me_emails, :company, :purchaser)
+                                   :password, :password_confirmation, :send_me_emails, :company, :purchaser,
+                                   :gender) # gender is the honeypot
     end
 
     def account_update_params

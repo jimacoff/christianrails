@@ -32,6 +32,7 @@
     = f.check_box :purchaser, checked: '', onchange: "updateCompanyField();"
     = f.label :purchaser, "Yes"
 
+  - # toggled with a bit of JS below
   .field.companyfield.hidden
     = f.label :company, "What is the name of your organization?"
     %br
@@ -43,7 +44,9 @@
     = f.check_box :send_me_emails, checked: 'checked'
     = f.label :send_me_emails, "Yes, please"
 
+
   .actions.center
+    = invisible_captcha :gender
     = f.submit "Create an account", class: "store-button bigger"
     %br
     %br

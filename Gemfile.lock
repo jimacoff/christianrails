@@ -105,6 +105,8 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
+    invisible_captcha (0.10.0)
+      rails (>= 3.2.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -295,6 +297,7 @@ DEPENDENCIES
   haml-rails
   highline
   httparty
+  invisible_captcha
   jbuilder
   jquery-rails
   mandrill-api
