@@ -1,4 +1,4 @@
-== About this project
+# About this project
 
 Christianrails is a monolithic web application that serves as the homepage of author/programmer Christian DeWolf. A version can be found at https://www.christiandewolf.com. It features:
 
