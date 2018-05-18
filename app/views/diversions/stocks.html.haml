@@ -41,6 +41,10 @@
   %button#buy-1000{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 1000 );"} Buy 1,000
   %button#sell-1000{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 1000 );"} Sell 1,000
 
+%br
+
+= link_to "Back to Diversions", diversions_path
+
 :javascript
   $(document).ready(function() {
     initializeGame();

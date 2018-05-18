@@ -1,6 +1,6 @@
 class DiversionsController < ApplicationController
 
-  skip_before_action :verify_is_admin, only: [:index, :rainfield]
+  skip_before_action :verify_is_admin, only: [:index, :rainfield, :stocks]
 
   ## PUBLIC
 
@@ -9,8 +9,6 @@ class DiversionsController < ApplicationController
 
   def rainfield
   end
-
-  ## ADMIN ONLY FOR NOW
 
   def stocks
   end
