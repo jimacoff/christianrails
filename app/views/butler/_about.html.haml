@@ -1,21 +1,29 @@
 #about
   %p.grayer.left
     Founded in late 2011 to legitimize the production of
-    %a.whitener.courier{href: "diamondfind", :onclick => "switchPage(this); return false;"} Diamond Find
+    %a.whitener.courier{href: "diamondfind", onclick: "switchPage(this); return false;"} Diamond Find
     for Android, Wolf Butler Art & Software now serves comedy through a variety of digital media.
+
   %br
-    = image_tag('butler/devices.jpg', id: 'about-image')
-    %br
-      %p.grayer.left
-        Do you want your work served here?
-        %a.whitener.courier{href: "mailto:christian@wolfbutler.com"} Email me
-        with a synopsis and sample.
-      %br
-        = image_tag('butler/s_78.jpg')
-        %br
-          %p.grayer.left
-            This is operated by
-            %a.whitener.courier{href: "http://www.christiandewolf.com/"} Christian DeWolf
-            from sunny Halifax, Nova Scotia.  Keep up to date on
-            %a.whitener.courier{href: "http://www.twitter.com/dewolfchristian", :target => "_blank"} Twitter
-            for all the latest news and observations.
+
+  = image_tag('butler/devices.jpg', id: 'about-image')
+
+  %br
+
+  %p.grayer.left
+    This is operated by
+    %a.whitener.courier{href: "http://www.christiandewolf.com/"} Christian DeWolf
+    from sunny Halifax, Nova Scotia.  Keep up to date on
+    %a.whitener.courier{href: "http://www.twitter.com/dewolfchristian", target: "blank"} Twitter
+    for all the latest news and observations.
+
+  %br
+
+  = image_tag('butler/s_78.jpg')
+
+  %br
+
+  %p.grayer.left
+    Wolf Butler is currently being scaled!
+    = link_to "ScaleQuail", scalequail_path
+    is applying bleeding-edge growth hacking techniques to maximize reach and revenue.

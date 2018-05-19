@@ -72,7 +72,7 @@ module ButlerHelper
         full_title: "4 Victoria Day Hacks That Can Really Modify Your Weekend",
         category: "Life Haxx",
         tags: ["listicle", "coding", "holidays", "royalty", "queens"],
-        desc: "Victoria Day hacks that can really modify your long weekend.",
+        desc: "Cyberwarfare got you down? Queen Victoria's own hacks might just save your long weekend.",
         thumbnail: ""
       },
       {
