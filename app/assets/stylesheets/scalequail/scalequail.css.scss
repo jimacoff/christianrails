@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   margin-right: 15px;
 }
 
-.quailpost-image {
+.quailpost-image, .large-quailpost-image {
   border-radius: 10px;
 }
 
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
     width: 300px;
   }
 
-  .quailpost-image {
+  .quailpost-image, .large-quailpost-image {
     width: 300px;
   }
 
@@ -243,6 +243,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   }
 
   .quail-title-image {
+    width: 400px;
+  }
+
+  .large-quailpost-image {
     width: 400px;
   }
 }
@@ -273,6 +277,9 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
     width: 400px;
   }
 
+  .large-quailpost-image {
+    width: 600px;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -287,6 +294,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 
   .quail-title-image {
     width: 500px;
+  }
+
+  .large-quailpost-image {
+    width: 700px;
   }
 }
 
@@ -322,6 +333,10 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
 
   .quail-title-image {
     width: 500px;
+  }
+
+  .large-quailpost-image {
+    width: 700px;
   }
 
 }
