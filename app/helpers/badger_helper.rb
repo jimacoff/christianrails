@@ -4,6 +4,12 @@ module BadgerHelper
     # Add new posts at the top.
     [
       {
+        slug: "20180521_jesse_is_old_now",
+        full_title: "Jesse is old now",
+        tags: ["badger", "aging", "food", "spring", "the end...?"],
+        description: "In which my old, grey badger is finally manageable"
+      },
+      {
         slug: "20160427_food_fight",
         full_title: "Food fight",
         tags: ["badger", "budgeting", "food", "high-end cheeses", "worrying weight loss"],
