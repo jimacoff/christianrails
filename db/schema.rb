@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311202823) do
+ActiveRecord::Schema.define(version: 20180521212941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "crm_assistants", force: :cascade do |t|
     t.string   "name"
@@ -286,10 +287,12 @@ ActiveRecord::Schema.define(version: 20180311202823) do
     t.datetime "last_gift_nudge"
     t.string   "company"
     t.boolean  "purchaser",              default: false
+    t.hstore   "progress_list"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+    t.index ["progress_list"], name: "index_users_on_progress_list", using: :gin
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end

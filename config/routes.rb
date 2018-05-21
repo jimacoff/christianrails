@@ -7,6 +7,8 @@ Christianrails::Application.routes.draw do
   resources :users, only: [:show] do
     collection do
       get 'report'
+      post 'consume'
+      delete 'consume'
     end
   end
   resources :logs, only: [:index]

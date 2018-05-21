@@ -12,5 +12,7 @@ FactoryBot.define do
     password "it_is_a_word"
     sign_in_count 0
     last_gift_nudge nil
+
+    progress_list nil
   end
 end

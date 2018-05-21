@@ -35,4 +35,43 @@ RSpec.describe UsersController, type: :controller do
 
   end
 
+  describe "#consume" do
+
+    it "requires a user to be logged in" do
+      sign_out @user
+
+      post :consume, params: {product: 'thisbadger'}, session: valid_session
+      expect( response ).to be_unauthorized
+    end
+
+    context "POST create" do
+
+      it "creates a record that the user has consumed a valid product" do
+        post :consume, params: {product: "thisbadger"}, session: valid_session
+        expect( response ).to be_created
+      end
+
+      it "does NOT create a record for an invalid product" do
+        post :consume, params: {product: "flarn"}, session: valid_session
+        expect( response ).to be_unprocessable
+      end
+
+    end
+
+    context "DELETE destroy" do
+
+      it "removes an existing record from a user" do
+        delete :consume, params: {product: "thisbadger"}, session: valid_session
+        expect( response ).to be_ok
+      end
+
+      it "does not change a record if an invalid product is given" do
+        delete :consume, params: {product: "clorb"}, session: valid_session
+        expect( response ).to be_unprocessable
+      end
+
+    end
+
+  end
+
 end

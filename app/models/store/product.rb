@@ -16,6 +16,8 @@ class Store::Product < ApplicationRecord
 
   monetize :price_cents, :giftpack_price_cents, :physical_price_cents, :shipping_cost_cents
 
+  ALL_PRODUCTS = ['ghostcrime', 'snapback-fuseki', 'snapback-shimari', 'thisbadger', 'diamondfind']
+
   def discount_for(user_id)
     total_discount = 0
     cart_products = Store::StagedPurchase.where(user_id: user_id).collect(&:product_id)
