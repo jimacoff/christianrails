@@ -1,0 +1,7 @@
+#blog
+  - @blog_posts.each do |post|
+    = render 'badger/embed_post', locals: { post: post }
+    %br
+
+  .center
+    %a.page-link.bit-larger{href: root_path} Read more from Christian DeWolf

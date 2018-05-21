@@ -227,6 +227,7 @@ Christianrails::Application.routes.draw do
 
   resources :badger, only: [:index] do  # badger doesn't have categories
     collection do
+      get 'read'
       get 'show_post'
       get 'archives'
       get 'tag'

@@ -18,7 +18,10 @@
 
 %p “We… don’t have access to your accounts.”
 
-%p “My accounts of Jesse the Badger.”
+%p
+  “My
+  %em accounts
+  of Jesse the Badger.”
 
 %p “Oh. They were brought to our attention, yes.”
 
@@ -26,13 +29,20 @@
 
 %p The man removed his sunglasses. He had green eyes.
 
-%p “Fictional.”
+%p
+  = precede "\"" do
+    = succeed ".\"" do
+      %em Fictional
 
 %p “Indeed!”
 
 %p Jesse scratched the back of my shirt with his long claws, tearing through easily and catching himself on my belt. I felt a trickle of blood and squirmed, and the Internet Policeman definitely noticed something was wrong.
 
-%p “If Jesse the badger is, as you say, indeed, fictional, can you say the same for your light-blue towel!?”
+%p
+  “If Jesse the badger is, as you say,
+  = succeed "," do
+    %em indeed
+  fictional, can you say the same for your light-blue towel!?”
 
 %p I had foolishly left my Emergency towel in full view on my armchair. His partner cracked a smile but said nothing. I recovered.
 

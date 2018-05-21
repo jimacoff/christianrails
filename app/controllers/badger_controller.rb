@@ -13,6 +13,10 @@ class BadgerController < ApplicationController
     get_sample_posts
   end
 
+  def read
+    @blog_posts.reverse!
+  end
+
   def archives
   end
 
