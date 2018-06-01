@@ -19,6 +19,7 @@ class Log < ApplicationRecord
   BUTLER = "Wolf Butler"
   CRM    = "ghostCRM"
   BADGER = "This Badger"
+  DRAWER = "Drawer"
 
   BACKEND = "Back-end"
 end

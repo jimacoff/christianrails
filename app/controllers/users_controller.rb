@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # json
   def consume
     if u = current_user
-      if Store::Product::ALL_PRODUCTS.include? params[:product]
+      if Store::Product::CHECKLIST_PRODUCTS.collect{ |x| x[:slug] }.include?( params[:product] )
         prod = params[:product].to_sym
         u.progress_list = {}
 
@@ -21,12 +21,16 @@ class UsersController < ApplicationController
           u.progress_list[ prod ] = true
           u.save
 
+          record_event(Log::DRAWER, "#{u.fullname} checked off #{prod.to_s}.")
           render json: {}, status: :created
+
         elsif request.delete?
           u.progress_list.delete( prod )
           u.save
 
+          record_event(Log::DRAWER, "#{u.fullname} unchecked #{prod.to_s}.")
           render json: {}, status: :ok
+
         else
           render json: {errors: "Please add or remove only."}, status: :unprocessable_entity
         end

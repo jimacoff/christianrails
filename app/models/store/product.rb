@@ -16,7 +16,14 @@ class Store::Product < ApplicationRecord
 
   monetize :price_cents, :giftpack_price_cents, :physical_price_cents, :shipping_cost_cents
 
-  ALL_PRODUCTS = ['ghostcrime', 'snapback-fuseki', 'snapback-shimari', 'thisbadger', 'diamondfind']
+  CHECKLIST_PRODUCTS = [
+    { name: "Ghostcrime",          slug: 'ghostcrime'       },
+    { name: "Snapback: Fuseki",    slug: 'snapback-fuseki'  },
+    { name: "Snapback: Shimari",   slug: 'snapback-shimari' },
+    { name: "I Found This Badger", slug: 'thisbadger'       },
+    { name: "Diamond Find",        slug: 'diamondfind'      },
+    { name: "ScaleQuail",          slug: 'scalequail'       }
+  ]
 
   def discount_for(user_id)
     total_discount = 0

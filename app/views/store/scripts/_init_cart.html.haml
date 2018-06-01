@@ -1,25 +1,37 @@
 - if @cart
   :javascript
     var cart = #{ raw( @cart.to_json ) };
-    var single_prods = Object.keys( cart.books );
-    for(var i in single_prods) {
-      $('.cart-dot').show();
-      showProductInCart( single_prods[i] ) ;
+
+    if (cart.books) {
+      var single_prods = Object.keys( cart.books );
+      for(var i in single_prods) {
+        $('.cart-dot').show();
+        showProductInCart( single_prods[i] ) ;
+      }
     }
-    var gift_packs = Object.keys( cart.giftpacks );
-    for(var i in gift_packs) {
-      $('.cart-dot').show();
-      showProductInCart( gift_packs[i], "giftpack" ) ;
+
+    if (cart.giftpacks) {
+      var gift_packs = Object.keys( cart.giftpacks );
+      for(var i in gift_packs) {
+        $('.cart-dot').show();
+        showProductInCart( gift_packs[i], "giftpack" ) ;
+      }
     }
-    var physical_books = Object.keys( cart.physicalbooks );
-    for(var i in physical_books) {
-      $('.cart-dot').show();
-      showProductInCart( physical_books[i], "physical" ) ;
+
+    if (cart.physicalbooks) {
+      var physical_books = Object.keys( cart.physicalbooks );
+      for(var i in physical_books) {
+        $('.cart-dot').show();
+        showProductInCart( physical_books[i], "physical" ) ;
+      }
     }
-    var memberships = Object.keys( cart.memberships );
-    for(var i in memberships) {
-      $('.cart-dot').show();
-      showProductInCart( null, "membership" ) ;   // null product_id
+
+    if (cart.memberships) {
+      var memberships = Object.keys( cart.memberships );
+      for(var i in memberships) {
+        $('.cart-dot').show();
+        showProductInCart( null, "membership" ) ;   // null product_id
+      }
     }
 
 :javascript

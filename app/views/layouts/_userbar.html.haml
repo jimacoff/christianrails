@@ -15,10 +15,6 @@
         - if current_user.has_crm_access?
           - if controller_path.starts_with?("crm")
             = link_to "Parent site", main_app.root_path
-          - elsif controller_path.starts_with?("scalequail")
-            = link_to "Parent site", main_app.root_path
-            ·
-            = link_to "CRM", main_app.crm_path
           - else
             = link_to "CRM", main_app.crm_path
           ·
