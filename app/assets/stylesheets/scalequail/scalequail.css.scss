@@ -51,6 +51,12 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   color: $gray;
 }
 
+.quailnext {
+  font-size: 0.5em;
+  font-weight: 500;
+  color: $quail-blue-x;
+}
+
 .tag-link {
   font-size: 0.8em;
   color: $quail-blue-l !important;

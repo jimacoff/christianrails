@@ -60,5 +60,6 @@
 
 %p
   I have chosen to start by writing
-  = succeed "." do
-    %a.quailglow{href: "/scalequail/show_post?post=business_algorithms_for_a_successful_scale", title: "In which I write business algorithms for the coming scale"} business algorithms
+  %a.quailglow{href: "/scalequail/show_post?post=business_algorithms_for_a_successful_scale", title: "In which I write business algorithms for the coming scale"}
+    %span business algorithms.
+    = render 'next'
