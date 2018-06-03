@@ -30,7 +30,9 @@
 
 %p In terms of scaling, though, the best I can rate this is a 2x multiplier. Each book purchase gets a second book out into the world, and it could create a new fan, but it doesn't directly increase revenue.
 
-%p But now that the application has a gifting mechanic, I can package multiple gifts together and sell those! And if you got the book for free, maybe you'll buy a discounted pack of five to send to your own friends. That's the hope, anyway.
+%p
+  But now that the application has a gifting mechanic, I can package multiple gifts together and sell those! And if you got the book for free, maybe you'll buy a discounted pack of five to send to your own friends.
+  %strong Please do this.
 
 %h3 Stage 2: Buying packs of giftable books
 
@@ -63,7 +65,7 @@
   that checks which gifts are getting stale, a gift nudger is easy to implement:
 
 .center
-  = image_tag "scalequail/gift-nudger.png", class: "quailpost-image", alt: "Code for the gift nudger"
+  = image_tag "scalequail/gift-nudger.png", class: "large-quailpost-image", alt: "Code for the gift nudger"
   %p.caption
     Sweet, sweet Ruby code. Open-sourced
     = succeed "." do
@@ -72,7 +74,7 @@
 %p
   As an author, you don't want to annoy your readers until they're at least most of the way through one of your books, so obviously, make sure that you don't nudge people
   %em too often.
-  I'm doing once a week.
+  I'm doing it just once, a week after the initial purchase.
 
 %p
   Now that we've scaled digital distribution a bit, let's move onto physical. I've got boxes of books in my office that are taking up space, and I

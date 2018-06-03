@@ -63,17 +63,14 @@ module StoreHelper
 
   def nudge_users_about_unsent_gifts
     last_week = DateTime.current - 1.week
-    stale_gifts = Store::FreeGift.where(recipient_id: nil)
-                                 .where('created_at < ?', last_week)
-    nudgable_users = stale_gifts.collect{ |g| g.giver }.uniq
+    stale_gifts = Store::FreeGift.where(recipient_id: nil).where('created_at < ?', last_week)
+    nudgable_users = stale_gifts.collect{ |g| g.giver }.uniq.select{ |x| x.send_me_emails }
     nudgable_users.each do |user|
-      # Temporarily cripple the constant nudging until email overhaul
-      if !user.last_gift_nudge # || user.last_gift_nudge < last_week
+      if !user.last_gift_nudge
         StoreMailer.gift_nudge( user.unsent_products[0], user ).deliver_now
         user.last_gift_nudge = DateTime.current
         user.save
-        record_scheduled_event(Log::BACKEND,
-          "Nudged #{user.full_name} about unsent gift(s).")
+        record_scheduled_event(Log::BACKEND, "Nudged #{user.full_name} about unsent gift(s).")
       end
     end
   end
