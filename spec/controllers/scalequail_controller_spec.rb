@@ -51,6 +51,8 @@ RSpec.describe ScalequailController, type: :controller do
       expect( response ).to be_ok
       get :show_post, params: {post: "overcharging_for_loyalty"}, session: valid_session
       expect( response ).to be_ok
+      get :show_post, params: {post: "socializing_with_customers"}, session: valid_session
+      expect( response ).to be_ok
     end
   end
 
