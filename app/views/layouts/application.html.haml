@@ -6,10 +6,12 @@
 %html
   %head
     %title= main_title
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application",       media: "all", "data-turbolinks-track" => true
+    - if @melon
+      = stylesheet_link_tag    "melon/melon",     media: "all", "data-turbolinks-track" => true
 
-    = javascript_include_tag "application",    "data-turbolinks-track" => true
-    = javascript_include_tag "store/dealzone", "data-turbolinks-track" => true
+    = javascript_include_tag "application",       "data-turbolinks-track" => true
+    = javascript_include_tag "store/dealzone",    "data-turbolinks-track" => true
     = csrf_meta_tags
 
     %meta{ property: "og:title", content: "#{ main_title }" }
@@ -33,7 +35,16 @@
 
     #mobile-title
       %h1 Christian DeWolf
-      %p.subtitle Books · Software · Blogs
+      %p.subtitle
+        = "Books · Software · Blogs"
+        - if @melon
+          - if @melon == 0
+            - melon_colour = 'melon-orange'
+          - elsif @melon == 1
+            - melon_colour = 'melon-yellow'
+          - elsif @melon == 2
+            - melon_colour = 'melon-green'
+          .store-melon{class: melon_colour}= "Now With Melon Content"
 
     - if notice
       %p.alert.alert-notice

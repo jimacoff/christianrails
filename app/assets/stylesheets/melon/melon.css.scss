@@ -4,8 +4,10 @@ body {
   background-color: $melon-blue-d;
 }
 
-h1, h3, p {
-  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+.melon-content {
+  h1, h3, p {
+    font-family: Artifika, Helvetica, Arial, sans-serif !important;
+  }
 }
 
 h1 {
@@ -52,7 +54,7 @@ h1 {
   color: $melon-blue-d;
 }
 
-.melon-shelf {
+.melon-shelf, .melon-machine-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -114,6 +116,22 @@ a {
 
 a:hover {
   color: $melon-blue-l !important;
+}
+
+.store-melon {
+  display: inline;
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
+.melon-machine-melon {
+  margin: 20px;
+  line-height: 1em;
+}
+
+.melon-banner-text {
+  font-size: 1.5em;
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+  line-height: 1em;
 }
 
 /////  RESPONSIVE //////

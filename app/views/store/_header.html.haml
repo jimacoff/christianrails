@@ -2,9 +2,29 @@
   .left-header{style: "display: inline-block;"}
     #logo-wrapper
       .left.face
-        %a{ href: main_app.root_path }= image_tag( "face-circle-2.png", alt: "Christian DeWolf" )
+        - if !@melon
+          %a{ href: main_app.root_path }= image_tag( "face-circle-2.png", alt: "Christian DeWolf" )
+        - elsif @melon == 0
+          %a{ href: main_app.root_path }= image_tag( "face-melon0.png", alt: "Christian DeWolf MELON TAKEOVER" )
+        - elsif @melon == 1
+          %a{ href: main_app.root_path }= image_tag( "face-melon1.png", alt: "Christian DeWolf MELON TAKEOVER" )
+        - elsif @melon == 2
+          %a{ href: main_app.root_path }= image_tag( "face-melon2.png", alt: "Christian DeWolf MELON TAKEOVER" )
+
     .header-words
       %h1#mynameis Christian DeWolf
-      %p#imake.subtitle Books · Software · Blogs
+      %p#imake.subtitle
+        - if @melon
+          .store-melon= "Books · Software · Blogs"
+          - if @melon == 0
+            - melon_colour = 'melon-orange'
+          - elsif @melon == 1
+            - melon_colour = 'melon-yellow'
+          - elsif @melon == 2
+            - melon_colour = 'melon-green'
+          .store-melon{class: melon_colour}= " · Melon Content"
+        - else
+          = "Books · Software · Blogs"
+
 
   = render 'layouts/userbar'

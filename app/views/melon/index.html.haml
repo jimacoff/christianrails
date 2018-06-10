@@ -13,22 +13,27 @@
     = image_tag "melon/melon-orange.png", class: "final-melon", onclick: "showStoreButton();"
     %h1.melon-orange The orange melon
     %p.dark-orange "A fine melon."
+    .store-link-wrapper
+      %a.melon-link{href: "https://www.christiandewolf.com?melon=0", onclick: "hideStoreLink();"}
+        %h1 Visit the webstore
   .yellow-content
     = image_tag "melon/melon-yellow.png",  class: "final-melon", onclick: "showStoreButton();"
     %h1.melon-yellow The yellow melon
     %p.dark-yellow  "A classic melon."
+    .store-link-wrapper
+      %a.melon-link{href: "https://www.christiandewolf.com?melon=1", onclick: "hideStoreLink();"}
+        %h1 Visit the webstore
   .green-content
     = image_tag "melon/melon-green.png", class: "final-melon", onclick: "showStoreButton();"
     %h1.melon-green The green melon
-    %p.dark-green "A robust melon."
-
-  .store-link-wrapper
-    %a.melon-link{href: "https://www.christiandewolf.com", onclick: "hideStoreLink();"}
-      %h1 Visit the webstore
+    %p.dark-green "A quality melon."
+    .store-link-wrapper
+      %a.melon-link{href: "https://www.christiandewolf.com?melon=2", onclick: "hideStoreLink();"}
+        %h1 Visit the webstore
 
 :javascript
 
-  melonChosen = false;
+  melonChosen = null;
 
   function melonClick( melonChoice ) {
 
@@ -41,14 +46,14 @@
       });
 
     request.done(function(data, textStatus, jqXHR) {
-      if (data.melonType === 0) {
+      melonChosen = data.melonType;
+      if (melonChosen === 0) {
         $('.orange-content').css('display', 'block');
-      } else if (data.melonType === 1) {
+      } else if (melonChosen === 1) {
         $('.yellow-content').css('display', 'block');
-      } else if (data.melonType === 2) {
+      } else if (melonChosen === 2) {
         $('.green-content').css('display', 'block');
       }
-      melonChosen = true;
 
       $('.melon-chooser-wrapper').fadeOut('slow', function() {
         $('.melon-choice-wrapper').fadeIn('slow');
@@ -70,7 +75,7 @@
   }
 
   function resetMelons() {
-    if ( melonChosen ) {
+    if ( melonChosen || melonChosen === 0 ) {
       melonChosen = false;
       $('.melon-choice-wrapper').fadeOut('slow', function() {
         $('.orange-content').css('display', 'none');

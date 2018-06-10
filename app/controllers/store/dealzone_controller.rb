@@ -24,6 +24,8 @@ class Store::DealzoneController < Store::StoreController
                                                 .where('woods_finds.story_id = ?', @diamondfind.id)
     end
     @finds ||= nil
+
+    @melon = params[:melon] ? params[:melon].to_i : nil
   end
 
   # GET - displays the user's downloadable books & givable gifts
