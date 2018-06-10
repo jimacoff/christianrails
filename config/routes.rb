@@ -265,6 +265,12 @@ Christianrails::Application.routes.draw do
   get '/computers', to: 'computers#index'
 
 
+###### MELON STUFF ######
+
+  resources :melon, only: [:index, :create]
+  get '/melon', to: 'melon#index'
+  get '/m3lon', to: 'melon#index'
+
 ###### GRAVEYARD #######
 
   resources :graveyard, only: [] do
@@ -286,6 +292,7 @@ Christianrails::Application.routes.draw do
   get '/', to: 'crm/assistants#index',                     constraints: DomainConstraint.new('ghostcrm.ca')
   get '/', to: 'scalequail#index',                         constraints: DomainConstraint.new('scalequail.com')
   get '/', to: 'store/dealzone#index',                     constraints: DomainConstraint.new('christiandewolfe.com')
+  get '/', to: 'melon#index',                              constraints: DomainConstraint.new('m3lon.com')
   root 'store/dealzone#index'
 
   get 'page_not_found', to: "errors#show", code: '404'

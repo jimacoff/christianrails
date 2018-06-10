@@ -1,0 +1,34 @@
+!!! 5
+
+- melon_title = @post ? @post[:full_title]  : "m3lon: A melon selector"
+- melon_desc  = @post ? @post[:description] : "Which of the three melons will you choose?"
+
+%html
+  %head
+    %title= melon_title
+
+    = stylesheet_link_tag "application",   media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "melon/melon",   media: "all", "data-turbolinks-track" => true
+
+    %link{rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css"}
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:image", content: "https://www.m3lon.com/melon-card.png" }
+    %meta{ property: "og:title", content: "#{ melon_title }" }
+    %meta{ property: "og:url",   content: "https://www.m3lon.com/" }
+    %meta{ property: "og:description", content: "#{ melon_desc }" }
+
+    %meta{ name: "twitter:card", content: "summary" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "#{ melon_title }" }
+    %meta{ name: "twitter:description", content: "#{ melon_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.m3lon.com/melon-card.png" }
+
+    = favicon_link_tag "melon.ico"
+
+  %body.noselect
+    .melon-content
+      = yield

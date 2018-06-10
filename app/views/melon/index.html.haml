@@ -1,0 +1,84 @@
+= image_tag "melon/melon-transparent.png", alt: "m3lon logo", class: 'main-melon-logo', onclick: 'resetMelons();'
+
+.melon-chooser-wrapper
+  %h1.melon-text-m Choose a melon:
+  .melon-shelf
+    = image_tag "melon/melon-orange.png", class: "clickable-melon", onclick: "melonClick(0);"
+    = image_tag "melon/melon-yellow.png", class: "clickable-melon", onclick: "melonClick(1);"
+    = image_tag "melon/melon-green.png",  class: "clickable-melon", onclick: "melonClick(2);"
+
+.melon-choice-wrapper
+  %h1.melon-text-l You selected:
+  .orange-content
+    = image_tag "melon/melon-orange.png", class: "final-melon", onclick: "showStoreButton();"
+    %h1.melon-orange The orange melon
+    %p.dark-orange "A fine melon."
+  .yellow-content
+    = image_tag "melon/melon-yellow.png",  class: "final-melon", onclick: "showStoreButton();"
+    %h1.melon-yellow The yellow melon
+    %p.dark-yellow  "One of the classics."
+  .green-content
+    = image_tag "melon/melon-green.png", class: "final-melon", onclick: "showStoreButton();"
+    %h1.melon-green The green melon
+    %p.dark-green "A robust melon."
+
+  .store-link-wrapper
+    %a.melon-link{href: "https://www.christiandewolf.com", onclick: "hideStoreLink();"}
+      %h1 Visit the webstore
+
+:javascript
+
+  melonChosen = false;
+
+  function melonClick( melonChoice ) {
+
+    request = void 0;
+    request = $.ajax({
+        type: 'POST',
+        url: '/melon.json',
+        dataType: 'json',
+        data: { 'melon': { 'type_id' : melonChoice } }
+      });
+
+    request.done(function(data, textStatus, jqXHR) {
+      if (data.melonType === 0) {
+        $('.orange-content').css('display', 'block');
+      } else if (data.melonType === 1) {
+        $('.yellow-content').css('display', 'block');
+      } else if (data.melonType === 2) {
+        $('.green-content').css('display', 'block');
+      }
+      melonChosen = true;
+
+      $('.melon-chooser-wrapper').fadeOut('slow', function() {
+        $('.melon-choice-wrapper').fadeIn('slow');
+      })
+    });
+
+    request.error(function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    });
+
+  }
+
+  function showStoreButton() {
+    $('.store-link-wrapper').fadeIn('slow');
+  }
+
+  function hideStoreLink() {
+    $('.store-link-wrapper').fadeOut('slow');
+  }
+
+  function resetMelons() {
+    if ( melonChosen ) {
+      melonChosen = false;
+      $('.melon-choice-wrapper').fadeOut('slow', function() {
+        $('.orange-content').css('display', 'none');
+        $('.yellow-content').css('display', 'none');
+        $('.green-content').css('display', 'none');
+        $('.store-link-wrapper').css('display', 'none');
+        $('.melon-chooser-wrapper').fadeIn('slow');
+      })
+    }
+  }
+

@@ -1,5 +1,6 @@
 # Release notes
 
+- 1.5.6 - Added m3lon site
 - 1.5.5 - Many small updates & fixes
 - 1.5.4 - Expanded the cart to allow Lifetime Membership purchases
 - 1.5.3 - Expanded the cart to allow physical purchases

@@ -1,0 +1,164 @@
+@import '../colormind';
+
+body {
+  background-color: $melon-blue-d;
+}
+
+h1, h3, p {
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.melon-content {
+  text-align: center;
+}
+
+.main-melon-logo {
+  margin: 25px 0 25px;
+  cursor: pointer;
+}
+
+.melon-chooser-wrapper {
+}
+
+.melon-choice-wrapper {
+  display: none;
+}
+
+.melon-orange {
+  color: $melon-orange;
+}
+
+.melon-yellow {
+  color: $melon-yellow;
+}
+
+.melon-green {
+  color: $melon-green;
+}
+
+.melon-text-l {
+  color: $melon-blue-l;
+}
+
+.melon-text-m {
+  color: $melon-blue-m;
+}
+
+.melon-text-d {
+  color: $melon-blue-d;
+}
+
+.melon-shelf {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.store-link-wrapper {
+  display: none;
+  margin-top: 50px;
+}
+
+.clickable-melon, .final-melon, a {
+  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+}
+
+.clickable-melon {
+  margin: 20px;
+  display: inline;
+  cursor: pointer;
+}
+
+.clickable-melon:hover, .final-melon:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
+.clickable-melon:active, .final-melon:active, a:active {
+  transform: scale(0.8) !important;
+  -webkit-transform: scale(0.8) !important;
+}
+
+.final-melon {
+  margin: 20px;
+  cursor: pointer;
+}
+
+.orange-content, .green-content, .yellow-content {
+  display: none;
+}
+
+.dark-orange {
+  color: lighten($melon-orange, 10%);
+}
+.dark-yellow {
+  color: lighten($melon-yellow, 10%);
+}
+.dark-green {
+  color: lighten($melon-green, 10%);
+}
+
+a {
+  color: $melon-blue-m;
+}
+
+a:hover {
+  color: $melon-blue-l !important;
+}
+
+/////  RESPONSIVE //////
+
+// small
+@media screen and (min-width: 320px) {
+
+  .main-melon-logo {
+    max-width: 300px;
+  }
+
+}
+
+// somewhat small
+@media screen and (min-width: 450px) {
+
+  .main-melon-logo {
+    max-width: 400px;
+  }
+
+}
+
+// medium
+@media screen and (min-width: 650px) {
+
+  .main-melon-logo {
+    max-width: 600px;
+  }
+
+}
+
+// somewhat large
+@media screen and (min-width: 750px) {
+
+  .main-melon-logo {
+    max-width: 700px;
+  }
+
+}
+
+// large
+@media screen and (min-width: 1034px) {
+
+  .main-melon-logo {
+    max-width: 1000px;
+  }
+
+}
