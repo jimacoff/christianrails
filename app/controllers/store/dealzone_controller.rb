@@ -25,7 +25,13 @@ class Store::DealzoneController < Store::StoreController
     end
     @finds ||= nil
 
-    @melon = params[:melon] ? params[:melon].to_i : nil
+    if @melon = (params[:melon] ? params[:melon].to_i : nil)
+      if @melon == 3
+        render 'melon/3'
+      elsif @melon > 3 || @melon < 0
+        @melon = nil
+      end
+    end
   end
 
   # GET - displays the user's downloadable books & givable gifts

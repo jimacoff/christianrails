@@ -1,0 +1,22 @@
+.secret-melon-wrapper
+  .melon-shelf
+    = image_tag "melon/melon-yellow.png", class: "final-melon"
+    = image_tag "melon/melon-orange.png", class: "final-melon"
+    = image_tag "melon/melon-green.png",  class: "final-melon"
+
+  %h4.melon-yellow You hacked
+  %h1.melon-green m3lon
+  %h3.melon-orange like a felon.
+
+  %br
+
+  %h4.melon-yellow
+    Please tell your friends about
+    = succeed "." do
+      = link_to "m3lon.com", "https://www.m3lon.com", class: 'melon-green'
+
+  .melon-shelf
+    = image_tag "melon/melon-orange.png", class: "final-melon"
+    = image_tag "melon/melon-green.png",  class: "final-melon"
+    = image_tag "melon/melon-yellow.png", class: "final-melon"
+

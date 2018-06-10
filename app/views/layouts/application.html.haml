@@ -42,9 +42,13 @@
             - melon_colour = 'melon-orange'
           - elsif @melon == 1
             - melon_colour = 'melon-yellow'
-          - elsif @melon == 2
+          - elsif [2,3].include?( @melon )
             - melon_colour = 'melon-green'
-          .store-melon{class: melon_colour}= "Now With Melon Content"
+
+          - if @melon == 3
+            .store-melon{class: melon_colour}= "MELON HACKED"
+          - else
+            .store-melon{class: melon_colour}= "Now With Melon Content"
 
     - if notice
       %p.alert.alert-notice

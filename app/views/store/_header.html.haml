@@ -22,7 +22,13 @@
             - melon_colour = 'melon-yellow'
           - elsif @melon == 2
             - melon_colour = 'melon-green'
-          .store-melon{class: melon_colour}= " · Melon Content"
+          - elsif @melon == 3
+            - melon_colour = 'melon-green'
+
+          - if @melon == 3
+            .store-melon{class: melon_colour}= " · MELON HACKING"
+          - else
+            .store-melon{class: melon_colour}= " · Melon Content"
         - else
           = "Books · Software · Blogs"
 
