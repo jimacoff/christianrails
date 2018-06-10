@@ -8,6 +8,15 @@ body {
   h1, h3, p {
     font-family: Artifika, Helvetica, Arial, sans-serif !important;
   }
+
+  a {
+    color: $melon-blue-m;
+  }
+
+  a:hover {
+    color: $melon-blue-l !important;
+  }
+
 }
 
 h1 {
@@ -108,14 +117,6 @@ h1 {
 }
 .dark-green {
   color: lighten($melon-green, 10%);
-}
-
-a {
-  color: $melon-blue-m;
-}
-
-a:hover {
-  color: $melon-blue-l !important;
 }
 
 .store-melon {
