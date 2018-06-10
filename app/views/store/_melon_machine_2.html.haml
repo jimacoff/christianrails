@@ -1,11 +1,11 @@
 .melon-machine-wrapper
   - if @melon
     - if @melon == 0
+      %span.melon-banner-text.melon-orange Melon: no regrets.
       = image_tag "melon/melon-orange.png", class: "melon-machine-melon final-melon"
-      %span.melon-banner-text.melon-orange A good choice of melon.
     - elsif @melon == 1
+      %span.melon-banner-text.melon-yellow Three times more melon content.
       = image_tag "melon/melon-yellow.png", class: "melon-machine-melon final-melon"
-      %span.melon-banner-text.melon-yellow Now, with added melon.
     - elsif @melon == 2
+      %span.melon-banner-text.melon-green The second melon is also free.
       = image_tag "melon/melon-green.png", class: "melon-machine-melon final-melon"
-      %span.melon-banner-text.melon-green The first melon is free.
