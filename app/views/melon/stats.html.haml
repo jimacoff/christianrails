@@ -1,13 +1,18 @@
-%h1.melon-blue-l Melon stats
+.melon-content
+  = image_tag "melon/melon-transparent.png", alt: "m3lon logo", class: 'main-melon-logo'
 
-.melon-shelf
-  = image_tag "melon/melon-orange.png", class: "final-melon"
-  = image_tag "melon/melon-yellow.png", class: "final-melon"
-  = image_tag "melon/melon-green.png",  class: "final-melon"
+  %h1.melon-text-l Melon stats
 
-.melon-shelf
-  .final-melon.melon-orange= @orange_melons
-  .final-melon.melon-yellow= @yellow_melons
-  .final-melon.melon-green= @green_melons
+  .melon-shelf
+    .orange
+      = image_tag "melon/melon-orange.png", class: "final-melon"
+      %h1.final-melon.melon-orange= @orange_melons
+    .yellow
+      = image_tag "melon/melon-yellow.png", class: "final-melon"
+      %h1.final-melon.melon-yellow= @yellow_melons
+    .green
+      = image_tag "melon/melon-green.png",  class: "final-melon"
+      %h1.final-melon.melon-green= @green_melons
 
-.melon-blue-m= link_to "Back to admin", admin_index_path
+  %p
+    = link_to "Back to admin", admin_index_path, class: "melon-text-m"
