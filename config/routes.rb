@@ -267,7 +267,11 @@ Christianrails::Application.routes.draw do
 
 ###### MELON STUFF ######
 
-  resources :melon, only: [:index, :create]
+  resources :melon, only: [:index, :create] do
+    collection do
+      get 'stats'
+    end
+  end
   get '/melon', to: 'melon#index'
   get '/m3lon', to: 'melon#index'
 

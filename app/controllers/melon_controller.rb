@@ -2,7 +2,7 @@ class MelonController < ApplicationController
 
   layout "melon"
 
-  skip_before_action :verify_is_admin
+  skip_before_action :verify_is_admin, only: [:index, :create]
 
   ## PUBLIC
 
@@ -16,6 +16,14 @@ class MelonController < ApplicationController
     else
       render json: {errors: @melon.errors}, status: :unprocessable_entity
     end
+  end
+
+  ## ADMIN ONLY
+
+  def stats
+    @orange_melons = Melon.where(type_id: Melon::TYPE_ORANGE).size
+    @yellow_melons = Melon.where(type_id: Melon::TYPE_YELLOW).size
+    @green_melons  = Melon.where(type_id: Melon::TYPE_GREEN).size
   end
 
   private

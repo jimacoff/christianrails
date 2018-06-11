@@ -1,0 +1,13 @@
+%h1.melon-blue-l Melon stats
+
+.melon-shelf
+  = image_tag "melon/melon-orange.png", class: "final-melon"
+  = image_tag "melon/melon-yellow.png", class: "final-melon"
+  = image_tag "melon/melon-green.png",  class: "final-melon"
+
+.melon-shelf
+  .final-melon.melon-orange= @orange_melons
+  .final-melon.melon-yellow= @yellow_melons
+  .final-melon.melon-green= @green_melons
+
+.melon-blue-m= link_to "Back to admin", admin_index_path
