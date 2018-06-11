@@ -10,21 +10,21 @@
 .melon-choice-wrapper
   %h1.melon-text-l You selected:
   .orange-content
-    = image_tag "melon/melon-orange.png", class: "final-melon", onclick: "showStoreButton();"
+    = image_tag "melon/melon-orange.png", class: "final-melon"
     %h1.melon-orange The orange melon
     %p.dark-orange "A fine melon."
     .store-link-wrapper
       %a.melon-link{href: "https://www.christiandewolf.com?melon=0", onclick: "hideStoreLink();"}
         %h1 Visit the webstore
   .yellow-content
-    = image_tag "melon/melon-yellow.png",  class: "final-melon", onclick: "showStoreButton();"
+    = image_tag "melon/melon-yellow.png",  class: "final-melon"
     %h1.melon-yellow The yellow melon
     %p.dark-yellow  "A classic melon."
     .store-link-wrapper
       %a.melon-link{href: "https://www.christiandewolf.com?melon=1", onclick: "hideStoreLink();"}
         %h1 Visit the webstore
   .green-content
-    = image_tag "melon/melon-green.png", class: "final-melon", onclick: "showStoreButton();"
+    = image_tag "melon/melon-green.png", class: "final-melon"
     %h1.melon-green The green melon
     %p.dark-green "A quality melon."
     .store-link-wrapper
@@ -56,7 +56,11 @@
       }
 
       $('.melon-chooser-wrapper').fadeOut('slow', function() {
-        $('.melon-choice-wrapper').fadeIn('slow');
+        $('.melon-choice-wrapper').fadeIn('slow', function() {
+          window.setTimeout(function(){
+            showStoreButton();
+          }, 1000);
+        });
       })
     });
 
