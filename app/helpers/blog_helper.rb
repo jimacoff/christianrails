@@ -11,6 +11,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20180611_advanced_melon_techniques",
+        category: JUST_BUSINESS,
+        tags: ["business", "melon", "marketing", "ScaleQuail", "Ghostcrime"]
+      },
+      {
         title: "20180224_new_stuff_in_the_works",
         category: WRITING_AND_PUBLISHING,
         tags: ["writing", "new things", "self-publishing", "Geequinox", "conventions", "wolfOS"]
