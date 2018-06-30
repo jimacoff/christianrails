@@ -1,0 +1,21 @@
+#desktop-butler
+  %table
+    %tr
+      %td.small-width.center{style: "vertical-align: text-top;"}
+        %br
+        %a{href: butler_path}
+          = image_tag("wolfbutler-icon-white.png", alt: "Wolf Butler Art & Software", class: "store-image")
+      %td
+        %a{href: "/wolfbutler", style: "color: $slate-gray;"}
+          %h2.slate Wolf Butler Art & Software
+
+          = render "store/butler_machine_content"
+
+#mobile-butler
+  %a{href: thisbadger_path}
+    = image_tag( "wolfbutler-icon-white.png", class: "store-image" )
+
+  %h2 Wolf Butler Art & Software
+
+  = render "store/butler_machine_content"
+

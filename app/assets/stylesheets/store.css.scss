@@ -428,7 +428,7 @@ th {
   color: $dark-gray;
 }
 
-#mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers {
+#mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers, #mobile-butler {
   text-align: center;
 }
 
@@ -502,7 +502,7 @@ th {
   // }
 
   #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
-    width: 100%;
+    max-width: 300px;
     margin: 0 auto 25px auto;
     text-align: left;
     padding: 40px 15px 15px 15px;
@@ -532,12 +532,11 @@ th {
   #ghostcrm-banner, #bookdeal-banner, #membership-banner {
     margin: 0 auto 15px auto;
     text-align: center;
-    max-width: 320px;
+    max-width: 250px;
   }
 
   #ghostcrm-banner-image, #bookdeal-button, #membership-button {
-    width: 320px;
-    height: 99px;
+    width: 250px;
   }
 
   // .store-image {
@@ -545,10 +544,10 @@ th {
 
   // }
 
-  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers {
+  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers, #mobile-butler {
     display: block;
   }
-  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail, #desktop-computers {
+  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail, #desktop-computers, #desktop-butler {
     display: none;
   }
   .store-image {
@@ -556,10 +555,13 @@ th {
   }
 
   #finds-table {
-    max-width: 320px;
+    max-width: 300px;
     margin: 0 auto;
   }
 
+  .membership-add-to-cart {
+    max-width: 250px;
+  }
 }
 
 
@@ -568,7 +570,6 @@ th {
 
   #ghostcrm-banner, #bookdeal-banner, #membership-banner {
     margin-bottom: 15px;
-    margin-left: 25px;
     text-align: center;
     max-width: 500px;
   }
@@ -583,6 +584,7 @@ th {
   }
 
   #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
+    max-width: 500px;
     width: 500px;
     margin: 0 auto 25px auto;
     text-align: left;
@@ -607,10 +609,10 @@ th {
     float: left;
   }
 
-  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers {
+  #mobile-badger, #mobile-diamonds, .mobile-product, #mobile-quail, #mobile-computers, #mobile-butler {
     display: none;
   }
-  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail, #desktop-computers {
+  #desktop-badger, #desktop-diamonds, .desktop-product, #desktop-quail, #desktop-computers, #desktop-butler {
     display: block;
   }
 
