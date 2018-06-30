@@ -401,7 +401,7 @@ a {
 
 }
 
-// SOMEWHAT SMALL
+// SOMEWHAT BIG
 @media screen and (max-width: 800px) {
   #woods-wrapper {
     width:      550px;
@@ -427,7 +427,7 @@ a {
   }
 }
 
-// THE VERY SMALLEST
+// GETTIN SMALLER
 @media screen and (max-width: 600px) {
   #woods-wrapper {
     width: 360px;
@@ -441,6 +441,43 @@ a {
 
   #nodepanel, #findpanel {
     width: 360px;
+  }
+  #statspanel {
+    margin-top: 20px;
+  }
+  // text
+  #story-pane {
+    p {
+      font-size: 80%;
+    }
+  }
+  #item-desc {
+    font-size: 80%;
+  }
+  .binary-button {
+    font-size: 90%;
+    min-height: 40px;
+  }
+  #left-button, #right-button {
+    font-size: 1em;
+  }
+
+}
+
+// THE VERY SMALLEST
+@media screen and (max-width: 320px) {
+  #woods-wrapper {
+    width: 310px;
+    padding-left:   0;
+    padding-right:  0;
+  }
+  .df-image {
+    height: 216px;
+    width: 310px;
+  }
+
+  #nodepanel, #findpanel {
+    width: 310px;
   }
   #statspanel {
     margin-top: 20px;

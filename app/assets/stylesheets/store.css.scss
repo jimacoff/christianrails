@@ -36,15 +36,15 @@ th {
 #cartwidget {
   background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
   border-radius: 10px;
-  width: 360px;
+  width: 320px;
   padding: 10px 2px;
   border: 2px solid $black;
   margin: 15px 0;
 }
 
 .cartwidget-item {
-  width: 320px;
-  margin: 15px;
+  width: 300px;
+  margin: 10px;
 }
 
 .cartwidget-title {
@@ -109,7 +109,7 @@ th {
   background: -webkit-radial-gradient(center, ellipse cover, rgba(214,214,214,1) 0%,rgba(214,214,214,0) 100%);
   background: radial-gradient(ellipse at center, rgba(214,214,214,1) 0%,rgba(214,214,214,0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#00d6d6d6',GradientType=1 );
-  width: 360px;
+  width: 320px;
   padding: 10px 2px;
   border: 1px solid $white;
   margin: 15px auto;
@@ -494,7 +494,7 @@ th {
 
 ////////// BEGIN RESPONSIVE ////////////////
 
-@media screen and (min-width: 1px) {
+@media screen and (min-width: 320px) {
   // STEP 1 -- VERY SMALL
 
   // #super-wrapper {
@@ -502,7 +502,7 @@ th {
   // }
 
   #store-wrapper, #about-wrapper, #blog-wrapper, #newsletter-wrapper {
-    min-width: 330px;
+    width: 100%;
     margin: 0 auto 25px auto;
     text-align: left;
     padding: 40px 15px 15px 15px;
@@ -518,7 +518,7 @@ th {
   // }
 
   #footer-bar {
-    width: 360px;
+    width: 310px;
   }
 
   .header-words {
@@ -532,11 +532,12 @@ th {
   #ghostcrm-banner, #bookdeal-banner, #membership-banner {
     margin: 0 auto 15px auto;
     text-align: center;
+    max-width: 320px;
   }
 
   #ghostcrm-banner-image, #bookdeal-button, #membership-button {
-    width: 323px;
-    height: 100px;
+    width: 320px;
+    height: 99px;
   }
 
   // .store-image {
@@ -555,7 +556,7 @@ th {
   }
 
   #finds-table {
-    max-width: 350px;
+    max-width: 320px;
     margin: 0 auto;
   }
 
@@ -569,6 +570,7 @@ th {
     margin-bottom: 15px;
     margin-left: 25px;
     text-align: center;
+    max-width: 500px;
   }
 
   #ghostcrm-banner-image, #bookdeal-button, #membership-button {
@@ -617,6 +619,9 @@ th {
     margin: 0;
   }
 
+  .standalone-cart {
+    width: 360px;
+  }
 }
 
 @media screen and (min-width: 801px) {
@@ -676,8 +681,8 @@ th {
   }
 
   #store-wrapper {
-    width: 640px;
     margin: 0 auto 25px 0;
+    width: 640px;
   }
 
   #about-wrapper, #blog-wrapper, #newsletter-wrapper {

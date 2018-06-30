@@ -2,14 +2,7 @@
   .left-header{style: "display: inline-block;"}
     #logo-wrapper
       .left.face
-        -# - if !@melon
-        %a{ href: main_app.root_path }= image_tag( "face-circle-2.png", alt: "Christian DeWolf" )
-        -# - elsif @melon == 0
-        -#   %a{ href: main_app.root_path }= image_tag( "face-melon0.png", alt: "Christian DeWolf MELON TAKEOVER" )
-        -# - elsif @melon == 1
-        -#   %a{ href: main_app.root_path }= image_tag( "face-melon1.png", alt: "Christian DeWolf MELON TAKEOVER" )
-        -# - elsif @melon == 2
-        -#   %a{ href: main_app.root_path }= image_tag( "face-melon2.png", alt: "Christian DeWolf MELON TAKEOVER" )
+        %a{ href: main_app.root_path }= image_tag( "face-circle-2.png", alt: "Christian DeWolf", class: "header-image" )
 
     .header-words
       %h1#mynameis Christian DeWolf

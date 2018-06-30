@@ -1,8 +1,8 @@
 #header
   .left-header{style: "display: inline-block;"}
     .left.face{style: "margin-top: -15px;"}
-      %a{ href: scalequail_path }= image_tag( "scalequail-circle.png", alt: "ScaleQuail logo", title: "This bird'll scale anything!" )
+      %a{ href: scalequail_path }= image_tag( "scalequail-circle.png", alt: "ScaleQuail logo", title: "This bird'll scale anything!", class: "header-image" )
 
-      #mynameis= image_tag "quail-title-text.png", class: 'quail-title-image'
+    #mynameis= image_tag "quail-title-text.png", class: 'quail-title-image'
 
   = render "layouts/userbar"
