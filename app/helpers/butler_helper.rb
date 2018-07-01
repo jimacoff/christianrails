@@ -22,7 +22,7 @@ module ButlerHelper
       {
         title: "20170116_4_things_computer_world_got_right",
         full_title: "4 Things \"Computer World\" by Kraftwerk Got Right About 2017",
-        category: "Music & Lyrics",
+        category: "Music and Lyrics",
         tags: ["music", "Kraftwerk", "computers", "business", "numbers", "money", "people"],
         desc: "Those guys knew a thing or two about the future.",
         thumbnail: ""
