@@ -1,0 +1,52 @@
+.gray-slider { padding: 32px; }
+
+#gray-cover {
+  vertical-align: none;
+  float: right;
+}
+#mobile-gray-cover {
+  text-align: center;
+}
+
+.graveyard-image {
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+///// RESPONSIVE /////////
+
+// THE VERY SMALLEST
+@media screen and (min-width: 320px) {
+  #mobile-gray-cover { display: block; }
+  #gray-cover        { display: none; }
+  .graveyard-image   {
+    max-width: 300px;
+  }
+}
+
+// THE SECOND SMALLEST, STILL MOBILE
+@media screen and (min-width: 530px) {
+  #mobile-gray-cover { display: block; }
+  #gray-cover        { display: none; }
+  .graveyard-image   {
+    max-width: 400px;
+  }
+}
+
+// MEDIUM SIZE - TABLET & LAPTOP
+@media screen and (min-width: 800px) {
+  #mobile-gray-cover { display: block; }
+  #gray-cover        { display: none; }
+  .graveyard-image   {
+    max-width: 560px;
+  }
+}
+
+/* Desktop layout */
+@media screen and (min-width: 1040px) {
+  #mobile-gray-cover { display: none; }
+  #gray-cover        { display: block; }
+  .graveyard-image   {
+    max-width: 640px;
+  }
+}

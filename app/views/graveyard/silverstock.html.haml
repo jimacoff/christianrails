@@ -1,0 +1,12 @@
+#silverstock
+  .center
+    = image_tag('butler/silverstock-0.jpg', title: "Silver Stock", class: 'graveyard-image' )
+
+    %p
+      In 2013, the comics and metal from Silver Stock were distributed to members of the now-defunct
+      = succeed "." do
+        = link_to "Precious Metals Reserve", reserve_path, class: 'niceblue'
+
+    %p Silver Stock did not succeed in going viral.
+
+    %p.center= link_to "Back to Graveyard", graveyard_index_path, class: 'niceblue'

@@ -1,0 +1,16 @@
+#reserve
+  .center
+    = image_tag( "butler/gold.jpg", alt: "Which precious metal is the best?", class: 'graveyard-image')
+
+    %h1 Precious Metals Reserve
+
+    %p The Precious Metals Reserve, a premium subscription service which distributed comics and occasionally a precious metal, has been liquidated.
+
+    %p Its business model, while only fractionally flawed, was ultimately undermined by market forces, notably the lackluster global demand for precious metals co-opted for comedy.
+
+    %p
+      While the Reserve will re-distribute no more metal, precious or otherwise, its legacy will exist in the pieces it
+      = succeed "." do
+        = link_to "did pass on", silverstock_path, class: 'niceblue'
+
+    %p.center= link_to "Back to Graveyard", graveyard_index_path, class: 'niceblue'

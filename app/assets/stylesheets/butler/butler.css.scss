@@ -253,24 +253,8 @@ img.center {
   -webkit-filter: brightness(225%);
 }
 
-.df-table {
-  text-align: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto ;
-}
-
-.df-cell {
-  padding: 32px;
-}
-
 .datemargin {
   margin: -44px 0 0 20px;
-}
-
-#gray-cover {
-  vertical-align: none;
-  float: right;
 }
 
 .top-button {
@@ -534,9 +518,6 @@ a.category-link {
   #nav-desktop { display: inline; }
   #nav-mobile  { display: none; }
 
-  #mobile-gray-cover { display: block; }
-  #gray-cover        { display: none; }
-
   .major-content-wrapper {
     display: flex;
   }
@@ -595,10 +576,6 @@ a.category-link {
   #products-link {
     display: none;
   }
-  #mobile-gray-cover { display: none; }
-  #gray-cover        { display: block; }
-
-  // specific images
 
   .blog-image {
     max-width: 700px;
@@ -606,6 +583,8 @@ a.category-link {
   .butler-cover-image {
     max-width: 700px;
   }
+
+  // specific images
 
   #snapback-title-image {
     max-width: 600px;

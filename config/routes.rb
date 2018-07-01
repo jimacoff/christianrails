@@ -279,12 +279,20 @@ Christianrails::Application.routes.draw do
 
 ###### GRAVEYARD #######
 
-  resources :graveyard, only: [] do
+  resources :graveyard, only: [:index] do
     collection do
       get 'fractalfic'
+      get 'gray'
+      get 'reserve'
+      get 'silverstock'
+      get 'blackink'
     end
   end
-  get '/fractalfic', to: 'graveyard#fractalfic'
+  get '/fractalfic',  to: 'graveyard#fractalfic'
+  get '/gray',        to: 'graveyard#gray'
+  get '/reserve',     to: 'graveyard#reserve'
+  get '/silverstock', to: 'graveyard#silverstock'
+  get '/blackink',    to: 'graveyard#blackink'
 
 
 

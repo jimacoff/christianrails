@@ -1,0 +1,32 @@
+.center
+  %h1 Graveyard
+  %h3 Here lie a selection of failed projects:
+
+  %p
+    = succeed "," do
+      = link_to "FractalFic", fractalfic_path, class: "niceblue"
+    a web writing platform
+
+  %p
+    = succeed "," do
+      = link_to "Gray", gray_path, class: "niceblue"
+    a novel
+
+  %p
+    = succeed "," do
+      = link_to "Black Ink", blackink_path, class: "niceblue"
+    a collection of comics
+
+  %p
+    = succeed "," do
+      = link_to "Silver Stock", silverstock_path, class: "niceblue"
+    another collection of comics
+
+  %p
+    = succeed "," do
+      = link_to "Precious Metals Reserve", reserve_path, class: "niceblue"
+    a premium subscription service
+
+  %br
+
+  = link_to "Back to Main Site", root_path, class: "niceblue"
