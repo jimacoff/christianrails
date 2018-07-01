@@ -1,11 +1,6 @@
-= render "about"
-= render "archives"
-= render "blackink"
-= render "blog"
-= render "diamondfind"
-= render "ghostcrime"
-= render "gray"
-= render "reserve"
-= render "silverstock"
-= render "snapback"
-= render "thisbadger"
+#blog
+  - @sample_posts.each do |post|
+    = render 'butler/blog/embed_post', locals: { post: post }
+    %hr
+
+  = render 'butler/blog/recommendations', locals: { post: @sample_posts[0] }

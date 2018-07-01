@@ -10,8 +10,6 @@
 
     = stylesheet_link_tag "butler/butler",   media: "all", "data-turbolinks-track" => true, id: 'butler-style'
     = stylesheet_link_tag "butler/classic",  media: "all", "data-turbolinks-track" => true, id: 'classic-style'
-    = stylesheet_link_tag "butler/reserve",  media: "all", "data-turbolinks-track" => true, id: 'reserve-style', disabled: true
-    = stylesheet_link_tag "butler/blackink", media: "all", "data-turbolinks-track" => true, id: 'blackink-style', disabled: true
 
     %link{rel: "stylesheet", media: "screen", href: "https://fontlibrary.org/face/cmu-serif", type:"text/css"}
     %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
@@ -22,113 +20,52 @@
 
     %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0"}
 
-    %meta{ property: "og:image", content: "https://www.christiandewolf.com/wolfbutler-ink.png" }
-    %meta{ property: "og:title", content: "#{ butler_title }" }
-    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/butler" }
+    %meta{ property: "og:image",       content: "https://www.christiandewolf.com/wolfbutler-ink.png" }
+    %meta{ property: "og:title",       content: "#{ butler_title }" }
+    %meta{ property: "og:url",         content: "https://www.christiandewolf.com/butler" }
     %meta{ property: "og:description", content: "#{ butler_short_desc }" }
 
-    %meta{ name: "twitter:card", content: "summary_large_image" }
-    %meta{ name: "twitter:site", content: "@dewolfchristian" }
-    %meta{ name: "twitter:title", content: "#{ butler_title }" }
+    %meta{ name: "twitter:card",        content: "summary_large_image" }
+    %meta{ name: "twitter:site",        content: "@dewolfchristian" }
+    %meta{ name: "twitter:title",       content: "#{ butler_title }" }
     %meta{ name: "twitter:description", content: "#{ butler_desc }" }
-    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/ghostcrime-books.png" }
+    %meta{ name: "twitter:image",       content: "https://www.christiandewolf.com/ghostcrime-books.png" }
 
     = favicon_link_tag "tumbler.ico"
 
-  %body.noselect
-
-    #fadeWrapper.site-width
-      - if notice
-        %p.alert.alert-notice
-          = notice
-      - if alert
-        %p.alert.alert-danger
-          = alert
-
-      #top-bar.header.site-width
-        #title-image.site-width
-          %a.link{href: ".#blog"}
-            = image_tag('butler/title-comedyserver.jpg', id: 'title-img', class: 'page-link', alt: 'Comedy... server')
-            = image_tag('butler/logo-reserve.jpg', id: 'reserve-title-img', class: 'page-link hidden', alt: 'Comedy... server')
-            = image_tag('butler/inklogo.png', id: 'ink-title-img', class: 'page-link hidden', alt: 'Comedy... server')
+  %body
+    #fade-wrapper
+      .super-wrapper
+        #top-bar
+          %a{href: butler_path}
+            = image_tag('butler/title-comedyserver.jpg', id: 'title-img',         class: 'butler-title-image page-link',        alt: 'Comedy... server')
+            = image_tag('butler/logo-reserve.jpg',       id: 'reserve-title-img', class: 'butler-title-image page-link hidden', alt: 'Comedy... server')
+            = image_tag('butler/inklogo.png',            id: 'ink-title-img',     class: 'butler-title-image page-link hidden', alt: 'Comedy... server')
 
           #top-links
             %a.top-button{href: root_path}
               %h5.top-button.pointer Bookstore
             %a#products-link.top-button{href: "javascript:moveToProducts();"}
               %h5.top-button.pointer Products
-            %a.link.top-button{href: "about"}
+            %a.link.top-button{href: butler_about_path}
               %h5.top-button.pointer About
-            %a.whitener.no-dec.top-button{href: "https://twitter.com/dewolfchristian", target: "_blank"}
-              = image_tag("butler/twitter.png", title: "Follow me on Twitter")
 
-      .wrapper.site-width
-        %nav
-          - @entities.each do |product|
-            - if product[:productName]
-              = render "/butler/navbutton", locals: { product: product}
+        .major-content-wrapper
+          #nav-desktop
+            = render '/butler/nav_content'
 
-        #content
-          = yield
+          #swappable-content
+            = yield
 
-        %br/
-        %br/
-        #mobile-divider
-          %hr/
-          %br/
-          %br/
-          %br/
+          #nav-mobile
+            %hr#mobile-divider
+            = render '/butler/nav_content'
 
-        #nav-mobile
-          - @entities.each do |product|
-            - if product[:productName]
-              = render "/butler/navbutton", locals: { product: product}
-
-        #footer-bar.footer.site-width
-          %p{style: "align='center'"}
-            %a#topper{href: "javascript:moveToTop();"} Top
-            -
-            %a.link{href: "blog"} Blog
-          %br/
-          %p.courier{style: "align='center'"}= "Wolf Butler Art & Software © 2011-#{ Time.now.year }"
-          %a.no-dec{href: scalequail_path, title: "Learn how"}
-            %p#wb-being-scaled.diminutive.swell
-              %strong We're being scaled!
-      #accent-bar
+    #footer-bar
+      %p.courier{style: "align='center'"}= "Wolf Butler Art & Software © 2011-#{ Time.now.year }"
+      %a{href: scalequail_path, title: "Learn how"}
+        %p#wb-being-scaled.diminutive.swell
+          %strong We're being scaled by ScaleQuail!
 
 :javascript
-
   var entities = #{ raw( @entities.to_json ) } ;
-
-  $(document).ready(function() {
-    // Create cross browser requestAnimationFrame method:
-    window.requestAnimationFrame = window.requestAnimationFrame
-     || window.mozRequestAnimationFrame
-     || window.webkitRequestAnimationFrame
-     || window.msRequestAnimationFrame
-     || function(f){setTimeout(f, 1000/60)};
-
-    window.addEventListener('scroll', function(){
-      if (typeof grayscroller === 'function') {
-        requestAnimationFrame(grayscroller);
-      }
-    }, false)
-
-    loadProductFromHash();
-    loadStyleSheet();
-
-    // Navigation button clicks
-    $('nav a').click(function(){
-      switchPage(this);
-      return false;
-    });
-    $('#nav-mobile a').click(function(){
-      switchPage(this);
-      return false;
-    });
-    $('.link').click(function(){
-      switchPage(this);
-      return false;
-    });
-
-  });

@@ -1,10 +1,6 @@
 @import '../colormind';
 
-#fadeWrapper {
-  background-color: $white;
-}
-
-.header {
+#fade-wrapper {
   background-color: $white;
 }
 
@@ -24,7 +20,7 @@ li, ul {
   text-align: left;
 }
 
-nav, #nav-mobile {
+#nav-desktop, #nav-mobile {
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: black !important;
@@ -36,15 +32,10 @@ nav, #nav-mobile {
   box-shadow: -5px 5px 5px 0px #000000;
 }
 
-nav {
-  max-width: 300px;
-}
+#nav-desktop { max-width: 300px; }
+#nav-mobile  { max-width: 625px; }
 
-#nav-mobile {
-  max-width: 625px;
-}
-
-nav a, #nav-mobile a {
+#nav-desktop a, #nav-mobile a {
   color: $white;
 }
 
@@ -52,7 +43,7 @@ nav a, #nav-mobile a {
   color: $gray;
 }
 
-#accent-bar {
+#ink-accent-bar {
   min-height: 400px;
   background-color: $black;
   max-width: 100%;

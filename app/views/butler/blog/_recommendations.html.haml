@@ -1,9 +1,8 @@
 .recommendations-wrapper
-  %hr
   %span.other-posts.CMUSerifRoman Other posts you might like:
 
   .recommended-posts
     - @recommended_posts.each do |rec_post|
       = render 'butler/blog/thumb_to_post', locals: { post: rec_post }
 
-  %a.page-link.link{href: "archives"} Archives
+  %a.archives-link{ href: butler_archives_path } Archives

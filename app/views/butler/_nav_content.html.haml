@@ -1,0 +1,3 @@
+- @entities.each do |product|
+  - if product[:productName]
+    = render "/butler/navbutton", locals: { product: product }

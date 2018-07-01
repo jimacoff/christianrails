@@ -220,6 +220,8 @@ Christianrails::Application.routes.draw do
 
   get '/wolfbutler',       to: 'butler#index'
   get '/butler',           to: 'butler#index'
+  get '/butler/about',     to: 'butler#about'
+  get '/butler/archives',  to: 'butler#archives'
   get '/butler/show_post', to: 'butler#show_post'
   get '/butler/category',  to: 'butler#category'
   get '/butler/tag',       to: 'butler#tag'

@@ -13,6 +13,13 @@ class ButlerController < ApplicationController
 
   def index
     get_sample_posts
+    get_recommendations_for( @sample_posts[0] )
+  end
+
+  def about
+  end
+
+  def archives
   end
 
   def show_post

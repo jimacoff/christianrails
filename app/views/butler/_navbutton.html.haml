@@ -1,12 +1,18 @@
+- paths = {}
+- paths['snapback']    = snapback_path
+- paths['ghostcrime']  = ghostcrime_path
+- paths['thisbadger']  = thisbadger_path
+- paths['diamondfind'] = diamondfind_path
+
 %table.product-icon.swell
   %tbody
     %tr
       %th
-        %a{href: locals[:product][:code]}
+        %a{href: paths[ locals[:product][:code] ] }
           = image_tag('butler/buttons/' + locals[:product][:icon], width: locals[:product][:iconW], height: locals[:product][:iconH])
     %tr
       %th
-        %a.product-link.courier{href: locals[:product][:code]}= locals[:product][:productName]
+        %a.product-link.courier{href: paths[ locals[:product][:code] ] }= locals[:product][:productName]
     %tr
       %th
-        .product-description.courier.diminutive{href: locals[:product][:code]}= locals[:product][:description]
+        .product-description.courier.diminutive{href: paths[ locals[:product][:code] ] }= locals[:product][:description]

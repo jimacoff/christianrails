@@ -8,30 +8,46 @@
           box-sizing: border-box;
 }
 
-body {
-  background-color: $black;
+body { background-color: $black; }
+
+.no-bullets { list-style: none; }
+.left  { text-align: left; }
+.right { float: right; }
+.hidden { display: none; }
+
+#fade-wrapper {
+  width: 100%;
+  display: block;
+  margin-bottom: 30px;
 }
 
-.no-bullets {
-  list-style: none;
+#blog {
+  margin: 0 auto;
 }
 
-.right {
-  float: right;
+.super-wrapper {
+  margin: 0 auto;
 }
 
-.hidden {
-  display: none;
+#nav-desktop, #nav-mobile {
+  z-index: 999;
+  align: top;
 }
 
-#fadeWrapper {
-  max-width: 100%;
-  min-width: 100%;
+#nav-desktop {
+  float: left;
+  margin-right: 25px;
+  max-width: 300px;
 }
 
-.justify {
-  text-align: justify !important;
+#nav-mobile {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+  min-width: 300px;
 }
+
+.justify { text-align: justify !important; }
 
 html, body {
   height: 100%;
@@ -146,26 +162,24 @@ img.center {
   margin-right: auto ;
 }
 
-.wrapper {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -4em;
-}
-
-.header {
+#top-bar {
   margin-left: 20%;
   margin-bottom: 15px;
+  text-align: left;
 }
 
-.footer, .push {
-  height: 10em;
+#footer-bar {
+  clear: both;
+  display: block;
   text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  border: 2px white solid;
+  border-radius: 50px;
 }
 
-#content {
-  margin-left: auto;
-  margin-right: auto;
+#swappable-content {
+  margin: 0 auto;
   text-align: center;
   display: block;
 }
@@ -187,6 +201,11 @@ img.center {
 
 .archive-post-link {
   margin-bottom: 5px;
+}
+
+.archives-link {
+  margin: 30px auto;
+  font-size: 1.25rem;
 }
 
 // recommendation engine
@@ -215,29 +234,12 @@ img.center {
 }
 
 /* Colourizers */
-.whitener {
-  color: $white;
-}
-
-.blackener {
-  color: $black;
-}
-
-.grayer {
-  color: $gray;
-}
-
-.purpler {
-  color: $servile-purple;
-}
-
-.oranger {
-  color: $pumpkin-orange !important;
-}
-
-.platinum {
-  color: $platinum-blue;
-}
+.whitener  { color: $white; }
+.blackener { color: $black; }
+.grayer    { color: $gray; }
+.purpler   { color: $servile-purple; }
+.oranger   { color: $pumpkin-orange !important; }
+.platinum  { color: $platinum-blue; }
 
 /*B&W*/
 
@@ -265,25 +267,15 @@ img.center {
   margin: -44px 0 0 20px;
 }
 
-.left {
-  text-align: left;
-}
-
 #gray-cover {
   vertical-align: none;
   float: right;
 }
 
-#top-links {
-  float: right;
-  margin-top: 70px;
-  margin-right: 55px;
-  text-align: right;
-}
-
 .top-button {
   text-decoration: none;
   text-align: right;
+  font-size: 1rem;
 }
 
 .no-dec {
@@ -336,17 +328,9 @@ img.center {
   font-style: normal;
 }
 
-.diminutive {
-  font-size: 20px;
-}
-
-.ultra-diminutive {
-  font-size: 10px;
-}
-
-.radical-diminutive {
-  font-size: 65%;
-}
+.diminutive { font-size: 20px; }
+.ultra-diminutive { font-size: 10px; }
+.radical-diminutive { font-size: 65%; }
 
 #category-holder, #tags-holder {
   display: inline-block;
@@ -380,230 +364,101 @@ a.category-link {
   color: $link-blue !important;
 }
 
-nav, #nav-mobile {
-  z-index: 999;
-  align: top;
-}
-
-nav {
-  float: left;
-  margin-right: 25px;
-  max-width: 300px;
-}
-
-#nav-mobile {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 300px;
-  min-width: 300px;
-}
-
 #wb-being-scaled {
   cursor: pointer;
   text-align: center;
 }
 
-// specific images -- this is the worst ever
+///// RESPONSIVE /////////
 
-.silver-image {
-  width: 600px;
-  height: 414px;
-}
+// THE VERY SMALLEST
+@media screen and (min-width: 320px) {
 
-.precious-image {
-  height: 325px;
-  width: 433px;
-}
+  #nav-desktop { display: none; }
+  #nav-mobile  { display: block; }
 
-#df-cover-image {
-  height: 300px;
-  width: 500px;
-}
-
-#blackink-cover-image {
-  width: 600px;
-  height: 600px;
-}
-
-#snapback-cover-image {
-  width: 650px;
-  height: 492px;
-}
-
-#snapback-title-image {
-  width: 600px;
-  height: 162px;
-}
-#snapback-illustrated-image {
-  width: 600px;
-  height: 50px;
-}
-#ghostcrime-cover-image {
-  width: 500px;
-  height: 443px;
-}
-#gc-ordernow-button {
-  width: 344px;
-  height: 94px;
-}
-#blog-goban-image {
-  width: 600px;
-  height: 444px;
-}
-#mobile-gray-cover {
-  display: none;
-}
-// DF
-#df-comic-image {
-  width: 700px;
-  height: 541px;
-}
-#df-alpha-image {
-  width: 497px;
-  height: 438px;
-}
-#df-android-image {
-  width: 400px;
-  height: 240px;
-}
-#diamond-find-lp {
-  width: 725px;
-  height: 537px;
-}
-#df-terminus {
-  width: 725px;
-  height: 271px;
-}
-#df-fractalfic {
-  width: 715px;
-  height: 557px;
-}
-#df-binarywoods {
-  width: 600px;
-  height: 636px;
-}
-#about-image {
-  width: 500px;
-  height: 375px;
-}
-
-/////////////////////////////////////////////////
-/* Mobile layout */
-
-// A MEDIUM SIZE
-@media screen and (max-width: 1039px) {
-  #content {
-    width: 80%;
-  }
-  .site-width {
-    max-width: 1050px;
-    min-width: 625px;
-  }
-  nav {
-    display: block;
-  }
-  #nav-mobile {
-    display: none;
+  #top-bar {
+    margin: 0 auto;
+    text-align: center;
   }
 
-  #snapback-cover-image {
-    width: 325px;
-    height: 246px;
+  #swappable-content {
+    width: 90%;
+    float: none;
   }
+
+  #footer-bar {
+    width: 90%;
+  }
+
+  .butler-title-image {
+    max-width: 320px;
+  }
+
+  #top-links {
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 320px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .top-button {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .blog-image {
+    max-width: 275px;
+  }
+
+  .butler-cover-image {
+    max-width: 275px;
+  }
+
   #snapback-title-image {
-    width: 300px;
-    height: 81px;
-  }
-  #snapback-illustrated-image {
-    width: 300px;
-    height: 27px;
-  }
-  #ghostcrime-cover-image {
-    width: 333px;
-    height: 295px;
-  }
-  #gc-ordernow-button {
-    width: 258px;
-    height: 70px;
-  }
-  #blackink-cover-image {
-    width: 350px;
-    height: 350px;
-  }
-  .silver-image {
-    width: 333px;
-    height: 230px;
-  }
-  .precious-image {
-    height: 225px;
-    width: 300px;
-  }
-  #mobile-gray-cover {
-    display: block;
+    max-width: 275px;
   }
 
-  #gray-cover {
-    display: none;
+  #snapback-illustrated-image {
+    max-width: 275px;
   }
-  #blog-goban-image {
-    width: 300px;
-    height: 222px;
-  }
-  // DF
-  #df-comic-image {
-    width: 350px;
-    height: 271px;
-  }
-  #df-alpha-image {
-    width: 249px;
-    height: 219px;
-  }
-  #df-android-image {
-    width: 200px;
-    height: 120px;
-  }
-  #diamond-find-lp {
-    width: 387px;
-    height: 268px;
-  }
-  #df-terminus {
-    width: 387px;
-    height: 135px;
-  }
-  #df-fractalfic {
-    width: 357px;
-    height: 278px;
-  }
-  #df-binarywoods {
-    width: 300px;
-    height: 318px;
-  }
-  #about-image {
-    width: 250px;
-    height: 187px;
-  }
+
 }
 
+// THE SECOND SMALLEST, STILL MOBILE
+@media screen and (min-width: 530px) {
+  .super-wrapper {
+    max-width: 799px;
+  }
+  .butler-title-image {
+    max-width: 320px;
+  }
+  #nav-desktop { display: none; }
+  #nav-mobile  { display: block; }
 
-// THE SECOND SMALLEST
-@media screen and (max-width: 800px) {
-  nav {
-    display: none;
+  #swappable-content {
+    width: 90%;
+    float: none;
   }
-  #nav-mobile {
-    display: block;
+
+  .top-button {
+    font-size: 1rem;
   }
-  #content {
-    width: 80%;
+
+  #footer-bar {
+    width: 60%;
   }
+
   #mobile-divider {
-    display:block;
     margin-left: auto;
     margin-right: auto;
     max-width: 50%;
   }
-  .site-width {
-    min-width: 300px;
+
+  .major-content-wrapper {
+    display: block;
   }
 
   #title-img, #reserve-title-img {
@@ -620,13 +475,8 @@ nav {
   #top-links {
     display: inline-block;
     float: none;
-    margin: 70px 0 20px 40px;
+    margin: 20px 0;
     text-align: center;
-  }
-
-  .smart-image {
-    max-width: 450px;
-    max-height: 300px;
   }
 
   h1 {
@@ -645,96 +495,127 @@ nav {
     font-size: 16px;
   }
 
-  .silver-image {
-    width: 333px;
-    height: 230px;
+  .blog-image {
+    max-width: 400px;
   }
 
-  #snapback-cover-image {
-    width: 325px;
-    height: 246px;
+  .butler-cover-image {
+    max-width: 400px;
   }
+
   #snapback-title-image {
-    width: 300px;
-    height: 81px;
+    max-width: 450px;
   }
   #snapback-illustrated-image {
-    width: 300px;
-    height: 27px;
+    max-width: 450px;
   }
+
 }
 
 
 
-// THE VERY SMALLEST
-@media screen and (max-width: 530px) {
-  .header {
-    margin: 0 auto;
-    text-align: center;
+// MEDIUM SIZE - TABLET & LAPTOP
+@media screen and (min-width: 800px) {
+  .super-wrapper {
+    max-width: 1039px;
   }
 
-  #top-links {
-    margin-top: 10px;
-    margin-left: 0;
+  #swappable-content {
+    width: 90%;
+    float: right;
+    max-width: 530px;
   }
 
-  .top-button {
-    display: inline-block;
-    margin: 0 10px;
+  #footer-bar {
+    width: 50%;
   }
 
-  #df-cover-image {
-    height: 180px;
-    width: 300px;
+  #nav-desktop { display: inline; }
+  #nav-mobile  { display: none; }
+
+  #mobile-gray-cover { display: block; }
+  #gray-cover        { display: none; }
+
+  .major-content-wrapper {
+    display: flex;
   }
-  #blackink-cover-image {
-    width: 300px;
-    height: 300px;
+
+  .blog-image {
+    max-width: 530px;
   }
-  #df-comic-image {
-    width: 300px;
-    height: 232px;
+
+  .butler-cover-image {
+    max-width: 530px;
   }
-  #diamond-find-lp {
-    width: 300px;
-    height: 207px;
+
+  #snapback-title-image {
+    max-width: 530px;
   }
-  #df-terminus {
-    width: 300px;
-    height: 104px;
+  #snapback-illustrated-image {
+    max-width: 530px;
   }
-  #df-fractalfic {
-    width: 300px;
-    height: 234px;
-  }
-  #df-binarywoods {
-    width: 300px;
-    height: 318px;
+
+  #gc-ordernow-button {
+    width: 258px;
+    height: 70px;
   }
 }
-
 
 
 /* Desktop layout */
 @media screen and (min-width: 1040px) {
-  .site-width {
+  .super-wrapper {
     max-width: 1050px;
-    min-width: 625px;
   }
-  nav {
-    display: block;
+
+  #top-links {
+    float: right;
+    margin-top: 70px;
+    margin-right: 55px;
+    text-align: right;
   }
-  #nav-mobile {
-    display: none;
+
+  #nav-desktop { display: inline; }
+  #nav-mobile  { display: none; }
+
+  #swappable-content {
+    max-width: 725px;
+    width: 90%;
+    float: right;
   }
-  #content {
-    width: 100%;
+
+  #footer-bar {
+    width: 40%;
   }
+
   #mobile-divider {
     display:none;
   }
   #products-link {
     display: none;
   }
-}
+  #mobile-gray-cover { display: none; }
+  #gray-cover        { display: block; }
 
+  // specific images
+
+  .blog-image {
+    max-width: 700px;
+  }
+  .butler-cover-image {
+    max-width: 700px;
+  }
+
+  #snapback-title-image {
+    max-width: 600px;
+  }
+  #snapback-illustrated-image {
+    max-width: 600px;
+  }
+
+  #gc-ordernow-button {
+    width: 344px;
+    height: 94px;
+  }
+
+}
