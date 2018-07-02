@@ -13,6 +13,20 @@ RSpec.describe ButlerController, type: :controller do
     end
   end
 
+  describe "GET #archives" do
+    it "allows access" do
+      get :archives, params: {}, session: valid_session
+      expect( response ).to be_ok
+    end
+  end
+
+  describe "GET #about" do
+    it "allows access" do
+      get :about, params: {}, session: valid_session
+      expect( response ).to be_ok
+    end
+  end
+
   describe "GET #show_post" do
     it "allows access" do
       get :show_post, params: {post: "20160826_did_not_get_the_social_media_job" }, session: valid_session

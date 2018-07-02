@@ -2,8 +2,11 @@
 
 body {
   color: $white;
-  background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
-  //background: $black !important;
+  //background-image: radial-gradient(circle farthest-corner at 45px 45px , #000000 0%, #303030 50%, #000000 95%) !important;
+  background: rgb(111,133,193) !important; /* Old browsers */
+  background: -moz-linear-gradient(left,    rgba(111,133,193,1) 0%, rgba(56,66,102,1) 100%) !important; /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(111,133,193,1) 0%, rgba(56,66,102,1) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,     rgba(111,133,193,1) 0%, rgba(56,66,102,1) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 a {
@@ -33,6 +36,18 @@ h1 {
   max-width: 650px;
   text-align: center;
   margin: 0 auto;
+}
+
+.product-text {
+  color: white;
+}
+
+.promo-header {
+  color: white;
+}
+
+.menu {
+  color: white;
 }
 
 #user-wrapper {
