@@ -1,3 +1,5 @@
+-# PLAY INTERFACE OF A BINARYWOODS STORY
+
 #woods-anchor
 #statspanel.zero-margin.center
   %span#score-span= "Score: #{current_player.total_score( @story.id )}"
@@ -13,20 +15,20 @@
   = image_tag("#{@story.pic_name}/title.png", class: "df-image")
 
 #nodepanel.zero-margin.noselect
-  #story-pane.pane.glass
+  #story-pane.pane.glass.readable-font
   #choice-pane.pane.center
-    %button#left-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'L');"}
-    %button#right-button.binary-button.hidden{onclick: "move(" + @story.id.to_s + ", 'R');"}
-    %button#big-button.binary-button{onclick: "move(" + @story.id.to_s + ", 'C');"}
+    %button#left-button.binary-button.readable-font.hidden{onclick: "move(" + @story.id.to_s + ", 'L');"}
+    %button#right-button.binary-button.readable-font.hidden{onclick: "move(" + @story.id.to_s + ", 'R');"}
+    %button#big-button.binary-button.readable-font{onclick: "move(" + @story.id.to_s + ", 'C');"}
       Continue
 
 #findpanel.zero-margin.hidden.noselect
   #item-desc.pane.glass
   #item-controls.pane.center{style: "padding-bottom: 0;"}
-    %button#prev-item-button.binary-button{onclick: "prevItem();"} Previous
-    %button#next-item-button.binary-button{onclick: "nextItem();"} Next
+    %button#prev-item-button.binary-button.readable-font{onclick: "prevItem();"} Previous
+    %button#next-item-button.binary-button.readable-font{onclick: "nextItem();"} Next
   #item-continue.pane.center
-    %button#item-continue-button.binary-button{onclick: "hideItemViewer();"} Keep playing!
+    %button#item-continue-button.binary-button.readable-font{onclick: "hideItemViewer();"} Keep playing!
 
 #woods-spacer
 

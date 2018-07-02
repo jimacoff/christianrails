@@ -25,7 +25,7 @@ function move(story_id, button) {
       format: 'json',
       url: '/woods/stories/' + story_id + '/move_to.json?target_node=' + target_node + "&dir=" + button
     });
-  $('#choice-pane').addClass('hidden');
+  $('#choice-pane').hide();
 
   request.done(function(data, textStatus, jqXHR) {
     current_node = data;
@@ -43,7 +43,7 @@ function move(story_id, button) {
     console.log("Error occured: " + textStatus);
     // TODO pop an error flash or something
 
-    $('#choice-pane').removeClass('hidden');
+    $('#choice-pane').fadeIn('fast');
   });
 }
 
@@ -66,7 +66,7 @@ function drawNewNode() {
     $('#right-button').addClass('hidden');
     $('#big-button').removeClass('hidden');
   }
-  $('#choice-pane').removeClass('hidden');
+  $('#choice-pane').fadeIn('fast');
   scrollToAnchor();
 }
 
@@ -113,7 +113,7 @@ function prevItem() {
 }
 
 function scrollToAnchor() {
- $("html, body").scrollTop($('#woods-anchor').offset().top);
+ $("html, body").animate( { scrollTop: $('#woods-anchor').offset().top + "px" } );
 }
 
 function showItem() {

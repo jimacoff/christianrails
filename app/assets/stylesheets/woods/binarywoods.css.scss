@@ -13,6 +13,11 @@ a {
   text-decoration: none !important;
 }
 
+.readable-font {
+  // font-family: , Arial, sans-serif !important;
+  font-size: 1.25rem;
+}
+
 .background {
   background: rgb(182,181,227); /* Old browsers */
   background: -moz-linear-gradient(left, rgba(182,181,227,1) 0%, rgba(102,100,192,1) 100%); /* FF3.6-15 */

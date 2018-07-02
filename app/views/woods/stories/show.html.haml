@@ -1,3 +1,5 @@
+-# DISLAYING A BINARYWOODS STORY FRONTPAGE
+
 #statspanel.zero-margin.center
   - if current_user && current_user.player
     %span= "Score: #{current_player.total_score(@story.id)}"
@@ -33,7 +35,7 @@
 
   #df-col2
     #storyinfopanel.zero-margin.center
-      %h3.center Story Stats
+      %h3.center Stats
       %table.zero-margin.center
         %tr
           %td= @story.total_plays
