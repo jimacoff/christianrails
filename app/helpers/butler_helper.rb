@@ -4,20 +4,20 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
+        title: "20180701_unpopular_diamond_finds",
+        full_title: "Unpopular Versions of Diamond Find I Have Made",
+        category: "Software Development",
+        tags: ["listicle", "Diamond Find", "Android", "FractalFic", "obsession", "ClamBlog"],
+        desc: "Made an unpopular game. Re-wrote it. Repeat.",
+        thumbnail: "diamondfind"
+      },
+      {
         title: "20171231_another_year_to_evaluate",
         full_title: "2017: Another Year to Evaluate",
         category: "Summaries of Time",
         tags: ["listicle", "year in review"],
         desc: "I'm sure I can find some highlights in this dark year.",
         thumbnail: "calendar"
-      },
-      {
-        title: "20170415_unpopular_diamond_finds",
-        full_title: "Unpopular Versions of Diamond Find I Have Made",
-        category: "Software Development",
-        tags: ["listicle", "Diamond Find", "Android", "FractalFic", "obsession", "ClamBlog"],
-        desc: "Made an unpopular game. Re-wrote it. Repeat.",
-        thumbnail: "diamondfind"
       },
       {
         title: "20170116_4_things_computer_world_got_right",
@@ -175,7 +175,7 @@ module ButlerHelper
   end
 
   def sample_butler_posts
-    all_butler_posts
+    [ all_butler_posts[0] ]
   end
 
   # the nav items

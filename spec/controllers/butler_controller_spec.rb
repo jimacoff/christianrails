@@ -29,11 +29,9 @@ RSpec.describe ButlerController, type: :controller do
 
   describe "GET #show_post" do
     it "allows access" do
-      get :show_post, params: {post: "20160826_did_not_get_the_social_media_job" }, session: valid_session
+      get :show_post, params: {post: "20180701_unpopular_diamond_finds"}, session: valid_session
       expect( response ).to be_ok
       get :show_post, params: {post: "20171231_another_year_to_evaluate"}, session: valid_session
-      expect( response ).to be_ok
-      get :show_post, params: {post: "20170415_unpopular_diamond_finds"}, session: valid_session
       expect( response ).to be_ok
       get :show_post, params: {post: "20170116_4_things_computer_world_got_right"}, session: valid_session
       expect( response ).to be_ok
