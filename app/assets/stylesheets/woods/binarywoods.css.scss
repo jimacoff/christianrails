@@ -23,12 +23,6 @@ a {
   background: -moz-linear-gradient(left, rgba(182,181,227,1) 0%, rgba(102,100,192,1) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, rgba(182,181,227,1) 0%,rgba(102,100,192,1) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(182,181,227,1) 0%,rgba(102,100,192,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-
-  // SLATE
-  // background: rgb(0,0,0); /* Old browsers */
-  // background: -moz-linear-gradient(right, rgba(0,0,0,1) 0%, rgba(184,220,227,1) 100%); /* FF3.6-15 */
-  // background: -webkit-linear-gradient(right, rgba(0,0,0,1) 0%,rgba(184,220,227,1) 100%); /* Chrome10-118,Safari5.1-6 */
-  // background: linear-gradient(to left, rgba(0,0,0,1) 0%,rgba(184,220,227,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 #binaryheader {
@@ -358,16 +352,16 @@ a {
   background-color: $honey-yellow;
 }
 
-.df-image {
+.woods-image {
   border-radius: 30px;
   border: 0px solid;
 }
 
-#df-col1 {
+#woods-col1 {
   display: inline-block;
 }
 
-#df-col2 {
+#woods-col2 {
   display: inline-block;
 }
 
@@ -399,7 +393,7 @@ a {
     width: 750px;
   }
 
-  .df-image {
+  .woods-image {
     height: 330px;
     width: 550px;
   }
@@ -410,11 +404,11 @@ a {
 @media screen and (max-width: 800px) {
   #woods-wrapper {
     width:      550px;
-  padding-left:   10px;
-  padding-right:  10px;
+    padding-left:   10px;
+    padding-right:  10px;
   }
 
-  .df-image {
+  .woods-image {
     height: 300px;
     width: 500px;
   }
@@ -423,11 +417,11 @@ a {
     width: 500px;
   }
 
-  #df-col1 {
+  #woods-col1 {
     display: block;
     margin-top: 20px;
   }
-  #df-col2 {
+  #woods-col2 {
     display: block;
   }
 }
@@ -439,7 +433,7 @@ a {
     padding-left:   0;
     padding-right:  0;
   }
-  .df-image {
+  .woods-image {
     height: 216px;
     width: 360px;
   }
@@ -476,7 +470,7 @@ a {
     padding-left:   0;
     padding-right:  0;
   }
-  .df-image {
+  .woods-image {
     height: 216px;
     width: 310px;
   }

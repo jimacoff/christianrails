@@ -5,11 +5,13 @@
     %span= "Score: #{current_player.total_score(@story.id)}"
 
 #imagepanel.zero-margin.center
-  = image_tag("#{@story.pic_name}/title.png", class: "df-image")
+  = image_tag("#{@story.pic_name}/title.png", class: "woods-image")
 
 .center
 
-  #df-play-or-signup-button
+  #woods-story-desc
+
+  #woods-play-or-signup-button
     - if @story.name == "Diamond Find"
       = button_to "Play #{@story.name} now!", diamondfind_play_path, class: "bright-button", method: :get
     - elsif @story.name == "The Calico Brief"
@@ -22,7 +24,7 @@
         = link_to 'Create an account for free', new_user_registration_path, class: 'megapink'
         to save your progress.
 
-  #df-col1
+  #woods-col1
     #highscore-table.zero-margin.center
       %h3.center High Scores
       %table.zero-margin.center
@@ -33,7 +35,7 @@
                 %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
               %td= h[1]
 
-  #df-col2
+  #woods-col2
     #storyinfopanel.zero-margin.center
       %h3.center Stats
       %table.zero-margin.center
