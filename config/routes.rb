@@ -141,10 +141,14 @@ Christianrails::Application.routes.draw do
   end
   post '/woods/items/download', to: 'woods/items#download'
   get  '/woods',                to: 'woods/stories#index'
-  get  '/diamondfind',          to: 'woods/stories#show', defaults: { id: 1 }
+
+  get  '/diamondfind',          to: 'woods/stories#diamondfind'
   get  '/diamondfind/play',     to: 'woods/stories#play', defaults: { id: 1 }
-  get  '/thecalicobrief',       to: 'woods/stories#show', defaults: { id: 15 }
+
+  get  '/thecalicobrief',       to: 'woods/stories#thecalicobrief'
+  get  '/calicobrief',          to: 'woods/stories#thecalicobrief'
   get  '/thecalicobrief/play',  to: 'woods/stories#play', defaults: { id: 15 }
+  get  '/calicobrief/play',     to: 'woods/stories#play', defaults: { id: 15 }
 
 ######## GHOSTCRM ##############
 

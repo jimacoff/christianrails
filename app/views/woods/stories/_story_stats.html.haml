@@ -1,0 +1,11 @@
+-# GENERIC STORY STATS
+
+#storyinfopanel.zero-margin.center
+  %h3.center Stats
+  %table.zero-margin.center
+    %tr
+      %td= @story.total_plays
+      %td= "#{@story.left_count} / #{@story.right_count}"
+    %tr
+      %th Total plays
+      %th Lefts / Rights

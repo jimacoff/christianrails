@@ -1,15 +1,24 @@
 class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update]
-  before_action :verify_is_published, except: [:index, :show, :manage, :export, :create, :edit, :update]
+  before_action :verify_is_published, except: [:index, :show, :diamondfind, :thecalicobrief, :manage, :export, :create, :edit, :update]
 
-  skip_before_action :verify_is_admin, only: [:show, :play, :move_to]
+  skip_before_action :verify_is_admin, only: [:show, :play, :move_to, :diamondfind, :thecalicobrief]
 
   ## PUBLIC
 
   def show
-    @highscores = Woods::Player.where.not(user_id: nil).collect{ |p| [p.username, p.total_score(@story.id), p.id] }
-                                                        .sort{ |x,y| y[1] <=> x[1] }[0..4]
+    get_highscores
+  end
+
+  def diamondfind
+    @story = Woods::Story.find( 1 )
+    get_highscores
+  end
+
+  def thecalicobrief
+    @story = Woods::Story.find( 15 )
+    get_highscores
   end
 
   def play
@@ -164,6 +173,13 @@ class Woods::StoriesController < Woods::WoodsController
   end
 
   private
+
+    def get_highscores
+      @highscores = Woods::Player.where.not(user_id: nil)
+                                 .collect{ |p| [p.username, p.total_score( @story.id ), p.id] }
+                                 .sort{ |x,y| y[1] <=> x[1] }[0..4]
+    end
+
     def set_woods_story
       @story = Woods::Story.find( params[:id] )
     end

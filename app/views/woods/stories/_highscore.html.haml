@@ -1,0 +1,11 @@
+-# GENERIC HIGH SCORE TABLE
+
+#highscore-table.zero-margin.center
+  %h3.center High Scores
+  %table.zero-margin.center
+    - @highscores.each do |h|
+      - unless h[1] == 0
+        %tr
+          %td
+            %strong= link_to h[0], woods_player_path(h[2]), class: "blackscore"
+          %td= h[1]
