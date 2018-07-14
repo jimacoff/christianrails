@@ -16,5 +16,5 @@
   #woods-col2
     = render "story_stats"
 
-  - if current_user.admin?
+  - if current_user && current_user.admin?
     = render "manage_button"

@@ -23,5 +23,5 @@
       %strong Gray
       are obviously based around my childhood stuffed animals. I don't know why so many of them had bowties, but that's why they work in an office.
 
-  - if current_user.admin?
+  - if current_user && current_user.admin?
     = render "manage_button"
