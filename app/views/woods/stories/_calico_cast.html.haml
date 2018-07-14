@@ -62,6 +62,15 @@
     $('.calico-cast-wrapper').fadeIn();
   }
 
+  function preloadCatImages() {
+    var preloadingImage;
+    cast.forEach(function(cat) {
+      preloadingImage = new Image();
+      preloadingImage.src = cat.image;
+    });
+  }
+
   $(document).ready(function() {
     drawCurrentCatToScreen();
+    preloadCatImages();
   });
