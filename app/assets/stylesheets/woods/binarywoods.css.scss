@@ -233,6 +233,65 @@ a {
   text-decoration: underline !important;
 }
 
+// CALICO-SPECIFIC
+
+#calico-widgets {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.calico-desc {
+  font-size: 1.2em;
+  font-family: Artifika, Helvetica, Arial, sans-serif !important;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.cast-name {
+  display: inline-block;
+}
+
+.cast-image {
+  max-width: 400px;
+}
+
+.cast-bio {
+  margin: 10px;
+}
+
+#left-cat-btn, #right-cat-btn {
+  border: 1px solid black;
+  border-radius: 2px;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.calico-cast-wrapper {
+  max-width: 400px;
+}
+
+#gray-callout, #calico-cast {
+  display: inline-block;
+  margin: 10px 30px;
+  vertical-align: top;
+}
+
+#calico-cast {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+}
+
+.cb-landing-image {
+  border-radius: 10px;
+}
 
 /////  TREE EDITOR
 
@@ -352,9 +411,13 @@ a {
   background-color: $honey-yellow;
 }
 
-.woods-image {
+.woods-image, .in-game-image {
   border-radius: 30px;
   border: 0px solid;
+}
+
+.in-game-image {
+  max-width: 300px;
 }
 
 #woods-col1 {
@@ -398,6 +461,10 @@ a {
     width: 550px;
   }
 
+  .in-game-image {
+    max-width: 300px;
+  }
+
 }
 
 // SOMEWHAT BIG
@@ -411,6 +478,10 @@ a {
   .woods-image {
     height: 300px;
     width: 500px;
+  }
+
+  .in-game-image {
+    max-width: 300px;
   }
 
   #nodepanel, #findpanel {
@@ -438,6 +509,10 @@ a {
     width: 360px;
   }
 
+  .in-game-image {
+    max-width: 300px;
+  }
+
   #nodepanel, #findpanel {
     width: 360px;
   }
@@ -461,6 +536,9 @@ a {
     font-size: 1em;
   }
 
+  .cast-image, .calico-cast-wrapper {
+    max-width: 300px;
+  }
 }
 
 // THE VERY SMALLEST
@@ -473,6 +551,10 @@ a {
   .woods-image {
     height: 216px;
     width: 310px;
+  }
+
+  .in-game-image {
+    max-width: 200px;
   }
 
   #nodepanel, #findpanel {

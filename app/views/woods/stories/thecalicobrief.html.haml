@@ -9,14 +9,14 @@
 
 .center
 
-  = render "basic_story_desc"
+  = render "basic_play_button"
 
-  -# TODO add cat specific stuff
+  #woods-story-desc
+    %p.calico-desc Calico watched SooCo almost crumble around her when her coworkers took advantage of a crisis. Now, she's out for payback.
 
-  #woods-col1
-    = render "highscore"
-  #woods-col2
-    = render "story_stats"
+    #calico-widgets
+    = render "calico_cast"
+    = render "gray_callout"
 
   - if current_user.admin?
     = render "manage_button"

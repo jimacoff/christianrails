@@ -1,0 +1,67 @@
+#calico-cast
+
+  .calico-cast-wrapper
+    %button#left-cat-btn{onclick: "prevCat();"} ←
+    %h3.cast-name
+    %button#right-cat-btn{onclick: "nextCat();"} →
+
+    %img.cast-image
+    %p.artifika.cast-bio
+
+:javascript
+  var cast = [
+    {name: "Calico",       image: "/assets/thecalicobrief/calico.png", alt: "Portrait of Calico",
+      bio: "Lead Architect at SootCo. She enjoys precision, good design, and office justice."},
+    {name: "Father Gray",  image: "/assets/thecalicobrief/fg.png", alt: "Portrait of Father Gray",
+      bio: "Real Estate Agent at SootCo. Has a dedicated snack table in his office that's just a fridge he overturned."},
+    {name: "Pounce",       image: "/assets/thecalicobrief/pounce.png", alt: "Portrait of Pounce",
+      bio: "SootCo's company lawyer. Inserts himself into contracts and enjoys unfair swivel battles."},
+    {name: "BK",           image: "/assets/thecalicobrief/bk.png", alt: "Portrait of BK",
+      bio: "Head Engineer at SootCo. Doesn't like to do work if it takes him away from smoking cigars."},
+    {name: "Sooty",        image: "/assets/thecalicobrief/sooty.png", alt: "Portrait of Sooty",
+      bio: "President and CEO of SootCo. Some say he's a robot."},
+    {name: "Typing Kitty", image: "/assets/thecalicobrief/typingkitty.png", alt: "Portrait of Typing Kitty",
+      bio: "Sooty's Administrative Assistant. Never not typing."},
+    {name: "Ounce",        image: "/assets/thecalicobrief/ounce.png", alt: "Portrait of Ounce",
+      bio: "Pounce's identical twin and SootCo's Mutual Fund Manager. Annoyingly optimistic."},
+    {name: "Siamese",      image: "/assets/thecalicobrief/siamese.png", alt: "Portrait of Siamese",
+      bio: "Local prankster and hooligan. Often targets SootCo employees."},
+    {name: "Licorice",     image: "/assets/thecalicobrief/licorice.png", alt: "Portrait of Licorice",
+      bio: "Prankster/vandal of legend. Has never been arrested."},
+    {name: "Flipper",      image: "/assets/thecalicobrief/flipper.png", alt: "Portrait of Flipper",
+      bio: "Notable penguin around town. Can fly, but has problems with alcohol."},
+    {name: "Gray Kitten",  image: "/assets/thecalicobrief/gk.png", alt: "Portrait of Gray Kitten",
+      bio: "Father Gray's unemployed son."},
+  ];
+
+  var currentCat = 0;
+
+  function prevCat() {
+    if (currentCat === 0) {
+      currentCat = cast.length - 1;
+    } else {
+      currentCat -= 1;
+    }
+    drawCurrentCatToScreen();
+  }
+
+  function nextCat() {
+    if (currentCat === cast.length - 1) {
+      currentCat = 0;
+    } else {
+      currentCat += 1;
+    }
+    drawCurrentCatToScreen();
+  }
+
+  function drawCurrentCatToScreen() {
+    $('.calico-cast-wrapper').hide();
+    $('.cast-name')[0].innerHTML = cast[currentCat].name;
+    $('.cast-bio')[0].innerHTML = cast[currentCat].bio;
+    $('.cast-image').attr('src', cast[currentCat].image);
+    $('.calico-cast-wrapper').fadeIn();
+  }
+
+  $(document).ready(function() {
+    drawCurrentCatToScreen();
+  });
