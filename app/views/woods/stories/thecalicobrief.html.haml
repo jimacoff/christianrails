@@ -14,9 +14,14 @@
   #woods-story-desc
     %p.calico-desc Calico watched SootCo almost crumble around her when her coworkers took advantage of a crisis. Now, she's out for payback.
 
-    #calico-widgets
     = render "calico_cast"
     = render "gray_callout"
+
+    %p.calico-footnote
+      %strong The Calico Brief
+      and
+      %strong Gray
+      are obviously based around my childhood stuffed animals. I don't know why so many of them had bowties, but that's why they work in an office.
 
   - if current_user.admin?
     = render "manage_button"
