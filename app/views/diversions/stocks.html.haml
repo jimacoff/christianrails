@@ -4,42 +4,51 @@
 
 = stylesheet_link_tag "stocks/stocks"
 
-%h1 STOOOOCKS
+%h1.center STOOOOCKS
 
 #stocks-wrapper
-  #environment-info
-    %span
-      %strong#date-display
+  #environment-info.game-panel
+    .panel-caption Date
+    .panel-inner-wrapper
+      %span#date-display
 
-  #stock-info
-    %span
-      %strong#stock-symbol
-      ·
-      %span#stock-name
-    #stock-description
-    #stock-price
+  #stock-info.game-panel
+    .panel-caption Current Symbol
+    .panel-inner-wrapper
+      %span
+        %strong#stock-symbol
+        ·
+        %span#stock-name
+      #stock-sector
+      #stock-description
+      #stock-price
 
   #stock-chart{style: "width: 100%; height: 250px"}
-  #player-info
-    %span Cash:
-    %span
-      %strong#player-cash
-    #player-portfolio
 
-    %span Net worth:
-    %span
-      %strong#player-networth
+  #player-info.game-panel
+    .panel-caption Your Portfolio
+    .panel-inner-wrapper
+      %span Cash:
+      %span#player-cash
+      #player-portfolio
 
-  %hr
+      %span Net worth:
+      %span
+        %strong#player-networth
 
-  %button#buy-100{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 100 );"} Buy 100
-  %button#sell-100{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 100 );"} Sell 100
-  %br
-  %button#buy-500{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 500 );"} Buy 500
-  %button#sell-500{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 500 );"} Sell 500
-  %br
-  %button#buy-1000{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 1000 );"} Buy 1,000
-  %button#sell-1000{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 1000 );"} Sell 1,000
+  #action-button-container.game-panel
+    .panel-caption Stock Actions
+    .panel-inner-wrapper
+      %button.stock-button#buy-100{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 100 );"} Buy 100
+      %button.stock-button#sell-100{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 100 );"} Sell 100
+      %br
+      %button.stock-button#buy-500{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 500 );"} Buy 500
+      %button.stock-button#sell-500{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 500 );"} Sell 500
+      %br
+      %button.stock-button#buy-1000{onclick: "buyStockWithPortfolio(  currentStock, myPortfolio, 1000 );"} Buy 1,000
+      %button.stock-button#sell-1000{onclick: "sellStockWithPortfolio( currentStock, myPortfolio, 1000 );"} Sell 1,000
+
+%hr
 
 %br
 
@@ -47,6 +56,5 @@
 
 :javascript
   $(document).ready(function() {
-    initializeGame();
-    startGame();
+    initializeAndStartGame();
   });

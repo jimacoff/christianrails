@@ -1,3 +1,50 @@
 #date-display, #environment-info {
   float: right;
 }
+
+#stock-info {
+  display: inline-block;
+  float: left;
+}
+
+#stock-chart {
+  display: block;
+  margin-bottom: 70px;
+}
+
+#player-info {
+  display: inline-block;
+  float: left;
+}
+
+#action-button-container {
+  display: inline-block;
+  text-align: center;
+}
+
+.panel-inner-wrapper {
+  width: 100%;
+  margin-top: -25px;
+}
+
+.game-panel {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.panel-caption {
+  display: inline-block;
+  padding: 0 5px;
+  position: relative;
+  font-size: 0.8rem;
+  top: -20px;
+  background: white;
+  margin-bottom: -25px;
+}
+
+.stock-button {
+  border: 1px solid black;
+  border-radius: 3px;
+}

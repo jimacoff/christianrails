@@ -61,6 +61,11 @@ Game.draw = function() {
 };
 
 // generate symbols, traders
+function initializeAndStartGame() {
+  initializeGame();
+  startGame();
+}
+
 function initializeGame() {
 
   let newStock = generateStock();
