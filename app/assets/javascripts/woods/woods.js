@@ -117,6 +117,7 @@ function scrollToAnchor() {
 }
 
 function showItem() {
+  $('#findpanel').hide();
   var itemDesc = "<strong>" + item_gallery[item_index]['name'] + "</strong>";
 
   if( item_gallery[item_index]['value'] > 0 ) {
@@ -124,6 +125,7 @@ function showItem() {
   }
   $('#imagepanel').html( "<img src='/assets/" + storyname + "/d_" + item_gallery[item_index]['image'] + ".jpg' class='woods-image'>" );
   $('#item-desc').html( itemDesc + "<br/>" + item_gallery[item_index]['legend'] );
+  $('#findpanel').fadeIn();
 }
 
 function showStoryTitle() {
