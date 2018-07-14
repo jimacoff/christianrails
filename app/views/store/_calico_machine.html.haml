@@ -1,0 +1,22 @@
+%a{name: "thecalicobrief"}
+#desktop-diamonds
+  %table
+    %tr
+      %td.small-width.center{style: "vertical-align: text-top;"}
+        %br
+        %a{href: thecalicobrief_path}
+          = image_tag( "calicobrief-icon.png", class: "store-image" )
+      %td
+        %a{href: "/thecalicobrief", style: "color: $slate-gray;"}
+          %h2.slate The Calico Brief
+
+        = render 'store/calico_machine_content'
+
+%br
+#mobile-diamonds
+  %a{href: thecalicobrief_path}
+    = image_tag( "calicobrief-icon.png", class: "store-image" )
+
+  %h2 The Calico Brief
+
+  = render 'store/calico_machine_content'
