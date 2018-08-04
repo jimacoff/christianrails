@@ -5,5 +5,4 @@ class Woods::ItemDownload < ApplicationRecord
   validates_presence_of :item, :player
 
   LIMIT = 5
-
 end

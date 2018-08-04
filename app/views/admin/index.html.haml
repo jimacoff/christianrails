@@ -1,53 +1,90 @@
 .admin-dashboard
-  %br
+  .stats-area
+    .stats-block
+      .stats-number= @days_since_blog_post
+      .stats-desc Days since blog post
+    .stats-block
+      .stats-number= @days_since_last_signup
+      .stats-desc Days since last sign-up
+    .stats-block
+      .stats-number= @days_since_last_download[:book]
+      .stats-desc Days since last book download
+    .stats-block
+      .stats-number= @days_since_last_download[:item]
+      .stats-desc Days since last item download
+    .stats-block
+      .stats-number= @days_since_last_purchase[:digital]
+      .stats-desc Days since last purchase (digital)
+    .stats-block
+      .stats-number= @days_since_last_purchase[:physical]
+      .stats-desc Days since last purchase (physical)
+    .stats-block
+      .stats-number= @days_since_last_melon_click
+      .stats-desc Days since last melon click
 
-.small-width.maintenance-panel
-  .embolden Site Management
-  %ul
-    %li= link_to 'View Users', report_users_path
-    %li= link_to 'View Logs', logs_path
+  .maintenance-area
 
-  .embolden Store Maintenance
-  %ul
-    %li= link_to 'Products', store_products_path
-    %li= link_to 'Price Combos', store_price_combos_path
-    %li= link_to 'Free gifts', store_free_gifts_path
+    .small-width.maintenance-panel
+      .embolden Site Management
+      %ul
+        %li= link_to 'View Users', report_users_path
+        %li= link_to 'View Logs', logs_path
 
-  .embolden Reports
-  %ul
-    %li= link_to 'Orders', store_orders_path
-    %li= link_to 'Digital Purchases', store_digital_purchases_path
-    %li= link_to 'Physical Purchases', store_physical_purchases_path
-    %li= link_to 'Downloads', downloads_store_products_path
-    %li= link_to 'Newsletter signups', newsletter_signups_path
-    %li= link_to 'Melon stats', stats_melon_index_path
+    .small-width.maintenance-panel
+      .embolden Store Maintenance
+      %ul
+        %li= link_to 'Products', store_products_path
+        %li= link_to 'Price Combos', store_price_combos_path
+        %li= link_to 'Free gifts', store_free_gifts_path
 
-  .embolden Testing
-  %ul
-    %li= link_to 'Test welcome email', emailtest_admin_index_path
-    %li= link_to 'Test receipt email', receipttest_admin_index_path
-    %li= link_to 'Cause exception!', cause_exception_admin_index_path
+    .small-width.maintenance-panel
+      .embolden Reports
+      %ul
+        %li= link_to 'Orders', store_orders_path
+        %li= link_to 'Digital Purchases', store_digital_purchases_path
+        %li= link_to 'Physical Purchases', store_physical_purchases_path
+        %li= link_to 'Downloads', downloads_store_products_path
+        %li= link_to 'Newsletter signups', newsletter_signups_path
+        %li= link_to 'Melon stats', stats_melon_index_path
+
+    .small-width.maintenance-panel
+      .embolden Testing
+      %ul
+        %li= link_to 'Test welcome email', emailtest_admin_index_path
+        %li= link_to 'Test receipt email', receipttest_admin_index_path
+        %li= link_to 'Cause exception!', cause_exception_admin_index_path
 
 
-.small-width.maintenance-panel.next-row-over
-  .embolden BinaryWoods
-  %ul
-    %li= link_to 'Stories', woods_stories_path
-    %li= link_to 'Players', woods_players_path
-    %li= link_to 'Manage Diamond Find', manage_woods_story_path(1)
+    .small-width.maintenance-panel
+      .embolden BinaryWoods
+      %ul
+        %li= link_to 'Stories', woods_stories_path
+        %li= link_to 'Players', woods_players_path
+        %li= link_to 'Manage Diamond Find', manage_woods_story_path(1)
+        %li= link_to 'Manage The Calico Brief', manage_woods_story_path(15)
 
-  .embolden CRM
-  %ul
-    %li= link_to "CRM stats", crm_stats_admin_index_path
+    .small-width.maintenance-panel
+      .embolden CRM
+      %ul
+        %li= link_to "CRM stats", crm_stats_admin_index_path
 
-  .embolden Property Management
-  %ul
-    %li= link_to 'Watch Properties', watch_properties_path
+    .small-width.maintenance-panel
+      .embolden Property Management
+      %ul
+        %li= link_to 'Watch Properties', watch_properties_path
 
-  .embolden Diversions
-  %ul
-    %li= link_to 'Go Joke info page', go_path
-    %li= link_to 'Diversions Index', diversions_path
+    .small-width.maintenance-panel
+      .embolden Diversions
+      %ul
+        %li= link_to 'Go Joke info page', go_path
+        %li= link_to 'Diversions Index', diversions_path
 
 .center
   = link_to 'Home', root_path
+
+
+:javascript
+  $(document).ready(function() {
+    $('.admin-dashboard').parent().css('background', 'transparent');
+    $('.admin-dashboard').parent().css('box-shadow', 'none');
+  });

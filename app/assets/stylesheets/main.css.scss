@@ -226,19 +226,6 @@ table {
   text-decoration: underline;
 }
 
-.maintenance-panel {
-  display: inline-block;
-  background-color: $mega-pink;
-  border: 1px solid $black;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.next-row-over {
-  margin-left: 30px;
-  vertical-align: top;
-}
-
 /// DEVISE
 
 .field {
@@ -276,6 +263,45 @@ table {
   height: 150px;
 }
 
+
+/// ADMIN
+
+.stats-area, .maintenance-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.stats-block {
+  display: inline;
+  margin: 10px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 70px;
+  background-color: $mega-blue;
+}
+
+.stats-number {
+  font-weight: 700;
+}
+
+.stats-desc {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.maintenance-panel {
+  display: inline;
+  background-color: $mega-pink;
+  border: 1px solid $black;
+  padding: 10px;
+  border-radius: 10px;
+  vertical-align: top;
+  margin: 10px;
+  width: 200px;
+}
 
 /////  RESPONSIVE //////
 
