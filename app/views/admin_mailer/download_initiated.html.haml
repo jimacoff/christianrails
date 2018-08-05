@@ -1,0 +1,6 @@
+%h3= "#{ @user.username } just downloaded #{ @product.title } in #{ @release.format }!"
+
+- if @user.send_me_emails
+  %p They consented to be emailed, so it might be a good idea to send them one in a week or so.
+- else
+  %p Unfortunately they did not consent to be emailed, so you can't really follow up that way.

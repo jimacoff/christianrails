@@ -28,8 +28,8 @@ class NewsletterSignupsController < ApplicationController
     end
 
     def send_email_notifications
-      NewsletterMailer.welcome(@newsletter_signup).deliver_now
-      AdminMailer.newsletter_signup(@newsletter_signup).deliver_now
+      NewsletterMailer.welcome( @newsletter_signup ).deliver_now
+      AdminMailer.newsletter_signup( @newsletter_signup ).deliver_now
     end
 
 end

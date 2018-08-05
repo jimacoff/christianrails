@@ -355,12 +355,15 @@ RSpec.describe Store::DealzoneController, type: :controller do
       controller.stubs(:render)
     end
 
-    it 'downloads for an authorized logged-in user' do
+    it 'downloads for an authorized logged-in user and notifies the admin of the download' do
+      ActionMailer::Base.deliveries = []
       controller.stubs(:send_file).returns("Download successful").once
 
       get 'download', params: { release_id: release1.id }
       expect( response.status ).to eq(200)
       expect( assigns[:error] ).to be_nil
+
+      expect( ActionMailer::Base.deliveries.size ).to eq(1)
     end
 
     it 'does NOT download if no user logged in' do

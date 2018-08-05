@@ -1,4 +1,6 @@
 class AdminMailer < ActionMailer::Base
+
+  # send to me by default
   default(
     from: "ChristianDeWolf.com AutoMailer <me@christiandewolf.com>",
     reply_to: "me@christiandewolf.com",
@@ -23,6 +25,15 @@ class AdminMailer < ActionMailer::Base
   def watch_property_alert(watch_property)
     @watch_property = watch_property
     subject = "#{ @watch_property.name } might be down!"
+
+    mail(subject: subject)
+  end
+
+  def download_initiated(user, product, release)
+    @user = user
+    @product = product
+    @release = release
+    subject = "Someone downloaded #{ product.title }!"
 
     mail(subject: subject)
   end

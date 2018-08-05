@@ -257,6 +257,7 @@ class Store::DealzoneController < Store::StoreController
             send_file "#{Rails.root}/../../downloads/#{file_name}"
             Store::Download.create(user: current_user, release: release)
             record_positive_event(Log::STORE, "Download initiated for: #{file_name}")
+            notify_admin_of_product_download( current_user, product, release )
             return
           end
         else
@@ -340,6 +341,12 @@ class Store::DealzoneController < Store::StoreController
       total_shipping = 0
       @staged_physical_books.map { |sp| total_shipping += sp.product.shipping_cost_cents }
       total_shipping
+    end
+
+    # email notifiers
+
+    def notify_admin_of_product_download( user, product, release )
+      AdminMailer.download_initiated( user, product, release ).deliver_now
     end
 
 end
