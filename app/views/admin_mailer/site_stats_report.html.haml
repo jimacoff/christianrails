@@ -6,3 +6,21 @@
     %strong= "#{stat_val}"
 
 %h4 Obviously, do work until you're happy with these.
+
+%h3 Logs from the last 24 hours:
+
+%table
+  %thead
+    %tr
+      %th Date/Time
+      %th Location
+      %th User
+      %th Description
+
+  %tbody
+    - @logs.each do |log|
+      %tr
+        %td= log.created_at.strftime("%b %e, %Y  %I:%M %p")
+        %td= log.location
+        %td= log.user ? log.user.username : "n/a"
+        %td= log.description

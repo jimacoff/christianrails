@@ -28,7 +28,8 @@ namespace :admin do
     include ApplicationHelper
     puts "Attempting to send Site Stats Report..."
 
-    AdminMailer.site_stats_report( get_site_stats ).deliver_now
+    logs_since_yesterday = Log.where('created_at > ?', DateTime.current - 1.day).order('created_at desc')
+    AdminMailer.site_stats_report( get_site_stats, logs_since_yesterday ).deliver_now
     puts "Done."
   end
 
