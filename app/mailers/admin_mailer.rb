@@ -38,4 +38,11 @@ class AdminMailer < ActionMailer::Base
     mail(subject: subject)
   end
 
+  def site_stats_report(stats)
+    @stats = stats
+    subject = "ChristianDeWolf.com Site Report"
+
+    mail(subject: subject)
+  end
+
 end

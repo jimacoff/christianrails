@@ -1,26 +1,9 @@
 .admin-dashboard
   .stats-area
-    .stats-block
-      .stats-number= @days_since_blog_post
-      .stats-desc Days since blog post
-    .stats-block
-      .stats-number= @days_since_last_signup
-      .stats-desc Days since last sign-up
-    .stats-block
-      .stats-number= @days_since_last_download[:book]
-      .stats-desc Days since last book download
-    .stats-block
-      .stats-number= @days_since_last_download[:item]
-      .stats-desc Days since last item download
-    .stats-block
-      .stats-number= @days_since_last_purchase[:digital]
-      .stats-desc Days since last purchase (digital)
-    .stats-block
-      .stats-number= @days_since_last_purchase[:physical]
-      .stats-desc Days since last purchase (physical)
-    .stats-block
-      .stats-number= @days_since_last_melon_click
-      .stats-desc Days since last melon click
+    - @stats.each do |stat_name, stat_val|
+      .stats-block
+        .stats-number= stat_val
+        .stats-desc= stat_name
 
   .maintenance-area
 

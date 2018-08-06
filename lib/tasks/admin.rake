@@ -20,7 +20,16 @@ namespace :admin do
         record_suspicious_event(Log::BACKEND, "WatchProperty check invoked sooner than expected.")
       end
     end
+    puts "All watch properties checked."
+  end
 
+  desc "Sends out stats email to admin"
+  task site_stats_report: :environment do
+    include ApplicationHelper
+    puts "Attempting to send Site Stats Report..."
+
+    AdminMailer.site_stats_report( get_site_stats ).deliver_now
+    puts "Done."
   end
 
 end
