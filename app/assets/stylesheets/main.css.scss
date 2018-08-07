@@ -303,6 +303,18 @@ table {
   width: 200px;
 }
 
+.pagination, .pagination-controls, .pagination-info {
+  display: inline;
+}
+
+.pagination-controls {
+  float: left;
+}
+
+.pagination-info {
+  float: right;
+}
+
 /////  RESPONSIVE //////
 
 // small

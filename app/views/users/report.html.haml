@@ -1,5 +1,7 @@
 %h1 Users
 
+= render "/layouts/paginator", data: @users
+
 %table.product-table
   %thead
     %tr
@@ -22,6 +24,6 @@
         %td= user.player    ? "X" : ""
         %td= user.assistant ? "X" : ""
 
-%strong Total users: #{@users.count}
+= render "/layouts/paginator", data: @users
 
 = render "admin/admin_link"

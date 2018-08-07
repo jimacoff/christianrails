@@ -1,5 +1,7 @@
 %h1 Logs
 
+= render "/layouts/paginator", data: @logs
+
 %table.product-table
   %thead
     %tr
@@ -7,7 +9,6 @@
       %th Location
       %th User
       %th Description
-      / %th
 
   %tbody
     - @logs.each do |log|
@@ -16,6 +17,7 @@
         %td= log.location
         %td= log.user ? log.user.username : "n/a"
         %td= log.description
-        / %td= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' }
+
+= render "/layouts/paginator", data: @logs
 
 = render "admin/admin_link"
