@@ -5,24 +5,25 @@
 %table.product-table
   %thead
     %tr
-      %th Username
-      %th Name
-      %th Email
-      %th Signed up
-      %th Last sign-in
-      %th DF
-      %th CRM
+      %th Bio
+      %th Activity
 
   %tbody
     - @users.each do |user|
       %tr
-        %td= link_to (user.username || "INVITED"), user_path( user )
-        %td= user.full_name
-        %td= user.email
-        %td= user.created_at.strftime("%b %e '%y")
-        %td= user.last_sign_in_at ? user.last_sign_in_at.strftime("%b %e '%y") : "Never"
-        %td= user.player    ? "X" : ""
-        %td= user.assistant ? "X" : ""
+        %td
+          %p
+            Username:
+            = link_to (user.username || "INVITED"), user_path( user )
+          %p= "Name: #{user.full_name}"
+          %p= "Email: #{user.email}"
+          %p= "Signed up: #{user.created_at.strftime("%e %b %Y")}"
+          %p= "Last log-in: #{user.last_sign_in_at ? user.last_sign_in_at.strftime("%e %b %Y") : "Never" }"
+        %td
+          %p= user.player ? "Woods Player" : ""
+          %p= user.assistant ? "CRM Assistant" : ""
+          %p= user.send_me_emails ? "Send me emails!" : "Do NOT send me emails"
+
 
 = render "/layouts/paginator", data: @users
 

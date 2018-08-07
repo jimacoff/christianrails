@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   ### ADMIN ONLY
 
   def report
-    @users = User.order(:created_at).page( params[:page] )
+    @users = User.order('created_at desc').page( params[:page] )
   end
 
   private
