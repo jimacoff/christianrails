@@ -74,4 +74,48 @@ RSpec.describe UsersController, type: :controller do
 
   end
 
+  describe "settings" do
+
+    let(:other_user) { FactoryBot.create(:user) }
+
+    it "displays the settings page for the current user" do
+      get :settings, params: {id: @user.to_param}, session: valid_session
+      expect( response ).to be_success
+    end
+
+    it "does NOT display the settings page for a different user" do
+      get :settings, params: {id: other_user.to_param}, session: valid_session
+      expect( response ).to redirect_to( root_path )
+    end
+
+  end
+
+  describe "update" do
+
+    let(:other_user) { FactoryBot.create(:user) }
+
+    let(:valid_params) {
+      {
+        send_me_emails: true
+      }
+    }
+
+    it "updates the users' notification status" do
+      expect( @user.send_me_emails ).to eq( false )
+      put :update, params: {id: @user.to_param, user: valid_params}, session: valid_session
+
+      @user.reload
+      expect( @user.send_me_emails ).to eq( true )
+    end
+
+    it "does NOT update the notification status for a different user" do
+      expect( @user.send_me_emails ).to eq( false )
+      put :update, params: {id: other_user.to_param, user: valid_params}, session: valid_session
+
+      @user.reload
+      expect( @user.send_me_emails ).to eq( false )
+    end
+
+  end
+
 end

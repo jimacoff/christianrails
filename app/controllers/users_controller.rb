@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :settings, :update]
 
-  skip_before_action :verify_is_admin, only: [:show, :consume]
+  skip_before_action :verify_is_admin, only: [:show, :consume, :settings, :update]
 
   # PUBLIC
 
@@ -42,6 +42,23 @@ class UsersController < ApplicationController
     end
   end
 
+  ## USER-SPECIFIC PERMISSIONS
+
+  def settings
+    redirect_to root_path unless current_user && current_user.id == @user.id
+  end
+
+  def update
+    redirect_to root_path and return unless current_user && current_user.id == @user.id
+
+    if @user.update_attributes( user_params )
+      redirect_to settings_user_path( @user ), notice: "Your settings have been updated."
+    else
+      flash[:alert] = "There was an error updating your settings."
+      redirect_to settings_user_path( @user )
+    end
+  end
+
   ### ADMIN ONLY
 
   def report
@@ -52,6 +69,10 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find( params[:id] )
+    end
+
+    def user_params
+      params.require(:user).permit(:send_me_emails)
     end
 
 end

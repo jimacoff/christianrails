@@ -27,22 +27,22 @@
     = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm your password"
 
   .field
-    = f.label :purchaser, "Will you be purchasing books for a store or library?"
+    %strong= f.label :purchaser, "Will you be purchasing books for a store or library?"
     %br
     = f.check_box :purchaser, checked: '', onchange: "updateCompanyField();"
-    = f.label :purchaser, "Yes"
+    = f.label :purchaser, "Yes, I am a professional buyer"
 
   - # toggled with a bit of JS below
   .field.companyfield.hidden
-    = f.label :company, "What is the name of your organization?"
+    %strong= f.label :company, "Is that so! What is the name of your organization?"
     %br
     = f.text_field :company, autocomplete: "off", placeholder: "My company name"
 
   .field
-    = f.label :send_me_emails, "Can I email you occasionally about future releases?"
+    %strong= f.label :send_me_emails, "Can I email you occasionally?"
     %br
     = f.check_box :send_me_emails, checked: 'checked'
-    = f.label :send_me_emails, "Yes, please"
+    = f.label :send_me_emails, "Yes! I would be happy to hear from you."
 
 
   .actions.center

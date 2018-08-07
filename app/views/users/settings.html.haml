@@ -1,0 +1,25 @@
+%h1 Settings
+
+= form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited your User from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  %p{style: "text-align: left;"}
+    Personalize your account and manage your notification settings.
+
+  %table
+    %tr
+      %td.left
+        = f.label :send_me_emails, "It's OK to send me emails occasionally", class: 'embolden'
+        = f.check_box :send_me_emails, value: @user.send_me_emails
+
+    %tr
+      %td= f.submit 'Save', class: 'store-button'
+
+%br
+
+= link_to "Home", root_path

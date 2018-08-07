@@ -27,6 +27,8 @@
         - if current_player && current_player.scorecards.size > 0 && controller_path.starts_with?("woods")
           = link_to 'Scores', main_app.woods_player_path(current_player)
           ·
+        = link_to "Settings", main_app.settings_user_path( current_user )
+        ·
         = link_to 'Sign out', main_app.destroy_user_session_path, method: :delete
 
   - else

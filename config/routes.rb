@@ -4,11 +4,14 @@ Christianrails::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions', invitations: 'invitations' }
 
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :update] do
     collection do
       get 'report'
       post 'consume'
       delete 'consume'
+    end
+    member do
+      get 'settings'
     end
   end
   resources :logs, only: [:index]
