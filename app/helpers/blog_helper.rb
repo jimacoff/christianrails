@@ -11,6 +11,11 @@ module BlogHelper
     # Add new posts at the top.
     [
       {
+        title: "20180808_still_more_interactive_fiction",
+        category: SOFTWARE_DEVELOPMENT,
+        tags: ["The Calico Brief", "interactive fiction", "Diamond Find", "writing", "programming"]
+      },
+      {
         title: "20180611_advanced_melon_techniques",
         category: JUST_BUSINESS,
         tags: ["business", "melon", "marketing", "ScaleQuail", "Ghostcrime"]
