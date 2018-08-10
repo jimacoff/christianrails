@@ -2,6 +2,6 @@
 
 - @items.all.each do |item|
   %p= item.name
-  %img{src: "/assets/" + @story.slug + "/d_" + item.image + ".jpg", class: 'woods-image'}
+  %img{src: "/assets/" + @story.pic_name + "/d_" + item.image + ".jpg", class: 'woods-image'}
 
 = link_to 'Back to itemsets', woods_story_itemsets_path(@story)
