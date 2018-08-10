@@ -1,0 +1,7 @@
+%h1= "#{ @story.name } Item Tester"
+
+- @items.all.each do |item|
+  %p= item.name
+  %img{src: "/assets/" + @story.name + "/d_" + item.image + ".jpg", class: 'woods-image'}
+
+= link_to 'Back to itemsets', woods_story_itemsets_path(@story)

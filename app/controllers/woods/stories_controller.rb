@@ -1,7 +1,7 @@
 class Woods::StoriesController < Woods::WoodsController
 
-  before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update]
-  before_action :verify_is_published, except: [:index, :show, :diamondfind, :thecalicobrief, :manage, :export, :create, :edit, :update]
+  before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update, :item_tester]
+  before_action :verify_is_published, except: [:index, :show, :diamondfind, :thecalicobrief, :manage, :export, :create, :edit, :update, :item_tester]
 
   skip_before_action :verify_is_admin, only: [:show, :play, :move_to, :diamondfind, :thecalicobrief]
 
@@ -170,6 +170,10 @@ class Woods::StoriesController < Woods::WoodsController
         @nodes << node
       end
     end
+  end
+
+  def item_tester
+    @items = @story.items
   end
 
   private

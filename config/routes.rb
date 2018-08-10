@@ -111,6 +111,7 @@ Christianrails::Application.routes.draw do
         get 'move_to'
         get 'manage'
         get 'export'
+        get 'item_tester'
       end
 
       resources :storytrees, only: [:show, :create] do

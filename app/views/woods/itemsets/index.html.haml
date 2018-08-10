@@ -21,4 +21,8 @@
   %h3 New Itemset
   = render 'form'
 
-= link_to "Back to story manager", manage_woods_story_path(@story)
+= link_to "Test all images", item_tester_woods_story_path( @story )
+
+%br
+
+= link_to "Back to story manager", manage_woods_story_path( @story )
