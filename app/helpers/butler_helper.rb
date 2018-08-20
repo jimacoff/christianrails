@@ -4,6 +4,14 @@ module ButlerHelper
     # Add new posts at the top.
     [
       {
+        title: "20180819_nicknames_i_cant_pull_off",
+        full_title: "Nicknames I Can't Pull Off",
+        category: "Let's Get Personal",
+        tags: ["nicknames", "myself", "insults", "long limbs", "listicle"],
+        desc: "People could refer to me with these rad monikers if I just improved slightly in some areas.",
+        thumbnail: ""
+      },
+      {
         title: "20180701_unpopular_diamond_finds",
         full_title: "Unpopular Versions of Diamond Find I Have Made",
         category: "Software Development",
@@ -167,7 +175,7 @@ module ButlerHelper
         title: "20130815_grocery_shopping_tips",
         full_title: "Grocery Shopping Tips",
         category: "Life Haxx",
-        tags: ["listicle", "food", "shopping", "deals", "gnawing hunger"],
+        tags: ["listicle", "food", "shopping", "deals", "gnawing hunger", "long limbs"],
         desc: "Maximize your grocery experience with THESE hot tips.",
         thumbnail: ""
       }
