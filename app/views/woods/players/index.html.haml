@@ -1,9 +1,10 @@
 %h1 Listing All Players
 
-%table.small-width
+%table.woods-admin-table
   %thead
     %tr
       %th Username
+      %th Finds
       %th Item downloads
       %th
 
@@ -11,8 +12,9 @@
     - @players.each do |woods_player|
       %tr
         %td= woods_player.username
+        %td= woods_player.finds.size
         %td= woods_player.item_download_count
-        %td= link_to 'Stats', woods_player
+        %td= link_to 'Public page', woods_player
 
 %br
 
