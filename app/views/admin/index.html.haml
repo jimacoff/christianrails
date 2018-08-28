@@ -1,9 +1,4 @@
 .admin-dashboard
-  .stats-area
-    - @stats.each do |stat_name, stat_val|
-      .stats-block
-        .stats-number= stat_val
-        .stats-desc= stat_name
 
   .maintenance-area
 
@@ -60,6 +55,12 @@
       .embolden Diversions
       %ul
         %li= link_to 'Go Joke info page', go_path
+
+  .stats-area
+    - @stats.each do |stat_name, stat_val|
+      .stats-block
+        .stats-number= stat_val
+        .stats-desc= stat_name
 
 .center
   = link_to 'Home', root_path

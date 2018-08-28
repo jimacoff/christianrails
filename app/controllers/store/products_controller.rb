@@ -52,6 +52,6 @@ class Store::ProductsController < Store::StoreController
       params.require(:store_product).permit(:title, :author, :short_desc, :long_desc, :price, :physical_price,
                                             :physical_sales, :rank, :image, :small_image, :logo_image, :coming_soon,
                                             :slug, :filename, :popularity_image, :free_on_signup, :giftpack_price,
-                                            :giftpackable, :shipping_cost)
+                                            :giftpackable, :shipping_cost, :goodreads_link)
     end
 end

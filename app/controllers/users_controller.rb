@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :settings, :update]
+  before_action :set_user, only: [:show, :settings, :update, :follow_up_about_product]
 
   skip_before_action :verify_is_admin, only: [:show, :consume, :settings, :update]
 
@@ -63,6 +63,30 @@ class UsersController < ApplicationController
 
   def report
     @users = User.order('created_at desc').page( params[:page] )
+
+    @ghostcrime = Store::Product.where(title: "Ghostcrime").take
+    @snapback1  = Store::Product.where(title: "Snapback: Fuseki").take
+    @snapback2  = Store::Product.where(title: "Snapback: Shimari").take
+  end
+
+  # POST - sends the user an email asking them what they thought of the book
+  # params: [:product_id]
+  def follow_up_about_product
+    @product = Store::Product.find( params[:product_id] )
+    if @user.can_follow_up_about_product?( @product )
+      @user.nudges = {} if !@user.nudges
+      @user.nudges[ @product.slug ] = DateTime.current
+      @user.save
+
+      StoreMailer.follow_up_about_product( @user, @product ).deliver_now
+
+      flash[:notice] = "Follow-up email sent!"
+      redirect_to report_users_path
+    else
+      flash[:alert] = "Can't follow up about this right now."
+      redirect_to report_users_path
+    end
+
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610182810) do
+ActiveRecord::Schema.define(version: 20180828015232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 20180610182810) do
     t.integer  "giftpack_price_cents", default: 0
     t.integer  "physical_price_cents", default: 0
     t.integer  "shipping_cost_cents",  default: 0
+    t.string   "goodreads_link"
   end
 
   create_table "store_releases", force: :cascade do |t|
@@ -294,6 +295,7 @@ ActiveRecord::Schema.define(version: 20180610182810) do
     t.string   "company"
     t.boolean  "purchaser",              default: false
     t.hstore   "progress_list"
+    t.hstore   "nudges"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree

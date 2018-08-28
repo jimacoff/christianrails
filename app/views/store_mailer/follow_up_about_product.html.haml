@@ -1,0 +1,12 @@
+%p= "Hi #{ @user.first_name },"
+
+%p= "I noticed you downloaded #{ @product.title } a little while ago. Did you get a chance to read it? What did you think?"
+
+%p
+  If you have time, please leave a review on
+  = succeed "." do
+    = link_to "Goodreads", @product.goodreads_link
+
+%p Thanks for the support!
+
+= render 'signature'

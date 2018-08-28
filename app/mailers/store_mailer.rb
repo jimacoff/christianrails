@@ -31,4 +31,13 @@ class StoreMailer < ActionMailer::Base
     mail(subject: subject, to: @user.email)
   end
 
+  def follow_up_about_product(user, product)
+    @user    = user
+    @product = product
+
+    subject = "What do you think of #{ @product.title }?"
+
+    mail(subject: subject, to: @user.email)
+  end
+
 end

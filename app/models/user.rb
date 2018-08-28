@@ -46,6 +46,16 @@ class User < ApplicationRecord
     self.products.collect(&:id).include?(product_id)
   end
 
+  def has_downloaded_product?( product )
+    product_release_ids = product.releases.collect{ |x| x.id}
+    releases_downloaded = self.downloads.collect{ |x| x.release_id }
+    ( product_release_ids - releases_downloaded ).size < product_release_ids.size
+  end
+
+  def can_follow_up_about_product?( product )
+    (!self.nudges || !self.nudges[ product.slug ]) && self.send_me_emails && self.has_downloaded_product?( product )
+  end
+
   def has_lifetime_membership?
     !!self.lifetime_membership
   end
