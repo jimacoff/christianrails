@@ -13,6 +13,7 @@ Christianrails::Application.routes.draw do
     member do
       get 'settings'
       post 'follow_up_about_product'
+      post 'block'
     end
   end
   resources :logs, only: [:index]

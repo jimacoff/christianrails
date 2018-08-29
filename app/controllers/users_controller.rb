@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :settings, :update, :follow_up_about_product]
+  before_action :set_user, only: [:show, :settings, :update, :follow_up_about_product, :block]
 
   skip_before_action :verify_is_admin, only: [:show, :consume, :settings, :update]
 
@@ -86,7 +86,15 @@ class UsersController < ApplicationController
       flash[:alert] = "Can't follow up about this right now."
       redirect_to report_users_path
     end
+  end
 
+  # POST
+  def block
+    @user.blocked_at = DateTime.current
+    @user.save
+
+    flash[:notice] = "#{ @user.fullname } blocked!"
+    redirect_to report_users_path
   end
 
   private

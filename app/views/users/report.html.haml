@@ -26,13 +26,22 @@
         %td
           %p= user.player ? "Binarywoods Player" : ""
           %p= user.assistant ? "CRM Assistant" : ""
-          %p= user.send_me_emails ? "Send me emails!" : "Do NOT send me emails"
-          - if user.can_follow_up_about_product?( @ghostcrime )
-            %p= link_to "Ghostcrime follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@ghostcrime.id}", method: :post
-          - if user.can_follow_up_about_product?( @snapback1 )
-            %p= link_to "Snapback: Fuseki follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback1.id}", method: :post
-          - if user.can_follow_up_about_product?( @snapback2 )
-            %p= link_to "Snapback: Shimari follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback2.id}", method: :post
+
+          - if user.account_active?
+            %p= link_to "BLOCK", block_user_path( user ), method: :post, data: {confirm: "Are you sure you wish to BLOCK this terrible user?"}
+
+            %p= user.send_me_emails ? "Send me emails!" : "Do NOT send me emails"
+            - if user.can_follow_up_about_product?( @ghostcrime )
+              %p= link_to "Ghostcrime follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@ghostcrime.id}", method: :post
+            - if user.can_follow_up_about_product?( @snapback1 )
+              %p= link_to "Snapback: Fuseki follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback1.id}", method: :post
+            - if user.can_follow_up_about_product?( @snapback2 )
+              %p= link_to "Snapback: Shimari follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback2.id}", method: :post
+
+          - else
+            %p
+              %strong User blocked!
+
 
 = render "/layouts/paginator", data: @users
 
