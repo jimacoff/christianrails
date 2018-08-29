@@ -13,6 +13,8 @@ Rails.application.config.assets.precompile += %w(
                                                   vendor/devrama-book.css
                                                   vendor/jquery.devrama.book.min.js
                                                   vendor/jscolor.min.js
+                                                  vendor/drawer.js
+                                                  vendor/drawer.css
                                                   woods/binarywoods.css
                                                   woods/tree_editor.js
                                                   woods/woods.js
