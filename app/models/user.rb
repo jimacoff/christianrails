@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_many :logs, inverse_of: :user
 
@@ -87,7 +87,7 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    account_active? ? super : :locked
+    account_active? ? super : :blocked
   end
 
 end

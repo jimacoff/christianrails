@@ -27,7 +27,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session[:previous_url] || root_path
+    if session[:previous_url]
+      # prevent infinite redirect on after-unlock sign-in
+      !session[:previous_url].include?("unlock_token") ? session[:previous_url] : root_path
+    else
+      root_path
+    end
   end
 
   private
