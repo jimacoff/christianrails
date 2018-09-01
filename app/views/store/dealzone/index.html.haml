@@ -7,8 +7,12 @@
     #newsletter-wrapper.panel= render 'store/leadbox'
     #membership-banner= render 'store/memberships_banner'
     = render 'store/melon_machine'
+
     #blog-wrapper.panel= render 'store/blog_sample'
-    #ghostcrm-banner= render 'store/ghostcrm_banner'
+
+    - if !@melon
+      #melon-banner= render 'store/melon_banner'
     = render 'store/melon_machine_2'
-    = render 'store/popularity', locals: {disambiguation: true}
+    -# = render 'store/popularity', locals: {disambiguation: true}   # maybe not here anymore
     #about-wrapper.panel= render 'store/about'
+    #ghostcrm-banner= render 'store/ghostcrm_banner'
