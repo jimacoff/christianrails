@@ -12,7 +12,7 @@ class MelonController < ApplicationController
   def create
     @melon = Melon.new(melon_params)
     if @melon.save
-      record_positive_event(Log::MELON, "Someone clicked on the #{ Melon::TYPE_NAMES[ @melon.type_id ] } melon!")
+      record_positive_event(Log::MELON, "Someone selected the #{ Melon::TYPE_NAMES[ @melon.type_id ] } melon!")
       render json: {melonType: @melon.type_id}, status: :created
     else
       render json: {errors: @melon.errors}, status: :unprocessable_entity
