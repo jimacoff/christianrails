@@ -27,6 +27,7 @@ class Store::DealzoneController < Store::StoreController
 
     if @melon = (params[:melon] ? params[:melon].to_i : nil)
       if @melon == 3
+        record_positive_event(Log::MELON, "A m3lonhacker got in!")
         render 'melon/3'
       elsif @melon > 3 || @melon < 0
         @melon = nil

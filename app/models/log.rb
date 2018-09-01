@@ -20,6 +20,7 @@ class Log < ApplicationRecord
   CRM    = "ghostCRM"
   BADGER = "This Badger"
   DRAWER = "Drawer"
+  MELON  = "m3lon"
 
   BACKEND = "Back-end"
 end
