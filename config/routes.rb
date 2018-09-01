@@ -50,6 +50,7 @@ Christianrails::Application.routes.draw do
         get  'complete_order'
         get  'order_success'
         post 'download'
+        post 'open_book'
       end
     end
 

@@ -403,4 +403,24 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   end
 
+  describe "open_book" do
+
+    let!(:product) { FactoryBot.create(:product, slug: "lol-prod") }
+
+    it "logs a book open" do
+      expect {
+        post :open_book, params: {slug: 'lol-prod'}
+      }.to change(Log, :count).by(1)
+      expect( response ).to be_ok
+    end
+
+    it "does NOT log an invalid open" do
+      expect {
+        post :open_book, params: {slug: 'non-prod'}
+      }.to change(Log, :count).by(0)
+      expect( response ).to be_unprocessable
+    end
+
+  end
+
 end

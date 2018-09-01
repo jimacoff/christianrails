@@ -372,3 +372,20 @@ function popSendGiftControls(product_id) {
   $('.send_a_gift_' + product_id).hide();
   $('.form_wrap_' + product_id).fadeIn();
 }
+
+function logBookOpen(slug) {
+  request = void 0;
+  request = $.ajax({
+      type: 'POST',
+      format: 'json',
+      url: '/store/dealzone/open_book.json',
+      data: {slug: slug}
+    });
+
+  request.done(function(data, textStatus, jqXHR) {
+  });
+
+  request.error(function(jqXHR, textStatus, errorThrown) {
+    console.log("Error: Open not logged.");
+  });
+}

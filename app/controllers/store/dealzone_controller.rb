@@ -259,7 +259,7 @@ class Store::DealzoneController < Store::StoreController
             file_name = "#{product.filename} - #{product.author}.#{release.format.downcase}"
             send_file "#{Rails.root}/../../downloads/#{file_name}" if (Rails.env.production? || Rails.env.test?)
             Store::Download.create(user: current_user, release: release)
-            record_positive_event(Log::STORE, "Download initiated for: #{file_name}")
+            record_positive_event(Log::STORE, "Download initiated for: #{file_name}.")
             notify_admin_of_product_download( current_user, product, release )
             return
           end
@@ -275,6 +275,16 @@ class Store::DealzoneController < Store::StoreController
     record_suspicious_event(Log::STORE, @error)
     flash[:alert] = @error
     redirect_to root_path
+  end
+
+  # POST - records the opening of a 3D book
+  def open_book
+    if params[:slug] && (product = Store::Product.where(slug: params[:slug]).take)
+      record_positive_event(Log::STORE, "Someone opened the 3D book of #{ product.title }!")
+      render json: {}, status: :ok
+    else
+      render json: {errors: "Invalid book opened."}, status: :unprocessable_entity
+    end
   end
 
   private
