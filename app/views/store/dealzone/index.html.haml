@@ -4,15 +4,18 @@
 
   #store-col2
     //#bookdeal-banner= render 'store/book_deal'  # fuck the book deal
+    - if @melon
+      = render 'store/melon_machine'
     #newsletter-wrapper.panel= render 'store/leadbox'
     #membership-banner= render 'store/memberships_banner'
-    = render 'store/melon_machine'
 
     #blog-wrapper.panel= render 'store/blog_sample'
 
-    - if !@melon
+    - if @melon
+      = render 'store/melon_machine_2'
+    - else
       #melon-banner= render 'store/melon_banner'
-    = render 'store/melon_machine_2'
+
     -# = render 'store/popularity', locals: {disambiguation: true}   # maybe not here anymore
     #about-wrapper.panel= render 'store/about'
     #ghostcrm-banner= render 'store/ghostcrm_banner'

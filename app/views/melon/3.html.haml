@@ -1,22 +1,20 @@
 .secret-melon-wrapper
-  .melon-shelf
-    = image_tag "melon/melon-yellow.png", class: "final-melon"
-    = image_tag "melon/melon-orange.png", class: "final-melon"
-    = image_tag "melon/melon-green.png",  class: "final-melon"
 
-  %h4.melon-yellow You hacked
-  %h1.melon-green m3lon
-  %h3.melon-orange like a felon.
+  %h1
+    .melon-text-l{style: 'margin-bottom: -10px;'} You hacked
+    %a{href: "https://www.m3lon.com"}
+      = image_tag "melon/melon-transparent.png", alt: "m3lon logo", class: 'main-melon-logo'
+    .melon-text-l{style: 'margin-top: -35px;'} like a felon!
 
   %br
 
-  %h4.melon-yellow
-    Please tell your friends about
-    = succeed "." do
-      = link_to "m3lon.com", "https://www.m3lon.com", class: 'melon-green'
+  %h4
+    %span.melon-yellow By the way,
+    %span.melon-orange it's pronounced
+    %span.melon-green "m'threllon"
 
   .melon-shelf
+    = image_tag "melon/melon-yellow.png", class: "final-melon"
     = image_tag "melon/melon-orange.png", class: "final-melon"
     = image_tag "melon/melon-green.png",  class: "final-melon"
-    = image_tag "melon/melon-yellow.png", class: "final-melon"
 
