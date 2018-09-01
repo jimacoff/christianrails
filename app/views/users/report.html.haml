@@ -26,24 +26,24 @@
           - if user.account_active?
             -# EMAIL SEND STATUS
             - if user.send_me_emails
-              = image_tag "icon-envelope", title: "It's OK to send me emails", class: "admin-icon"
+              = image_tag "icon-envelope.png", title: "It's OK to send me emails", class: "admin-icon"
             - else
-              = image_tag "icon-denied", title: "Do NOT send me emails", class: "admin-icon"
+              = image_tag "icon-denied.png", title: "Do NOT send me emails", class: "admin-icon"
 
             -# BOOKS DOWNLOADED?
             - if user.downloads.size > 0
-              = image_tag "icon-book", title: "Downloads: \n#{ user.downloads.collect{ |x| [x.release.product.title, x.release.format, x.created_at.strftime("%e %b %Y")].join("--") }.join("\n") }", class: "admin-icon"
+              = image_tag "icon-book.png", title: "Downloads: \n#{ user.downloads.collect{ |x| [x.release.product.title, x.release.format, x.created_at.strftime("%e %b %Y")].join("--") }.join("\n") }", class: "admin-icon"
 
             - if user.player
-              = image_tag "icon-tree", title: "BinaryWoods player", class: "admin-icon"
+              = image_tag "icon-tree.png", title: "BinaryWoods player", class: "admin-icon"
               - if user.player.finds.size > 0
-                = image_tag "icon-sun", title: "#{user.player.finds.size} finds", class: "admin-icon"
+                = image_tag "icon-sun.png", title: "#{user.player.finds.size} finds", class: "admin-icon"
             - if user.assistant
-              = image_tag "ghostcrm-logo", title: "Assistant: #{ user.assistant.name }", class: "admin-icon"
+              = image_tag "ghostcrm-logo.png", title: "Assistant: #{ user.assistant.name }", class: "admin-icon"
 
             -# BLOCKER
             %a{href: "/users/" + user.id.to_s + "/block", data: {confirm: "Are you sure you wish to BLOCK this terrible user?", method: "post"}}
-              = image_tag "icon-rubbish", title: "Block this user!", class: "admin-icon right"
+              = image_tag "icon-rubbish.png", title: "Block this user!", class: "admin-icon right"
 
             -# NUDGES
             - if user.can_follow_up_about_product?( @ghostcrime )
