@@ -65,7 +65,7 @@ class Crm::AssistantsController < Crm::CrmController
       current_user.assistant = @assistant
       current_user.save
       add_initial_objects_to_crm
-      record_positive_event(Log::CRM, "#{current_user.username} created a new ghostCRM assistant \"#{@assistant.name}\"")
+      record_positive_event(Log::CRM, "#{current_user.username} created a new ghostCRM assistant, \"#{@assistant.name}\"!")
     else
       @assistant = nil
     end
