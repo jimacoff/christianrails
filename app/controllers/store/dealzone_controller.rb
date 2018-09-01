@@ -31,6 +31,8 @@ class Store::DealzoneController < Store::StoreController
         render 'melon/3'
       elsif @melon > 3 || @melon < 0
         @melon = nil
+      else
+        record_positive_event(Log::MELON, "Initiated an #{ Melon::TYPE_NAMES[ @melon ] } melon store takeover!")
       end
     end
   end
