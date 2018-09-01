@@ -9,6 +9,15 @@ body {
   background: linear-gradient(to right,     rgba(111,133,193,1) 0%, rgba(56,66,102,1) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
+.characters {
+  background-image: image-url('snapback-chars.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0 10rem;
+  background-attachment: fixed;
+}
+
 a {
   color: $sky-cyan;
   text-decoration: none !important;

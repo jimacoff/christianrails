@@ -92,7 +92,8 @@ class Woods::StoriesController < Woods::WoodsController
         item_found = itemset_found.calculate_item_found( item_ids_player_has )
 
         if item_found.is_a?( Woods::Item )
-          Woods::Find.create( player_id: current_player.id, item_id: item_found.id, story_id: @story.id ) if item_found
+          Woods::Find.create( player_id: current_player.id, item_id: item_found.id, story_id: @story.id )
+          record_positive_event(Log::WOODS, "Someone found #{ item_found.name } in #{ @story.name }!")
         else
           @errors = item_found.to_s
           item_found = nil

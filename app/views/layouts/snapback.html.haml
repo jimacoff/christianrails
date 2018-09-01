@@ -34,29 +34,30 @@
     = favicon_link_tag "goban.ico"
 
   %body.background
+    .characters
 
-    = render "store/snapback/header"
+      = render "store/snapback/header"
 
-    #mobile-title
-      = image_tag 'snapback-title-word.png', class: 'snapback-title-image'
-      - if action_name == 'fuseki'
-        .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-one-text-white.png", width: '300px'
-      - else
-        .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-two-text-white.png", width: '300px'
+      #mobile-title
+        = image_tag 'snapback-title-word.png', class: 'snapback-title-image'
+        - if action_name == 'fuseki'
+          .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-one-text-white.png", width: '300px'
+        - else
+          .sb-subtitle{style: 'margin-left: 10px;'}= image_tag "snapback-volume-two-text-white.png", width: '300px'
 
-    #gc-wrapper
-      - if notice
-        %p.alert.alert-notice
-          = notice
-      - if alert
-        %p.alert.alert-danger
-          = alert
+      #gc-wrapper
+        - if notice
+          %p.alert.alert-notice
+            = notice
+        - if alert
+          %p.alert.alert-danger
+            = alert
 
-      #snapback-content
-        = yield
+        #snapback-content
+          = yield
 
-    %h5.right= "v #{app_version}"
+      %h5.right= "v #{app_version}"
 
-    = render "store/scripts/init_cart"
-    = render "store/scripts/init_novella"
+      = render "store/scripts/init_cart"
+      = render "store/scripts/init_novella"
 
