@@ -12,25 +12,40 @@
     - @users.each do |user|
       %tr
         // Bio details
-        %td
+        %td{style: "max-width: 75%;"}
           %p
-            Username:
             = link_to (user.username || "INVITED"), user_path( user )
-            %span.admin-spacer= "Name: #{user.full_name}"
-          %p= "Email: #{user.email}"
+            %span.admin-spacer= "#{user.full_name}"
+            %span.admin-spacer= "#{user.email}"
           %p
             = "Signed up: #{user.created_at.strftime("%e %b %Y")}"
             %span.admin-spacer= "Last log-in: #{user.last_sign_in_at ? user.last_sign_in_at.strftime("%e %b %Y") : "Never" }"
 
         // Actions
         %td
-          %p= user.player ? "Binarywoods Player" : ""
-          %p= user.assistant ? "CRM Assistant" : ""
-
           - if user.account_active?
-            %p= link_to "BLOCK", block_user_path( user ), method: :post, data: {confirm: "Are you sure you wish to BLOCK this terrible user?"}
+            -# EMAIL SEND STATUS
+            - if user.send_me_emails
+              = image_tag "icon-envelope", title: "It's OK to send me emails", class: "admin-icon"
+            - else
+              = image_tag "icon-denied", title: "Do NOT send me emails", class: "admin-icon"
 
-            %p= user.send_me_emails ? "Send me emails!" : "Do NOT send me emails"
+            -# BOOKS DOWNLOADED?
+            - if user.downloads.size > 0
+              = image_tag "icon-book", title: "Downloads: \n#{ user.downloads.collect{ |x| [x.release.product.title, x.release.format, x.created_at.strftime("%e %b %Y")].join("--") }.join("\n") }", class: "admin-icon"
+
+            - if user.player
+              = image_tag "icon-tree", title: "BinaryWoods player", class: "admin-icon"
+              - if user.player.finds.size > 0
+                = image_tag "icon-sun", title: "#{user.player.finds.size} finds", class: "admin-icon"
+            - if user.assistant
+              = image_tag "ghostcrm-logo", title: "Assistant: #{ user.assistant.name }", class: "admin-icon"
+
+            -# BLOCKER
+            %a{href: "/users/" + user.id.to_s + "/block", data: {confirm: "Are you sure you wish to BLOCK this terrible user?", method: "post"}}
+              = image_tag "icon-rubbish", title: "Block this user!", class: "admin-icon right"
+
+            -# NUDGES
             - if user.can_follow_up_about_product?( @ghostcrime )
               %p= link_to "Ghostcrime follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@ghostcrime.id}", method: :post
             - if user.can_follow_up_about_product?( @snapback1 )
