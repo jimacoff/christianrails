@@ -17,14 +17,16 @@
 
 // place for the icons to go
 .program-container {
-  display: flex;
 
 }
 
 
 // INDIVIDUAL PROGRAMS
 .steveOS-directory {
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .email-client {
@@ -40,8 +42,8 @@
 }
 
 .steveOS-icon {
-  margin: 20px;
-  width: 80px;
+  margin: 10px;
+  width: 75px;
   text-align: center;
   cursor: pointer;
 }
