@@ -222,9 +222,11 @@ Christianrails::Application.routes.draw do
     collection do
       get 'rainfield'
       get 'stocks'
+      get 'hackersteve'
     end
   end
   get '/go',  to: 'go#index'
+  get '/hackersteve', to: 'diversions#hackersteve'
 
 
 ##### BUTLER STUFF ######

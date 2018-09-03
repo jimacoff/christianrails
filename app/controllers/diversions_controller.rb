@@ -13,4 +13,9 @@ class DiversionsController < ApplicationController
   def stocks
   end
 
+  ## ADMIN ONLY FOR NOW
+
+  def hackersteve
+  end
+
 end

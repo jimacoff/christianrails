@@ -18,5 +18,6 @@ Rails.application.config.assets.precompile += %w(
                                                   woods/woods.js
                                                   stocks/stocks.js
                                                   stocks/stocks.css
+                                                  hackersteve/*
                                                   melon/melon.css
                                                 )
