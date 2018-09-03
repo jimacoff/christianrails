@@ -127,6 +127,10 @@ function homeButtonBar() {
   return homeButtonContainer;
 }
 
+function getRidOfParentPanel() {
+  $('.hackersteve-container').parent().removeClass("panel");
+}
+
 ///// NAVIGATION HELPERS /////
 
 function followLink( link ) {
@@ -142,8 +146,14 @@ function followLink( link ) {
 
 ///// INITIALIZERS /////
 
+function startNewGame() {
+  console.log('Initializing steveOS');
+  $('.hackersteve-titlescreen').hide();
+  getRidOfParentPanel();
+  drawSteveOSProgramDirectory();
+  $('.steveos-container').fadeIn();
+}
+
 // initialize the game
 $(document).ready(function() {
-  console.log('Initializing steveOS');
-  drawSteveOSProgramDirectory();
 });

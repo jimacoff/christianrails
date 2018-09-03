@@ -2,9 +2,18 @@
 
 // Main layout
 .hackersteve-container
-  %h1.hackersteve-title Hacker Steve in... DEANHACK 5000
+  .hackersteve-titlescreen
+    %h3.hackersteve-title Hacker Steve in...
+    %h1 DEANHACK 5000
+    %p Steve can hack just about anything — but getting away with it is another matter.
+    %br
+    %button.steve-play-button{onClick: "startNewGame();"} Start New Game
 
   .steveos-container
     .steveos-header
+      .steveos-header-left
+        steveOS
+      .steveos-header-right
+        logo
     .program-container
       // ALL PROGRAM STRUCTURES GO HERE
