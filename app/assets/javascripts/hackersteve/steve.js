@@ -8,10 +8,10 @@ var npcs = {
 }
 
 var programs = {
-  email:     { installed: true, icon: "envelope", link: "email",     name: "SteveMail" },
-  browser:   { installed: true, icon: "eye",      link: "browser",   name: "Browser" },
-  networker: { installed: true, icon: "cloud",    link: "networker", name: "Network Explorer" },
-  console:   { installed: true, icon: "chevron",  link: "console",   name: "Console" }
+  email:     { installed: true, icon: "envelope", link: "email-home", name: "SteveMail" },
+  browser:   { installed: true, icon: "eye",      link: "browser",    name: "Browser" },
+  networker: { installed: true, icon: "cloud",    link: "networker",  name: "Network Explorer" },
+  console:   { installed: true, icon: "chevron",  link: "console",    name: "Console" }
 };
 
 var files = {
@@ -28,23 +28,34 @@ var interfaces = {
 };
 
 var emails = {
-  coffeeMachineBroken: { received: true, subject: "", content: "", from: npcs[ 'gerald' ] }
+  coffeeMachineBroken: { received: true, unread: true, subject: "Coffee machine's busted again", from: npcs[ 'gerald' ],
+                         content: "Steve, the damn DigiPerk is making scary noises and leaking everywhere. It's finals week -- I can't deal with this right now. Can you fix it again? -Gerald" }
+}
+
+// ELEMENT BUILDERS
+
+function makeElementOfClass(type, klass) {
+  var element = document.createElement(type);
+  element.className = klass;
+  return element;
+}
+
+function attachToProgramContainer( element ) {
+  programContainer = document.getElementsByClassName('program-container')[0];
+  programContainer.appendChild( element );
 }
 
 ///// DISPLAY HELPERS /////
 
 function makeIcon(name, icon, link) {
-  var newIcon = document.createElement('span');
-  newIcon.className = "steveOS-icon";
+  var newIcon = makeElementOfClass('span', "steveOS-icon");
 
   // draw picture
-  var iconImage = document.createElement('img');
-  iconImage.className = "steveOS-icon-image";
+  var iconImage = makeElementOfClass('img', "steveOS-icon-image");
   iconImage.src = "/assets/hackersteve/icon-" + icon + ".png";
 
   // write title
-  iconTitle = document.createElement('p');
-  iconTitle.className = "steveOS-icon-title";
+  iconTitle = makeElementOfClass('p', "steveOS-icon-title");
   iconTitle.innerHTML = name;
 
   // give it an onclick to the link
@@ -60,8 +71,7 @@ function makeIcon(name, icon, link) {
 }
 
 function drawSteveOSProgramDirectory() {
-  var directoryContainer = document.createElement('div');
-  directoryContainer.className = "steveOS-directory";
+  var directoryContainer = makeElementOfClass('div', "steveOS-directory");
 
   // draw each installed program
   Object.keys( programs ).forEach( function(program) {
@@ -78,8 +88,7 @@ function drawSteveOSProgramDirectory() {
 }
 
 function drawSteveOSFileDirectory() {
-  var directoryContainer = document.createElement('div');
-  directoryContainer.className = "steveOS-directory";
+  var directoryContainer = makeElementOfClass('div', "steveOS-directory");
 
   Object.keys( files ).forEach( function(file) {
     let theFile = files[file];
@@ -92,9 +101,31 @@ function drawSteveOSFileDirectory() {
   attachToProgramContainer( homeButtonBar() );
 }
 
-function attachToProgramContainer( element ) {
-  programContainer = document.getElementsByClassName('program-container')[0];
-  programContainer.appendChild( element );
+function makeEmailPreview( subject, unread, from ) {
+  var emailPreviewContainer = makeElementOfClass('div', "email-preview-container");
+  var emailSubject = makeElementOfClass('span', "email-preview-subject");
+  emailSubject.innerHTML = subject;
+  var emailFrom = makeElementOfClass('span', "email-preview-from");
+  emailFrom.innerHTML = from.name;
+
+  emailPreviewContainer.appendChild(emailSubject);
+  emailPreviewContainer.appendChild(emailFrom);
+
+  return emailPreviewContainer;
+}
+
+function drawEmailClient() {
+  var emailClientContainer = makeElementOfClass('div', "email-client-container");
+
+  Object.keys( emails ).forEach( function(email) {
+    let theEmail = emails[email];
+    if (theEmail.received) {
+      emailClientContainer.appendChild( makeEmailPreview(theEmail.subject, theEmail.unread, theEmail.from ) );
+    }
+  });
+
+  attachToProgramContainer( emailClientContainer );
+  attachToProgramContainer( homeButtonBar() );
 }
 
 // wipe the whole program container, because it's that kind of OS
@@ -106,14 +137,9 @@ function clearScreen() {
 }
 
 function homeButtonBar() {
-  var homeButtonContainer = document.createElement('div');
-  homeButtonContainer.className = "home-button-container";
-
-  var homeButton = document.createElement('span');
-  homeButton.className = "steveOS-icon";
-
-  var homeIconImage = document.createElement('img');
-  homeIconImage.className = "steveOS-icon-image";
+  var homeButtonContainer = makeElementOfClass('div', "home-button-container");
+  var homeButton = makeElementOfClass('span', "steveOS-icon");
+  var homeIconImage = makeElementOfClass('img', "steveOS-icon-image");
   homeIconImage.src = "/assets/hackersteve/icon-home.png";
 
   homeIconImage.addEventListener("click", function(event) {
@@ -141,13 +167,14 @@ function followLink( link ) {
     drawSteveOSFileDirectory();
   } else if (link === "home") {
     drawSteveOSProgramDirectory();
+  } else if (link === "email-home") {
+    drawEmailClient();
   }
 }
 
 ///// INITIALIZERS /////
 
 function startNewGame() {
-  console.log('Initializing steveOS');
   $('.hackersteve-titlescreen').hide();
   getRidOfParentPanel();
   drawSteveOSProgramDirectory();
