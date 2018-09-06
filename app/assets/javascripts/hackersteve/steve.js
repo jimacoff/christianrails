@@ -28,7 +28,7 @@ var interfaces = {
 };
 
 var emails = {
-  coffeeMachineBroken: { received: true, unread: true, subject: "Coffee machine's busted again", from: npcs[ 'gerald' ],
+  coffeeMachineBroken: { link: "coffeeMachineBroken", received: true, unread: true, subject: "Coffee machine's busted again", from: npcs[ 'gerald' ],
                          content: "Steve, the damn DigiPerk is making scary noises and leaking everywhere. It's finals week -- I can't deal with this right now. Can you fix it again? -Gerald" }
 }
 
@@ -101,28 +101,41 @@ function drawSteveOSFileDirectory() {
   attachToProgramContainer( homeButtonBar() );
 }
 
-function makeEmailPreview( subject, unread, from ) {
+function makeEmailPreview( subject, unread, from, link ) {
   var emailPreviewContainer = makeElementOfClass('div', "email-preview-container");
   var emailSubject = makeElementOfClass('span', "email-preview-subject");
   emailSubject.innerHTML = subject;
   var emailFrom = makeElementOfClass('span', "email-preview-from");
   emailFrom.innerHTML = from.name;
 
+
   emailPreviewContainer.appendChild(emailSubject);
   emailPreviewContainer.appendChild(emailFrom);
+
+  emailPreviewContainer.addEventListener("click", function(event) {
+    openEmail(link);
+    event.preventDefault();
+  });
 
   return emailPreviewContainer;
 }
 
-function drawEmailClient() {
+function drawEmailClient( emailLink ) {
   var emailClientContainer = makeElementOfClass('div', "email-client-container");
 
-  Object.keys( emails ).forEach( function(email) {
-    let theEmail = emails[email];
-    if (theEmail.received) {
-      emailClientContainer.appendChild( makeEmailPreview(theEmail.subject, theEmail.unread, theEmail.from ) );
-    }
-  });
+  if (!emailLink) {
+    Object.keys( emails ).forEach( function(email) {
+      let theEmail = emails[email];
+      if (theEmail.received) {
+        emailClientContainer.appendChild( makeEmailPreview(theEmail.subject, theEmail.unread, theEmail.from, theEmail.link ) );
+      }
+    });
+  } else {
+    var emailToShow = emails[ emailLink ]
+    var emailBodyContainer = makeElementOfClass('p', 'email-body-container');
+    emailBodyContainer.innerHTML = emailToShow.content;
+    emailClientContainer.appendChild( emailBodyContainer );
+  }
 
   attachToProgramContainer( emailClientContainer );
   attachToProgramContainer( homeButtonBar() );
@@ -170,6 +183,12 @@ function followLink( link ) {
   } else if (link === "email-home") {
     drawEmailClient();
   }
+}
+
+function openEmail( link ) {
+  console.log('showing email ' + link);
+  clearScreen();
+  drawEmailClient( link );
 }
 
 ///// INITIALIZERS /////
