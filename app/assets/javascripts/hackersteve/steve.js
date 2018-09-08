@@ -32,6 +32,9 @@ var emails = {
                          content: "Steve, the damn DigiPerk is making scary noises and leaking everywhere. It's finals week -- I can't deal with this right now. Can you fix it again? -Gerald" }
 }
 
+///////////////////////////////
+///////////////////////////////
+
 // ELEMENT BUILDERS
 
 function makeElementOfClass(type, klass) {
@@ -46,6 +49,8 @@ function attachToProgramContainer( element ) {
 }
 
 ///// DISPLAY HELPERS /////
+
+// os display helpers
 
 function makeIcon(name, icon, link) {
   var newIcon = makeElementOfClass('span', "steveOS-icon");
@@ -100,6 +105,8 @@ function drawSteveOSFileDirectory() {
   attachToProgramContainer( directoryContainer );
   attachToProgramContainer( homeButtonBar() );
 }
+
+// email client display helpers
 
 function makeEmailHeader() {
   var emailHeaderContainer = makeElementOfClass('tr', "email-header-container");
@@ -185,6 +192,28 @@ function drawEmailClient( emailLink ) {
   attachToProgramContainer( homeButtonBar() );
 }
 
+/// network explorer display helpers
+
+function drawNetworkExplorer() {
+
+  attachToProgramContainer( homeButtonBar() );
+}
+
+/// browser display helpers
+
+function drawBrowser( webpage ) {
+
+  attachToProgramContainer( homeButtonBar() );
+}
+
+/// console display helpers
+function drawConsole() {
+
+  attachToProgramContainer( homeButtonBar() );
+}
+
+/// general display helpers
+
 // wipe the whole program container, because it's that kind of OS
 function clearScreen() {
   programContainer = document.getElementsByClassName('program-container')[0];
@@ -226,6 +255,12 @@ function followLink( link ) {
     drawSteveOSProgramDirectory();
   } else if (link === "email-home") {
     drawEmailClient();
+  } else if (link === "networker") {
+    drawNetworkExplorer();
+  } else if (link === "browser") {
+    drawBrowser();
+  } else if (link === "console") {
+    drawConsole();
   }
 }
 
@@ -233,6 +268,12 @@ function openEmail( link ) {
   console.log('showing email ' + link);
   clearScreen();
   drawEmailClient( link );
+}
+
+function openWebpage( link ) {
+  console.log('opening webpage ' + link);
+  clearScreen();
+  drawBrowser( link );
 }
 
 ///// INITIALIZERS /////
