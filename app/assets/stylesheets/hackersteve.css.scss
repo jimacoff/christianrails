@@ -1,3 +1,5 @@
+// TITLE AND SUPERCONTAINER
+
 .hackersteve-container {
   text-align: center;
 
@@ -6,6 +8,15 @@
 .hackersteve-title {
 
 }
+
+.steve-play-button {
+  font-size: 1.5em;
+  border: 1px black solid;
+  border-radius: 10px;
+  background-color: lightgrey;
+}
+
+// MAIN / OS STYLING
 
 .steveos-container {
   border: 2px solid black;
@@ -18,51 +29,11 @@
   border-bottom: 2px solid black;
 }
 
-// place for the icons to go
-.program-container {
-
-}
-
-.steve-play-button {
-  font-size: 1.5em;
-  border: 1px black solid;
-  border-radius: 10px;
-  background-color: lightgrey;
-}
-
-// INDIVIDUAL PROGRAMS
-.steveOS-directory {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.email-client {
-
-}
-
-.browser {
-
-}
-
-.console {
-
-}
-
 .steveOS-icon {
   margin: 10px;
   width: 75px;
   text-align: center;
   cursor: pointer;
-}
-
-.steveOS-icon-image {
-  width: 40px;
-}
-
-.steveOS-icon-title {
-
 }
 
 .steveos-header-left {
@@ -73,4 +44,76 @@
 .steveos-header-right {
   width: 200px;
   display: inline-block;
+}
+
+// OS NAVIGATION AND ICONS
+
+// INDIVIDUAL PROGRAMS
+.steveOS-directory {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+// place for the icons to go
+.program-container {
+}
+
+.steveOS-icon-image {
+  width: 40px;
+}
+
+.steveOS-icon-title {
+}
+
+// EMAIL CLIENT
+
+.email-client {
+
+}
+
+.email-preview-container {
+  cursor: pointer;
+}
+
+.email-table {
+  margin: 0 auto;
+  td {
+    width: 50%;
+    border: 1px solid black;
+    text-align: left;
+  }
+}
+
+// content of an email
+.email-body-container {
+  white-space: pre-line;
+  text-align: left;
+}
+
+.email-body-from {
+  text-align: left;
+}
+
+.email-body-subject {
+  text-align: left;
+}
+
+.email-back-button {
+  width: 40px;
+  float: left;
+  cursor: pointer;
+}
+
+/// BROWSER
+
+.browser {
+
+}
+
+// CONSOLE
+
+.console {
+
 }

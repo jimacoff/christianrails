@@ -11,7 +11,7 @@ var programs = {
   email:     { installed: true, icon: "envelope", link: "email-home", name: "SteveMail" },
   browser:   { installed: true, icon: "eye",      link: "browser",    name: "Browser" },
   networker: { installed: true, icon: "cloud",    link: "networker",  name: "Network Explorer" },
-  console:   { installed: true, icon: "chevron",  link: "console",    name: "Console" }
+  console:   { installed: true, icon: "right",    link: "console",    name: "Console" }
 };
 
 var files = {
@@ -101,13 +101,36 @@ function drawSteveOSFileDirectory() {
   attachToProgramContainer( homeButtonBar() );
 }
 
-function makeEmailPreview( subject, unread, from, link ) {
-  var emailPreviewContainer = makeElementOfClass('div', "email-preview-container");
-  var emailSubject = makeElementOfClass('span', "email-preview-subject");
-  emailSubject.innerHTML = subject;
-  var emailFrom = makeElementOfClass('span', "email-preview-from");
-  emailFrom.innerHTML = from.name;
+function makeEmailHeader() {
+  var emailHeaderContainer = makeElementOfClass('tr', "email-header-container");
 
+  var emailSubject = makeElementOfClass('td', "email-header-subject-cell");
+  var emailSubjectHeader = makeElementOfClass('strong', "email-header-subject");
+  emailSubjectHeader.innerHTML = "Subject";
+  var emailFrom = makeElementOfClass('td', "email-header-from-cell");
+  var emailFromHeader = makeElementOfClass('strong', "email-header-from");
+  emailFromHeader.innerHTML = "From";
+
+  emailSubject.appendChild(emailSubjectHeader);
+  emailFrom.appendChild(emailFromHeader);
+
+  emailHeaderContainer.appendChild(emailSubject);
+  emailHeaderContainer.appendChild(emailFrom);
+
+  emailHeaderContainer.addEventListener("click", function(event) {
+    openEmail(link);
+    event.preventDefault();
+  });
+
+  return emailHeaderContainer;
+}
+
+function makeEmailPreview( subject, unread, from, link ) {
+  var emailPreviewContainer = makeElementOfClass('tr', "email-preview-container");
+  var emailSubject = makeElementOfClass('td', "email-preview-subject");
+  emailSubject.innerHTML = subject;
+  var emailFrom = makeElementOfClass('td', "email-preview-from");
+  emailFrom.innerHTML = from.name;
 
   emailPreviewContainer.appendChild(emailSubject);
   emailPreviewContainer.appendChild(emailFrom);
@@ -124,16 +147,37 @@ function drawEmailClient( emailLink ) {
   var emailClientContainer = makeElementOfClass('div', "email-client-container");
 
   if (!emailLink) {
+    // display inbox
+    var emailTable = makeElementOfClass('table', "email-table")
+    emailTable.appendChild( makeEmailHeader() );
     Object.keys( emails ).forEach( function(email) {
       let theEmail = emails[email];
       if (theEmail.received) {
-        emailClientContainer.appendChild( makeEmailPreview(theEmail.subject, theEmail.unread, theEmail.from, theEmail.link ) );
+        emailTable.appendChild( makeEmailPreview(theEmail.subject, theEmail.unread, theEmail.from, theEmail.link ) );
       }
     });
+    emailClientContainer.appendChild( emailTable );
   } else {
+    // display specific email
+    var backButton = makeElementOfClass('img', "email-back-button");
+    backButton.src = "/assets/hackersteve/icon-left.png";
+    backButton.addEventListener("click", function(event) {
+      followLink('email-home');
+      event.preventDefault();
+    });
+
     var emailToShow = emails[ emailLink ]
+
+    var emailFrom = makeElementOfClass('p', "email-body-from");
+    emailFrom.innerHTML = "From: " + emailToShow.from.name;
+    var emailSubject = makeElementOfClass('p', "email-body-subject");
+    emailSubject.innerHTML = "Subject: " + emailToShow.subject;
     var emailBodyContainer = makeElementOfClass('p', 'email-body-container');
     emailBodyContainer.innerHTML = emailToShow.content;
+
+    emailClientContainer.appendChild( backButton );
+    emailClientContainer.appendChild( emailFrom );
+    emailClientContainer.appendChild( emailSubject );
     emailClientContainer.appendChild( emailBodyContainer );
   }
 
