@@ -14,6 +14,7 @@
   border: 1px black solid;
   border-radius: 10px;
   background-color: lightgrey;
+  cursor: pointer;
 }
 
 // MAIN / OS STYLING
@@ -127,4 +128,8 @@
 
 .network-explorer {
 
+}
+
+.network-place-preview-container {
+  cursor: pointer;
 }

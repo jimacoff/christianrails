@@ -33,9 +33,9 @@ var networks = {
   steveApartment: {
     name: "Th3 Cyb4rN0de", known: true,
     devices: {
-      geraldsPC: { name: "GeraldsPC",      visible: true },
-      mathbox:   { name: "mathbox-eugene", visible: true },
-      digiPerk:  { name: "DigiPerk 850",   visible: true }
+      geraldsPC: { link: "geraldsPC", identifier: "GeraldsPC",      visible: true, address: "192.168.1.10" },
+      mathbox:   { link: "mathbox",   identifier: "mathbox-eugene", visible: true, address: "192.168.1.7"  },
+      digiPerk:  { link: "digiPerk",  identifier: "DigiPerk-850",   visible: true, address: "192.168.1.13" }
     }
   }
 }
@@ -149,33 +149,28 @@ function makeEmailHeader() {
   emailHeaderContainer.appendChild(emailSubject);
   emailHeaderContainer.appendChild(emailFrom);
 
-  emailHeaderContainer.addEventListener("click", function(event) {
-    openEmail(link);
-    event.preventDefault();
-  });
-
   return emailHeaderContainer;
 }
 
-function makeEmailPreview( subject, unread, from, link ) {
+function makeEmailPreview( email ) {
   var emailPreviewContainer = makeElementOfClass('tr', "email-preview-container");
-  var stillUnread = unread ? 'strong' : 'span';
+  var stillUnread = email.unread ? 'strong' : 'span';
 
   var emailSubjectCell = makeElementOfClass('td', "email-preview-subject-cell");
   var emailSubject = makeElementOfClass(stillUnread, "email-preview-subject");
-  emailSubject.innerHTML = subject;
+  emailSubject.innerHTML = email.subject;
   emailSubjectCell.appendChild(emailSubject);
 
   var emailFromCell = makeElementOfClass('td', "email-preview-from-cell");
   var emailFrom = makeElementOfClass(stillUnread, "email-preview-from");
-  emailFrom.innerHTML = from.name;
+  emailFrom.innerHTML = email.from.name;
   emailFromCell.appendChild(emailFrom);
 
   emailPreviewContainer.appendChild(emailSubjectCell);
   emailPreviewContainer.appendChild(emailFromCell);
 
   emailPreviewContainer.addEventListener("click", function(event) {
-    openEmail(link);
+    openEmail( email.link );
     event.preventDefault();
   });
 
@@ -187,12 +182,12 @@ function drawEmailClient( emailLink ) {
 
   if (!emailLink) {
     // display inbox
-    var emailTable = makeElementOfClass('table', "email-table")
+    var emailTable = makeElementOfClass('table', "email-table");
     emailTable.appendChild( makeEmailHeader() );
     Object.keys( emails ).forEach( function(email) {
       let theEmail = emails[email];
       if (theEmail.received) {
-        emailTable.appendChild( makeEmailPreview(theEmail.subject, theEmail.unread, theEmail.from, theEmail.link ) );
+        emailTable.appendChild( makeEmailPreview( theEmail ) );
       }
     });
     emailClientContainer.appendChild( emailTable );
@@ -227,10 +222,94 @@ function drawEmailClient( emailLink ) {
 
 /// network explorer display helpers
 
-function drawNetworkExplorer() {
+function makeNetworkerHeader() {
+  var networkerHeaderContainer = makeElementOfClass('tr', "network-header-container");
+
+  var networkPlaceNameCell = makeElementOfClass('td', "network-header-identifier-cell");
+  var networkPlaceNameText = makeElementOfClass('strong', "network-header-identifier");
+  networkPlaceNameText.innerHTML = "Network Identifier";
+
+  var networkPlaceAddressCell = makeElementOfClass('td', "network-header-address-cell");
+  var networkPlaceAddressText = makeElementOfClass('strong', "network-header-address");
+  networkPlaceAddressText.innerHTML = "Address";
+
+  networkPlaceNameCell.appendChild(networkPlaceNameText);
+  networkPlaceAddressCell.appendChild(networkPlaceAddressText);
+
+  networkerHeaderContainer.appendChild(networkPlaceNameCell);
+  networkerHeaderContainer.appendChild(networkPlaceAddressCell);
+
+  return networkerHeaderContainer;
+}
+
+function makeNetworkPlacePreview( networkPlace ) {
+  var networkPlacePreviewContainer = makeElementOfClass('tr', "network-place-preview-container");
+
+  var networkPlaceIdentifierCell = makeElementOfClass('td', "network-place-preview-identifier-cell");
+  var networkPlaceIdentifierText = makeElementOfClass('p', "network-place-preview-identifier");
+  networkPlaceIdentifierText.innerHTML = networkPlace.identifier;
+  networkPlaceIdentifierCell.appendChild(networkPlaceIdentifierText);
+
+  var networkPlaceAddressCell = makeElementOfClass('td', "network-place-preview-address-cell");
+  var networkPlaceAddressText = makeElementOfClass('p', "network-place-preview-address");
+  networkPlaceAddressText.innerHTML = networkPlace.address;
+  networkPlaceAddressCell.appendChild(networkPlaceAddressText);
+
+  networkPlacePreviewContainer.appendChild(networkPlaceIdentifierCell);
+  networkPlacePreviewContainer.appendChild(networkPlaceAddressCell);
+
+  networkPlacePreviewContainer.addEventListener("click", function(event) {
+    openNetworkPlace( networkPlace.link );
+    event.preventDefault();
+  });
+
+  return networkPlacePreviewContainer;
+}
+
+function drawNetworkExplorer( network ) {
   var networkExplorerContainer = makeElementOfClass('div', "network-explorer-container");
+  var networkPlacesTable = makeElementOfClass('table', "network-places-table");
+
+  var currentNetwork = network || 'steveApartment';
+  var theCurrentNetwork = networks[ currentNetwork ];
+
+  networkPlacesTable.appendChild( makeNetworkerHeader() );
+
+  Object.keys( networks[ currentNetwork ].devices ).forEach( function(device) {
+    let theNetworkPlace = theCurrentNetwork.devices[device];
+    if (theNetworkPlace.visible) {
+      networkPlacesTable.appendChild( makeNetworkPlacePreview( theNetworkPlace ) );
+    }
+  });
+  networkExplorerContainer.appendChild( networkPlacesTable );
 
   attachToProgramContainer( networkExplorerContainer );
+  attachToProgramContainer( homeButtonBar() );
+}
+
+function drawCoffeeInterface() {
+  var coffeeContainer = makeElementOfClass('div', "coffee-container");
+
+  var digiperkHeader = makeElementOfClass('h1', "coffee-header");
+  digiperkHeader.innerHTML = "DigiPerk 850"
+
+  coffeeContainer.appendChild( digiperkHeader );
+
+  attachToProgramContainer( coffeeContainer );
+  attachToProgramContainer( homeButtonBar() );
+}
+
+function drawPCAuthInterface( device ) {
+  var authContainer = makeElementOfClass('div', "auth-container");
+
+  var authHeader = makeElementOfClass('h1', "auth-header");
+  authHeader.innerHTML = "Authorization Required"
+
+  // TODO more of this
+
+  authContainer.appendChild( authHeader );
+
+  attachToProgramContainer( authContainer );
   attachToProgramContainer( homeButtonBar() );
 }
 
@@ -294,7 +373,6 @@ function getRidOfParentPanel() {
 ///// NAVIGATION HELPERS /////
 
 function followLink( link ) {
-  console.log('following link to ' + link);
   clearScreen();
 
   if (link === "fileDirectory") {
@@ -313,14 +391,24 @@ function followLink( link ) {
 }
 
 function openEmail( link ) {
-  console.log('showing email ' + link);
   clearScreen();
   drawEmailClient( link );
   emails[link].unread = false;
 }
 
+function openNetworkPlace( link ) {
+  clearScreen();
+
+  if (link === "geraldsPC") {
+    drawPCAuthInterface( link );
+  } else if (link === "mathbox") {
+    drawPCAuthInterface( link );
+  } else if (link === "digiPerk") {
+    drawCoffeeInterface();
+  }
+}
+
 function openWebpage( link ) {
-  console.log('opening webpage ' + link);
   clearScreen();
   drawBrowser( link );
 }
