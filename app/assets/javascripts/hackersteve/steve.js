@@ -1,10 +1,10 @@
 // HACKER STEVE in... DEANHACK 5000
 
-var currentLocation = 'programDirectory';
+var internetWorking = false;
 
 var npcs = {
-  eugene: {name: "Eugene"},
-  gerald: {name: "Gerald"}
+  eugene: {name: "Eugene", email: "math_eugene@cobblestonecollege.biz"},
+  gerald: {name: "Gerald", email: "gbrunston@cobblestonecollege.biz"}
 }
 
 var programs = {
@@ -18,18 +18,26 @@ var files = {
   privatekey: {owned: true, icon: "lock", link: "access-denied", name: "Steve's Private Key"},
 };
 
-var interfaces = {
-  programDirectory: "steveOS",
-  fileDirectory:    "steveOS",
-  email:            "email",
-  browser:          "browser",
-  networker:        "networker",
-  console:          "console",
-};
-
 var emails = {
   coffeeMachineBroken: { link: "coffeeMachineBroken", received: true, unread: true, subject: "Coffee machine's busted again", from: npcs[ 'gerald' ],
-                         content: "Steve, the damn DigiPerk is making scary noises and leaking everywhere. It's finals week -- I can't deal with this right now. Can you fix it again? -Gerald" }
+                         content: "Steve, your damn \"smart\" coffee machine is making scary noises and leaking everywhere. It's finals week -- I can't deal with this right now.\nI disconnected the modem and it'll stay locked in my room until you get it fixed.\n -Gerald" },
+  internetInquiry:     { link: "internetInquiry",     received: true, unread: true, subject: "Internet is down", from: npcs[ 'eugene' ],
+                         content: "Did you do something? I haven't been able to connect for 5 minutes now.\nEug'" }
+}
+
+var websites = {
+  digiPerkInterface: { link: "digiPerkInterface", bookmarked: false }
+}
+
+var networks = {
+  steveApartment: {
+    name: "Th3 Cyb4rN0de", known: true,
+    devices: {
+      geraldsPC: { name: "GeraldsPC",      visible: true },
+      mathbox:   { name: "mathbox-eugene", visible: true },
+      digiPerk:  { name: "DigiPerk 850",   visible: true }
+    }
+  }
 }
 
 ///////////////////////////////
@@ -75,6 +83,18 @@ function makeIcon(name, icon, link) {
   return newIcon;
 }
 
+function haveUnreadEmails() {
+  var hasUnread = false;
+
+  Object.keys(emails).forEach( function(email) {
+    if (emails[email].unread) {
+      hasUnread = true;
+    }
+  });
+
+  return hasUnread;
+}
+
 function drawSteveOSProgramDirectory() {
   var directoryContainer = makeElementOfClass('div', "steveOS-directory");
 
@@ -82,7 +102,11 @@ function drawSteveOSProgramDirectory() {
   Object.keys( programs ).forEach( function(program) {
     let theProgram = programs[program];
     if (theProgram.installed) {
-      directoryContainer.appendChild( makeIcon(theProgram.name, theProgram.icon, theProgram.link ) );
+      if ( theProgram.name === "SteveMail" && haveUnreadEmails() ) {
+        directoryContainer.appendChild( makeIcon(theProgram.name, theProgram.icon + '-alert', theProgram.link ) );
+      } else {
+        directoryContainer.appendChild( makeIcon(theProgram.name, theProgram.icon, theProgram.link ) );
+      }
     }
   });
 
@@ -114,6 +138,7 @@ function makeEmailHeader() {
   var emailSubject = makeElementOfClass('td', "email-header-subject-cell");
   var emailSubjectHeader = makeElementOfClass('strong', "email-header-subject");
   emailSubjectHeader.innerHTML = "Subject";
+
   var emailFrom = makeElementOfClass('td', "email-header-from-cell");
   var emailFromHeader = makeElementOfClass('strong', "email-header-from");
   emailFromHeader.innerHTML = "From";
@@ -134,13 +159,20 @@ function makeEmailHeader() {
 
 function makeEmailPreview( subject, unread, from, link ) {
   var emailPreviewContainer = makeElementOfClass('tr', "email-preview-container");
-  var emailSubject = makeElementOfClass('td', "email-preview-subject");
-  emailSubject.innerHTML = subject;
-  var emailFrom = makeElementOfClass('td', "email-preview-from");
-  emailFrom.innerHTML = from.name;
+  var stillUnread = unread ? 'strong' : 'span';
 
-  emailPreviewContainer.appendChild(emailSubject);
-  emailPreviewContainer.appendChild(emailFrom);
+  var emailSubjectCell = makeElementOfClass('td', "email-preview-subject-cell");
+  var emailSubject = makeElementOfClass(stillUnread, "email-preview-subject");
+  emailSubject.innerHTML = subject;
+  emailSubjectCell.appendChild(emailSubject);
+
+  var emailFromCell = makeElementOfClass('td', "email-preview-from-cell");
+  var emailFrom = makeElementOfClass(stillUnread, "email-preview-from");
+  emailFrom.innerHTML = from.name;
+  emailFromCell.appendChild(emailFrom);
+
+  emailPreviewContainer.appendChild(emailSubjectCell);
+  emailPreviewContainer.appendChild(emailFromCell);
 
   emailPreviewContainer.addEventListener("click", function(event) {
     openEmail(link);
@@ -173,13 +205,14 @@ function drawEmailClient( emailLink ) {
       event.preventDefault();
     });
 
-    var emailToShow = emails[ emailLink ]
+    var emailToShow = emails[ emailLink ];
 
     var emailFrom = makeElementOfClass('p', "email-body-from");
-    emailFrom.innerHTML = "From: " + emailToShow.from.name;
+    emailFrom.innerHTML = "From: " + emailToShow.from.name + " &lt;" + emailToShow.from.email + "&gt;";
+
     var emailSubject = makeElementOfClass('p', "email-body-subject");
     emailSubject.innerHTML = "Subject: " + emailToShow.subject;
-    var emailBodyContainer = makeElementOfClass('p', 'email-body-container');
+    var emailBodyContainer = makeElementOfClass('pre', 'email-body-container');
     emailBodyContainer.innerHTML = emailToShow.content;
 
     emailClientContainer.appendChild( backButton );
@@ -195,20 +228,35 @@ function drawEmailClient( emailLink ) {
 /// network explorer display helpers
 
 function drawNetworkExplorer() {
+  var networkExplorerContainer = makeElementOfClass('div', "network-explorer-container");
 
+  attachToProgramContainer( networkExplorerContainer );
   attachToProgramContainer( homeButtonBar() );
 }
 
 /// browser display helpers
 
 function drawBrowser( webpage ) {
+  var browserContainer = makeElementOfClass('div', "browser-container");
 
+  if (internetWorking) {
+    // TODO display home page
+  } else {
+    var noConnectionBox = makeElementOfClass('h3', "no-connection-box");
+    noConnectionBox.innerHTML = "No internet connection"
+    browserContainer.appendChild( noConnectionBox );
+  }
+
+  attachToProgramContainer( browserContainer );
   attachToProgramContainer( homeButtonBar() );
 }
 
 /// console display helpers
-function drawConsole() {
 
+function drawConsole() {
+  var consoleContainer = makeElementOfClass('div', "console-container");
+
+  attachToProgramContainer( consoleContainer );
   attachToProgramContainer( homeButtonBar() );
 }
 
@@ -268,6 +316,7 @@ function openEmail( link ) {
   console.log('showing email ' + link);
   clearScreen();
   drawEmailClient( link );
+  emails[link].unread = false;
 }
 
 function openWebpage( link ) {
