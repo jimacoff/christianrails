@@ -5,6 +5,21 @@
         %span.superbar-url ChristianDeWolf.com
       %span.superbar-spacer
       %span.superbar-tag Books · Software · Blogs
+    - else
+      %span.superbar-url ChristianDeWolf.com
+
+    -#   // Preview images of all sites
+    -#   .superbar-preview-container
+    -#     = image_tag "diamond-logo.png",          class: "superbar-preview-image", title: "Diamond Find"
+    -#     = image_tag "ghostcrime-posterlogo.png", class: "superbar-preview-image", title: "GHOSTCRIME"
+    -#     = image_tag "lindsay-circle.png",        class: "superbar-preview-image", title: "Snapback"
+    -#     = image_tag "badger-circle.png",         class: "superbar-preview-image", title: "I Found This Badger"
+    -#     = image_tag "scalequail-circle.png",     class: "superbar-preview-image", title: "ScaleQuail"
+    -#     = image_tag "wolfbutler-icon-white.png", class: "superbar-preview-image", title: "Wolf Butler Art & Software"
+    -#     = image_tag "computers-logo.png",        class: "superbar-preview-image", title: "Do you like COMPUTERS"
+    -#     = image_tag "ghostcrm-logo.png",         class: "superbar-preview-image", title: "ghostCRM"
+    -#     = image_tag "calicobrief-icon.png",      class: "superbar-preview-image", title: "The Calico Brief"
+
     %a{href: memberships_path}
       %span.superbar-random-message
 

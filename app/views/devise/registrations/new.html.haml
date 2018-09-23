@@ -1,26 +1,31 @@
 %h2.center Create your account
 
+// Perks of signing up
+.signup-preview-container.signup-borders
+  %h4.signup-freebook-text You'll receive a free digital copy of Snapback, Vol.1 (ePub & PDF) on sign-up.
+  = image_tag "snapback-book.jpg", alt: "Snapback, Vol.1: Fuseki", title: "Snapback, Vol.1: Fuseki", class: "signup-freebook-image"
+
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
 
   .field
-    = f.label "Choose how your name will be displayed to others:"
+    %strong= f.label "Choose how your name will be displayed to others:"
     %br
     = f.text_field :username, autocomplete: "off", placeholder: "Enter a username"
 
   .field
-    = f.label "Please enter your name (will not be shared with others):"
+    %strong= f.label "Please enter your name (will not be shared with others):"
     %br
     = f.text_field :first_name, autocomplete: "off", placeholder: "First name", class: "half"
     = f.text_field :last_name, autocomplete: "off", placeholder: "Last name", class: "half"
 
   .field
-    = f.label "Please enter your email address (will not be shared with others):"
+    %strong= f.label "Please enter your email address (will not be shared with others):"
     %br
     = f.email_field :email, autocomplete: "off", placeholder: "Email address"
 
   .field
-    = f.label "Please choose a secure password:"
+    %strong= f.label "Please choose a secure password:"
     %br
     = f.password_field :password, autocomplete: "off", placeholder: "Enter a password"
     %br
@@ -41,17 +46,18 @@
   .field
     %strong= f.label :send_me_emails, "Can I email you occasionally?"
     %br
-    = f.check_box :send_me_emails, checked: 'checked'
+    = f.check_box :send_me_emails, checked: '', onchange: "updateThanksField();"
     = f.label :send_me_emails, "Yes! I would be happy to hear from you."
 
+    .thanksfield.hidden
+      %strong= "\nCool. I promise I won't bug you too much."
 
   .actions.center
     = invisible_captcha :gender
     = f.submit "Create an account", class: "store-button bigger"
     %br
-    %br
     %span
-      #{ link_to "Log in", new_session_path(resource_name)  } | #{ link_to "Home", root_path }
+      = link_to "Log in", new_session_path(resource_name)
 
 :javascript
 
@@ -60,5 +66,13 @@
       $('.companyfield').removeClass("hidden");
     } else {
       $('.companyfield').addClass("hidden");
+    }
+  }
+
+  function updateThanksField() {
+    if ( $('#user_send_me_emails')[0].checked ) {
+      $('.thanksfield').removeClass("hidden");
+    } else {
+      $('.thanksfield').addClass("hidden");
     }
   }

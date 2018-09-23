@@ -55,7 +55,7 @@
   Next, I'll look at the
   = succeed "," do
     = link_to "Wolf Butler blog", butler_path
-  which hosts a collection of my older comedy essays, game reviews, and clickbait listicles. It has an Archives page, and the posts are related by categories and tags, but no one clicks on those.
+  which hosts a collection of my older comedy essays, game reviews, and clickbait listicles. It has an Archives page, and posts are related by categories and tags, but no one clicks on those.
 
 %p
   A custom recommendation engine is required here. It's a simple build, choosing two posts related by Category or Tag, then a random third for variety:
@@ -73,12 +73,12 @@
 
 %p
   I opted for a less obtrusive design — a bar along the top of every page that lets you know you're in a sub-area, with an easy way to navigate back to the main page and also space to push the
-  = link_to "lifetime membership", memberships_path
-  deal.
-  %strong Please buy one of those.
+  = succeed "." do
+    = link_to "lifetime membership", memberships_path
+  %strong Please buy a lifetime membership.
 
 .center
-  = image_tag "scalequail/quail-superheader.png", class: "large-quailpost-image", alt: "Gotta make the bar innocuous so people don't hate the bar."
+  = image_tag "scalequail/quail-superheader.png", class: "large-quailpost-image", alt: "Gotta make the bar innocuous so people don't hate the bar", title: "Gotta make the bar innocuous so people don't hate the bar"
   %p.caption
     %em How innovative,
     you're probably saying.
