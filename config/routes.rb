@@ -116,6 +116,9 @@ Christianrails::Application.routes.draw do
         get 'export'
         get 'item_tester'
       end
+      collection do
+        get 'admin_listing'
+      end
 
       resources :storytrees, only: [:show, :create] do
         member do

@@ -1,0 +1,25 @@
+%h1 All Stories
+
+%table.woods-table{style: "width: 50%"}
+  %thead
+    %tr
+      %th Title
+      %th Author
+      %th Total plays
+      %th Published
+      %th Trees
+      %th Nodes
+
+  %tbody
+    - @stories.each do |woods_story|
+      %tr
+        %td= link_to woods_story.name, woods_story
+        %td= woods_story.player.username
+        %td= woods_story.total_plays
+        %td= woods_story.published
+        %td= woods_story.storytrees.count
+        %td= woods_story.nodes.count
+
+.woods-box
+  %h3 Add new story
+  = render 'form'

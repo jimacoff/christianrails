@@ -32,6 +32,22 @@ h2 {
   margin-top: 40px;
 }
 
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: black;
+}
+.superbar-content {
+  .superbar-url {
+    color: #e1ddd8;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: $l-ghost-green;
+  }
+}
+
+//////////
+
 .computers-post {
   a {
     font-weight: bold;

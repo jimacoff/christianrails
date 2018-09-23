@@ -1,0 +1,13 @@
+.superbar
+  .superbar-content
+    - unless defined?( stripped_down )
+      %a{href: root_path}
+        %span.superbar-url ChristianDeWolf.com
+      %span.superbar-spacer
+      %span.superbar-tag Books · Software · Blogs
+    %a{href: memberships_path}
+      %span.superbar-random-message
+
+:javascript
+  // TODO a randomizer for messages
+  $('.superbar-random-message')[0].innerHTML = "Lifetime membership for only $20!";

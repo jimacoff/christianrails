@@ -20,6 +20,22 @@ h1 {
   font-size: 2em;
 }
 
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: $ghost-purple;
+}
+.superbar-content {
+  .superbar-url {
+    color: #e1ddd8;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: $l-ghost-green;
+  }
+}
+
+//////////
+
 #gc-header {
   padding-top: 10px;
   padding-left: 10px;

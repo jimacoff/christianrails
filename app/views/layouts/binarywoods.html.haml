@@ -26,8 +26,10 @@
 
     %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
 
-  %body.background
+    = favicon_link_tag "woods.ico"
 
+  %body.background
+    = render "/layouts/superbar"
     = render "woods/header"
 
     #woods-wrapper

@@ -33,6 +33,22 @@ h1 {
   font-size: 2em;
 }
 
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: black;
+}
+.superbar-content {
+  .superbar-url {
+    color: $quail-blue-h;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: $quail-blue-l;
+  }
+}
+
+//////////
+
 #sb-header {
   padding-top: 10px;
   padding-left: 10px;

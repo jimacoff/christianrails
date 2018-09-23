@@ -4,29 +4,28 @@
       .span
         Welcome,
         = succeed "." do
-          - #link_to "#{current_user.first_name}", user_path( current_user )
           = "#{current_user.first_name}"
+
       %p.diminutive.lineheight-spacer
         = link_to "", main_app.cart_path, class: 'cart-link-highlight embolden'
         %span.cart-dot{style: 'display: none;'} ·
+
         - if @owned_products && @owned_products.size > 0
           = link_to "Library", main_app.library_path, class: 'library-link-highlight embolden'
           %span.library-dot ·
-        - if current_user.has_crm_access?
-          - if controller_path.starts_with?("crm")
-            = link_to "Parent site", main_app.root_path
-          - else
-            = link_to "CRM", main_app.crm_path
-          ·
+
         - if current_user.admin?
           = link_to "Admin", main_app.admin_index_path
           ·
+
         - if current_user.digital_purchases.size > 0
           = link_to "Receipts", main_app.receipts_store_orders_path
           ·
+
         - if current_player && current_player.scorecards.size > 0 && controller_path.starts_with?("woods")
           = link_to 'Scores', main_app.woods_player_path(current_player)
           ·
+
         = link_to "Settings", main_app.settings_user_path( current_user )
         ·
         = link_to 'Sign out', main_app.destroy_user_session_path, method: :delete

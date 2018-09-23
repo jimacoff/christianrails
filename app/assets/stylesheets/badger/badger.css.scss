@@ -15,6 +15,22 @@ h1, h2, h3, h4, h5, h6, tr, th, a, li, ul, p {
   font-style: normal;
 }
 
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: black;
+}
+.superbar-content {
+  .superbar-url {
+    color: white;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: #e1ddd8;
+  }
+}
+
+//////////
+
 .badger-post {
   a {
     font-weight: bold;

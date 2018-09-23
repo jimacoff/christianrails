@@ -4,9 +4,9 @@
     #snapback-logo-wrapper
 
       - if action_name == 'fuseki'
-        %a{ href: root_path }= image_tag( "felix-circle.png", alt: "Felix of Snapback", class: "header-image" )
+        %a{ href: "#thats-felix" }= image_tag( "felix-circle.png", alt: "Felix of Snapback", class: "header-image" )
       - else
-        %a{ href: root_path }= image_tag( "lindsay-circle.png", alt: "Lindsay of Snapback", class: "header-image" )
+        %a{ href: "#thats-lindsay" }= image_tag( "lindsay-circle.png", alt: "Lindsay of Snapback", class: "header-image" )
 
       .header-words.ghost-align
         = image_tag 'snapback-title-word.png', class: "snapback-title-image"

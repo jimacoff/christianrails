@@ -1,11 +1,16 @@
 class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update, :item_tester]
-  before_action :verify_is_published, except: [:index, :show, :diamondfind, :thecalicobrief, :manage, :export, :create, :edit, :update, :item_tester]
+  before_action :verify_is_published, except: [:index, :admin_listing, :show, :diamondfind, :thecalicobrief, :manage, :export, :create, :edit, :update, :item_tester]
 
-  skip_before_action :verify_is_admin, only: [:show, :play, :move_to, :diamondfind, :thecalicobrief]
+  skip_before_action :verify_is_admin, only: [:index, :show, :play, :move_to, :diamondfind, :thecalicobrief]
 
   ## PUBLIC
+
+  # listing of Binarywoods stories
+  def index
+    @stories = Woods::Story.where(published: true).order('created_at desc')
+  end
 
   def show
     get_highscores
@@ -120,7 +125,7 @@ class Woods::StoriesController < Woods::WoodsController
 
   ## ADMIN ONLY
 
-  def index
+  def admin_listing
     @stories = Woods::Story.all
     @story = Woods::Story.new
   end

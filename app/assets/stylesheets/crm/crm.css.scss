@@ -25,6 +25,23 @@
   }
 }
 
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: black;
+}
+.superbar-content {
+  .superbar-url {
+    color: #e1ddd8;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: $l-ghost-green;
+  }
+}
+
+//////////
+
+
 #store-footer-bar {
   background-color: $ghost-green;
   color: $white;
@@ -136,8 +153,8 @@
 
 
   #mynameis {
-    width: 170px;
-    font-size: 0.75em;
+    width: 140px;
+    font-size: 0.6em;
   }
 
   #imake {

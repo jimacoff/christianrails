@@ -25,6 +25,29 @@ a {
   background: linear-gradient(to right, rgba(182,181,227,1) 0%,rgba(102,100,192,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
+.woods-index-choice {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: black;
+}
+.superbar-content {
+  .superbar-url {
+    color: #e1ddd8;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: $l-back-purple;
+  }
+}
+
+//////////
+
 #binaryheader {
   width: 100%;
   background: $white;

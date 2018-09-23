@@ -32,8 +32,8 @@
 
     = favicon_link_tag "quail.ico"
 
-  %body.noselect
-
+  %body
+    = render "/layouts/superbar"
     = render "scalequail/header"
 
     - if notice

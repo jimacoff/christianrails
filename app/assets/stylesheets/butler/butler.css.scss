@@ -10,6 +10,51 @@
 
 body { background-color: $black; }
 
+// THE SUPERBAR (STRAIGHT UP COPIED FROM MAIN.CSS, TODO do an include or extend or whatever)
+
+.superbar {
+  width: 100%;
+  border: 1px black solid;
+  min-height: 32px;
+}
+
+.superbar-content {
+  margin: 5px 20px;
+  span {
+    font-family: Artifika, Helvetica, Arial, sans-serif !important;
+    font-size: 0.8em;
+  }
+}
+
+.superbar-spacer {
+  width: 25px;
+  display: inline-block;
+}
+
+.superbar-random-message {
+  float: right;
+  max-width: 500px;
+}
+
+// SPECIFICS
+
+.superbar {
+  background-color: #1a1a1a;
+}
+.superbar-content {
+  a {
+    text-decoration: none;
+  }
+  .superbar-url {
+    color: white;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: #e1ddd8;
+  }
+}
+
+//////////
+
 .no-bullets { list-style: none; }
 .left  { text-align: left; }
 .right { float: right; }

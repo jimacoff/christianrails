@@ -5,6 +5,7 @@ body {
   color: #444;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  margin: 0 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -64,6 +65,32 @@ table {
 
 .library-link-highlight {
   color: $platinum-blue !important;
+}
+
+// THE SUPERBAR
+
+.superbar {
+  width: 100%;
+  border: 0px black solid;
+  min-height: 32px;
+}
+
+.superbar-content {
+  padding: 5px 20px;
+  span {
+    font-family: Artifika, Helvetica, Arial, sans-serif !important;
+    font-size: 0.8em;
+  }
+}
+
+.superbar-spacer {
+  width: 25px;
+  display: inline-block;
+}
+
+.superbar-random-message {
+  float: right;
+  max-width: 500px;
 }
 
 // PANELS ETC
@@ -358,6 +385,10 @@ table {
     height: 100px;
   }
 
+  .superbar-random-message {
+    display: none;
+  }
+
 }
 
 @media screen and (min-width: 450px) {
@@ -369,6 +400,10 @@ table {
  .face {
     width: 150px;
     height: 150px;
+  }
+
+  .superbar-random-message {
+    display: none;
   }
 
 }
@@ -404,6 +439,10 @@ table {
     height: 150px;
   }
 
+  .superbar-random-message {
+    display: inline;
+  }
+
 }
 
 // large
@@ -434,6 +473,10 @@ table {
   #logo-wrapper {
     height: 95px;
     width: 160px;
+  }
+
+  .superbar-random-message {
+    display: inline;
   }
 
 }

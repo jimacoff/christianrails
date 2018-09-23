@@ -26,6 +26,22 @@ th {
   background-color: $white;
 }
 
+// SUPERBAR SPECIFICS
+
+.superbar {
+  background-color: black;
+}
+.superbar-content {
+  .superbar-url {
+    color: #e1ddd8;
+  }
+  .superbar-tag, .superbar-random-message {
+    color: $l-ghost-green;
+  }
+}
+
+//////////
+
 .slate {
   color: $slate-gray;
 }

@@ -1,5 +1,6 @@
 # Release notes
 
+- 1.6.1 - Unified the site with superheader
 - 1.6.0 - Major CSS overhaul & gutted the Wolf Butler site
 - 1.5.6 - Added m3lon site
 - 1.5.5 - Many small updates & fixes
