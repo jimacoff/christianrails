@@ -84,6 +84,15 @@ module QuailHelper
         category: "Scaling up",
         tags:  ["scaling", "growth-hacking", "startups", "business", "Twitter", "HootSuite"],
         date: "20180519"
+      },
+      {
+        sequence: 10,
+        slug:  "monetizing_the_network",
+        title: "Monetizing the Network using a Revenue Monolith",
+        desc:  "If you aren't excited by that idea, maybe you aren't capitalist enough for this line of work.",
+        category: "Scaling up",
+        tags:  ["scaling", "growth-hacking", "startups", "business"],
+        date: "20180923"
       }
     ]
   end

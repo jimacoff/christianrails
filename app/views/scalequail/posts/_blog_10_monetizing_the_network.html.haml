@@ -1,0 +1,92 @@
+%p
+  Now that I've
+  %a{href: "/scalequail/show_post?post=socializing_with_customers", title: "In which I socialize with customers"} automated some marketing
+  and patched up a few psychological flaws, I'm almost ready to push products to my network. But there's one more scale I have to implement before I put my life savings into billboard space.
+
+/// THE THEORY
+
+%p
+  Before, when
+  %a{href: "/scalequail/show_post?post=cracking_the_physical_distribution_problem", title: "In which I tackle the physical distribution problem"} contemplating a scale
+  to my physical book distribution system, I estimated that shipping five books at once was
+  %strong five times less work, per book,
+  than shipping one by one. Today I'm going to use an inverse of that theory to scale my marketing efforts.
+
+%p
+  Right now, I have at least 6 "products", or destinations within the website, each with separate marketing strategies and separate audiences. The
+  = link_to "#SickGoTakedowns hashtag", "https://twitter.com/search?q=%23SickGoTakedowns", target: 'blank'
+  I use to advertise
+  = link_to "the Snapback series", snapback_shimari_path
+  to Go players is approaching its third year, though it may not be relevant to a
+  = link_to "Ghostcrime", ghostcrime_path
+  reader, who may instead be pulled in with neon ghost/robot art. But if I can attract a customer to the site with the right post, and it's easy to navigate around, they'll explore.
+
+// sick go takedown image
+.center
+  %a{href: "https://twitter.com/search?q=%23SickGoTakedowns", target: 'blank'}
+    = image_tag "scalequail/sick-go-takedown.png", class: "medium-quailpost-image image-wrap", alt: "A sick Go takedown"
+
+%p
+  The trick is to think of all the unrelated brands as a single product unified by the web platform. That was always the premise of
+  = succeed "," do
+    %a{href: "/scalequail/show_post?post=let_me_tell_you_about_my_business"} the company
+  anyway — a virtual butler who offers up an assortment of curiosities and handles all the financial transactions, so that I'm free to spend summers paragliding instead of indoors on the computer. Each book, blog, or game is just a module of a larger machine, and any effort to market one individually has the effect of marketing the whole.
+
+/// THE METHOD
+
+%p
+  First, I'm going to analyze my blogs to make sure it's easy to jump from post to post. ScaleQuail has a linear format, and prominent links in the text move forward and backward, so it's fine for now.
+  = succeed "," do
+    = link_to "I Found This Badger", thisbadger_path
+  however, needs some love. It's some of my most accessible writing, and a venerable story of human/animal relations, but by default it displays latest posts first. At this stage, I need to accommodate new readers who want to
+  = succeed "." do
+    = link_to "start reading from the beginning", read_badger_index_path
+
+%p
+  This is as easy as improvements get:
+
+.center
+  %a{href: read_badger_index_path}
+    = image_tag "scalequail/badger-upgrade.png", class: "large-quailpost-image", alt: "An easier way to read the badger blog"
+  %p.caption
+    A friendlier way to read adorable badger stories
+
+%p
+  Next, I'll look at the
+  = succeed "," do
+    = link_to "Wolf Butler blog", butler_path
+  which hosts a collection of my older comedy essays, game reviews, and clickbait listicles. It has an Archives page, and the posts are related by categories and tags, but no one clicks on those.
+
+%p
+  A custom recommendation engine is required here. It's a simple build, choosing two posts related by Category or Tag, then a random third for variety:
+
+.center
+  %a{href: butler_path}
+    = image_tag "scalequail/recommendation-engine.png", class: "large-quailpost-image", alt: "Classic content you're definitely going to love"
+  %p.caption
+    Classic content you're definitely going to love
+
+%p
+  Getting readers deeper into the blogs is one thing, but to go from free short-form comedy to buying all my books, they need to hop around. I was originally thinking something like the recommendation engine above, kind of an internal ad network, but everyone hates ads, right? That's why you all use ad-blockers? (you
+  %em should
+  use an ad-blocker)
+
+%p
+  I opted for a less obtrusive design — a bar along the top of every page that lets you know you're in a sub-area, with an easy way to navigate back to the main page and also space to push the
+  = link_to "lifetime membership", memberships_path
+  deal.
+  %strong Please buy one of those.
+
+.center
+  = image_tag "scalequail/quail-superheader.png", class: "large-quailpost-image", alt: "Gotta make the bar innocuous so people don't hate the bar."
+  %p.caption
+    %em How innovative,
+    you're probably saying.
+    %em A bar.
+    Yeah, how about you just go to hell, you piece of shit.
+
+%p
+  Anyway, now that my products are woven together into a multi-faceted revenue-generation monolith, it's time to drive some serious traffic. In true ScaleQuail fashion, I'm going to accomplish this by orchestrating a multi-stage
+  %a.coming-soon.quailglow{onclick: "comingSoon( $(this) );"}
+    %span marketing cyclone.
+    = render 'next'
