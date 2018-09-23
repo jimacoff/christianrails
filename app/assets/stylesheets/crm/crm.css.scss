@@ -143,22 +143,22 @@
   display: inline-block;
   height: 75px;
   width: 75px;
+  margin-top: 12px;
 }
 
 @media screen and (min-width: 320px) {
 
   #user-wrapper {
-    position: absolute;
+    position: static;
   }
 
 
   #mynameis {
-    width: 140px;
-    font-size: 0.6em;
+    display: none;
   }
 
   #imake {
-    font-size: 0.75em;
+    display: none;
   }
 
 }
@@ -174,11 +174,13 @@
   }
 
   #mynameis {
+    display: block;
     width: 280px;
     font-size: 1em;
   }
 
   #imake {
+    display: block;
     font-size: 1em;
   }
 }
