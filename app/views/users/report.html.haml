@@ -46,12 +46,26 @@
               = image_tag "icon-rubbish.png", title: "Block this user!", class: "admin-icon right"
 
             -# NUDGES
+            - if user.nudges && user.nudges.size > 0
+              %p
+                %strong Nudges sent:
+              - user.nudges.each do |k,v|
+                %p= k.to_s + "  " + v[0..9]
+
             - if user.can_follow_up_about_product?( @ghostcrime )
-              %p= link_to "Ghostcrime follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@ghostcrime.id}", method: :post
+              %p
+                = link_to "Ghostcrime follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@ghostcrime.id}", method: :post
+                = link_to "w/o name", follow_up_about_product_user_path( user ) + "?product_id=#{@ghostcrime.id}&no_name=true", method: :post, class: "no-name-emphasis"
+
             - if user.can_follow_up_about_product?( @snapback1 )
-              %p= link_to "Snapback: Fuseki follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback1.id}", method: :post
+              %p
+                = link_to "Snapback: Fuseki follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback1.id}", method: :post
+                = link_to "w/o name", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback1.id}&no_name=true", method: :post, class: "no-name-emphasis"
+
             - if user.can_follow_up_about_product?( @snapback2 )
-              %p= link_to "Snapback: Shimari follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback2.id}", method: :post
+              %p
+                = link_to "Snapback: Shimari follow-up", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback2.id}", method: :post
+                = link_to "w/o name", follow_up_about_product_user_path( user ) + "?product_id=#{@snapback2.id}&no_name=true", method: :post, class: "no-name-emphasis"
 
           - else
             %p

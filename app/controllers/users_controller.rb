@@ -73,12 +73,14 @@ class UsersController < ApplicationController
   # params: [:product_id]
   def follow_up_about_product
     @product = Store::Product.find( params[:product_id] )
+    no_name = params[:no_name] || false
+
     if @user.can_follow_up_about_product?( @product )
       @user.nudges = {} if !@user.nudges
       @user.nudges[ @product.slug ] = DateTime.current
       @user.save
 
-      StoreMailer.follow_up_about_product( @user, @product ).deliver_now
+      StoreMailer.follow_up_about_product( @user, @product, !no_name ).deliver_now
 
       flash[:notice] = "Follow-up email sent!"
       redirect_to report_users_path

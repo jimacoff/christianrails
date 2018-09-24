@@ -1,4 +1,7 @@
-%p= "Hi #{ @user.first_name },"
+- if @first_name_basis
+  %p= "Hi #{ @user.first_name.capitalize },"
+- else
+  %p= "Hello!"
 
 %p= "I noticed you downloaded #{ @product.title } a little while ago. Did you get a chance to read it? What did you think?"
 
