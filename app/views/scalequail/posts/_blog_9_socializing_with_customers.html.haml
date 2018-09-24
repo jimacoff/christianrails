@@ -112,10 +112,43 @@
     My QAWP Wheel in action. It could also be laid flat if you like the DJ aesthetic.
 
 %p
-  Now, when I'm in advertising mode, I can fill my Scheduled Tweets queue full of great content and then safely forget about it for a few days. And maybe I'll finally connect with someone on Goodreads.
+  Now, when I'm in advertising mode, I can fill my Scheduled Tweets queue full of great content and then safely forget about it for a few days. And maybe I'll finally connect with someone on Goodreads (but still, probably not).
 
 %p
-  With a reliable and psychologically manageable way to push my content to people, I should hopefully see that "bump" in revenue I've heard so many startup founders talk about. But if I want to maximize it, I've got one more marketing scale I want to put in place that'll make my efforts at least
-  %a.quailglow{href: "/scalequail/show_post?post=monetizing_the_network", title: "In which I monetize a network"}
-    %span five times more effective.
+  But it's important that I actually do communicate with customers directly instead of just passively blasting my followers. This is one of those tasks that I won't voluntarily do, especially if there are other activities available, but luckily, my trusty auto-mailer is up to the task.
+
+%p
+  Ideally, if someone downloads a book, I'd send them an email to ask what they thought, and if they'd have time to leave a Goodreads review. I have all the data I need, so if the user has consented to receive emails, I can set up a one-button auto-sender for eligible users in my rickety admin area:
+
+.center
+  = image_tag "scalequail/auto-nudge.png", class: "large-quailpost-image", alt: "An auto-nudger"
+  %p.caption
+    Crab User got a lot of emails during testing.
+
+%p
+  I could automate this even more, but I like the control, and I want to be able to address the user by first name in the email only when I know it's appropriate. A machine may be performing my arduous social tasks, but it still has to feel personal.
+
+%p
+  There's one more thing I have to do to complete the illusion, though:
+
+.center
+  = image_tag "scalequail/no-tracking.png", class: "large-quailpost-image", alt: "Tracking email links creates ugly, impersonal links."
+  %p.caption
+    You can really anger some digital marketers by doing this.
+
+%p
+  Turn off the tracking! Unless you want every link in the email to come out as a nasty mess of parameters, and ruin the personal façade we're trying to create here. It's subtle, but people notice.
+
+.center
+  = image_tag "scalequail/nasty-link.png", class: "large-quailpost-image", alt: "Look at this terrible link."
+  %p.caption
+    I AM NOT A ROBOT. PLEASE LEAVE A REVIEW.
+
+%p
+  Ah, but then I won't be able to track my opens and click-throughs. You think I care who opens the emails I auto-send? What, I'm supposed to A/B test the subject lines? Guess I should have A/B tested every line in my books, too. Make sure I wrote the right things.
+
+%p
+  With personal, psychologically manageable ways to push out my content, I should hopefully see that "bump" in revenue I've heard so many founders talk about. But if I want to maximize it, I've got one more marketing scale I want to put in place that'll make my efforts at least five times more effective — fusing my site into a
+  %a.quailglow{href: "/scalequail/show_post?post=monetizing_the_network", title: "In which I fuse a revenue monolith"}
+    %span revenue monolith.
     = render 'next'
