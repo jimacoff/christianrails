@@ -1,0 +1,92 @@
+// COMEDY GOLD STYLING
+
+.nugget-header {
+  color: gold;
+  text-align: center;
+}
+
+.nugget-subheading {
+  color: black;
+  display: inline;
+}
+
+.nugget-table {
+  margin: 10px auto;
+  td {
+    padding: 4px;
+    border-radius: 8px;
+  }
+  max-width: 325px;
+}
+
+.nugget-description {
+  color: black;
+  max-width: 85%;
+  text-align: center;
+  margin: 15px auto;
+}
+
+.nugget-unlock-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nugget-unlock-box {
+  display: inline-block;
+  border-radius: 10px;
+  border: black solid 2px;
+  padding: 5px;
+  background-color: black;
+  max-width: 400px;
+}
+
+.nugget-serial {
+  color: black;
+  border-radius: 100px;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.nugget-joke {
+  font-family: "Courier New", monospace !important;
+}
+
+.nugget-joke-cell {
+  background-color: gold;
+}
+
+.nugget-locked {
+  background-color: black;
+  color: white;
+}
+
+.nugget-locked-cell {
+  background-color: black;
+}
+
+.nugget-buy {
+  background-color: lightgrey;
+  color: black;
+}
+
+.nugget-buy-cell {
+  background-color: lightgrey;
+}
+
+.nugget-gold {
+  background-color: gold;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 450px) {
+  .nugget-table {
+    max-width: 400px !important;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  .nugget-table {
+    max-width: 600px !important;
+  }
+}

@@ -293,6 +293,11 @@ Christianrails::Application.routes.draw do
   get '/melon', to: 'melon#index'
   get '/m3lon', to: 'melon#index'
 
+###### COMEDYGOLD STUFF ######
+
+  resources :nuggets, only: [:index]
+  get '/comedygold', to: 'nuggets#index'
+
 ###### GRAVEYARD #######
 
   resources :graveyard, only: [:index] do

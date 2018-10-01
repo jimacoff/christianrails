@@ -59,6 +59,8 @@
 
     - if controller_name == 'dealzone' && ( ['index', 'cart'].include?(action_name) )
       = yield
+    - elsif controller_name == 'nuggets'
+      = yield
     - else
       .smart-panel.panel
         = yield

@@ -1,0 +1,36 @@
+.smart-panel
+  %h1.nugget-header Comedy Gold
+
+  %p.nugget-description
+    %strong You're pre-approved!
+    Each
+    %em extremely limited edition
+    card comes magnetically encoded with a nugget of unique comedy & an access code to unlock it here on the central database.
+
+  .nugget-unlock-container
+    %h3.nugget-subheading Unlock a joke:
+    .nugget-unlock-box
+      %input#nugget-code{type: 'text', placeholder: 'Enter your access code', class: 'newsletter-input', size: 25}
+      %input#nugget-button{type: 'submit', onclick: 'nuggetUnlock();', class: "store-button newsletter-signup-button", value: "Unlock"}
+
+  %table.nugget-table
+    - @nuggets.each do |nugget|
+      %tr
+        - if nugget.disbursed
+          - if nugget.unlocked?
+            %td
+              %span.nugget-serial= nugget.serial_number
+            %td.nugget-joke-cell
+              %span.nugget-joke.nugget-gold= nugget.joke
+
+          - else
+            %td
+              %span.nugget-serial= nugget.serial_number
+            %td.nugget-locked-cell
+              %span.nugget-joke.nugget-locked= "MAGNETICALLY LOCKED"
+
+        - else
+          %td
+            %span.nugget-serial= nugget.serial_number
+          %td.nugget-buy-cell
+            %span.nugget-joke.nugget-buy= "Buy now: #{ Money.new( nugget.calc_price ).format }"

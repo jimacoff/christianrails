@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180829020009) do
+ActiveRecord::Schema.define(version: 20180930171103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,17 @@ ActiveRecord::Schema.define(version: 20180829020009) do
     t.integer  "newsletters_received", default: 0
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+  end
+
+  create_table "nuggets", force: :cascade do |t|
+    t.integer  "serial_number"
+    t.string   "joke",           limit: 76
+    t.string   "access_code"
+    t.boolean  "disbursed",                 default: false
+    t.integer  "unlocked_by_id"
+    t.datetime "unlocked_at"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   create_table "store_digital_purchases", force: :cascade do |t|
