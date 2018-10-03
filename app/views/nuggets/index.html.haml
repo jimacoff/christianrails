@@ -1,5 +1,6 @@
 .smart-panel
   %h1.nugget-header Comedy Gold
+  -# TODO actually make the above an image
 
   %p.nugget-description
     %strong You're pre-approved!
@@ -8,10 +9,15 @@
     card comes magnetically encoded with a nugget of unique comedy & an access code to unlock it here on the central database.
 
   .nugget-unlock-container
-    %h3.nugget-subheading Unlock a joke:
-    .nugget-unlock-box
-      %input#nugget-code{type: 'text', placeholder: 'Enter your access code', class: 'newsletter-input', size: 25}
-      %input#nugget-button{type: 'submit', onclick: 'nuggetUnlock();', class: "store-button newsletter-signup-button", value: "Unlock"}
+    - if current_user
+      %h3.nugget-subheading Unlock your joke:
+      .nugget-unlock-box
+        = form_tag(unlock_nuggets_path, id: 'nugget-unlock-form', method: :post) do
+          = text_field_tag 'access_code', nil, class: 'comedygold-input', onKeyPress: "updateSubmitButton();"
+          = submit_tag :Unlock, class: 'comedygold-submit-button', disabled: true
+    - else
+      %p.nugget-description
+        %strong Please log in to unlock a joke.
 
   %table.nugget-table
     - @nuggets.each do |nugget|
@@ -34,3 +40,9 @@
             %span.nugget-serial= nugget.serial_number
           %td.nugget-buy-cell
             %span.nugget-joke.nugget-buy= "Buy now: #{ Money.new( nugget.calc_price ).format }"
+
+:javascript
+
+  function updateSubmitButton() {
+    $('.comedygold-submit-button').prop("disabled", false);
+  }

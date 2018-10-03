@@ -295,7 +295,11 @@ Christianrails::Application.routes.draw do
 
 ###### COMEDYGOLD STUFF ######
 
-  resources :nuggets, only: [:index]
+  resources :nuggets, only: [:index] do
+    collection do
+      post 'unlock'
+    end
+  end
   get '/comedygold', to: 'nuggets#index'
 
 ###### GRAVEYARD #######

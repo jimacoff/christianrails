@@ -4,7 +4,7 @@ RSpec.describe Store::DealzoneController, type: :controller do
 
   render_views
 
-  let(:user)    { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   let(:valid_session) { {} }
 

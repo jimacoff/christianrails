@@ -53,7 +53,9 @@
 }
 
 .nugget-joke-cell {
-  background-color: gold;
+  background: -moz-linear-gradient(top, gold 0%, #fff1a3 50%, gold 100%);
+  background: -webkit-linear-gradient(top, gold 0%,#fff1a3 50%, gold 100%);
+  background: linear-gradient(to bottom, gold 0%,#fff1a3 50%, gold 100%);
 }
 
 .nugget-locked {
@@ -75,8 +77,33 @@
 }
 
 .nugget-gold {
-  background-color: gold;
   font-weight: 600;
+}
+
+.comedygold-input {
+  font-size: 1.25em;
+  min-width: 250px;
+  min-height: 30px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.comedygold-submit-button {
+  color: black;
+  background: -moz-linear-gradient(top, gold 0%, #fff1a3 50%, gold 100%);
+  background: -webkit-linear-gradient(top, gold 0%,#fff1a3 50%, gold 100%);
+  background: linear-gradient(to bottom, gold 0%,#fff1a3 50%, gold 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='gold', endColorstr='gold',GradientType=0 );
+
+  border: black 1px solid;
+  border-radius: 5px;
+  padding: 6px;
+  margin-right: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
 }
 
 @media screen and (min-width: 450px) {
