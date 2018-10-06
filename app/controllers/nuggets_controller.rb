@@ -16,7 +16,7 @@ class NuggetsController < ApplicationController
   def unlock
     if current_user
       if params[:access_code] && !params[:access_code].empty?
-        if nugget = Nugget.where(access_code: params[:access_code]).take
+        if nugget = Nugget.where(access_code: params[:access_code]).where(unlocked_at: nil).take
           nugget.unlocked_by = current_user
           nugget.unlocked_at = DateTime.current
           nugget.save
