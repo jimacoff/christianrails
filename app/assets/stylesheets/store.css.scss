@@ -402,6 +402,10 @@ th {
   color: $honey-yellow;
 }
 
+.better-gold {
+  color: gold;
+}
+
 .greener {
   color: $ghost-green;
 }
@@ -564,6 +568,10 @@ th {
   margin-left: 5px;
 }
 
+.comedygold-image {
+  border-radius: 10px;
+}
+
 ////////// BEGIN RESPONSIVE ////////////////
 
 @media screen and (min-width: 320px) {
@@ -619,6 +627,10 @@ th {
 
   .membership-add-to-cart {
     max-width: 250px;
+  }
+
+  .comedygold-image {
+    width: 300px;
   }
 }
 
@@ -693,6 +705,10 @@ th {
   .standalone-cart {
     width: 360px;
   }
+
+  .comedygold-image {
+    width: 400px;
+  }
 }
 
 @media screen and (min-width: 801px) {
@@ -728,6 +744,9 @@ th {
     display: inline-block;
   }
 
+  .comedygold-image {
+    width: 500px;
+  }
 }
 
 @media screen and (min-width: 1200px)  {
@@ -760,6 +779,10 @@ th {
     margin: 0 auto 25px 25px;
     width: 450px;
     clear: right;
+  }
+
+  .comedygold-image {
+    width: 500px;
   }
 
 }

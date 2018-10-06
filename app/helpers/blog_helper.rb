@@ -6,10 +6,16 @@ module BlogHelper
   SOFTWARE_DEVELOPMENT    = "Software Development"
   FREELANCE_LIFE          = "Freelance Life"
   JUST_BUSINESS           = "Just Business"
+  WEIRD_METAL_COMEDY      = "Weird Metal Comedy"
 
   def all_blog_posts
     # Add new posts at the top.
     [
+      {
+        title: "20181005_metal_thats_funny",
+        category: WEIRD_METAL_COMEDY,
+        tags: ["Comedy Gold", "metals", "magnetism", "cards", "business"]
+      },
       {
         title: "20180808_still_more_interactive_fiction",
         category: SOFTWARE_DEVELOPMENT,

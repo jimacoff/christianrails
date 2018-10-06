@@ -1,12 +1,11 @@
 .smart-panel
-  %h1.nugget-header Comedy Gold
-  -# TODO actually make the above an image
+  .center
+    = image_tag "comedygold-cards.jpg", class: 'comedygold-image', alt: "Comedy Gold: high-end magnetic comedy", title: "Comedy Gold: high-end magnetic comedy"
+    %h2.nugget-header Comedy Gold
 
   %p.nugget-description
     %strong You're pre-approved!
-    Each
-    %em extremely limited edition
-    card comes magnetically encoded with a nugget of unique comedy & an access code to unlock it here on the central database.
+    Each limited edition card comes magnetically encoded with a nugget of unique comedy & an access code to unlock it here for everyone.
 
   .nugget-unlock-container
     - if current_user
@@ -17,29 +16,27 @@
           = submit_tag :Unlock, class: 'comedygold-submit-button', disabled: true
     - else
       %p.nugget-description
-        %strong Please log in to unlock a joke.
+        %strong= link_to "Log in", main_app.user_session_path, class: "better-gold"
+        or
+        %strong= link_to "sign up", main_app.new_user_registration_path, class: "better-gold"
+        to unlock a joke.
 
   %table.nugget-table
     - @nuggets.each do |nugget|
       %tr
-        - if nugget.disbursed
-          - if nugget.unlocked?
-            %td
-              %span.nugget-serial= nugget.serial_number
-            %td.nugget-joke-cell
-              %span.nugget-joke.nugget-gold= nugget.joke
-
-          - else
-            %td
-              %span.nugget-serial= nugget.serial_number
-            %td.nugget-locked-cell
-              %span.nugget-joke.nugget-locked= "MAGNETICALLY LOCKED"
-
+        - if nugget.unlocked?
+          %td
+            %span.nugget-serial= nugget.serial_number
+          %td.nugget-joke-cell
+            %span.nugget-joke.nugget-gold= nugget.joke
         - else
           %td
             %span.nugget-serial= nugget.serial_number
-          %td.nugget-buy-cell
-            %span.nugget-joke.nugget-buy= "Buy now: #{ Money.new( nugget.calc_price ).format }"
+          %td.nugget-locked-cell
+            %span.nugget-joke.nugget-locked= "MAGNETICALLY LOCKED"
+
+  .center
+    = link_to "Home", store_path, class: 'better-gold'
 
 :javascript
 
