@@ -59,7 +59,7 @@
 
     - if controller_name == 'dealzone' && ( ['index', 'cart'].include?(action_name) )
       = yield
-    - elsif controller_name == 'nuggets'
+    - elsif controller_name == 'nuggets' || action_name == 'memberships'
       = yield
     - else
       .smart-panel.panel

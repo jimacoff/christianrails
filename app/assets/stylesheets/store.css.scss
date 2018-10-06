@@ -93,6 +93,22 @@ th {
   cursor: default !important;
 }
 
+.memberships-panel {
+  p {
+    color: black;
+  }
+
+  hr {
+    width: 70%;
+    border: 1px white solid;
+    opacity: 0.5;
+  }
+
+  h1 {
+    color: white;
+  }
+}
+
 .slate {
   color: $slate-gray;
 }

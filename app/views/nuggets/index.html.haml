@@ -7,6 +7,10 @@
     %strong You're pre-approved!
     Each limited edition card comes magnetically encoded with a nugget of unique comedy & an access code to unlock it here for everyone.
 
+  %p.nugget-description
+    Get a piece of Comedy Gold with a
+    %strong= link_to "Lifetime Membership.", memberships_path, class: 'white'
+
   .nugget-unlock-container
     - if current_user
       %h3.nugget-subheading Unlock your joke:

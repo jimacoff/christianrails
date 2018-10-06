@@ -1,46 +1,53 @@
-%h1.center Lifetime Memberships
+.smart-panel.memberships-panel
+  %h1.center{style: "color: white;"} Lifetime Memberships
 
-.center
-  = image_tag "mystery-book.png", id: "membership-button", class: 'membership-books'
-
-%p Purchasing a lifetime eBook membership is the ultimate gesture of author support.
-
-%hr
-
-%p
-  For
-  = succeed "," do
-    %strong $20
-  you'll get:
-
-%ul
-  %li
-    %p
-      Personal access to
-      %strong all digital releases, for life
-
-  %li
-    %p
-      Notifications when
-      %strong new books
-      are available for download
-
-%hr
-
-// GO TO CART & ADD THE PRODUCT
-- if current_user
   .center
-    %a{href: cart_path + "?membership=lifetime", alt: "Add Membership To Cart"}
-      = image_tag "membership-to-cart.png", class: 'swell membership-add-to-cart'
-- else
+    = image_tag "mystery-book.png", id: "membership-button"
+
+  %p Purchasing a lifetime eBook membership is the ultimate gesture of author support.
+
+  %hr
+
+  %p
+    For
+    = succeed "," do
+      %strong $20
+    you'll get:
+
+  %ul
+    %li
+      %p
+        Personal access to
+        %strong all digital releases, for life
+
+    %li
+      %p
+        Notifications when
+        %strong new books
+        are available for download
+
+    %li
+      %p
+        A limited edition
+        %strong= link_to "Comedy Gold", comedygold_path, class: "better-gold"
+        lustrecard
+
+  %hr
+
+  // GO TO CART & ADD THE PRODUCT
+  - if current_user
+    .center
+      %a{href: cart_path + "?membership=lifetime", alt: "Add Membership To Cart"}
+        = image_tag "membership-to-cart.png", class: 'swell membership-add-to-cart'
+  - else
+    .center
+      %p
+        = link_to 'Log in', main_app.user_session_path, class: 'white'
+        or
+        = link_to 'Sign up',  main_app.new_user_registration_path, class: 'white'
+        for a free account first.
+
+  %br
+
   .center
-    %p
-      = link_to 'Log in', main_app.user_session_path
-      or
-      = link_to 'Sign up',  main_app.new_user_registration_path
-      for a free account first.
-
-%br
-
-.center
-  = link_to "Back to store", store_path
+    = link_to "Back to store", store_path, class: 'niceblue'
