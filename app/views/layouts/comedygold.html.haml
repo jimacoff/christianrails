@@ -1,0 +1,53 @@
+!!! 5
+
+- main_title = "Comedy Gold - magnetically encoded lustrecards"
+- main_desc = "A treat for the wallet, these limited edition cards are each encoded with comedy."
+
+%html
+  %head
+    %title= main_title
+    = stylesheet_link_tag    "application",       media: "all", "data-turbolinks-track" => true
+
+    = javascript_include_tag "application",       "data-turbolinks-track" => true
+    = javascript_include_tag "store/dealzone",    "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+    %meta{ property: "og:title", content: "#{ main_title }" }
+    %meta{ property: "og:url",   content: "https://www.christiandewolf.com/comedygold" }
+    %meta{ property: "og:description", content: "#{ main_desc }" }
+    %meta{ property: "og:image", content: "https://www.christiandewolf.com/comedygold-cards.jpg" }
+
+    %meta{ name: "twitter:card", content: "summary_large_image" }
+    %meta{ name: "twitter:site", content: "@dewolfchristian" }
+    %meta{ name: "twitter:title", content: "#{ main_title }" }
+    %meta{ name: "twitter:description", content: "#{ main_desc }" }
+    %meta{ name: "twitter:image", content: "https://www.christiandewolf.com/comedygold-cards.jpg" }
+
+    %meta{ name: "viewport", content: "width=device-width", initial: { scale: 1 } }
+
+    %link{ href: 'https://fonts.googleapis.com/css?family=Artifika', rel: 'stylesheet', type: 'text/css' }
+
+  %body.background
+    = render "/layouts/superbar", { stripped_down: true }
+    = render "store/header"
+
+    #mobile-title
+      %h1 Christian DeWolf
+      %p.subtitle
+        = "Books · Software · Blogs"
+
+    - if notice
+      %p.alert.alert-notice
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
+
+    = yield
+
+    #footer-bar.center
+      = render "store/footer"
+
+    = render "store/scripts/init_cart"
+
+    %h5.right= "v #{app_version}"

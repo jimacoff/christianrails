@@ -1,5 +1,7 @@
 class NuggetsController < ApplicationController
 
+  layout 'comedygold'
+
   skip_before_action :verify_is_admin
 
   ## PUBLIC
