@@ -2,7 +2,6 @@ module QuailHelper
 
   def all_scalequail_posts
     # Add new posts at the bottom.
-    # TITLE: max 70 characters
     [
       {
         sequence: 1,
@@ -88,12 +87,13 @@ module QuailHelper
       {
         sequence: 10,
         slug:  "monetizing_the_monolith",
-        title: "Monetizing a Revenue Monolith with a Marketing Cyclone",
+        title: "Monetizing a revenue monolith with a marketing cyclone",
         desc:  "If you aren't excited by that idea, maybe you aren't capitalist enough for this line of work.",
         category: "Scaling up",
         tags:  ["scaling", "growth-hacking", "startups", "business", "cyclones", "marketing", "HootSuite"],
         date: "20180923"
       }
+    ### TITLE: "max 70 characters ####################################################"
     ]
   end
 
