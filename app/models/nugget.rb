@@ -4,6 +4,8 @@ class Nugget < ApplicationRecord
   validates_presence_of :joke, :access_code, :serial_number
   validates_uniqueness_of :serial_number
 
+  MAX_ATTEMPTS = 10
+
   def unlocked?
     !!self.unlocked_at
   end

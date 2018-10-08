@@ -49,6 +49,17 @@ RSpec.describe NuggetsController, type: :controller do
       expect( nugget.unlocked_at ).to be_nil
     end
 
+    it "does NOT unlock a nugget if you've reached the max nugget attempts" do
+      user.nugget_attempts = 11
+      user.save
+
+      post :unlock, params: {access_code: "korg"}, session: valid_session
+      nugget.reload
+
+      expect( nugget.unlocked_by ).to be_nil
+      expect( nugget.unlocked_at ).to be_nil
+    end
+
   end
 
 end
