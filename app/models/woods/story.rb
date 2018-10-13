@@ -7,10 +7,13 @@ class Woods::Story < ApplicationRecord
   has_many :palettes,     dependent: :destroy
   has_many :scorecards
 
+  belongs_to :entry_tree, class_name: "Woods::Storytree", optional: true
+
   belongs_to :player
 
   validates_presence_of :name, :player
 
+  # collect all nodes of all storytrees
   def nodes
     nodes = []
     self.storytrees.each do |tree|

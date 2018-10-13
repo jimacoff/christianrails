@@ -35,6 +35,7 @@ class Woods::PalettesController < Woods::WoodsController
   end
 
   private
+
     def set_woods_palette
       @palette = Woods::Palette.find(params[:id])
     end
@@ -46,4 +47,5 @@ class Woods::PalettesController < Woods::WoodsController
     def woods_palette_params
       params.require(:woods_palette).permit(:name, :fore_colour, :back_colour, :alt_colour, :story_id)
     end
+
 end

@@ -24,7 +24,9 @@ class Woods::TreelinksController < Woods::WoodsController
   end
 
   private
+
     def woods_treelink_params
       params.require(:woods_treelink).permit(:linked_tree_id, :enabled, :node_id)
     end
+
 end

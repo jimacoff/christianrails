@@ -24,7 +24,9 @@ class Woods::BoxesController < Woods::WoodsController
   end
 
   private
+
     def woods_box_params
       params.require(:woods_box).permit(:itemset_id, :enabled, :node_id)
     end
+
 end

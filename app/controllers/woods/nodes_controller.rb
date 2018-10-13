@@ -28,6 +28,7 @@ class Woods::NodesController < Woods::WoodsController
   end
 
   private
+
     def set_woods_node
       @node = Woods::Node.find(params[:id])
     end
@@ -40,4 +41,5 @@ class Woods::NodesController < Woods::WoodsController
     def woods_node_params
       params.require(:woods_node).permit(:moverule_id, :name, :left_text, :right_text, :node_text)
     end
+
 end

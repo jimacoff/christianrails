@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181008173745) do
+ActiveRecord::Schema.define(version: 20181012233339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -448,7 +448,7 @@ ActiveRecord::Schema.define(version: 20181008173745) do
     t.string   "name",                 limit: 50,                   null: false
     t.integer  "player_id"
     t.string   "description",          limit: 1000
-    t.integer  "entry_tree"
+    t.integer  "entry_tree_id"
     t.integer  "total_plays"
     t.boolean  "published",                         default: false
     t.datetime "created_at"

@@ -26,46 +26,59 @@ class Woods::StoriesController < Woods::WoodsController
     get_highscores
   end
 
+  # GET - HTML or JSON
   def play
-    begin
-      @storytree = Woods::Storytree.find( @story.entry_tree )
-    rescue
-      raise "Invalid entry tree?!?"
-    end
+    if @storytree = @story.entry_tree
+      @node = @storytree.get_first_node
+      @node = @node.add_accoutrements_and_make_json!
 
-    @node = @storytree.get_first_node
-    @node = @node.add_accoutrements_and_make_json!
-
-    if !current_user
-      if session[:woods_player_id] && !session[:woods_player_id].blank?
-        the_player = Woods::Player.find( session[:woods_player_id] )
-      else
-        the_player = Woods::Player.create
-        session[:woods_player_id] = the_player.id
+      if current_user
+        if !current_user.player  # make new player for user
+          the_player = Woods::Player.create(user_id: current_user.id)
+          current_user.player = the_player
+          current_user.save
+        else  # use existing player
+          the_player = current_user.player
+        end
+      else  # guests
+        if session[:woods_player_id] && !session[:woods_player_id].blank?
+          the_player = Woods::Player.find( session[:woods_player_id] )
+        else
+          the_player = Woods::Player.create
+          session[:woods_player_id] = the_player.id
+        end
       end
-    elsif current_user && !current_user.player
-      the_player = Woods::Player.create(user_id: current_user.id)
-      current_user.player = the_player
-      current_user.save
+
+      @items = []
+      items_player_has = Woods::Item.find( the_player.finds.where(story_id: @story.id).collect(&:item_id) )
+      items_player_has.each do |i|
+        @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
+      end
+
+      if @story.total_plays
+        @story.total_plays += 1
+      else
+        @story.total_plays = 0
+      end
+      @story.save
+
+      record_positive_event(Log::WOODS, "#{the_player.username} started a game of #{@story.name}")
+
+      respond_to do |format|
+        format.json { render json: {node: @node, items: @items}, status: :ok  }
+        format.html { render 'play' }
+      end
     else
-      the_player = current_user.player
+      respond_to do |format|
+        format.json { render json: {errors: 'Invalid entry tree.'}, status: :unprocessable_entity  }
+        format.html { redirect_to 'show' }
+      end
     end
-
-    @items = []
-    items_player_has = Woods::Item.find( the_player.finds.where(story_id: @story.id).collect(&:item_id) )
-    items_player_has.each do |i|
-      @items << { name: i.name, value: i.value, legend: i.legend, image: i.image }
-    end
-
-    @story.total_plays += 1
-    @story.save
-
-    record_positive_event(Log::WOODS, "#{the_player.username} started a game of #{@story.name}")
   end
 
-  # JSON endpoint
+  # GET - JSON
   def move_to
-    #begin
+    begin
       @node = Woods::Node.find( params[:target_node].to_i )
       @storytree = @node.storytree
 
@@ -88,7 +101,6 @@ class Woods::StoriesController < Woods::WoodsController
 
       # any finds at this location?
       if @node.possibleitem && @node.possibleitem.enabled && @footprint.item_at_index?(@node.tree_index)
-
         # determine what the player has currently
         item_ids_player_has = current_player.finds.where( story_id: @story.id ).collect(&:item_id)
 
@@ -109,16 +121,15 @@ class Woods::StoriesController < Woods::WoodsController
 
       @footprint.step!( @node['tree_index'] )
 
-    #rescue => e
-     # record_warning(Log::WOODS, e.to_s)
-     # @errors = e.to_s
-     # Rails.logger.warn("Something's wrong: " + @errors)
-    #end
+    rescue => e
+      record_warning(Log::WOODS, e.to_s)
+      @errors = e.to_s
+    end
 
-    if @errors
-      render json: {errors: @errors}, status: :unprocessable_entity
-    else
+    if !@errors
       render json: @node, status: :ok
+    else
+      render json: {errors: @errors}, status: :unprocessable_entity
     end
 
   end
@@ -140,7 +151,7 @@ class Woods::StoriesController < Woods::WoodsController
       @storytree = Woods::Storytree.create( name: "Intro", max_level: 1, story_id: @story.id )
 
       create_nodes_for_storytree( @storytree )
-      @story.entry_tree = @storytree.id
+      @story.entry_tree = @storytree
       @story.save
 
       redirect_to woods_stories_path(@story), notice: 'Story was successfully created.'
@@ -197,4 +208,5 @@ class Woods::StoriesController < Woods::WoodsController
     def woods_story_params
       params.require(:woods_story).permit(:store_link_text, :name, :description, :slug, :allow_remote_syncing, :published)
     end
+
 end

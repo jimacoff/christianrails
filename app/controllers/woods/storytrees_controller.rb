@@ -51,6 +51,7 @@ class Woods::StorytreesController < Woods::WoodsController
   end
 
   private
+
     def set_woods_storytree
       @storytree = Woods::Storytree.includes(nodes: [:treelink, :paintball, :possibleitem, :box]).find(params[:id])
     end

@@ -23,7 +23,9 @@ class Woods::PaintballsController < Woods::WoodsController
   end
 
   private
+
     def woods_paintball_params
       params.require(:woods_paintball).permit(:palette_id, :enabled, :node_id)
     end
+
 end

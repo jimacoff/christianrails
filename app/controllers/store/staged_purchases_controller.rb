@@ -31,13 +31,11 @@ class Store::StagedPurchasesController < Store::StoreController
           end
         end
 
-        respond_to do |format|
-          if @staged_purchase.save!
-            record_positive_event(Log::STORE, "Item added to cart: #{ the_title }") if fresh_add
-            format.json { render json: @staged_purchase, status: :created }
-          else
-            format.json { render json: {}, status: :unprocessable_entity }
-          end
+        if @staged_purchase.save!
+          record_positive_event(Log::STORE, "Item added to cart: #{ the_title }") if fresh_add
+          render json: @staged_purchase, status: :created
+        else
+          render json: {}, status: :unprocessable_entity
         end
 
       rescue

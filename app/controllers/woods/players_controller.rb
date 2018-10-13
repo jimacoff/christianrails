@@ -22,7 +22,9 @@ class Woods::PlayersController < Woods::WoodsController
   end
 
   private
+
     def woods_player_params
       params.permit(:id)
     end
+
 end

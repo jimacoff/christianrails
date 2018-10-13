@@ -32,6 +32,7 @@ class Woods::ItemsetsController < Woods::WoodsController
   end
 
   private
+
     def set_woods_itemset
       @itemset = Woods::Itemset.find(params[:id])
     end
@@ -43,4 +44,5 @@ class Woods::ItemsetsController < Woods::WoodsController
     def woods_itemset_params
       params.require(:woods_itemset).permit(:name)
     end
+
 end

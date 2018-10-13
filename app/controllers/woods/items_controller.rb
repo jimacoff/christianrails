@@ -82,4 +82,5 @@ class Woods::ItemsController < Woods::WoodsController
     def woods_item_params
       params.require(:woods_item).permit(:item_id, :name, :legend, :value, :itemset_id, :winning_condition, :image)
     end
+
 end
