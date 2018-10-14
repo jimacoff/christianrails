@@ -22,6 +22,56 @@ RSpec.describe Woods::StoriesController, type: :controller do
 
   let(:blank_session) { {} }
 
+  describe "GET #index" do
+
+    it "renders the index" do
+      get :index, params: {}, session: blank_session
+      expect( response ).to be_ok
+    end
+
+  end
+
+  describe "GET #show" do
+    let!(:story) { FactoryBot.create(:story) }
+
+    it "renders the show" do
+      get :show, params: {id: story.to_param}, session: blank_session
+      expect( response ).to be_ok
+    end
+
+  end
+
+  describe "GET #diamondfind" do
+
+    let!(:story) { FactoryBot.create(:story, id: 1) }
+
+    it "renders diamondfind homepage" do
+      get :diamondfind, params: {}, session: blank_session
+      expect( response ).to be_ok
+    end
+
+  end
+
+  describe "GET #thecalicobrief" do
+
+    let!(:story) { FactoryBot.create(:story, id: 15) }
+
+    it "renders the thecalicobrief homepage" do
+      get :thecalicobrief, params: {}, session: blank_session
+      expect( response ).to be_ok
+    end
+
+  end
+
+  describe "GET #up" do
+
+    it "ensures the woods API is up" do
+      get :up, params: {}, session: blank_session, format: :json
+      expect( response ).to be_ok
+    end
+
+  end
+
   describe "-Gameplay -" do
 
     let!(:player) { FactoryBot.create(:player, user: @user) }

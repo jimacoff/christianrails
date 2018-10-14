@@ -117,6 +117,7 @@ Christianrails::Application.routes.draw do
         get 'item_tester'
       end
       collection do
+        get 'up'
         get 'admin_listing'
       end
 

@@ -1,9 +1,9 @@
 class Woods::StoriesController < Woods::WoodsController
 
   before_action :set_woods_story, only: [:show, :play, :move_to, :manage, :export, :edit, :update, :item_tester]
-  before_action :verify_is_published, except: [:index, :admin_listing, :show, :diamondfind, :thecalicobrief, :manage, :export, :create, :edit, :update, :item_tester]
-
-  skip_before_action :verify_is_admin, only: [:index, :show, :play, :move_to, :diamondfind, :thecalicobrief]
+  before_action :verify_is_published, except: [:index, :admin_listing, :show, :diamondfind, :thecalicobrief,
+                                               :manage, :export, :create, :edit, :update, :item_tester, :up]
+  skip_before_action :verify_is_admin, only: [:index, :show, :up, :play, :move_to, :diamondfind, :thecalicobrief]
 
   ## PUBLIC
 
@@ -12,6 +12,7 @@ class Woods::StoriesController < Woods::WoodsController
     @stories = Woods::Story.where(published: true).order('created_at desc')
   end
 
+  # vanilla title page of a story
   def show
     get_highscores
   end
@@ -24,6 +25,11 @@ class Woods::StoriesController < Woods::WoodsController
   def thecalicobrief
     @story = Woods::Story.find( 15 )
     get_highscores
+  end
+
+  # GET - JSON
+  def up
+    render json: {}, status: :ok
   end
 
   # GET - HTML or JSON
