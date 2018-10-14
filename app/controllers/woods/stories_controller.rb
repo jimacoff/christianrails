@@ -4,6 +4,7 @@ class Woods::StoriesController < Woods::WoodsController
   before_action :verify_is_published, except: [:index, :admin_listing, :show, :diamondfind, :thecalicobrief,
                                                :manage, :export, :create, :edit, :update, :item_tester, :up]
   skip_before_action :verify_is_admin, only: [:index, :show, :up, :play, :move_to, :diamondfind, :thecalicobrief]
+  skip_before_action :verify_authenticity_token, only: [:up, :play, :move_to]
 
   ## PUBLIC
 
