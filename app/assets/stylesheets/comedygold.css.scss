@@ -106,6 +106,15 @@
   text-align: center;
 }
 
+.gold-alert-notice {
+  border: 1px solid gold;
+  background: -moz-linear-gradient(top, gold 0%, #fff1a3 50%, gold 100%);
+  background: -webkit-linear-gradient(top, gold 0%,#fff1a3 50%, gold 100%);
+  background: linear-gradient(to bottom, gold 0%,#fff1a3 50%, gold 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='gold', endColorstr='gold',GradientType=0 );
+  color: black;
+}
+
 @media screen and (min-width: 450px) {
   .nugget-table {
     max-width: 400px !important;
